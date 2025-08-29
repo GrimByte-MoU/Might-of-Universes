@@ -1,0 +1,41 @@
+using Terraria;
+using Terraria.ModLoader;
+using Microsoft.Xna.Framework;
+
+namespace MightofUniverses.Content.Items.Projectiles
+{
+    public class KiokuLarge : ModProjectile
+    {
+        public override void SetDefaults()
+        {
+            Projectile.width = 28;
+            Projectile.height = 28;
+            Projectile.friendly = true;
+            Projectile.DamageType = DamageClass.Magic;
+            Projectile.penetrate = 2;
+            Projectile.timeLeft = 45;
+            Projectile.ignoreWater = true;
+        }
+
+        public override void Kill(int timeLeft)
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                Vector2 vel = Vector2.UnitX.RotatedBy(MathHelper.ToRadians(60 * i)) * 6f;
+                Projectile.NewProjectile(
+                    Projectile.GetSource_FromThis(),
+                    Projectile.Center,
+                    vel,
+                    ModContent.ProjectileType<KiokuMedium>(),
+                    (int)(Projectile.damage * 0.9f),
+                    Projectile.knockBack,
+                    Projectile.owner
+                );
+            }
+        }
+        public override void AI() {
+        Lighting.AddLight(Projectile.Center, 1.0f, 0.6f, 0.8f);
+        }
+
+    }
+}

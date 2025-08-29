@@ -1,0 +1,37 @@
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
+using MightofUniverses.Common;
+
+namespace MightofUniverses.Content.Items.Projectiles
+{
+    public class SoulCoin : ModProjectile
+    {
+        public override void SetDefaults()
+        {
+            Projectile.width = 24;
+            Projectile.height = 24;
+            Projectile.friendly = true;
+            Projectile.DamageType = ModContent.GetInstance<ReaperDamageClass>();
+            Projectile.penetrate = 2;
+            Projectile.timeLeft = 180;
+            Projectile.light = 1f;
+            Projectile.aiStyle = 1;
+        }
+
+        public override void AI()
+        {
+            Projectile.rotation += 0.4f;
+            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GoldCoin);
+            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GemEmerald);
+        }
+
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            Player player = Main.player[Projectile.owner];
+            var reaper = player.GetModPlayer<ReaperPlayer>();
+            reaper.AddSoulEnergy(5f, target.Center);
+            player.lifeSteal += 0.05f;
+        }
+    }
+}

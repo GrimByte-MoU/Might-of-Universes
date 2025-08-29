@@ -1,0 +1,3655 @@
+MightofUniverses.WorldsBalanceGauntlet_Tooltip:
+	'''
+	Improves melee damage, attack speed, and knockback
+	Increases melee damage by 30%
+	Increases melee attack speed by 30%
+	Increases melee knockback by 30%
+	Enables auto-swing
+	Melee attacks inflict Element's Harmony
+	'''
+
+Buffs: {
+	GoblinsCurse: {
+		DisplayName: Goblin's Curse
+		Description: Cursed by a Goblin!
+		Tooltip: Cursed by a Goblin!
+	}
+
+	PrismaticRend: {
+		DisplayName: Prismatic Rend
+		Description: Shredded by the power of RGB.
+		Tooltip: Shredded by the power of RGB.
+	}
+
+	ElementsHarmony: {
+		DisplayName: Elements Harmony
+		Description: The power of the elements undo you.
+		Tooltip: The power of the elements undo you.
+	}
+
+	HollyFighterBuff: {
+		DisplayName: Holly Fighter
+		Description: This little squadron will protect you.
+		Tooltip: This little squadron will protect you.
+	}
+
+	Shred: {
+		DisplayName: Shred
+		Description: Shred by the might of clockwork!
+	}
+
+	ClockworkAirshipBuff: {
+		DisplayName: Clockwork Airship
+		Description: The mighty Clockwork Airship will protect you.
+	}
+
+	SolunarEmpowerment: {
+		DisplayName: Solunar Empowerment
+		Description: Two Solunar Medallions orbit you and damage enemies
+	}
+
+	LunarReap: {
+		DisplayName: Lunar Reap
+		Description: The moon's hold over you weakens you
+	}
+
+	AlteredPerception: {
+		DisplayName: Altered Perception
+		Description: +15% critical strike chance, +50% movement speed
+	}
+
+	CerebralMindtrick: {
+		DisplayName: Cerebral Mindtrick
+		Description: +10% critical strike chance
+	}
+
+	Corrupted: {
+		DisplayName: Corrupted
+		Description: Corruption beckons you
+	}
+
+	Demonfire: {
+		DisplayName: Demonfire
+		Description: The demon's flames scorch you!
+	}
+
+	Hyper: {
+		DisplayName: Hyper
+		Description: +10% movement speed, +1hp/sec regen
+	}
+
+	LunarVision: {
+		DisplayName: Lunar Vision
+		Description: +25% critical strike chance, +25% attack speed, +75% movement speed
+	}
+
+	Spineless: {
+		DisplayName: Spineless
+		Description: Grow a backbone loser!
+	}
+
+	RebukingLight: {
+		DisplayName: Rebuking Light
+		Description: The Hallowed Light rebukes you!
+	}
+
+	JungleVitality: {
+		DisplayName: Jungle Vitality
+		Description: The jungle increases your vitality.
+	}
+
+	TurtlesVitality: {
+		DisplayName: Turtle's Vitality
+		Description:
+			'''
+			"You see my heart won't die though I really tried"
+			The turtle's vitality is within you.
+			'''
+	}
+
+	Drowning: {
+		DisplayName: Drowning
+		Description: You feel as though your drowning. Your losing health!
+	}
+
+	FaesTrade: {
+		DisplayName: Faes Trade
+		Description:
+			'''
+			Tit for tat, is it worth it?
+			+50% damage dealt and +75% damage received
+			'''
+	}
+
+	HellsMark: {
+		DisplayName: Hells Mark
+		Description: Marked by a demon's scorching mark!
+	}
+
+	LordsVenom: {
+		DisplayName: Lords Venom
+		Description: That deep red liquid decimates your health!
+	}
+
+	OceanPressure: {
+		DisplayName: Ocean Pressure
+		Description: The ocean's pressure reduces your defense and vertical movement speed by 50%
+	}
+
+	Subjugated: {
+		DisplayName: Subjugated
+		Description: Your utterly subjugated by holy light!
+	}
+
+	Sunfire: {
+		DisplayName: Sunfire
+		Description: The fire of the suns scorch you!
+	}
+
+	DeadlyCorrupt: {
+		DisplayName: Deadly Corruption
+		Description: An especially deadly strain of Corrupted.
+	}
+
+	SugarCrash: {
+		DisplayName: Sugar Crash
+		Description: Its too much sugar!
+	}
+
+	CandySlimeBuff: {
+		DisplayName: Candy Slime Buff
+		Description: Small globs of unhealthiness will defend you.
+	}
+
+	CodeDestabilized: {
+		DisplayName: Code Destabilized
+		Description: Digital forces are breaking you down!
+	}
+
+	TrojanDebuff: {
+		DisplayName: Trojan Debuff
+		Description: Mods.MightofUniverses.Buffs.TrojanDebuff.Description
+	}
+
+	EclipseBlessing: {
+		DisplayName: Eclipse Blessing
+		Description:
+			'''
+			The darklight of the eclipse shines on you
+			+20% movement speed, +40% flight time and an illuminating orange glow
+			'''
+	}
+
+	FestiveComfort: {
+		DisplayName: Festive Comfort
+		Description:
+			'''
+			Warmed by the spirit of Christmas!
+			Immunity to cold based debuffs, reduced damage from cold enemies and reduced enemy spawns
+			'''
+	}
+
+	HalloweenMight: {
+		DisplayName: Halloween Might
+		Description:
+			'''
+			Your filled with the spirit of Halloween!
+			+7% damage, +5% damage reduction and +5 defense
+			'''
+	}
+
+	Terrified: {
+		DisplayName: Terrified
+		Description:
+			'''
+			Paralyzed with fear!
+			+20% damage received and -20% damage
+			'''
+	}
+
+	PiratePower: {
+		DisplayName: Pirate Power
+		Description:
+			'''
+			Rich and risky! Just the way you like it!
+			+1% damage, +0.5% crit chance and +2.5% crit damage for each gold coin in your inventory, max 20 gold
+			This buff ends early and gives you Potion Sickness for 10 seconds if you get hit.
+			'''
+	}
+
+	WinterGrace: {
+		DisplayName: Winter Grace
+		Description:
+			'''
+			The winter chill fills you with grace!
+			Immunity to Hellfire, Lava immunity, free movement through liquids and on ice!
+			'''
+	}
+
+	BrothVitality: {
+		DisplayName: Broth Vitality
+		Description:
+			'''
+			So much hemoglobin!
+			Increases max life by 100% and heals 5 health per second.
+			'''
+	}
+
+	CakeBlessing: {
+		DisplayName: Cake Blessing
+		Description:
+			'''
+			Mmm... cake
+			An extra second of invincibility after taking damage
+			While invincible or for 2 seconds after a dodge, +5% crit chance and +10% damage
+			'''
+	}
+
+	OminousPrice: {
+		DisplayName: Ominous Price
+		Description: Your pain comes in small doses over extended times.
+	}
+
+	MortalWound: {
+		DisplayName: Mortal Wound
+		Description: Mods.MightofUniverses.Buffs.MortalWound.Description
+	}
+
+	FungShuiDisturbance: {
+		DisplayName: Fung Shui Disturbance
+		Description: Mods.MightofUniverses.Buffs.FungShuiDisturbance.Description
+	}
+
+	MiniAegisBuff: {
+		DisplayName: Mini Aegis Buff
+		Description: Mods.MightofUniverses.Buffs.MiniAegisBuff.Description
+	}
+}
+
+Projectiles: {
+	PrismaticProjectile: Prismatic Projectile
+
+	BloodShard: {
+		$parentVal: Blood Shard
+		DisplayName: Blood Shard
+	}
+
+	BluePrismaticProjectile: {
+		$parentVal: Blue Prismatic Projectile
+		DisplayName: Blue Prismatic Projectile
+	}
+
+	CactusThorn: {
+		$parentVal: Cactus Thorn
+		DisplayName: Cactus Thorn
+	}
+
+	GreenPrismaticProjectile: {
+		$parentVal: Green Prismatic Projectile
+		DisplayName: Green Prismatic Projectile
+	}
+
+	GumballProjectile: {
+		$parentVal: Gumball Projectile
+		DisplayName: Gumball Projectile
+	}
+
+	OrangePrismaticProjectile: {
+		$parentVal: Orange Prismatic Projectile
+		DisplayName: Orange Prismatic Projectile
+	}
+
+	PurplePrismaticProjectile: {
+		$parentVal: Purple Prismatic Projectile
+		DisplayName: Purple Prismatic Projectile
+	}
+
+	RedPrismaticProjectile: {
+		$parentVal: Red Prismatic Projectile
+		DisplayName: Red Prismatic Projectile
+	}
+
+	SanguineDroplet: {
+		$parentVal: Sanguine Droplet
+		DisplayName: Sanguine Droplet
+	}
+
+	YellowPrismaticProjectile: {
+		$parentVal: Yellow Prismatic Projectile
+		DisplayName: Yellow Prismatic Projectile
+	}
+
+	BloodRay: {
+		$parentVal: Blood Ray
+		DisplayName: Blood Ray
+	}
+
+	FrostSphere: {
+		$parentVal: Frost Sphere
+		DisplayName: Frost Sphere
+	}
+
+	IceSpike: {
+		$parentVal: Ice Spike
+		DisplayName: Ice Spike
+	}
+
+	HollyFighter: {
+		$parentVal: Holly Fighter
+		DisplayName: Holly Fighter
+	}
+
+	MistletoeThorn: {
+		$parentVal: Mistletoe Thorn
+		DisplayName: Mistletoe Thorn
+	}
+
+	ChristmasForkSpear: Christmas Fork Spear
+	PeppermintStar: Peppermint Star
+	WintergreenStar: Wintergreen Star
+
+	ToxicGrenadeProjectile: {
+		$parentVal: Toxic Grenade Projectile
+		DisplayName: Toxic Grenade Projectile
+	}
+
+	ColoredSpearhead: {
+		$parentVal: Colored Spearhead
+		DisplayName: Colored Spearhead
+	}
+
+	PrismaticSpearhead: {
+		$parentVal: Prismatic Spearhead
+		DisplayName: Prismatic Spearhead
+	}
+
+	RainbowsEdgeProjectile: {
+		$parentVal: Rainbows Edge Projectile
+		DisplayName: Rainbows Edge Projectile
+	}
+
+	PrismaticGrenade.DisplayName: Prismatic Grenade
+	ClockworkAirship.DisplayName: Clockwork Airship
+	ClockworkBomb.DisplayName: Clockwork Bomb
+	ClockworkFirebolt.DisplayName: Clockwork Firebolt
+	EurekaBolt.DisplayName: Eureka Bolt
+	SolunarMedallion.DisplayName: Solunar Medallion
+	PrismaticFractureProjectile1.DisplayName: Prismatic Fracture Projectile1
+	PrismaticFractureProjectile10.DisplayName: Prismatic Fracture Projectile10
+	PrismaticFractureProjectile2.DisplayName: Prismatic Fracture Projectile2
+	PrismaticFractureProjectile3.DisplayName: Prismatic Fracture Projectile3
+	PrismaticFractureProjectile4.DisplayName: Prismatic Fracture Projectile4
+	PrismaticFractureProjectile5.DisplayName: Prismatic Fracture Projectile5
+	PrismaticFractureProjectile6.DisplayName: Prismatic Fracture Projectile6
+	PrismaticFractureProjectile7.DisplayName: Prismatic Fracture Projectile7
+	PrismaticFractureProjectile8.DisplayName: Prismatic Fracture Projectile8
+	PrismaticFractureProjectile9.DisplayName: Prismatic Fracture Projectile9
+	BSCUProjectile.DisplayName: B S C U Projectile
+	ColdstoneProjectile.DisplayName: Coldstone Projectile
+	IcefireSphereProjectile.DisplayName: Icefire Sphere Projectile
+	LavastoneProjectile.DisplayName: Lavastone Projectile
+	LunarSphereProjectile.DisplayName: Lunar Sphere Projectile
+	PrismaticSphereProjectile.DisplayName: Prismatic Sphere Projectile
+	LunarBlastProjectile.DisplayName: Lunar Blast Projectile
+	PrismaticSpitballProjectile.DisplayName: Prismatic Spitball Projectile
+	EclipseSphere.DisplayName: Eclipse Sphere
+	DebuggingSphereMelee.DisplayName: Debugging Sphere Melee
+	DebuggingSphereRanged.DisplayName: Debugging Sphere Ranged
+	IndustrialGear.DisplayName: Industrial Gear
+	TeslaPointerBolt.DisplayName: Tesla Pointer Bolt
+	MoonWave.DisplayName: Moon Wave
+	FearPumpkin.DisplayName: Fear Pumpkin
+	GildedSlitterProjectile.DisplayName: Gilded Slitter Projectile
+	PossessedPumpkin.DisplayName: Possessed Pumpkin
+	DeglitchingSphereMelee.DisplayName: Deglitching Sphere Melee
+	DeglitchingSphereRanged.DisplayName: Deglitching Sphere Ranged
+	CodeRedSphere.DisplayName: Code Red Sphere
+	CodeBlastProjectile.DisplayName: Code Blast Projectile
+	CodeBulletProjectile.DisplayName: Code Bullet Projectile
+	EclipseRoundProjectile.DisplayName: Eclipse Round Projectile
+	FearsomeRoundProjectile.DisplayName: Fearsome Round Projectile
+	FrozenBulletProjectile.DisplayName: Frozen Bullet Projectile
+	FrozenFragmentProjectile.DisplayName: Frozen Fragment Projectile
+	HollowPointProjectile.DisplayName: Hollow Point Projectile
+	LightRoundProjectile.DisplayName: Light Round Projectile
+	SanguineBulletProjectile.DisplayName: Sanguine Bullet Projectile
+	StationaryEclipseProjectile.DisplayName: Stationary Eclipse Projectile
+	BloodletterProjectile.DisplayName: Bloodletter Projectile
+	EvildoerProjectile.DisplayName: Evildoer Projectile
+	HarvesterGumballProjectile.DisplayName: Harvester Gumball Projectile
+	HarvesterMeteorProjectile.DisplayName: Harvester Meteor Projectile
+	HellsoulProjectile.DisplayName: Hellsoul Projectile
+	HellsTalonProjectile.DisplayName: Hells Talon Projectile
+	MeteoriteHarvesterProjectile.DisplayName: Meteorite Harvester Projectile
+	MidnightSoulProjectile.DisplayName: Midnight Soul Projectile
+	MidnightWaveProjectile.DisplayName: Midnight Wave Projectile
+	SolunarProjectile.DisplayName: Solunar Projectile
+	SolunarScytheMedallion.DisplayName: Solunar Scythe Medallion
+	WardenBoltProjectile.DisplayName: Warden Bolt Projectile
+	WardenCrossProjectile.DisplayName: Warden Cross Projectile
+	WardenSpearProjectile.DisplayName: Warden Spear Projectile
+	PalladiumScytheProjectile.DisplayName: Palladium Scythe Projectile
+	ChlorophyteScytheProjectile.DisplayName: Chlorophyte Scythe Projectile
+	HallowedScytheProjectile.DisplayName: Hallowed Scythe Projectile
+	OrichalcumScytheProjectile.DisplayName: Orichalcum Scythe Projectile
+	TitaniumScytheProjectile.DisplayName: Titanium Scythe Projectile
+	AdamantiteScytheProjectile.DisplayName: Adamantite Scythe Projectile
+	AdamantiteSphereProjectile.DisplayName: Adamantite Sphere Projectile
+	BloodTitheWave.DisplayName: Blood Tithe Wave
+	CobaltScytheProjectile.DisplayName: Cobalt Scythe Projectile
+	CobaltShotProjectile.DisplayName: Cobalt Shot Projectile
+	CodeBolt.DisplayName: Code Bolt
+	CriticalFailureProjectile.DisplayName: Critical Failure Projectile
+	DemonsFingerProjectile.DisplayName: Demons Finger Projectile
+	Demonsoul.DisplayName: Demonsoul
+	GlitchBlast.DisplayName: Glitch Blast
+	GlitchScytheProjectile.DisplayName: Glitch Scythe Projectile
+	MineralWaveProjectile.DisplayName: Mineral Wave Projectile
+	MythrilScytheProjectile.DisplayName: Mythril Scythe Projectile
+	BlizzardSnowflakeProjectile.DisplayName: Blizzard Snowflake Projectile
+	ChlorotaniumStar.DisplayName: Chlorotanium Star
+	EclipseRay.DisplayName: Eclipse Ray
+	GreedySoul.DisplayName: Greedy Soul
+	Leaf1.DisplayName: Leaf1
+	Leaf2.DisplayName: Leaf2
+	ScytheEclipse.DisplayName: Scythe Eclipse
+	SnowflakeProjectile.DisplayName: Snowflake Projectile
+	SoulCoin.DisplayName: Soul Coin
+	TeslaSpear.DisplayName: Tesla Spear
+	TempleReaperFireball.DisplayName: Temple Reaper Fireball
+	TempleReaperShard.DisplayName: Temple Reaper Shard
+	TrickstersDueBolt.DisplayName: Tricksters Due Bolt
+	MartianTallyBolt.DisplayName: Martian Tally Bolt
+	ReinforcedStakeProjectile.DisplayName: Reinforced Stake Projectile
+	VortexStakeBolt.DisplayName: Vortex Stake Bolt
+	EnvenomedStakeProjectile.DisplayName: Envenomed Stake Projectile
+	HellstakeProjectile.DisplayName: Hellstake Projectile
+	NatureStakeProjectile.DisplayName: Nature Stake Projectile
+	SollutumStakeProjectile.DisplayName: Sollutum Stake Projectile
+	DawnsPiercerBolt.DisplayName: Dawns Piercer Bolt
+	ObeSadeeToothProjectile.DisplayName: Obe Sadee Tooth Projectile
+	ConecussionWhip.DisplayName: Conecussion Whip
+	SweetGlob.DisplayName: Sweet Glob
+	CandySlimeMinion.DisplayName: Candy Slime Minion
+	FrostingBolt.DisplayName: Frosting Bolt
+	SprinkleNeedle.DisplayName: Sprinkle Needle
+	TreatSpikerCone.DisplayName: Treat Spiker Cone
+	WaferSwordSprinkle.DisplayName: Wafer Sword Sprinkle
+	PrismaticNeedleBlue.DisplayName: Prismatic Needle Blue
+	PrismaticNeedleGreen.DisplayName: Prismatic Needle Green
+	PrismaticNeedleOrange.DisplayName: Prismatic Needle Orange
+	PrismaticNeedlePurple.DisplayName: Prismatic Needle Purple
+	PrismaticNeedleRed.DisplayName: Prismatic Needle Red
+	PrismaticNeedleYellow.DisplayName: Prismatic Needle Yellow
+	BlueFireProjectile.DisplayName: Blue Fire Projectile
+	BlueSkullProjectile.DisplayName: Blue Skull Projectile
+	CrossboneProjectile.DisplayName: Crossbone Projectile
+	HomingSkullProjectile.DisplayName: Homing Skull Projectile
+	InfectedTabletWormProjectile.DisplayName: Infected Tablet Worm Projectile
+	TabletWormProjectile.DisplayName: Tablet Worm Projectile
+	VaporBomb.DisplayName: Vapor Bomb
+	VaporBombSpawner.DisplayName: Vapor Bomb Spawner
+	ViralFragment.DisplayName: Viral Fragment
+	ViralOrb.DisplayName: Viral Orb
+	ChristmasOrb.DisplayName: Christmas Orb
+	EclipseBall.DisplayName: Eclipse Ball
+	SpookyflyMinion.DisplayName: Spookyfly Minion
+	FrigidHeartShard.DisplayName: Frigid Heart Shard
+	GoldChaliceDrop.DisplayName: Gold Chalice Drop
+	GreenChaliceDrop.DisplayName: Green Chalice Drop
+	ArcaneGladiusProjectile.DisplayName: Arcane Gladius Projectile
+	TacticalGlaiveProjectile.DisplayName: Tactical Glaive Projectile
+	ClockworkGear.DisplayName: Clockwork Gear
+	ClockworkHook.DisplayName: Clockwork Hook
+	FloatingHeartCrystal.DisplayName: Floating Heart Crystal
+	FloatingHeartCrystalMage.DisplayName: Floating Heart Crystal Mage
+	MushroomSpore.DisplayName: Mushroom Spore
+	NeedlePointerProjectile.DisplayName: Needle Pointer Projectile
+	VolatileSandExplosion.DisplayName: Volatile Sand Explosion
+	VolatileSandShard.DisplayName: Volatile Sand Shard
+	FungShuiSpore1.DisplayName: Fung Shui Spore1
+	FungShuiSpore2.DisplayName: Fung Shui Spore2
+	FungShuiTrap1.DisplayName: Fung Shui Trap1
+	FungShuiTrap2.DisplayName: Fung Shui Trap2
+	MushroomSporeStrong.DisplayName: Mushroom Spore Strong
+	GaiasArrow.DisplayName: Gaias Arrow
+	GaiasShard.DisplayName: Gaias Shard
+	ChillyIcicle.DisplayName: Chilly Icicle
+	MiniAegis.DisplayName: Mini Aegis
+	TerraBall.DisplayName: Terra Ball
+	Worldbolt.DisplayName: Worldbolt
+	WorldwalkerChilly.DisplayName: Worldwalker Chilly
+	WorldwalkerEvilBolt.DisplayName: Worldwalker Evil Bolt
+	WorldwalkerFireWave.DisplayName: Worldwalker Fire Wave
+	WorldwalkerPurityBoulder.DisplayName: Worldwalker Purity Boulder
+	WorldwalkerStinger.DisplayName: Worldwalker Stinger
+	KiokuLarge.DisplayName: Kioku Large
+	KiokuMedium.DisplayName: Kioku Medium
+	KiokuPetal.DisplayName: Kioku Petal
+	KiokuSmall.DisplayName: Kioku Small
+	SmallYakusokuPetal.DisplayName: Small Yakusoku Petal
+	YakusokuPetal.DisplayName: Yakusoku Petal
+	KetsumatsuBloom.DisplayName: Ketsumatsu Bloom
+	KetsumatsuBloomPetal.DisplayName: Ketsumatsu Bloom Petal
+	KetsumatsuPetal.DisplayName: Ketsumatsu Petal
+	UnmeiBloom.DisplayName: Unmei Bloom
+	UnmeiPetal.DisplayName: Unmei Petal
+	TerraiumDaggerProjectile.DisplayName: Terraium Dagger Projectile
+	TerraiumLightning.DisplayName: Terraium Lightning
+}
+
+Keybinds: {
+	"Release Soul Energy": {
+		$parentVal: Release Soul Energy
+		DisplayName: Release  Soul  Energy
+	}
+
+	"Ability 1.DisplayName": Ability 1
+	"Ability 2.DisplayName": Ability 2
+	"Ability 3.DisplayName": Ability 3
+	"Ability 4.DisplayName": Ability 4
+	"Ability 5.DisplayName": Ability 5
+}
+
+DamageClasses: {
+	ReaperDamageClass: {
+		$parentVal: Reaper Damage Class
+		DisplayName: Reaper Damage Class
+	}
+
+	PacifistDamageClass.DisplayName: Pacifist Damage Class
+}
+
+Items: {
+	GoblinMastersign: {
+		DisplayName: Goblin Mastersign
+		Tooltip:
+			'''
+			Combines the effects of Goblin Core, Goblin Plating, Goblin Sigil, and Goblin Tech
+			Increases movement speed by 15%
+			Grants flipper, depth meter, lava immunity, water walking, and no fall damage
+			Increases max life by 15%
+			Increases life regeneration by 3
+			Increases damage by 12%
+			Increases critical strike chance by 10%
+			Increases mana regeneration
+			Grants critter guide, find treasure, detect creature, danger sense, night vision, and sonar potion
+			Increases defense by 4
+			'''
+	}
+
+	GoblinPlating: {
+		DisplayName: Goblin Plating
+		Tooltip:
+			'''
+			Increases maximum life by 10%
+			Increases damage reduction by 5%
+			Increases life regeneration by 2 health per second
+			Grants dreamcatcher and thorns effects
+			Provides 3 defense
+			'''
+	}
+
+	GoblinRadar: {
+		DisplayName: Goblin Radar
+		Tooltip:
+			'''
+			Grants treasure detection, creature detection, danger sense, night vision, and sonar effects
+			Emits a faint light around the player
+			'''
+	}
+
+	GoblinSigil: {
+		DisplayName: Goblin Sigil
+		Tooltip:
+			'''
+			Increases generic damage by 6% and magic damage by 4%
+			Increases critical strike chance by 7%
+			Increases mana regeneration by 25
+			Grants critter guide effect
+			'''
+	}
+
+	GoblinTool: {
+		DisplayName: Goblin Tool
+		Tooltip:
+			'''
+			Grants treasure detection
+			Increases pickaxe speed by 25%
+			Emits a faint light around the player
+			'''
+	}
+
+	GoodnessFlower: {
+		DisplayName: Goodness Flower
+		Tooltip:
+			'''
+			Reduces weapon damage by 15%
+			Increases armor set bonus and accessory damage by 25%
+			Grants stacking bonuses to defense and life regeneration when not using a weapon
+			Stacks up to 6 times, with each stack granting +1 defense and +0.5 health regeneration per second
+			'''
+	}
+
+	StiffBrassFlower: {
+		DisplayName: Stiff Brass Flower
+		Tooltip:
+			'''
+			Reduces weapon damage by 35%
+			Increases armor set bonus and accessory damage by 50%
+			Grants stacking bonuses to defense and life regeneration when not using a weapon
+			Stacks up to 6 times, with each stack granting +3 defense and +1 health regeneration per second
+			'''
+	}
+
+	LandwalkerBauble: {
+		DisplayName: Landwalker Bauble
+		Tooltip:
+			'''
+			Increases defense by 4
+			Increases life regeneration by 1 health per second
+			Increases maximum life and mana by 20
+			Increases all damage types by 5%
+			Increases endurance by 5% and movement speed by 10%
+			Grants 1 extra minion slot and improved jump ability
+			Increases armor set bonus and accessory damage by 20%
+			'''
+	}
+
+	MucilaginousBanner: {
+		DisplayName: Mucilaginous Banner
+		Tooltip:
+			'''
+			Makes all slime NPCs non-aggressive
+			Increases damage reduction by 3%
+			'''
+	}
+
+	Opulence: {
+		DisplayName: Opulence
+		Tooltip:
+			'''
+			Grants the effects of Lucky Coin and Gold Ring
+			Increases generic damage by up to 50% based on the number of Platinum Coins in the player's inventory
+			If the player has 5 or more Platinum Coins, increases critical strike chance by 5%, increases defense by 7, and reduces damage taken by 5%
+			'''
+	}
+
+	PrismaticBeetle: {
+		DisplayName: Prismatic Beetle
+		Tooltip:
+			'''
+			Such a pretty shell...
+			Increases summon damage by 20%
+			Increases minion knockback by 3
+			Increases max minions by 2
+			Minions inflict Prismatic Rend
+			'''
+	}
+
+	PrismaticGauntlet: {
+		DisplayName: Prismatic Gauntlet
+		Tooltip:
+			'''
+			Improves melee damage, attack speed, and knockback
+			Increases melee damage by 15%
+			Increases melee attack speed by 15%
+			Increases melee knockback by 15%
+			Enables auto-swing
+			Melee attacks inflict Prismatic Rend
+			'''
+	}
+
+	SweetAttractor: {
+		DisplayName: Sweet Attractor
+		Tooltip:
+			'''
+			Tasty, but fattening
+			Increases max minions by 2
+			Reduces minion damage by 10%
+			'''
+	}
+
+	TitanBeetle: {
+		DisplayName: Titan Beetle
+		Tooltip:
+			'''
+			Increases max minions by 1
+			Increases minion summon damage by 20%
+			Increases minion knockback by 3
+			'''
+	}
+
+	WorldsBalanceGauntlet: {
+		DisplayName: World's Balance Gauntlet
+		Tooltip:
+			'''
+			Improves melee damage, attack speed, and knockback
+			Increases melee damage by 30%
+			Increases melee attack speed by 30%
+			Increases melee knockback by 30%
+			Enables auto-swing
+			Melee attacks inflict Element's Harmony
+			'''
+	}
+
+	DeliciousAttractor: {
+		DisplayName: Delicious Attractor
+		Tooltip:
+			'''
+			Sugarload!
+			Increases max minions by 2 and summon damage by 5%
+			Reduces all other class damage by 20%
+			'''
+	}
+
+	PrismaticDelight: {
+		DisplayName: Prismatic Delight
+		Tooltip:
+			'''
+			The colors simply melt in your mouth!
+			Increases your max minions by 3 and summon damage by 10%
+			Reduces all other class damage by 40%
+			'''
+	}
+
+	Starharvest: {
+		DisplayName: Starharvest
+		Tooltip:
+			'''
+			Who knew space tasted this good!
+			Increases your max minions by 3 and summon damage by 25%
+			Summon damage also occasionally lifesteals
+			Reduces all other class damage by 50%
+			'''
+	}
+
+	BattlemageEmblem: {
+		DisplayName: Battlemage Emblem
+		Tooltip:
+			'''
+			+12% magic and melee damage
+			+10% magic and melee critical strike chance
+			Melee attacks increase mana regeneration
+			+5 defense while above 50% mana
+			'''
+	}
+
+	SpellshotEmblem: {
+		DisplayName: Spellshot Emblem
+		Tooltip:
+			'''
+			+12% magic and ranged damage
+			+10% magic and ranged critical strike chance
+			Ranged weapons consume mana and deal bonus damage equal to its use speed
+			Mage weapons consume bullets and deal bonus damage equal to the bullets damage
+			'''
+	}
+
+	ConjurerEmblem: {
+		DisplayName: Conjurer Emblem
+		Tooltip:
+			'''
+			+12% magic and summon damage
+			+10% magic critical strike chance
+			+2% magic crit chance for each minion
+			Summon damage restores 5 mana
+			'''
+	}
+
+	VigilanteEmblem: {
+		DisplayName: Vigilante Emblem
+		Tooltip:
+			'''
+			+12% melee and ranged damage
+			+10% melee and ranged critical strike chance
+			Melee weapons deal increased damage based on how far away you are, up to 20%
+			Ranged weapons deal increased damage based on how close you are, up to 20%
+			'''
+	}
+
+	WarcallerEmblem: {
+		DisplayName: Warcaller Emblem
+		Tooltip:
+			'''
+			+12% melee and summon damage
+			+10% melee critical strike chance
+			+2 defense for each minion
+			Melee strikes cause minions to focus struck enemies
+			'''
+	}
+
+	CommanderEmblem: {
+		DisplayName: Commander Emblem
+		Tooltip:
+			'''
+			+12% ranged and summon damage
+			+10% ranged critical strike chance
+			+5% ranged speed for each minion
+			While below 50% health, all minions deal bonus damage equal to your ammos damage
+			'''
+	}
+
+	BrassBar: {
+		DisplayName: Brass Bar
+		Tooltip: The primary metal used by Steampunkers all over!
+	}
+
+	EclipseLight: {
+		DisplayName: Eclipse Light
+		Tooltip: A dark shard of pure light, an anomaly that shouldn't be
+	}
+
+	ElementalCore: {
+		DisplayName: Elemental Core
+		Tooltip:
+			'''
+			A sphere of formidable power. 
+			All of the elements exist in equilibrium within it
+			'''
+	}
+
+	FestiveSpirit: {
+		DisplayName: Festive Spirit
+		Tooltip: A sample of yuletide magic, you can hear the laughter of children
+	}
+
+	FrozenFragment: {
+		DisplayName: Frozen Fragment
+		Tooltip: A fragment of magical ice, it is a remnant of a frozen land
+	}
+
+	GoblinLeather: {
+		DisplayName: Goblin Leather
+		Tooltip: A rough piece of leather carried on a goblins person
+	}
+
+	GoblinScrap: {
+		DisplayName: Goblin Scrap
+		Tooltip: A piece of metal uniquely crafted by the goblins
+	}
+
+	GreedySpirit: {
+		DisplayName: Greedy Spirit
+		Tooltip: An everhungry soul, holding it makes you unsatisfied with what you have
+	}
+
+	HallowedLight: {
+		DisplayName: Hallowed Light
+		Tooltip: A piece colorful light, the essence of the Hallowed swirls within it
+	}
+
+	PrismaticCatalyst: {
+		DisplayName: Prismatic Catalyst
+		Tooltip: A beautiful crystal, every color of the rainbow swirls within it
+	}
+
+	PureTerror: {
+		DisplayName: Pure Terror
+		Tooltip:
+			'''
+			A cool and onimous piece of ever laughing evil, 
+			If you look into it, something seems to stare back
+			'''
+	}
+
+	SanguineEssence: {
+		DisplayName: Sanguine Essence
+		Tooltip: The essence of blood and life itself now rendered accursed and foul
+	}
+
+	SpiderSilk: {
+		DisplayName: Spider Silk
+		Tooltip: A smooth and strong piece of silk
+	}
+
+	SweetgumBar: {
+		DisplayName: Sweetgum Bar
+		Tooltip: As edible as it looks... do not eat it
+	}
+
+	SweetgumOre: {
+		DisplayName: Sweetgum Ore
+		Tooltip: It somewhat sticks to your fingers
+	}
+
+	TerraiumBar: {
+		DisplayName: Terraium Bar
+		Tooltip: Fused together from Aegis Shards, the power of the world is in your hands
+	}
+
+	AegisShard: {
+		DisplayName: Aegis Shard
+		Tooltip:
+			'''
+			A remnant of Aegon's now destroyed Aegis, it is made from an irreplicable material
+			It contains hints of all the elements within it
+			'''
+	}
+
+	BloodedBlade: {
+		DisplayName: Blooded Blade
+		Tooltip:
+			'''
+			Spits out a glob of blood and very short ranged 
+			life stealing glass shards when swung
+			'''
+	}
+
+	CactusScythe: {
+		DisplayName: Cactus Scythe
+		Tooltip: Fires out a single cactus thorn when swung
+	}
+
+	ChristmasCleaver: {
+		DisplayName: Christmas Cleaver
+		Tooltip: A large and strong blade that heals you when you hit enemies
+	}
+
+	FrostAdmiralsPoint: {
+		DisplayName: Frost Admirals Point
+		Tooltip:
+			'''
+			Shoots out a large ice ball 
+			that occasionally fires out smaller ice shards
+			'''
+	}
+
+	GoblinPistol: {
+		DisplayName: Goblin Pistol
+		Tooltip:
+			'''
+			A barely working gun that can pack some punch 
+			and inflict Acid Venom
+			'''
+	}
+
+	GoblinToxigun: {
+		DisplayName: Goblin Toxigun
+		Tooltip:
+			'''
+			A gnarly gun that shoots out a cursed toxic glob 
+			which inflicts Goblins Curse and Acid Venom
+			'''
+	}
+
+	HollyPointer: {
+		DisplayName: Holly Pointer
+		Tooltip: A scepter that calls a Holly Fighter to fight for you
+	}
+
+	PrismaticSword: {
+		DisplayName: Prismatic Sword
+		Tooltip:
+			'''
+			A beautiful sword that randomly fires out prismatic projectiles
+			when swung inflicting Prismatic Rend
+			'''
+	}
+
+	RainbowsEdge: {
+		DisplayName: Rainbows Edge
+		Tooltip:
+			'''
+			A colorful spear that fires out a spearhead which sends out
+			smaller shards
+			'''
+	}
+
+	SanguineSong: {
+		DisplayName: Sanguine Song
+		Tooltip: Fires 1-2 arrows alongside four piercing rays of blood
+	}
+
+	SweetgumSword: {
+		DisplayName: Sweetgum Sword
+		Tooltip:
+			'''
+			A sword that is less tasty than sharp
+			Fires out a gravity affected gumball when swung
+			'''
+	}
+
+	PrismaticBlaster: {
+		DisplayName: Prismatic Blaster
+		Tooltip:
+			'''
+			Shoots 2 bullets at once and occasionally a beautiful prismatic 
+			grenade which inflicts Prismatic Rend and Goblin's Curse
+			'''
+	}
+
+	AirshipBeacon: {
+		DisplayName: Airship Beacon
+		Tooltip:
+			'''
+			A bright beacon used to summon a mighty clockwork airship to your aid.
+			Takes 4 minion slots and there can only be one airship at a times
+			'''
+	}
+
+	EurekaBranch: {
+		DisplayName: Eureka Branch
+		Tooltip:
+			'''
+			A rod with many lightbulbs attached to it, its a little volatile.
+			Randomly shoots out 1-3 bolts of electricity that travel at random speeds
+			'''
+	}
+
+	AcidVial: {
+		DisplayName: Acid Vial
+		Tooltip: A vial of acid derived from the venom of spiders and jellyfish.
+	}
+
+	AetherLight: {
+		DisplayName: Aether Light
+		Tooltip: An ethereal light that swirls with beauty and good thoughts
+	}
+
+	Bonemeal: {
+		DisplayName: Bonemeal
+		Tooltip: Several crushed up and finely ground bones
+	}
+
+	CarbonFiber: {
+		DisplayName: Carbon Fiber
+		Tooltip: A very strong and light material used in several good weapons and armor
+	}
+
+	ChocolateScale: {
+		DisplayName: Chocolate Scale
+		Tooltip:
+			'''
+			A scale made entirely of very tough chocolate
+			It is as hard as a dragonscale
+			'''
+	}
+
+	DemonicEssence: {
+		DisplayName: Demonic Essence
+		Tooltip: The essence of the demonic, it is bright and cursed
+	}
+
+	DesertWrappings: {
+		DisplayName: Desert Wrappings
+		Tooltip: Ancient wrappings that were used to dress the dead long ago
+	}
+
+	DevilsBlood: {
+		DisplayName: Devil's Blood
+		Tooltip: The blood of the infernal, it is used in only the darkest of rituals
+	}
+
+	FairyMetal: {
+		DisplayName: Fairy Metal
+		Tooltip:
+			'''
+			A light, otherworldly metal
+			Listening closely, you can hear wind chimes
+			'''
+	}
+
+	GlitchyChunk: {
+		DisplayName: Glitchy Chunk
+		Tooltip: A glitched chunk of a strange, dark material
+	}
+
+	GummyMembrane: {
+		DisplayName: Gummy Membrane
+		Tooltip: The flexible and soft membrane made of living candy
+	}
+
+	Kevlar: {
+		DisplayName: Kevlar
+		Tooltip:
+			'''
+			One of the toughest fabrics known to man
+			It is resistant to most things
+			'''
+	}
+
+	PureLight: {
+		DisplayName: Pure Light
+		Tooltip:
+			'''
+			A hardened crystal made of pure light
+			It is blinding to stare at for too long
+			'''
+	}
+
+	SolunarToken: {
+		DisplayName: Solunar Token
+		Tooltip:
+			'''
+			A token used by an ancient civilization as a currency
+			It is no longer used as currency but its light and dark balanced material remains a mystery
+			'''
+	}
+
+	SugarClot: {
+		DisplayName: Sugar Clot
+		Tooltip:
+			'''
+			A glob of unhealthy sweets
+			Just looking at it makes you feel lethargic
+			'''
+	}
+
+	SweetTooth: {
+		DisplayName: Sweet Tooth
+		Tooltip: A dirty and cavity ridden tooth made that way due to eating too much candy
+	}
+
+	UnderworldMass: {
+		DisplayName: Underworld Mass
+		Tooltip:
+			'''
+			A scorching bar of all the malice and evil in the underworld
+			It burns with infernal heat, barely able to be held
+			'''
+	}
+
+	UnderworldSlag: {
+		DisplayName: Underworld Slag
+		Tooltip:
+			'''
+			A bar of what used to be hellstone
+			Now it is just a solidified mass of superheated slag and evil
+			'''
+	}
+
+	VaporFragment: {
+		DisplayName: Vapor Fragment
+		Tooltip: A beautiful fragment of a world of color and light
+	}
+
+	ViralCode: {
+		DisplayName: Viral Code
+		Tooltip: A piece of code that is infected with a mysterious virus
+	}
+
+	SolunarBreastplate: {
+		DisplayName: Solunar Breastplate
+		Tooltip: +10% increased reaper damage
+	}
+
+	SolunarHelmet: {
+		SetBonus: Mods.MightofUniverses.Items.SolunarHelmet.SetBonus
+		DisplayName: Solunar Helmet
+		Tooltip: +1 soul stolen per strike
+	}
+
+	SolunarLegwraps: {
+		DisplayName: Solunar Legwraps
+		Tooltip: +5% movement speed
+	}
+
+	PrismaticFracture: {
+		DisplayName: Prismatic Fracture
+		Tooltip: Fires out several prismatic swords that inflict Prismatic Rend
+	}
+
+	ClockworkMinigun: {
+		DisplayName: Clockwork Minigun
+		Tooltip: Fires a barrage of bullets quickly but highly inaccurate
+	}
+
+	AdvancedBulletCartridge: {
+		DisplayName: Advanced Bullet Cartridge
+		Tooltip:
+			'''
+			A cartridge full of various deadly bullets
+			Bullets pierce 3 extra enemies
+			'''
+	}
+
+	BSCU: {
+		DisplayName: B.S.C.U
+		Tooltip:
+			'''
+			A Brass Sphere Containment Unit
+			3 brass spheres orbit the player dealing damage to enemies
+			The spheres also inflict Shred
+			'''
+	}
+
+	Coldstone: {
+		DisplayName: Coldstone
+		Tooltip:
+			'''
+			A sphere made of simple cold materials
+			A cold sphere orbits you closely dealing damage to those it hits
+			'''
+	}
+
+	IcefireSphere: {
+		DisplayName: Icefire Sphere
+		Tooltip:
+			'''
+			A frozen lavasphere
+			Two spheres orbit you dealing damage to enemies
+			The spheres inflict Hellfire and Frostburn
+			'''
+	}
+
+	LandwalkersCharm: {
+		DisplayName: Landwalkers Charm
+		Tooltip:
+			'''
+			A charm used by those versed in their land
+			+6 defense, +1.5hp/sec life regen, +30 max health and mana
+			+8% all damage, +8% damage reduction, +20% movement speed, +1 minion slot
+			+25% jump speed, improved jump height and +1 minion slot
+			Increases armor set bonus and accessory damage by 30%
+			'''
+	}
+
+	Lavastone: {
+		DisplayName: Lavastone
+		Tooltip:
+			'''
+			A sphere made from things found in the Underworld
+			A molten hot sphere circles you
+			The sphere sets enemies alight
+			'''
+	}
+
+	LunarBulletCartridge: {
+		DisplayName: Lunar Bullet Cartridge
+		Tooltip:
+			'''
+			A cartridge full of bullets made from the moon and starry night
+			Bullets pierce 5 extra enemies
+			'''
+	}
+
+	LunarSphere: {
+		DisplayName: Lunar Sphere
+		Tooltip:
+			'''
+			Let the moons light your path and guide you so you may not go astray
+			Five lunar spheres orbit you
+			The spheres inflict Lunar Reap, harming your enemies and lowering their damage
+			'''
+	}
+
+	PrismaticAmmoBag: {
+		DisplayName: Prismatic Ammo Bag
+		Tooltip:
+			'''
+			As equally pretty as it is deadly
+			+15% ranged damage, +12% ranged speed, +7% ranged crit chance
+			Ranged attacks inflict Prismatic Rend
+			'''
+	}
+
+	PrismaticMagestone: {
+		DisplayName: Prismatic Magestone
+		Tooltip:
+			'''
+			Master the colors before you try the elements
+			+15% magic damage, +10% magic knockback, +7% magic crit chance, -15% mana usage
+			Magic attacks inflict Prismatic Rend
+			'''
+	}
+
+	PrismaticSphere: {
+		DisplayName: Prismatic Sphere
+		Tooltip:
+			'''
+			A dance of colors to lighten your day
+			Four prismatic spheres orbit you
+			The spheres inflict Prismatic Rend
+			'''
+	}
+
+	SimpleBulletCartridge: {
+		DisplayName: Simple Bullet Cartridge
+		Tooltip:
+			'''
+			A cartridge full of simple bullets
+			Bullets pierce an extra enemy
+			'''
+	}
+
+	WorldwalkersCharm: {
+		DisplayName: Worldwalkers Charm
+		Tooltip:
+			'''
+			For those who have grown fond of their world
+			+8 defense, +2hp/sec life regen, +35 max health and mana
+			+10% to all damage, +8% damage reduction, +25% movement speed
+			+30% jump speed, improved jump height and +1 minion slot
+			'''
+	}
+
+	SyntheticumBar: {
+		DisplayName: Syntheticum Bar
+		Tooltip: A bar of a mysterious metal, it seems to be made from code
+	}
+
+	Backbone: {
+		DisplayName: Backbone
+		Tooltip:
+			'''
+			A complete spine, someone needs that
+			+5% damage reduction
+			+0.5hp/sec life regen
+			+10 max health
+			Your attacks inflict Spineless for 3 seconds
+			'''
+	}
+
+	CavityNecklace: {
+		DisplayName: Cavity Necklace
+		Tooltip:
+			'''
+			A necklace made of cavity ridden teeth
+			+5 armor penetration
+			+5 more armo penetration while having the Hyper Buffs
+			'''
+	}
+
+	FleshGolem: {
+		DisplayName: Flesh Golem
+		Tooltip:
+			'''
+			A golem made of flesh and bone
+			+8% damage reduction
+			+1.5hp/sec life regen
+			+25 max health
+			You have a 15% chance to dodge attacks and gain the Altered Perception Buff for 8 seconds
+			After dodging, you give all enemies in a 35 tile range Ichor and Spineless for 3 seconds
+			While having Altered Perception, you can't dodge another attack and your crits deal 50% more damage
+			'''
+	}
+
+	HellwyrmFamiliar: {
+		DisplayName: Hellwyrm Familiar
+		Tooltip:
+			'''
+			This little guy is hot to the touch
+			+9% damage and damage reduction
+			Whenever an enemy hurts you, they take double the damage you took
+			They are also given Cursed Inferno and Demonfire for 3 seconds
+			'''
+	}
+
+	LunarHellrider: {
+		DisplayName: Lunar Hellrider
+		Tooltip:
+			'''
+			An incredibly powerful twin Familiar
+			+12% damage and dagame reduction
+			+2.5hp/sec life regen
+			+40 max health
+			Whenever an enemy damages you, they take triple the damage you took and 2 Lunar blasts will also fall from the sky and damage nearby enemies
+			You have a 20% chance to dodge attacks, gaining Lunar Vision for 8 seconds when you do
+			This chance increases by 5% for each second that you haven't dodged an attack
+			Whenever you successfully dodge, all enemies within 75 tiles are given Ichor, Demonfire and Lunar Reap for 3 seconds
+			Five Lunar blasts will also rain down from above and hit enemies
+			You cannot dodge another attack while having Lunar Vision or Altered Perception
+			Your critical strikes deal double damage while having Lunar Vision
+			'''
+	}
+
+	NervousSystem: {
+		DisplayName: Nervous System
+		Tooltip:
+			'''
+			Some need the brain as well as the spine
+			+7% damage reduction
+			+1hp/sec life regen
+			+20 max health
+			You have a 15% chance to dodge attacks and gain the Cerebral Mindtrick Buff for 6 seconds
+			After dodging, you give all enemies in a 25 tile radius Ichor and Spineless for 3 second
+			While having Cerebral Mindtrick, you can't dodge another Attack
+			'''
+	}
+
+	NullsDatabase: {
+		DisplayName: Nulls Database
+		Tooltip:
+			'''
+			A database containing tons of knowledge
+			Every 30 seconds, whenever you reach 50% or less health, you will be instantly healed for 150 health
+			'''
+	}
+
+	PrismaticFamiliar: {
+		DisplayName: Prismatic Familiar
+		Tooltip:
+			'''
+			A powerful familiar with great capabilities
+			+10% damage and damage reduction
+			Whenever an enemy hurts you, they take two and a half times the damage you took
+			They are also given Demonfire and Prismatic Rend for 3 seconds
+			Every 30 seconds, whenever you reach 50% or less health, 5 Prismatic Spitballs will retaliate and damage nearby enemies
+			'''
+	}
+
+	PrismaticGolem: {
+		DisplayName: Prismatic Golem
+		Tooltip:
+			'''
+			A golem made of prismatic materials
+			+9% damage reduction
+			+2hp/sec life regen
+			+30 max health
+			You have a 15% chance to dodge attacks and gain the Altered Perception Buff for 8 seconds
+			After dodging, you give all enemies in a 50 tile range Ichor, Spineless and Prismatic Rend for 3 seconds
+			While having Altered Perception, you can't dodge another attack and your crits deal 75% more damage
+			'''
+	}
+
+	WormFamiliar: {
+		DisplayName: Worm Familiar
+		Tooltip:
+			'''
+			A tamed corrupted worm
+			+8% damage and damage reduction
+			Whenever an enemy damages you, they take damage equal to 150% of the damage you took
+			They will also be given Corrupted and Cursed Inferno for 3 seconds
+			'''
+	}
+
+	WormFang: {
+		DisplayName: Worm Fang
+		Tooltip:
+			'''
+			+8% damage
+			Whenever an enemy damages you, they take damage equal to the damage you took
+			They will also be given Corrupted for 3 seconds
+			'''
+	}
+
+	CyberSphere: {
+		DisplayName: Cyber Sphere
+		Tooltip:
+			'''
+			Radiate glitched power around you, damaging enemies within 20 tiles of you once per second
+			The more enemies in this radius, the more damage all enemies will take
+			'''
+	}
+
+	GummyClusterPouch: {
+		DisplayName: Gummy Cluster Pouch
+		Tooltip:
+			'''
+			A pouch of soul cluster candy
+			Reaper strikes heals you for 3 health while wearing any reaper armor
+			Reaper strikes gather an additional soul while wearing any reaper armor
+			Reaper strikes gather an additional 2 souls and heal an additional 5 health while wearing any reaper armor and having the Hyper buff
+			'''
+	}
+
+	HeartAttackGlob: {
+		DisplayName: Heart Attack Glob
+		Tooltip:
+			'''
+			A glob of an absolutely unhealthy amount of sugar
+			-20 max health
+			+10% damage
+			+15% movement speed
+			'''
+	}
+
+	SnackPouch: {
+		DisplayName: Snack Pouch
+		Tooltip:
+			'''
+			A pouch of soul candy!
+			Reaper strikes heals you for 2 health while wearing any reaper armor
+			Reaper strikes gather an additional soul and heal an additional 1 health while wearing any reaper armor and having the Hyper buff
+			'''
+	}
+
+	CandiedHeart: {
+		DisplayName: Candied Heart
+		Tooltip:
+			'''
+			A candied heart that emanates power
+			+8 defense, +30 max health
+			While above 50% health, +10% damage and critical strike chance
+			While below 50% health, +3hp/sec life regen and 10% damage reduction
+			'''
+	}
+
+	SharpeningGear: {
+		DisplayName: Sharpening Gear
+		Tooltip: Your Reaper strikes inflict Shred for 3 seconds
+	}
+
+	EclipseHood: {
+		SetBonus:
+			'''
+			+15% Reaper damage
+			The maximum amount of souls you can gather is 400
+			Four miniature Eclipses orbit you, damaging enemies and gathering souls
+			Whenever you consume souls, you temporarily gain +30% attack speed and +20% Reaper damage
+			'''
+		DisplayName: Eclipse Hood
+		Tooltip:
+			'''
+			+4 souls gathered per strike
+			+10% Reaper damage and attack speed
+			'''
+	}
+
+	EclipseChestplate: {
+		DisplayName: Eclipse Chestplate
+		Tooltip: +10% Reaper damage and attack speed
+	}
+
+	EclipseLegwraps: {
+		DisplayName: Eclipse Legwraps
+		Tooltip:
+			'''
+			+20% movement speed
+			+10% Reaper damage and attack speed
+			'''
+	}
+
+	CleansedViralSaber: {
+		DisplayName: Cleansed Viral Saber
+		Tooltip:
+			'''
+			Fixed of all bugs and viruses
+			50% chance for each strike to deal 25% more damage
+			Attacks will now always lifesteal
+			'''
+	}
+
+	DebuggingSaber: {
+		DisplayName: Debugging Saber
+		Tooltip:
+			'''
+			Debug and erase any enemy infront of you!
+			15% chance to fire a slow and decelerating debugging sphere that rapidly damages enemies
+			'''
+	}
+
+	FrozenEnforcer: {
+		DisplayName: Frozen Enforcer
+		Tooltip:
+			'''
+			A relatively slow firing gun, but it packs a frosty punch
+			Inflicts Frostburn for 3 seconds
+			'''
+	}
+
+	IndustrialSeverence: {
+		DisplayName: Industrial Severence
+		Tooltip:
+			'''
+			5 souls gathered per strike
+			Fires out a burst of a random amount of gears that travel random distances
+			Each gear gathers 1 soul per hit
+			Consume 40 souls to fire a piercing tesla spear that electrifies enemies for 5 seconds
+			'''
+	}
+
+	Pathmaker: {
+		DisplayName: Pathmaker
+		Tooltip:
+			'''
+			A powerful shotgun that fires out 7 bullets at once
+			Inflicts Ichor for 2 seconds
+			'''
+	}
+
+	TeslaPointer: {
+		DisplayName: Tesla Pointer
+		Tooltip:
+			'''
+			A prototype to a tesla coil, it fires out two electric bolts that arc out and rejoin
+			The blade inflicts Electrified for 5 seconds, the bolts inflict it for 2 seconds
+			'''
+	}
+
+	ViralSaber: {
+		DisplayName: Viral Saber
+		Tooltip:
+			'''
+			A saber made from the mysterious Syntheticum but, something seems wrong
+			30% chance for this blade to deal 10% more damage and lifesteal
+			5% chance to heal the enemy for 50 health instead
+			'''
+	}
+
+	VRBlaster: {
+		DisplayName: VR Blaster
+		Tooltip:
+			'''
+			A gun born from Syntheticum, it is imperfect but strong
+			20% chance to fire two bullets at once, 10% chance to fire three
+			5% chance to nearly instantly shoot again
+			'''
+	}
+
+	VRDebugger: {
+		DisplayName: VR Debugger
+		Tooltip:
+			'''
+			Debug anything, simply point and shoot
+			15% chance to shoot out a slow and decelerating debugging sphere that rapidly damages enemies
+			'''
+	}
+
+	VRGlitchBlaster: {
+		DisplayName: VR Glitch Blaster
+		Tooltip:
+			'''
+			The VRBlaster has been fixed and improved! Now shoot the problems away
+			Always shoots two bullets, 30% chance to fire three, 20% chance to fire four and 5% chance to fire five
+			5% chance to briefly shoot incredibly quickly
+			'''
+	}
+
+	Firewall: {
+		DisplayName: Firewall
+		Tooltip:
+			'''
+			+6 defense
+			Immunity to most debuffs
+			Enables you to dash, dashing through enemies harms them
+			'''
+	}
+
+	SatelliteDefenseGrid: {
+		DisplayName: Satellite Defense Grid
+		Tooltip:
+			'''
+			System onl1ne... Defense gr1d 100% operat10onal...
+			+10 defense and immunity to most debuffs
+			Enables the player to perform a more powerful dash
+			The player emanates a triple layered aura that damages enemies
+			The aura deals more damage to enemies that are closer to you
+			The more enemies in the aura, the more damage it deals to all of them
+			Every 30 seconds, whenever you reach 50% or less health, you rapidly regenerate health for 6 seconds
+			Every 60 seconds, whenever you reach 20% or less health, all harmful debuffs will be scrubbed and you will instantly heal 200 health
+			'''
+	}
+
+	MoonBlade: {
+		DisplayName: Moon Blade
+		Tooltip:
+			'''
+			An unusually shaped lunar blade
+			It fires out two crescents that circle back around you
+			The blade inflicts Lunar Reap for 4 seconds, the crescents inflict it for 2 seconds
+			'''
+	}
+
+	FearCaster: {
+		DisplayName: Fear Caster
+		Tooltip:
+			'''
+				Calls up homing fear pumpkins from underground to attack enemies
+				The pumpkins leave behind explosive jackolanterns
+				5% chance to call up a stronger and faster possesed pumpkins
+			'''
+	}
+
+	GildedSlitter: {
+		DisplayName: Gilded Slitter
+		Tooltip: A strong and large throwing knife that cleaves throgh several enemies
+	}
+
+	GlitchfixerSaber: {
+		DisplayName: Glitchfixer Saber
+		Tooltip:
+			'''
+			50% chance to deal 25% more damage
+			20% chance to fire a deglitching sphere that rapidly damages enemies
+			The blade lifesteals
+			'''
+	}
+
+	HeadModsGlitchfixer: {
+		DisplayName: VR Hero Glitchfixer
+		Tooltip:
+			'''
+			Fires out three to six bullets at once
+			5% chance to briefly rapid fire
+			15% chance to fire a deglitching sphere that rapidly damages enemies
+			'''
+	}
+
+	CometiniteBar: {
+		DisplayName: Cometinite Bar
+		Tooltip: Dark and cold for now yet oh so powerful
+	}
+
+	CometiniteOre: {
+		DisplayName: Cometinite Ore
+		Tooltip: Ice cold to the touch and leaves behind a glittery residue
+	}
+
+	GalaxyBar: {
+		DisplayName: Galaxy Bar
+		Tooltip: An ingot of the galaxies it pulses with near unmatchable power
+	}
+
+	GalaxyOre: {
+		DisplayName: Galaxy Fragment
+		Tooltip: A miniature galaxy in the palm of your hand it is exceptionally heavy
+	}
+
+	Novalite: {
+		DisplayName: Nova Fragment
+		Tooltip: A fragment of the hardened remains of a supernova
+	}
+
+	NovaliteBar: {
+		DisplayName: Novalite Bar
+		Tooltip: A beautiful bar containing the power of a supernova
+	}
+
+	RinggaliumBar: {
+		DisplayName: Ringgalium Bar
+		Tooltip: A bar of cold and heavy metal and stone from the rings of a far away planet
+	}
+
+	RinggaliumOre: {
+		DisplayName: Ring Remains
+		Tooltip: A rough and very hard material made from spacerock and metals
+	}
+
+	SagittariusBar: {
+		DisplayName: Sagittarius Bar
+		Tooltip: A bar of a mysterious material time and space bend around it
+	}
+
+	SagittariusOre: {
+		DisplayName: Void Ore
+		Tooltip: A material that should not exist anywhere near a celestial body or world
+	}
+
+	SollutumBar: {
+		DisplayName: Sollutum Bar
+		Tooltip: The solidified heat and might of the very sun itself
+	}
+
+	SollutumOre: {
+		DisplayName: Sollutum Ore
+		Tooltip: It is searing hot to the touch and warms the air around it
+	}
+
+	StarsteelBar: {
+		DisplayName: Starmetal Bar
+		Tooltip: It shines with the light of countless stars
+	}
+
+	StarsteelOre: {
+		DisplayName: Starsteel Ore
+		Tooltip: An ore touched by the light of the stars
+	}
+
+	TacticiansEssence: {
+		DisplayName: Tactician's Essence
+		Tooltip:
+			'''
+			Fragments of the now felled Erebus the Tactician
+			Are you feelin' lucky?
+			'''
+	}
+
+	AlienMetal: {
+		DisplayName: Alien Metal
+		Tooltip: Debris from the Unidentified Carrier Mothership
+	}
+
+	CodeRed: {
+		DisplayName: Code Red
+		Tooltip:
+			'''
+			Complete erasure at whatever you point at
+			Permanent rapid fire
+			Fires 5 to 10 bullets at once
+			5% chance to fire a sphere that razes life around it
+			'''
+	}
+
+	CodeBullet: {
+		DisplayName: Code Bullet
+		Tooltip: Pierces 3 enemies and calls down a blast that hits enemies
+	}
+
+	EclipseRound: {
+		DisplayName: Eclipse Round
+		Tooltip: Spawns miniature eclipses that deal rapid damage
+	}
+
+	FearsomeRound: {
+		DisplayName: Fearsome Round
+		Tooltip: Aggresively homes in on enemies
+	}
+
+	FrozenBullet: {
+		DisplayName: Frozen Bullet
+		Tooltip:
+			'''
+			Shatters into several shards that damage enemies
+			The bullet and shards inflict Frostburn
+			'''
+	}
+
+	HollowPointRound: {
+		DisplayName: Hollow Point Round
+		Tooltip: Fast traveling and pierces
+	}
+
+	LightRound: {
+		DisplayName: Light Round
+		Tooltip: Ultrabright bullets that inflict Rebuking Light
+	}
+
+	SanguineBullet: {
+		DisplayName: Sanguine Bullet
+		Tooltip: Lifesteals and inflicts Sanguine Rend
+	}
+
+	Bloodletter: {
+		DisplayName: Bloodletter
+		Tooltip:
+			'''
+			Gathers 1 soul on hit and fires a bloody projectile
+			The projectile also gathers 1 soul when hitting
+			Consume 50 soouls to give your weapons lifesteal for 5 seconds
+			'''
+	}
+
+	CopperScythe: {
+		DisplayName: Copper Scythe
+		Tooltip: Consume 25 souls to gain increased life regen for 3 seconds
+	}
+
+	Evildoer: {
+		DisplayName: Evil Doer
+		Tooltip:
+			'''
+			Gathers 1 soul on hit and fires a corrupted projectile
+			The projectile also gathers 1 soul when hitting
+			Consume 30 souls to give your weapons the ability to inflict Corrupted and Cursed Inferno for 5 seconds
+			'''
+	}
+
+	GoldScythe: {
+		DisplayName: Gold Scythe
+		Tooltip:
+			'''
+			Gathers 1 soul on hit
+			Consume 40 souls to heal the player 40 health as well as grant +5 defense and +10% reaper dsamage for 4 seconds
+			'''
+	}
+
+	GummyScythe: {
+		DisplayName: Gummy Scythe
+		Tooltip:
+			'''
+			Gathers 1 soul on hit
+			Consume 30 souls to heal the player 50 health as well as grant the Hyper buff for 3 seconds
+			'''
+	}
+
+	HellsTalon: {
+		DisplayName: Hell's Talon
+		Tooltip:
+			'''
+			Gathers 2 souls, ignites on hit and launches a fiery  projectile
+			The projectile also gathers 1 soul when hitting
+			Consume 40 souls to launch a Hellsoul
+			'''
+	}
+
+	IronScythe: {
+		DisplayName: Iron Scythe
+		Tooltip:
+			'''
+			Gathers 1 soul on hit
+			Consume 30 souls to give the player increased life regen for 3 seconds
+			'''
+	}
+
+	LeadScythe: {
+		DisplayName: Lead Scythe
+		Tooltip:
+			'''
+			Gathers 1 soul on hit
+			Consume 30 souls to give the player increased life regen for 3 seconds
+			'''
+	}
+
+	MeteoriteHarvester: {
+		DisplayName: Meteorite Harvester
+		Tooltip:
+			'''
+			Gathers 2 souls on hit and fires a meteoric shard which gathers 2 soul on hit
+				Consume 40 souls to fire a shotgun of three meteors
+				
+			'''
+	}
+
+	MidnightsReap: {
+		DisplayName: Midnight's Reap
+		Tooltip:
+			'''
+			Gathers 3 souls on hit and fires a midnight wave that gathers 2 soul on hit
+			Consume 50 souls to fire out several nightbound souls
+			'''
+	}
+
+	PlatinumScythe: {
+		DisplayName: Platinum Scythe
+		Tooltip:
+			'''
+			Gathers 1 soul on hit
+			Consume 40 souls to heal the player 40 health as well as grant +5 defense and +10% reaper dsamage for 4 seconds
+			'''
+	}
+
+	SolunarScythe: {
+		DisplayName: Solunar Scythe
+		Tooltip:
+			'''
+			Gathers 2 souls on hit
+			Fires 2 solunar bolts that move in a helix, the bolts gather 1 soul each
+			Consume 50 souls to cause two Solunar medallions to spin away from you
+			'''
+	}
+
+	SweetHarvester: {
+		DisplayName: Sweet Harvester
+		Tooltip:
+			'''
+			Gathers 2 souls on hit
+			Fires a gumball projectile that also gathers 1 soul on hit
+			Consume 75 souls to heal for 100 health as well as gain greatly increased life regen and the Hyper buff for 5 seconds
+			'''
+	}
+
+	TinScythe: {
+		DisplayName: Tin Scythe
+		Tooltip: Consume 25 souls to gain increased life regen for 3 seconds
+	}
+
+	WardensHook: {
+		DisplayName: Warden's Hook
+		Tooltip:
+			'''
+			Gathers 2 souls on hit and fires a water bolt which also steals 1 soul on hit
+			15% chance to instead fire damaging crossbones
+			Consume 25 souls to fire a piercing water spear
+			'''
+	}
+
+	PalladiumScythe: {
+		DisplayName: Palladium Scythe
+		Tooltip:
+			'''
+			Gathers 3 souls on hit and fires a Palladium dart which gathers 2 souls on hit
+			Consume 70 souls to give yourself +7 defense and greatly increased life regen for 5 seconds
+			'''
+	}
+
+	ChlorophyteScythe: {
+		DisplayName: Chlorophyte Scythe
+		Tooltip:
+			'''
+			Gathers 4 souls on hit and fires a Chlorophyte leaf which gathers 3 souls on hit
+			Consume 140 souls to immediately heal for 150 health, then rapidly regenerate health for 5 seconds
+			'''
+	}
+
+	Orcus: {
+		DisplayName: Orcus
+		Tooltip:
+			'''
+			A scythe used by Thanatos
+			Gathers 4 souls on hit and fires a Hallowed Scythe which gathers 3 souls on hit
+			Consume 30 souls to give yourself +7 defense, +15% attack speed and +5% damage reduction for 3 seconds
+			'''
+	}
+
+	OrichalcumScythe: {
+		DisplayName: Orichalcum Scythe
+		Tooltip:
+			'''
+			Gathers 4 souls on hit and fires out an orichalcum petal that gathers 2 souls on hit
+			Consume 40 souls to give yourself +15% reaper damage and attack speed for 4 seconds
+			'''
+	}
+
+	TitaniumScythe: {
+		DisplayName: Titanium Scythe
+		Tooltip:
+			'''
+			Gathers 4 souls on hit and fires out a titanium star which gathers 3 souls on hit
+			Consume 75 souls to instantly heal yourself 150 health, then get +15 defense and +15% damage reduction for 4 seconds
+			'''
+	}
+
+	AdamantiteScythe: {
+		DisplayName: Adamantite Scythe
+		Tooltip:
+			'''
+			Gathers 4 souls on hit and fires out an adamantite dart that gathers 3 souls on hit
+			Consume 40 souls to fire a homing adamantite sphere that pierces all defense
+			'''
+	}
+
+	BloodTithe: {
+		DisplayName: Blood Tithe
+		Tooltip:
+			'''
+			Gathers 5 souls on strike and fire out an accelerating blood wave that also gathers 5 souls on hit
+			Consume 50 souls to get decreased life regen, +30% attack speed and +25% reaper damage for 5 seconds
+			'''
+	}
+
+	CobaltScythe: {
+		DisplayName: Cobalt Scythe
+		Tooltip:
+			'''
+			Gathers 3 souls on hit and fires a Cobalt dart which gathers 2 souls on hit
+			Consume 40 souls to fire out 4 powerful cobalt blades
+			'''
+	}
+
+	CriticalFailure: {
+		DisplayName: Critical Failure
+		Tooltip:
+			'''
+			SYSTEM ERROR... SYSTEM FAILURE...
+			Gathers 5 souls on strike and fires out a code wave which gathers 3 souls on hit
+			Consume 35 souls to fire out two homing code spheres
+			'''
+	}
+
+	DemonsFinger: {
+		DisplayName: Demon's Finger
+		Tooltip:
+			'''
+			Gathers 4 souls and inflicts Hellfire for 3 seconds on strike
+			Fires a firebolt that gathers 3 souls and inflicts Hellfire for 3 seconds on hit
+			Consume 40 souls to fire out a barrage of demon souls that inflict Demonfire for 3 seconds and Hellfire for 5 seconds
+			'''
+	}
+
+	GlitchScythe: {
+		DisplayName: Glitch Scythe
+		Tooltip:
+			'''
+			Gathers 3 souls on hit and fires a glitch bolt that gathers 2 souls on strike
+			Consume 40 souls to fire three glitch blasts in a tight arc
+			'''
+	}
+
+	MythrilScythe: {
+		DisplayName: Mythril Scythe
+		Tooltip:
+			'''
+			Gathers 4 souls on hit and fires out a mythril blade that gathers 2 souls on hit
+			Consume 40 souls to send out a mineral wave that sends enemies it hits flying back
+			'''
+	}
+
+	ChlorotaniumScythe: {
+		DisplayName: Chlorotanium Scythe
+		Tooltip:
+			'''
+			Gathers 5 souls on hit and fires out a chlorotanium star that also gathers 5 souls on hit
+			Consume 200 souls to heal for 150 health, then gain rapid life regen, +20 defense and +15% damage reduction for 5 seconds.
+			'''
+	}
+
+	DebtCollector: {
+		DisplayName: Debt Collector
+		Tooltip:
+			'''
+			Gathers 5 souls on hit and fires out a lifestealing soul coin that also gathers 5 souls on hit
+			Consume 50 souls to fire out a barrage of greedy souls
+			'''
+	}
+
+	GreatBlizzard88: {
+		DisplayName: Great Blizzard 88
+		Tooltip:
+			'''
+			Gathers 5 souls on hit and randomly fires out one or two snoflakes that each gather 5 souls on hit
+			Consume 50 souls to cause a blizzard to rain down from the sky
+			The snowflakes inflict Frostburn for 3 seconds while the blizzard inflicts Frostburn for 1 second
+			'''
+	}
+
+	LifesTwilight: {
+		DisplayName: Life's Twilight
+		Tooltip:
+			'''
+			Gathers 5 souls on hit and fires out four eclipse rays that each gather 2 souls on hit
+			Consume 50 souls to create four miniature eclipses that circle out and away from the player
+			'''
+	}
+
+	ScytheofChristmasFuture: {
+		DisplayName: Scythe of Christmas Future
+		Tooltip:
+			'''
+			Gthers 5 souls on hit and fires out a holly leaf that  gathers 4 souls and heals the player for 5 health on hit
+			15% chance to instead fire out a more powerful holly leaf that gathers 6 souls and heals the player for 15 health on hit
+			'''
+	}
+
+	SilverScythe: {
+		DisplayName: Silver Scythe
+		Tooltip: Consume 40 souls to gain increased life regen and +10% reaper damage for 3 seconds
+	}
+
+	TungstenScythe: {
+		DisplayName: Tungsten Scythe
+		Tooltip: Consume 40 souls to gain increased life regen and +10% reaper damage for 3 seconds
+	}
+
+	TempleReaper: {
+		DisplayName: Temple Reaper
+		Tooltip:
+			'''
+			Gathers 7 souls on hit and fires out three temple shards that each gather 4 souls on hit
+			15% chance for each shard to be replaced by a bouncing fireball that pierces and bounces but gathers no souls
+			Consume 220 souls to heal for 150 flat health, then gain rapid regeneration, +25 defense and +20% damage reduction for 5 seconds
+			'''
+	}
+
+	TrickstersDue: {
+		DisplayName: Trickster's Due
+		Tooltip:
+			'''
+			Gathers 7 souls on hit and fires out a pixie bolt that also gathers 7 souls on hit
+			Consume 300 souls to give yourself massive life regen for 5 seconds
+			'''
+	}
+
+	MartianTally: {
+		DisplayName: Martian Tally
+		Tooltip:
+			'''
+			Gathers 7 souls on hit and fires out 1 or 2 wavy martian tally bolts that gather 5 souls each
+			Consume 70 souls to gain double attack speed and ignore all defense for 3 seconds
+			'''
+	}
+
+	JungleHeart: {
+		DisplayName: Jungle Heart
+		Tooltip: Whenever you consume souls, you get Jungles Vitality for 5 seconds, giving you +100 max health
+	}
+
+	LivingStorm: {
+		DisplayName: Living Storm
+		Tooltip:
+			'''
+			Creates a damaging aura around the player that electrifies enemies
+			Each enemy hit gathers you 1 soul
+			'''
+	}
+
+	SweetsoulJar: {
+		DisplayName: Sweetsoul Jar
+		Tooltip:
+			'''
+			Delicious...
+			Generaates you 1 soul per second
+			'''
+	}
+
+	VialOfCorruption: {
+		DisplayName: Vial Of Corruption
+		Tooltip: Reaper attacks inflict Corrupted for 3 seconds
+	}
+
+	MoodyStorm: {
+		DisplayName: Moody Storm
+		Tooltip: An upgraded area damages enemies faster and gathers you 2 souls per hit enemy
+	}
+
+	SoulStorm: {
+		DisplayName: Soul Storm
+		Tooltip:
+			'''
+			They are many and they are angry
+			A large area around the player damages and electrifies enemies twice per second
+			Each enemy hit gathers you 3 souls
+			'''
+	}
+
+	InfernalSoulJar: {
+		DisplayName: Infernal Soul Jar
+		Tooltip:
+			'''
+			Forbidden Hot Sauce
+			Generates you 3 souls per second
+			'''
+	}
+
+	InfernalTablet: {
+		DisplayName: Infernal Tablet
+		Tooltip:
+			'''
+			Activate to consume 25% of your current health to get an amount of souls equal to half of the amount of health lost
+			This has a 10 second cooldown
+			'''
+	}
+
+	ReaperEmblem: {
+		DisplayName: Reaper Emblem
+		Tooltip: +15% Reaper damage
+	}
+
+	TrappedDemonFire: {
+		DisplayName: Trapped Demon Fire
+		Tooltip: Reaper attacks inflict Demonfire for 3 seconds
+	}
+
+	TurtlesHeart: {
+		DisplayName: Turtle's Heart
+		Tooltip: Whenever you consume souls you get Turtles Vitality for 5 seconds, giving you +150 max health and +10 defense
+	}
+
+	VampiricTotem: {
+		DisplayName: Vampiric Totem
+		Tooltip: Reaper attack gain lifesteal
+	}
+
+	DeathknightEmblem: {
+		DisplayName: Deathknight Emblem
+		Tooltip:
+			'''
+			+12% Reaper and Melee damage
+			+10% Reaper and Melee critical strike chance
+			Whenever the player takes damage, they gain soul energy equal to half the damage taken. This ability has a 3 second cooldown
+			When holding a melee weapon, the player loses 10 soul energy per second 
+			'''
+	}
+
+	GoblinCore: {
+		DisplayName: Goblin Core
+		Tooltip:
+			'''
+			Increases the player's movement speed by 15%
+			Grants the player the effects of flipper, depth meter and water walking potions
+			Shows player depth and tells the time
+			Players take no fall damage and emit light
+			'''
+	}
+
+	NecromasterEmblem: {
+		DisplayName: Necromaster Emblem
+		Tooltip:
+			'''
+			+12% Reaper and Summon damage
+			+10% Reaper crit chance
+			Summoned minions gather 1 soul whenever they attack an enemy
+			+2 hp/sec regen for each summoned minion
+			If the player control no minions, +2 defense and +1 soul gathered when striking for each unused minion slot
+			'''
+	}
+
+	SoulbinderEmblem: {
+		DisplayName: Soulbinder Emblem
+		Tooltip:
+			'''
+			+12% Reaper and Magic damage
+			+10% Reaper and Magic critical strike chance
+			If the player would lose health whether by damage or sacrifice, instead that much mana. This has a 3 second cooldown.
+			Mana costs instead costs health
+			'''
+	}
+
+	WraithwalkerEmblem: {
+		DisplayName: Wraithwalker Emblem
+		Tooltip:
+			'''
+			+12% Reaper and Ranged damage
+			+10% Reaper and Ranged critical strike chance
+			Every 2 seconds, the player consumes one ammo to gain soul energy equal to half of the ammo's damage
+			For every 10 soul energy the player has, the player gets +1% ranged damage, attack speed and +1 armor penetration
+			'''
+	}
+
+	BeltOfVials: {
+		DisplayName: Belt Of Vials
+		Tooltip:
+			'''
+			A belt only a mad alchemist would endorse
+			Reaper attacks inflict multiple debuffs:
+			      Prismatic Rend for 3 seconds
+			      Demonfire for 5 seconds
+			      Corrupted for 10 seconds
+			'''
+	}
+
+	ColdCrown: {
+		DisplayName: Cold Crown
+		Tooltip:
+			'''
+			Radiates a chilling aura that slows all nonboss enemies by 50%
+			Enemies that die within the aura are lost to the eternal cold granting you a 10 soul energy bonus
+			'''
+	}
+
+	HallowedSoulChalice: {
+		DisplayName: Hallowed Soul Chalice
+		Tooltip: Generates 10 soul energy per second
+	}
+
+	PrismaticVial: {
+		DisplayName: Prismatic Vial
+		Tooltip: Reaper attacks inflict Prismatic Rend for 3 seconds
+	}
+
+	LunaticCloth: {
+		DisplayName: Lunatic Cloth
+		Tooltip: Scraps of the Lunatic Cultist's mythical robes
+	}
+
+	LiquidTerra: {
+		DisplayName: Liquid Terra
+		Tooltip: Reaper attacks inflict Element's Harmony for 3 seconds
+	}
+
+	LunaticBanner: {
+		DisplayName: Lunatic Banner
+		Tooltip:
+			'''
+			The banner of a madman
+			+15% Reaper damage
+			+10% Reaper critical strike chance
+			Whenever you consume souls, the player heals for 15% of their max health
+			'''
+	}
+
+	VialofLordsVenom: {
+		DisplayName: Vialof Lords Venom
+		Tooltip: Reaper attacks inflict Lord's Venom for 3 seconds
+	}
+
+	WarcrimeSash: {
+		DisplayName: Warcrime Sash
+		Tooltip:
+			'''
+			Reaper attacks inflicts several vicious debuffs
+			Lord's Venom for 3 seconds
+			Sunfire for 4 seconds
+			Element's Harmony and Deadly Corruption for 5 seconds
+			Prismatic Rend for 6 seconds
+			'''
+	}
+
+	ReinforcedStake: {
+		DisplayName: Reinforced Stake
+		Tooltip: A stake that has been improved by threading it with metal
+	}
+
+	VortexStakeLauncher: {
+		DisplayName: Vortex Stake Launcher
+		Tooltip:
+			'''
+			A bit overkill 
+			Occasionally fires a burst of vortex blasts
+			'''
+	}
+
+	PsychicTadpole: {
+		DisplayName: Psychic Tadpole
+		Tooltip:
+			'''
+			Allows flight and slow fall.
+			+20 max life, +20% movement speed and +7% damage
+			'''
+	}
+
+	StellarTadpole: {
+		DisplayName: Stellar Tadpole
+		Tooltip:
+			'''
+			Allows flight and slow fall.
+			+40 max life, +35% movement speed, +12% damage and +7 defense
+			'''
+	}
+
+	EnvenomedStake: {
+		DisplayName: Envenomed Stake
+		Tooltip:
+			'''
+			A stake coated in venom.
+			Inflicts Acid Venom for 5 seconds
+			'''
+	}
+
+	Hellstake: {
+		DisplayName: Hellstake
+		Tooltip:
+			'''
+			A stake containing the fires of Hell.
+			Explodes and inflicts Demonfire and Hellfire for 3 seconds
+			'''
+	}
+
+	NatureStake: {
+		DisplayName: Nature Stake
+		Tooltip:
+			'''
+			A stake empowered by nature.
+			Bounces off the ground and walls up to 3 times
+			'''
+	}
+
+	SollutumStake: {
+		DisplayName: Sollutum Stake
+		Tooltip:
+			'''
+			A stake infused with the force of a sun.
+			Explodes and inflicts Sunfire and Daybroken for 3 seconds.
+			'''
+	}
+
+	DawnsPiercer: {
+		DisplayName: Dawns Piercer
+		Tooltip:
+			'''
+			A stake launcher used by a legendary hunter of the undead.
+			Fires two stakes and two helixes of sun bolts that inflict Daybroken and Sunfire for 3 seconds
+			'''
+	}
+
+	BroodheartOfTheThousandYoung: {
+		DisplayName: Broodheart Of The Thousand Young
+		Tooltip:
+			'''
+			It beats a maddening pulse.
+			Increases max life by 25
+			Increases max mana by 200
+			+15% damage
+			+2 max minion slots
+			'''
+	}
+
+	CoreOfBlindIdiocy: {
+		DisplayName: Core Of Blind Idiocy
+		Tooltip:
+			'''
+			The core of an unspeakable entity.
+			+275 max health
+			'''
+	}
+
+	HeartOfTheCrawlingChaos: {
+		DisplayName: Heart Of The Crawling Chaos
+		Tooltip:
+			'''
+			A pulsing heart made entirely of otherworldly chaos.
+			+25 max life
+			+50 max mana
+			-10% mana cost
+			Increased mana and life regen
+			'''
+	}
+
+	KeyOfTheVoidGate: {
+		DisplayName: Key Of The Void Gate
+		Tooltip:
+			'''
+			A key that opens to beyond space and time.
+			+1 accessory slot
+			Grants a 2% chance to dodge any and all damage, damage dodged from this dodge heal
+			'''
+	}
+
+	LunarCoreShard: {
+		DisplayName: Lunar Core Shard
+		Tooltip:
+			'''
+			A piece of the moon, right in your hands.
+			+1 accessory slot
+			'''
+	}
+
+	PearlOfTheAbyss: {
+		DisplayName: Pearl Of The Abyss
+		Tooltip:
+			'''
+			A pearl imbued with unnatural darkness.
+			+25 max life
+			Allows free movement through liquids, water breathing and normalized gravity while in space
+			'''
+	}
+
+	TatteredVeilOfCarcosa: {
+		DisplayName: Tattered Veil Of Carcosa
+		Tooltip:
+			'''
+			A tattered and worn yellow cloak.
+			+1 accessory slot
+			Allows for much faster acceleration, deceleration and fall speed
+			+20% move speed, +1 second flight time
+			'''
+	}
+
+	LunaFlower: {
+		DisplayName: Luna Flower
+		Tooltip:
+			'''
+				Reduces weapon damage by 70%
+				Increases armor set bonus and accessory damage by 115%
+				Grants stacking bonuses to defense and life regeneration when not using a weapon
+				Stacks up to 6 times, with each stack granting +5 defense and +6 health regeneration per second
+			'''
+	}
+
+	PrismaticLotus: {
+		DisplayName: Prismatic Lotus
+		Tooltip:
+			'''
+			Reduces weapon damage by 70%
+			Increases armor set bonus and accessory damage by 90%
+			Grants stacking bonuses to defense and life regeneration when not using a weapon
+			Stacks up to 6 times, with each stack granting +4 defense and +2 health regeneration per second
+			'''
+	}
+
+	ChewyTaffy: {
+		DisplayName: Chewy Taffy
+		Tooltip:
+			'''
+			A magically chewy piece of candy
+			Grants regeneration and mana regeneration for 1 minute and heals 10 health
+			'''
+	}
+
+	RainbowLollipop: {
+		DisplayName: Rainbow Lollipop
+		Tooltip:
+			'''
+			An incredibly sweet and colorful lollipop
+			Gives the Hyper buff for 1 minute and heals 25 health
+			'''
+	}
+
+	StickOfBubblegum: {
+		DisplayName: Stick Of Bubblegum
+		Tooltip:
+			'''
+			A flavorful and tasty stick of gum
+			Grants swiftness and slowfall for 1 minute and heals 10 health
+			'''
+	}
+
+	HealingElixir: {
+		DisplayName: Healing Elixir
+		Tooltip: Heals 300 health
+	}
+
+	TrueLifePotion: {
+		DisplayName: True Life Potion
+		Tooltip: Heals for 400 health or half of the player's max health, whichever is higher
+	}
+
+	CandyBowl: {
+		DisplayName: Candy Bowl
+		Tooltip: Randomly gives an assortment of sweet rewards
+	}
+
+	HorrificTreat: {
+		DisplayName: Horrific Treat
+		Tooltip: Summons Obe Sadee, the Clogged
+	}
+
+	Conecussion: {
+		DisplayName: Conecussion
+		Tooltip:
+			'''
+			Causes summons to focus struck enemies
+			Hits from the tip of the whip deal more damage and will always be a critical strike
+			'''
+	}
+
+	ObeSadeeBag: {
+		DisplayName: Obe Sadee Bag
+		Tooltip: ""
+	}
+
+	SprinkleShaker: {
+		DisplayName: Sprinkle Shaker
+		Tooltip: Sprays out a midrange barrage of sharp sprinkles
+	}
+
+	SweetCandylabra: {
+		DisplayName: Sweet Candylabra
+		Tooltip:
+			'''
+			Summons a trio of candy slimes
+			The three slimes only take up 2 minion slots
+			'''
+	}
+
+	SweetlandsStaff: {
+		DisplayName: Sweetlands Staff
+		Tooltip: A staff that fires a bolt of piercing magic frosting
+	}
+
+	TreatSpiker: {
+		DisplayName: Treat Spiker
+		Tooltip: Replaces wooden arrows with a slow moving and highly piercing cone
+	}
+
+	WaferSword: {
+		DisplayName: Wafer Sword
+		Tooltip: Sprays a short range shotgun of sprinkles
+	}
+
+	PrismaticBranch: {
+		DisplayName: Prismatic Branch
+		Tooltip:
+			'''
+			So pretty yet so deadly
+			Rapidly fires out accelerating prismatic needles while also occasioanlly sending out an extra spray of needles
+			Needles in flict Prismatic Rend for 3 seconds
+			'''
+	}
+
+	SkeletalCovering: {
+		DisplayName: Skeletal Covering
+		Tooltip:
+			'''
+			+5 defense
+			Fires crossbones at the nearest enemy with it firing faster at closer enemies
+			Crossbones have a 50% chance to be replaced by a homing skull that deals more damage
+			Homing skulls have a further 50% chance to be replaced by a blue skull that deals even more damage and spawn a burst of blue fires on contact
+			'''
+	}
+
+	DataPiercer: {
+		DisplayName: Data Piercer
+		Tooltip:
+			'''
+			Fires two arrows
+			Replaces wooden arrows with a instantaneous beam that bounces off of enemies up to 4 times
+			'''
+	}
+
+	TrojanSword: {
+		DisplayName: Trojan Sword
+		Tooltip: Each strike steals 1 defense from the target for 5 seconds
+	}
+
+	InfectedTablet: {
+		DisplayName: Infected Tablet
+		Tooltip:
+			'''
+			While being held, enemies within 30 tiles of the player will be attacked by Tablet Worms which inflict Code Destabilized for 3 seconds
+			Tablet Worms have a 25% chance to be replaced by Infected Tablet Worms which inflict Code Destabilized for 5 seconds instead
+			'''
+	}
+
+	ParadiseKey: {
+		DisplayName: Paradise Key
+		Tooltip:
+			'''
+			The sounds of the beach and lofi music can be faintly heard
+			While being held, Vapor Bombs will occasionally spawn which will damage enemies and then explode
+			'''
+	}
+
+	VirusClaw: {
+		DisplayName: Virus Claw
+		Tooltip:
+			'''
+			Fires a decelerating orb that after coming to a stop fires a radial burst of small Viral Fragments
+			The Orb will deal massive damage, ignore half of all defense and inflict Code Destabilized for 10 seconds
+			Viral Fragments will inflict Code Destabilized for 3 seconds
+			The Orb will fire a larger radial burst of Viral Fragments when fading away
+			'''
+	}
+
+	CanisterOfFear: {
+		DisplayName: Canister Of Fear
+		Tooltip:
+			'''
+			Condensed fear in a pristine canister
+			The player gives off a bright aura that causes enemies that come within 13 tiles of the player to become Terrified for 3 seconds
+			The aura will generate 2 souls per second per enemy in the aura as well
+			'''
+	}
+
+	ChristmasToken: {
+		DisplayName: Christmas Token
+		Tooltip:
+			'''
+			A coin to take the Northern Express!
+			Twice per second, a little orb will appear near the player
+			If the player touches the orb, they will rapidly regenerate health and soul energy for 0.5 seconds
+			If an enemy touches the orb they will rapidly lose health for 0.5 seconds
+			'''
+	}
+
+	EclipseCrystalPendant: {
+		DisplayName: Eclipse Crystal Pendant
+		Tooltip:
+			'''
+			A crystal holding a piece of the eclipsed sun within it
+			For each 1 soul energy the player has, their Reaper damage is increased by 0.075%
+			During the day, the player gains increased life regeneration
+			At night, the player generates 4 soul energy per second
+			During an eclipse, the player gets both benefits simultaneously
+			'''
+	}
+
+	JollyCrown: {
+		DisplayName: Jolly Crown
+		Tooltip:
+			'''
+			Christmas music (not MC) can be faintly heard from it
+			Whenever an enemy deals contact damage to the player, that damage is reduced by 50% and that enemy suffers some damage
+			While in the snow biome, the contact damage is reduced by 60% instead and suffers even greator retaliatory damage
+			This has a 0.33 second cooldown, which is reduced to 0.25 seconds in the snow biome
+			'''
+	}
+
+	Spookyfly: {
+		DisplayName: Spookyfly
+		Tooltip:
+			'''
+			A spooky, scary firefly that ominously glows
+			Whenever the player is damaged, five spookyflies will spawn around the player and retaliate
+			Spookyflies inflict Terrified for 3 seconds
+			The spookyflies have a 0.5 second cooldown
+			'''
+	}
+
+	UmbraOffering: {
+		DisplayName: Umbra Offering
+		Tooltip:
+			'''
+			A bowl of black dust that glows orange
+			Twice per second, an orb is spawned near the player, touching the orb heals the player 5 health and gives the Eclipse Blessing for 3 seconds
+			During an eclipse, the orbs spawn four times per second instead
+			'''
+	}
+
+	Bambrack: {
+		DisplayName: Bambrack
+		Tooltip:
+			'''
+			A fruit bread said to show you your future
+			Grants the player the Halloween Might buff for 30 seconds.
+			'''
+	}
+
+	MugOfFestivities: {
+		DisplayName: Mug Of Festivities
+		Tooltip:
+			'''
+			It tastes of Christmas Spirit and family gatherings
+			Grants the player the Festive Comfort buff for 30 seconds
+			'''
+	}
+
+	SolarSizzleSnack: {
+		DisplayName: Solar Sizzle Snack
+		Tooltip:
+			'''
+			It sizzles and pops in your mouth!
+			Grants the player the Eclipse Blessing for 30 seconds
+			'''
+	}
+
+	AvidityChalice: {
+		DisplayName: Avidity Chalice
+		Tooltip:
+			'''
+			Upon activation, chalice droplets will fly out from the player towards enemies within 15 tiles
+			Chalice droplets deal 25 damage, inflict Ichor for 2 seconds and steals 2 soul energy
+			Chalice droplets have a 15% chance to be replaced with larger green droplets
+			The green chalice droplets deal 40 damage, steals 5 soul energy, inflict Ichor for 5 seconds and Midas for 2 seconds
+			Green chalice droplets also lifesteal
+			'''
+	}
+
+	FrigidHeart: {
+		DisplayName: Frigid Heart
+		Tooltip:
+			'''
+			Frigid Heart Shards will periodically spawn and orbit around the player
+			Whenever an enemy makes contact with the shards, all shards explode dealing 100 damage to that enemy for each shard
+			Whenever the player lands a critical strike, a shard will fly at the enemy for equal damage
+			If the player has less than 50% health, two shards will fly at the enemy instead
+			'''
+	}
+
+	IncenseOfSuccess: {
+		DisplayName: Incense Of Success
+		Tooltip:
+			'''
+			+12% damage and +5% crit chance.
+			+25% healing and money received
+			Increases armor set bonus and accessory damage by 40%
+			'''
+	}
+
+	SigilOfWinter: {
+		DisplayName: Sigil Of Winter
+		Tooltip:
+			'''
+			Upon activation, the player will get +30 defense and +25% damage reduction for 5 seconds, however the player will also get -90% movement speed for the same duration
+			This effect will end early if the player is hit
+			If the effect doesn't end early, the player will heal 50 health and rinse all debuffs from themselves
+			'''
+	}
+
+	FrozenFrappe: {
+		DisplayName: Frozen Frappe
+		Tooltip: Grants the Winter Grace buff for 30 seconds
+	}
+
+	BladedDesertwrappedBlaster: {
+		DisplayName: Bladed Desertwrapped Blaster
+		Tooltip: Enemies will now take damage and will be knocked back when touching the gun
+	}
+
+	BladedDesertwrappedSMG: {
+		DisplayName: Bladed Desertwrapped S M G
+		Tooltip: Enemies will now take damage and will be knocked back when touching the gun
+	}
+
+	DarkGun: {
+		DisplayName: Dark Gun
+		Tooltip: Well... it's usable now, not the best, but still usable!
+	}
+
+	DesertwrappedBlaster: {
+		DisplayName: Desertwrapped Blaster
+		Tooltip: ""
+	}
+
+	DesertwrappedSMG: {
+		DisplayName: Desertwrapped S M G
+		Tooltip: ""
+	}
+
+	HyperScopedEvilBlaster: {
+		DisplayName: Hyper Scoped Evil Blaster
+		Tooltip: ""
+	}
+
+	HyperScopedEvilSMG: {
+		DisplayName: Hyper Scoped Evil S M G
+		Tooltip: ""
+	}
+
+	SandedExtendedGun: {
+		DisplayName: Sanded Extended Gun
+		Tooltip: ""
+	}
+
+	SandedGun: {
+		DisplayName: Sanded Gun
+		Tooltip: ""
+	}
+
+	SandedRefinedExtendedGun: {
+		DisplayName: Sanded Refined Extended Gun
+		Tooltip: ""
+	}
+
+	ScopedBlaster: {
+		DisplayName: Scoped Blaster
+		Tooltip: Higher damage per shot but slower fire rate
+	}
+
+	ScopedDarkGun: {
+		DisplayName: Scoped Dark Gun
+		Tooltip: ""
+	}
+
+	ScopedEvilBlaster: {
+		DisplayName: Scoped Evil Blaster
+		Tooltip: ""
+	}
+
+	ScopedEvilSMG: {
+		DisplayName: Scoped Evil S M G
+		Tooltip: ""
+	}
+
+	ScopedSMG: {
+		DisplayName: Scoped S M G
+		Tooltip: Fast fire but weaker per shot damage
+	}
+
+	SimpleGun: {
+		DisplayName: Simple Gun
+		Tooltip: A barely usable piece of trash that can hardly fire anything
+	}
+
+	BloodsoakedRing: {
+		DisplayName: Bloodsoaked Ring
+		Tooltip:
+			'''
+			+3 hp/sec regen and +25% max health but receive 20% more damage
+			When being hit, the player gains soul energy equal to 40% of the damage received
+			This has a 20 second cooldown
+			'''
+	}
+
+	HallowedMirror: {
+		DisplayName: Hallowed Mirror
+		Tooltip:
+			'''
+			After teleporting, the player has their flight time fully restored 
+			The player also gets 1 second of invincibility and 5 seconds of +50% movement speed
+			'''
+	}
+
+	OminousAmphorae: {
+		DisplayName: Ominous Amphorae
+		Tooltip:
+			'''
+			If the player would take damage equal to or greater than 20% of their max health, they instead take no damage
+			If damage is prevented this way, for each 10 damage prevented, they get Ominous Price for 2 seconds
+			Ominous Price causes 
+			This has a 10 second cooldown.
+			'''
+	}
+
+	QueensCrystalTear: {
+		DisplayName: Queens Crystal Tear
+		Tooltip:
+			'''
+			+12% reaper damage and +7% reaper critical strike chance
+			Whenever the player consumes soul energy, they will dodge the next time they would be damaged. 
+			The dodge has a 3 second cooldown.
+			'''
+	}
+
+	BloodyBroth: {
+		DisplayName: Bloody Broth
+		Tooltip: Grants the player Broth vitality for 30 seconds.
+	}
+
+	HallowedPastry: {
+		DisplayName: Hallowed Pastry
+		Tooltip: Grants the player Cake Blessing for 30 seconds.
+	}
+
+	PiratesPorridge: {
+		DisplayName: Pirates Porridge
+		Tooltip: Grants the player Pirate Power for 30 seconds.
+	}
+
+	BayonetedDemonflamedBlaster: {
+		DisplayName: Bayoneted Demonflamed Blaster
+		Tooltip: Enemies will now take greater damage and will be knocked back when touching the gun
+	}
+
+	BayonetedDemonflamedSMG: {
+		DisplayName: Bayoneted Demonflamed S M G
+		Tooltip: Enemies will now take greater damage and will be knocked back when touching the gun
+	}
+
+	DemonflamedBlaster: {
+		DisplayName: Demonflamed Blaster
+		Tooltip: Enemies will take damage and will be knocked back when touching the gun
+	}
+
+	HellkissedBlaster: {
+		DisplayName: Hellkissed Blaster
+		Tooltip:
+			'''
+			After a lot of hard work and a little bit of sacrificing, its looking nice and sturdy!
+			Enemies will take damage and will be knocked back when touching the gun
+			'''
+	}
+
+	HellkissedSMG: {
+		DisplayName: Hellkissed S M G
+		Tooltip:
+			'''
+			After a lot of hard work and a little bit of sacrificing, its looking nice and sturdy!
+			Enemies will take damage and will be knocked back when touching the gun
+			'''
+	}
+
+	HighCaliberBlaster: {
+		DisplayName: High Caliber Blaster
+		Tooltip:
+			'''
+			Enemies will take greater damage and will be knocked back when touching the gun
+			Replaces musket balls with High velocity Bullets
+			'''
+	}
+
+	HighCaliberSMG: {
+		DisplayName: High Caliber S M G
+		Tooltip:
+			'''
+			Enemies will take greater damage and will be knocked back when touching the gun
+			Replaces musket balls with High velocity Bullets
+			'''
+	}
+
+	HomemadeAR: {
+		DisplayName: Homemade A R
+		Tooltip:
+			'''
+			Alot of time and materials went into this, seems to have been worth it.
+			Removes spread and increases fire rate a little bit and bullet speed a good bit.
+			Enemies will take greater damage and will be knocked back when touching the gun
+			Replaces musket balls with High velocity Bullets
+			'''
+	}
+
+	HomemadeDoubleshot: {
+		DisplayName: Homemade Doubleshot
+		Tooltip:
+			'''
+			Whats better than a gun that can shoot one bullet? A gun that can shoot two!
+			Fires two bullets at once in exchange for some damage
+			Enemies will take greater damage and will be knocked back when touching the gun
+			Replaces musket balls with High velocity Bullets
+			'''
+	}
+
+	HomemadeMachineGun: {
+		DisplayName: Homemade Machine Gun
+		Tooltip:
+			'''
+			There's such thing as too many bullets!
+			Even more rapid fire in exchange for some damage
+			Enemies will take greater damage and will be knocked back when touching the gun
+			Replaces musket balls with High velocity Bullets
+			'''
+	}
+
+	HomemadeSniper: {
+		DisplayName: Homemade Sniper
+		Tooltip:
+			'''
+			This probably isn't legal but well, I'm sure they don't have level 4 plates.
+			Much faster bullet speed and critical strike chance
+			Shots pierce 15% of the enemy's defense
+			Enemies will take greater damage and will be knocked back when touching the gun
+			Replaces musket balls with High velocity Bullets
+			'''
+	}
+
+	LightsoulMilitaryGradeBlaster: {
+		DisplayName: Lightsoul Military Grade Blaster
+		Tooltip:
+			'''
+			Enemies will take greater damage and will be knocked back when touching the gun
+			Replaces musket balls with High velocity Bullets
+			'''
+	}
+
+	LightsoulMilitaryGradeSMG: {
+		DisplayName: Lightsoul Military Grade S M G
+		Tooltip:
+			'''
+			Enemies will take greater damage and will be knocked back when touching the gun
+			Replaces musket balls with High velocity Bullets
+			'''
+	}
+
+	MilitaryGradeBlaster: {
+		DisplayName: Military Grade Blaster
+		Tooltip:
+			'''
+			Enemies will take greater damage and will be knocked back when touching the gun
+			Replaces musket balls with Silver Bullets
+			'''
+	}
+
+	MilitaryGradeSMG: {
+		DisplayName: Military Grade S M G
+		Tooltip:
+			'''
+			Enemies will take greater damage and will be knocked back when touching the gun
+			Replaces musket balls with Silver Bullets
+			'''
+	}
+
+	TacticalDemonflamedBlaster: {
+		DisplayName: Tactical Demonflamed Blaster
+		Tooltip: Enemies will take greater damage and will be knocked back when touching the gun
+	}
+
+	TacticalDemonflamedSMG: {
+		DisplayName: Tactical Demonflamed S M G
+		Tooltip: Enemies will take greater damage and will be knocked back when touching the gun
+	}
+
+	ApexLunarMachineGun: {
+		DisplayName: Apex Lunar Machine Gun
+		Tooltip: ""
+	}
+
+	BloodiedEclipsedMachineGun: {
+		DisplayName: Bloodied Eclipsed Machine Gun
+		Tooltip:
+			'''
+			Enemies will take massive damage and will be knocked back when touching the gun
+			You will also heal 5 health each time an enemy is hit with this gun
+			Replaces musket balls with High velocity Bullets
+			'''
+	}
+
+	BloodiedPlatedMachineGun: {
+		DisplayName: Bloodied Plated Machine Gun
+		Tooltip:
+			'''
+				Enemies will take massive damage and will be knocked back when touching the gun
+				You will also heal 5 health each time an enemy is hit with this gun
+				Replaces musket balls with High velocity Bullets
+				While firing, you get +5 defense and +3% damage reduction
+				
+			'''
+	}
+
+	CelestialtouchedLunarMachineGun: {
+		DisplayName: Celestialtouched Lunar Machine Gun
+		Tooltip: ""
+	}
+
+	EclipsedFrozenMachineGun: {
+		DisplayName: Eclipsed Frozen Machine Gun
+		Tooltip: ""
+	}
+
+	FrozenHomemadeMachineGun: {
+		DisplayName: Frozen Homemade Machine Gun
+		Tooltip: ""
+	}
+
+	HeartseekingMachineGun: {
+		DisplayName: Heartseeking Machine Gun
+		Tooltip: ""
+	}
+
+	LunaAlpha: {
+		DisplayName: Luna Alpha
+		Tooltip: ""
+	}
+
+	LunacyApexMachineGun: {
+		DisplayName: Lunacy Apex Machine Gun
+		Tooltip: ""
+	}
+
+	PrismaticLunacyMachineGun: {
+		DisplayName: Prismatic Lunacy Machine Gun
+		Tooltip: ""
+	}
+
+	PrismaticPlatedMachineGun: {
+		DisplayName: Prismatic Plated Machine Gun
+		Tooltip: ""
+	}
+
+	ApexLunarAR: {
+		DisplayName: Apex Lunar A R
+		Tooltip: ""
+	}
+
+	ApexLunarDoubleshot: {
+		DisplayName: Apex Lunar Doubleshot
+		Tooltip: ""
+	}
+
+	ApexLunarSniper: {
+		DisplayName: Apex Lunar Sniper
+		Tooltip: ""
+	}
+
+	BloodiedEclipsedAR: {
+		DisplayName: Bloodied Eclipsed A R
+		Tooltip: ""
+	}
+
+	BloodiedEclipsedDoubleshot: {
+		DisplayName: Bloodied Eclipsed Doubleshot
+		Tooltip: ""
+	}
+
+	BloodiedEclipsedSniper: {
+		DisplayName: Bloodied Eclipsed Sniper
+		Tooltip: ""
+	}
+
+	BloodiedPlatedAR: {
+		DisplayName: Bloodied Plated A R
+		Tooltip: ""
+	}
+
+	BloodiedPlatedDoubleshot: {
+		DisplayName: Bloodied Plated Doubleshot
+		Tooltip: ""
+	}
+
+	BloodiedPlatedSniper: {
+		DisplayName: Bloodied Plated Sniper
+		Tooltip: ""
+	}
+
+	CelestialtouchedLunarAR: {
+		DisplayName: Celestialtouched Lunar A R
+		Tooltip: ""
+	}
+
+	CelestialtouchedLunarDoubleshot: {
+		DisplayName: Celestialtouched Lunar Doubleshot
+		Tooltip: ""
+	}
+
+	CelestialtouchedLunarSniper: {
+		DisplayName: Celestialtouched Lunar Sniper
+		Tooltip: ""
+	}
+
+	EclipsedFrozenAR: {
+		DisplayName: Eclipsed Frozen A R
+		Tooltip: ""
+	}
+
+	EclipsedFrozenDoubleshot: {
+		DisplayName: Eclipsed Frozen Doubleshot
+		Tooltip: ""
+	}
+
+	EclipsedFrozenSniper: {
+		DisplayName: Eclipsed Frozen Sniper
+		Tooltip: ""
+	}
+
+	FrozenHomemadeAR: {
+		DisplayName: Frozen Homemade A R
+		Tooltip: ""
+	}
+
+	FrozenHomemadeDoubleshot: {
+		DisplayName: Frozen Homemade Doubleshot
+		Tooltip: ""
+	}
+
+	FrozenHomemadeSniper: {
+		DisplayName: Frozen Homemade Sniper
+		Tooltip: ""
+	}
+
+	HeartseekingAR: {
+		DisplayName: Heartseeking A R
+		Tooltip: ""
+	}
+
+	HeartseekingDoubleshot: {
+		DisplayName: Heartseeking Doubleshot
+		Tooltip: ""
+	}
+
+	HeartseekingSniper: {
+		DisplayName: Heartseeking Sniper
+		Tooltip: ""
+	}
+
+	LunaBeta: {
+		DisplayName: Luna Beta
+		Tooltip: ""
+	}
+
+	LunacyApexAR: {
+		DisplayName: Lunacy Apex A R
+		Tooltip: ""
+	}
+
+	LunacyApexDoubleshot: {
+		DisplayName: Lunacy Apex Doubleshot
+		Tooltip: ""
+	}
+
+	LunacyApexSniper: {
+		DisplayName: Lunacy Apex Sniper
+		Tooltip: ""
+	}
+
+	LunaDelta: {
+		DisplayName: Luna Delta
+		Tooltip: ""
+	}
+
+	LunaGamma: {
+		DisplayName: Luna Gamma
+		Tooltip: ""
+	}
+
+	PrismaticLunacyAR: {
+		DisplayName: Prismatic Lunacy A R
+		Tooltip: ""
+	}
+
+	PrismaticLunacyDoubleshot: {
+		DisplayName: Prismatic Lunacy Doubleshot
+		Tooltip: ""
+	}
+
+	PrismaticLunacySniper: {
+		DisplayName: Prismatic Lunacy Sniper
+		Tooltip: ""
+	}
+
+	PrismaticPlatedAR: {
+		DisplayName: Prismatic Plated A R
+		Tooltip: ""
+	}
+
+	PrismaticPlatedDoubleshot: {
+		DisplayName: Prismatic Plated Doubleshot
+		Tooltip: ""
+	}
+
+	PrismaticPlatedSniper: {
+		DisplayName: Prismatic Plated Sniper
+		Tooltip: ""
+	}
+
+	AdvancedBow: {
+		DisplayName: Advanced Bow
+		Tooltip: Fires arrows with greater force
+	}
+
+	ArcaneGladius: {
+		DisplayName: Arcane Gladius
+		Tooltip:
+			'''
+			Fires out 3 arcane blades which quickly fly where the cursor is
+			Arcane Gladius will also deal damage to enemies who touch the gladius itself
+			Both the Arcane Gladius and the arcane blades will inflict Mortal Wouns for 3 seconds when hitting an enemy
+			Arcane Gladius benefits off of both melee and magic bonuses
+			'''
+	}
+
+	CombatKnife: {
+		DisplayName: Combat Knife
+		Tooltip: Gut anything that gets close
+	}
+
+	IssueFixer: {
+		DisplayName: Issue Fixer
+		Tooltip: Shoots in two shot bursts
+	}
+
+	TacticalGlaive: {
+		DisplayName: Tactical Glaive
+		Tooltip: Throw a fast moving blade that pierces all in its path
+	}
+
+	ClockworkPirateHat: {
+		DisplayName: Clockwork Pirate Hat
+		Tooltip:
+			'''
+			+12% ranged damage
+			+5% ranged critical strike chance
+			+10% ranged speed
+			+10% chance to not consume ammo
+			+1% damage reduction
+			Ranged attacks ignore 5 defense
+			'''
+	}
+
+	ClockworkPiratePants: {
+		DisplayName: Clockwork Pirate Pants
+		Tooltip:
+			'''
+			+13% ranged damage
+			+5% ranged critical strike chance
+			+15% movement speed
+			+15% chance to not consume ammo
+			+2% damage reduction
+			Ranged attacks ignore 5 defense
+			'''
+	}
+
+	ClockworkPirateVest: {
+		DisplayName: Clockwork Pirate Vest
+		Tooltip:
+			'''
+			+15% ranged damage
+			+10% ranged critical strike chance
+			+10% movement speed
+			+20% chance to not consume ammo
+			+3% damage reduction
+			+40 max health
+			Ranged attacks ignore 10 defense
+			'''
+	}
+
+	ClockworkPirateWings: {
+		DisplayName: Clockwork Pirate Wings
+		Tooltip: ""
+	}
+
+	RageFungi: {
+		DisplayName: Rage Fungi
+		Tooltip:
+			'''
+			Increases armor set bonus and accessory damage by 20%
+			+10 max health and +2 defense
+			'''
+	}
+
+	RotFungi: {
+		DisplayName: Rot Fungi
+		Tooltip:
+			'''
+			Increases armor set bonus and accessory damage by 50%
+			-20 max health and -5 defense
+			'''
+	}
+
+	MushroomSample: {
+		DisplayName: Mushroom Sample
+		Tooltip: Spore clouds will randomly appear around the player and damage enemies
+	}
+
+	NeedlePointer: {
+		DisplayName: Needle Pointer
+		Tooltip: Occasionally, a thorn will fly in the direction of your cursor
+	}
+
+	RiverToken: {
+		DisplayName: River Token
+		Tooltip: +10 max health, +5 seconds of underwater breathing and +20% nonweapon damage
+	}
+
+	VolatileSand: {
+		DisplayName: Volatile Sand
+		Tooltip:
+			'''
+			The enemy with the highest health will occasionally give off a sandy explosion damaging them
+			The sand explosion will send off sand shards to damage other nearby enemies.
+			'''
+	}
+
+	StonegemChestplate: {
+		DisplayName: Stonegem Chestplate
+		Tooltip:
+			'''
+			-25% damage to all weapons
+			+25% nonweapon damage
+			'''
+	}
+
+	StonegemKilt: {
+		DisplayName: Stonegem Kilt
+		Tooltip:
+			'''
+			-15% damage to all weapons
+			+15% nonweapon damage
+			'''
+	}
+
+	StonegemMask: {
+		DisplayName: Stonegem Mask
+		Tooltip:
+			'''
+			-10% damage to all weapons
+			+10% nonweapon damage
+			'''
+	}
+
+	FungalCollection: {
+		DisplayName: Fungal Collection
+		Tooltip:
+			'''
+			Different species living in harmony
+			Spore clouds will randomly appear around the player and damage enemies
+			+3 defense, +25 max health, +35% nonweapon damage
+			'''
+	}
+
+	FungShui: {
+		DisplayName: Fung Shui
+		Tooltip:
+			'''
+			Don't interrupt it!
+			Spore traps will randomly spawn around the player that will home in and explode on enemies
+			+5 defense, +30 max health, +45% nonweapon damage
+			'''
+	}
+
+	GaiasLongbow: {
+		DisplayName: Gaia's Longbow
+		Tooltip:
+			'''
+			A sentimental weapon held by Aegon, he never used it
+			Fires 3 arrows at once and replaces all arrows fired from this bow with Gaia's Arrows.
+			Gaia's Arrows travel very quickly, home and will shatter into bright shards that also home.
+			The arrows inflict Terra's Rend for 3 seconds, the shards inflict it for 1 second.
+			'''
+	}
+
+	MouldoftheMother: {
+		DisplayName: Mould Of The Mother
+		Tooltip:
+			'''
+			The mould made and used to forge Aegon's first shield
+			Summons a Mini Aegis to your aid that bashes enemies and can even block projectiles by taking their pierce
+			Only one aegis can exist at a time
+			Using the mould while an Aegis already exists will empower the aegis increasing damage and how much pierce the aegis blocks
+			'''
+	}
+
+	TomeoftheWorldsSoul: {
+		DisplayName: Tome Of The World's Soul
+		Tooltip:
+			'''
+			A book seeming to be a personal journal of Aegon's 
+			Cycles through two different modes: Channel and Punish
+			Channel: Fires a piercing bolt that inflicts Ichor, Acid Venom, Cursed Inferno, Frostburn, Hellfire and Electrified for 7 seconds
+			Punish: Fires a piercing ball that deals bonus damage for each debuff on the enemy but reduces all that enemy's debuffs by 0.5 seconds
+			'''
+	}
+
+	WorldwalkerSword: {
+		DisplayName: Worldwalker Sword
+		Tooltip:
+			'''
+			An ancient blade that seems to draw power from the environment
+			Fires various projectiles depending on which biome your in
+			'''
+	}
+
+	Kioku: {
+		DisplayName: Kioku
+		Tooltip:
+			'''
+			"Fallen petals drift on winds of time, carrying echoes of a season long past, 
+			perserved in their fragile hue"
+			Fires a large cherry blossom which splits into four medium cherry blossoms for
+			Each medium cherry blossom splits into four small cherry blossoms
+			Each small cherry blossom splits into four homing cherry blossom petals
+			'''
+	}
+
+	Yakusoku: {
+		DisplayName: Yakusoku
+		Tooltip:
+			'''
+			"Sakura branches sway with a silent vow, 
+			their blossom guarding a bond etched in the earth's quiet embrance"
+			Fires a gravity affected sakura petal which will rain down smaller sakura petals
+			'''
+	}
+
+	Ketsumatsu: {
+		DisplayName: Ketsumatsu
+		Tooltip:
+			'''
+			"The sakura's last bloom falls, a crimson offering in the soil,
+			where shadows gather what light once held."
+			Gathers 10 souls per hit and fires out one or two petals at random
+			Each petal gathers 5 souls on hit and travel in a wavy pattern
+			Consume 125 souls to spawn a Sakura Bloom on your cursor which damage an enemy for 300% damage
+			When making contact with an enemy, the bloom will explode into a radial burst of 32 Sakura Petals
+			The Sakura Petals deal 150% damage and don't pierce
+			'''
+	}
+
+	UnmeiTeki: {
+		DisplayName: Unmei-Teki
+		Tooltip:
+			'''
+			"Beneath the blossom's fleeting dance, a whisper of destiny stirs the air,
+			where petals first entwine two paths"
+			Consumes bullets for ammo
+			Fires wavy, short range petals that deal 20% damage and don't pierce but ignore defense
+			Will occasionally fire a piercing and fast traveling Bloom that damages for 200% damage
+			'''
+	}
+
+	TerraiumLongsword: {
+		DisplayName: Terraium Longsword
+		Tooltip:
+			'''
+			"It's like a shard of the world and it's sky!"
+			Whenever the player strikes an enemy with the blade, four bolts of lightning will strike the enemy
+			Each bolt of lightning will do 40% damage
+			'''
+	}
+
+	TerraiumShortsword: {
+		DisplayName: Terraium Shortsword
+		Tooltip: '''"The shank of the world!"'''
+	}
+
+	TerraiumDagger: {
+		DisplayName: Terraium Dagger
+		Tooltip: Send five fast daggers made of terraium
+	}
+}
+
+Prefixes: {
+	HeartyPrefix.DisplayName: Hearty Prefix
+	HealingPrefix.DisplayName: Healing Prefix
+	HealthyPrefix.DisplayName: Healthy Prefix
+	MendingPrefix.DisplayName: Mending Prefix
+	RegenerativePrefix.DisplayName: Regenerative Prefix
+	RestoringPrefix.DisplayName: Restoring Prefix
+	RobustPrefix.DisplayName: Robust Prefix
+	VitalPrefix.DisplayName: Vital Prefix
+	HardyPrefix.DisplayName: Hardy Prefix
+}
+
+NPCs: {
+	ObeSadeeHealerMinion.DisplayName: Obe Sadee Healer Minion
+	ObeSadee.DisplayName: Obe Sadee
+}

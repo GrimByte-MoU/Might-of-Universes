@@ -1,0 +1,5 @@
+/Users/joshuaguzman/Library/Application Support/Terraria/tModLoader/ModSources/MightofUniverses/obj/Debug/net8.0/MightofUniverses.csproj.AssemblyReference.cache
+/Users/joshuaguzman/Library/Application Support/Terraria/tModLoader/ModSources/MightofUniverses/obj/Debug/net8.0/MightofUniverses.GeneratedMSBuildEditorConfig.editorconfig
+/Users/joshuaguzman/Library/Application Support/Terraria/tModLoader/ModSources/MightofUniverses/obj/Debug/net8.0/MightofUniverses.AssemblyInfoInputs.cache
+/Users/joshuaguzman/Library/Application Support/Terraria/tModLoader/ModSources/MightofUniverses/obj/Debug/net8.0/MightofUniverses.AssemblyInfo.cs
+/Users/joshuaguzman/Library/Application Support/Terraria/tModLoader/ModSources/MightofUniverses/obj/Debug/net8.0/MightofUniverses.csproj.CoreCompileInputs.cache
