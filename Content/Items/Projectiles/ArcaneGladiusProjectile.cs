@@ -3,14 +3,12 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
 using System;
-using Terraria.DataStructures;
-using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
     public class ArcaneGladiusProjectile : ModProjectile
     {
-        private Vector2 targetPosition;
+        private const int SpiralFrames = 36;
 
         public override void SetDefaults()
         {
@@ -27,42 +25,30 @@ namespace MightofUniverses.Content.Items.Projectiles
         public override void AI()
         {
             Player player = Main.player[Projectile.owner];
-
-            if (Projectile.timeLeft > 540)
+            if (Projectile.ai[0] < SpiralFrames)
             {
-                // Spiral out phase
-                Projectile.velocity += new Vector2(Main.rand.NextFloat(-1f, 1f), Main.rand.NextFloat(-1f, 1f));
-                Projectile.velocity = Projectile.velocity.SafeNormalize(Vector2.One) * 3f;
+                float angle = Projectile.ai[0] * 0.3f + Projectile.whoAmI;
+                Vector2 spiralOffset = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * 2.5f;
+                Projectile.velocity = (player.DirectionTo(Projectile.Center) * 2f) + spiralOffset;
+                Projectile.ai[0]++;
             }
             else
             {
-                // Homing toward cursor
                 Vector2 destination = Main.MouseWorld;
-                Vector2 direction = destination - Projectile.Center;
-                direction.Normalize();
-                Projectile.velocity = Vector2.Lerp(Projectile.velocity, direction * 16f, 0.15f);
+                Vector2 toCursor = destination - Projectile.Center;
+                float desiredSpeed = 14f;
+                if (toCursor.Length() > 32f)
+                {
+                    toCursor.Normalize();
+                    Vector2 desiredVelocity = toCursor * desiredSpeed;
+                    Projectile.velocity = Vector2.Lerp(Projectile.velocity, desiredVelocity, 0.13f);
+                }
+                else
+                {
+                    Projectile.velocity = toCursor;
+                }
             }
-
             Projectile.rotation = Projectile.velocity.ToRotation();
         }
-
-        public override void OnSpawn(IEntitySource source)
-        {
-            Player player = Main.player[Projectile.owner];
-
-            // Apply both Melee and Magic bonuses manually
-            float meleeBoost = player.GetDamage(DamageClass.Melee).Additive;
-            float magicBoost = player.GetDamage(DamageClass.Magic).Additive;
-            float totalBoost = meleeBoost + magicBoost;
-
-            Projectile.damage = (int)(Projectile.damage * totalBoost);
-        }
-
-public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-{
-    target.AddBuff(ModContent.BuffType<MortalWound>(), 180);
-}
-
-
     }
 }

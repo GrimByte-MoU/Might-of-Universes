@@ -264,6 +264,16 @@ Buffs: {
 		DisplayName: Mini Aegis Buff
 		Description: Mods.MightofUniverses.Buffs.MiniAegisBuff.Description
 	}
+
+	RubyGlaiveBuff: {
+		DisplayName: Ruby Glaive Buff
+		Description: The Ruby will shoot enemies for you!
+	}
+
+	SapphireGlaiveBuff: {
+		DisplayName: Sapphire Glaive Buff
+		Description: The Sapphire will shoot enemies for you!
+	}
 }
 
 Projectiles: {
@@ -536,6 +546,9 @@ Projectiles: {
 	UnmeiPetal.DisplayName: Unmei Petal
 	TerraiumDaggerProjectile.DisplayName: Terraium Dagger Projectile
 	TerraiumLightning.DisplayName: Terraium Lightning
+	LightGemProjectile.DisplayName: Light Gem Projectile
+	RubyMinion.DisplayName: Ruby Minion
+	SapphireMinion.DisplayName: Sapphire Minion
 }
 
 Keybinds: {
@@ -2852,515 +2865,6 @@ Items: {
 		Tooltip: Grants the Winter Grace buff for 30 seconds
 	}
 
-	BladedDesertwrappedBlaster: {
-		DisplayName: Bladed Desertwrapped Blaster
-		Tooltip: Enemies will now take damage and will be knocked back when touching the gun
-	}
-
-	BladedDesertwrappedSMG: {
-		DisplayName: Bladed Desertwrapped S M G
-		Tooltip: Enemies will now take damage and will be knocked back when touching the gun
-	}
-
-	DarkGun: {
-		DisplayName: Dark Gun
-		Tooltip: Well... it's usable now, not the best, but still usable!
-	}
-
-	DesertwrappedBlaster: {
-		DisplayName: Desertwrapped Blaster
-		Tooltip: ""
-	}
-
-	DesertwrappedSMG: {
-		DisplayName: Desertwrapped S M G
-		Tooltip: ""
-	}
-
-	HyperScopedEvilBlaster: {
-		DisplayName: Hyper Scoped Evil Blaster
-		Tooltip: ""
-	}
-
-	HyperScopedEvilSMG: {
-		DisplayName: Hyper Scoped Evil S M G
-		Tooltip: ""
-	}
-
-	SandedExtendedGun: {
-		DisplayName: Sanded Extended Gun
-		Tooltip: ""
-	}
-
-	SandedGun: {
-		DisplayName: Sanded Gun
-		Tooltip: ""
-	}
-
-	SandedRefinedExtendedGun: {
-		DisplayName: Sanded Refined Extended Gun
-		Tooltip: ""
-	}
-
-	ScopedBlaster: {
-		DisplayName: Scoped Blaster
-		Tooltip: Higher damage per shot but slower fire rate
-	}
-
-	ScopedDarkGun: {
-		DisplayName: Scoped Dark Gun
-		Tooltip: ""
-	}
-
-	ScopedEvilBlaster: {
-		DisplayName: Scoped Evil Blaster
-		Tooltip: ""
-	}
-
-	ScopedEvilSMG: {
-		DisplayName: Scoped Evil S M G
-		Tooltip: ""
-	}
-
-	ScopedSMG: {
-		DisplayName: Scoped S M G
-		Tooltip: Fast fire but weaker per shot damage
-	}
-
-	SimpleGun: {
-		DisplayName: Simple Gun
-		Tooltip: A barely usable piece of trash that can hardly fire anything
-	}
-
-	BloodsoakedRing: {
-		DisplayName: Bloodsoaked Ring
-		Tooltip:
-			'''
-			+3 hp/sec regen and +25% max health but receive 20% more damage
-			When being hit, the player gains soul energy equal to 40% of the damage received
-			This has a 20 second cooldown
-			'''
-	}
-
-	HallowedMirror: {
-		DisplayName: Hallowed Mirror
-		Tooltip:
-			'''
-			After teleporting, the player has their flight time fully restored 
-			The player also gets 1 second of invincibility and 5 seconds of +50% movement speed
-			'''
-	}
-
-	OminousAmphorae: {
-		DisplayName: Ominous Amphorae
-		Tooltip:
-			'''
-			If the player would take damage equal to or greater than 20% of their max health, they instead take no damage
-			If damage is prevented this way, for each 10 damage prevented, they get Ominous Price for 2 seconds
-			Ominous Price causes 
-			This has a 10 second cooldown.
-			'''
-	}
-
-	QueensCrystalTear: {
-		DisplayName: Queens Crystal Tear
-		Tooltip:
-			'''
-			+12% reaper damage and +7% reaper critical strike chance
-			Whenever the player consumes soul energy, they will dodge the next time they would be damaged. 
-			The dodge has a 3 second cooldown.
-			'''
-	}
-
-	BloodyBroth: {
-		DisplayName: Bloody Broth
-		Tooltip: Grants the player Broth vitality for 30 seconds.
-	}
-
-	HallowedPastry: {
-		DisplayName: Hallowed Pastry
-		Tooltip: Grants the player Cake Blessing for 30 seconds.
-	}
-
-	PiratesPorridge: {
-		DisplayName: Pirates Porridge
-		Tooltip: Grants the player Pirate Power for 30 seconds.
-	}
-
-	BayonetedDemonflamedBlaster: {
-		DisplayName: Bayoneted Demonflamed Blaster
-		Tooltip: Enemies will now take greater damage and will be knocked back when touching the gun
-	}
-
-	BayonetedDemonflamedSMG: {
-		DisplayName: Bayoneted Demonflamed S M G
-		Tooltip: Enemies will now take greater damage and will be knocked back when touching the gun
-	}
-
-	DemonflamedBlaster: {
-		DisplayName: Demonflamed Blaster
-		Tooltip: Enemies will take damage and will be knocked back when touching the gun
-	}
-
-	HellkissedBlaster: {
-		DisplayName: Hellkissed Blaster
-		Tooltip:
-			'''
-			After a lot of hard work and a little bit of sacrificing, its looking nice and sturdy!
-			Enemies will take damage and will be knocked back when touching the gun
-			'''
-	}
-
-	HellkissedSMG: {
-		DisplayName: Hellkissed S M G
-		Tooltip:
-			'''
-			After a lot of hard work and a little bit of sacrificing, its looking nice and sturdy!
-			Enemies will take damage and will be knocked back when touching the gun
-			'''
-	}
-
-	HighCaliberBlaster: {
-		DisplayName: High Caliber Blaster
-		Tooltip:
-			'''
-			Enemies will take greater damage and will be knocked back when touching the gun
-			Replaces musket balls with High velocity Bullets
-			'''
-	}
-
-	HighCaliberSMG: {
-		DisplayName: High Caliber S M G
-		Tooltip:
-			'''
-			Enemies will take greater damage and will be knocked back when touching the gun
-			Replaces musket balls with High velocity Bullets
-			'''
-	}
-
-	HomemadeAR: {
-		DisplayName: Homemade A R
-		Tooltip:
-			'''
-			Alot of time and materials went into this, seems to have been worth it.
-			Removes spread and increases fire rate a little bit and bullet speed a good bit.
-			Enemies will take greater damage and will be knocked back when touching the gun
-			Replaces musket balls with High velocity Bullets
-			'''
-	}
-
-	HomemadeDoubleshot: {
-		DisplayName: Homemade Doubleshot
-		Tooltip:
-			'''
-			Whats better than a gun that can shoot one bullet? A gun that can shoot two!
-			Fires two bullets at once in exchange for some damage
-			Enemies will take greater damage and will be knocked back when touching the gun
-			Replaces musket balls with High velocity Bullets
-			'''
-	}
-
-	HomemadeMachineGun: {
-		DisplayName: Homemade Machine Gun
-		Tooltip:
-			'''
-			There's such thing as too many bullets!
-			Even more rapid fire in exchange for some damage
-			Enemies will take greater damage and will be knocked back when touching the gun
-			Replaces musket balls with High velocity Bullets
-			'''
-	}
-
-	HomemadeSniper: {
-		DisplayName: Homemade Sniper
-		Tooltip:
-			'''
-			This probably isn't legal but well, I'm sure they don't have level 4 plates.
-			Much faster bullet speed and critical strike chance
-			Shots pierce 15% of the enemy's defense
-			Enemies will take greater damage and will be knocked back when touching the gun
-			Replaces musket balls with High velocity Bullets
-			'''
-	}
-
-	LightsoulMilitaryGradeBlaster: {
-		DisplayName: Lightsoul Military Grade Blaster
-		Tooltip:
-			'''
-			Enemies will take greater damage and will be knocked back when touching the gun
-			Replaces musket balls with High velocity Bullets
-			'''
-	}
-
-	LightsoulMilitaryGradeSMG: {
-		DisplayName: Lightsoul Military Grade S M G
-		Tooltip:
-			'''
-			Enemies will take greater damage and will be knocked back when touching the gun
-			Replaces musket balls with High velocity Bullets
-			'''
-	}
-
-	MilitaryGradeBlaster: {
-		DisplayName: Military Grade Blaster
-		Tooltip:
-			'''
-			Enemies will take greater damage and will be knocked back when touching the gun
-			Replaces musket balls with Silver Bullets
-			'''
-	}
-
-	MilitaryGradeSMG: {
-		DisplayName: Military Grade S M G
-		Tooltip:
-			'''
-			Enemies will take greater damage and will be knocked back when touching the gun
-			Replaces musket balls with Silver Bullets
-			'''
-	}
-
-	TacticalDemonflamedBlaster: {
-		DisplayName: Tactical Demonflamed Blaster
-		Tooltip: Enemies will take greater damage and will be knocked back when touching the gun
-	}
-
-	TacticalDemonflamedSMG: {
-		DisplayName: Tactical Demonflamed S M G
-		Tooltip: Enemies will take greater damage and will be knocked back when touching the gun
-	}
-
-	ApexLunarMachineGun: {
-		DisplayName: Apex Lunar Machine Gun
-		Tooltip: ""
-	}
-
-	BloodiedEclipsedMachineGun: {
-		DisplayName: Bloodied Eclipsed Machine Gun
-		Tooltip:
-			'''
-			Enemies will take massive damage and will be knocked back when touching the gun
-			You will also heal 5 health each time an enemy is hit with this gun
-			Replaces musket balls with High velocity Bullets
-			'''
-	}
-
-	BloodiedPlatedMachineGun: {
-		DisplayName: Bloodied Plated Machine Gun
-		Tooltip:
-			'''
-				Enemies will take massive damage and will be knocked back when touching the gun
-				You will also heal 5 health each time an enemy is hit with this gun
-				Replaces musket balls with High velocity Bullets
-				While firing, you get +5 defense and +3% damage reduction
-				
-			'''
-	}
-
-	CelestialtouchedLunarMachineGun: {
-		DisplayName: Celestialtouched Lunar Machine Gun
-		Tooltip: ""
-	}
-
-	EclipsedFrozenMachineGun: {
-		DisplayName: Eclipsed Frozen Machine Gun
-		Tooltip: ""
-	}
-
-	FrozenHomemadeMachineGun: {
-		DisplayName: Frozen Homemade Machine Gun
-		Tooltip: ""
-	}
-
-	HeartseekingMachineGun: {
-		DisplayName: Heartseeking Machine Gun
-		Tooltip: ""
-	}
-
-	LunaAlpha: {
-		DisplayName: Luna Alpha
-		Tooltip: ""
-	}
-
-	LunacyApexMachineGun: {
-		DisplayName: Lunacy Apex Machine Gun
-		Tooltip: ""
-	}
-
-	PrismaticLunacyMachineGun: {
-		DisplayName: Prismatic Lunacy Machine Gun
-		Tooltip: ""
-	}
-
-	PrismaticPlatedMachineGun: {
-		DisplayName: Prismatic Plated Machine Gun
-		Tooltip: ""
-	}
-
-	ApexLunarAR: {
-		DisplayName: Apex Lunar A R
-		Tooltip: ""
-	}
-
-	ApexLunarDoubleshot: {
-		DisplayName: Apex Lunar Doubleshot
-		Tooltip: ""
-	}
-
-	ApexLunarSniper: {
-		DisplayName: Apex Lunar Sniper
-		Tooltip: ""
-	}
-
-	BloodiedEclipsedAR: {
-		DisplayName: Bloodied Eclipsed A R
-		Tooltip: ""
-	}
-
-	BloodiedEclipsedDoubleshot: {
-		DisplayName: Bloodied Eclipsed Doubleshot
-		Tooltip: ""
-	}
-
-	BloodiedEclipsedSniper: {
-		DisplayName: Bloodied Eclipsed Sniper
-		Tooltip: ""
-	}
-
-	BloodiedPlatedAR: {
-		DisplayName: Bloodied Plated A R
-		Tooltip: ""
-	}
-
-	BloodiedPlatedDoubleshot: {
-		DisplayName: Bloodied Plated Doubleshot
-		Tooltip: ""
-	}
-
-	BloodiedPlatedSniper: {
-		DisplayName: Bloodied Plated Sniper
-		Tooltip: ""
-	}
-
-	CelestialtouchedLunarAR: {
-		DisplayName: Celestialtouched Lunar A R
-		Tooltip: ""
-	}
-
-	CelestialtouchedLunarDoubleshot: {
-		DisplayName: Celestialtouched Lunar Doubleshot
-		Tooltip: ""
-	}
-
-	CelestialtouchedLunarSniper: {
-		DisplayName: Celestialtouched Lunar Sniper
-		Tooltip: ""
-	}
-
-	EclipsedFrozenAR: {
-		DisplayName: Eclipsed Frozen A R
-		Tooltip: ""
-	}
-
-	EclipsedFrozenDoubleshot: {
-		DisplayName: Eclipsed Frozen Doubleshot
-		Tooltip: ""
-	}
-
-	EclipsedFrozenSniper: {
-		DisplayName: Eclipsed Frozen Sniper
-		Tooltip: ""
-	}
-
-	FrozenHomemadeAR: {
-		DisplayName: Frozen Homemade A R
-		Tooltip: ""
-	}
-
-	FrozenHomemadeDoubleshot: {
-		DisplayName: Frozen Homemade Doubleshot
-		Tooltip: ""
-	}
-
-	FrozenHomemadeSniper: {
-		DisplayName: Frozen Homemade Sniper
-		Tooltip: ""
-	}
-
-	HeartseekingAR: {
-		DisplayName: Heartseeking A R
-		Tooltip: ""
-	}
-
-	HeartseekingDoubleshot: {
-		DisplayName: Heartseeking Doubleshot
-		Tooltip: ""
-	}
-
-	HeartseekingSniper: {
-		DisplayName: Heartseeking Sniper
-		Tooltip: ""
-	}
-
-	LunaBeta: {
-		DisplayName: Luna Beta
-		Tooltip: ""
-	}
-
-	LunacyApexAR: {
-		DisplayName: Lunacy Apex A R
-		Tooltip: ""
-	}
-
-	LunacyApexDoubleshot: {
-		DisplayName: Lunacy Apex Doubleshot
-		Tooltip: ""
-	}
-
-	LunacyApexSniper: {
-		DisplayName: Lunacy Apex Sniper
-		Tooltip: ""
-	}
-
-	LunaDelta: {
-		DisplayName: Luna Delta
-		Tooltip: ""
-	}
-
-	LunaGamma: {
-		DisplayName: Luna Gamma
-		Tooltip: ""
-	}
-
-	PrismaticLunacyAR: {
-		DisplayName: Prismatic Lunacy A R
-		Tooltip: ""
-	}
-
-	PrismaticLunacyDoubleshot: {
-		DisplayName: Prismatic Lunacy Doubleshot
-		Tooltip: ""
-	}
-
-	PrismaticLunacySniper: {
-		DisplayName: Prismatic Lunacy Sniper
-		Tooltip: ""
-	}
-
-	PrismaticPlatedAR: {
-		DisplayName: Prismatic Plated A R
-		Tooltip: ""
-	}
-
-	PrismaticPlatedDoubleshot: {
-		DisplayName: Prismatic Plated Doubleshot
-		Tooltip: ""
-	}
-
-	PrismaticPlatedSniper: {
-		DisplayName: Prismatic Plated Sniper
-		Tooltip: ""
-	}
-
 	AdvancedBow: {
 		DisplayName: Advanced Bow
 		Tooltip: Fires arrows with greater force
@@ -3621,8 +3125,8 @@ Items: {
 		Tooltip:
 			'''
 			"It's like a shard of the world and it's sky!"
-			Whenever the player strikes an enemy with the blade, four bolts of lightning will strike the enemy
-			Each bolt of lightning will do 40% damage
+			Whenever the player strikes an enemy with the blade, two bolts of lightning will strike the enemy
+			Each bolt of lightning will do 75% damage
 			'''
 	}
 
@@ -3634,6 +3138,51 @@ Items: {
 	TerraiumDagger: {
 		DisplayName: Terraium Dagger
 		Tooltip: Send five fast daggers made of terraium
+	}
+
+	RubyGlaive: {
+		DisplayName: Ruby Glaive
+		Tooltip: Summons a Ruby Minion to fight for you
+	}
+
+	SapphireGlaive: {
+		DisplayName: Sapphire Glaive
+		Tooltip: Summons a Sapphire Minion to fight for you
+	}
+
+	BloodsoakedRing: {
+		DisplayName: Bloodsoaked Ring
+		Tooltip: ""
+	}
+
+	HallowedMirror: {
+		DisplayName: Hallowed Mirror
+		Tooltip: ""
+	}
+
+	OminousAmphorae: {
+		DisplayName: Ominous Amphorae
+		Tooltip: ""
+	}
+
+	QueensCrystalTear: {
+		DisplayName: Queens Crystal Tear
+		Tooltip: ""
+	}
+
+	BloodyBroth: {
+		DisplayName: Bloody Broth
+		Tooltip: ""
+	}
+
+	HallowedPastry: {
+		DisplayName: Hallowed Pastry
+		Tooltip: ""
+	}
+
+	PiratesPorridge: {
+		DisplayName: Pirates Porridge
+		Tooltip: ""
 	}
 }
 

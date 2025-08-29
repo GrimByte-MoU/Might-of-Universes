@@ -2,11 +2,16 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
+using System;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
     public class TerraiumLightning : ModProjectile
     {
+        private List<Vector2> lightningPath;
+        private int currentSegment;
+
         public override void SetDefaults()
         {
             Projectile.width = 10;
@@ -31,27 +36,48 @@ namespace MightofUniverses.Content.Items.Projectiles
             if (Projectile.localAI[0]++ < delay)
                 return;
 
-            if (targetIndex >= 0 && targetIndex < Main.maxNPCs && Main.npc[targetIndex].active)
+            if (lightningPath == null)
             {
-                NPC target = Main.npc[targetIndex];
+                lightningPath = new List<Vector2>();
+                currentSegment = 0;
 
-                // Position directly above target, then strike down
-                Vector2 strikeStart = target.Center + new Vector2(0, -600f);
-                Vector2 strikeEnd = target.Center;
-
-                // Each tick, lerp down to target
-                float progress = (Projectile.localAI[0] - delay) / 10f;
-                progress = MathHelper.Clamp(progress, 0f, 1f);
-                Projectile.Center = Vector2.Lerp(strikeStart, strikeEnd, progress);
-
-                // Spawn electric dust trail
-                for (int i = 0; i < 5; i++)
+                if (targetIndex >= 0 && targetIndex < Main.maxNPCs && Main.npc[targetIndex].active)
                 {
-                    Vector2 dustPos = Vector2.Lerp(strikeStart, strikeEnd, Main.rand.NextFloat());
-                    Dust.NewDustPerfect(dustPos, DustID.Electric, Vector2.Zero, 150, Color.LightBlue, 1.5f).noGravity = true;
-                }
+                    NPC target = Main.npc[targetIndex];
+                    Vector2 strikeStart = target.Center + new Vector2(0, -600f);
+                    Vector2 strikeEnd = target.Center;
 
-                if (progress >= 1f)
+                    int segments = 15;
+                    for (int i = 0; i <= segments; i++)
+                    {
+                        float t = i / (float)segments;
+                        Vector2 pos = Vector2.Lerp(strikeStart, strikeEnd, t);
+                        float jaggedness = 40f * (float)(1.0 - Math.Abs(t - 0.5) * 2.0); // More jagged in the middle
+                        pos.X += Main.rand.NextFloat(-jaggedness, jaggedness);
+
+                        lightningPath.Add(pos);
+                    }
+                }
+                else
+                {
+                    Projectile.Kill();
+                    return;
+                }
+            }
+
+            if (currentSegment < lightningPath.Count)
+            {
+                Projectile.Center = lightningPath[currentSegment];
+
+                // Spawn dust along the segment
+                Dust.NewDustPerfect(Projectile.Center, DustID.Electric, Vector2.Zero, 150, Color.LightBlue, 1.5f).noGravity = true;
+                currentSegment++;
+            }
+            else
+            {
+                // Strike at the end
+                NPC target = Main.npc[targetIndex];
+                if (target != null && target.active)
                 {
                     var hitInfo = new NPC.HitInfo()
                     {
@@ -61,12 +87,8 @@ namespace MightofUniverses.Content.Items.Projectiles
                         Crit = false
                     };
                     target.StrikeNPC(hitInfo);
-                    Projectile.Kill();
                 }
-            }
-            else
-            {
-                Projectile.Kill(); // if target despawns
+                Projectile.Kill();
             }
         }
     }

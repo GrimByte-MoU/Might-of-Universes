@@ -44,8 +44,7 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             if (player.whoAmI == Main.myPlayer)
             {
-                // Spawn 4 lightning strikes in fast succession
-                for (int i = 0; i < 6; i++)
+                for (int i = 0; i < 2; i++)
                 {
                     
                     int proj = Projectile.NewProjectile(
@@ -53,7 +52,7 @@ namespace MightofUniverses.Content.Items.Weapons
                         target.Center + new Vector2(Main.rand.Next(-40, 40), -600f),
                         Vector2.Zero,
                         ModContent.ProjectileType<TerraiumLightning>(),
-                        (int)(damageDone * 0.5f),
+                        (int)(damageDone * 0.75f),
                         0f,
                         player.whoAmI,
                         target.whoAmI,

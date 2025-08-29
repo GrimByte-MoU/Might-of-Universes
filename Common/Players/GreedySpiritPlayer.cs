@@ -23,12 +23,16 @@ public override void GetHealLife(Item item, bool quickHeal, ref int healValue)
 
 public override bool OnPickup(Item item)
 {
-    if (hasIncenseOfSuccess && item.type == ItemID.CopperCoin || item.type == ItemID.SilverCoin || item.type == ItemID.GoldCoin || item.type == ItemID.PlatinumCoin)
+    if (hasIncenseOfSuccess &&
+        (item.type == ItemID.CopperCoin || item.type == ItemID.SilverCoin ||
+         item.type == ItemID.GoldCoin || item.type == ItemID.PlatinumCoin))
     {
         item.stack = (int)(item.stack * 1.25f);
-        return true; // or return false, depending on the desired behavior
+        // Let coins (with bonus) be picked up
+        return true;
     }
-    return false; // or return true, depending on the desired behavior
+    // Let all other items be picked up too!
+    return true;
 }
 
     }
