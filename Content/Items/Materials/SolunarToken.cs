@@ -14,5 +14,14 @@ namespace MightofUniverses.Content.Items.Materials
             Item.value = Item.sellPrice(silver: 5);
             Item.rare = ItemRarityID.Green;
         }
+
+         public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ModContent.ItemType<SunSigil>(), 1)
+                .AddIngredient(ModContent.ItemType<MoonSigil>(), 1)
+                .AddTile(TileID.Furnaces)
+                .Register();
+        }
     }
 }

@@ -30,38 +30,83 @@ namespace MightofUniverses.Content.Items.Accessories
                 .Register();
         }
     }
+public class HallowedMirrorPlayer : ModPlayer
+{
+    public bool hasHallowedMirror;
 
-    public class HallowedMirrorPlayer : ModPlayer
+    // 20s cooldown (in ticks), 5s flash window (in ticks)
+    private int cooldownTimer = 0;
+    private int flashTimer = 0;
+
+    // Store base values so we can revert cleanly
+    private bool boostApplied = false;
+    private float savedMaxRunSpeed = 0f;
+    private float savedRunAcceleration = 0f;
+
+    private Vector2 lastPosition;
+
+    public override void ResetEffects()
     {
-        public bool hasHallowedMirror;
-        private int cooldownTimer = 0;
-        private Vector2 lastPosition;
+        hasHallowedMirror = false;
+    }
 
-        public override void ResetEffects()
+    public override void UpdateDead()
+    {
+        // Ensure we revert if the player dies mid-boost
+        if (boostApplied)
         {
-            hasHallowedMirror = false;
+            Player.maxRunSpeed = savedMaxRunSpeed;
+            Player.runAcceleration = savedRunAcceleration;
+            boostApplied = false;
+        }
+        flashTimer = 0;
+        // Optional: keep cooldown or clear it on death
+        // cooldownTimer = 0;
+    }
+
+    public override void PostUpdate()
+    {
+        if (cooldownTimer > 0)
+            cooldownTimer--;
+        if (flashTimer > 0)
+            flashTimer--;
+
+        // End-of-flash cleanup: revert speeds once when timer hits zero
+        if (flashTimer == 0 && boostApplied)
+        {
+            Player.maxRunSpeed = savedMaxRunSpeed;
+            Player.runAcceleration = savedRunAcceleration;
+            boostApplied = false;
         }
 
-        public override void PostUpdate()
+        if (hasHallowedMirror && cooldownTimer <= 0)
         {
-            if (cooldownTimer > 0)
-                cooldownTimer--;
-
-            if (hasHallowedMirror && cooldownTimer <= 0)
+            // Detect large instantaneous movement (teleport) since last tick
+            if (Vector2.Distance(Player.position, lastPosition) > 500f)
             {
-                if ((Player.position - lastPosition).Length() > 500f) // Significant distance = teleport
+                cooldownTimer = 1200; // 20 seconds
+                flashTimer = 300;     // 5 seconds
+
+                Player.immune = true;
+                Player.immuneTime = 60;
+                Player.wingTime = Player.wingTimeMax;
+                if (!boostApplied)
                 {
-                    cooldownTimer = 1200; // 20 seconds
-                    Player.immune = true;
-                    Player.immuneTime = 60; // 1 second of invincibility
-                    Player.maxRunSpeed *= 1.5f;
-                    Player.runAcceleration *= 1.5f;
-                    Player.wingTime = Player.wingTimeMax;
-                    CombatText.NewText(Player.Hitbox, Color.LightGoldenrodYellow, "Hallowed Flash!");
+                    savedMaxRunSpeed = Player.maxRunSpeed;
+                    savedRunAcceleration = Player.runAcceleration;
+
+                    Player.maxRunSpeed = savedMaxRunSpeed * 1.5f;
+                    Player.runAcceleration = savedRunAcceleration * 1.5f;
+
+                    boostApplied = true;
                 }
 
-                lastPosition = Player.position;
+                CombatText.NewText(Player.Hitbox, Color.LightGoldenrodYellow, "Hallowed Flash!");
             }
         }
+
+        // Always update lastPosition each tick so teleport detection is accurate
+        lastPosition = Player.position;
     }
+}
 }

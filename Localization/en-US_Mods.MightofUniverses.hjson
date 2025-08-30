@@ -274,6 +274,26 @@ Buffs: {
 		DisplayName: Sapphire Glaive Buff
 		Description: The Sapphire will shoot enemies for you!
 	}
+
+	ObsidianDaggerBuff: {
+		DisplayName: Obsidian Dagger Buff
+		Description: The Obsidian Daggers will defend you!
+	}
+
+	InkEyeBuff: {
+		DisplayName: Ink-Eye's Watch
+		Description: The Ink-Eye has been summoned!
+	}
+
+	EyeOfHorusBuff: {
+		DisplayName: Eye Of Horus' Watch
+		Description: A figment of divine power watches over you!
+	}
+
+	HellsEyeBuff: {
+		DisplayName: Hells Eye Buff
+		Description: The swarm of Hell's Eyes fight for you!
+	}
 }
 
 Projectiles: {
@@ -549,6 +569,14 @@ Projectiles: {
 	LightGemProjectile.DisplayName: Light Gem Projectile
 	RubyMinion.DisplayName: Ruby Minion
 	SapphireMinion.DisplayName: Sapphire Minion
+	ObsidianDaggerMinion.DisplayName: Obsidian Dagger Minion
+	InkEyeMinion.DisplayName: Ink Eye Minion
+	InkZapProjectile.DisplayName: Ink Zap Projectile
+	EyeOfHorusMinion.DisplayName: Eye Of Horus Minion
+	HorusZapProjectile.DisplayName: Horus Zap Projectile
+	WhipswordWhipProj.DisplayName: Whipsword Whip Proj
+	HellsEyeLaser.DisplayName: Hells Eye Laser
+	HellsEyeMinion.DisplayName: Hells Eye Minion
 }
 
 Keybinds: {
@@ -562,6 +590,7 @@ Keybinds: {
 	"Ability 3.DisplayName": Ability 3
 	"Ability 4.DisplayName": Ability 4
 	"Ability 5.DisplayName": Ability 5
+	"Overclock Remote.DisplayName": Overclock
 }
 
 DamageClasses: {
@@ -3152,37 +3181,153 @@ Items: {
 
 	BloodsoakedRing: {
 		DisplayName: Bloodsoaked Ring
-		Tooltip: ""
+		Tooltip:
+			'''
+			Increases life regen by 3hp/sec and increases max health by 25%
+			Take 20% damage from enemies
+			Everytime the player is hit, they gain 40% of the damage dealt as soul energy, this has a 20 second cooldown
+			'''
 	}
 
 	HallowedMirror: {
 		DisplayName: Hallowed Mirror
-		Tooltip: ""
+		Tooltip:
+			'''
+			Whenever the player teleports m32 or more blocks away, they gain 1 second of invincibility, 
+			+50% movement speed for 5 seconds and restores all flight time
+			This has a 20 second cooldown.
+			'''
 	}
 
 	OminousAmphorae: {
 		DisplayName: Ominous Amphorae
-		Tooltip: ""
+		Tooltip:
+			'''
+			"Everything comes at a price"
+			Whenever the player would receive damage equal to or greater than 20% of their max health, that damage is prevented
+			When damage is prevented this way, for every 5 damage prevented, the player will receive 1 second of the Ominous Price debuff
+			This ability has a 10 second cooldown
+			'''
 	}
 
 	QueensCrystalTear: {
 		DisplayName: Queens Crystal Tear
-		Tooltip: ""
+		Tooltip:
+			'''
+			+12% Reaper Damage, +7% Reaper Crit Chance
+			Whenever the player consumes souls, they will dodge the next attack they would take.
+			'''
 	}
 
 	BloodyBroth: {
 		DisplayName: Bloody Broth
-		Tooltip: ""
+		Tooltip: Grants the player the Broth Vitality buff for 30 seconds
 	}
 
 	HallowedPastry: {
 		DisplayName: Hallowed Pastry
-		Tooltip: ""
+		Tooltip: Grants the player the Cake Blessing buff for 30 seconds
 	}
 
 	PiratesPorridge: {
 		DisplayName: Pirates Porridge
+		Tooltip: Grants the player the Pirate Power buff for 30 seconds
+	}
+
+	ObsidianDaggerBox: {
+		DisplayName: Obsidian Dagger Box
+		Tooltip:
+			'''
+			Summons an Obsidian Dagger to fight for you
+			Each dagger only takes up half a minion slot
+			'''
+	}
+
+	IncantationInkEye: {
+		DisplayName: Incantation: Ink-Eye
+		Tooltip:
+			'''
+			"The scroll's writing seems to still be wet"
+			Summons an Ink Eye to fight for you, keeping watch above you
+			The Ink Eye will shoot inky bolts at enemies which chain to other enemies
+			Only one Ink Eye can exist at a time
+			'''
+	}
+
+	IncantationEyeOfHorus: {
+		DisplayName: Incantation: Eye Of Horus
+		Tooltip:
+			'''
+			"This scroll tells of an ancient ritual to summon a mere fragment of divine power"
+			Summons an Eye Of Horus to fight for you, keeping watch above you
+			The Eye Of Horus will shoot piercing bolts of sand energy which chain to other enemies
+			Only one Eye Of Horus can exist at a time
+			'''
+	}
+
+	Whipsword: {
+		DisplayName: Whipsword
+		Tooltip:
+			'''
+			A special weapon that can switch let you switch between the links being connected and disconnected
+			Connected: Swing like a melee weapon, deals 150% damage
+			Disconnected: Swings like a proper whip and causes enemies to focus struck target
+			'''
+	}
+
+	FireheartArtifact: {
+		DisplayName: Fireheart Artifact
 		Tooltip: ""
+	}
+
+	FireheartShard: {
+		DisplayName: Fireheart Shard
+		Tooltip:
+			'''
+			"A small shard of a powerful demon's heart"
+			+1 minion slot
+			'''
+	}
+
+	FragmentoftheDesert: {
+		DisplayName: Fragmentofthe Desert
+		Tooltip: +7% summon damage
+	}
+
+	JarofSlimyExtract: {
+		DisplayName: Jarof Slimy Extract
+		Tooltip: +1 minion slot
+	}
+
+	OverclockingRemote: {
+		DisplayName: Overclocking Remote
+		Tooltip:
+			'''
+			Activate by pressing {OverclockKeybind} to overclock your minions letting them deal double damage for 2 seconds
+			After overclocking your minions, they will be unable to attack for 1 second
+			This ability has a 15 second cooldown
+			'''
+	}
+
+	SkyRibbon: {
+		DisplayName: Sky Ribbon
+		Tooltip: +45% whip speed
+	}
+
+	UnderworldCoin: {
+		DisplayName: Underworld Coin
+		Tooltip: +1 minion slot, +2% summon damage for each minion
+	}
+
+	HellsEyeLure: {
+		DisplayName: Hell's Eye Lure
+		Tooltip:
+			'''
+			"Strange... there's the faintest hint of celestial energy coming from them"
+			Summons a swarm of four Hell's Eyes to fight for you by circling and blasting enemies
+			Up to 12 Hell's Eyes can exist at a time
+			Four Hell's eyes take up one minion slot.
+			'''
 	}
 }
 

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "FgCJ28dQBug=",
+  "success": true,
+  "projectFilePath": "/Users/joshuaguzman/Library/Application Support/Terraria/tModLoader/ModSources/MightofUniverses/MightofUniverses.csproj",
+  "expectedPackageFiles": [
+    "/Users/joshuaguzman/.nuget/packages/tmodloader.codeassist/0.1.5/tmodloader.codeassist.0.1.5.nupkg.sha512"
+  ],
+  "logs": []
+}

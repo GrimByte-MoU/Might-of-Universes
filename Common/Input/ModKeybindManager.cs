@@ -1,7 +1,10 @@
+using Terraria;
 using Terraria.ModLoader;
 
 namespace MightofUniverses.Common.Input
 {
+    // Loads only on client; avoids registering keybinds on dedicated server
+    [Autoload(Side = ModSide.Client)]
     public class ModKeybindManager : ModSystem
     {
         public static ModKeybind Ability1;
@@ -12,6 +15,7 @@ namespace MightofUniverses.Common.Input
 
         public override void Load()
         {
+            // Default bindings can be "", letting players bind them themselves if you prefer
             Ability1 = KeybindLoader.RegisterKeybind(Mod, "Ability 1", "Z");
             Ability2 = KeybindLoader.RegisterKeybind(Mod, "Ability 2", "X");
             Ability3 = KeybindLoader.RegisterKeybind(Mod, "Ability 3", "C");

@@ -17,7 +17,7 @@ namespace MightofUniverses.Content.Items.Materials
             Item.height = 20;
             Item.maxStack = 999;
             Item.value = Item.sellPrice(silver: 1);
-            Item.rare = ItemRarityID.Lime;
+            Item.rare = ItemRarityID.Green;
         }
 
         public override void AddRecipes()
