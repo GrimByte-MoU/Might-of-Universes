@@ -3,13 +3,13 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using MightofUniverses.Common;
+using MightofUniverses.Common.Players;
 using Terraria.DataStructures;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
     public class SilverScythe : ModItem
     {
-        private int regenTimer = 0;
 
         public override void SetDefaults()
         {
@@ -35,43 +35,13 @@ namespace MightofUniverses.Content.Items.Weapons
 
        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 {
-    var reaper = player.GetModPlayer<ReaperPlayer>();
+    // Use new centralized empowerment system - life regen + damage boost
+    var empowermentValues = ReaperSoulEffects.CreateLifeRegenAndDamageEmpowerment(7, 0.1f);
+    ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(player, 40f, 180, empowermentValues);
     
-    
-if (ReaperPlayer.SoulReleaseKey.JustPressed)
-
-
-
-    {
-        if (reaper.ConsumeSoulEnergy(40f))
-        {
-            player.lifeRegen += 7;
-            player.GetDamage(ModContent.GetInstance<ReaperDamageClass>()) += 0.1f;
-            regenTimer = 180; // 3 seconds
-            Main.NewText("40 souls released!", Color.Green);
-            return false;
-        }
-        else
-        {
-            Main.NewText("Not enough soul energy to activate!", Color.Red);
-        }
-    }
     return true;
 }
 
-
-        public override void UpdateInventory(Player player)
-        {
-            if (regenTimer > 0)
-            {
-                regenTimer--;
-                if (regenTimer <= 0)
-                {
-                    player.lifeRegen -= 7;
-                    player.GetDamage(ModContent.GetInstance<ReaperDamageClass>()) -= 0.1f;
-                }
-            }
-        }
 
         public override void AddRecipes()
         {

@@ -3,13 +3,13 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using MightofUniverses.Common;
+using MightofUniverses.Common.Players;
 using Terraria.DataStructures;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
     public class PlatinumScythe : ModItem
     {
-        private int buffTimer = 0;
 
         public override void SetDefaults()
         {
@@ -35,45 +35,17 @@ namespace MightofUniverses.Content.Items.Weapons
 
 public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 {
-    var reaper = player.GetModPlayer<ReaperPlayer>();
+    // Use new centralized empowerment system - instant heal + defense + damage boost
+    var empowermentValues = ReaperSoulEffects.CreateDefenseAndDamageEmpowerment(5, 0.1f);
+    bool released = ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(player, 40f, 240, empowermentValues,
+        onConsume: (p) => {
+            // Apply instant healing when souls are consumed
+            ReaperSoulEffects.ApplyInstantHealing(p, 40);
+        });
     
-    
-if (ReaperPlayer.SoulReleaseKey.JustPressed)
-
-
-
-    {
-        if (reaper.ConsumeSoulEnergy(40f))
-        {
-            player.statLife += 40;
-            player.Heal(40);
-            player.statDefense += 5;
-            player.GetDamage(ModContent.GetInstance<ReaperDamageClass>()) += 0.1f;
-            buffTimer = 240; // 4 seconds
-            Main.NewText("40 souls released!", Color.Green);
-            return false;
-        }
-        else
-        {
-            Main.NewText("Not enough soul energy to activate!", Color.Red);
-        }
-    }
     return true;
 }
 
-
-        public override void UpdateInventory(Player player)
-        {
-            if (buffTimer > 0)
-            {
-                buffTimer--;
-                if (buffTimer <= 0)
-                {
-                    player.statDefense -= 5;
-                    player.GetDamage(ModContent.GetInstance<ReaperDamageClass>()) -= 0.1f;
-                }
-            }
-        }
 
         public override void AddRecipes()
         {
