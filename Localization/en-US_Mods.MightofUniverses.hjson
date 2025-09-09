@@ -294,6 +294,19 @@ Buffs: {
 		DisplayName: Hells Eye Buff
 		Description: The swarm of Hell's Eyes fight for you!
 	}
+
+	Tarred: {
+		DisplayName: Tarred
+		Description: Mods.MightofUniverses.Buffs.Tarred.Description
+	}
+
+	AncientSkullMinionBuff: {
+		DisplayName: Ancient Skull Minion Buff
+		Description: 
+		'''
+		An ancient spirit fights for you!
+		'''
+	}
 }
 
 Projectiles: {
@@ -577,6 +590,13 @@ Projectiles: {
 	WhipswordWhipProj.DisplayName: Whipsword Whip Proj
 	HellsEyeLaser.DisplayName: Hells Eye Laser
 	HellsEyeMinion.DisplayName: Hells Eye Minion
+	AncientBoneArrow.DisplayName: Ancient Bone Arrow
+	AncientTeeth.DisplayName: Ancient Teeth
+	TarSplatter.DisplayName: Tar Splatter
+	AncientBoneSpike.DisplayName: Ancient Bone Spike
+	AncientRodAmbushController.DisplayName: Ancient Rod Ambush Controller
+	AncientSkullMinion.DisplayName: Ancient Skull Minion
+	TarPellet.DisplayName: Tar Pellet
 }
 
 Keybinds: {
@@ -3327,6 +3347,80 @@ Items: {
 			Summons a swarm of four Hell's Eyes to fight for you by circling and blasting enemies
 			Up to 12 Hell's Eyes can exist at a time
 			Four Hell's eyes take up one minion slot.
+			'''
+	}
+
+	AncientBone: {
+		DisplayName: Ancient Bone
+		Tooltip: A bone from a species that has existed for longer than history
+	}
+
+	MoonSigil: {
+		DisplayName: Moon Sigil
+		Tooltip: A shard of the moon's energy, it seems to call to its other half
+	}
+
+	PrehistoricAmber: {
+		DisplayName: Prehistoric Amber
+		Tooltip: An ancient amber that came from large prehistoric trees
+	}
+
+	SunSigil: {
+		DisplayName: Sun Sigil
+		Tooltip: A shard of the sun's energy, it seems to call to its other half
+	}
+
+	TarChunk: {
+		DisplayName: Tar Chunk
+		Tooltip: A chunk of ancient tar that has hardened and dried
+	}
+
+	AncientBoneBow: {
+		DisplayName: Ancient Bone Bow
+		Tooltip:
+			'''
+			"Shoots with the pulse of an ancient beast"
+			Has a higher crit rate than normal
+			Replaces wooden arrows fired from it with Ancient Bone Arrows which have high pierce and penetrate 50 defense
+			Fires a pair of Tar Splatters alongside your arrows
+			The Tar Splatters deal 125% damage and inflict Tarred for 3 seconds
+			Fires in bursts of 2 before needing a break
+			'''
+	}
+
+	AncientBoneSword: {
+		DisplayName: Ancient Bone Sword
+		Tooltip:
+			'''
+			"Contains the ferocity of creatures long dead and turned to fossil"
+			Has a higher crit rate then normal
+			Fires an even spread of two to four Ancient Teeth that have high pierce and inflict Tarred for 3 seconds
+			The Ancient Teeth do 50% damage each
+			'''
+	}
+
+	AncientBoneRod: {
+		DisplayName: Ancient Bone Rod
+		Tooltip:
+			'''
+			"Retains the violent nature of ancient beasts"
+			Has a higher crit rate than normal
+			Right click to switch between two modes, Hunt and Spray. 
+			Hunt: A ring of 16 Ancient Bone Spikes will spawn around the enemy and converge where the cursor is
+			The spikes do 50% damage each, pierce 20 defense and inflict Tarred for 2 seconds
+			Spray: Fires short range Tar Spit in a cone
+			The tar spit pierces 10 defense and inflict Tarred for 1 second
+			'''
+	}
+
+	AncientBoneStaff: {
+		DisplayName: Ancient Bone Staff
+		Tooltip:
+			'''
+			"Ancient spirits rest within, waiting to be free"
+			Summons an Ancient Skull to fight for you. The skull will lock on to nearby enemies and fire a continuous beam at them
+			The beam will get more powerful the longer the beam continues
+			Each ancient skull takes up 2 minion slots 
 			'''
 	}
 }

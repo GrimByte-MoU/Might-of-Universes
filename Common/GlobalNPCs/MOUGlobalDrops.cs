@@ -39,7 +39,7 @@ namespace MightofUniverses.Common.GlobalNPCs
                             if (Main.rand.Next(10) < 3) // 30%
                 {
                     int stack = Main.rand.Next(1, 4); // 1–3
-                    Item.NewItem(npc.GetSource_Loot(), npc.Hitbox, ModContent.ItemType<DevilsBlood>(), stack);
+                    Item.NewItem(npc.GetSource_Loot(), npc.Hitbox, ModContent.ItemType<DemonicEssence>(), stack);
                 }
             }
         }
