@@ -6,13 +6,14 @@ using Terraria.DataStructures;
 using MightofUniverses.Common;
 using MightofUniverses.Content.Items.Projectiles;
 using MightofUniverses.Content.Items.Materials;
+using MightofUniverses.Common.Players;
+using MightofUniverses.Common.Abstractions;
+using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
     public class TrickstersDue : ModItem
     {
-        private int buffTimer = 0;
-
         public override void SetDefaults()
         {
             Item.width = 50;
@@ -39,40 +40,21 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
-
-            
-if (ReaperPlayer.SoulReleaseKey.JustPressed)
-
-
-
+            if (ReaperPlayer.SoulReleaseKey.JustPressed)
             {
-                if (reaper.ConsumeSoulEnergy(300f))
-                {
-                    player.lifeRegen += 60;
-                    buffTimer = 300; // 5 seconds
-                    Main.NewText("300 souls released!", Color.Pink);
-                }
-                else
-                {
-                    Main.NewText("Not enough soul energy to activate!", Color.Red);
-                }
+                ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
+                    player,
+                    cost: 300f,
+                    durationTicks: 300,
+                    configure: vals =>
+                    {
+                        vals.LifeRegen += 60;
+                    }
+                );
             }
 
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
             return true;
-        }
-
-        public override void UpdateInventory(Player player)
-        {
-            if (buffTimer > 0)
-            {
-                buffTimer--;
-                if (buffTimer <= 0)
-                {
-                    player.lifeRegen -= 60;
-                }
-            }
         }
 
         public override void AddRecipes()
@@ -85,4 +67,3 @@ if (ReaperPlayer.SoulReleaseKey.JustPressed)
         }
     }
 }
-

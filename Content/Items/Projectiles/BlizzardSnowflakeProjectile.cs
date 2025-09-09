@@ -2,6 +2,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using MightofUniverses.Common;
+using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
@@ -17,7 +18,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.timeLeft = 180;
             Projectile.light = 1f;
             Projectile.aiStyle = 1;
-            Projectile.scale = 1.5f;
+            Projectile.scale = 1f;
         }
 
         public override void AI()

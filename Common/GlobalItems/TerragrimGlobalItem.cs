@@ -4,11 +4,11 @@ using Terraria.ModLoader;
 
 namespace MightofUniverses.Common.GlobalItems
 {
-    	public class ArkhalisGlobalItem : GlobalItem
+    	public class TerragrimGlobalItem : GlobalItem
 	{
 		// Here we make sure to only instance this GlobalItem for the Copper Shortsword, by checking item.type
 		public override bool AppliesToEntity(Item item, bool lateInstantiation) {
-			return item.type == ItemID.Arkhalis;
+			return item.type == ItemID.Terragrim;
 		}
 
 		public override void SetDefaults(Item item) {

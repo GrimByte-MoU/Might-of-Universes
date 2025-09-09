@@ -6,6 +6,7 @@ using MightofUniverses.Common;
 using MightofUniverses.Content.Items.Projectiles;
 using Terraria.DataStructures;
 using MightofUniverses.Content.Items.Materials;
+using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
@@ -58,12 +59,7 @@ if (ReaperPlayer.SoulReleaseKey.JustPressed)
                     ModContent.ProjectileType<GreedySoul>(), 
                     (int)(damage * 1.5f), knockback, player.whoAmI, 0f, i * 5); // Delay based on i
             }
-            Main.NewText("50 souls released!", Color.Green);
             return false;
-        }
-        else
-        {
-            Main.NewText("Not enough soul energy to activate!", Color.Red);
         }
     }
 

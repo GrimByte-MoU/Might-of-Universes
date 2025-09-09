@@ -2,15 +2,16 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using MightofUniverses.Common;
 using Terraria.DataStructures;
+using MightofUniverses.Common;
+using MightofUniverses.Common.Players;
+using MightofUniverses.Common.Abstractions;
+using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
     public class TungstenScythe : ModItem
     {
-        private int regenTimer = 0;
-
         public override void SetDefaults()
         {
             Item.width = 32;
@@ -29,48 +30,26 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(1f, target.Center);
+            player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(1f, target.Center);
         }
 
-       public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-{
-    var reaper = player.GetModPlayer<ReaperPlayer>();
-    
-    
-if (ReaperPlayer.SoulReleaseKey.JustPressed)
-
-
-
-    {
-        if (reaper.ConsumeSoulEnergy(40f))
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            player.lifeRegen += 7;
-            player.GetDamage(ModContent.GetInstance<ReaperDamageClass>()) += 0.1f;
-            regenTimer = 180; // 3 seconds
-            Main.NewText("40 souls released!", Color.Green);
-            return false;
-        }
-        else
-        {
-            Main.NewText("Not enough soul energy to activate!", Color.Red);
-        }
-    }
-    return true;
-}
-
-
-        public override void UpdateInventory(Player player)
-        {
-            if (regenTimer > 0)
+            if (ReaperPlayer.SoulReleaseKey.JustPressed)
             {
-                regenTimer--;
-                if (regenTimer <= 0)
-                {
-                    player.lifeRegen -= 7;
-                    player.GetDamage(ModContent.GetInstance<ReaperDamageClass>()) -= 0.1f;
-                }
+                ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
+                    player,
+                    cost: 40f,
+                    durationTicks: 180,
+                    configure: vals =>
+                    {
+                        vals.LifeRegen += 7;
+                        vals.ReaperDamage += 0.10f;
+                    }
+                );
+                return false;
             }
+            return true;
         }
 
         public override void AddRecipes()

@@ -2,6 +2,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using MightofUniverses.Common;
+using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
@@ -20,7 +21,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            Projectile.rotation = Projectile.velocity.ToRotation();
+            Projectile.rotation += 0.2f;
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch);
             Lighting.AddLight(Projectile.Center, 1f, 0.5f, 0f);
         }

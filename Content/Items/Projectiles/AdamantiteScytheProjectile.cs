@@ -2,6 +2,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using MightofUniverses.Common;
+using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
@@ -17,12 +18,12 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.timeLeft = 180;
             Projectile.light = 1f;
             Projectile.aiStyle = 1;
-            Projectile.scale = 1.5f;
+            Projectile.scale = 0.75f;
         }
         public override void AI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
-            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Adamantite);
+            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Electric);
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -30,6 +31,8 @@ namespace MightofUniverses.Content.Items.Projectiles
             Player player = Main.player[Projectile.owner];
             var reaper = player.GetModPlayer<ReaperPlayer>();
             reaper.AddSoulEnergy(3f, target.Center);
+            target.AddBuff(BuffID.Electrified, 180);
         }
+        
     }
 }

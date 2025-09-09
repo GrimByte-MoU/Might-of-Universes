@@ -2,6 +2,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using MightofUniverses.Common;
+using MightofUniverses.Common.Players;
 
 
 namespace MightofUniverses.Content.Items.Projectiles
@@ -18,23 +19,15 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.timeLeft = 600;
             Projectile.aiStyle = 1;
             AIType = ProjectileID.WoodenArrowFriendly;
-            Projectile.scale = 1.5f;
         }
 
         public override void AI()
         {
-            
-           Projectile.rotation = Projectile.velocity.ToRotation();
-
-// Optional: Add this if you want the sprite to be oriented differently
-// Projectile.rotation += MathHelper.PiOver2; // Rotates sprite 90 degrees
-
-            
             if (Main.rand.NextBool(3))
             {
-                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Chlorophyte);
+                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GreenTorch);
             }
-            Projectile.spriteDirection = Projectile.direction;
+            Projectile.rotation = Projectile.velocity.ToRotation();
 
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

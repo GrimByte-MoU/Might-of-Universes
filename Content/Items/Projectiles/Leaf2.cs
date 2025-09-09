@@ -3,6 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using MightofUniverses.Common;
+using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
@@ -32,7 +33,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Player player = Main.player[Projectile.owner];
             var reaper = player.GetModPlayer<ReaperPlayer>();
             reaper.AddSoulEnergy(6f, target.Center);
-            player.Heal(15);
+            player.Heal(5);
         }
     }
 }

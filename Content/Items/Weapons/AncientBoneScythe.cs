@@ -8,15 +8,18 @@ using MightofUniverses.Content.Items.Materials;
 using MightofUniverses.Content.Items.Buffs;
 using System;
 using MightofUniverses.Common;
+using MightofUniverses.Common.Players;
+using MightofUniverses.Common.Abstractions;
+using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
     public class AncientBoneScythe : ModItem
     {
-        private const float PulseRadiusPx = 30f * 16f; // 30 tiles
+        private const float PulseRadiusPx = 50f * 16f; // 30 tiles
         private const int TarOnHitDuration = 120;   // 2 seconds
         private const int PulseTarDuration = 300;   // 5 seconds
-        private const int PrimalSavageryDuration = 180; // 3 seconds
+        private const int PrimalSavageryDuration = 300; // 5 seconds
 
         public override void SetDefaults()
         {
@@ -28,8 +31,8 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.knockBack = 6f;
 
             Item.useStyle = ItemUseStyleID.Swing;
-            Item.useTime = 22;
-            Item.useAnimation = 22;
+            Item.useTime = 10;
+            Item.useAnimation = 10;
             Item.autoReuse = true;
             Item.UseSound = SoundID.Item1;
 
@@ -63,12 +66,6 @@ namespace MightofUniverses.Content.Items.Weapons
                         }
                     }
                     player.AddBuff(ModContent.BuffType<PrimalSavageryBuff>(), PrimalSavageryDuration);
-
-                    Main.NewText("100 souls released!", Color.Gray);
-                }
-                else
-                {
-                    Main.NewText("Not enough soul energy to activate!", Color.Red);
                 }
             }
         }
@@ -92,7 +89,6 @@ namespace MightofUniverses.Content.Items.Weapons
 
         private void DoGrayPulse(Player player)
         {
-            // Simple expanding smoke ring for feedback
             Vector2 center = player.Center;
 
             for (int i = 0; i < 48; i++)
@@ -105,9 +101,7 @@ namespace MightofUniverses.Content.Items.Weapons
                 Main.dust[d].noGravity = true;
                 Main.dust[d].velocity = dir * 6f;
             }
-
-            // Lite ring outline samples
-            for (int r = 64; r <= (int)PulseRadiusPx; r += 64)
+            for (int r = 800; r <= (int)PulseRadiusPx; r += 64)
             {
                 for (int i = 0; i < 18; i++)
                 {

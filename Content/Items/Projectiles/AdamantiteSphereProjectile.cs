@@ -3,6 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using MightofUniverses.Common;
+using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
@@ -25,7 +26,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            
+
             NPC target = null;
             float maxDistance = MAX_HOMING_DISTANCE;
 
@@ -60,6 +61,10 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             modifiers.ArmorPenetration += 999999;
             modifiers.FinalDamage *= 1f;
+        }
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            target.AddBuff(BuffID.Electrified, 600);
         }
     }
 }

@@ -6,6 +6,9 @@ using MightofUniverses.Common;
 using MightofUniverses.Content.Items.Projectiles;
 using Terraria.DataStructures;
 using MightofUniverses.Content.Items.Buffs;
+using MightofUniverses.Common.Players;
+using MightofUniverses.Common.Abstractions;
+using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
@@ -60,12 +63,7 @@ if (ReaperPlayer.SoulReleaseKey.JustPressed)
         {
             debuffsActive = true;
             debuffTimer = 300; // 5 seconds
-            Main.NewText("30 souls released!", Color.Green);
             return false;
-        }
-        else
-        {
-            Main.NewText("Not enough soul energy to activate!", Color.Red);
         }
     }
 

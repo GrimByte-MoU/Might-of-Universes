@@ -28,7 +28,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            Projectile.rotation += 0.2f;
+            Projectile.rotation += 0.6f;
 
             if (!isSpinning)
             {

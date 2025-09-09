@@ -5,6 +5,9 @@ using Microsoft.Xna.Framework;
 using MightofUniverses.Common;
 using MightofUniverses.Content.Items.Projectiles;
 using Terraria.DataStructures;
+using MightofUniverses.Common.Players;
+using MightofUniverses.Common.Abstractions;
+using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {

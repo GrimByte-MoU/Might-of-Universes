@@ -3,6 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using MightofUniverses.Common;
 using MightofUniverses.Content.Items.Buffs;
+using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {

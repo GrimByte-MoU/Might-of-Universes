@@ -6,6 +6,9 @@ using MightofUniverses.Common;
 using MightofUniverses.Content.Items.Projectiles;
 using Terraria.DataStructures;
 using MightofUniverses.Content.Items.Materials;
+using MightofUniverses.Common.Players;
+using MightofUniverses.Common.Abstractions;
+using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
@@ -65,13 +68,7 @@ if (ReaperPlayer.SoulReleaseKey.JustPressed)
             Projectile.NewProjectile(source, player.Center, Vector2.Zero, 
                 ModContent.ProjectileType<ScytheEclipse>(), 
                 damage * 2, knockback, player.whoAmI, MathHelper.Pi);
-                
-            Main.NewText("50 souls released!", Color.Green);
             return false;
-        }
-        else
-        {
-            Main.NewText("Not enough soul energy to activate!", Color.Red);
         }
     }
 

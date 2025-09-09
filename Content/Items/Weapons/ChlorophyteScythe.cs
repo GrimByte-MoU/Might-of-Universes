@@ -2,15 +2,19 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
+using Terraria.DataStructures;
 using MightofUniverses.Common;
 using MightofUniverses.Content.Items.Projectiles;
-using Terraria.DataStructures;
+using MightofUniverses.Common.Players;
+using MightofUniverses.Common.Abstractions;
+using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class ChlorophyteScythe : ModItem
+    public class ChlorophyteScythe : ModItem, IHasSoulCost
     {
-        private int buffTimer = 0;
+        public float BaseSoulCost => 140f;
+
         public override void SetDefaults()
         {
             Item.width = 50;
@@ -32,49 +36,30 @@ namespace MightofUniverses.Content.Items.Weapons
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(4f, target.Center); // Cal
-
+            reaper.AddSoulEnergy(4f, target.Center);
             if (!target.active)
+                reaper.AddSoulEnergy(4f, target.Center);
+        }
+
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            if (ReaperPlayer.SoulReleaseKey.JustPressed)
             {
-                reaper.AddSoulEnergy(4f, target.Center); // Cal
+                ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
+                    player,
+                    cost: 50f,
+                    durationTicks: 300,
+                    configure: vals =>
+                    {
+                        vals.LifeRegen += 15;
+                    }
+                );
+                return false;
             }
-        }
 
-public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-{
-    var reaper = player.GetModPlayer<ReaperPlayer>();
-    
-    if (ReaperPlayer.SoulReleaseKey.JustPressed)
-    {
-        if (reaper.ConsumeSoulEnergy(140f))
-        {
-            player.Heal(150);
-            player.lifeRegen += 15;
-            buffTimer = 300; // 5 seconds
-            Main.NewText("140 souls released!", Color.Green);
-            return false;
+            Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
+            return false; // manual projectile spawning
         }
-        else
-        {
-            Main.NewText("Not enough soul energy to activate!", Color.Red);
-        }
-    }
-    Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
-    return false;
-}
-
-        public override void UpdateInventory(Player player)
-        {
-            if (buffTimer > 0)
-            {
-                buffTimer--;
-                if (buffTimer <= 0)
-                {
-                player.lifeRegen -= 15;
-                }
-            }
-        }
-
 
         public override void AddRecipes()
         {

@@ -6,6 +6,9 @@ using MightofUniverses.Common;
 using Terraria.DataStructures;
 using MightofUniverses.Content.Items.Materials;
 using MightofUniverses.Content.Items.Buffs;
+using MightofUniverses.Common.Players;
+using MightofUniverses.Common.Abstractions;
+using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {

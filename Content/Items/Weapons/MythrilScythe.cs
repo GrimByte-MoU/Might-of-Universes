@@ -5,6 +5,9 @@ using Microsoft.Xna.Framework;
 using MightofUniverses.Common;
 using MightofUniverses.Content.Items.Projectiles;
 using Terraria.DataStructures;
+using MightofUniverses.Common.Players;
+using MightofUniverses.Common.Abstractions;
+using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
@@ -54,12 +57,7 @@ if (ReaperPlayer.SoulReleaseKey.JustPressed)
             Projectile.NewProjectile(source, position, velocity, 
                 ModContent.ProjectileType<MineralWaveProjectile>(), 
                 damage, knockback * 5f, player.whoAmI);
-            Main.NewText("40 souls released!", Color.Green);
             return false;
-        }
-        else
-        {
-            Main.NewText("Not enough soul energy to activate!", Color.Red);
         }
     }
     return true;

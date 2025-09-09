@@ -6,6 +6,9 @@ using MightofUniverses.Common;
 using MightofUniverses.Content.Items.Projectiles;
 using Terraria.DataStructures;
 using MightofUniverses.Content.Items.Materials;
+using MightofUniverses.Common.Players;
+using MightofUniverses.Common.Abstractions;
+using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
@@ -58,12 +61,7 @@ if (ReaperPlayer.SoulReleaseKey.JustPressed)
                     ModContent.ProjectileType<Demonsoul>(), 
                     (int)(damage * 1.5f), knockback, player.whoAmI, 0f, i * 5); // Delay based on i
             }
-            Main.NewText("40 souls released!", Color.Green);
             return false;
-        }
-        else
-        {
-            Main.NewText("Not enough soul energy to activate!", Color.Red);
         }
     }
 

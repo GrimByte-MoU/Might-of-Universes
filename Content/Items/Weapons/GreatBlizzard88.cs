@@ -6,6 +6,9 @@ using MightofUniverses.Common;
 using Terraria.DataStructures;
 using MightofUniverses.Content.Items.Projectiles;
 using MightofUniverses.Content.Items.Materials;
+using MightofUniverses.Common.Players;
+using MightofUniverses.Common.Abstractions;
+using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
@@ -59,12 +62,7 @@ if (ReaperPlayer.SoulReleaseKey.JustPressed)
                     ModContent.ProjectileType<BlizzardSnowflakeProjectile>(),
                     damage / 2, knockback / 4, player.whoAmI);
             }
-            Main.NewText("50 souls released!", Color.Green);
             return false;
-        }
-        else
-        {
-            Main.NewText("Not enough soul energy to activate!", Color.Red);
         }
     }
 

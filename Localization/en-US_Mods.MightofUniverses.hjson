@@ -302,9 +302,26 @@ Buffs: {
 
 	AncientSkullMinionBuff: {
 		DisplayName: Ancient Skull Minion Buff
+		Description: An ancient spirit fights for you!
+	}
+
+	PrimalSavageryBuff: {
+		DisplayName: Primal Savagery Buff
+		Description: +30% Reaper damage and pierce 50 defense
+	}
+
+	CactusReaperPierce: {
+		DisplayName: Cactus Reaper Pierce
+		Description: '''
+		Reaper attacks pierce 10 defense
+		'''
+	}
+
+	SoulEmpowerment: {
+		DisplayName: Soul Empowerment
 		Description: 
 		'''
-		An ancient spirit fights for you!
+		The souls you've consumed empower you!
 		'''
 	}
 }
@@ -1919,13 +1936,13 @@ Items: {
 			'''
 			Gathers 1 soul on hit and fires a bloody projectile
 			The projectile also gathers 1 soul when hitting
-			Consume 50 soouls to give your weapons lifesteal for 5 seconds
+			Consume {0} souls to give your weapons lifesteal for 5 seconds
 			'''
 	}
 
 	CopperScythe: {
 		DisplayName: Copper Scythe
-		Tooltip: Consume 25 souls to gain increased life regen for 3 seconds
+		Tooltip: Consume {0} souls to gain increased life regen for 3 seconds
 	}
 
 	Evildoer: {
@@ -1934,7 +1951,7 @@ Items: {
 			'''
 			Gathers 1 soul on hit and fires a corrupted projectile
 			The projectile also gathers 1 soul when hitting
-			Consume 30 souls to give your weapons the ability to inflict Corrupted and Cursed Inferno for 5 seconds
+			Consume {0} souls to give your weapons the ability to inflict Corrupted and Cursed Inferno for 5 seconds
 			'''
 	}
 
@@ -1943,7 +1960,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 1 soul on hit
-			Consume 40 souls to heal the player 40 health as well as grant +5 defense and +10% reaper dsamage for 4 seconds
+			Consume {0} souls to heal the player 40 health as well as grant +5 defense and +10% reaper dsamage for 4 seconds
 			'''
 	}
 
@@ -1952,7 +1969,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 1 soul on hit
-			Consume 30 souls to heal the player 50 health as well as grant the Hyper buff for 3 seconds
+			Consume {0} souls to heal the player 50 health as well as grant the Hyper buff for 3 seconds
 			'''
 	}
 
@@ -1962,7 +1979,7 @@ Items: {
 			'''
 			Gathers 2 souls, ignites on hit and launches a fiery  projectile
 			The projectile also gathers 1 soul when hitting
-			Consume 40 souls to launch a Hellsoul
+			Consume {0} souls to launch a Hellsoul
 			'''
 	}
 
@@ -1971,7 +1988,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 1 soul on hit
-			Consume 30 souls to give the player increased life regen for 3 seconds
+			Consume {0} souls to give the player increased life regen for 3 seconds
 			'''
 	}
 
@@ -1980,7 +1997,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 1 soul on hit
-			Consume 30 souls to give the player increased life regen for 3 seconds
+			Consume {0} souls to give the player increased life regen for 3 seconds
 			'''
 	}
 
@@ -1989,7 +2006,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 2 souls on hit and fires a meteoric shard which gathers 2 soul on hit
-				Consume 40 souls to fire a shotgun of three meteors
+				Consume {0} souls to fire a shotgun of three meteors
 				
 			'''
 	}
@@ -1999,7 +2016,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 3 souls on hit and fires a midnight wave that gathers 2 soul on hit
-			Consume 50 souls to fire out several nightbound souls
+			Consume {0} souls to fire out several nightbound souls
 			'''
 	}
 
@@ -2008,7 +2025,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 1 soul on hit
-			Consume 40 souls to heal the player 40 health as well as grant +5 defense and +10% reaper dsamage for 4 seconds
+			Consume {0} souls to heal the player 40 health as well as grant +5 defense and +10% reaper dsamage for 4 seconds
 			'''
 	}
 
@@ -2018,7 +2035,7 @@ Items: {
 			'''
 			Gathers 2 souls on hit
 			Fires 2 solunar bolts that move in a helix, the bolts gather 1 soul each
-			Consume 50 souls to cause two Solunar medallions to spin away from you
+			Consume {0} souls to cause two Solunar medallions to spin away from you
 			'''
 	}
 
@@ -2028,13 +2045,13 @@ Items: {
 			'''
 			Gathers 2 souls on hit
 			Fires a gumball projectile that also gathers 1 soul on hit
-			Consume 75 souls to heal for 100 health as well as gain greatly increased life regen and the Hyper buff for 5 seconds
+			Consume {0} souls to heal for 100 health as well as gain greatly increased life regen and the Hyper buff for 5 seconds
 			'''
 	}
 
 	TinScythe: {
 		DisplayName: Tin Scythe
-		Tooltip: Consume 25 souls to gain increased life regen for 3 seconds
+		Tooltip: Consume {0} souls to gain increased life regen for 3 seconds
 	}
 
 	WardensHook: {
@@ -2043,7 +2060,7 @@ Items: {
 			'''
 			Gathers 2 souls on hit and fires a water bolt which also steals 1 soul on hit
 			15% chance to instead fire damaging crossbones
-			Consume 25 souls to fire a piercing water spear
+			Consume {0} souls to fire a piercing water spear
 			'''
 	}
 
@@ -2052,7 +2069,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 3 souls on hit and fires a Palladium dart which gathers 2 souls on hit
-			Consume 70 souls to give yourself +7 defense and greatly increased life regen for 5 seconds
+			Consume {0} souls to give yourself +7 defense and greatly increased life regen for 5 seconds
 			'''
 	}
 
@@ -2061,7 +2078,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 4 souls on hit and fires a Chlorophyte leaf which gathers 3 souls on hit
-			Consume 140 souls to immediately heal for 150 health, then rapidly regenerate health for 5 seconds
+			Consume {0} souls to immediately heal for 150 health, then rapidly regenerate health for 5 seconds
 			'''
 	}
 
@@ -2071,7 +2088,7 @@ Items: {
 			'''
 			A scythe used by Thanatos
 			Gathers 4 souls on hit and fires a Hallowed Scythe which gathers 3 souls on hit
-			Consume 30 souls to give yourself +7 defense, +15% attack speed and +5% damage reduction for 3 seconds
+			Consume {0} souls to give yourself +7 defense, +15% attack speed and +5% damage reduction for 3 seconds
 			'''
 	}
 
@@ -2080,7 +2097,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 4 souls on hit and fires out an orichalcum petal that gathers 2 souls on hit
-			Consume 40 souls to give yourself +15% reaper damage and attack speed for 4 seconds
+			Consume {0} souls to give yourself +15% reaper damage and attack speed for 4 seconds
 			'''
 	}
 
@@ -2089,7 +2106,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 4 souls on hit and fires out a titanium star which gathers 3 souls on hit
-			Consume 75 souls to instantly heal yourself 150 health, then get +15 defense and +15% damage reduction for 4 seconds
+			Consume {0} souls to instantly heal yourself 150 health, then get +15 defense and +15% damage reduction for 4 seconds
 			'''
 	}
 
@@ -2098,7 +2115,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 4 souls on hit and fires out an adamantite dart that gathers 3 souls on hit
-			Consume 40 souls to fire a homing adamantite sphere that pierces all defense
+			Consume {0} souls to fire a homing adamantite sphere that pierces all defense
 			'''
 	}
 
@@ -2107,7 +2124,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 5 souls on strike and fire out an accelerating blood wave that also gathers 5 souls on hit
-			Consume 50 souls to get decreased life regen, +30% attack speed and +25% reaper damage for 5 seconds
+			Consume {0} souls to get decreased life regen, +30% attack speed and +25% reaper damage for 5 seconds
 			'''
 	}
 
@@ -2116,7 +2133,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 3 souls on hit and fires a Cobalt dart which gathers 2 souls on hit
-			Consume 40 souls to fire out 4 powerful cobalt blades
+			Consume {0} souls to fire out 4 powerful cobalt blades
 			'''
 	}
 
@@ -2126,7 +2143,7 @@ Items: {
 			'''
 			SYSTEM ERROR... SYSTEM FAILURE...
 			Gathers 5 souls on strike and fires out a code wave which gathers 3 souls on hit
-			Consume 35 souls to fire out two homing code spheres
+			Consume {0} souls to fire out two homing code spheres
 			'''
 	}
 
@@ -2136,7 +2153,7 @@ Items: {
 			'''
 			Gathers 4 souls and inflicts Hellfire for 3 seconds on strike
 			Fires a firebolt that gathers 3 souls and inflicts Hellfire for 3 seconds on hit
-			Consume 40 souls to fire out a barrage of demon souls that inflict Demonfire for 3 seconds and Hellfire for 5 seconds
+			Consume {0} souls to fire out a barrage of demon souls that inflict Demonfire for 3 seconds and Hellfire for 5 seconds
 			'''
 	}
 
@@ -2145,7 +2162,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 3 souls on hit and fires a glitch bolt that gathers 2 souls on strike
-			Consume 40 souls to fire three glitch blasts in a tight arc
+			Consume {0} souls to fire three glitch blasts in a tight arc
 			'''
 	}
 
@@ -2154,7 +2171,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 4 souls on hit and fires out a mythril blade that gathers 2 souls on hit
-			Consume 40 souls to send out a mineral wave that sends enemies it hits flying back
+			Consume {0} souls to send out a mineral wave that sends enemies it hits flying back
 			'''
 	}
 
@@ -2163,7 +2180,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 5 souls on hit and fires out a chlorotanium star that also gathers 5 souls on hit
-			Consume 200 souls to heal for 150 health, then gain rapid life regen, +20 defense and +15% damage reduction for 5 seconds.
+			Consume {0} souls to heal for 150 health, then gain rapid life regen, +20 defense and +15% damage reduction for 5 seconds.
 			'''
 	}
 
@@ -2172,7 +2189,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 5 souls on hit and fires out a lifestealing soul coin that also gathers 5 souls on hit
-			Consume 50 souls to fire out a barrage of greedy souls
+			Consume {0} souls to fire out a barrage of greedy souls
 			'''
 	}
 
@@ -2181,7 +2198,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 5 souls on hit and randomly fires out one or two snoflakes that each gather 5 souls on hit
-			Consume 50 souls to cause a blizzard to rain down from the sky
+			Consume {0} souls to cause a blizzard to rain down from the sky
 			The snowflakes inflict Frostburn for 3 seconds while the blizzard inflicts Frostburn for 1 second
 			'''
 	}
@@ -2191,7 +2208,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 5 souls on hit and fires out four eclipse rays that each gather 2 souls on hit
-			Consume 50 souls to create four miniature eclipses that circle out and away from the player
+			Consume {0} souls to create four miniature eclipses that circle out and away from the player
 			'''
 	}
 
@@ -2201,17 +2218,18 @@ Items: {
 			'''
 			Gthers 5 souls on hit and fires out a holly leaf that  gathers 4 souls and heals the player for 5 health on hit
 			15% chance to instead fire out a more powerful holly leaf that gathers 6 souls and heals the player for 15 health on hit
+			Consume {0} souls to gain significant life regen for 5 seconds
 			'''
 	}
 
 	SilverScythe: {
 		DisplayName: Silver Scythe
-		Tooltip: Consume 40 souls to gain increased life regen and +10% reaper damage for 3 seconds
+		Tooltip: Consume {0} souls to gain increased life regen and +10% reaper damage for 3 seconds
 	}
 
 	TungstenScythe: {
 		DisplayName: Tungsten Scythe
-		Tooltip: Consume 40 souls to gain increased life regen and +10% reaper damage for 3 seconds
+		Tooltip: Consume {0} souls to gain increased life regen and +10% reaper damage for 3 seconds
 	}
 
 	TempleReaper: {
@@ -2220,7 +2238,7 @@ Items: {
 			'''
 			Gathers 7 souls on hit and fires out three temple shards that each gather 4 souls on hit
 			15% chance for each shard to be replaced by a bouncing fireball that pierces and bounces but gathers no souls
-			Consume 220 souls to heal for 150 flat health, then gain rapid regeneration, +25 defense and +20% damage reduction for 5 seconds
+			Consume {0} souls to heal for 150 flat health, then gain rapid regeneration, +25 defense and +20% damage reduction for 5 seconds
 			'''
 	}
 
@@ -2229,7 +2247,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 7 souls on hit and fires out a pixie bolt that also gathers 7 souls on hit
-			Consume 300 souls to give yourself massive life regen for 5 seconds
+			Consume {0} souls to give yourself massive life regen for 5 seconds
 			'''
 	}
 
@@ -2238,7 +2256,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 7 souls on hit and fires out 1 or 2 wavy martian tally bolts that gather 5 souls each
-			Consume 70 souls to gain double attack speed and ignore all defense for 3 seconds
+			Consume {0} souls to gain double attack speed and ignore all defense for 3 seconds
 			'''
 	}
 
@@ -3421,6 +3439,16 @@ Items: {
 			Summons an Ancient Skull to fight for you. The skull will lock on to nearby enemies and fire a continuous beam at them
 			The beam will get more powerful the longer the beam continues
 			Each ancient skull takes up 2 minion slots 
+			'''
+	}
+
+	AncientBoneScythe: {
+		DisplayName: Ancient Bone Scythe
+		Tooltip:
+			'''
+			"The finality of the ancient's lives are inscribed in this scythe"
+			Gathers 10 souls per strike
+			Consume {0} souls to gain the Primal Savagery buff for 5 seconds
 			'''
 	}
 }

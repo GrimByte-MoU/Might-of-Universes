@@ -2,15 +2,17 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
+using Terraria.DataStructures;
 using MightofUniverses.Common;
 using MightofUniverses.Content.Items.Projectiles;
-using Terraria.DataStructures;
+using MightofUniverses.Common.Players;
+using MightofUniverses.Common.Abstractions;
+using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
     public class PalladiumScythe : ModItem
     {
-        private int buffTimer = 0;
         public override void SetDefaults()
         {
             Item.width = 50;
@@ -31,56 +33,33 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(3f, target.Center); // Cal
-
+            player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(3f, target.Center);
             if (!target.active)
-            {
-                reaper.AddSoulEnergy(3f, target.Center); // Cal
-            }
+                player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(3f, target.Center);
         }
 
-public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-{
-    var reaper = player.GetModPlayer<ReaperPlayer>();
-    
-    
-if (ReaperPlayer.SoulReleaseKey.JustPressed)
-
-
-
-    {
-        if (reaper.ConsumeSoulEnergy(70f))
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            player.lifeRegen += 13;
-            player.statDefense += 7;
-            buffTimer = 300; // 5 seconds
-            Main.NewText("70 souls released!", Color.Green);
+            if (ReaperPlayer.SoulReleaseKey.JustPressed)
+            {
+                ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
+                    player,
+                    cost: 70f,
+                    durationTicks: 300,
+                    configure: vals =>
+                    {
+                        vals.LifeRegen += 13;
+                        vals.Defense += 7;
+                    }
+                );
+                return false;
+            }
+
+            position.Y -= Item.height / 2;
+            Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
             return false;
         }
-        else
-        {
-            Main.NewText("Not enough soul energy to activate!", Color.Red);
-        }
-    }
 
-    position.Y -= Item.height / 2;
-    Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
-    return false;
-}
-
-public override void UpdateInventory(Player player)
-{
-    if (buffTimer > 0)
-    {
-        buffTimer--;
-        if (buffTimer <= 0)
-        {
-            player.lifeRegen -= 13;
-            player.statDefense -= 7;
-        }
-    }
-}
         public override void AddRecipes()
         {
             CreateRecipe()

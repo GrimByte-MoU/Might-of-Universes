@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using MightofUniverses.Common;
 using MightofUniverses.Content.Items.Materials;
 using System.Collections.Generic;
+using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {

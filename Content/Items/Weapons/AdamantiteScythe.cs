@@ -5,6 +5,9 @@ using Microsoft.Xna.Framework;
 using MightofUniverses.Common;
 using MightofUniverses.Content.Items.Projectiles;
 using Terraria.DataStructures;
+using MightofUniverses.Common.Players;
+using MightofUniverses.Common.Abstractions;
+using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
@@ -37,6 +40,7 @@ namespace MightofUniverses.Content.Items.Weapons
             {
                 reaper.AddSoulEnergy(4f, target.Center); // Cal
             }
+            target.AddBuff(BuffID.Electrified, 180);
         }
 
 public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
@@ -54,12 +58,7 @@ if (ReaperPlayer.SoulReleaseKey.JustPressed)
             Projectile.NewProjectile(source, position, velocity, 
                 ModContent.ProjectileType<AdamantiteSphereProjectile>(), 
                 damage * 3, knockback, player.whoAmI);
-                Main.NewText("40 souls released!", Color.Green);
             return false;
-        }
-        else
-        {
-            Main.NewText("Not enough soul energy to activate!", Color.Red);
         }
     }
     return true;

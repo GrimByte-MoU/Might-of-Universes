@@ -2,15 +2,19 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
+using Terraria.DataStructures;
 using MightofUniverses.Common;
 using MightofUniverses.Content.Items.Projectiles;
-using Terraria.DataStructures;
+using MightofUniverses.Common.Players;
+using MightofUniverses.Common.Abstractions;
+using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class ChlorotaniumScythe : ModItem
+    public class ChlorotaniumScythe : ModItem, IHasSoulCost
     {
-        private int buffTimer = 0;
+        public float BaseSoulCost => 200f;
+
         public override void SetDefaults()
         {
             Item.width = 50;
@@ -32,56 +36,34 @@ namespace MightofUniverses.Content.Items.Weapons
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(5f, target.Center); // Cal
-
+            reaper.AddSoulEnergy(5f, target.Center);
             if (!target.active)
+                reaper.AddSoulEnergy(5f, target.Center);
+        }
+
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            if (ReaperPlayer.SoulReleaseKey.JustPressed)
             {
-                reaper.AddSoulEnergy(5f, target.Center); // Cal
+                bool released = ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
+                    player,
+                    cost: BaseSoulCost,
+                    durationTicks: 300,
+                    configure: vals =>
+                    {
+                        vals.Defense += 20;
+                        vals.Endurance += 0.15f;
+                        vals.LifeRegen += 15;
+                    }
+                );
+                if (released)
+                    player.Heal(150);
+
+                return true; // keep default firing behavior
             }
+
+            return true;
         }
-
-public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-{
-    var reaper = player.GetModPlayer<ReaperPlayer>();
-    
-    
-if (ReaperPlayer.SoulReleaseKey.JustPressed)
-
-
-
-    {
-        if (reaper.ConsumeSoulEnergy(200f))
-        {
-            player.Heal(150);
-                player.statDefense += 20;
-                player.endurance += 0.15f;
-                player.lifeRegen += 15;
-                buffTimer = 300; // 5 seconds
-            Main.NewText("200 souls released!", Color.Green);
-            return false;
-        }
-        else
-        {
-            Main.NewText("Not enough soul energy to activate!", Color.Red);
-        }
-    }
-    return true;
-}
-
-        public override void UpdateInventory(Player player)
-        {
-            if (buffTimer > 0)
-            {
-                buffTimer--;
-                if (buffTimer <= 0)
-                {
-                player.lifeRegen -= 20;
-                player.statDefense -= 20;
-                player.endurance -= 0.15f;
-                }
-            }
-        }
-
 
         public override void AddRecipes()
         {
@@ -91,7 +73,7 @@ if (ReaperPlayer.SoulReleaseKey.JustPressed)
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
 
-                CreateRecipe()
+            CreateRecipe()
                 .AddIngredient(ModContent.ItemType<ChlorophyteScythe>())
                 .AddIngredient(ModContent.ItemType<AdamantiteScythe>())
                 .AddTile(TileID.MythrilAnvil)

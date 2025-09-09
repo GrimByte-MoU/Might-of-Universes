@@ -2,16 +2,18 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using MightofUniverses.Common;
-using MightofUniverses.Content.Items.Projectiles;
 using Terraria.DataStructures;
+using MightofUniverses.Common;
 using MightofUniverses.Content.Items.Materials;
+using MightofUniverses.Content.Items.Projectiles;
+using MightofUniverses.Common.Players;
+using MightofUniverses.Common.Abstractions;
+using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
     public class CriticalFailure : ModItem
     {
-         private int buffTimer = 0;
         public override void SetDefaults()
         {
             Item.width = 50;
@@ -32,46 +34,42 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(5f, target.Center); // Cal
-
+            player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(5f, target.Center);
             if (!target.active)
-            {
-                reaper.AddSoulEnergy(5f, target.Center); // Cal
-            }
+                player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(5f, target.Center);
         }
 
-public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-{
-    var reaper = player.GetModPlayer<ReaperPlayer>();
-    
-    
-if (ReaperPlayer.SoulReleaseKey.JustPressed)
-
-
-
-    {
-        if (reaper.ConsumeSoulEnergy(30f))
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            for (int i = 0; i <= 1; i++)
+            if (ReaperPlayer.SoulReleaseKey.JustPressed)
             {
-                Vector2 newVelocity = velocity.RotatedBy(MathHelper.ToRadians(10 * i));
-                Projectile.NewProjectile(source, position, newVelocity, 
-                    ModContent.ProjectileType<CodeBolt>(), 
-                    damage * 2, knockback * 1.5f, player.whoAmI);
+                if (ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
+                    player,
+                    cost: 30f,
+                    durationTicks: 60, // brief visual window; adjust or set to 0 if undesired
+                    configure: vals => { }
+                ))
+                {
+                    for (int i = 0; i <= 1; i++)
+                    {
+                        Vector2 newVelocity = velocity.RotatedBy(MathHelper.ToRadians(10 * i));
+                        Projectile.NewProjectile(
+                            source,
+                            position,
+                            newVelocity,
+                            ModContent.ProjectileType<CodeBolt>(),
+                            damage * 2,
+                            knockback * 1.5f,
+                            player.whoAmI
+                        );
+                    }
+                }
+                return false;
             }
-            Main.NewText("30 souls released!", Color.Green);
-            return false;
+            return true;
         }
-        else
-        {
-            Main.NewText("Not enough soul energy to activate!", Color.Red);
-        }
-    }
-    return true;
-}
 
-         public override void AddRecipes()
+        public override void AddRecipes()
         {
             CreateRecipe()
                 .AddIngredient(ModContent.ItemType<GlitchScythe>())

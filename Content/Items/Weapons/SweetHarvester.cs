@@ -2,18 +2,19 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
+using Terraria.DataStructures;
 using MightofUniverses.Common;
 using MightofUniverses.Content.Items.Projectiles;
-using Terraria.DataStructures;
 using MightofUniverses.Content.Items.Materials;
 using MightofUniverses.Content.Items.Buffs;
+using MightofUniverses.Common.Players;
+using MightofUniverses.Common.Abstractions;
+using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
     public class SweetHarvester : ModItem
     {
-        private int regenTimer = 0;
-
         public override void SetDefaults()
         {
             Item.width = 50;
@@ -34,51 +35,27 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(2f, target.Center);
+            player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(2f, target.Center);
         }
 
-public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-{
-    var reaper = player.GetModPlayer<ReaperPlayer>();
-    
-    
-if (ReaperPlayer.SoulReleaseKey.JustPressed)
-
-
-
-    {
-        if (reaper.ConsumeSoulEnergy(75f))
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            player.Heal(100);
-            player.lifeRegen += 10;
-            player.AddBuff(ModContent.BuffType<Hyper>(), 300);
-            regenTimer = 300;
-            Main.NewText("75 souls released!", Color.Green);
+            if (ReaperPlayer.SoulReleaseKey.JustPressed)
+            {
+                ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
+                    player,
+                    75f,
+                    300,
+                    vals => { vals.LifeRegen += 10; } // matches your +10
+                );
+                player.Heal(100);
+                player.AddBuff(ModContent.BuffType<Hyper>(), 300);
+                return false;
+            }
+
+            Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
             return false;
         }
-        else
-        {
-            Main.NewText("Not enough soul energy to activate!", Color.Red);
-        }
-    }
-
-    Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
-    return false;
-}
-
-public override void UpdateInventory(Player player)
-{
-    if (regenTimer > 0)
-    {
-        regenTimer--;
-        if (regenTimer <= 0)
-        {
-            player.lifeRegen -= 20;
-        }
-    }
-}
-
 
         public override void AddRecipes()
         {

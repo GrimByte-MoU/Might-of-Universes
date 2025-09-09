@@ -1,17 +1,21 @@
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
+using Terraria.DataStructures;
 using MightofUniverses.Common;
 using MightofUniverses.Content.Items.Projectiles;
-using Terraria.DataStructures;
+using MightofUniverses.Common.Players;
+using MightofUniverses.Common.Abstractions; // + add this
+using MightofUniverses.Common.Util;        // + add this
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class Bloodletter : ModItem
+    public class Bloodletter : ModItem, IHasSoulCost // + implement IHasSoulCost
     {
-        private int buffTimer = 0;
-        private bool lifeStealActive = false;
+        // + one-liner base cost for tooltips and spending
+        public float BaseSoulCost => 50f;
 
         public override void SetDefaults()
         {
@@ -35,55 +39,31 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
             reaper.AddSoulEnergy(1f, target.Center);
-
-            if (lifeStealActive)
-            {
-                player.Heal((int)(damageDone * 0.05f));
-            }
-
             Dust.NewDust(target.position, target.width, target.height, DustID.Blood);
         }
 
-public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-{
-    var reaper = player.GetModPlayer<ReaperPlayer>();
-    
-    
-if (ReaperPlayer.SoulReleaseKey.JustPressed)
-
-
-
-    {
-        if (reaper.ConsumeSoulEnergy(50f))
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            player.lifeRegen += 10;
-            lifeStealActive = true;
-            buffTimer = 300; // 5 seconds
-            Main.NewText("50 souls released!", Color.Green);
-            return false;
-        }
-        else
-        {
-            Main.NewText("Not enough soul energy to activate!", Color.Red);
-        }
-    }
-
-    Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
-    return false;
-}
-
-
-        public override void UpdateInventory(Player player)
-        {
-            if (buffTimer > 0)
+            if (ReaperPlayer.SoulReleaseKey.JustPressed)
             {
-                buffTimer--;
-                if (buffTimer <= 0)
-                {
-                    lifeStealActive = false;
-                    player.lifeRegen -= 10;
-                }
+                // - replace hardcoded 50f with computed effective cost shown in tooltip
+                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
+
+                ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
+                    player,
+                    cost: effectiveCost,  // was: 50f
+                    durationTicks: 300,
+                    configure: vals =>
+                    {
+                        vals.LifestealPercent += 5; // 5% lifesteal
+                        vals.LifeRegen += 10;
+                    }
+                );
+                return false;
             }
+
+            Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
+            return false;
         }
 
         public override void AddRecipes()

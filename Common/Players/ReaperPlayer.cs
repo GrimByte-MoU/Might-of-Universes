@@ -1,127 +1,182 @@
-using Terraria;
-using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using Terraria.ID;
-using Terraria.GameInput;
 using System;
+using Microsoft.Xna.Framework;
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
+using Terraria.GameInput;
 
-public class ReaperPlayer : ModPlayer
+namespace MightofUniverses.Common.Players
 {
-    public float soulEnergy;
-    public float maxSoulEnergy = 100f;
-    public float soulGatherMultiplier = 1f;
-    public bool hasReaperArmor;
-    public int deathMarks;
-    public const int MAX_DEATH_MARKS = 5;
-    public static ModKeybind SoulReleaseKey;
-    public float reaperDamageMultiplier = 1f;
-    public float reaperCritChance = 0f;
-    public bool justConsumedSouls;
-
-
-    public int TempleBuffTimer;
-
-    public override void Load()
+    public class ReaperPlayer : ModPlayer
     {
-        SoulReleaseKey = KeybindLoader.RegisterKeybind(Mod, "Release Soul Energy", "R");
-    }
+        // Core soul economy
+        public float soulEnergy;
+        public float maxSoulEnergy = 100f;
+        public float soulGatherMultiplier = 1f;
 
-    public override void Unload()
-    {
-        SoulReleaseKey = null;
-    }
+        // Class flags/stats
+        public bool hasReaperArmor;
+        public float reaperDamageMultiplier = 1f;
+        public float reaperCritChance = 0f;
 
-    public override void Initialize()
-    {
-        soulEnergy = 0f;
-        soulGatherMultiplier = 1f;
-        hasReaperArmor = false;
-        reaperDamageMultiplier = 1f;
-        reaperCritChance = 0f;
-        justConsumedSouls = false;
-        TempleBuffTimer = 0;
-    }
+        // Misc
+        public int deathMarks;
+        public const int MAX_DEATH_MARKS = 5;
+        public static ModKeybind SoulReleaseKey;
+        public bool justConsumedSouls;
 
-    public override void ResetEffects()
-    {
-        maxSoulEnergy = 100f;
-        soulGatherMultiplier = 1f;
-        hasReaperArmor = false;
-        reaperDamageMultiplier = 1f;
-        reaperCritChance = 0f;
-        justConsumedSouls = false;
+        // Timers
+        public int TempleBuffTimer;
 
-        if (TempleBuffTimer > 0)
+        // Constants
+        private const float BaseMaxSoulEnergy = 100f;
+
+        public override void Load()
         {
-            TempleBuffTimer--;
+            SoulReleaseKey = KeybindLoader.RegisterKeybind(Mod, "Release Soul Energy", "R");
         }
-    }
 
-    public void AddSoulEnergy(float amount, Vector2 sourcePosition)
-    {
-        float adjustedAmount = amount * soulGatherMultiplier;
-        if (soulEnergy < maxSoulEnergy)
+        public override void Unload()
         {
-            soulEnergy = MathHelper.Clamp(soulEnergy + adjustedAmount, 0f, maxSoulEnergy);
+            SoulReleaseKey = null;
+        }
 
-            // Create soul-gathering dust trail effect
-            Vector2 vectorToPlayer = Player.Center - sourcePosition;
-            float distance = vectorToPlayer.Length();
-            vectorToPlayer.Normalize();
+        public override void Initialize()
+        {
+            soulEnergy = 0f;
+            soulGatherMultiplier = 1f;
+            hasReaperArmor = false;
+            reaperDamageMultiplier = 1f;
+            reaperCritChance = 0f;
+            justConsumedSouls = false;
+            deathMarks = 0;
+            TempleBuffTimer = 0;
+            maxSoulEnergy = BaseMaxSoulEnergy;
+        }
 
-            for (int i = 0; i < 10; i++)
+        public override void ResetEffects()
+        {
+            // Reset per-tick accumulators; accessories and buffs add to these each tick
+            maxSoulEnergy = BaseMaxSoulEnergy;
+            soulGatherMultiplier = 1f;
+            hasReaperArmor = false;
+            reaperDamageMultiplier = 1f;
+            reaperCritChance = 0f;
+            justConsumedSouls = false;
+
+            if (TempleBuffTimer > 0)
+                TempleBuffTimer--;
+        }
+
+        // Visual-friendly soul gain from a world position (creates a small dust trail)
+        public void AddSoulEnergy(float amount, Vector2 sourcePosition)
+        {
+            if (amount <= 0f)
+                return;
+
+            float adjustedAmount = amount * soulGatherMultiplier;
+
+            if (soulEnergy < maxSoulEnergy)
             {
-                Vector2 dustPosition = sourcePosition + vectorToPlayer * distance * (i / 10f);
-                Dust dust = Dust.NewDustPerfect(
-                    dustPosition,
-                    DustID.WhiteTorch,
-                    vectorToPlayer * 5f,
-                    0,
-                    Color.White,
-                    1f
-                );
-                dust.noGravity = true;
-                dust.fadeIn = 1.2f;
+                soulEnergy = MathHelper.Clamp(soulEnergy + adjustedAmount, 0f, maxSoulEnergy);
+
+                // Create soul-gathering dust trail effect
+                Vector2 dirToPlayer = Player.Center - sourcePosition;
+                float distance = dirToPlayer.Length();
+                if (distance > 0.01f)
+                {
+                    dirToPlayer.Normalize();
+                    for (int i = 0; i < 10; i++)
+                    {
+                        Vector2 dustPosition = sourcePosition + dirToPlayer * distance * (i / 10f);
+                        Dust dust = Dust.NewDustPerfect(
+                            dustPosition,
+                            DustID.WhiteTorch,
+                            dirToPlayer * 5f,
+                            0,
+                            Color.White,
+                            1f
+                        );
+                        dust.noGravity = true;
+                        dust.fadeIn = 1.2f;
+                    }
+                }
             }
         }
-    }
 
-    public bool ConsumeSoulEnergy(float amount)
-    {
-        if (soulEnergy >= amount)
+        // Silent, raw gain (no visuals)
+        public void AddSoulEnergy(float amount)
         {
-            soulEnergy -= amount;
-            justConsumedSouls = true;
-            return true;
+            if (amount <= 0f)
+                return;
+
+            soulEnergy = MathHelper.Clamp(soulEnergy + amount * soulGatherMultiplier, 0f, maxSoulEnergy);
         }
-        return false;
-    }
 
-    public bool TryReleaseSouls(float cost, Action<Player> onSuccess, string releaseMessage = null)
-    {
-        if (SoulReleaseKey.JustPressed)
+        // Consume a specific amount of souls
+        public bool ConsumeSoulEnergy(float amount)
         {
-            if (ConsumeSoulEnergy(cost))
+            if (amount <= 0f)
+                return true;
+
+            if (soulEnergy >= amount)
             {
-                onSuccess?.Invoke(Player);
-                Main.NewText(releaseMessage ?? $"{(int)cost} souls released!", Color.Green);
+                soulEnergy -= amount;
+                justConsumedSouls = true;
                 return true;
             }
-            else
-            {
-                Main.NewText("Not enough soul energy to activate!", Color.Red);
-            }
+            return false;
         }
-        return false;
-    }
 
-    public void UpdateReaperDamageMultiplier(float amount)
-    {
-        reaperDamageMultiplier = MathHelper.Clamp(reaperDamageMultiplier + amount, 1f, 10f);
-    }
+        // Try to consume souls due to a player-triggered release (bound key), then run callback
+        // Also integrates accessory refund hooks after a successful spend.
+        public bool TryReleaseSouls(float cost, Action<Player> onSuccess, string releaseMessage = null)
+        {
+            if (SoulReleaseKey.JustPressed)
+            {
+                if (ConsumeSoulEnergy(cost))
+                {
+                    onSuccess?.Invoke(Player);
 
-    public void UpdateReaperCritChance(float amount)
-    {
-        reaperCritChance = MathHelper.Clamp(reaperCritChance + amount, 0f, 100f);
+                    Console.WriteLine($"Souls consumed: {cost}");
+
+                    Main.NewText(releaseMessage ?? $"{(int)cost} souls released!", Color.Green);
+                    return true;
+                }
+                else
+                {
+                    Main.NewText("Not enough soul energy to activate!", Color.Red);
+                }
+            }
+            return false;
+        }
+
+        // Utility: percentage of current souls
+        public float SoulEnergyPercent => maxSoulEnergy > 0f ? soulEnergy / maxSoulEnergy : 0f;
+
+        // Utility: hard set (clamped)
+        public void SetSoulEnergy(float value)
+        {
+            soulEnergy = MathHelper.Clamp(value, 0f, maxSoulEnergy);
+        }
+
+        // Utility: empty all souls and return amount removed
+        public float ConsumeAllSouls()
+        {
+            float consumed = soulEnergy;
+            soulEnergy = 0f;
+            justConsumedSouls = consumed > 0f;
+            return consumed;
+        }
+
+        public void UpdateReaperDamageMultiplier(float amount)
+        {
+            reaperDamageMultiplier = MathHelper.Clamp(reaperDamageMultiplier + amount, 1f, 10f);
+        }
+
+        public void UpdateReaperCritChance(float amount)
+        {
+            reaperCritChance = MathHelper.Clamp(reaperCritChance + amount, 0f, 100f);
+        }
     }
 }
