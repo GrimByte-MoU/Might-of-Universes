@@ -3,6 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using MightofUniverses.Common;
+using MightofUniverses.Common.Players;
 using MightofUniverses.Content.Items.Projectiles;
 using Terraria.DataStructures;
 
@@ -10,7 +11,6 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class TitaniumScythe : ModItem
     {
-        private int buffTimer = 0;
         public override void SetDefaults()
         {
             Item.width = 50;
@@ -42,44 +42,20 @@ namespace MightofUniverses.Content.Items.Weapons
 
 public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 {
-    var reaper = player.GetModPlayer<ReaperPlayer>();
-    
-    
-if (ReaperPlayer.SoulReleaseKey.JustPressed)
-
-
-
+    // Use new centralized empowerment system - instant heal + defense + endurance
+    var empowermentValues = new ReaperEmpowermentValues
     {
-        if (reaper.ConsumeSoulEnergy(60f))
-        {
-            player.Heal(150);
-                player.statDefense += 15;
-                player.endurance += 0.15f;
-                buffTimer = 240; // 4 seconds // 10 seconds of Ironskin buff
-            Main.NewText("60 souls released!", Color.Green);
-            return false;
-        }
-        else
-        {
-            Main.NewText("Not enough soul energy to activate!", Color.Red);
-        }
-    }
+        Defense = 15,
+        Endurance = 0.15f
+    };
+    bool released = ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(player, 60f, 240, empowermentValues,
+        onConsume: (p) => {
+            // Apply instant healing when souls are consumed
+            p.Heal(150);
+        });
+    
     return true;
 }
-
-        public override void UpdateInventory(Player player)
-        {
-            if (buffTimer > 0)
-            {
-                buffTimer--;
-                if (buffTimer <= 0)
-                {
-                player.statDefense -= 15;
-                player.endurance -= 0.15f;
-                }
-            }
-        }
-
 
         public override void AddRecipes()
         {

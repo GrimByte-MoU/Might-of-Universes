@@ -3,6 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using MightofUniverses.Common;
+using MightofUniverses.Common.Players;
 using MightofUniverses.Content.Items.Projectiles;
 using Terraria.DataStructures;
 
@@ -10,7 +11,6 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class PalladiumScythe : ModItem
     {
-        private int buffTimer = 0;
         public override void SetDefaults()
         {
             Item.width = 50;
@@ -42,45 +42,19 @@ namespace MightofUniverses.Content.Items.Weapons
 
 public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 {
-    var reaper = player.GetModPlayer<ReaperPlayer>();
-    
-    
-if (ReaperPlayer.SoulReleaseKey.JustPressed)
-
-
-
+    // Use new centralized empowerment system - life regen + defense
+    var empowermentValues = new ReaperEmpowermentValues
     {
-        if (reaper.ConsumeSoulEnergy(70f))
-        {
-            player.lifeRegen += 13;
-            player.statDefense += 7;
-            buffTimer = 300; // 5 seconds
-            Main.NewText("70 souls released!", Color.Green);
-            return false;
-        }
-        else
-        {
-            Main.NewText("Not enough soul energy to activate!", Color.Red);
-        }
-    }
+        LifeRegen = 13,
+        Defense = 7
+    };
+    ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(player, 70f, 300, empowermentValues);
 
     position.Y -= Item.height / 2;
     Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
     return false;
 }
 
-public override void UpdateInventory(Player player)
-{
-    if (buffTimer > 0)
-    {
-        buffTimer--;
-        if (buffTimer <= 0)
-        {
-            player.lifeRegen -= 13;
-            player.statDefense -= 7;
-        }
-    }
-}
         public override void AddRecipes()
         {
             CreateRecipe()
