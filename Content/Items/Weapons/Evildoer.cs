@@ -12,8 +12,10 @@ using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class Evildoer : ModItem
+    public class Evildoer : ModItem, IHasSoulCost
     {
+        public float BaseSoulCost => 30f;
+
         private int debuffTimer = 0;
         private bool debuffsActive = false;
 
@@ -49,28 +51,24 @@ namespace MightofUniverses.Content.Items.Weapons
             Dust.NewDust(target.position, target.width, target.height, DustID.Corruption);
         }
 
-      public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-{
-    var reaper = player.GetModPlayer<ReaperPlayer>();
-    
-    
-if (ReaperPlayer.SoulReleaseKey.JustPressed)
-
-
-
-    {
-        if (reaper.ConsumeSoulEnergy(30f))
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            debuffsActive = true;
-            debuffTimer = 300; // 5 seconds
+            var reaper = player.GetModPlayer<ReaperPlayer>();
+
+            if (ReaperPlayer.SoulReleaseKey.JustPressed)
+            {
+                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
+                if (reaper.ConsumeSoulEnergy(effectiveCost))
+                {
+                    debuffsActive = true;
+                    debuffTimer = 300; // 5 seconds
+                    return false;
+                }
+            }
+
+            Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
             return false;
         }
-    }
-
-    Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
-    return false;
-}
-
 
         public override void UpdateInventory(Player player)
         {

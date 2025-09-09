@@ -11,8 +11,10 @@ using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class HellsTalon : ModItem
+    public class HellsTalon : ModItem, IHasSoulCost
     {
+        public float BaseSoulCost => 40f;
+
         public override void SetDefaults()
         {
             Item.width = 50;
@@ -36,7 +38,7 @@ namespace MightofUniverses.Content.Items.Weapons
             var reaper = player.GetModPlayer<ReaperPlayer>();
             reaper.AddSoulEnergy(2f, target.Center);
             target.AddBuff(BuffID.OnFire, 180);
-            
+
             Dust.NewDust(target.position, target.width, target.height, DustID.Torch);
             Lighting.AddLight(target.Center, 1f, 0.3f, 0f);
         }
@@ -44,12 +46,18 @@ namespace MightofUniverses.Content.Items.Weapons
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            
-            if (ReaperPlayer.SoulReleaseKey.JustPressed && reaper.ConsumeSoulEnergy(40f))
+
+            if (ReaperPlayer.SoulReleaseKey.JustPressed && reaper.ConsumeSoulEnergy(SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost)))
             {
-                Projectile.NewProjectile(source, position, velocity, 
-                    ModContent.ProjectileType<HellsoulProjectile>(), 
-                    (int)(damage * 1.5f), knockback * 2f, player.whoAmI);
+                Projectile.NewProjectile(
+                    source,
+                    position,
+                    velocity,
+                    ModContent.ProjectileType<HellsoulProjectile>(),
+                    (int)(damage * 1.5f),
+                    knockback * 2f,
+                    player.whoAmI
+                );
                 return false;
             }
 

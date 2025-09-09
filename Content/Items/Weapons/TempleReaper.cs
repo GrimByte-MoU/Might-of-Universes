@@ -12,8 +12,10 @@ using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class TempleReaper : ModItem
+    public class TempleReaper : ModItem, IHasSoulCost
     {
+        public float BaseSoulCost => 175f;
+
         public override void SetDefaults()
         {
             Item.width = 50;
@@ -43,9 +45,10 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             if (ReaperPlayer.SoulReleaseKey.JustPressed)
             {
+                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
                 bool released = ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
                     player,
-                    cost: 175f,
+                    cost: effectiveCost,
                     durationTicks: 300,
                     configure: vals =>
                     {
@@ -59,7 +62,6 @@ namespace MightofUniverses.Content.Items.Weapons
                 return false;
             }
 
-            // 3-shot arc with 15% chance to be the stronger fireball variant
             float spread = MathHelper.ToRadians(10);
             float baseSpeed = velocity.Length();
             double startAngle = Math.Atan2(velocity.Y, velocity.X) - spread / 2;

@@ -11,8 +11,10 @@ using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class WardensHook : ModItem
+    public class WardensHook : ModItem, IHasSoulCost
     {
+        public float BaseSoulCost => 25f;
+
         public override void SetDefaults()
         {
             Item.width = 50;
@@ -35,43 +37,51 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
             reaper.AddSoulEnergy(2f, target.Center);
-            
+
             Dust.NewDust(target.position, target.width, target.height, DustID.Water);
             Lighting.AddLight(target.Center, 0f, 0f, 1f);
         }
 
-public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-{
-    var reaper = player.GetModPlayer<ReaperPlayer>();
-    
-    
-if (ReaperPlayer.SoulReleaseKey.JustPressed)
-
-
-
-    {
-        if (reaper.ConsumeSoulEnergy(25f))
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            Projectile.NewProjectile(source, position, velocity, 
-                ModContent.ProjectileType<WardenSpearProjectile>(), 
-                damage * 2, knockback * 1.5f, player.whoAmI);
-            return false;
+            var reaper = player.GetModPlayer<ReaperPlayer>();
+
+            if (ReaperPlayer.SoulReleaseKey.JustPressed)
+            {
+                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
+                if (reaper.ConsumeSoulEnergy(effectiveCost))
+                {
+                    Projectile.NewProjectile(
+                        source,
+                        position,
+                        velocity,
+                        ModContent.ProjectileType<WardenSpearProjectile>(),
+                        damage * 2,
+                        knockback * 1.5f,
+                        player.whoAmI
+                    );
+                    return false;
+                }
+            }
+
+            if (Main.rand.NextFloat() <= 0.15f)
+            {
+                Projectile.NewProjectile(
+                    source,
+                    position,
+                    velocity,
+                    ModContent.ProjectileType<WardenCrossProjectile>(),
+                    (int)(damage * 1.25f),
+                    knockback,
+                    player.whoAmI
+                );
+            }
+            else
+            {
+                Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
+            }
+            return true;
         }
-    }
-
-    if (Main.rand.NextFloat() <= 0.15f)
-    {
-        Projectile.NewProjectile(source, position, velocity, 
-            ModContent.ProjectileType<WardenCrossProjectile>(), 
-            (int)(damage * 1.25f), knockback, player.whoAmI);
-    }
-    else
-    {
-        Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
-    }
-    return true;
-}
-
 
         public override void AddRecipes()
         {

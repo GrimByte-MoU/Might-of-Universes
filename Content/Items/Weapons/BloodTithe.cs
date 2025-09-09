@@ -12,8 +12,10 @@ using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class BloodTithe : ModItem
+    public class BloodTithe : ModItem, IHasSoulCost
     {
+        public float BaseSoulCost => 50f;
+
         public override void SetDefaults()
         {
             Item.width = 50;
@@ -43,15 +45,16 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             if (ReaperPlayer.SoulReleaseKey.JustPressed)
             {
+                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
                 ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
                     player,
-                    cost: 50f,
+                    cost: effectiveCost,
                     durationTicks: 300,
                     configure: vals =>
                     {
                         vals.AttackSpeed += 0.30f;
                         vals.ReaperDamage += 0.25f;
-                        vals.LifeRegen -= 10; // preserve your decreased regen
+                        vals.LifeRegen -= 10;
                     }
                 );
             }

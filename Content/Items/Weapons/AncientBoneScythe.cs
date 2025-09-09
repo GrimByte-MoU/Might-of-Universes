@@ -14,11 +14,13 @@ using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class AncientBoneScythe : ModItem
+    public class AncientBoneScythe : ModItem, IHasSoulCost
     {
+        public float BaseSoulCost => 100f;
+
         private const float PulseRadiusPx = 50f * 16f; // 30 tiles
-        private const int TarOnHitDuration = 120;   // 2 seconds
-        private const int PulseTarDuration = 300;   // 5 seconds
+        private const int TarOnHitDuration = 120;       // 2 seconds
+        private const int PulseTarDuration = 300;       // 5 seconds
         private const int PrimalSavageryDuration = 300; // 5 seconds
 
         public override void SetDefaults()
@@ -49,7 +51,8 @@ namespace MightofUniverses.Content.Items.Weapons
 
             if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
             {
-                if (reaper.ConsumeSoulEnergy(100f))
+                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
+                if (reaper.ConsumeSoulEnergy(effectiveCost))
                 {
                     // Visual + sound feedback
                     SoundEngine.PlaySound(SoundID.Item62 with { Pitch = -0.15f }, player.Center);

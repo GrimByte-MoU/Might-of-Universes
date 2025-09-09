@@ -12,8 +12,10 @@ using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class SolunarScythe : ModItem
+    public class SolunarScythe : ModItem, IHasSoulCost
     {
+        public float BaseSoulCost => 50f;
+
         public override void SetDefaults()
         {
             Item.width = 50;
@@ -36,47 +38,42 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
             reaper.AddSoulEnergy(3f, target.Center);
-            
+
             Dust.NewDust(target.position, target.width, target.height, DustID.PurpleTorch);
             Dust.NewDust(target.position, target.width, target.height, DustID.OrangeTorch);
             Lighting.AddLight(target.Center, 0.8f, 0f, 0.8f);
             Lighting.AddLight(target.Center, 1f, 0.5f, 0f);
         }
 
- public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-{
-    var reaper = player.GetModPlayer<ReaperPlayer>();
-    
-    
-if (ReaperPlayer.SoulReleaseKey.JustPressed)
-
-
-
-    {
-        if (reaper.ConsumeSoulEnergy(50f))
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            Projectile.NewProjectile(source, player.Center, Vector2.Zero, 
-                ModContent.ProjectileType<SolunarScytheMedallion>(), 
-                damage * 2, knockback, player.whoAmI, 0f);
-                
-            Projectile.NewProjectile(source, player.Center, Vector2.Zero, 
-                ModContent.ProjectileType<SolunarScytheMedallion>(), 
-                damage * 2, knockback, player.whoAmI, MathHelper.Pi);
+            var reaper = player.GetModPlayer<ReaperPlayer>();
+
+            if (ReaperPlayer.SoulReleaseKey.JustPressed)
+            {
+                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
+                if (reaper.ConsumeSoulEnergy(effectiveCost))
+                {
+                    Projectile.NewProjectile(source, player.Center, Vector2.Zero,
+                        ModContent.ProjectileType<SolunarScytheMedallion>(),
+                        damage * 2, knockback, player.whoAmI, 0f);
+
+                    Projectile.NewProjectile(source, player.Center, Vector2.Zero,
+                        ModContent.ProjectileType<SolunarScytheMedallion>(),
+                        damage * 2, knockback, player.whoAmI, MathHelper.Pi);
+                    return false;
+                }
+            }
+
+            float offset = 20f;
+            Vector2 position1 = position + Vector2.Normalize(velocity).RotatedBy(MathHelper.PiOver2) * offset;
+            Vector2 position2 = position + Vector2.Normalize(velocity).RotatedBy(-MathHelper.PiOver2) * offset;
+
+            Projectile.NewProjectile(source, position1, velocity, type, damage, knockback, player.whoAmI, 0.5f);
+            Projectile.NewProjectile(source, position2, velocity, type, damage, knockback, player.whoAmI, -0.5f);
+
             return false;
         }
-    }
-
-    // Double helix projectiles
-    float offset = 20f;
-    Vector2 position1 = position + Vector2.Normalize(velocity).RotatedBy(MathHelper.PiOver2) * offset;
-    Vector2 position2 = position + Vector2.Normalize(velocity).RotatedBy(-MathHelper.PiOver2) * offset;
-    
-    Projectile.NewProjectile(source, position1, velocity, type, damage, knockback, player.whoAmI, 0.5f);
-    Projectile.NewProjectile(source, position2, velocity, type, damage, knockback, player.whoAmI, -0.5f);
-    
-    return false;
-}
-
 
         public override void AddRecipes()
         {

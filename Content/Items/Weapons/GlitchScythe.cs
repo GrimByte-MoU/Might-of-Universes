@@ -12,9 +12,12 @@ using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class GlitchScythe : ModItem
+    public class GlitchScythe : ModItem, IHasSoulCost
     {
-         private int buffTimer = 0;
+        public float BaseSoulCost => 40f;
+
+        private int buffTimer = 0;
+
         public override void SetDefaults()
         {
             Item.width = 50;
@@ -36,40 +39,43 @@ namespace MightofUniverses.Content.Items.Weapons
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(3f, target.Center); // Cal
+            reaper.AddSoulEnergy(3f, target.Center);
 
             if (!target.active)
             {
-                reaper.AddSoulEnergy(3f, target.Center); // Cal
+                reaper.AddSoulEnergy(3f, target.Center);
             }
         }
 
-public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-{
-    var reaper = player.GetModPlayer<ReaperPlayer>();
-    
-    
-if (ReaperPlayer.SoulReleaseKey.JustPressed)
-
-
-
-    {
-        if (reaper.ConsumeSoulEnergy(40f))
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            for (int i = -1; i <= 1; i++)
-            {
-                Vector2 newVelocity = velocity.RotatedBy(MathHelper.ToRadians(4 * i));
-                Projectile.NewProjectile(source, position, newVelocity, 
-                    ModContent.ProjectileType<GlitchBlast>(), 
-                    damage, knockback, player.whoAmI);
-            }
-            return false;
-        }
-    }
-    return true;
-}
+            var reaper = player.GetModPlayer<ReaperPlayer>();
 
-         public override void AddRecipes()
+            if (ReaperPlayer.SoulReleaseKey.JustPressed)
+            {
+                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
+                if (reaper.ConsumeSoulEnergy(effectiveCost))
+                {
+                    for (int i = -1; i <= 1; i++)
+                    {
+                        Vector2 newVelocity = velocity.RotatedBy(MathHelper.ToRadians(4 * i));
+                        Projectile.NewProjectile(
+                            source,
+                            position,
+                            newVelocity,
+                            ModContent.ProjectileType<GlitchBlast>(),
+                            damage,
+                            knockback,
+                            player.whoAmI
+                        );
+                    }
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public override void AddRecipes()
         {
             CreateRecipe()
                 .AddIngredient(ModContent.ItemType<GlitchyChunk>(), 10)

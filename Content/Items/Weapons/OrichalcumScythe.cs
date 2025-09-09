@@ -11,8 +11,10 @@ using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class OrichalcumScythe : ModItem
+    public class OrichalcumScythe : ModItem, IHasSoulCost
     {
+        public float BaseSoulCost => 40f;
+
         public override void SetDefaults()
         {
             Item.width = 50;
@@ -42,9 +44,10 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             if (ReaperPlayer.SoulReleaseKey.JustPressed)
             {
+                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
                 ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
                     player,
-                    cost: 40f,
+                    cost: effectiveCost,
                     durationTicks: 240,
                     configure: vals =>
                     {

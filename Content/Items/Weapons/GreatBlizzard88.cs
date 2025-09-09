@@ -12,8 +12,10 @@ using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class GreatBlizzard88 : ModItem
+    public class GreatBlizzard88 : ModItem, IHasSoulCost
     {
+        public float BaseSoulCost => 50f;
+
         public override void SetDefaults()
         {
             Item.width = 50;
@@ -39,42 +41,45 @@ namespace MightofUniverses.Content.Items.Weapons
             reaper.AddSoulEnergy(5f, target.Center);
         }
 
-      public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-{
-    var reaper = player.GetModPlayer<ReaperPlayer>();
-    
-    
-if (ReaperPlayer.SoulReleaseKey.JustPressed)
-
-
-
-    {
-        if (reaper.ConsumeSoulEnergy(50f))
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            for (int i = 0; i < 25; i++)
+            var reaper = player.GetModPlayer<ReaperPlayer>();
+
+            if (ReaperPlayer.SoulReleaseKey.JustPressed)
             {
-                Vector2 snowPosition = new Vector2(
-                    player.Center.X + Main.rand.NextFloat(-400f, 400f),
-                    player.Center.Y - Main.rand.NextFloat(600f, 800f)
-                );
-                Vector2 snowVelocity = new Vector2(Main.rand.NextFloat(-2f, 2f), Main.rand.NextFloat(12f, 16f));
-                Projectile.NewProjectile(source, snowPosition, snowVelocity,
-                    ModContent.ProjectileType<BlizzardSnowflakeProjectile>(),
-                    damage / 2, knockback / 4, player.whoAmI);
+                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
+                if (reaper.ConsumeSoulEnergy(effectiveCost))
+                {
+                    for (int i = 0; i < 25; i++)
+                    {
+                        Vector2 snowPosition = new Vector2(
+                            player.Center.X + Main.rand.NextFloat(-400f, 400f),
+                            player.Center.Y - Main.rand.NextFloat(600f, 800f)
+                        );
+                        Vector2 snowVelocity = new Vector2(Main.rand.NextFloat(-2f, 2f), Main.rand.NextFloat(12f, 16f));
+                        Projectile.NewProjectile(
+                            source,
+                            snowPosition,
+                            snowVelocity,
+                            ModContent.ProjectileType<BlizzardSnowflakeProjectile>(),
+                            damage / 2,
+                            knockback / 4,
+                            player.whoAmI
+                        );
+                    }
+                    return false;
+                }
+            }
+
+            for (int i = 0; i < 2; i++)
+            {
+                Vector2 newVelocity = velocity.RotatedBy(MathHelper.ToRadians(Main.rand.NextFloat(-5f, 5f)));
+                Projectile.NewProjectile(source, position, newVelocity, type, damage, knockback, player.whoAmI);
             }
             return false;
         }
-    }
 
-    for (int i = 0; i < 2; i++)
-    {
-        Vector2 newVelocity = velocity.RotatedBy(MathHelper.ToRadians(Main.rand.NextFloat(-5f, 5f)));
-        Projectile.NewProjectile(source, position, newVelocity, type, damage, knockback, player.whoAmI);
-    }
-    return false;
-}
-
-         public override void AddRecipes()
+        public override void AddRecipes()
         {
             CreateRecipe()
                 .AddIngredient(ModContent.ItemType<FrozenFragment>(), 12)

@@ -13,7 +13,7 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class ChlorophyteScythe : ModItem, IHasSoulCost
     {
-        public float BaseSoulCost => 140f;
+        public float BaseSoulCost => 50f; // match actual spend in this item
 
         public override void SetDefaults()
         {
@@ -45,9 +45,10 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             if (ReaperPlayer.SoulReleaseKey.JustPressed)
             {
+                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
                 ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
                     player,
-                    cost: 50f,
+                    cost: effectiveCost,
                     durationTicks: 300,
                     configure: vals =>
                     {

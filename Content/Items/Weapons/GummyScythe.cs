@@ -12,8 +12,10 @@ using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class GummyScythe : ModItem
+    public class GummyScythe : ModItem, IHasSoulCost
     {
+        public float BaseSoulCost => 30f;
+
         private int buffTimer = 0;
 
         public override void SetDefaults()
@@ -41,12 +43,16 @@ namespace MightofUniverses.Content.Items.Weapons
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            
-            if (ReaperPlayer.SoulReleaseKey.JustPressed && reaper.ConsumeSoulEnergy(30f))
+
+            if (ReaperPlayer.SoulReleaseKey.JustPressed)
             {
-                player.Heal(50);
-                player.AddBuff(ModContent.BuffType<Hyper>(), 180); // Hyper buff for 3 seconds
-                return false;
+                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
+                if (reaper.ConsumeSoulEnergy(effectiveCost))
+                {
+                    player.Heal(50);
+                    player.AddBuff(ModContent.BuffType<Hyper>(), 180);
+                    return false;
+                }
             }
             return true;
         }

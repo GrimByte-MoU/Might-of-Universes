@@ -11,8 +11,10 @@ using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class MythrilScythe : ModItem
+    public class MythrilScythe : ModItem, IHasSoulCost
     {
+        public float BaseSoulCost => 40f;
+
         public override void SetDefaults()
         {
             Item.width = 50;
@@ -34,34 +36,37 @@ namespace MightofUniverses.Content.Items.Weapons
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(3f, target.Center); // Cal
+            reaper.AddSoulEnergy(3f, target.Center);
 
             if (!target.active)
             {
-                reaper.AddSoulEnergy(3f, target.Center); // Cal
+                reaper.AddSoulEnergy(3f, target.Center);
             }
         }
 
-public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-{
-    var reaper = player.GetModPlayer<ReaperPlayer>();
-    
-    
-if (ReaperPlayer.SoulReleaseKey.JustPressed)
-
-
-
-    {
-        if (reaper.ConsumeSoulEnergy(40f))
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            Projectile.NewProjectile(source, position, velocity, 
-                ModContent.ProjectileType<MineralWaveProjectile>(), 
-                damage, knockback * 5f, player.whoAmI);
-            return false;
+            var reaper = player.GetModPlayer<ReaperPlayer>();
+
+            if (ReaperPlayer.SoulReleaseKey.JustPressed)
+            {
+                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
+                if (reaper.ConsumeSoulEnergy(effectiveCost))
+                {
+                    Projectile.NewProjectile(
+                        source,
+                        position,
+                        velocity,
+                        ModContent.ProjectileType<MineralWaveProjectile>(),
+                        damage,
+                        knockback * 5f,
+                        player.whoAmI
+                    );
+                    return false;
+                }
+            }
+            return true;
         }
-    }
-    return true;
-}
 
         public override void AddRecipes()
         {

@@ -11,8 +11,10 @@ using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class MidnightsReap : ModItem
+    public class MidnightsReap : ModItem, IHasSoulCost
     {
+        public float BaseSoulCost => 50f;
+
         public override void SetDefaults()
         {
             Item.width = 50;
@@ -35,40 +37,43 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
             reaper.AddSoulEnergy(3f, target.Center);
-            
+
             Dust.NewDust(target.position, target.width, target.height, DustID.PurpleTorch);
             Lighting.AddLight(target.Center, 0.8f, 0f, 0.8f);
         }
 
-public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-{
-    var reaper = player.GetModPlayer<ReaperPlayer>();
-    
-    
-if (ReaperPlayer.SoulReleaseKey.JustPressed)
-
-
-
-    {
-        if (reaper.ConsumeSoulEnergy(50f))
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            for (int i = 0; i < 5; i++)
+            var reaper = player.GetModPlayer<ReaperPlayer>();
+
+            if (ReaperPlayer.SoulReleaseKey.JustPressed)
             {
-                Vector2 newVelocity = velocity.RotatedBy(MathHelper.ToRadians(Main.rand.NextFloat(-7.5f, 7.5f)));
-                Projectile.NewProjectile(source, position, newVelocity * 1.5f, 
-                    ModContent.ProjectileType<MidnightSoulProjectile>(), 
-                    (int)(damage * 1.5f), knockback, player.whoAmI, 0f, i * 5); // Delay based on i
+                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
+                if (reaper.ConsumeSoulEnergy(effectiveCost))
+                {
+                    for (int i = 0; i < 5; i++)
+                    {
+                        Vector2 newVelocity = velocity.RotatedBy(MathHelper.ToRadians(Main.rand.NextFloat(-7.5f, 7.5f)));
+                        Projectile.NewProjectile(
+                            source,
+                            position,
+                            newVelocity * 1.5f,
+                            ModContent.ProjectileType<MidnightSoulProjectile>(),
+                            (int)(damage * 1.5f),
+                            knockback,
+                            player.whoAmI,
+                            0f,
+                            i * 5
+                        );
+                    }
+                    return false;
+                }
             }
-            return false;
+
+            position.Y -= Item.height / 2;
+            Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
+            return true;
         }
-    }
-
-    position.Y -= Item.height / 2;
-    Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
-    return true;
-}
-
-
 
         public override void AddRecipes()
         {
@@ -80,7 +85,7 @@ if (ReaperPlayer.SoulReleaseKey.JustPressed)
                 .AddTile(TileID.DemonAltar)
                 .Register();
 
-                CreateRecipe()
+            CreateRecipe()
                 .AddIngredient<HellsTalon>()
                 .AddIngredient<Evildoer>()
                 .AddIngredient<WardensHook>()

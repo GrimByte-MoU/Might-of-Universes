@@ -12,8 +12,10 @@ using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class DemonsFinger : ModItem
+    public class DemonsFinger : ModItem, IHasSoulCost
     {
+        public float BaseSoulCost => 40f;
+
         public override void SetDefaults()
         {
             Item.width = 50;
@@ -37,45 +39,49 @@ namespace MightofUniverses.Content.Items.Weapons
             var reaper = player.GetModPlayer<ReaperPlayer>();
             reaper.AddSoulEnergy(4f, target.Center);
             target.AddBuff(BuffID.OnFire3, 180);
-            
+
             Dust.NewDust(target.position, target.width, target.height, DustID.Torch);
             Lighting.AddLight(target.Center, 1f, 0.3f, 0f);
         }
 
-public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-{
-    var reaper = player.GetModPlayer<ReaperPlayer>();
-    
-    
-if (ReaperPlayer.SoulReleaseKey.JustPressed)
-
-
-
-    {
-        if (reaper.ConsumeSoulEnergy(40f))
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            for (int i = 0; i < 7; i++)
+            var reaper = player.GetModPlayer<ReaperPlayer>();
+
+            if (ReaperPlayer.SoulReleaseKey.JustPressed)
             {
-                Vector2 newVelocity = velocity.RotatedBy(MathHelper.ToRadians(Main.rand.NextFloat(-7.5f, 7.5f)));
-                Projectile.NewProjectile(source, position, newVelocity * 1.5f, 
-                    ModContent.ProjectileType<Demonsoul>(), 
-                    (int)(damage * 1.5f), knockback, player.whoAmI, 0f, i * 5); // Delay based on i
+                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
+                if (reaper.ConsumeSoulEnergy(effectiveCost))
+                {
+                    for (int i = 0; i < 7; i++)
+                    {
+                        Vector2 newVelocity = velocity.RotatedBy(MathHelper.ToRadians(Main.rand.NextFloat(-7.5f, 7.5f)));
+                        Projectile.NewProjectile(
+                            source,
+                            position,
+                            newVelocity * 1.5f,
+                            ModContent.ProjectileType<Demonsoul>(),
+                            (int)(damage * 1.5f),
+                            knockback,
+                            player.whoAmI,
+                            0f,
+                            i * 5
+                        );
+                    }
+                    return false;
+                }
             }
+
+            position.Y -= Item.height / 2;
+            Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
             return false;
         }
-    }
-
-    position.Y -= Item.height / 2;
-    Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
-    return false;
-}
-
 
         public override void AddRecipes()
         {
             CreateRecipe()
-                 .AddIngredient(ModContent.ItemType<HellsTalon>())
-                  .AddIngredient(ModContent.ItemType<UnderworldMass>(), 10)
+                .AddIngredient(ModContent.ItemType<HellsTalon>())
+                .AddIngredient(ModContent.ItemType<UnderworldMass>(), 10)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

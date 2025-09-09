@@ -12,8 +12,10 @@ using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class ScytheofChristmasFuture : ModItem
+    public class ScytheofChristmasFuture : ModItem, IHasSoulCost
     {
+        public float BaseSoulCost => 175f;
+
         public override void SetDefaults()
         {
             Item.width = 50;
@@ -41,9 +43,10 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             if (ReaperPlayer.SoulReleaseKey.JustPressed)
             {
+                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
                 ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
                     player,
-                    cost: 175f,
+                    cost: effectiveCost,
                     durationTicks: 300,
                     configure: vals => { vals.LifeRegen += 40; }
                 );
@@ -52,9 +55,15 @@ namespace MightofUniverses.Content.Items.Weapons
 
             if (Main.rand.NextFloat() <= 0.15f)
             {
-                Projectile.NewProjectile(source, position, velocity,
+                Projectile.NewProjectile(
+                    source,
+                    position,
+                    velocity,
                     ModContent.ProjectileType<Leaf2>(),
-                    (int)(damage * 1.25f), knockback, player.whoAmI);
+                    (int)(damage * 1.25f),
+                    knockback,
+                    player.whoAmI
+                );
             }
             else
             {

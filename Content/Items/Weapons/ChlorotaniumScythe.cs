@@ -45,9 +45,10 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             if (ReaperPlayer.SoulReleaseKey.JustPressed)
             {
+                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
                 bool released = ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
                     player,
-                    cost: BaseSoulCost,
+                    cost: effectiveCost,
                     durationTicks: 300,
                     configure: vals =>
                     {

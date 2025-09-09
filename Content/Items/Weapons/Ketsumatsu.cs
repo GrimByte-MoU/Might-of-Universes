@@ -14,8 +14,10 @@ using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class Ketsumatsu : ModItem
+    public class Ketsumatsu : ModItem, IHasSoulCost
     {
+        public float BaseSoulCost => 125f;
+
         public override void SetDefaults()
         {
             Item.damage = 180;
@@ -31,7 +33,6 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.UseSound = SoundID.Item71;
             Item.autoReuse = true;
 
-            // needed to let Shoot() fire petals
             Item.shoot = ModContent.ProjectileType<KetsumatsuPetal>();
             Item.shootSpeed = 10f;
         }
@@ -50,12 +51,11 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
 
-            // --- Soul Release ability ---
             if (ReaperPlayer.SoulReleaseKey.JustPressed)
             {
-                if (reaper.ConsumeSoulEnergy(125f))
+                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
+                if (reaper.ConsumeSoulEnergy(effectiveCost))
                 {
-                    // Sakura Bloom appears at cursor
                     Vector2 cursorPos = Main.MouseWorld;
                     Projectile.NewProjectile(
                         source,
@@ -67,7 +67,6 @@ namespace MightofUniverses.Content.Items.Weapons
                         player.whoAmI
                     );
 
-                    // pink pixel line to cursor
                     for (int i = 0; i < 50; i++)
                     {
                         float t = i / 50f;
@@ -79,8 +78,7 @@ namespace MightofUniverses.Content.Items.Weapons
                 }
             }
 
-            // --- Normal swing petals ---
-            int numPetals = Main.rand.NextBool() ? 1 : 2; // randomly 1 or 2
+            int numPetals = Main.rand.NextBool() ? 1 : 2;
             for (int i = 0; i < numPetals; i++)
             {
                 Vector2 perturbedSpeed = velocity.RotatedByRandom(MathHelper.ToRadians(3));
@@ -95,7 +93,7 @@ namespace MightofUniverses.Content.Items.Weapons
                 );
             }
 
-            return false; // no vanilla projectile, just our petals
+            return false;
         }
 
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
@@ -105,4 +103,3 @@ namespace MightofUniverses.Content.Items.Weapons
         }
     }
 }
-

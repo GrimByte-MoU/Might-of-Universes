@@ -13,8 +13,10 @@ using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class SweetHarvester : ModItem
+    public class SweetHarvester : ModItem, IHasSoulCost
     {
+        public float BaseSoulCost => 75f;
+
         public override void SetDefaults()
         {
             Item.width = 50;
@@ -42,11 +44,12 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             if (ReaperPlayer.SoulReleaseKey.JustPressed)
             {
+                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
                 ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
                     player,
-                    75f,
+                    effectiveCost,
                     300,
-                    vals => { vals.LifeRegen += 10; } // matches your +10
+                    vals => { vals.LifeRegen += 10; }
                 );
                 player.Heal(100);
                 player.AddBuff(ModContent.BuffType<Hyper>(), 300);

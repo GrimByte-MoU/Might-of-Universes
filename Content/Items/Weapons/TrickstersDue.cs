@@ -12,8 +12,10 @@ using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class TrickstersDue : ModItem
+    public class TrickstersDue : ModItem, IHasSoulCost
     {
+        public float BaseSoulCost => 300f;
+
         public override void SetDefaults()
         {
             Item.width = 50;
@@ -42,9 +44,10 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             if (ReaperPlayer.SoulReleaseKey.JustPressed)
             {
+                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
                 ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
                     player,
-                    cost: 300f,
+                    cost: effectiveCost,
                     durationTicks: 300,
                     configure: vals =>
                     {

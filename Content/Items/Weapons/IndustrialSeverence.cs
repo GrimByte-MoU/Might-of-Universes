@@ -13,8 +13,10 @@ using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class IndustrialSeverence : ModItem
+    public class IndustrialSeverence : ModItem, IHasSoulCost
     {
+        public float BaseSoulCost => 25f;
+
         public override void SetDefaults()
         {
             Item.width = 50;
@@ -33,47 +35,46 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shootSpeed = 14f;
         }
 
-public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-{
-    int numGears = Main.rand.Next(1, 8); // 1-7 gears
-    
-    for (int i = 0; i < numGears; i++)
-    {
-        float speedMultiplier = Main.rand.NextFloat(0.75f, 1.5f);
-        Vector2 newVelocity = velocity * speedMultiplier;
-        
-        float spread = MathHelper.ToRadians(5);
-        newVelocity = newVelocity.RotatedByRandom(spread);
-        
-        Projectile.NewProjectile(source, position, newVelocity, type, damage, knockback, player.whoAmI);
-    }
-    
-    var reaper = player.GetModPlayer<ReaperPlayer>();
-    
-    
-if (ReaperPlayer.SoulReleaseKey.JustPressed)
-
-
-
-    {
-        if (reaper.ConsumeSoulEnergy(25f))
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            Projectile.NewProjectile(source, position, velocity, 
-                ModContent.ProjectileType<TeslaSpear>(), 
-                damage * 2, knockback * 1.5f, player.whoAmI);
+            int numGears = Main.rand.Next(1, 8); // 1-7 gears
+            for (int i = 0; i < numGears; i++)
+            {
+                float speedMultiplier = Main.rand.NextFloat(0.75f, 1.5f);
+                Vector2 newVelocity = velocity * speedMultiplier;
+                float spread = MathHelper.ToRadians(5);
+                newVelocity = newVelocity.RotatedByRandom(spread);
+                Projectile.NewProjectile(source, position, newVelocity, type, damage, knockback, player.whoAmI);
+            }
+
+            var reaper = player.GetModPlayer<ReaperPlayer>();
+
+            if (ReaperPlayer.SoulReleaseKey.JustPressed)
+            {
+                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
+                if (reaper.ConsumeSoulEnergy(effectiveCost))
+                {
+                    Projectile.NewProjectile(
+                        source,
+                        position,
+                        velocity,
+                        ModContent.ProjectileType<TeslaSpear>(),
+                        damage * 2,
+                        knockback * 1.5f,
+                        player.whoAmI
+                    );
+                    return false;
+                }
+            }
+
             return false;
         }
-    }
-    
-    return false;
-}
-        
+
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             var reaperPlayer = player.GetModPlayer<ReaperPlayer>();
             target.AddBuff(ModContent.BuffType<Shred>(), 180);
-            reaperPlayer.AddSoulEnergy(5f, target.Center); // Call this where souls are gathered
-
+            reaperPlayer.AddSoulEnergy(5f, target.Center);
         }
 
         public override void AddRecipes()
@@ -88,4 +89,3 @@ if (ReaperPlayer.SoulReleaseKey.JustPressed)
         }
     }
 }
-

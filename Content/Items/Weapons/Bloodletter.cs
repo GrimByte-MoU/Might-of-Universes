@@ -7,14 +7,13 @@ using Terraria.DataStructures;
 using MightofUniverses.Common;
 using MightofUniverses.Content.Items.Projectiles;
 using MightofUniverses.Common.Players;
-using MightofUniverses.Common.Abstractions; // + add this
-using MightofUniverses.Common.Util;        // + add this
+using MightofUniverses.Common.Abstractions;
+using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class Bloodletter : ModItem, IHasSoulCost // + implement IHasSoulCost
+    public class Bloodletter : ModItem, IHasSoulCost
     {
-        // + one-liner base cost for tooltips and spending
         public float BaseSoulCost => 50f;
 
         public override void SetDefaults()
@@ -46,12 +45,11 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             if (ReaperPlayer.SoulReleaseKey.JustPressed)
             {
-                // - replace hardcoded 50f with computed effective cost shown in tooltip
                 int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
 
                 ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
                     player,
-                    cost: effectiveCost,  // was: 50f
+                    cost: effectiveCost,
                     durationTicks: 300,
                     configure: vals =>
                     {

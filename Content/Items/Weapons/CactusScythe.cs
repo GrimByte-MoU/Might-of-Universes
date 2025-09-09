@@ -11,8 +11,10 @@ using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class CactusScythe : ModItem
+    public class CactusScythe : ModItem, IHasSoulCost
     {
+        public float BaseSoulCost => 40f;
+
         public override void SetDefaults()
         {
             Item.width = 32;
@@ -34,36 +36,34 @@ namespace MightofUniverses.Content.Items.Weapons
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(1f, target.Center); // Cal
+            reaper.AddSoulEnergy(1f, target.Center);
 
             if (!target.active)
             {
-                reaper.AddSoulEnergy(1f, target.Center); // Cal
+                reaper.AddSoulEnergy(1f, target.Center);
             }
         }
 
-public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-{
-    var reaper = player.GetModPlayer<ReaperPlayer>();
-    
-    
-if (ReaperPlayer.SoulReleaseKey.JustPressed)
-
-
-
-    {
-        if (reaper.ConsumeSoulEnergy(40f))
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            for (int i = 0; i < 5; i++)
+            var reaper = player.GetModPlayer<ReaperPlayer>();
+
+            if (ReaperPlayer.SoulReleaseKey.JustPressed)
             {
-                Vector2 newVelocity = velocity.RotatedBy(MathHelper.ToRadians(-10 + (i * 5)));
-                Projectile.NewProjectile(source, position, newVelocity, type, damage * 2, knockback, player.whoAmI);
+                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
+                if (reaper.ConsumeSoulEnergy(effectiveCost))
+                {
+                    for (int i = 0; i < 5; i++)
+                    {
+                        Vector2 newVelocity = velocity.RotatedBy(MathHelper.ToRadians(-10 + (i * 5)));
+                        Projectile.NewProjectile(source, position, newVelocity, type, damage * 2, knockback, player.whoAmI);
+                    }
+                    return false;
+                }
             }
-            return false;
+            return true;
         }
-    }
-    return true;
-}
+
         public override void AddRecipes()
         {
             CreateRecipe()
@@ -73,4 +73,3 @@ if (ReaperPlayer.SoulReleaseKey.JustPressed)
         }
     }
 }
-
