@@ -3,6 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using MightofUniverses.Common;
+using MightofUniverses.Common.Players;
 using MightofUniverses.Content.Items.Projectiles;
 using Terraria.DataStructures;
 
@@ -41,16 +42,12 @@ namespace MightofUniverses.Content.Items.Weapons
 
 public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 {
-    var reaper = player.GetModPlayer<ReaperPlayer>();
-    
-    
-if (ReaperPlayer.SoulReleaseKey.JustPressed)
-
-
-
-    {
-        if (reaper.ConsumeSoulEnergy(40f))
-        {
+    // Use new centralized empowerment system for projectile release
+    bool released = ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
+        player, 40f, 1, // Very short duration since this is instant effect only
+        new ReaperEmpowermentValues(), // No ongoing empowerment
+        onConsume: (p) => {
+            // Fire multiple cobalt shots when souls are consumed
             for (int i = -1; i <= 2; i++)
             {
                 Vector2 newVelocity = velocity.RotatedBy(MathHelper.ToRadians(10 * i));
@@ -58,14 +55,8 @@ if (ReaperPlayer.SoulReleaseKey.JustPressed)
                     ModContent.ProjectileType<CobaltShotProjectile>(), 
                     damage * 2, knockback, player.whoAmI);
             }
-            Main.NewText("40 souls released!", Color.Green);
-            return false;
-        }
-        else
-        {
-            Main.NewText("Not enough soul energy to activate!", Color.Red);
-        }
-    }
+        });
+    
     return true;
 }
 
