@@ -3,6 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using MightofUniverses.Common;
+using MightofUniverses.Common.Players;
 using MightofUniverses.Content.Items.Projectiles;
 using Terraria.DataStructures;
 
@@ -10,7 +11,6 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class ChlorophyteScythe : ModItem
     {
-        private int buffTimer = 0;
         public override void SetDefaults()
         {
             Item.width = 50;
@@ -42,39 +42,20 @@ namespace MightofUniverses.Content.Items.Weapons
 
 public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 {
-    var reaper = player.GetModPlayer<ReaperPlayer>();
-    
-    if (ReaperPlayer.SoulReleaseKey.JustPressed)
+    // Use new centralized empowerment system - instant heal + life regen
+    var empowermentValues = new ReaperEmpowermentValues
     {
-        if (reaper.ConsumeSoulEnergy(140f))
-        {
-            player.Heal(150);
-            player.lifeRegen += 15;
-            buffTimer = 300; // 5 seconds
-            Main.NewText("140 souls released!", Color.Green);
-            return false;
-        }
-        else
-        {
-            Main.NewText("Not enough soul energy to activate!", Color.Red);
-        }
-    }
+        LifeRegen = 15
+    };
+    bool released = ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(player, 140f, 300, empowermentValues,
+        onConsume: (p) => {
+            // Apply instant healing when souls are consumed
+            p.Heal(150);
+        });
+    
     Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
     return false;
 }
-
-        public override void UpdateInventory(Player player)
-        {
-            if (buffTimer > 0)
-            {
-                buffTimer--;
-                if (buffTimer <= 0)
-                {
-                player.lifeRegen -= 15;
-                }
-            }
-        }
-
 
         public override void AddRecipes()
         {

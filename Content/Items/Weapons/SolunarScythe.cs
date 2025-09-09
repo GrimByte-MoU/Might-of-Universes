@@ -3,6 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using MightofUniverses.Common;
+using MightofUniverses.Common.Players;
 using MightofUniverses.Content.Items.Projectiles;
 using Terraria.DataStructures;
 using MightofUniverses.Content.Items.Materials;
@@ -42,16 +43,12 @@ namespace MightofUniverses.Content.Items.Weapons
 
  public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 {
-    var reaper = player.GetModPlayer<ReaperPlayer>();
-    
-    
-if (ReaperPlayer.SoulReleaseKey.JustPressed)
-
-
-
-    {
-        if (reaper.ConsumeSoulEnergy(50f))
-        {
+    // Use new centralized empowerment system for dual projectile release
+    bool released = ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
+        player, 50f, 1, // Very short duration since this is instant effect only
+        new ReaperEmpowermentValues(), // No ongoing empowerment
+        onConsume: (p) => {
+            // Fire dual SolunarScytheMedallion projectiles when souls are consumed
             Projectile.NewProjectile(source, player.Center, Vector2.Zero, 
                 ModContent.ProjectileType<SolunarScytheMedallion>(), 
                 damage * 2, knockback, player.whoAmI, 0f);
@@ -59,15 +56,10 @@ if (ReaperPlayer.SoulReleaseKey.JustPressed)
             Projectile.NewProjectile(source, player.Center, Vector2.Zero, 
                 ModContent.ProjectileType<SolunarScytheMedallion>(), 
                 damage * 2, knockback, player.whoAmI, MathHelper.Pi);
-                
-            Main.NewText("50 souls released!", Color.Green);
-            return false;
-        }
-        else
-        {
-            Main.NewText("Not enough soul energy to activate!", Color.Red);
-        }
-    }
+        });
+    
+    return true;
+}
 
     // Double helix projectiles
     float offset = 20f;
