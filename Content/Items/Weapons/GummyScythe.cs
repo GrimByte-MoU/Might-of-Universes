@@ -3,6 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using MightofUniverses.Common;
+using MightofUniverses.Common.Players;
 using Terraria.DataStructures;
 using MightofUniverses.Content.Items.Materials;
 using MightofUniverses.Content.Items.Buffs;
@@ -11,7 +12,6 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class GummyScythe : ModItem
     {
-        private int buffTimer = 0;
 
         public override void SetDefaults()
         {
@@ -37,14 +37,16 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
+            // Use new centralized empowerment system for instant heal + Hyper buff
+            bool released = ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
+                player, 30f, 1, // Very short duration since this is instant effect only
+                new ReaperEmpowermentValues(), // No ongoing empowerment
+                onConsume: (p) => {
+                    // Apply instant healing and Hyper buff when souls are consumed
+                    p.Heal(50);
+                    p.AddBuff(ModContent.BuffType<Hyper>(), 180); // Hyper buff for 3 seconds
+                });
             
-            if (ReaperPlayer.SoulReleaseKey.JustPressed && reaper.ConsumeSoulEnergy(30f))
-            {
-                player.Heal(50);
-                player.AddBuff(ModContent.BuffType<Hyper>(), 180); // Hyper buff for 3 seconds
-                return false;
-            }
             return true;
         }
 
