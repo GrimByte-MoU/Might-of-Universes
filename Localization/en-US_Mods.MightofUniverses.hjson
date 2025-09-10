@@ -609,6 +609,7 @@ Projectiles: {
 	AncientRodAmbushController.DisplayName: Ancient Rod Ambush Controller
 	AncientSkullMinion.DisplayName: Ancient Skull Minion
 	TarPellet.DisplayName: Tar Pellet
+	SoulWispOrb.DisplayName: Soul Wisp Orb
 }
 
 Keybinds: {
@@ -3445,6 +3446,36 @@ Items: {
 			Gathers 10 souls per strike
 			Consume {0} souls to gain the Primal Savagery buff for 5 seconds
 			'''
+	}
+
+	CharmOfTheDepths: {
+		DisplayName: Charm Of The Depths
+		Tooltip: ""
+	}
+
+	FerrymansToken: {
+		DisplayName: Ferrymans Token
+		Tooltip: ""
+	}
+
+	GravediggersRing: {
+		DisplayName: Gravediggers Ring
+		Tooltip: ""
+	}
+
+	MonkeysPaw: {
+		DisplayName: Monkeys Paw
+		Tooltip: ""
+	}
+
+	SoulSiphoningArtifact: {
+		DisplayName: Soul Siphoning Artifact
+		Tooltip: ""
+	}
+
+	UndertakersBrooch: {
+		DisplayName: Undertakers Brooch
+		Tooltip: ""
 	}
 }
 

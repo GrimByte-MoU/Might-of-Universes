@@ -1,32 +1,28 @@
 using System;
 using Terraria;
-using MightofUniverses.Common;
+using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Common.Util
 {
     public static class SoulCostHelper
     {
-        // Choose ONE rounding mode for both display and actual consumption.
-        // Floor ensures you never overstate the cost in the tooltip.
-        private static int RoundCost(float value) => (int)Math.Floor(value);
+        private static int RoundCost(float v) => (int)Math.Floor(v);
 
-        // Computes the effective soul cost given a base cost and the player's modifiers.
-        // Modifiers come from ReaperAccessoryPlayer (defined below).
         public static int ComputeEffectiveSoulCostInt(Player player, float baseCost)
         {
             var acc = player.GetModPlayer<ReaperAccessoryPlayer>();
             float cost = baseCost;
 
-            // Apply percent multiplier first
-            cost *= acc.SoulCostMultiplier;
+            // Apply multiplier (clamp)
+            float multi = Math.Max(ReaperAccessoryPlayer.MinEffectiveCostMultiplier, acc.SoulCostMultiplier);
+            cost *= multi;
 
-            // Apply flat subtraction next
+            // Apply flat
             cost -= acc.SoulCostFlatReduction;
 
-            // Clamp to minimum 1
-            cost = Math.Max(cost, 1f);
+            // Guarantee minimum raw cost BEFORE refunds (so refunds still matter)
+            cost = Math.Max(1f, cost);
 
-            // Apply unified rounding for both display and spend
             return RoundCost(cost);
         }
     }

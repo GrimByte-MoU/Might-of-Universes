@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 using MightofUniverses.Common.Players;
-using MightofUniverses.Content.Projectiles;
+using MightofUniverses.Content.Items.Projectiles;
 
 namespace MightofUniverses.Common.GlobalNPCs
 {

@@ -1,10 +1,4 @@
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using MightofUniverses.Common.Players;
-
-namespace MightofUniverses.Content.Projectiles
+namespace MightofUniverses.Content.Items.Projectiles
 {
     public class SoulWispOrb : ModProjectile
     {
