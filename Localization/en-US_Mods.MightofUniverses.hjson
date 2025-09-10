@@ -312,17 +312,12 @@ Buffs: {
 
 	CactusReaperPierce: {
 		DisplayName: Cactus Reaper Pierce
-		Description: '''
-		Reaper attacks pierce 10 defense
-		'''
+		Description: Reaper attacks pierce 10 defense
 	}
 
 	SoulEmpowerment: {
 		DisplayName: Soul Empowerment
-		Description: 
-		'''
-		The souls you've consumed empower you!
-		'''
+		Description: The souls you've consumed empower you!
 	}
 }
 
