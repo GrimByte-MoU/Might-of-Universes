@@ -6,25 +6,8 @@ using Microsoft.Xna.Framework;
 namespace MightofUniverses.Common.Players
 {
     /// <summary>
-    /// Aggregates ALL accessory-driven or passive modifiers that influence:
-    ///  - Soul cost calculation
-    ///  - Refund mechanics
-    ///  - Crit-based soul returns
-    ///  - Death-prevention (Ferryman chain)
-    ///  - Future upgrade scaling hooks
-    /// 
-    /// IMPORTANT LIFECYCLE:
-    ///   ResetEffects()  -> Accessories re-apply modifiers in UpdateAccessory().
-    ///   RecordSoulSpend -> Called ONLY by ReaperPlayer.ConsumeSoulEnergy() after final net spend.
-    ///   TryActivateFerrymanFatalSave -> Called from FreeDodge (preferred) before damage is finalized.
-    /// 
-    /// UPGRADE PATTERNS:
-    ///   - Cost reduction:    SoulCostMultiplier *= 0.90f;
-    ///   - Flat reduction:    SoulCostFlatReduction += 2;
-    ///   - Guaranteed refund: GuaranteedSoulRefund = Math.Max(GuaranteedSoulRefund, 1);
-    ///   - Refund chance:     RefundChance += 0.10f; RefundFraction = Math.Max(RefundFraction, 0.50f);
-    ///   - Heal scaling:      FerrymanHealScale = Math.Max(FerrymanHealScale, 0.60f);
-    ///   - Cooldown scaling:  FerrymanCooldownMultiplier *= 0.80f; FerrymanCooldownFlatReduction += 300;
+    /// Accessory-driven modifiers & Ferryman cheat-death.
+    /// Now simplified: Ferryman consumes ALL current souls for the heal.
     /// </summary>
     public class ReaperAccessoryPlayer : ModPlayer
     {
@@ -33,42 +16,43 @@ namespace MightofUniverses.Common.Players
         // =========================
         public float SoulCostMultiplier;
         public int   SoulCostFlatReduction;
-
-        // Safety clamp (can be tuned): prevents >90% total reduction through stacking.
         public const float MinEffectiveCostMultiplier = 0.10f;
 
         // =========================
         // Refund Mechanics
         // =========================
-        public float RefundChance;      // 0.10f = 10% chance
-        public float RefundFraction;    // 0.50f = refund 50% (rounded down)
-        public int   GuaranteedSoulRefund; // Flat souls always refunded (applied before fraction logic)
-        public bool  RefundAtLeastOne;     // If true, ensures net spend ≥ 1 (default behavior anyway)
+        public float RefundChance;
+        public float RefundFraction;
+        public int   GuaranteedSoulRefund;
+        public bool  RefundAtLeastOne;
 
         // =========================
-        // Spend Tracking
+        // Spend Tracking (still kept in case other systems rely on it)
         // =========================
-        public int LastSoulSpendAmount;      // Final net souls consumed (after all refunds)
-        public int LargestSoulSpendWindow;   // Largest spend in rolling window
-        public int LargestSoulSpendTimer;    // Ticks until window resets
-        public int LargestWindowDuration = 60 * 10; // 10 seconds default
-
-        // If true, Ferryman will use LargestSoulSpendWindow instead of LastSoulSpendAmount for heal baseline.
-        public bool UseLargestSpendWindowForFerryman;
+        public int LastSoulSpendAmount;
+        public int LargestSoulSpendWindow;
+        public int LargestSoulSpendTimer;
+        public int LargestWindowDuration = 60 * 10;
+        public bool UseLargestSpendWindowForFerryman; // No longer used for heal, retained for future
 
         // =========================
         // Ferryman’s Token (cheat-death)
         // =========================
         public bool HasFerrymansToken;
         public int  FerrymanCooldownTicks;
-        public const int FerrymanBaseCooldown = 60 * 60; // 60s
-        public float FerrymanCooldownMultiplier;         // Multiplicative
-        public int   FerrymanCooldownFlatReduction;      // Flat ticks removed
-        public float FerrymanHealScale;                  // Scales chosen spend (default 0.5)
-        public int   FerrymanMaxHeal;                    // 0 => uncapped
+        public const int FerrymanBaseCooldown = 60 * 60; // 60 seconds
+        public float FerrymanCooldownMultiplier;
+        public int   FerrymanCooldownFlatReduction;
 
-        // Debuff clearing policy
-        public bool ClearOnlyDebuffs = true;
+        // Heal scale: each soul consumed → HealScale HP (converted via Ceil)
+        public float FerrymanHealScale;
+        public int   FerrymanMaxHeal;      // 0 => uncapped
+
+        // New simplified config: consume all & heal. Some optional tuning knobs:
+        public int   FerrymanMinHealFloor = 1;   // Minimal heal after scaling (can raise if you wish)
+        public bool  FerrymanSetLifeToBrink = true; // If true, set life to 1 first then add heal
+
+        public bool  ClearOnlyDebuffs = true;
 
         // =========================
         // Crit / Misc Flags
@@ -83,9 +67,6 @@ namespace MightofUniverses.Common.Players
         public bool HasMonkeysPaw;
         public bool HasSoulSiphoningArtifact;
 
-        // =========================
-        // ResetEffects - stateless aggregation root
-        // =========================
         public override void ResetEffects()
         {
             SoulCostMultiplier         = 1f;
@@ -99,7 +80,7 @@ namespace MightofUniverses.Common.Players
             HasFerrymansToken          = false;
             FerrymanCooldownMultiplier = 1f;
             FerrymanCooldownFlatReduction = 0;
-            FerrymanHealScale          = 0.5f;
+            FerrymanHealScale          = 0.5f; // Example: every soul = 0.5 HP (tune in your accessory)
             FerrymanMaxHeal            = 0;
 
             HasUndertakersBrooch       = false;
@@ -112,9 +93,6 @@ namespace MightofUniverses.Common.Players
             ClearOnlyDebuffs = true;
         }
 
-        // =========================
-        // PostUpdate - timers
-        // =========================
         public override void PostUpdate()
         {
             if (FerrymanCooldownTicks > 0)
@@ -131,14 +109,9 @@ namespace MightofUniverses.Common.Players
             }
         }
 
-        // =========================
-        // Spend Recording (called AFTER refunds finalize)
-        // =========================
         public void RecordSoulSpend(int finalSpent)
         {
             LastSoulSpendAmount = finalSpent;
-
-            // Rolling window
             if (finalSpent > LargestSoulSpendWindow)
             {
                 LargestSoulSpendWindow = finalSpent;
@@ -146,9 +119,6 @@ namespace MightofUniverses.Common.Players
             }
         }
 
-        // =========================
-        // Reaper Crit Tracking
-        // =========================
         public void RegisterReaperCrit()
         {
             if (!HasUndertakersBrooch)
@@ -163,34 +133,21 @@ namespace MightofUniverses.Common.Players
             }
         }
 
-        // =========================
-        // Ferryman Core
-        // =========================
         private int ComputeFerrymanCooldown()
         {
             int baseTicks = (int)(FerrymanBaseCooldown * FerrymanCooldownMultiplier) - FerrymanCooldownFlatReduction;
-            return Math.Max(60, baseTicks); // Minimum 1 second
+            return Math.Max(60, baseTicks);
         }
 
-        private int GetSpendForHeal()
+        // =========================
+        // NEW CORE: Consume all souls
+        // =========================
+        private int ComputeHealFromConsumed(int soulsConsumed)
         {
-            if (UseLargestSpendWindowForFerryman && LargestSoulSpendWindow > 0)
-                return LargestSoulSpendWindow;
-            return LastSoulSpendAmount;
-        }
-
-        private int ComputeFerrymanHeal()
-        {
-            int spend = GetSpendForHeal();
-            if (spend <= 0)
-                return 1;
-
-            double raw = spend * FerrymanHealScale;
+            double raw = soulsConsumed * FerrymanHealScale;
             int heal = (int)Math.Ceiling(raw);
-            if (heal <= 0)
-                heal = 1;
-            if (FerrymanMaxHeal > 0)
-                heal = Math.Min(heal, FerrymanMaxHeal);
+            if (heal < FerrymanMinHealFloor) heal = FerrymanMinHealFloor;
+            if (FerrymanMaxHeal > 0) heal = Math.Min(heal, FerrymanMaxHeal);
             return heal;
         }
 
@@ -202,12 +159,25 @@ namespace MightofUniverses.Common.Players
             if (incomingDamage < Player.statLife)
                 return false; // Not lethal
 
-            int heal = ComputeFerrymanHeal();
+            var reaper = Player.GetModPlayer<ReaperPlayer>();
+            int soulsCurrent = (int)Math.Floor(reaper.soulEnergy);
 
-            Player.statLife = Math.Min(Player.statLifeMax2, Player.statLife + heal);
+            if (soulsCurrent <= 0)
+                return false; // No souls to pay the ferryman → no save
+
+            // Consume ALL current souls
+            reaper.soulEnergy = 0f;
+
+            int heal = ComputeHealFromConsumed(soulsCurrent);
+
+            if (FerrymanSetLifeToBrink)
+                Player.statLife = Math.Min(Player.statLifeMax2, 1 + heal);
+            else
+                Player.statLife = Math.Min(Player.statLifeMax2, Player.statLife + heal);
+
             Player.HealEffect(heal, broadcast: true);
 
-            // Clear debuffs OR everything, based on policy
+            // Clear debuffs (or all buffs depending on policy)
             for (int i = Player.buffType.Length - 1; i >= 0; i--)
             {
                 int b = Player.buffType[i];
@@ -224,22 +194,26 @@ namespace MightofUniverses.Common.Players
                 }
             }
 
+            // Immunity frames
             Player.immune = true;
             Player.immuneTime = Math.Max(Player.immuneTime, 60);
 
             // Visual feedback
             for (int i = 0; i < 40; i++)
             {
-                var d = Dust.NewDustDirect(Player.position, Player.width, Player.height, 15, Main.rand.NextFloat(-2f, 2f), Main.rand.NextFloat(-3f, -0.5f));
-                d.scale = 1.2f + Main.rand.NextFloat(0.3f);
+                var d = Dust.NewDustDirect(Player.position, Player.width, Player.height, 15,
+                    Main.rand.NextFloat(-2f, 2f), Main.rand.NextFloat(-3f, -0.5f));
+                d.scale = 1.15f + Main.rand.NextFloat(0.25f);
                 d.noGravity = true;
             }
 
             FerrymanCooldownTicks = ComputeFerrymanCooldown();
+
+            CombatText.NewText(Player.getRect(), Color.Gold, $"Souls: {soulsCurrent}");
+
             return true;
         }
 
-        // Preferred modern hook
         public override bool FreeDodge(Player.HurtInfo info)
         {
             if (TryActivateFerrymanFatalSave(info.Damage))
@@ -247,28 +221,12 @@ namespace MightofUniverses.Common.Players
             return false;
         }
 
-        // Optional fallback (leave commented unless you want redundancy)
-        // public override bool PreHurt(
-        //     bool pvp, ref int damage, ref int hitDirection, ref bool crit,
-        //     ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
-        // {
-        //     if (TryActivateFerrymanFatalSave(damage))
-        //     {
-        //         damage = 0;
-        //         return true;
-        //     }
-        //     return true;
-        // }
-
         public override void OnRespawn()
         {
-            // Optional: reset crit chain or keep it. We keep it.
-            // ReaperCritCounter = 0;
+            // Leave crit counters intact (design choice)
         }
 
-        // =========================
-        // UI / External Helpers
-        // =========================
+        // UI helpers
         public float GetFerrymanCooldownFraction()
         {
             int denom = ComputeFerrymanCooldown();
@@ -290,29 +248,5 @@ namespace MightofUniverses.Common.Players
                 ? $"Ferryman cooldown: {GetFerrymanCooldownSeconds()}s"
                 : "Ferryman ready";
         }
-
-        // =========================
-        // (Optional) Networking Skeleton
-        // Uncomment & implement if you need multiplayer syncing of cooldown / window.
-        // =========================
-        /*
-        public override void SyncPlayer(int toWho, int fromWho, bool newPlayer)
-        {
-            ModPacket p = Mod.GetPacket();
-            p.Write((byte)MessageType.SyncReaperAccessoryPlayer);
-            p.Write((byte)Player.whoAmI);
-            p.Write(FerrymanCooldownTicks);
-            p.Write(LastSoulSpendAmount);
-            p.Write(LargestSoulSpendWindow);
-            p.Send(toWho, fromWho);
-        }
-
-        public void ReceivePacket(BinaryReader r)
-        {
-            FerrymanCooldownTicks = r.ReadInt32();
-            LastSoulSpendAmount   = r.ReadInt32();
-            LargestSoulSpendWindow = r.ReadInt32();
-        }
-        */
     }
 }

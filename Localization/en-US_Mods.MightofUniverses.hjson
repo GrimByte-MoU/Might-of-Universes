@@ -3450,32 +3450,69 @@ Items: {
 
 	CharmOfTheDepths: {
 		DisplayName: Charm Of The Depths
-		Tooltip: ""
+		Tooltip:
+			'''
+			"It hums with sounds of something unfathomable"
+			Soul consumption abilities cost 10% less soul energy to activate
+			'''
 	}
 
 	FerrymansToken: {
 		DisplayName: Ferrymans Token
-		Tooltip: ""
+		Tooltip:
+			'''
+			Upon taking fatal damage, prevent all the damage then consume all of your current souls
+			The player will heal healt equal to 50% of the souls consumed
+			This has a 60 second cooldown.
+			'''
 	}
 
 	GravediggersRing: {
 		DisplayName: Gravediggers Ring
-		Tooltip: ""
+		Tooltip:
+			'''
+			+10% Reaper damage, +75 max souls
+			When consuming souls, 10% cance to refund 50% of the souls consumed, rounded down
+			'''
 	}
 
 	MonkeysPaw: {
 		DisplayName: Monkeys Paw
-		Tooltip: ""
+		Tooltip:
+			'''
+			"It is old and wrinkly but the fingers seem to occasionally twitch"
+			+15% max health and +50 max souls
+			+25% damage taken from enemies
+			'''
 	}
 
 	SoulSiphoningArtifact: {
 		DisplayName: Soul Siphoning Artifact
-		Tooltip: ""
+		Tooltip:
+			'''
+			+5% Reaper damage
+			Wen killing an enemy, 1-2 soul orbs will spawn and fly towards the player
+			Each soul orb heals the player for 1-2 health and gives the player 1 soul
+			'''
 	}
 
 	UndertakersBrooch: {
 		DisplayName: Undertakers Brooch
-		Tooltip: ""
+		Tooltip:
+			'''
+			+50 max souls, +6% Reaper crit chance
+			Every 5th Reaper crit gives the player 5 souls
+			'''
+	}
+
+	CursedClaw: {
+		DisplayName: Cursed Claw
+		Tooltip:
+			'''
+			"Did you really think infusing the monkey's paw with literal devil's blood would be a good idea?"
+			+15% max health, +75 max souls and +15% Reaper damage
+			+30% damage taken from enemies and soul consumption abilities cost 10% more to activate
+			'''
 	}
 }
 

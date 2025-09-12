@@ -2,6 +2,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using MightofUniverses.Content.Items.Materials;
+using MightofUniverses.Common.Players; // Adjust if ReaperPlayer lives elsewhere
 
 namespace MightofUniverses.Content.Items.Accessories
 {
@@ -18,13 +19,7 @@ namespace MightofUniverses.Content.Items.Accessories
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            var modPlayer = player.GetModPlayer<ReaperPlayer>();
-            
-            // Add soul energy every 60 ticks (1 second)
-            if (player.whoAmI == Main.myPlayer && Main.GameUpdateCount % 20 == 0)
-            {
-                modPlayer.AddSoulEnergy(1f, player.Center);
-            }
+            player.GetModPlayer<InfernalSoulJarPlayer>().HasInfernalSoulJar = true;
         }
 
         public override void AddRecipes()
@@ -34,6 +29,41 @@ namespace MightofUniverses.Content.Items.Accessories
                 .AddIngredient(ModContent.ItemType<DemonicEssence>(), 10)
                 .AddTile(TileID.WorkBenches)
                 .Register();
+        }
+    }
+
+    public class InfernalSoulJarPlayer : ModPlayer
+    {
+        public bool HasInfernalSoulJar;
+        private int tickTimer;
+
+        public override void ResetEffects()
+        {
+            HasInfernalSoulJar = false;
+        }
+
+        public override void PostUpdate()
+        {
+            if (!HasInfernalSoulJar)
+            {
+                tickTimer = 0;
+                return;
+            }
+
+            tickTimer++;
+            if (tickTimer >= 20) // 20 ticks ≈ 1/3 second
+            {
+                tickTimer = 0;
+
+                var reaper = Player.GetModPlayer<ReaperPlayer>();
+                if (reaper.soulEnergy + 0.01f < reaper.maxSoulEnergy)
+                {
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        reaper.AddSoulEnergy(1f, Player.Center);
+                    }
+                }
+            }
         }
     }
 }

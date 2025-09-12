@@ -27,7 +27,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 6f;
             Item.value = Item.sellPrice(gold: 1);
-            Item.rare = ItemRarityID.Orange;
+            Item.rare = ItemRarityID.LightRed;
             Item.UseSound = SoundID.Item1;
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<DemonsFingerProjectile>();

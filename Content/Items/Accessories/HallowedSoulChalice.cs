@@ -1,6 +1,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using MightofUniverses.Common.Players; // Adjust if ReaperPlayer lives elsewhere
 
 namespace MightofUniverses.Content.Items.Accessories
 {
@@ -17,11 +18,7 @@ namespace MightofUniverses.Content.Items.Accessories
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            var modPlayer = player.GetModPlayer<ReaperPlayer>();
-            if (player.whoAmI == Main.myPlayer && Main.GameUpdateCount % 6 == 0)
-            {
-                modPlayer.AddSoulEnergy(1f, player.Center);
-            }
+            player.GetModPlayer<HallowedSoulChalicePlayer>().HasHallowedSoulChalice = true;
         }
 
         public override void AddRecipes()
@@ -36,6 +33,41 @@ namespace MightofUniverses.Content.Items.Accessories
                 .AddIngredient(ItemID.SoulofSight, 5)
                 .AddTile(TileID.WorkBenches)
                 .Register();
+        }
+    }
+
+    public class HallowedSoulChalicePlayer : ModPlayer
+    {
+        public bool HasHallowedSoulChalice;
+        private int tickTimer;
+
+        public override void ResetEffects()
+        {
+            HasHallowedSoulChalice = false;
+        }
+
+        public override void PostUpdate()
+        {
+            if (!HasHallowedSoulChalice)
+            {
+                tickTimer = 0;
+                return;
+            }
+
+            tickTimer++;
+            if (tickTimer >= 6) // 6 ticks ≈ 0.1 second
+            {
+                tickTimer = 0;
+
+                var reaper = Player.GetModPlayer<ReaperPlayer>();
+                if (reaper.soulEnergy + 0.01f < reaper.maxSoulEnergy)
+                {
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        reaper.AddSoulEnergy(1f, Player.Center);
+                    }
+                }
+            }
         }
     }
 }
