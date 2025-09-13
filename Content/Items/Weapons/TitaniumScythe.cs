@@ -41,9 +41,9 @@ namespace MightofUniverses.Content.Items.Weapons
             target.AddBuff(BuffID.OnFire3, 180);
         }
 
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override void HoldItem(Player player)
         {
-            if (ReaperPlayer.SoulReleaseKey.JustPressed)
+            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
             {
                 int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
                 bool released = ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
@@ -58,8 +58,11 @@ namespace MightofUniverses.Content.Items.Weapons
                 );
                 if (released)
                     player.Heal(150);
-                return false;
             }
+        }
+
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
             return true;
         }
 

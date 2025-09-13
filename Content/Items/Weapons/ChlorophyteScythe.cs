@@ -41,9 +41,9 @@ namespace MightofUniverses.Content.Items.Weapons
                 reaper.AddSoulEnergy(4f, target.Center);
         }
 
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override void HoldItem(Player player)
         {
-            if (ReaperPlayer.SoulReleaseKey.JustPressed)
+            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
             {
                 int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
                 ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
@@ -55,9 +55,11 @@ namespace MightofUniverses.Content.Items.Weapons
                         vals.LifeRegen += 15;
                     }
                 );
-                return false;
             }
+        }
 
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
             return false; // manual projectile spawning
         }
