@@ -2,7 +2,7 @@ using System;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace MightofUniverses.Common.Buffs
+namespace MightofUniverses.Content.Items.Buffs
 {
     public class GuidingLight : ModBuff
     {

@@ -1,3 +1,5 @@
+using System;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -9,7 +11,8 @@ namespace MightofUniverses.Content.Items.Accessories
     {
         public override void SetStaticDefaults()
         {
-            // "+15 max soul energy\nGenerates 1 soul per second while below 30% soul capacity."
+            // +15 max soul energy
+            // Generates 1 soul per second while below 30% soul capacity.
         }
 
         public override void SetDefaults()
@@ -23,19 +26,21 @@ namespace MightofUniverses.Content.Items.Accessories
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            var acc = player.GetModPlayer<BoneTrinketPlayer>();
-            acc.HasBoneTrinket = true;
+            // Prefer the shared extra-max-souls pathway so all max-soul math is centralized.
+            player.GetModPlayer<ReaperAccessoryPlayer>().flatMaxSoulsBonus += 15;
 
-            player.GetModPlayer<ReaperPlayer>().maxSoulEnergy += 15f;
+            // If your system still reads max directly from ReaperPlayer, uncomment this line:
+            // player.GetModPlayer<ReaperPlayer>().maxSoulEnergy += 15f;
+
+            player.GetModPlayer<BoneTrinketPlayer>().HasBoneTrinket = true;
         }
 
         public override void AddRecipes()
         {
-            // Crafting route post-Skeletron
             CreateRecipe()
                 .AddIngredient(ItemID.Bone, 20)
-                .AddCondition(Condition.DownedSkeletron) // tModLoader condition (1.4+)
-                .AddTile(TileID.BoneWelder, TileID.WorkBenches) // choose appropriate
+                .AddCondition(Condition.DownedSkeletron)
+                .AddTile(TileID.BoneWelder)
                 .Register();
         }
     }
@@ -58,19 +63,23 @@ namespace MightofUniverses.Content.Items.Accessories
                 return;
             }
 
-            regenTimer++;
-            if (regenTimer >= 60)
+            // 1 soul per second if below 30% capacity
+            if (++regenTimer >= 60)
             {
                 regenTimer = 0;
-                var reaper = Player.GetModPlayer<ReaperPlayer>();
 
-                if (reaper.soulEnergy < reaper.maxSoulEnergy * 0.30f - 0.01f)
+                var reaper = Player.GetModPlayer<ReaperPlayer>();
+                float max = Math.Max(1f, reaper.maxSoulEnergy);
+                if (reaper.soulEnergy <= max * 0.30f - 0.01f)
                 {
                     if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
+                        // Actually add 1 soul (server-side)
                         reaper.AddSoulEnergy(1f, Player.Center);
-                        PassiveSoulRegistry.AddPassiveSoul(Player, 1f); // so Spirit String can convert
                     }
+
+                    // Report passive soul gain so Spirit String/Threads can convert it to life regen
+                    ReaperAccessoryPlayer.ReportPassiveSoulGain(Player, 1f);
                 }
             }
         }

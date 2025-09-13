@@ -319,6 +319,49 @@ Buffs: {
 		DisplayName: Soul Empowerment
 		Description: The souls you've consumed empower you!
 	}
+
+	CagedSoulBuff: {
+		DisplayName: Caged Soul Buff
+		Description:
+		'''
+		"Draw your strength from beyond"
+		+10% Reaper damage
+		'''
+	}
+
+	EnemyBleeding: {
+		DisplayName: Enemy Bleeding
+		Description: Mods.MightofUniverses.Buffs.EnemyBleeding.Description
+	}
+
+	GuidingLight: {
+		DisplayName: Guiding Light
+		Description: 
+		'''
+		"The light fills you with peace and thoughts of home"
+		+4% damage reduction
+		+1% health regen per second
+		Debuff duration is reduced by 20%
+		'''
+	}
+
+	ProtectionCantrip: {
+		DisplayName: Protection Cantrip
+		Description: 
+		'''
+		"Luckily this didn't require any spell slots"
+		+3 defense and +2 health regen per second
+		'''
+	}
+
+	SpiritsTag: {
+		DisplayName: Spirit's Tag
+		Description: 
+		'''
+		"The tag's power wards you from harm and heals your wounds"
+		+6 defense and +3 health regen per second
+		'''
+	}
 }
 
 Projectiles: {
@@ -610,6 +653,8 @@ Projectiles: {
 	AncientSkullMinion.DisplayName: Ancient Skull Minion
 	TarPellet.DisplayName: Tar Pellet
 	SoulWispOrb.DisplayName: Soul Wisp Orb
+	SpecterOrbProj.DisplayName: Specter Orb Proj
+	VisceraBoltProj.DisplayName: Viscera Bolt Proj
 }
 
 Keybinds: {
@@ -3491,7 +3536,7 @@ Items: {
 		Tooltip:
 			'''
 			+5% Reaper damage
-			Wen killing an enemy, 1-2 soul orbs will spawn and fly towards the player
+			When killing an enemy, 1-2 soul orbs will spawn and fly towards the player
 			Each soul orb heals the player for 1-2 health and gives the player 1 soul
 			'''
 	}
@@ -3513,6 +3558,140 @@ Items: {
 			+15% max health, +75 max souls and +15% Reaper damage
 			+30% damage taken from enemies and soul consumption abilities cost 10% more to activate
 			'''
+	}
+
+	BoneTrinket: {
+		DisplayName: Bone Trinket
+		Tooltip: 
+		'''
+		+15 max souls
+		While below 30% max soul capacity, generates 1 soul per second
+		'''
+	}
+
+	HematicLocket: {
+		DisplayName: Hematic Locket
+		Tooltip: 
+		'''
+		Gain max souls equal to 15% of your max life
+		Whenever you consume souls, send out a red pulse that travels a short distance
+		All enemies caught in the pulse take damage and get Spineless for 3 seconds
+		'''
+	}
+
+	IchorveinLocket: {
+		DisplayName: Ichorvein Locket
+		Tooltip: 
+		'''
+		Gain max souls equal to 15% of your max life
+		Whenever you consume souls, send out a red pulse that travels a moderate distance
+		All enemies caught in the pulse take damage and get Spineless and Ichor for 3 seconds
+		'''
+	}
+
+	LanternOfFadingMoths: {
+		DisplayName: Lantern Of Fading Moths
+		Tooltip: 
+		'''
+		+30 max souls and +3% Reaper damage
+		At night, the player gives off a faint light and the Reaper damage bonus is increased to 6%
+		'''
+	}
+
+	ProtectionCharm: {
+		DisplayName: Protection Charm
+		Tooltip: 
+		'''
+		When consuming souls, the player gains the Protection Cantrip buff for 5 seconds
+		'''
+	}
+
+	ShackledSpiritArtifact: {
+		DisplayName: Shackled Spirit Artifact
+		Tooltip: 
+		'''
+		"A poor shackled soul rests within this old cranium"
+		+7% Reaper damage
+		When killing an enemy, 1-3 soul orbs will spawn and fly towards the player
+		Each soul orb heals the player for 3-5 health and gives the player 2 souls
+		'''
+	}
+
+	SkeletonKnickknack: {
+		DisplayName: Skeleton Knickknack
+		Tooltip: 
+		'''
+		+30 max souls
+		While below 30% max soul capacity, generates 3 souls per second
+		'''
+	}
+
+	SoulEnslavementArtifact: {
+		DisplayName: Soul Enslavement Artifact
+		Tooltip: 
+		'''
+		"A benevolent soul is bound to this accursed artifact"
+		+10% Reaper damage
+		When killing an enemy, 2-3 soul orbs will spawn and fly towards the player
+		Each soul orb heals the player for 4-5 health and gives the player 2 souls
+		'''
+	}
+
+	SpectercageArtifact: {
+		DisplayName: Spectercage Artifact
+		Tooltip: 
+		'''
+		"This artifact is made with the sole purpose of keeping souls trapped"
+		+12% Reaper damage
+		When killing an enemy, 1 specter orb will spawn and fly towards the player
+		Each soul orb heals the player for 10 health, gives the player 5 souls and grants the Caged Soul buff for 3 seconds
+		'''
+	}
+
+	SpiritString: {
+		DisplayName: Spirit String
+		Tooltip: 
+		'''
+		All positive, passive soul generation grants positive life regen at a rate of 50%
+		'''
+	}
+
+	SpiritTalisman: {
+		DisplayName: Spirit Talisman
+		Tooltip: 
+		'''
+		When consuming souls, the player gains the Spirit's Tag buff for 5 seconds
+		'''
+	}
+
+	TatteredCharm: {
+		DisplayName: Tattered Charm
+		Tooltip: 
+		'''
+		When consuming souls, the player will heal for 5 health.
+		'''
+	}
+
+	ThreadsOfTheSoul: {
+		DisplayName: Threads Of The Soul
+		Tooltip: 
+		'''
+		All positive, passive soul generation grants positive life regen at a rate of 50%
+		Upon reaching 20% or less health, the player will generate 20 souls per second for 5 seconds
+		The soul generation has a 20 second cooldown
+		'''
+	}
+
+	VisceraNovelty: {
+		DisplayName: Viscera Novelty
+		Tooltip: 
+		'''
+		Gain max souls equal to 20% of your max life
+		Every 3 seconds a Red pulse is sent out that travels a good distance
+		All enemies caught in the pulse take damage and get Spineless, Ichor and Bleeding for 3 seconds
+		Whenever you consume souls, send out 3 viscera bolts that home in on the nearest enemy
+		The bolts inflict Spineless, Bleeding and Ichor for 5 seconds
+		'''
 	}
 }
 

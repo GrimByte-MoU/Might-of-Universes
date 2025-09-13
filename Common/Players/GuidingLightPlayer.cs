@@ -28,7 +28,7 @@ namespace MightofUniverses.Common.Players
             {
                 return;
             }
-            const float extraTicksPerSecond = 10.588235f;
+            const float extraTicksPerSecond = 12f;
             const float extraTicksPerTick = extraTicksPerSecond / 60f;
 
             for (int i = 0; i < Player.MaxBuffs; i++)
