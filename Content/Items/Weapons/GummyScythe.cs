@@ -40,20 +40,22 @@ namespace MightofUniverses.Content.Items.Weapons
             reaper.AddSoulEnergy(1f, target.Center);
         }
 
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override void HoldItem(Player player)
         {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
-
-            if (ReaperPlayer.SoulReleaseKey.JustPressed)
+            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
             {
+                var reaper = player.GetModPlayer<ReaperPlayer>();
                 int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
                 if (reaper.ConsumeSoulEnergy(effectiveCost))
                 {
                     player.Heal(50);
                     player.AddBuff(ModContent.BuffType<Hyper>(), 180);
-                    return false;
                 }
             }
+        }
+
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
             return true;
         }
 

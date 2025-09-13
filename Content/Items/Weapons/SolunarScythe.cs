@@ -45,15 +45,18 @@ namespace MightofUniverses.Content.Items.Weapons
             Lighting.AddLight(target.Center, 1f, 0.5f, 0f);
         }
 
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override void HoldItem(Player player)
         {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
-
-            if (ReaperPlayer.SoulReleaseKey.JustPressed)
+            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
             {
+                var reaper = player.GetModPlayer<ReaperPlayer>();
                 int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
                 if (reaper.ConsumeSoulEnergy(effectiveCost))
                 {
+                    int damage = player.GetWeaponDamage(Item);
+                    float knockback = player.GetWeaponKnockback(Item);
+                    var source = player.GetSource_ItemUse(Item);
+
                     Projectile.NewProjectile(source, player.Center, Vector2.Zero,
                         ModContent.ProjectileType<SolunarScytheMedallion>(),
                         damage * 2, knockback, player.whoAmI, 0f);
@@ -61,10 +64,12 @@ namespace MightofUniverses.Content.Items.Weapons
                     Projectile.NewProjectile(source, player.Center, Vector2.Zero,
                         ModContent.ProjectileType<SolunarScytheMedallion>(),
                         damage * 2, knockback, player.whoAmI, MathHelper.Pi);
-                    return false;
                 }
             }
+        }
 
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
             float offset = 20f;
             Vector2 position1 = position + Vector2.Normalize(velocity).RotatedBy(MathHelper.PiOver2) * offset;
             Vector2 position2 = position + Vector2.Normalize(velocity).RotatedBy(-MathHelper.PiOver2) * offset;

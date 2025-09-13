@@ -47,21 +47,26 @@ namespace MightofUniverses.Content.Items.Weapons
             }
         }
 
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override void HoldItem(Player player)
         {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
-
-            if (ReaperPlayer.SoulReleaseKey.JustPressed)
+            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
             {
+                var reaper = player.GetModPlayer<ReaperPlayer>();
                 int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
                 if (reaper.ConsumeSoulEnergy(effectiveCost))
                 {
+                    Vector2 toMouse = Vector2.Normalize(Main.MouseWorld - player.MountedCenter);
+                    Vector2 velocity = toMouse * Item.shootSpeed;
+                    int damage = player.GetWeaponDamage(Item);
+                    float knockback = player.GetWeaponKnockback(Item);
+                    var source = player.GetSource_ItemUse(Item);
+
                     for (int i = -1; i <= 1; i++)
                     {
                         Vector2 newVelocity = velocity.RotatedBy(MathHelper.ToRadians(4 * i));
                         Projectile.NewProjectile(
                             source,
-                            position,
+                            player.MountedCenter,
                             newVelocity,
                             ModContent.ProjectileType<GlitchBlast>(),
                             damage,
@@ -69,9 +74,12 @@ namespace MightofUniverses.Content.Items.Weapons
                             player.whoAmI
                         );
                     }
-                    return false;
                 }
             }
+        }
+
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
             return true;
         }
 
