@@ -30,6 +30,12 @@ namespace MightofUniverses.Content.Items.Projectiles
             // Rotate the projectile
             Projectile.rotation += 0.1f * (float)Projectile.direction;
         }
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            Player player = Main.player[Projectile.owner];
+            var reaper = player.GetModPlayer<ReaperPlayer>();
+            reaper.AddSoulEnergy(0.3f, target.Center);
+        }
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {

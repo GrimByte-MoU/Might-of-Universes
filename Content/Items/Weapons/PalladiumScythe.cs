@@ -5,9 +5,6 @@ using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
 using MightofUniverses.Common;
 using MightofUniverses.Content.Items.Projectiles;
-using MightofUniverses.Common.Players;
-using MightofUniverses.Common.Abstractions;
-using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
@@ -33,16 +30,9 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shootSpeed = 8f;
         }
 
-        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        public override void HoldItem(Player player)
         {
-            player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(3f, target.Center);
-            if (!target.active)
-                player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(3f, target.Center);
-        }
-
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-        {
-            if (ReaperPlayer.SoulReleaseKey.JustPressed)
+            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
             {
                 int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
                 ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
@@ -55,9 +45,18 @@ namespace MightofUniverses.Content.Items.Weapons
                         vals.Defense += 7;
                     }
                 );
-                return false;
             }
+        }
 
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(3f, target.Center);
+            if (!target.active)
+                player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(3f, target.Center);
+        }
+
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
             position.Y -= Item.height / 2;
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
             return false;

@@ -30,9 +30,10 @@ namespace MightofUniverses.Content.Items.Projectiles
         // ai1 determines curve direction (1 or -1)
         Projectile.velocity = Projectile.velocity.RotatedBy(curveStrength * Projectile.ai[1] * 
             (1f - Projectile.timeLeft / 60f));
+            Projectile.rotation = Projectile.velocity.ToRotation();
         
         // Create electric effects
-        Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, 
+            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, 
             DustID.Electric, 0f, 0f, 100, default, 1f);
     }
 

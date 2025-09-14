@@ -36,7 +36,7 @@ namespace MightofUniverses.Content.Items.Weapons
                 .AddIngredient(ModContent.ItemType<TerraiumBar>(), 5)
                 .AddIngredient(ItemID.LifeCrystal, 5)
                 .AddIngredient(ItemID.OrichalcumRepeater)
-                .AddTile(TileID.MythrilAnvil)
+                .AddTile(TileID.LunarCraftingStation)
                 .Register();
         }
 

@@ -14,7 +14,7 @@ namespace MightofUniverses.Content.Items.Armors
     public class SolunarHelmet : ModItem
     {
         public static readonly float SoulMultiplierBonus = 1f;
-        public static readonly float MaxSoulEnergy = 100f;
+        public static readonly float MaxSoulEnergy = 100f; // Base in ReaperPlayer is already 100
         public static readonly float ReaperDamageBonus = 0.1f;
         public static LocalizedText SetBonusText { get; private set; }
 
@@ -40,7 +40,7 @@ namespace MightofUniverses.Content.Items.Armors
 
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
-            return body.type == ModContent.ItemType<SolunarBreastplate>() && 
+            return body.type == ModContent.ItemType<SolunarBreastplate>() &&
                    legs.type == ModContent.ItemType<SolunarLegwraps>();
         }
 
@@ -48,10 +48,12 @@ namespace MightofUniverses.Content.Items.Armors
         {
             var reaperPlayer = player.GetModPlayer<ReaperPlayer>();
             player.setBonus = SetBonusText.Value;
-            
+
             reaperPlayer.hasReaperArmor = true;
-            reaperPlayer.maxSoulEnergy = MaxSoulEnergy;
             reaperPlayer.reaperDamageMultiplier += ReaperDamageBonus;
+
+            // Set Solunar to 200 total cap (base 100 + 100 from the set), stacking with accessories:
+            reaperPlayer.maxSoulEnergy += 100f;
 
             SpawnMedallions(player);
 
@@ -69,7 +71,7 @@ namespace MightofUniverses.Content.Items.Armors
             for (int i = 0; i < Main.maxProjectiles; i++)
             {
                 Projectile proj = Main.projectile[i];
-                if (proj.active && proj.type == ModContent.ProjectileType<SolunarMedallion>() && 
+                if (proj.active && proj.type == ModContent.ProjectileType<SolunarMedallion>() &&
                     proj.owner == player.whoAmI)
                 {
                     foundMedallions[(int)proj.ai[0]] = true;

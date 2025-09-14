@@ -16,7 +16,9 @@ namespace MightofUniverses.Content.Items.Accessories
             var reaper = player.GetModPlayer<ReaperPlayer>();
             reaper.reaperDamageMultiplier += 0.05f;
 
-            player.GetModPlayer<ReaperAccessoryPlayer>().HasSoulSiphoningArtifact = true;
+            var acc = player.GetModPlayer<ReaperAccessoryPlayer>();
+            acc.HasSoulSiphoningArtifact = true;
+            acc.ApplyMaxSoulFromHP(0.05f);
         }
     }
 }

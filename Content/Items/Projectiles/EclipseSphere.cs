@@ -11,7 +11,7 @@ namespace MightofUniverses.Content.Items.Projectiles
     {
         private float rotation = 0f;
         private const float ORBIT_RADIUS = 200f; // Increased radius from Solunar
-        private const float ROTATION_SPEED = 0.15f; // Faster rotation
+        private const float ROTATION_SPEED = 0.075f; // Faster rotation
         
         public override void SetDefaults()
         {
@@ -90,7 +90,7 @@ if (Main.rand.NextBool(2))
         {
             Player player = Main.player[Projectile.owner];
             var reaperPlayer = player.GetModPlayer<ReaperPlayer>();
-            reaperPlayer.AddSoulEnergy(3f, target.Center);
+            reaperPlayer.AddSoulEnergy(0.4f, target.Center);
         }
     }
 }

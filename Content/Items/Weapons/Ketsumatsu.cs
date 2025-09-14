@@ -37,47 +37,47 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shootSpeed = 10f;
         }
 
+        public override void HoldItem(Player player)
+        {
+            var reaper = player.GetModPlayer<ReaperPlayer>();
+            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed && reaper.ConsumeSoulEnergy(SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost)))
+            {
+                IEntitySource src = player.GetSource_ItemUse(Item);
+                int damage = player.GetWeaponDamage(Item);
+                float kb = player.GetWeaponKnockback(Item);
+
+                Vector2 cursorPos = Main.MouseWorld;
+                Projectile.NewProjectile(
+                    src,
+                    cursorPos,
+                    Vector2.Zero,
+                    ModContent.ProjectileType<KetsumatsuBloom>(),
+                    (int)(damage * 3f),
+                    kb,
+                    player.whoAmI
+                );
+
+                for (int i = 0; i < 50; i++)
+                {
+                    float t = i / 50f;
+                    Vector2 dustPos = Vector2.Lerp(player.Center, cursorPos, t);
+                    Dust.NewDustPerfect(dustPos, DustID.PinkCrystalShard, Vector2.Zero, 150, Color.LightPink, 1.2f).noGravity = true;
+                }
+            }
+        }
+
         public override void AddRecipes()
         {
             CreateRecipe()
                 .AddIngredient(ModContent.ItemType<TerraiumBar>(), 5)
                 .AddIngredient(ItemID.LifeCrystal, 5)
                 .AddIngredient(ModContent.ItemType<OrichalcumScythe>(), 1)
-                .AddTile(TileID.MythrilAnvil)
+                .AddTile(TileID.LunarCraftingStation)
                 .Register();
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
-
-            if (ReaperPlayer.SoulReleaseKey.JustPressed)
-            {
-                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
-                if (reaper.ConsumeSoulEnergy(effectiveCost))
-                {
-                    Vector2 cursorPos = Main.MouseWorld;
-                    Projectile.NewProjectile(
-                        source,
-                        cursorPos,
-                        Vector2.Zero,
-                        ModContent.ProjectileType<KetsumatsuBloom>(),
-                        (int)(damage * 3f),
-                        knockback,
-                        player.whoAmI
-                    );
-
-                    for (int i = 0; i < 50; i++)
-                    {
-                        float t = i / 50f;
-                        Vector2 dustPos = Vector2.Lerp(player.Center, cursorPos, t);
-                        Dust.NewDustPerfect(dustPos, DustID.PinkCrystalShard, Vector2.Zero, 150, Color.LightPink, 1.2f).noGravity = true;
-                    }
-
-                    return false; // stop normal petals this swing
-                }
-            }
-
             int numPetals = Main.rand.NextBool() ? 1 : 2;
             for (int i = 0; i < numPetals; i++)
             {
@@ -99,7 +99,7 @@ namespace MightofUniverses.Content.Items.Weapons
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(10f, target.Center);
+            reaper.AddSoulEnergy(2f, target.Center);
         }
     }
 }

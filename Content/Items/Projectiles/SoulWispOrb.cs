@@ -27,7 +27,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             {
                 // Collect
                 var reaper = owner.GetModPlayer<ReaperPlayer>();
-                reaper.AddSoulEnergy(1f, owner.Center);
+                reaper.AddSoulEnergy(0.2f, owner.Center);
                 int heal = Main.rand.Next(1, 3);
                 owner.statLife = System.Math.Min(owner.statLifeMax2, owner.statLife + heal);
                 owner.HealEffect(heal, true);

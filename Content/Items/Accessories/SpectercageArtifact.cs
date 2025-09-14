@@ -1,14 +1,9 @@
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using MightofUniverses.Common;
 using MightofUniverses.Content.Items.Materials;
 
 namespace MightofUniverses.Content.Items.Accessories
 {
     public class SpectercageArtifact : ModItem
     {
-
         public override void SetDefaults()
         {
             Item.width = 28;
@@ -21,7 +16,9 @@ namespace MightofUniverses.Content.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.GetDamage(ModContent.GetInstance<ReaperDamageClass>()) += 0.12f;
-            player.GetModPlayer<ReaperAccessoryPlayer>().accSpectercageArtifact = true;
+            var acc = player.GetModPlayer<ReaperAccessoryPlayer>();
+            acc.accSpectercageArtifact = true;
+            acc.ApplyMaxSoulFromHP(0.125f);
         }
 
         public override void AddRecipes()

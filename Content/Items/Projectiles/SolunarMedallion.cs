@@ -9,7 +9,7 @@ namespace MightofUniverses.Content.Items.Projectiles
     {
         private float rotation = 0f;
         private const float ORBIT_RADIUS = 150f;
-        private const float ROTATION_SPEED = 0.075f;
+        private const float ROTATION_SPEED = 0.035f;
         private bool isSunMedallion;
 
         public override void SetDefaults()
@@ -49,7 +49,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             Player player = Main.player[Projectile.owner];
             var reaperPlayer = player.GetModPlayer<ReaperPlayer>();
-            reaperPlayer.AddSoulEnergy(1f, target.Center);
+            reaperPlayer.AddSoulEnergy(0.2f, target.Center);
         }
     }
 }

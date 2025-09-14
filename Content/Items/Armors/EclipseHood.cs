@@ -12,7 +12,7 @@ namespace MightofUniverses.Content.Items.Armors
     [AutoloadEquip(EquipType.Head)]
     public class EclipseHood : ModItem
     {
-        public static readonly float SoulGatherBonus = 4f;
+        public static readonly float SoulGatherBonus = 1f;
         public static readonly float ReaperDamageBonus = 0.10f;
         public static readonly float AttackSpeedBonus = 0.10f;
         public static readonly float SetBonusReaperDamage = 0.15f;
@@ -45,7 +45,7 @@ namespace MightofUniverses.Content.Items.Armors
 
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
-            return body.type == ModContent.ItemType<EclipseChestplate>() && 
+            return body.type == ModContent.ItemType<EclipseChestplate>() &&
                    legs.type == ModContent.ItemType<EclipseLegwraps>();
         }
 
@@ -53,10 +53,14 @@ namespace MightofUniverses.Content.Items.Armors
         {
             var reaperPlayer = player.GetModPlayer<ReaperPlayer>();
             player.setBonus = SetBonusText.Value;
-            
+
             reaperPlayer.hasReaperArmor = true;
             reaperPlayer.reaperDamageMultiplier += SetBonusReaperDamage;
-            reaperPlayer.maxSoulEnergy = 400f;
+
+            // Change this line:
+            // reaperPlayer.maxSoulEnergy = 400f;
+            // To additive, so base 100 -> 400 and accessories still stack:
+            reaperPlayer.maxSoulEnergy += 300f;
 
             SpawnEclipses(player);
 
@@ -70,11 +74,11 @@ namespace MightofUniverses.Content.Items.Armors
         private void SpawnEclipses(Player player)
         {
             bool[] foundEclipses = new bool[4];
-            
+
             for (int i = 0; i < Main.maxProjectiles; i++)
             {
                 Projectile proj = Main.projectile[i];
-                if (proj.active && proj.type == ModContent.ProjectileType<EclipseSphere>() && 
+                if (proj.active && proj.type == ModContent.ProjectileType<EclipseSphere>() &&
                     proj.owner == player.whoAmI)
                 {
                     foundEclipses[(int)proj.ai[0]] = true;

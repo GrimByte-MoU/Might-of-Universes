@@ -43,7 +43,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             if (player.Hitbox.Intersects(Projectile.Hitbox))
             {
                 player.lifeRegen += 50;
-                player.GetModPlayer<ReaperPlayer>().soulEnergy += (50f / 60f); // +50/sec for 0.5s
+                player.GetModPlayer<ReaperPlayer>().soulEnergy += 50f / 60f;
                 Projectile.Kill();
             }
         }

@@ -33,10 +33,41 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shootSpeed = 14f;
         }
 
+        public override void HoldItem(Player player)
+        {
+            var reaper = player.GetModPlayer<ReaperPlayer>();
+            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed && reaper.ConsumeSoulEnergy(SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost)))
+            {
+                Vector2 from = player.MountedCenter;
+                Vector2 dir = Main.MouseWorld - from;
+                if (dir.LengthSquared() < 0.0001f) dir = new Vector2(player.direction, 0f);
+                dir.Normalize();
+                Vector2 baseVel = dir * (Item.shootSpeed > 0 ? Item.shootSpeed : 14f);
+
+                IEntitySource src = player.GetSource_ItemUse(Item);
+                int damage = player.GetWeaponDamage(Item);
+                float kb = player.GetWeaponKnockback(Item);
+
+                for (int i = -1; i <= 1; i++)
+                {
+                    Vector2 newVelocity = baseVel.RotatedBy(MathHelper.ToRadians(15 * i));
+                    Projectile.NewProjectile(
+                        src,
+                        from,
+                        newVelocity,
+                        ModContent.ProjectileType<HarvesterMeteorProjectile>(),
+                        damage * 2,
+                        kb * 1.5f,
+                        player.whoAmI
+                    );
+                }
+            }
+        }
+
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(2f, target.Center);
+            reaper.AddSoulEnergy(0.4f, target.Center);
 
             Dust.NewDust(target.position, target.width, target.height, DustID.Torch);
             Lighting.AddLight(target.Center, 1f, 0.5f, 0f);
@@ -44,30 +75,6 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
-
-            if (ReaperPlayer.SoulReleaseKey.JustPressed)
-            {
-                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
-                if (reaper.ConsumeSoulEnergy(effectiveCost))
-                {
-                    for (int i = -1; i <= 1; i++)
-                    {
-                        Vector2 newVelocity = velocity.RotatedBy(MathHelper.ToRadians(15 * i));
-                        Projectile.NewProjectile(
-                            source,
-                            position,
-                            newVelocity,
-                            ModContent.ProjectileType<HarvesterMeteorProjectile>(),
-                            damage * 2,
-                            knockback * 1.5f,
-                            player.whoAmI
-                        );
-                    }
-                    return false;
-                }
-            }
-
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
             return true;
         }

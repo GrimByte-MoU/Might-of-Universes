@@ -33,10 +33,38 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shootSpeed = 16f;
         }
 
+        public override void HoldItem(Player player)
+        {
+            var reaper = player.GetModPlayer<ReaperPlayer>();
+
+            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed && reaper.ConsumeSoulEnergy(SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost)))
+            {
+                Vector2 from = player.MountedCenter;
+                Vector2 dir = Main.MouseWorld - from;
+                if (dir.LengthSquared() < 0.0001f) dir = new Vector2(player.direction, 0f);
+                dir.Normalize();
+                Vector2 velocity = dir * (Item.shootSpeed > 0 ? Item.shootSpeed : 16f);
+
+                IEntitySource src = player.GetSource_ItemUse(Item);
+                int damage = player.GetWeaponDamage(Item);
+                float kb = player.GetWeaponKnockback(Item);
+
+                Projectile.NewProjectile(
+                    src,
+                    from,
+                    velocity,
+                    ModContent.ProjectileType<HellsoulProjectile>(),
+                    (int)(damage * 1.5f),
+                    kb * 2f,
+                    player.whoAmI
+                );
+            }
+        }
+
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(2f, target.Center);
+            reaper.AddSoulEnergy(0.4f, target.Center);
             target.AddBuff(BuffID.OnFire, 180);
 
             Dust.NewDust(target.position, target.width, target.height, DustID.Torch);
@@ -45,22 +73,6 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
-
-            if (ReaperPlayer.SoulReleaseKey.JustPressed && reaper.ConsumeSoulEnergy(SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost)))
-            {
-                Projectile.NewProjectile(
-                    source,
-                    position,
-                    velocity,
-                    ModContent.ProjectileType<HellsoulProjectile>(),
-                    (int)(damage * 1.5f),
-                    knockback * 2f,
-                    player.whoAmI
-                );
-                return false;
-            }
-
             int projectileCount = Main.rand.Next(1, 3); // 1 or 2 projectiles
             for (int i = 0; i < projectileCount; i++)
             {

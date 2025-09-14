@@ -30,14 +30,9 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.autoReuse = true;
         }
 
-        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        public override void HoldItem(Player player)
         {
-            player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(1f, target.Center);
-        }
-
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-        {
-            if (ReaperPlayer.SoulReleaseKey.JustPressed)
+            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
             {
                 int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
                 if (ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
@@ -54,6 +49,15 @@ namespace MightofUniverses.Content.Items.Weapons
                     player.Heal(40);
                 }
             }
+        }
+
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(0.2f, target.Center);
+        }
+
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
             return true;
         }
 

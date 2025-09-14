@@ -34,6 +34,30 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shootSpeed = 15f;
         }
 
+        public override void HoldItem(Player player)
+        {
+            var reaper = player.GetModPlayer<ReaperPlayer>();
+
+            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
+            {
+                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
+                if (reaper.ConsumeSoulEnergy(effectiveCost))
+                {
+                    IEntitySource src = player.GetSource_ItemUse(Item);
+                    int damage = player.GetWeaponDamage(Item);
+                    float kb = player.GetWeaponKnockback(Item);
+
+                    Projectile.NewProjectile(src, player.Center, Vector2.Zero,
+                        ModContent.ProjectileType<SolunarScytheMedallion>(),
+                        damage * 2, kb, player.whoAmI, 0f);
+
+                    Projectile.NewProjectile(src, player.Center, Vector2.Zero,
+                        ModContent.ProjectileType<SolunarScytheMedallion>(),
+                        damage * 2, kb, player.whoAmI, MathHelper.Pi);
+                }
+            }
+        }
+
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
@@ -47,24 +71,6 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
-
-            if (ReaperPlayer.SoulReleaseKey.JustPressed)
-            {
-                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
-                if (reaper.ConsumeSoulEnergy(effectiveCost))
-                {
-                    Projectile.NewProjectile(source, player.Center, Vector2.Zero,
-                        ModContent.ProjectileType<SolunarScytheMedallion>(),
-                        damage * 2, knockback, player.whoAmI, 0f);
-
-                    Projectile.NewProjectile(source, player.Center, Vector2.Zero,
-                        ModContent.ProjectileType<SolunarScytheMedallion>(),
-                        damage * 2, knockback, player.whoAmI, MathHelper.Pi);
-                    return false;
-                }
-            }
-
             float offset = 20f;
             Vector2 position1 = position + Vector2.Normalize(velocity).RotatedBy(MathHelper.PiOver2) * offset;
             Vector2 position2 = position + Vector2.Normalize(velocity).RotatedBy(-MathHelper.PiOver2) * offset;
@@ -78,7 +84,7 @@ namespace MightofUniverses.Content.Items.Weapons
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient<SolunarToken>(12)
+                .AddIngredient(ModContent.ItemType<SolunarToken>(), 12)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

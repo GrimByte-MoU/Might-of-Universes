@@ -35,14 +35,9 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.scale = 1.5f;
         }
 
-        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        public override void HoldItem(Player player)
         {
-            player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(7f, target.Center);
-        }
-
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-        {
-            if (ReaperPlayer.SoulReleaseKey.JustPressed)
+            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
             {
                 int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
                 ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
@@ -54,9 +49,16 @@ namespace MightofUniverses.Content.Items.Weapons
                         vals.ArmorPenetration += 9999;
                     }
                 );
-                return false;
             }
+        }
 
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(1.4f, target.Center);
+        }
+
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
             for (int i = 0; i < 2; i++)
             {
                 Vector2 newVelocity = velocity.RotatedBy(MathHelper.ToRadians(Main.rand.NextFloat(-5f, 5f)));

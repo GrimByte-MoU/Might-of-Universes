@@ -37,7 +37,7 @@ namespace MightofUniverses.Content.Items.Weapons
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(5f, target.Center);
+            reaper.AddSoulEnergy(1f, target.Center);
             target.AddBuff(BuffID.OnFire3, 180);
 
             Dust.NewDust(target.position, target.width, target.height, DustID.Torch);

@@ -1,41 +1,53 @@
 using System;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using MightofUniverses.Common; // ReaperPlayer, ReaperDamageClass
+using MightofUniverses.Common;               // ReaperDamageClass
+using MightofUniverses.Common.Players;       // ReaperPlayer
 
 namespace MightofUniverses.Common.Players
 {
     public class CactusSetRework : ModPlayer
     {
-        // Configurable knobs
-        private const float ReaperDamageBonus = 0.08f;   // +8% reaper damage
-        private const int SoulOnHitCooldownTicks = 30;   // 0.5s @ 60 FPS
+        private const int SoulOnHitCooldownTicks = 30; // 0.5s @ 60 FPS
         private const int SoulOnHitAmount = 5;
+        private const int SetBonusMaxSouls = 20;
 
         private bool wearingCactusSet;
         private int soulOnHitCooldown;
 
         public override void ResetEffects()
         {
-            wearingCactusSet = false; // will be re-enabled below if full set is worn
+            wearingCactusSet = false;
         }
 
         public override void UpdateEquips()
         {
-            // Detect full Cactus set: head/body/legs
             if (IsWearingFullCactusSet())
             {
                 wearingCactusSet = true;
-                Player.setBonus =
-                    "Bristling with spikes: attackers take damage\n" +
-                    "+8% reaper damage\n" +
-                    "When struck, gain 5 souls. This has a 0.5 second cooldown.";
 
-                // Apply Reaper-only bonuses
-                Player.GetDamage(ModContent.GetInstance<ReaperDamageClass>()) += ReaperDamageBonus;
-                // NOTE: We intentionally do NOT add extra thorns here to avoid stacking with vanilla Cactus thorns behavior.
+                // Mark as “Reaper armor” so the SoulBar UI draws.
+                var reaper = Player.GetModPlayer<ReaperPlayer>();
+                reaper.hasReaperArmor = true;
+
+                // Add to max souls via a bonus accumulator if your ReaperPlayer supports it.
+                // Prefer a bonus field that gets summed into max each tick.
+                // Replace this line with your exact field name.
+                reaper.maxSoulEnergy += 20f;
+            }
+        }
+
+        // Set the set-bonus string LAST so vanilla doesn’t overwrite it.
+        public override void PostUpdateEquips()
+        {
+            if (wearingCactusSet)
+            {
+                Player.setBonus =
+                    "Attackers take damage\n" +
+                    "+20 max souls\n" +
+                    "When struck, gain 5 souls (0.5s cooldown)";
             }
         }
 
@@ -47,7 +59,7 @@ namespace MightofUniverses.Common.Players
 
         public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
         {
-            if (!wearingCactusSet)
+            if (!wearingCactusSet || !Player.active || Player.dead)
                 return;
 
             TryGrantSoul(npc?.Center ?? Player.Center);
@@ -55,7 +67,7 @@ namespace MightofUniverses.Common.Players
 
         public override void OnHitByProjectile(Projectile proj, Player.HurtInfo hurtInfo)
         {
-            if (!wearingCactusSet)
+            if (!wearingCactusSet || !Player.active || Player.dead)
                 return;
 
             TryGrantSoul(proj?.Center ?? Player.Center);
@@ -67,9 +79,11 @@ namespace MightofUniverses.Common.Players
                 return;
 
             var reaper = Player.GetModPlayer<ReaperPlayer>();
+
+            // If AddSoulEnergy already syncs in MP, this is fine.
+            // Otherwise, gate to server/owner before mutating state.
             reaper.AddSoulEnergy(SoulOnHitAmount, worldPos);
 
-            // Small visual
             for (int i = 0; i < 6; i++)
             {
                 var d = Dust.NewDustPerfect(
@@ -88,7 +102,7 @@ namespace MightofUniverses.Common.Players
 
         private bool IsWearingFullCactusSet()
         {
-            // Armor slots: 0=head, 1=body, 2=legs
+            // Armor slots: 0=head, 1=body, 2=legs (functional slots, not vanity)
             return Player.armor[0].type == ItemID.CactusHelmet
                 && Player.armor[1].type == ItemID.CactusBreastplate
                 && Player.armor[2].type == ItemID.CactusLeggings;

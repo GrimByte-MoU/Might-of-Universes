@@ -32,40 +32,56 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shoot = ModContent.ProjectileType<AdamantiteScytheProjectile>();
             Item.shootSpeed = 10f;
         }
-
-        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(4f, target.Center);
-
-            if (!target.active)
-            {
-                reaper.AddSoulEnergy(4f, target.Center);
-            }
-            target.AddBuff(BuffID.Electrified, 180);
-        }
-
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override void HoldItem(Player player)
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
 
-            if (ReaperPlayer.SoulReleaseKey.JustPressed)
+            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
             {
                 int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
                 if (reaper.ConsumeSoulEnergy(effectiveCost))
                 {
+                    // Derive a velocity toward the cursor
+                    Vector2 from = player.MountedCenter;
+                    Vector2 dir = Main.MouseWorld - from;
+                    if (dir.LengthSquared() < 0.0001f)
+                        dir = new Vector2(player.direction, 0f);
+                    dir.Normalize();
+                    Vector2 velocity = dir * (Item.shootSpeed > 0 ? Item.shootSpeed : 10f);
+
+                    // Use item-based damage/KB scaling
+                    int damage = player.GetWeaponDamage(Item);
+                    float kb = player.GetWeaponKnockback(Item);
+                    IEntitySource src = player.GetSource_ItemUse(Item);
+
                     Projectile.NewProjectile(
-                        source,
-                        position,
+                        src,
+                        from,
                         velocity,
                         ModContent.ProjectileType<AdamantiteSphereProjectile>(),
                         damage * 3,
-                        knockback,
+                        kb,
                         player.whoAmI
                     );
-                    return false;
                 }
             }
+        }
+
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            var reaper = player.GetModPlayer<ReaperPlayer>();
+            reaper.AddSoulEnergy(0.8f, target.Center);
+
+            if (!target.active)
+            {
+                reaper.AddSoulEnergy(0.8f, target.Center);
+            }
+            target.AddBuff(BuffID.Electrified, 180);
+        }
+
+        // Normal shooting – no release logic here anymore
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
             return true;
         }
 

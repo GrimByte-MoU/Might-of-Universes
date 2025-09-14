@@ -53,7 +53,7 @@ namespace MightofUniverses.Content.Items.Accessories
                 if (npc.active && !npc.friendly && npc.Distance(Player.Center) < 13 * 16f)
                 {
                     npc.AddBuff(ModContent.BuffType<Terrified>(), 180);
-                    Player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(2f / 60f, npc.Center);
+                    Player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(0.4f / 60f, npc.Center);
                 }
             }
         }

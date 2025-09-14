@@ -34,16 +34,9 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shootSpeed = 12f;
         }
 
-        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        public override void HoldItem(Player player)
         {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(1f, target.Center);
-            Dust.NewDust(target.position, target.width, target.height, DustID.Blood);
-        }
-
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-        {
-            if (ReaperPlayer.SoulReleaseKey.JustPressed)
+            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
             {
                 int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
 
@@ -53,13 +46,22 @@ namespace MightofUniverses.Content.Items.Weapons
                     durationTicks: 300,
                     configure: vals =>
                     {
-                        vals.LifestealPercent += 5; // 5% lifesteal
+                        vals.LifestealPercent += 5;
                         vals.LifeRegen += 10;
                     }
                 );
-                return false;
             }
+        }
 
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            var reaper = player.GetModPlayer<ReaperPlayer>();
+            reaper.AddSoulEnergy(0.2f, target.Center);
+            Dust.NewDust(target.position, target.width, target.height, DustID.Blood);
+        }
+
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
             return false;
         }

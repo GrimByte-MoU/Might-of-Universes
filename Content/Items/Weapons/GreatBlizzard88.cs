@@ -34,43 +34,45 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shootSpeed = 14f;
         }
 
+        public override void HoldItem(Player player)
+        {
+            var reaper = player.GetModPlayer<ReaperPlayer>();
+
+            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed && reaper.ConsumeSoulEnergy(SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost)))
+            {
+                IEntitySource src = player.GetSource_ItemUse(Item);
+                int damage = player.GetWeaponDamage(Item);
+                float kb = player.GetWeaponKnockback(Item);
+
+                for (int i = 0; i < 25; i++)
+                {
+                    Vector2 snowPosition = new Vector2(
+                        player.Center.X + Main.rand.NextFloat(-400f, 400f),
+                        player.Center.Y - Main.rand.NextFloat(600f, 800f)
+                    );
+                    Vector2 snowVelocity = new Vector2(Main.rand.NextFloat(-2f, 2f), Main.rand.NextFloat(12f, 16f));
+                    Projectile.NewProjectile(
+                        src,
+                        snowPosition,
+                        snowVelocity,
+                        ModContent.ProjectileType<BlizzardSnowflakeProjectile>(),
+                        damage / 2,
+                        kb / 4f,
+                        player.whoAmI
+                    );
+                }
+            }
+        }
+
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.Frostburn, 180);
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(5f, target.Center);
+            reaper.AddSoulEnergy(1f, target.Center);
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
-
-            if (ReaperPlayer.SoulReleaseKey.JustPressed)
-            {
-                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
-                if (reaper.ConsumeSoulEnergy(effectiveCost))
-                {
-                    for (int i = 0; i < 25; i++)
-                    {
-                        Vector2 snowPosition = new Vector2(
-                            player.Center.X + Main.rand.NextFloat(-400f, 400f),
-                            player.Center.Y - Main.rand.NextFloat(600f, 800f)
-                        );
-                        Vector2 snowVelocity = new Vector2(Main.rand.NextFloat(-2f, 2f), Main.rand.NextFloat(12f, 16f));
-                        Projectile.NewProjectile(
-                            source,
-                            snowPosition,
-                            snowVelocity,
-                            ModContent.ProjectileType<BlizzardSnowflakeProjectile>(),
-                            damage / 2,
-                            knockback / 4,
-                            player.whoAmI
-                        );
-                    }
-                    return false;
-                }
-            }
-
             for (int i = 0; i < 2; i++)
             {
                 Vector2 newVelocity = velocity.RotatedBy(MathHelper.ToRadians(Main.rand.NextFloat(-5f, 5f)));

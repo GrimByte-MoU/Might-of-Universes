@@ -26,7 +26,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            
+            Projectile.rotation = Projectile.velocity.ToRotation();
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Electric);
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.MartianSaucerSpark);
             Lighting.AddLight(Projectile.Center, 0f, 0.5f, 2f);

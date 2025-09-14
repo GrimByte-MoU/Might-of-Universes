@@ -34,41 +34,49 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shootSpeed = 15f;
         }
 
-        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        public override void HoldItem(Player player)
         {
-            player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(5f, target.Center);
-            if (!target.active)
-                player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(5f, target.Center);
-        }
-
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-        {
-            if (ReaperPlayer.SoulReleaseKey.JustPressed)
+            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
             {
-                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
-                if (ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
-                    player,
-                    cost: effectiveCost,
-                    durationTicks: 60,
-                    configure: vals => { }
-                ))
+                int cost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
+                if (ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(player, cost: cost, durationTicks: 60, configure: _ => { }))
                 {
+                    Vector2 from = player.MountedCenter;
+                    Vector2 dir = Main.MouseWorld - from;
+                    if (dir.LengthSquared() < 0.0001f) dir = new Vector2(player.direction, 0f);
+                    dir.Normalize();
+                    Vector2 baseVel = dir * (Item.shootSpeed > 0 ? Item.shootSpeed : 15f);
+
+                    IEntitySource src = player.GetSource_ItemUse(Item);
+                    int damage = player.GetWeaponDamage(Item);
+                    float kb = player.GetWeaponKnockback(Item);
+
                     for (int i = 0; i <= 1; i++)
                     {
-                        Vector2 newVelocity = velocity.RotatedBy(MathHelper.ToRadians(10 * i));
+                        Vector2 newVelocity = baseVel.RotatedBy(MathHelper.ToRadians(10 * i));
                         Projectile.NewProjectile(
-                            source,
-                            position,
+                            src,
+                            from,
                             newVelocity,
                             ModContent.ProjectileType<CodeBolt>(),
                             damage * 2,
-                            knockback * 1.5f,
+                            kb * 1.5f,
                             player.whoAmI
                         );
                     }
                 }
-                return false;
             }
+        }
+
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(1f, target.Center);
+            if (!target.active)
+                player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(1f, target.Center);
+        }
+
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
             return true;
         }
 

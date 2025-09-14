@@ -53,7 +53,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             var reaperPlayer = player.GetModPlayer<ReaperPlayer>();
             
             target.AddBuff(ModContent.BuffType<Shred>(), 120);
-            reaperPlayer.AddSoulEnergy(1f, target.Center); // Cal
+            reaperPlayer.AddSoulEnergy(0.2f, target.Center);
         }
     }
 }

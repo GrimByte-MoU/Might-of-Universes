@@ -42,7 +42,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.value = Item.sellPrice(gold: 10);
 
             Item.noMelee = false;
-            Item.scale = 1.45f;
+            Item.scale = 1.3f;
         }
 
         public override void HoldItem(Player player)
@@ -86,7 +86,7 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             // Gather souls and apply Tarred on hit
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(10f, target.Center);
+            reaper.AddSoulEnergy(2f, target.Center);
             target.AddBuff(ModContent.BuffType<Tarred>(), TarOnHitDuration);
         }
 

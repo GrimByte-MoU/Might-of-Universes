@@ -37,37 +37,15 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shootSpeed = 12f;
         }
 
-        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(1f, target.Center);
-
-            if (debuffsActive)
-            {
-                target.AddBuff(BuffID.CursedInferno, 300);
-                target.AddBuff(ModContent.BuffType<Corrupted>(), 300);
-            }
-
-            Dust.NewDust(target.position, target.width, target.height, DustID.Corruption);
-        }
-
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override void HoldItem(Player player)
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
 
-            if (ReaperPlayer.SoulReleaseKey.JustPressed)
+            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed && reaper.ConsumeSoulEnergy(SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost)))
             {
-                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
-                if (reaper.ConsumeSoulEnergy(effectiveCost))
-                {
-                    debuffsActive = true;
-                    debuffTimer = 300; // 5 seconds
-                    return false;
-                }
+                debuffsActive = true;
+                debuffTimer = 300; // 5 seconds
             }
-
-            Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
-            return false;
         }
 
         public override void UpdateInventory(Player player)
@@ -80,6 +58,26 @@ namespace MightofUniverses.Content.Items.Weapons
                     debuffsActive = false;
                 }
             }
+        }
+
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            var reaper = player.GetModPlayer<ReaperPlayer>();
+            reaper.AddSoulEnergy(0.2f, target.Center);
+
+            if (debuffsActive)
+            {
+                target.AddBuff(BuffID.CursedInferno, 300);
+                target.AddBuff(ModContent.BuffType<Corrupted>(), 300);
+            }
+
+            Dust.NewDust(target.position, target.width, target.height, DustID.Corruption);
+        }
+
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
+            return false;
         }
 
         public override void AddRecipes()

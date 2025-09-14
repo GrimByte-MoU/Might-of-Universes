@@ -60,7 +60,7 @@ namespace MightofUniverses.Content.Items.Accessories
                 {
                     if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        reaper.AddSoulEnergy(1f, Player.Center);
+                        reaper.AddSoulEnergy(0.2f, Player.Center);
                     }
                 }
             }

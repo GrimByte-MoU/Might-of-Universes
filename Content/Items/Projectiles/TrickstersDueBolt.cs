@@ -35,13 +35,14 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Projectile.ai[0] = 30f;
                 Projectile.velocity.Y = Projectile.velocity.Y + 0.1f;
             }
+            Projectile.rotation = Projectile.velocity.ToRotation();
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             var player = Main.player[Projectile.owner];
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(7f, target.Center);
+            reaper.AddSoulEnergy(1.4f, target.Center);
         }
     }
 }

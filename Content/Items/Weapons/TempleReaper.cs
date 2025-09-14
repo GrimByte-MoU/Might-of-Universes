@@ -34,16 +34,9 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shootSpeed = 10f;
         }
 
-        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        public override void HoldItem(Player player)
         {
-            player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(7f, target.Center);
-            if (!target.active)
-                player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(7f, target.Center);
-        }
-
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-        {
-            if (ReaperPlayer.SoulReleaseKey.JustPressed)
+            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
             {
                 int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
                 bool released = ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
@@ -59,9 +52,18 @@ namespace MightofUniverses.Content.Items.Weapons
                 );
                 if (released)
                     player.Heal(150);
-                return false;
             }
+        }
 
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(1.4f, target.Center);
+            if (!target.active)
+                player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(1.4f, target.Center);
+        }
+
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
             float spread = MathHelper.ToRadians(10);
             float baseSpeed = velocity.Length();
             double startAngle = Math.Atan2(velocity.Y, velocity.X) - spread / 2;
