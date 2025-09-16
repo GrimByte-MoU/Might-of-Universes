@@ -34,7 +34,7 @@ namespace MightofUniverses.Content.Items.Buffs
 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.lifeRegen -= 90;
+            player.lifeRegen -= 60;
             if (Main.rand.NextBool(2))
             {
                 Dust dust = Dust.NewDustDirect(player.position, player.width, player.height, DustID.Torch, 0f, 0f, 100, default, 0.8f);

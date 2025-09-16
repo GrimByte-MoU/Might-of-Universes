@@ -5,7 +5,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using MightofUniverses.Content.Items.Buffs;
 
-namespace MightofUniverses.Content.NPCs
+namespace MightofUniverses.Common.GlobalNPCs
 {
     // Agreed changes:
     // - Empress of Light gets +5 defense.
