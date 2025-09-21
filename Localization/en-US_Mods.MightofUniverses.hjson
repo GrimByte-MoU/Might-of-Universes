@@ -3701,8 +3701,8 @@ Items: {
 			'''
 			Gives off a light that gives all players within it the Guiding Light buff
 			Right click to cycle between 3 different powers within the lantern:
-			Flesh Tongues: Strikes enemies at a moderate distance giving the player 3 souls when connecting
-			The tongues deal 75% damage and do not pierce
+			Teeth: Sends out a spread of two fast traveling, gravity affected teeth three times per second
+			The teeth gather 2 souls on hit, deal 75% damage and do not pierce
 			Lasers: Fires out bursts of 3 lasers with a brief pause after firing
 			The lasers do 80% damage and pierce 1 enemy, they do not gather souls
 			Demon Sickle: Fires out demonic sickles that start slow but travel quickly at enemies consuming 30 souls per second
