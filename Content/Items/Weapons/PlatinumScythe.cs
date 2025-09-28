@@ -53,7 +53,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(0.2f, target.Center);
+            player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(1f, target.Center);
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

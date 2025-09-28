@@ -38,8 +38,6 @@ namespace MightofUniverses.Common.Players
                 reaper.maxSoulEnergy += 20f;
             }
         }
-
-        // Set the set-bonus string LAST so vanilla doesn’t overwrite it.
         public override void PostUpdateEquips()
         {
             if (wearingCactusSet)
@@ -79,9 +77,6 @@ namespace MightofUniverses.Common.Players
                 return;
 
             var reaper = Player.GetModPlayer<ReaperPlayer>();
-
-            // If AddSoulEnergy already syncs in MP, this is fine.
-            // Otherwise, gate to server/owner before mutating state.
             reaper.AddSoulEnergy(SoulOnHitAmount, worldPos);
 
             for (int i = 0; i < 6; i++)
@@ -102,7 +97,6 @@ namespace MightofUniverses.Common.Players
 
         private bool IsWearingFullCactusSet()
         {
-            // Armor slots: 0=head, 1=body, 2=legs (functional slots, not vanity)
             return Player.armor[0].type == ItemID.CactusHelmet
                 && Player.armor[1].type == ItemID.CactusBreastplate
                 && Player.armor[2].type == ItemID.CactusLeggings;

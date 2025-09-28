@@ -16,7 +16,7 @@ namespace MightofUniverses.Content.Items.Armors
             Item.height = 18;
             Item.value = Item.sellPrice(gold: 5);
             Item.rare = ItemRarityID.Lime;
-            Item.defense = 6;
+            Item.defense = 9;
         }
 
         public override void UpdateEquip(Player player)

@@ -28,16 +28,16 @@ namespace MightofUniverses.Content.Items.Accessories
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddRecipeGroup(ItemID.IronBar, 10)
+                .AddIngredient(ItemID.IronBar, 10)
                 .AddIngredient(ItemID.Wire, 25)
-                .AddRecipeGroup(ItemID.GoldBar, 5)
+                .AddIngredient(ItemID.GoldBar, 5)
                 .AddTile(TileID.TinkerersWorkbench)
                 .Register();
 
             CreateRecipe()
-                .AddRecipeGroup(ItemID.LeadBar, 10)
+                .AddIngredient(ItemID.LeadBar, 10)
                 .AddIngredient(ItemID.Wire, 25)
-                .AddRecipeGroup(ItemID.PlatinumBar, 5)
+                .AddIngredient(ItemID.PlatinumBar, 5)
                 .AddTile(TileID.TinkerersWorkbench)
                 .Register();
         }

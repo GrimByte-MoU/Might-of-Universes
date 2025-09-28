@@ -55,9 +55,9 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(0.8f, target.Center);
+            player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(4f, target.Center);
             if (!target.active)
-                player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(0.8f, target.Center);
+                player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(4f, target.Center);
             target.AddBuff(BuffID.OnFire3, 180);
         }
 

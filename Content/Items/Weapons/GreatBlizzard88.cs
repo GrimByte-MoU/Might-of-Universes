@@ -68,7 +68,7 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             target.AddBuff(BuffID.Frostburn, 180);
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(1f, target.Center);
+            reaper.AddSoulEnergy(5f, target.Center);
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

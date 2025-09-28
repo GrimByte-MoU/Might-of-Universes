@@ -45,7 +45,7 @@ Buffs: {
 
 	SolunarEmpowerment: {
 		DisplayName: Solunar Empowerment
-		Description: Two Solunar Medallions orbit you and damage enemies
+		Description: +20% Reaper damage and +5% Reaper critical strike chance
 	}
 
 	LunarReap: {
@@ -658,6 +658,7 @@ Projectiles: {
 	CoreFlesh_DemonSickle.DisplayName: Core Flesh_ Demon Sickle
 	CoreFlesh_FleshTongue.DisplayName: Core Flesh_ Flesh Tongue
 	CoreFlesh_Laser.DisplayName: Core Flesh_ Laser
+	CoreFlesh_Tooth.DisplayName: Core Flesh_ Tooth
 }
 
 Keybinds: {
@@ -2165,7 +2166,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 4 souls on hit and fires out an adamantite dart that gathers 3 souls on hit
-			Consume {0} souls to fire a homing adamantite sphere that pierces all defense
+			Consume {0} souls to fire a homing adamantite sphere that pierces all defense and deals 500% damage
 			'''
 	}
 
@@ -3709,6 +3710,11 @@ Items: {
 			The sickles do 250% damage, don't pierce and ignore 50 defense
 			When running out of souls, it switches to Lasers automatically
 			'''
+	}
+
+	TabulatingMachine: {
+		DisplayName: Tabulating Machine
+		Tooltip: ""
 	}
 }
 

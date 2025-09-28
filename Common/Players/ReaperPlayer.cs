@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -9,26 +10,17 @@ namespace MightofUniverses.Common.Players
 {
     public class ReaperPlayer : ModPlayer
     {
-        // Core soul economy
         public float soulEnergy;
         public float maxSoulEnergy = 100f;
         public float soulGatherMultiplier = 1f;
-
-        // Class flags/stats
         public bool hasReaperArmor;
         public float reaperDamageMultiplier = 1f;
         public float reaperCritChance = 0f;
-
-        // Misc
         public int deathMarks;
         public const int MAX_DEATH_MARKS = 5;
         public static ModKeybind SoulReleaseKey;
         public bool justConsumedSouls;
-
-        // Timers
         public int TempleBuffTimer;
-
-        // Constants
         private const float BaseMaxSoulEnergy = 100f;
 
         public override void Load()
@@ -56,19 +48,16 @@ namespace MightofUniverses.Common.Players
 
         public override void ResetEffects()
         {
-            // Reset per-tick accumulators; accessories and buffs add to these each tick
             maxSoulEnergy = BaseMaxSoulEnergy;
             soulGatherMultiplier = 1f;
             hasReaperArmor = false;
             reaperDamageMultiplier = 1f;
             reaperCritChance = 0f;
             justConsumedSouls = false;
-
             if (TempleBuffTimer > 0)
                 TempleBuffTimer--;
         }
 
-        // Visual-friendly soul gain from a world position (creates a small dust trail)
         public void AddSoulEnergy(float amount, Vector2 sourcePosition)
         {
             if (amount <= 0f)
@@ -80,7 +69,6 @@ namespace MightofUniverses.Common.Players
             {
                 soulEnergy = MathHelper.Clamp(soulEnergy + adjustedAmount, 0f, maxSoulEnergy);
 
-                // Create soul-gathering dust trail effect
                 Vector2 dirToPlayer = Player.Center - sourcePosition;
                 float distance = dirToPlayer.Length();
                 if (distance > 0.01f)
@@ -104,7 +92,6 @@ namespace MightofUniverses.Common.Players
             }
         }
 
-        // Silent, raw gain (no visuals)
         public void AddSoulEnergy(float amount)
         {
             if (amount <= 0f)
@@ -113,7 +100,18 @@ namespace MightofUniverses.Common.Players
             soulEnergy = MathHelper.Clamp(soulEnergy + amount * soulGatherMultiplier, 0f, maxSoulEnergy);
         }
 
-        // Consume a specific amount of souls
+        public bool AddSoulEnergyFromNPC(NPC npc, float amount)
+        {
+            if (npc == null || amount <= 0f)
+                return false;
+
+            if (!IsValidSoulSourceNPC(npc))
+                return false;
+
+            AddSoulEnergy(amount, npc.Center);
+            return true;
+        }
+
         public bool ConsumeSoulEnergy(float amount)
         {
             if (amount <= 0f)
@@ -128,8 +126,6 @@ namespace MightofUniverses.Common.Players
             return false;
         }
 
-        // Try to consume souls due to a player-triggered release (bound key), then run callback
-        // Also integrates accessory refund hooks after a successful spend.
         public bool TryReleaseSouls(float cost, Action<Player> onSuccess, string releaseMessage = null)
         {
             if (SoulReleaseKey.JustPressed)
@@ -137,9 +133,7 @@ namespace MightofUniverses.Common.Players
                 if (ConsumeSoulEnergy(cost))
                 {
                     onSuccess?.Invoke(Player);
-
                     Console.WriteLine($"Souls consumed: {cost}");
-
                     Main.NewText(releaseMessage ?? $"{(int)cost} souls released!", Color.Green);
                     return true;
                 }
@@ -151,16 +145,13 @@ namespace MightofUniverses.Common.Players
             return false;
         }
 
-        // Utility: percentage of current souls
         public float SoulEnergyPercent => maxSoulEnergy > 0f ? soulEnergy / maxSoulEnergy : 0f;
 
-        // Utility: hard set (clamped)
         public void SetSoulEnergy(float value)
         {
             soulEnergy = MathHelper.Clamp(value, 0f, maxSoulEnergy);
         }
 
-        // Utility: empty all souls and return amount removed
         public float ConsumeAllSouls()
         {
             float consumed = soulEnergy;
@@ -177,6 +168,60 @@ namespace MightofUniverses.Common.Players
         public void UpdateReaperCritChance(float amount)
         {
             reaperCritChance = MathHelper.Clamp(reaperCritChance + amount, 0f, 100f);
+        }
+
+        public bool IsValidSoulSourceNPC(NPC npc)
+        {
+            if (npc == null) return false;
+            if (npc.type == NPCID.TargetDummy) return false;
+            if (npc.friendly) return false;
+            if (npc.townNPC) return false;
+            if (npc.dontTakeDamage) return false;
+            if (IsStatueSpawned(npc)) return false;
+            return true;
+        }
+
+        private bool IsStatueSpawned(NPC npc)
+        {
+            if (npc == null) return false;
+            Type t = npc.GetType();
+            FieldInfo f = t.GetField("spawnedFromStatue", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            if (f != null && f.FieldType == typeof(bool))
+            {
+                try
+                {
+                    return (bool)f.GetValue(npc);
+                }
+                catch { }
+            }
+            PropertyInfo p = t.GetProperty("spawnedFromStatue", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            if (p != null && p.PropertyType == typeof(bool))
+            {
+                try
+                {
+                    return (bool)p.GetValue(npc);
+                }
+                catch { }
+            }
+            p = t.GetProperty("SpawnedFromStatue", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            if (p != null && p.PropertyType == typeof(bool))
+            {
+                try
+                {
+                    return (bool)p.GetValue(npc);
+                }
+                catch { }
+            }
+            f = t.GetField("SpawnedFromStatue", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            if (f != null && f.FieldType == typeof(bool))
+            {
+                try
+                {
+                    return (bool)f.GetValue(npc);
+                }
+                catch { }
+            }
+            return false;
         }
     }
 }

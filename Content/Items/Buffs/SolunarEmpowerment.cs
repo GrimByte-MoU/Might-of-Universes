@@ -17,7 +17,8 @@ namespace MightofUniverses.Content.Items.Buffs
         public override void Update(Player player, ref int buffIndex)
         {
             var reaperPlayer = player.GetModPlayer<ReaperPlayer>();
-            reaperPlayer.reaperDamageMultiplier += 0.1f;
+            reaperPlayer.reaperDamageMultiplier += 0.2f;
+            reaperPlayer.reaperCritChance += 5;
         }
     }
 }

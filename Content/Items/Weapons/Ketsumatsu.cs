@@ -32,7 +32,6 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.rare = ModContent.RarityType<TerraiumRarity>();
             Item.UseSound = SoundID.Item71;
             Item.autoReuse = true;
-
             Item.shoot = ModContent.ProjectileType<KetsumatsuPetal>();
             Item.shootSpeed = 10f;
         }
@@ -99,7 +98,7 @@ namespace MightofUniverses.Content.Items.Weapons
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(2f, target.Center);
+            reaper.AddSoulEnergy(10f, target.Center);
         }
     }
 }

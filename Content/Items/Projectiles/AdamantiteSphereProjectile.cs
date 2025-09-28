@@ -9,7 +9,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 {
     public class AdamantiteSphereProjectile : ModProjectile
     {
-        private const float HOMING_STRENGTH = 0.15f;
+        private const float HOMING_STRENGTH = 0.30f;
         private const float MAX_HOMING_DISTANCE = 400f;
 
         public override void SetDefaults()

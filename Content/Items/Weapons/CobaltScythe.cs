@@ -63,11 +63,11 @@ namespace MightofUniverses.Content.Items.Weapons
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(0.6f, target.Center);
+            reaper.AddSoulEnergy(3f, target.Center);
 
             if (!target.active)
             {
-                reaper.AddSoulEnergy(0.6f, target.Center);
+                reaper.AddSoulEnergy(3f, target.Center);
             }
         }
 

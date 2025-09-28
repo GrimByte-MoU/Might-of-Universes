@@ -18,7 +18,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.rare = ItemRarityID.Yellow;
             Item.value = Item.sellPrice(gold: 8);
             
-            Item.useStyle = ItemUseStyleID.HoldUp;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.useTime = 30;
             Item.useAnimation = 30;
             Item.autoReuse = true;
