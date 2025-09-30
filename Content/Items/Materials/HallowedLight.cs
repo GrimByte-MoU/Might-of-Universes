@@ -1,8 +1,3 @@
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using MightofUniverses.Content.Items.Materials;
-
 namespace MightofUniverses.Content.Items.Materials
 {
     public class HallowedLight : ModItem

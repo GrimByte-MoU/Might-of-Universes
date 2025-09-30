@@ -61,6 +61,7 @@ namespace MightofUniverses.Content.Items.Weapons
             reaper.AddSoulEnergy(5f, target.Center);
             if (!target.active)
                 reaper.AddSoulEnergy(5f, target.Center);
+                target.AddBuff(BuffID.CursedInferno, 240);
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

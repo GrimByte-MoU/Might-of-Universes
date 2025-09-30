@@ -18,7 +18,6 @@ namespace MightofUniverses.Content.Items.Buffs
         {
             var state = player.GetModPlayer<ReaperEmpowermentState>().Values;
 
-            // Stats applied while the buff is active (read from state)
             if (state.ReaperDamage != 0f)
                 player.GetModPlayer<ReaperPlayer>().reaperDamageMultiplier += state.ReaperDamage;
 

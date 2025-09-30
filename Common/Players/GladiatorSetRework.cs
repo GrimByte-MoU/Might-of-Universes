@@ -1,15 +1,12 @@
 using System.Reflection;
 using Terraria.Audio;
+using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Common.Players
 {
     public class GladiatorSetRework : ModPlayer
     {
-        private const int PhalanxDurationTicks = 600;
-        private const int PhalanxInternalCooldownTicks = 180;
-
         private bool wearingGladiatorSet;
-        private int phalanxTimeLeft;
         private int phalanxCooldown;
         private int previousReaperSoulValue = -1;
         private bool attemptedReflectionLookup;
@@ -28,11 +25,6 @@ namespace MightofUniverses.Common.Players
                 reaper.hasReaperArmor = true;
                 reaper.maxSoulEnergy += 60;
                 Player.noKnockback = true;
-                if (phalanxTimeLeft > 0)
-                {
-                    Player.statDefense += 6;
-                    Player.lifeRegen += 10;
-                }
             }
         }
 
@@ -40,14 +32,12 @@ namespace MightofUniverses.Common.Players
         {
             if (wearingGladiatorSet)
             {
-                Player.setBonus = "+60 max souls\nImmunity to knockback\nWhen consuming souls, gain the Phalanx buff (+6 defense and +5 HP/s) for 10 seconds (refreshes duration, 2s internal cooldown)";
+                Player.setBonus = "+60 max souls\nImmunity to knockback\nWhen consuming souls, gain the Phalanx buff for 10 seconds (refreshes duration, 2s internal cooldown)";
             }
         }
 
         public override void PostUpdate()
         {
-            if (phalanxTimeLeft > 0)
-                phalanxTimeLeft--;
             if (phalanxCooldown > 0)
                 phalanxCooldown--;
 
@@ -85,8 +75,8 @@ namespace MightofUniverses.Common.Players
         private void TryTriggerPhalanx()
         {
             if (phalanxCooldown > 0) return;
-            phalanxTimeLeft = PhalanxDurationTicks;
-            phalanxCooldown = PhalanxInternalCooldownTicks;
+            phalanxCooldown = 120;
+            Player.AddBuff(ModContent.BuffType<PhalanxBuff>(), 600);
             for (int i = 0; i < 12; i++)
             {
                 var pos = Player.Center + Main.rand.NextVector2Circular(16f, 16f);

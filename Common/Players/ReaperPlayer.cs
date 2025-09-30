@@ -22,6 +22,7 @@ namespace MightofUniverses.Common.Players
         public bool justConsumedSouls;
         public int TempleBuffTimer;
         private const float BaseMaxSoulEnergy = 100f;
+        public bool chillingPresence;
 
         public override void Load()
         {
@@ -44,6 +45,7 @@ namespace MightofUniverses.Common.Players
             deathMarks = 0;
             TempleBuffTimer = 0;
             maxSoulEnergy = BaseMaxSoulEnergy;
+            chillingPresence = false;
         }
 
         public override void ResetEffects()
@@ -54,6 +56,7 @@ namespace MightofUniverses.Common.Players
             reaperDamageMultiplier = 1f;
             reaperCritChance = 0f;
             justConsumedSouls = false;
+            chillingPresence = false;
             if (TempleBuffTimer > 0)
                 TempleBuffTimer--;
         }

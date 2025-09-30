@@ -362,6 +362,35 @@ Buffs: {
 			+6 defense and +3 health regen per second
 			'''
 	}
+
+	PhalanxBuff: {
+		DisplayName: Phalanx
+		Description: +6 defense and +5 health regen per second
+	}
+
+	ChillingPresenceBuff: {
+		DisplayName: Chilling Presence
+		Description:
+			'''
+			"Your attacks chill enemies to their very soul"
+			Your reaper attacks inflict Frostburn, Spineless and Corrupted for 3 seconds
+			'''
+	}
+
+	MorticianGraceBuff: {
+		DisplayName: Mortician's Grace
+		Description: +50 max life
+	}
+
+	YangBuff: {
+		DisplayName: Yang Buff
+		Description: +10% damage reduction and +10 defense
+	}
+
+	YinBuff: {
+		DisplayName: Yin Buff
+		Description: +15% movement and +10 hp/sec regen
+	}
 }
 
 Projectiles: {
@@ -659,6 +688,8 @@ Projectiles: {
 	CoreFlesh_FleshTongue.DisplayName: Core Flesh_ Flesh Tongue
 	CoreFlesh_Laser.DisplayName: Core Flesh_ Laser
 	CoreFlesh_Tooth.DisplayName: Core Flesh_ Tooth
+	GravetenderThorn.DisplayName: Gravetender Thorn
+	AccursedSoul.DisplayName: Accursed Soul
 }
 
 Keybinds: {
@@ -3714,7 +3745,214 @@ Items: {
 
 	TabulatingMachine: {
 		DisplayName: Tabulating Machine
-		Tooltip: ""
+		Tooltip: Displays the number of minion slots you have
+	}
+
+	MorticianChestplate: {
+		DisplayName: Mortician's Chestplate
+		Tooltip:
+			'''
+			+3% Reaper damage
+			+1% Reaper critical strike chance
+			+1 health regen/sec
+			'''
+	}
+
+	MorticianGreaves: {
+		DisplayName: Mortician's Greaves
+		Tooltip:
+			'''
+			+5% Movement speed
+			+2% Reaper damage
+			'''
+	}
+
+	MorticianHat: {
+		DisplayName: Mortician's Hat
+		Tooltip: +2% Reaper critical strike chance
+	}
+
+	GravetenderChestplate: {
+		DisplayName: Gravetender's Chestplate
+		Tooltip:
+			'''
+			+4% Reaper damage
+			+4% Reaper critical strike chance
+			+4 Armor Penetration against poisoned enemies
+			'''
+	}
+
+	GravetenderHat: {
+		DisplayName: Gravetender's Hat
+		Tooltip:
+			'''
+			+3% Reaper damage
+			+3% Reaper critical strike chance
+			+3 Armor Penetration against poisoned enemies
+			'''
+	}
+
+	GravetenderShoes: {
+		DisplayName: Gravetender's Shoes
+		Tooltip:
+			'''
+			+3% Reaper damage
+			+3% Reaper critical strike chance
+			+3 Armor Penetration against poisoned enemies
+			+5% Movement speed
+			'''
+	}
+
+	BoneCollectorHat: {
+		DisplayName: Bone Collector's Hat
+		Tooltip:
+			'''
+			+4% Reaper damage
+			+2% Reaper critical strike chance
+			+5 max life
+			'''
+	}
+
+	BoneCollectorPants: {
+		DisplayName: Bone Collector's Pants
+		Tooltip:
+			'''
+			+5% Reaper damage
+			+10 max life
+			+3% Reaper critical strike chance
+			+10% movement speed
+			'''
+	}
+
+	BoneCollectorShirt: {
+		DisplayName: Bone Collector's Shirt
+		Tooltip:
+			'''
+			+6% Reaper damage
+			+10 max life
+			+4% Reaper critical strike chance
+			'''
+	}
+
+	LichChestplate: {
+		DisplayName: Lich's Chestplate
+		Tooltip:
+			'''
+			+6% Reaper damage
+			+6% Reaper critical strike chance
+			Soul consumption abilities cost 5% less to activate
+			'''
+	}
+
+	LichGreaves: {
+		DisplayName: Lich's Greaves
+		Tooltip:
+			'''
+			+5% Reaper damage
+			+5% Reaper critical strike chance
+			+10% movement speed
+			'''
+	}
+
+	LichMask: {
+		DisplayName: Lich's Mask
+		Tooltip:
+			'''
+			+4% Reaper damage
+			+4% Reaper critical strike chance
+			+1 soul generated per second
+			'''
+	}
+
+	MurkyIceBoots: {
+		DisplayName: Murky Ice Boots
+		Tooltip:
+			'''
+			+5% Reaper damage
+			+3% Reaper critical strike chance
+			+10% movement speed
+			'''
+	}
+
+	MurkyIceChestplate: {
+		DisplayName: Murky Ice Chestplate
+		Tooltip:
+			'''
+			+6% Reaper damage
+			+5% Reaper critical strike chance
+			'''
+	}
+
+	MurkyIceHelmet: {
+		DisplayName: Murky Ice Helmet
+		Tooltip:
+			'''
+			+4% Reaper damage
+			+2% Reaper critical strike chance
+			'''
+	}
+
+	ChestplateofOrcus: {
+		DisplayName: Chestplate Of Orcus
+		Tooltip:
+			'''
+			+8% Reaper damage
+			+5% Reaper critical strike chance
+			+10 armor penetration against enemies afflicted with Rebuking Light
+			'''
+	}
+
+	GreavesofOrcus: {
+		DisplayName: Greaves Of Orcus
+		Tooltip:
+			'''
+			+6% Reaper damage
+			+5% Reaper critical strike chance
+			+12% movement speed
+			'''
+	}
+
+	MaskofOrcus: {
+		DisplayName: Mask Of Orcus
+		Tooltip:
+			'''
+			+6% Reaper damage
+			+5% Reaper critical strike chance
+			+2 souls generated per second
+			'''
+	}
+
+	YinYangCloak: {
+		DisplayName: Yin Yang Cloak
+		Tooltip:
+			'''
+			+4% Reaper damage
+			+4% Reaper critical strike chance
+			+2% damage reduction
+			+10 max life
+			'''
+	}
+
+	YinYangHat: {
+		DisplayName: Yin Yang Hat
+		Tooltip:
+			'''
+			+3% Reaper damage
+			+3% Reaper critical strike chance
+			+1% damage reduction
+			+10 max life
+			'''
+	}
+
+	YinYangShoes: {
+		DisplayName: Yin Yang Shoes
+		Tooltip:
+			'''
+			+3% Reaper damage
+			+3% Reaper critical strike chance
+			+1% damage reduction
+			+10 max life
+			'''
 	}
 }
 

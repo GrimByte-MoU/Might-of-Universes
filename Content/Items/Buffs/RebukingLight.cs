@@ -1,7 +1,3 @@
-using Terraria;
-using Terraria.ModLoader;
-using Terraria.ID;
-
 namespace MightofUniverses.Content.Items.Buffs
 {
     public class RebukingLight : ModBuff
