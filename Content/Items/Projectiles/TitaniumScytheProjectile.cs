@@ -18,13 +18,13 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.timeLeft = 180;
             Projectile.light = 1f;
             Projectile.aiStyle = 1;
-            Projectile.scale = 1.5f;
+            Projectile.scale = 1f;
         }
 
         public override void AI()
         {
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch);
-            Projectile.rotation += 0.2f;
+            Projectile.rotation += 0.4f;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

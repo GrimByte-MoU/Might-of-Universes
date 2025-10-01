@@ -13,38 +13,38 @@ namespace MightofUniverses.Common.Players
         private const int SpawnIntervalTicks = 120;
         private const int SpawnCount = 2;
         private const float SpawnRadiusTiles = 15f;
-        private bool wearingLichSet;
+        private const int MaxSoulBonus = 125;
+
+        private bool wearing;
         private int spawnTimer;
 
         public override void ResetEffects()
         {
-            wearingLichSet = false;
+            wearing = false;
         }
 
         public override void UpdateEquips()
         {
-            if (IsWearingFullLichSet())
+            if (Player.armor[0].type == ModContent.ItemType<Content.Items.Armors.LichMask>()
+             && Player.armor[1].type == ModContent.ItemType<Content.Items.Armors.LichChestplate>()
+             && Player.armor[2].type == ModContent.ItemType<Content.Items.Armors.LichGreaves>())
             {
-                wearingLichSet = true;
+                wearing = true;
                 var reaper = Player.GetModPlayer<ReaperPlayer>();
                 reaper.hasReaperArmor = true;
-
-                var acc = Player.GetModPlayer<ReaperAccessoryPlayer>();
-                acc.flatMaxSoulsBonus += 125;
+                reaper.maxSoulEnergy += MaxSoulBonus; // Direct like Eclipse
             }
         }
 
         public override void PostUpdateEquips()
         {
-            if (wearingLichSet)
-            {
+            if (wearing)
                 Player.setBonus = "+125 max souls\nTwo accursed souls spawn near you every 2 seconds. They home in on nearby enemies and steal 2 souls on hit.";
-            }
         }
 
         public override void PostUpdate()
         {
-            if (!wearingLichSet)
+            if (!wearing)
             {
                 spawnTimer = 0;
                 return;
@@ -52,25 +52,18 @@ namespace MightofUniverses.Common.Players
 
             if (spawnTimer > 0) spawnTimer--;
             if (spawnTimer > 0) return;
-
             spawnTimer = SpawnIntervalTicks;
 
             for (int i = 0; i < SpawnCount; i++)
             {
-                float r = (float)(Main.rand.NextDouble() * SpawnRadiusTiles * 16.0);
-                float ang = MathHelper.ToRadians(Main.rand.NextFloat() * 360f);
+                float r = (float)(Main.rand.NextDouble() * SpawnRadiusTiles * 16f);
+                float ang = MathHelper.TwoPi * Main.rand.NextFloat();
                 Vector2 spawnPos = Player.Center + new Vector2((float)Math.Cos(ang), (float)Math.Sin(ang)) * r;
-                Projectile.NewProjectile(Player.GetSource_FromThis(), spawnPos, Vector2.Zero, ModContent.ProjectileType<AccursedSoul>(), 45, 0f, Player.whoAmI);
+                Projectile.NewProjectile(Player.GetSource_FromThis(), spawnPos, Vector2.Zero,
+                    ModContent.ProjectileType<AccursedSoul>(), 45, 0f, Player.whoAmI);
             }
 
             SoundEngine.PlaySound(SoundID.Item8, Player.position);
-        }
-
-        private bool IsWearingFullLichSet()
-        {
-            return Player.armor[0].type == ModContent.ItemType<Content.Items.Armors.LichMask>()
-                && Player.armor[1].type == ModContent.ItemType<Content.Items.Armors.LichChestplate>()
-                && Player.armor[2].type == ModContent.ItemType<Content.Items.Armors.LichGreaves>();
         }
     }
 }

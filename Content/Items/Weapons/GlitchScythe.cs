@@ -14,7 +14,7 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class GlitchScythe : ModItem, IHasSoulCost
     {
-        public float BaseSoulCost => 40f;
+        public float BaseSoulCost => 55f;
 
         private int buffTimer = 0;
 

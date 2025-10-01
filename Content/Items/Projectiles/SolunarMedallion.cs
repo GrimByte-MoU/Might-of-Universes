@@ -1,16 +1,17 @@
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using MightofUniverses.Common.Players;
+using System;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
+    // ai[0] = initial phase (0 or π)
+    // localAI[0] anchorX, localAI[1] anchorY, localAI[2] initialized flag (0/1)
     public class SolunarMedallion : ModProjectile
     {
-        private float rotation = 0f;
-        private const float ORBIT_RADIUS = 150f;
-        private const float ROTATION_SPEED = 0.035f;
-        private bool isSunMedallion;
+        private const float OrbitRadius = 150f;
+        private const float OrbitSpeed = 0.035f;
+        private const int   Lifetime   = 240;
 
         public override void SetDefaults()
         {
@@ -19,37 +20,43 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.friendly = true;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
-            Projectile.damage = 30;
+            Projectile.ignoreWater = true;
+            Projectile.timeLeft = Lifetime;
+            Projectile.DamageType = ModContent.GetInstance<ReaperDamageClass>();
         }
 
         public override void AI()
         {
-            Player player = Main.player[Projectile.owner];
-            var reaperPlayer = player.GetModPlayer<ReaperPlayer>();
-            
-            if (!reaperPlayer.hasReaperArmor)
+            Player owner = Main.player[Projectile.owner];
+            if (!owner.active || owner.dead)
             {
                 Projectile.Kill();
                 return;
             }
-            
-            rotation += ROTATION_SPEED;
-            if (Projectile.ai[0] == 1f)
-                rotation += MathHelper.Pi;
 
-            Vector2 offset = new Vector2(
-                ORBIT_RADIUS * (float)System.Math.Cos(rotation),
-                ORBIT_RADIUS * (float)System.Math.Sin(rotation)
-            );
+            // Initialize anchor only once
+            if (Projectile.localAI[2] == 0f)
+            {
+                Projectile.localAI[0] = Projectile.Center.X;
+                Projectile.localAI[1] = Projectile.Center.Y;
+                Projectile.localAI[2] = 1f;
+            }
 
-            Projectile.Center = player.Center + offset;
-        }
+            Vector2 anchor = new(Projectile.localAI[0], Projectile.localAI[1]);
 
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            Player player = Main.player[Projectile.owner];
-            var reaperPlayer = player.GetModPlayer<ReaperPlayer>();
-            reaperPlayer.AddSoulEnergy(0.2f, target.Center);
+            float elapsed = Lifetime - Projectile.timeLeft;
+            float angle = Projectile.ai[0] + elapsed * OrbitSpeed;
+
+            Projectile.Center = anchor + new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * OrbitRadius;
+            Projectile.rotation += 0.18f;
+
+            if (Main.rand.NextBool(10))
+            {
+                int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height,
+                    Main.rand.NextBool() ? Terraria.ID.DustID.PurpleTorch : Terraria.ID.DustID.OrangeTorch,
+                    0f, 0f, 140, default, 0.9f);
+                Main.dust[d].noGravity = true;
+            }
         }
     }
 }

@@ -15,7 +15,7 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class SweetHarvester : ModItem, IHasSoulCost
     {
-        public float BaseSoulCost => 75f;
+        public float BaseSoulCost => 85f;
 
         public override void SetDefaults()
         {

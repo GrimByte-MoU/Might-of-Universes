@@ -15,7 +15,7 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class IndustrialSeverence : ModItem, IHasSoulCost
     {
-        public float BaseSoulCost => 25f;
+        public float BaseSoulCost => 35f;
 
         public override void SetDefaults()
         {

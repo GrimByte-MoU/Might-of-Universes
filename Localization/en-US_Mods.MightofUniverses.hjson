@@ -690,6 +690,7 @@ Projectiles: {
 	CoreFlesh_Tooth.DisplayName: Core Flesh_ Tooth
 	GravetenderThorn.DisplayName: Gravetender Thorn
 	AccursedSoul.DisplayName: Accursed Soul
+	BlizzardSnowController.DisplayName: Blizzard Snow Controller
 }
 
 Keybinds: {

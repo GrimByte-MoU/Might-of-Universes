@@ -14,7 +14,7 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class CriticalFailure : ModItem, IHasSoulCost
     {
-        public float BaseSoulCost => 30f;
+        public float BaseSoulCost => 45f;
 
         public override void SetDefaults()
         {
@@ -59,7 +59,7 @@ namespace MightofUniverses.Content.Items.Weapons
                             from,
                             newVelocity,
                             ModContent.ProjectileType<CodeBolt>(),
-                            damage * 2,
+                            damage * 5,
                             kb * 1.5f,
                             player.whoAmI
                         );

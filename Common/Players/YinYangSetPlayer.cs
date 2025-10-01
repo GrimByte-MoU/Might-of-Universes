@@ -8,42 +8,39 @@ namespace MightofUniverses.Common.Players
 {
     public class YinYangSetPlayer : ModPlayer
     {
-        private const int SetBonusMaxSouls = 125;
-
-        private bool wearingYinYangSet;
+        private const int MaxSoulBonus = 125;
+        private bool wearing;
 
         public override void ResetEffects()
         {
-            wearingYinYangSet = false;
+            wearing = false;
         }
 
         public override void UpdateEquips()
         {
-            if (IsWearingFullYinYangSet())
+            if (Player.armor[0].type == ModContent.ItemType<Content.Items.Armors.YinYangHat>()
+             && Player.armor[1].type == ModContent.ItemType<Content.Items.Armors.YinYangCloak>()
+             && Player.armor[2].type == ModContent.ItemType<Content.Items.Armors.YinYangShoes>())
             {
-                wearingYinYangSet = true;
+                wearing = true;
                 var reaper = Player.GetModPlayer<ReaperPlayer>();
                 reaper.hasReaperArmor = true;
-
-                var acc = Player.GetModPlayer<ReaperAccessoryPlayer>();
-                acc.flatMaxSoulsBonus += SetBonusMaxSouls;
+                reaper.maxSoulEnergy += MaxSoulBonus;
             }
         }
 
         public override void PostUpdateEquips()
         {
-            if (wearingYinYangSet)
-            {
-                Player.setBonus = $"+{SetBonusMaxSouls} max souls\nWhen you consume souls you gain the Yang buff for 3 seconds. If below 50% health you also gain the Yin buff for 3 seconds.";
-            }
+            if (wearing)
+                Player.setBonus = "+125 max souls\nConsuming souls grants Yang (3s). Also grants Yin (3s) if below 50% life.";
         }
 
         public override void PostUpdate()
         {
-            if (!wearingYinYangSet) return;
+            if (!wearing) return;
 
             var reaper = Player.GetModPlayer<ReaperPlayer>();
-            if (reaper != null && reaper.justConsumedSouls)
+            if (reaper.justConsumedSouls)
             {
                 if (Player.statLife < Player.statLifeMax2 * 0.5f)
                 {
@@ -63,13 +60,6 @@ namespace MightofUniverses.Common.Players
                 }
                 Terraria.Audio.SoundEngine.PlaySound(SoundID.Item4, Player.position);
             }
-        }
-
-        private bool IsWearingFullYinYangSet()
-        {
-            return Player.armor[0].type == ModContent.ItemType<Content.Items.Armors.YinYangHat>()
-                && Player.armor[1].type == ModContent.ItemType<Content.Items.Armors.YinYangCloak>()
-                && Player.armor[2].type == ModContent.ItemType<Content.Items.Armors.YinYangShoes>();
         }
     }
 }

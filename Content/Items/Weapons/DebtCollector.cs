@@ -14,7 +14,7 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class DebtCollector : ModItem, IHasSoulCost
     {
-        public float BaseSoulCost => 50f;
+        public float BaseSoulCost => 65f;
 
         public override void SetDefaults()
         {

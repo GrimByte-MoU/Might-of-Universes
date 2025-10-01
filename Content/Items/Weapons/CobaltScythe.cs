@@ -4,7 +4,7 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class CobaltScythe : ModItem, IHasSoulCost
     {
-        public float BaseSoulCost => 40f;
+        public float BaseSoulCost => 50f;
 
         public override void SetDefaults()
         {

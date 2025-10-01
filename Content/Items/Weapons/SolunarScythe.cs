@@ -2,19 +2,19 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using MightofUniverses.Common;
-using MightofUniverses.Content.Items.Projectiles;
 using Terraria.DataStructures;
-using MightofUniverses.Content.Items.Materials;
+using MightofUniverses.Common;
 using MightofUniverses.Common.Players;
 using MightofUniverses.Common.Abstractions;
 using MightofUniverses.Common.Util;
+using MightofUniverses.Content.Items.Projectiles;
+using MightofUniverses.Content.Items.Materials;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
     public class SolunarScythe : ModItem, IHasSoulCost
     {
-        public float BaseSoulCost => 50f;
+        public float BaseSoulCost => 55f;
 
         public override void SetDefaults()
         {
@@ -38,45 +38,35 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
 
-            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
+            if (ReaperPlayer.SoulReleaseKey != null &&
+                ReaperPlayer.SoulReleaseKey.JustPressed)
             {
-                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
-                if (reaper.ConsumeSoulEnergy(effectiveCost))
-                {
-                    IEntitySource src = player.GetSource_ItemUse(Item);
-                    int damage = player.GetWeaponDamage(Item);
-                    float kb = player.GetWeaponKnockback(Item);
+                int cost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
+                if (!reaper.ConsumeSoulEnergy(cost))
+                    return;
 
-                    Projectile.NewProjectile(src, player.Center, Vector2.Zero,
-                        ModContent.ProjectileType<SolunarScytheMedallion>(),
-                        damage * 2, kb, player.whoAmI, 0f);
+                IEntitySource src = player.GetSource_ItemUse(Item);
+                int damage = player.GetWeaponDamage(Item);
+                float kb = player.GetWeaponKnockback(Item);
 
-                    Projectile.NewProjectile(src, player.Center, Vector2.Zero,
-                        ModContent.ProjectileType<SolunarScytheMedallion>(),
-                        damage * 2, kb, player.whoAmI, MathHelper.Pi);
-                }
+                // Two opposite medallions (anchor orbit)
+                Projectile.NewProjectile(src, player.Center, Vector2.Zero,
+                    ModContent.ProjectileType<SolunarMedallion>(), damage * 2, kb, player.whoAmI, 0f);
+
+                Projectile.NewProjectile(src, player.Center, Vector2.Zero,
+                    ModContent.ProjectileType<SolunarMedallion>(), damage * 2, kb, player.whoAmI, MathHelper.Pi);
             }
         }
 
-        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source,
+            Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(3f, target.Center);
+            Vector2 dir = velocity.SafeNormalize(Vector2.UnitX);
+            float lateral = 12f;
+            Vector2 perp = dir.RotatedBy(MathHelper.PiOver2) * lateral;
 
-            Dust.NewDust(target.position, target.width, target.height, DustID.PurpleTorch);
-            Dust.NewDust(target.position, target.width, target.height, DustID.OrangeTorch);
-            Lighting.AddLight(target.Center, 0.8f, 0f, 0.8f);
-            Lighting.AddLight(target.Center, 1f, 0.5f, 0f);
-        }
-
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-        {
-            float offset = 20f;
-            Vector2 position1 = position + Vector2.Normalize(velocity).RotatedBy(MathHelper.PiOver2) * offset;
-            Vector2 position2 = position + Vector2.Normalize(velocity).RotatedBy(-MathHelper.PiOver2) * offset;
-
-            Projectile.NewProjectile(source, position1, velocity, type, damage, knockback, player.whoAmI, 0.5f);
-            Projectile.NewProjectile(source, position2, velocity, type, damage, knockback, player.whoAmI, -0.5f);
+            Projectile.NewProjectile(source, position + perp, velocity, type, damage, knockback, player.whoAmI, 0f);
+            Projectile.NewProjectile(source, position - perp, velocity, type, damage, knockback, player.whoAmI, MathHelper.Pi);
 
             return false;
         }

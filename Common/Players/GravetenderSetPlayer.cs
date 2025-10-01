@@ -10,37 +10,35 @@ namespace MightofUniverses.Common.Players
 {
     public class GravetenderSetPlayer : ModPlayer
     {
+        private const int MaxSoulBonus = 40;
 
-
-        private bool wearingGravetenderSet;
+        private bool wearing;
         private int thornCooldown;
         public float poisonArmorPen;
 
         public override void ResetEffects()
         {
-            wearingGravetenderSet = false;
+            wearing = false;
             poisonArmorPen = 0f;
         }
 
         public override void UpdateEquips()
         {
-            if (IsWearingFullGravetenderSet())
+            if (Player.armor[0].type == ModContent.ItemType<GravetenderHat>()
+             && Player.armor[1].type == ModContent.ItemType<GravetenderChestplate>()
+             && Player.armor[2].type == ModContent.ItemType<GravetenderShoes>())
             {
-                wearingGravetenderSet = true;
+                wearing = true;
                 var reaper = Player.GetModPlayer<ReaperPlayer>();
                 reaper.hasReaperArmor = true;
-
-                var acc = Player.GetModPlayer<ReaperAccessoryPlayer>();
-                acc.flatMaxSoulsBonus += 40;
+                reaper.maxSoulEnergy += MaxSoulBonus;
             }
         }
 
         public override void PostUpdateEquips()
         {
-            if (wearingGravetenderSet)
-            {
-                Player.setBonus = "+40 max souls\nWhen you take >20% of your max life in one hit, fire 6 Gravetender Thorns that pierce 1 enemy and inflict Poisoned for 2 seconds.\n Each thorn gathers 1 soul on hit.\n This ability has a 5 second cooldown.";
-            }
+            if (wearing)
+                Player.setBonus = "+40 max souls\nTaking >20% max life in one hit fires 6 thorns. Each thorn gathers 1 soul and have a 5 second cooldown.";
         }
 
         public override void PostUpdate()
@@ -48,79 +46,68 @@ namespace MightofUniverses.Common.Players
             if (thornCooldown > 0) thornCooldown--;
         }
 
-        public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
+        public override void OnHitByNPC(NPC npc, Player.HurtInfo info)
         {
-            if (!wearingGravetenderSet || !Player.active || Player.dead)
-                return;
-
+            if (!wearing || !Player.active || Player.dead) return;
             float threshold = Player.statLifeMax2 * 0.20f;
-            if (hurtInfo.Damage > threshold)
-            {
-                TrySpawnThorns(npc?.Center ?? Player.Center);
-            }
+            if (info.Damage > threshold) TrySpawnThorns();
         }
 
-        public override void OnHitByProjectile(Projectile proj, Player.HurtInfo hurtInfo)
+        public override void OnHitByProjectile(Projectile proj, Player.HurtInfo info)
         {
-            if (!wearingGravetenderSet || !Player.active || Player.dead)
-                return;
-
+            if (!wearing || !Player.active || Player.dead) return;
             float threshold = Player.statLifeMax2 * 0.20f;
-            if (hurtInfo.Damage > threshold)
-            {
-                TrySpawnThorns(proj?.Center ?? Player.Center);
-            }
+            if (info.Damage > threshold) TrySpawnThorns();
         }
 
-        private void TrySpawnThorns(Vector2 origin)
+        private void TrySpawnThorns()
         {
             if (thornCooldown > 0) return;
             thornCooldown = 300;
 
-            // Spawn radial burst of Thorns
             for (int i = 0; i < 6; i++)
             {
-                float angle = MathHelper.TwoPi * i / 6;
+                float angle = MathHelper.TwoPi * i / 6f;
                 Vector2 vel = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * 8f;
                 Vector2 spawnPos = Player.Center + vel.SafeNormalize(Vector2.Zero) * 10f;
-                Projectile.NewProjectile(Player.GetSource_FromThis(), spawnPos, vel, ModContent.ProjectileType<GravetenderThorn>(), 15, 0f, Player.whoAmI);
+                Projectile.NewProjectile(
+                    Player.GetSource_FromThis(),
+                    spawnPos,
+                    vel,
+                    ModContent.ProjectileType<GravetenderThorn>(),
+                    15,
+                    0f,
+                    Player.whoAmI
+                );
             }
 
-            // Visuals & sound
             for (int i = 0; i < 10; i++)
             {
-                var d = Dust.NewDustPerfect(Player.Center + Main.rand.NextVector2Circular(12f, 12f), DustID.Smoke, Main.rand.NextVector2Circular(1.2f, 1.2f), Alpha: 150, Color.White, Scale: 1f);
+                var d = Dust.NewDustPerfect(
+                    Player.Center + Main.rand.NextVector2Circular(12f, 12f),
+                    DustID.Smoke,
+                    Main.rand.NextVector2Circular(1.2f, 1.2f),
+                    150,
+                    Color.White,
+                    1f
+                );
                 d.noGravity = true;
             }
             Terraria.Audio.SoundEngine.PlaySound(SoundID.Item14, Player.position);
         }
 
-        private bool IsWearingFullGravetenderSet()
-        {
-            return Player.armor[0].type == ModContent.ItemType<GravetenderHat>()
-                && Player.armor[1].type == ModContent.ItemType<GravetenderChestplate>()
-                && Player.armor[2].type == ModContent.ItemType<GravetenderShoes>();
-        }
+        public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers) =>
+            ApplyPoison(target, ref modifiers);
 
-        // Apply armor-penetration against Poisoned enemies for both item and projectile hits
-        public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
-        {
-            ApplyPoisonArmorPen(target, ref modifiers);
-        }
+        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers) =>
+            ApplyPoison(target, ref modifiers);
 
-        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
+        private void ApplyPoison(NPC target, ref NPC.HitModifiers modifiers)
         {
-            ApplyPoisonArmorPen(target, ref modifiers);
-        }
-
-        private void ApplyPoisonArmorPen(NPC target, ref NPC.HitModifiers modifiers)
-        {
-            if (poisonArmorPen <= 0f) return;
-            if (target == null || !target.active) return;
+            if (poisonArmorPen <= 0f || target == null || !target.active) return;
             if (!target.HasBuff(BuffID.Poisoned)) return;
-
-            float penFrac = MathHelper.Clamp(poisonArmorPen / 100f, 0f, 0.9f);
-            modifiers.DefenseEffectiveness *= 1f - penFrac;
+            float frac = MathHelper.Clamp(poisonArmorPen / 100f, 0f, 0.9f);
+            modifiers.DefenseEffectiveness *= 1f - frac;
         }
     }
 }

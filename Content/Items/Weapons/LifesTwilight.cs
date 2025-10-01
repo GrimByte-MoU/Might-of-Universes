@@ -2,19 +2,19 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using MightofUniverses.Common;
-using MightofUniverses.Content.Items.Projectiles;
 using Terraria.DataStructures;
-using MightofUniverses.Content.Items.Materials;
+using MightofUniverses.Common;
 using MightofUniverses.Common.Players;
 using MightofUniverses.Common.Abstractions;
 using MightofUniverses.Common.Util;
+using MightofUniverses.Content.Items.Projectiles;
+using MightofUniverses.Content.Items.Materials;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
     public class LifesTwilight : ModItem, IHasSoulCost
     {
-        public float BaseSoulCost => 50f;
+        public float BaseSoulCost => 65f;
 
         public override void SetDefaults()
         {
@@ -38,52 +38,56 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
 
-            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed && reaper.ConsumeSoulEnergy(SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost)))
+            if (ReaperPlayer.SoulReleaseKey != null &&
+                ReaperPlayer.SoulReleaseKey.JustPressed)
             {
+                int cost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
+                if (!reaper.ConsumeSoulEnergy(cost))
+                    return;
+
                 IEntitySource src = player.GetSource_ItemUse(Item);
                 int damage = player.GetWeaponDamage(Item);
                 float kb = player.GetWeaponKnockback(Item);
 
-                Projectile.NewProjectile(src, player.Center, Vector2.Zero,
-                    ModContent.ProjectileType<ScytheEclipse>(),
-                    damage * 2, kb, player.whoAmI, 0f);
+                // Four orbiters at fixed world anchor: phases 0, π/2, π, 3π/2
+                float[] phases = {
+                    0f,
+                    MathHelper.PiOver2,
+                    MathHelper.Pi,
+                    MathHelper.Pi + MathHelper.PiOver2
+                };
 
-                Projectile.NewProjectile(src, player.Center, Vector2.Zero,
-                    ModContent.ProjectileType<ScytheEclipse>(),
-                    damage * 2, kb, player.whoAmI, MathHelper.Pi);
+                foreach (float phase in phases)
+                {
+                    Projectile.NewProjectile(
+                        src,
+                        player.Center,
+                        Vector2.Zero,
+                        ModContent.ProjectileType<ScytheEclipse>(), // Make sure this matches the file below
+                        damage * 2,
+                        kb,
+                        player.whoAmI,
+                        ai0: phase
+                    );
+                }
 
-                Projectile.NewProjectile(src, player.Center, Vector2.Zero,
-                    ModContent.ProjectileType<ScytheEclipse>(),
-                    damage * 2, kb, player.whoAmI, MathHelper.Pi);
-
-                Projectile.NewProjectile(src, player.Center, Vector2.Zero,
-                    ModContent.ProjectileType<ScytheEclipse>(),
-                    damage * 2, kb, player.whoAmI, MathHelper.Pi);
+                // Optional debug:
+                // Main.NewText("Life's Twilight ability spawned 4 eclipses.", Microsoft.Xna.Framework.Color.Orange);
             }
         }
 
-        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source,
+            Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(5f, target.Center);
-            Dust.NewDust(target.position, target.width, target.height, DustID.OrangeTorch);
-            Dust.NewDust(target.position, target.width, target.height, DustID.Torch);
-            Lighting.AddLight(target.Center, 1f, 0.5f, 0f);
-        }
+            // Two helix strands: phases 0 & π (NOT ±0.5f)
+            Vector2 dir = velocity.SafeNormalize(Vector2.UnitX);
+            float lateral = 14f; // narrower than old 20 to reduce ground hits
 
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-        {
-            // Double-helix: exactly two projectiles, one per strand.
-            float offset = 20f;
-            Vector2 dir = Vector2.Normalize(velocity);
-            Vector2 position1 = position + dir.RotatedBy(MathHelper.PiOver2) * offset;
-            Vector2 position2 = position + dir.RotatedBy(-MathHelper.PiOver2) * offset;
+            Vector2 perp = dir.RotatedBy(MathHelper.PiOver2) * lateral;
 
-            // Use opposing phase values so they spiral around each other.
-            Projectile.NewProjectile(source, position1, velocity, type, damage, knockback, player.whoAmI, 0.5f);
-            Projectile.NewProjectile(source, position2, velocity, type, damage, knockback, player.whoAmI, -0.5f);
+            Projectile.NewProjectile(source, position + perp, velocity, type, damage, knockback, player.whoAmI, 0f);
+            Projectile.NewProjectile(source, position - perp, velocity, type, damage, knockback, player.whoAmI, MathHelper.Pi);
 
-            // Return false to prevent the default extra projectile so the total is two.
             return false;
         }
 

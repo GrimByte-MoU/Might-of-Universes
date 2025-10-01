@@ -27,13 +27,14 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.velocity.X += (float)System.Math.Sin(Projectile.timeLeft * 0.1f) * 0.15f;
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.PinkCrystalShard);
             Lighting.AddLight(Projectile.Center, 1.0f, 0.6f, 0.8f);
+            Projectile.rotation = Projectile.velocity.ToRotation(); 
 
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Player player = Main.player[Projectile.owner];
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(1f, target.Center);
+            reaper.AddSoulEnergy(5f, target.Center);
         }
     }
 }

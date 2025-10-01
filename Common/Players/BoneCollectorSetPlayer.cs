@@ -1,52 +1,41 @@
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
-using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Common.Players
 {
     public class BoneCollectorSetPlayer : ModPlayer
     {
-
-        private bool wearingBoneCollectorSet;
+        private const int MaxSoulBonus = 100;
+        private bool wearing;
 
         public override void ResetEffects()
         {
-            wearingBoneCollectorSet = false;
+            wearing = false;
         }
 
         public override void UpdateEquips()
         {
-            if (IsWearingFullBoneCollectorSet())
+            if (Player.armor[0].type == ModContent.ItemType<Content.Items.Armors.BoneCollectorHat>()
+             && Player.armor[1].type == ModContent.ItemType<Content.Items.Armors.BoneCollectorShirt>()
+             && Player.armor[2].type == ModContent.ItemType<Content.Items.Armors.BoneCollectorPants>())
             {
-                wearingBoneCollectorSet = true;
+                wearing = true;
                 var reaper = Player.GetModPlayer<ReaperPlayer>();
                 reaper.hasReaperArmor = true;
+                reaper.maxSoulEnergy += MaxSoulBonus;
 
                 var acc = Player.GetModPlayer<ReaperAccessoryPlayer>();
-                acc.flatMaxSoulsBonus += 100;
-
                 if (acc.SoulCostMultiplier == 0f)
                     acc.SoulCostMultiplier = 1f;
                 acc.SoulCostMultiplier *= 0.90f;
-
                 acc.RefundChance += 0.02f;
             }
         }
 
         public override void PostUpdateEquips()
         {
-            if (wearingBoneCollectorSet)
-            {
-                Player.setBonus = $"+{100} max souls\nSoul consumption costs 10% less.\nWhen you consume souls, there is a 2% chance to refund the entire cost.";
-            }
-        }
-
-        private bool IsWearingFullBoneCollectorSet()
-        {
-            return Player.armor[0].type == ModContent.ItemType<Content.Items.Armors.BoneCollectorHat>()
-                && Player.armor[1].type == ModContent.ItemType<Content.Items.Armors.BoneCollectorShirt>()
-                && Player.armor[2].type == ModContent.ItemType<Content.Items.Armors.BoneCollectorPants>();
+            if (wearing)
+                Player.setBonus = "+100 max souls\nSoul consumption costs 10% less.\n2% chance to fully refund consumed souls.";
         }
     }
 }

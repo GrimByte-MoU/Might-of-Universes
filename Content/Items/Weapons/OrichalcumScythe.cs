@@ -13,7 +13,7 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class OrichalcumScythe : ModItem, IHasSoulCost
     {
-        public float BaseSoulCost => 40f;
+        public float BaseSoulCost => 55f;
 
         public override void SetDefaults()
         {

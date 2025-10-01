@@ -13,7 +13,7 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class ChlorophyteScythe : ModItem, IHasSoulCost
     {
-        public float BaseSoulCost => 50f; // match actual spend in this item
+        public float BaseSoulCost => 75f;
 
         public override void SetDefaults()
         {

@@ -27,7 +27,7 @@ namespace MightofUniverses.Common
             int effectiveCost = (int)Math.Floor(Math.Max(1f, cost));
 
             // Assumes your ReaperPlayer.TryReleaseSouls returns bool and accepts onSuccess + optional message.
-            bool released = reaper.TryReleaseSouls(
+            var releaseResult = reaper.TryReleaseSouls(
                 effectiveCost,
                 onSuccess: p =>
                 {
@@ -38,9 +38,10 @@ namespace MightofUniverses.Common
                     p.AddBuff(ModContent.BuffType<SoulEmpowerment>(), durationTicks);
 
                     onConsume?.Invoke(p);
-                },
-                releaseMessage: message
+                }
             );
+
+            bool released = releaseResult;
 
             return released;
         }

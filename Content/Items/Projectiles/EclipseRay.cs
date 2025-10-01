@@ -1,15 +1,19 @@
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using MightofUniverses.Common;
+using Terraria;
+using Terraria.ModLoader;
 using System;
+using Terraria.ID;
 using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
+    // ai[0] = phase (0 or π)
+    // localAI[0] ticks, localAI[1] previous sine
     public class EclipseRay : ModProjectile
     {
+        private const float HelixSpeed = 0.80f;
+        private const float HelixAmplitude = 8f;
+
         public override void SetDefaults()
         {
             Projectile.width = 24;
@@ -19,28 +23,35 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.penetrate = 3;
             Projectile.timeLeft = 180;
             Projectile.light = 1f;
+            Projectile.tileCollide = true;
         }
 
         public override void AI()
-        {    
-            // Helix movement
+        {
             Projectile.rotation = Projectile.velocity.ToRotation();
-            float waveSpeed = 0.75f;
-            float waveWidth = 25f;
-            Vector2 offset = new Vector2(0, (float)Math.Sin(Projectile.timeLeft * waveSpeed) * waveWidth);
-            offset = offset.RotatedBy(Projectile.velocity.ToRotation());
-            Projectile.position += offset * Projectile.ai[0];
 
-            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch);
-            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.OrangeTorch);
-            Lighting.AddLight(Projectile.Center, 1f, 0.5f, 0f);
+            Vector2 forward = Projectile.velocity.SafeNormalize(Vector2.UnitX);
+            Vector2 perp = forward.RotatedBy(MathHelper.PiOver2);
+
+            float ticks = Projectile.localAI[0]++;
+            float prev = Projectile.localAI[1];
+            float sine = (float)Math.Sin(ticks * HelixSpeed + Projectile.ai[0]);
+            float delta = sine - prev;
+
+            Projectile.position += perp * (delta * HelixAmplitude);
+            Projectile.localAI[1] = sine;
+
+            if (Main.rand.NextBool(3))
+                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, 0f, 0f, 140);
+            if (Main.rand.NextBool(4))
+                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.OrangeTorch, 0f, 0f, 140);
+
+            Lighting.AddLight(Projectile.Center, 1f, 0.5f, 0.1f);
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            Player player = Main.player[Projectile.owner];
-            var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(0.4f, target.Center);
+            Main.player[Projectile.owner].GetModPlayer<ReaperPlayer>().AddSoulEnergy(0.4f, target.Center);
         }
     }
 }

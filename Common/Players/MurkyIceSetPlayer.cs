@@ -1,10 +1,14 @@
 using MightofUniverses.Content.Items.Buffs;
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
+using Microsoft.Xna.Framework;
 
 namespace MightofUniverses.Common.Players
 {
     public class MurkyIceSetPlayer : ModPlayer
     {
-        private const int SetBonusMaxSouls = 60;
+        private const int MaxSoulBonus = 60;
 
         private bool wearingMurkyIceSet;
 
@@ -20,9 +24,8 @@ namespace MightofUniverses.Common.Players
                 wearingMurkyIceSet = true;
                 var reaper = Player.GetModPlayer<ReaperPlayer>();
                 reaper.hasReaperArmor = true;
-
-                var acc = Player.GetModPlayer<ReaperAccessoryPlayer>();
-                acc.flatMaxSoulsBonus += SetBonusMaxSouls;
+                reaper.maxSoulEnergy += MaxSoulBonus;
+                Player.GetModPlayer<ReaperAccessoryPlayer>().flatMaxSoulsBonus += MaxSoulBonus;
             }
         }
 
@@ -30,20 +33,18 @@ namespace MightofUniverses.Common.Players
         {
             if (wearingMurkyIceSet)
             {
-                Player.setBonus = $"+{SetBonusMaxSouls} max souls\nWhen you consume souls, gain Chilling Presence for 5 seconds. Reaper attacks deal +15% damage to enemies with Frostburn, Corrupted or Spineless.";
+                Player.setBonus = "+60 max souls\nWhen you consume souls, gain Chilling Presence (5s). Reaper attacks +15% damage vs Frostburn, Corrupted or Spineless enemies.";
             }
         }
 
         public override void PostUpdate()
         {
-            if (!wearingMurkyIceSet)
-                return;
+            if (!wearingMurkyIceSet) return;
 
             var reaper = Player.GetModPlayer<ReaperPlayer>();
-            if (reaper != null && reaper.justConsumedSouls)
+            if (reaper.justConsumedSouls)
             {
                 Player.AddBuff(ModContent.BuffType<ChillingPresenceBuff>(), 300);
-
                 for (int i = 0; i < 8; i++)
                 {
                     var pos = Player.Center + Main.rand.NextVector2Circular(12f, 12f);
@@ -62,31 +63,26 @@ namespace MightofUniverses.Common.Players
                 && Player.armor[2].type == ModContent.ItemType<Content.Items.Armors.MurkyIceBoots>();
         }
 
-        // Apply 15% extra Reaper damage to targets with Frostburn, Corrupted, or Spineless
         public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (item.DamageType != ModContent.GetInstance<ReaperDamageClass>()) return;
-            ApplyChillDamageBonus(target, ref modifiers);
+            if (item.DamageType == ModContent.GetInstance<ReaperDamageClass>())
+                ApplyBonus(target, ref modifiers);
         }
 
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (proj.DamageType != ModContent.GetInstance<ReaperDamageClass>()) return;
-            ApplyChillDamageBonus(target, ref modifiers);
+            if (proj.DamageType == ModContent.GetInstance<ReaperDamageClass>())
+                ApplyBonus(target, ref modifiers);
         }
 
-        private void ApplyChillDamageBonus(NPC target, ref NPC.HitModifiers modifiers)
+        private void ApplyBonus(NPC target, ref NPC.HitModifiers modifiers)
         {
             if (target == null || !target.active) return;
-
             bool hasFrost = target.HasBuff(BuffID.Frostburn);
             bool hasCorrupted = target.HasBuff(ModContent.BuffType<Corrupted>());
             bool hasSpineless = target.HasBuff(ModContent.BuffType<Spineless>());
-
             if (hasFrost || hasCorrupted || hasSpineless)
-            {
                 modifiers.SourceDamage *= 1.15f;
-            }
         }
     }
 }

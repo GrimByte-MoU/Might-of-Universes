@@ -16,12 +16,12 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class AncientBoneScythe : ModItem, IHasSoulCost
     {
-        public float BaseSoulCost => 100f;
+        public float BaseSoulCost => 125f;
 
-        private const float PulseRadiusPx = 50f * 16f; // 30 tiles
-        private const int TarOnHitDuration = 120;       // 2 seconds
-        private const int PulseTarDuration = 300;       // 5 seconds
-        private const int PrimalSavageryDuration = 300; // 5 seconds
+        private const float PulseRadiusPx = 30f * 16f;
+        private const int TarOnHitDuration = 120;
+        private const int PulseTarDuration = 300;
+        private const int PrimalSavageryDuration = 300;
 
         public override void SetDefaults()
         {

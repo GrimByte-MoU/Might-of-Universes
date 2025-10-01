@@ -14,7 +14,7 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class MartianTally : ModItem, IHasSoulCost
     {
-        public float BaseSoulCost => 70f;
+        public float BaseSoulCost => 100f;
 
         public override void SetDefaults()
         {

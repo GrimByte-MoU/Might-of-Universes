@@ -13,7 +13,7 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class MidnightsReap : ModItem, IHasSoulCost
     {
-        public float BaseSoulCost => 50f;
+        public float BaseSoulCost => 55f;
 
         public override void SetDefaults()
         {

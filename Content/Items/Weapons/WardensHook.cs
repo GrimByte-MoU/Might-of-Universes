@@ -13,7 +13,7 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class WardensHook : ModItem, IHasSoulCost
     {
-        public float BaseSoulCost => 25f;
+        public float BaseSoulCost => 30f;
 
         public override void SetDefaults()
         {

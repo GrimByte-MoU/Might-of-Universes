@@ -14,7 +14,7 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class GreatBlizzard88 : ModItem, IHasSoulCost
     {
-        public float BaseSoulCost => 50f;
+        public float BaseSoulCost => 75f;
 
         public override void SetDefaults()
         {
@@ -35,34 +35,31 @@ namespace MightofUniverses.Content.Items.Weapons
         }
 
         public override void HoldItem(Player player)
-        {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
+{
+    var reaper = player.GetModPlayer<ReaperPlayer>();
 
-            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed && reaper.ConsumeSoulEnergy(SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost)))
-            {
-                IEntitySource src = player.GetSource_ItemUse(Item);
-                int damage = player.GetWeaponDamage(Item);
-                float kb = player.GetWeaponKnockback(Item);
+    if (ReaperPlayer.SoulReleaseKey != null &&
+        ReaperPlayer.SoulReleaseKey.JustPressed &&
+        reaper.ConsumeSoulEnergy(SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost)))
+    {
+        IEntitySource src = player.GetSource_ItemUse(Item);
+        int damage = player.GetWeaponDamage(Item);
+        float kb = player.GetWeaponKnockback(Item);
 
-                for (int i = 0; i < 25; i++)
-                {
-                    Vector2 snowPosition = new Vector2(
-                        player.Center.X + Main.rand.NextFloat(-400f, 400f),
-                        player.Center.Y - Main.rand.NextFloat(600f, 800f)
-                    );
-                    Vector2 snowVelocity = new Vector2(Main.rand.NextFloat(-2f, 2f), Main.rand.NextFloat(12f, 16f));
-                    Projectile.NewProjectile(
-                        src,
-                        snowPosition,
-                        snowVelocity,
-                        ModContent.ProjectileType<BlizzardSnowflakeProjectile>(),
-                        damage / 2,
-                        kb / 4f,
-                        player.whoAmI
-                    );
-                }
-            }
-        }
+        // Spawn one controller that rains snowflakes over 4 seconds.
+        Projectile.NewProjectile(
+            src,
+            player.Center,
+            Vector2.Zero,
+            ModContent.ProjectileType<BlizzardSnowController>(),
+            damage / 2,
+            kb / 4f,
+            player.whoAmI,
+            ai0: 75,
+            ai1: 240
+        );
+    }
+}
 
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {

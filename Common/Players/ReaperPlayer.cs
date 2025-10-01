@@ -10,8 +10,10 @@ namespace MightofUniverses.Common.Players
 {
     public class ReaperPlayer : ModPlayer
     {
+        private const float BaseMaxSoulEnergy = 100f;
+
         public float soulEnergy;
-        public float maxSoulEnergy = 100f;
+        public float maxSoulEnergy = BaseMaxSoulEnergy;
         public float soulGatherMultiplier = 1f;
         public bool hasReaperArmor;
         public float reaperDamageMultiplier = 1f;
@@ -21,18 +23,13 @@ namespace MightofUniverses.Common.Players
         public static ModKeybind SoulReleaseKey;
         public bool justConsumedSouls;
         public int TempleBuffTimer;
-        private const float BaseMaxSoulEnergy = 100f;
         public bool chillingPresence;
 
         public override void Load()
         {
             SoulReleaseKey = KeybindLoader.RegisterKeybind(Mod, "Release Soul Energy", "R");
         }
-
-        public override void Unload()
-        {
-            SoulReleaseKey = null;
-        }
+        public override void Unload() => SoulReleaseKey = null;
 
         public override void Initialize()
         {
@@ -50,6 +47,7 @@ namespace MightofUniverses.Common.Players
 
         public override void ResetEffects()
         {
+            // Reset; equipment logic will (later) rebuild maxSoulEnergy, but soul gains now use an immediate calc.
             maxSoulEnergy = BaseMaxSoulEnergy;
             soulGatherMultiplier = 1f;
             hasReaperArmor = false;
@@ -61,35 +59,105 @@ namespace MightofUniverses.Common.Players
                 TempleBuffTimer--;
         }
 
+        // --- NEW: Immediate set bonus scan (independent of tick order) ---
+        private float ComputeImmediateSetBonus()
+        {
+            // Armor indices: 0=head,1=body,2=legs
+            int head = Player.armor[0].type;
+            int body = Player.armor[1].type;
+            int legs = Player.armor[2].type;
+
+            float bonus = 0f;
+
+            bool Eclipse =
+                head == ModContent.ItemType<Content.Items.Armors.EclipseHood>() &&
+                body == ModContent.ItemType<Content.Items.Armors.EclipseChestplate>() &&
+                legs == ModContent.ItemType<Content.Items.Armors.EclipseLegwraps>();
+            if (Eclipse) bonus += 300f;
+
+            bool Lich =
+                head == ModContent.ItemType<Content.Items.Armors.LichMask>() &&
+                body == ModContent.ItemType<Content.Items.Armors.LichChestplate>() &&
+                legs == ModContent.ItemType<Content.Items.Armors.LichGreaves>();
+            if (Lich) bonus += 125f;
+
+            bool BoneCollector =
+                head == ModContent.ItemType<Content.Items.Armors.BoneCollectorHat>() &&
+                body == ModContent.ItemType<Content.Items.Armors.BoneCollectorShirt>() &&
+                legs == ModContent.ItemType<Content.Items.Armors.BoneCollectorPants>();
+            if (BoneCollector) bonus += 100f;
+
+            bool Gravetender =
+                head == ModContent.ItemType<Content.Items.Armors.GravetenderHat>() &&
+                body == ModContent.ItemType<Content.Items.Armors.GravetenderChestplate>() &&
+                legs == ModContent.ItemType<Content.Items.Armors.GravetenderShoes>();
+            if (Gravetender) bonus += 40f;
+
+            bool Mortician =
+                head == ModContent.ItemType<Content.Items.Armors.MorticianHat>() &&
+                body == ModContent.ItemType<Content.Items.Armors.MorticianChestplate>() &&
+                legs == ModContent.ItemType<Content.Items.Armors.MorticianGreaves>();
+            if (Mortician) bonus += 40f;
+
+            bool MurkyIce =
+                head == ModContent.ItemType<Content.Items.Armors.MurkyIceHelmet>() &&
+                body == ModContent.ItemType<Content.Items.Armors.MurkyIceChestplate>() &&
+                legs == ModContent.ItemType<Content.Items.Armors.MurkyIceBoots>();
+            if (MurkyIce) bonus += 60f;
+
+            bool YinYang =
+                head == ModContent.ItemType<Content.Items.Armors.YinYangHat>() &&
+                body == ModContent.ItemType<Content.Items.Armors.YinYangCloak>() &&
+                legs == ModContent.ItemType<Content.Items.Armors.YinYangShoes>();
+            if (YinYang) bonus += 125f;
+
+            bool Orcus =
+                head == ModContent.ItemType<Content.Items.Armors.MaskofOrcus>() &&
+                body == ModContent.ItemType<Content.Items.Armors.ChestplateofOrcus>() &&
+                legs == ModContent.ItemType<Content.Items.Armors.GreavesofOrcus>();
+            if (Orcus) bonus += 150f;
+
+            return bonus;
+        }
+
+        // Public helper if you need it elsewhere
+        public float GetEffectiveInstantMax()
+        {
+            float setBonus = ComputeImmediateSetBonus();
+            // Include whatever the current tick has already built into maxSoulEnergy (so we never go lower)
+            float baseline = Math.Max(maxSoulEnergy, BaseMaxSoulEnergy + setBonus);
+            return baseline;
+        }
+
+        private float GetClampMaxForGain()
+        {
+            // The immediate set-based max might exceed current maxSoulEnergy early in the tick.
+            float immediate = BaseMaxSoulEnergy + ComputeImmediateSetBonus();
+            return Math.Max(immediate, maxSoulEnergy);
+        }
+
         public void AddSoulEnergy(float amount, Vector2 sourcePosition)
         {
-            if (amount <= 0f)
-                return;
+            if (amount <= 0f) return;
 
-            float adjustedAmount = amount * soulGatherMultiplier;
+            float clampMax = GetClampMaxForGain();
+            float adjusted = amount * soulGatherMultiplier;
 
-            if (soulEnergy < maxSoulEnergy)
+            if (soulEnergy < clampMax)
             {
-                soulEnergy = MathHelper.Clamp(soulEnergy + adjustedAmount, 0f, maxSoulEnergy);
+                soulEnergy = MathHelper.Clamp(soulEnergy + adjusted, 0f, clampMax);
 
-                Vector2 dirToPlayer = Player.Center - sourcePosition;
-                float distance = dirToPlayer.Length();
-                if (distance > 0.01f)
+                Vector2 dir = Player.Center - sourcePosition;
+                float dist = dir.Length();
+                if (dist > 0.01f)
                 {
-                    dirToPlayer.Normalize();
+                    dir.Normalize();
                     for (int i = 0; i < 10; i++)
                     {
-                        Vector2 dustPosition = sourcePosition + dirToPlayer * distance * (i / 10f);
-                        Dust dust = Dust.NewDustPerfect(
-                            dustPosition,
-                            DustID.WhiteTorch,
-                            dirToPlayer * 5f,
-                            0,
-                            Color.White,
-                            1f
-                        );
-                        dust.noGravity = true;
-                        dust.fadeIn = 1.2f;
+                        Vector2 dustPos = sourcePosition + dir * dist * (i / 10f);
+                        var d = Dust.NewDustPerfect(dustPos, DustID.WhiteTorch, dir * 5f, 0, Color.White, 1f);
+                        d.noGravity = true;
+                        d.fadeIn = 1.2f;
                     }
                 }
             }
@@ -97,29 +165,22 @@ namespace MightofUniverses.Common.Players
 
         public void AddSoulEnergy(float amount)
         {
-            if (amount <= 0f)
-                return;
-
-            soulEnergy = MathHelper.Clamp(soulEnergy + amount * soulGatherMultiplier, 0f, maxSoulEnergy);
+            if (amount <= 0f) return;
+            float clampMax = GetClampMaxForGain();
+            soulEnergy = MathHelper.Clamp(soulEnergy + amount * soulGatherMultiplier, 0f, clampMax);
         }
 
         public bool AddSoulEnergyFromNPC(NPC npc, float amount)
         {
-            if (npc == null || amount <= 0f)
-                return false;
-
-            if (!IsValidSoulSourceNPC(npc))
-                return false;
-
+            if (npc == null || amount <= 0f) return false;
+            if (!IsValidSoulSourceNPC(npc)) return false;
             AddSoulEnergy(amount, npc.Center);
             return true;
         }
 
         public bool ConsumeSoulEnergy(float amount)
         {
-            if (amount <= 0f)
-                return true;
-
+            if (amount <= 0f) return true;
             if (soulEnergy >= amount)
             {
                 soulEnergy -= amount;
@@ -129,57 +190,66 @@ namespace MightofUniverses.Common.Players
             return false;
         }
 
-        public bool TryReleaseSouls(float cost, Action<Player> onSuccess, string releaseMessage = null)
+        public bool TryReleaseSouls(float cost, Action<Player> onSuccess, string msg = null)
         {
             if (SoulReleaseKey.JustPressed)
             {
                 if (ConsumeSoulEnergy(cost))
                 {
                     onSuccess?.Invoke(Player);
-                    Console.WriteLine($"Souls consumed: {cost}");
-                    Main.NewText(releaseMessage ?? $"{(int)cost} souls released!", Color.Green);
+                    Main.NewText(msg ?? $"{(int)cost} souls released!", Color.Green);
                     return true;
                 }
-                else
-                {
-                    Main.NewText("Not enough soul energy to activate!", Color.Red);
-                }
+                Main.NewText("Not enough soul energy to activate!", Color.Red);
             }
             return false;
         }
 
-        public float SoulEnergyPercent => maxSoulEnergy > 0f ? soulEnergy / maxSoulEnergy : 0f;
+        public float SoulEnergyPercent
+        {
+            get
+            {
+                float clampMax = GetClampMaxForGain();
+                return clampMax > 0f ? soulEnergy / clampMax : 0f;
+            }
+        }
 
         public void SetSoulEnergy(float value)
         {
-            soulEnergy = MathHelper.Clamp(value, 0f, maxSoulEnergy);
+            float clampMax = GetClampMaxForGain();
+            soulEnergy = MathHelper.Clamp(value, 0f, clampMax);
         }
 
         public float ConsumeAllSouls()
         {
-            float consumed = soulEnergy;
+            float taken = soulEnergy;
             soulEnergy = 0f;
-            justConsumedSouls = consumed > 0f;
-            return consumed;
+            justConsumedSouls = taken > 0f;
+            return taken;
         }
 
-        public void UpdateReaperDamageMultiplier(float amount)
+        public override void PostUpdate()
         {
-            reaperDamageMultiplier = MathHelper.Clamp(reaperDamageMultiplier + amount, 1f, 10f);
+            // After sets & accessories have fully modified maxSoulEnergy, bring it up to at least the immediate set value (UI consistency)
+            float setImmediate = BaseMaxSoulEnergy + ComputeImmediateSetBonus();
+            if (maxSoulEnergy < setImmediate)
+                maxSoulEnergy = setImmediate;
+
+            if (soulEnergy > maxSoulEnergy)
+                soulEnergy = maxSoulEnergy;
         }
 
-        public void UpdateReaperCritChance(float amount)
-        {
-            reaperCritChance = MathHelper.Clamp(reaperCritChance + amount, 0f, 100f);
-        }
+        public void UpdateReaperDamageMultiplier(float amt) =>
+            reaperDamageMultiplier = MathHelper.Clamp(reaperDamageMultiplier + amt, 1f, 10f);
+
+        public void UpdateReaperCritChance(float amt) =>
+            reaperCritChance = MathHelper.Clamp(reaperCritChance + amt, 0f, 100f);
 
         public bool IsValidSoulSourceNPC(NPC npc)
         {
             if (npc == null) return false;
             if (npc.type == NPCID.TargetDummy) return false;
-            if (npc.friendly) return false;
-            if (npc.townNPC) return false;
-            if (npc.dontTakeDamage) return false;
+            if (npc.friendly || npc.townNPC || npc.dontTakeDamage) return false;
             if (IsStatueSpawned(npc)) return false;
             return true;
         }
@@ -188,43 +258,33 @@ namespace MightofUniverses.Common.Players
         {
             if (npc == null) return false;
             Type t = npc.GetType();
+
             FieldInfo f = t.GetField("spawnedFromStatue", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
             if (f != null && f.FieldType == typeof(bool))
-            {
-                try
-                {
-                    return (bool)f.GetValue(npc);
-                }
-                catch { }
-            }
+                try { return (bool)f.GetValue(npc); } catch { }
+
             PropertyInfo p = t.GetProperty("spawnedFromStatue", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
             if (p != null && p.PropertyType == typeof(bool))
-            {
-                try
-                {
-                    return (bool)p.GetValue(npc);
-                }
-                catch { }
-            }
+                try { return (bool)p.GetValue(npc); } catch { }
+
             p = t.GetProperty("SpawnedFromStatue", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
             if (p != null && p.PropertyType == typeof(bool))
-            {
-                try
-                {
-                    return (bool)p.GetValue(npc);
-                }
-                catch { }
-            }
+                try { return (bool)p.GetValue(npc); } catch { }
+
             f = t.GetField("SpawnedFromStatue", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
             if (f != null && f.FieldType == typeof(bool))
-            {
-                try
-                {
-                    return (bool)f.GetValue(npc);
-                }
-                catch { }
-            }
+                try { return (bool)f.GetValue(npc); } catch { }
+
             return false;
+        }
+        public enum SoulReleaseResult
+
+        {
+
+            Success,
+
+            Failure
+
         }
     }
 }

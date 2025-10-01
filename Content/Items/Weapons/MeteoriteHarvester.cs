@@ -13,7 +13,7 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class MeteoriteHarvester : ModItem, IHasSoulCost
     {
-        public float BaseSoulCost => 40f;
+        public float BaseSoulCost => 45f;
 
         public override void SetDefaults()
         {

@@ -80,10 +80,13 @@ namespace MightofUniverses.Content.Items.Weapons
         }
 
         // Normal shooting – no release logic here anymore
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-        {
-            return true;
-        }
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position,
+        Vector2 velocity, int type, int damage, float knockback)
+{
+    position.Y -= 6f;
+    Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
+    return false; // prevent double spawn
+}
 
         public override void AddRecipes()
         {

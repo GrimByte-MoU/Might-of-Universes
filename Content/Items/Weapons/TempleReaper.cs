@@ -14,7 +14,7 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class TempleReaper : ModItem, IHasSoulCost
     {
-        public float BaseSoulCost => 175f;
+        public float BaseSoulCost => 200f;
 
         public override void SetDefaults()
         {
