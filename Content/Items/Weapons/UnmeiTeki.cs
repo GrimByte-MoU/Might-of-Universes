@@ -52,7 +52,7 @@ namespace MightofUniverses.Content.Items.Weapons
             }
 
             // long-range bloom
-            if (Main.GameUpdateCount % 15 == 0) // ~4 per second
+            if (Main.GameUpdateCount % 15 == 0)
             {
                 Projectile.NewProjectile(source, position, velocity * 1.5f,
                     ModContent.ProjectileType<UnmeiBloom>(), (int)(damage * 2.0f), knockback, player.whoAmI);

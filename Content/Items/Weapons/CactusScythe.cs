@@ -27,7 +27,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.knockBack = 4f;
             Item.value = Item.sellPrice(copper: 50);
             Item.rare = ItemRarityID.Blue;
-            Item.UseSound = SoundID.Item1;
+            Item.UseSound = SoundID.Item71;
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<CactusThorn>();
             Item.shootSpeed = 8f;

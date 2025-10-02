@@ -3252,9 +3252,9 @@ Items: {
 			where shadows gather what light once held."
 			Gathers 10 souls per hit and fires out one or two petals at random
 			Each petal gathers 5 souls on hit and travel in a wavy pattern
-			Consume 125 souls to spawn a Sakura Bloom on your cursor which damage an enemy for 300% damage
-			When making contact with an enemy, the bloom will explode into a radial burst of 32 Sakura Petals
-			The Sakura Petals deal 150% damage and don't pierce
+			Consume {0} souls to spawn a Sakura Bloom on your cursor which damage an enemy for 400% damage
+			When making contact with an enemy, the bloom will explode into a radial burst of 40 Sakura Petals
+			The Sakura Petals deal 66% damage of the bloom and don't pierce
 			'''
 	}
 
@@ -3954,6 +3954,99 @@ Items: {
 			+1% damage reduction
 			+10 max life
 			'''
+	}
+
+	ChlorotaniumChestplate: {
+		DisplayName: Chlorotanium Chestplate
+		Tooltip:
+			'''
+			+5% Reaper damage and critical strike chance
+			+30 armor penetration for enemies with Cursed Inferno
+			+10 max life
+			'''
+	}
+
+	ChlorotaniumGreaves: {
+		DisplayName: Chlorotanium Greaves
+		Tooltip:
+			'''
+			+5% Reaper damage and critical strike chance
+			+13% movement speed
+			+10 max life
+			'''
+	}
+
+	ChlorotaniumMaskedHelmet: {
+		DisplayName: Chlorotanium Masked Helmet
+		Tooltip:
+			'''
+			+5% Reaper damage and critical strike chance
+			Soul consumption abilities cost 10% less to activate
+			'''
+	}
+
+	MechaCactusBreastplate: {
+		DisplayName: Mecha Cactus Breastplate
+		Tooltip:
+			'''
+			+5% Reaper damage and critical strike chance
+			+15 max life
+			+2% damage reduction
+			'''
+	}
+
+	MechaCactusHelmet: {
+		DisplayName: Mecha Cactus Helmet
+		Tooltip:
+			'''
+			+4% Reaper damage and critical strike chance
+			+10 max life
+			+1% damage reduction
+			'''
+	}
+
+	MechaCactusLeggings: {
+		DisplayName: Mecha Cactus Leggings
+		Tooltip:
+			'''
+			+3% Reaper damage and critical strike chance
+			+10% movement speed
+			+10 max life
+			'''
+	}
+
+	EctoplasmicContraption: {
+		DisplayName: Ectoplasmic Contraption
+		Tooltip: 
+		'''
+		+200 max souls
+		Soul consumption abilities cost 10% less to activate
+		'''
+	}
+
+	OverloadedSoulPack: {
+		DisplayName: Overloaded Soul Pack
+		Tooltip: 
+		'''
+		+150 max souls
+		Soul consumption abilities cost 5% less to activate
+		'''
+	}
+
+	SoulBattery: {
+		DisplayName: Soul Battery
+		Tooltip: 
+		'''
+		+50 max souls
+		'''
+	}
+
+	SoulCapacitor: {
+		DisplayName: Soul Capacitor
+		Tooltip: 
+		'''
+		+100 max souls
+		'''
 	}
 }
 

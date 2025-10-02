@@ -16,7 +16,7 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class Ketsumatsu : ModItem, IHasSoulCost
     {
-        public float BaseSoulCost => 165f;
+        public float BaseSoulCost => 200f;
 
         public override void SetDefaults()
         {
@@ -51,7 +51,7 @@ namespace MightofUniverses.Content.Items.Weapons
                     cursorPos,
                     Vector2.Zero,
                     ModContent.ProjectileType<KetsumatsuBloom>(),
-                    (int)(damage * 3f),
+                    (int)(damage * 4f),
                     kb,
                     player.whoAmI
                 );

@@ -112,7 +112,7 @@ namespace MightofUniverses.Common.UI
             {
                 if (!playedMaxSound)
                 {
-                    SoundEngine.PlaySound(SoundID.Item4 with { Volume = 0.8f }, player.Center);
+                    SoundEngine.PlaySound(SoundID.NPCDeath54 with { Volume = 0.8f }, player.Center);
                     playedMaxSound = true;
                 }
             }

@@ -26,7 +26,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.knockBack = 5f;
             Item.value = Item.sellPrice(silver: 6);
             Item.rare = ItemRarityID.Blue;
-            Item.UseSound = SoundID.Item1;
+            Item.UseSound = SoundID.Item71;
             Item.autoReuse = true;
         }
 

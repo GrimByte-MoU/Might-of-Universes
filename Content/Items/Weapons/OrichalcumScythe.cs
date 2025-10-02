@@ -27,7 +27,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.knockBack = 4f;
             Item.value = Item.sellPrice(gold: 1, silver: 50);
             Item.rare = ItemRarityID.LightRed;
-            Item.UseSound = SoundID.Item1;
+            Item.UseSound = SoundID.Item71;
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<OrichalcumScytheProjectile>();
             Item.shootSpeed = 10f;

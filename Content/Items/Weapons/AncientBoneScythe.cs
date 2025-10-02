@@ -36,7 +36,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.useTime = 10;
             Item.useAnimation = 10;
             Item.autoReuse = true;
-            Item.UseSound = SoundID.Item1;
+            Item.UseSound = SoundID.Item71;
 
             Item.rare = ItemRarityID.Yellow;
             Item.value = Item.sellPrice(gold: 10);

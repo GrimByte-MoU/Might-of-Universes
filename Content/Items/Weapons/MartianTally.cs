@@ -28,7 +28,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.knockBack = 5f;
             Item.value = Item.sellPrice(gold: 15);
             Item.rare = ItemRarityID.Yellow;
-            Item.UseSound = SoundID.Item1;
+            Item.UseSound = SoundID.Item71;
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<MartianTallyBolt>();
             Item.shootSpeed = 14f;

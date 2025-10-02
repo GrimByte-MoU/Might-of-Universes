@@ -36,15 +36,15 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.localAI[0] = 1f;
 
             // Radial burst of 32 sakura petals
-            for (int i = 0; i < 32; i++)
+            for (int i = 0; i < 40; i++)
             {
-                Vector2 velocity = Vector2.UnitX.RotatedBy(MathHelper.TwoPi * i / 32f) * 8f;
+                Vector2 velocity = Vector2.UnitX.RotatedBy(MathHelper.TwoPi * i / 40f) * 8f;
                 Projectile.NewProjectile(
                     Projectile.GetSource_Death(),
                     Projectile.Center,
                     velocity,
                     ModContent.ProjectileType<KetsumatsuBloomPetal>(),
-                    (int)(Projectile.damage * 1.5f), // 150% damage
+                    (int)(Projectile.damage * 0.66f),
                     Projectile.knockBack,
                     Projectile.owner
                 );

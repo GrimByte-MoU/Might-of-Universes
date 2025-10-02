@@ -27,7 +27,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.knockBack = 6f;
             Item.value = Item.sellPrice(gold: 2);
             Item.rare = ItemRarityID.Orange;
-            Item.UseSound = SoundID.Item1;
+            Item.UseSound = SoundID.Item71;
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<MidnightWaveProjectile>();
             Item.shootSpeed = 16f;

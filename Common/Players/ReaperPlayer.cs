@@ -117,6 +117,18 @@ namespace MightofUniverses.Common.Players
                 legs == ModContent.ItemType<Content.Items.Armors.GreavesofOrcus>();
             if (Orcus) bonus += 150f;
 
+            bool MechaCactus =
+                head == ModContent.ItemType<Content.Items.Armors.MechaCactusHelmet>() &&
+                body == ModContent.ItemType<Content.Items.Armors.MechaCactusBreastplate>() &&
+                legs == ModContent.ItemType<Content.Items.Armors.MechaCactusLeggings>();
+            if (MechaCactus) bonus += 150f;
+
+            bool Chlorotanium =
+    head == ModContent.ItemType<Content.Items.Armors.ChlorotaniumMaskedHelmet>() &&
+    body == ModContent.ItemType<Content.Items.Armors.ChlorotaniumChestplate>() &&
+    legs == ModContent.ItemType<Content.Items.Armors.ChlorotaniumGreaves>();
+if (Chlorotanium) bonus += 200f;
+
             return bonus;
         }
 

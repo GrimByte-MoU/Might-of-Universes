@@ -30,7 +30,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.knockBack = 4f;
             Item.value = Item.sellPrice(silver: 75);
             Item.rare = ItemRarityID.Lime;
-            Item.UseSound = SoundID.Item1;
+            Item.UseSound = SoundID.Item71;
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<GlitchScytheProjectile>();
             Item.shootSpeed = 10f;

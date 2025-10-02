@@ -28,7 +28,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.knockBack = 5f;
             Item.value = Item.sellPrice(gold: 5);
             Item.rare = ItemRarityID.Lime;
-            Item.UseSound = SoundID.Item1;
+            Item.UseSound = SoundID.Item71;
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<SnowflakeProjectile>();
             Item.shootSpeed = 14f;
