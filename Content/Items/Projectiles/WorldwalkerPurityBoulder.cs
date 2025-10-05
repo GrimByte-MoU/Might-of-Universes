@@ -17,6 +17,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.penetrate = 6; // 5 pierce + 1 for final hit
             Projectile.tileCollide = true;
             Projectile.ignoreWater = true;
+            Projectile.timeLeft = 600;
         }
 
         public override void AI()

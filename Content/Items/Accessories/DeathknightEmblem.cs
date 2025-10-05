@@ -26,7 +26,7 @@ namespace MightofUniverses.Content.Items.Accessories
             // Increase Reaper and Melee damage
             player.GetDamage(DamageClass.Melee) += 0.12f;
             var reaperPlayer = player.GetModPlayer<ReaperPlayer>();
-            reaperPlayer.reaperDamageMultiplier *= 1.12f;
+            reaperPlayer.reaperDamageMultiplier += 1.12f;
 
             // Increase Reaper and Melee crit chance
             player.GetCritChance(DamageClass.Melee) += 10;

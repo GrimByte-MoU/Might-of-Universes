@@ -18,16 +18,9 @@ namespace MightofUniverses.Content.Items.Accessories
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            // Get the ReaperPlayer instance for this player
             var reaperPlayer = player.GetModPlayer<ReaperPlayer>();
-
-            // Increase Reaper damage by 15%
             reaperPlayer.reaperDamageMultiplier += 0.15f;
-
-            // Increase Reaper critical strike chance by 10%
             reaperPlayer.reaperCritChance += 10;
-
-            // Enable soul energy healing effect
             player.GetModPlayer<LunaticBannerPlayer>().hasLunaticBanner = true;
         }
 

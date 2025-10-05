@@ -16,14 +16,16 @@ namespace MightofUniverses.Content.Items.Armors
             Item.height = 18;
             Item.value = Item.sellPrice(gold: 1);
             Item.rare = ItemRarityID.Lime;
-            Item.defense = 15;
+            Item.defense = 20;
         }
 
         public override void UpdateEquip(Player player)
         {
             ReaperPlayer reaperPlayer = player.GetModPlayer<ReaperPlayer>();
-            reaperPlayer.reaperDamageMultiplier += 0.10f;
-            player.GetAttackSpeed(DamageClass.Generic) += 0.10f;
+            reaperPlayer.reaperDamageMultiplier += 0.08f;
+            player.GetAttackSpeed(DamageClass.Generic) += 0.08f;
+            player.GetCritChance(ModContent.GetInstance<ReaperDamageClass>()) += 6f;
+            player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(2f / 60f);
         }
 
         public override void AddRecipes()
@@ -31,6 +33,7 @@ namespace MightofUniverses.Content.Items.Armors
             CreateRecipe()
                 .AddIngredient(ModContent.ItemType<SolunarBreastplate>())
                 .AddIngredient(ModContent.ItemType<EclipseLight>(), 20)
+                .AddIngredient(ItemID.Ectoplasm, 25)
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
         }

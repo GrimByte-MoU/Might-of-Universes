@@ -70,7 +70,7 @@ namespace MightofUniverses.Content.Items.Accessories
                     // Server or singleplayer authoritative
                     if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        reaper.AddSoulEnergy(0.2f, Player.Center);
+                        reaper.AddSoulEnergy(1f, Player.Center);
                     }
                 }
             }

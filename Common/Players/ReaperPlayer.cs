@@ -127,7 +127,31 @@ namespace MightofUniverses.Common.Players
     head == ModContent.ItemType<Content.Items.Armors.ChlorotaniumMaskedHelmet>() &&
     body == ModContent.ItemType<Content.Items.Armors.ChlorotaniumChestplate>() &&
     legs == ModContent.ItemType<Content.Items.Armors.ChlorotaniumGreaves>();
-if (Chlorotanium) bonus += 200f;
+            if (Chlorotanium) bonus += 200f;
+
+bool FoundryRevenant =
+    head == ModContent.ItemType<Content.Items.Armors.FoundryRevenantVisage>() &&
+    body == ModContent.ItemType<Content.Items.Armors.FoundryRevenantBoilerplate>() &&
+    legs == ModContent.ItemType<Content.Items.Armors.FoundryRevenantTreads>();
+            if (FoundryRevenant) bonus += 250f;
+
+bool HolidayButcher =
+    head == ModContent.ItemType<Content.Items.Armors.HolidayButcherHat>() &&
+    body == ModContent.ItemType<Content.Items.Armors.HolidayButcherChestplate>() &&
+    legs == ModContent.ItemType<Content.Items.Armors.HolidayButcherGreaves>();
+            if (HolidayButcher) bonus += 300f;
+
+bool PrimalSavagery =
+    head == ModContent.ItemType<Content.Items.Armors.PrimalSavageryMask>() &&
+    body == ModContent.ItemType<Content.Items.Armors.PrimalSavageryChestplate>() &&
+    legs == ModContent.ItemType<Content.Items.Armors.PrimalSavageryBoots>();
+if (PrimalSavagery) bonus += 350f;
+
+bool TempleReaver =
+    head == ModContent.ItemType<Content.Items.Armors.TempleReaverMask>() &&
+    body == ModContent.ItemType<Content.Items.Armors.TempleReaverPlate>() &&
+    legs == ModContent.ItemType<Content.Items.Armors.TempleReaverBoots>();
+if (TempleReaver) bonus += 350f;
 
             return bonus;
         }

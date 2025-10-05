@@ -12,12 +12,6 @@ namespace MightofUniverses.Content.Items.Armors
     [AutoloadEquip(EquipType.Head)]
     public class EclipseHood : ModItem
     {
-        public static readonly float SoulGatherBonus = 1f;
-        public static readonly float ReaperDamageBonus = 0.10f;
-        public static readonly float AttackSpeedBonus = 0.10f;
-        public static readonly float SetBonusReaperDamage = 0.15f;
-        public static readonly float SoulConsumeAttackSpeed = 0.30f;
-        public static readonly float SoulConsumeReaperDamage = 0.20f;
         public static LocalizedText SetBonusText { get; private set; }
 
         public override void SetStaticDefaults()
@@ -38,9 +32,14 @@ namespace MightofUniverses.Content.Items.Armors
         public override void UpdateEquip(Player player)
         {
             var reaperPlayer = player.GetModPlayer<ReaperPlayer>();
-            reaperPlayer.soulGatherMultiplier += SoulGatherBonus;
-            reaperPlayer.reaperDamageMultiplier += ReaperDamageBonus;
-            player.GetAttackSpeed(DamageClass.Generic) += AttackSpeedBonus;
+            reaperPlayer.reaperDamageMultiplier += 0.08f;
+            player.GetAttackSpeed(DamageClass.Generic) += 0.08f;
+            player.GetCritChance(ModContent.GetInstance<ReaperDamageClass>()) += 6f;
+
+            var acc = player.GetModPlayer<ReaperAccessoryPlayer>();
+            if (acc.SoulCostMultiplier == 0f)
+                acc.SoulCostMultiplier = 1f;
+            acc.SoulCostMultiplier *= 0.9f;
         }
 
         public override bool IsArmorSet(Item head, Item body, Item legs)
@@ -55,19 +54,15 @@ namespace MightofUniverses.Content.Items.Armors
             player.setBonus = SetBonusText.Value;
 
             reaperPlayer.hasReaperArmor = true;
-            reaperPlayer.reaperDamageMultiplier += SetBonusReaperDamage;
-
-            // Change this line:
-            // reaperPlayer.maxSoulEnergy = 400f;
-            // To additive, so base 100 -> 400 and accessories still stack:
+            reaperPlayer.reaperDamageMultiplier += 0.15f;
             reaperPlayer.maxSoulEnergy += 300f;
 
             SpawnEclipses(player);
 
             if (reaperPlayer.justConsumedSouls)
             {
-                player.GetAttackSpeed(DamageClass.Generic) += SoulConsumeAttackSpeed;
-                reaperPlayer.reaperDamageMultiplier += SoulConsumeReaperDamage;
+                player.GetAttackSpeed(DamageClass.Generic) += 0.30f;
+                reaperPlayer.reaperDamageMultiplier += 0.20f;
             }
         }
 
@@ -108,6 +103,7 @@ namespace MightofUniverses.Content.Items.Armors
             CreateRecipe()
                 .AddIngredient(ModContent.ItemType<SolunarHelmet>())
                 .AddIngredient(ModContent.ItemType<EclipseLight>(), 15)
+                .AddIngredient(ItemID.Ectoplasm, 10)
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
         }

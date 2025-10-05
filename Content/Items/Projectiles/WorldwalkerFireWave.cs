@@ -15,8 +15,8 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.height = 28;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Melee;
-            Projectile.penetrate = -1; // Infinite until time runs out
-            Projectile.timeLeft = 60; // 1 second lifetime
+            Projectile.penetrate = -1;
+            Projectile.timeLeft = 180;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
             Projectile.extraUpdates = 1;
@@ -27,6 +27,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             // Constant forward velocity
             if (Projectile.velocity.Length() < 8f)
                 Projectile.velocity = Vector2.Normalize(Projectile.velocity) * 8f;
+            Projectile.gfxOffY = -32f;
 
             // Light & dust effect
             Lighting.AddLight(Projectile.Center, 1f, 0.4f, 0.1f);
@@ -35,6 +36,7 @@ namespace MightofUniverses.Content.Items.Projectiles
                 int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, Projectile.velocity.X * 0.3f, Projectile.velocity.Y * 0.3f, 150, default, 1.2f);
                 Main.dust[dust].noGravity = true;
             }
+            Projectile.rotation = Projectile.velocity.ToRotation();
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

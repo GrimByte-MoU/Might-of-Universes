@@ -27,7 +27,7 @@ namespace MightofUniverses.Content.Items.Accessories
             // Increase Reaper and Ranged damage
             player.GetDamage(DamageClass.Ranged) += 0.12f;
             var reaperPlayer = player.GetModPlayer<ReaperPlayer>();
-            reaperPlayer.reaperDamageMultiplier *= 1.12f;
+            reaperPlayer.reaperDamageMultiplier += 0.12f;
 
             // Increase Reaper and Ranged crit chance
             player.GetCritChance(DamageClass.Ranged) += 10;

@@ -391,6 +391,25 @@ Buffs: {
 		DisplayName: Yin Buff
 		Description: +15% movement and +10 hp/sec regen
 	}
+
+	HolidayScream: {
+		DisplayName: Holiday Scream
+		Description:
+			'''
+			"Scream for the holidays!"
+			+12% damage reduction, +25% bonus health healed when healing
+			All positive life regen is increased by 20%
+			'''
+	}
+
+	Savage: {
+		DisplayName: Savage
+		Description:
+			'''
+			"Primal might urges you to savagely beat everything infront of you!"
+			+30 armor penetration
+			'''
+	}
 }
 
 Projectiles: {
@@ -1694,14 +1713,20 @@ Items: {
 		DisplayName: Eclipse Hood
 		Tooltip:
 			'''
-			+4 souls gathered per strike
-			+10% Reaper damage and attack speed
+			+8% Reaper damage and attack speed
+			+6% Reaper critical strike chance
+			Soul consumption abilities cost 10% less to activate
 			'''
 	}
 
 	EclipseChestplate: {
 		DisplayName: Eclipse Chestplate
-		Tooltip: +10% Reaper damage and attack speed
+		Tooltip:
+			'''
+			+8% Reaper damage and attack speed
+			+6% Reaper critical strike chance
+			+20% movement speed
+			'''
 	}
 
 	EclipseLegwraps: {
@@ -1709,7 +1734,8 @@ Items: {
 		Tooltip:
 			'''
 			+20% movement speed
-			+10% Reaper damage and attack speed
+			+8% Reaper damage and attack speed
+			+6% Reaper critical strike chance
 			'''
 	}
 
@@ -3217,8 +3243,17 @@ Items: {
 		DisplayName: Worldwalker Sword
 		Tooltip:
 			'''
-			An ancient blade that seems to draw power from the environment
-			Fires various projectiles depending on which biome your in
+			An ancient blade that is capable of channeling the biomes
+			Right click to cycle through the following powers of the biomes within this blade:
+			Evil Spear: Fires a fast moving spear that inflicts Cursed Inferno and Ichor for 5 seconds. 
+			The spear pierces four enemies.
+			Chilly Blade: Fires a Chilly sword that explodes into fragments that causes fragments to rain down.
+			Both the chilly sword and the fragments inflict Frostburn for 5 seconds.
+			         Jungle Swarm: Fires a spread of 5-7 poisonous stingers that decelerate. The stingers inflict Poison and Acid Venom for 5 seconds.
+			         Infernal Wave: Fires a wave of fire that inflicts Demonfire and Hellfire for 5 seconds.
+			The wave pierces infinitely but does 10% less damage to each enemy hit after the first
+			         Forest's Fist: Fires a piercing and bouncing boulder that ignores 30% defense.
+			The boulder can bounce up to 3 times and pierces 5 enemies.
 			'''
 	}
 
@@ -4017,36 +4052,154 @@ Items: {
 
 	EctoplasmicContraption: {
 		DisplayName: Ectoplasmic Contraption
-		Tooltip: 
-		'''
-		+200 max souls
-		Soul consumption abilities cost 10% less to activate
-		'''
+		Tooltip:
+			'''
+			+200 max souls
+			Soul consumption abilities cost 10% less to activate
+			'''
 	}
 
 	OverloadedSoulPack: {
 		DisplayName: Overloaded Soul Pack
-		Tooltip: 
-		'''
-		+150 max souls
-		Soul consumption abilities cost 5% less to activate
-		'''
+		Tooltip:
+			'''
+			+150 max souls
+			Soul consumption abilities cost 5% less to activate
+			'''
 	}
 
 	SoulBattery: {
 		DisplayName: Soul Battery
-		Tooltip: 
-		'''
-		+50 max souls
-		'''
+		Tooltip: +50 max souls
 	}
 
 	SoulCapacitor: {
 		DisplayName: Soul Capacitor
-		Tooltip: 
-		'''
-		+100 max souls
-		'''
+		Tooltip: +100 max souls
+	}
+
+	FoundryRevenantBoilerplate: {
+		DisplayName: Foundry Revenant Boilerplate
+		Tooltip:
+			'''
+			+5% Reaper damage and critical strike chance
+			See all traps and enemies
+			'''
+	}
+
+	FoundryRevenantTreads: {
+		DisplayName: Foundry Revenant Treads
+		Tooltip:
+			'''
+			+5% Reaper damage and critical strike chance
+			Soul consumption abilities cost 10% less to activate
+			+25 max life
+			'''
+	}
+
+	FoundryRevenantVisage: {
+		DisplayName: Foundry Revenant Visage
+		Tooltip:
+			'''
+			+5% Reaper damage and critical strike chance
+			+15% movement speed
+			'''
+	}
+
+	HolidayButcherChestplate: {
+		DisplayName: Holiday Butcher Chestplate
+		Tooltip:
+			'''
+			+6% Reaper damage and critical strike chance
+			+50 max life
+			+4% damage reduction
+			'''
+	}
+
+	HolidayButcherGreaves: {
+		DisplayName: Holiday Butcher Greaves
+		Tooltip:
+			'''
+			+6% Reaper damage and critical strike chance
+			+15% movement speed
+			+3% damage reduction
+			'''
+	}
+
+	HolidayButcherHat: {
+		DisplayName: Holiday Butcher Hat
+		Tooltip:
+			'''
+			+6% Reaper damage and critical strike chance
+			Soul consumption abilities cost 5% less to activate
+			+3% damage reduction
+			'''
+	}
+
+	PrimalSavageryBoots: {
+		DisplayName: Primal Savagery Boots
+		Tooltip:
+			'''
+			+8% Reaper damage 
+			+7% critical strike chance
+			+15 armor penetration against Tarred or Oiled enemies
+			+20% movement speed
+			'''
+	}
+
+	PrimalSavageryChestplate: {
+		DisplayName: Primal Savagery Chestplate
+		Tooltip:
+			'''
+			+8% Reaper damage 
+			+7% critical strike chance
+			+15 armor penetration against Tarred or Oiled enemies
+			+4 souls generated per second
+			'''
+	}
+
+	PrimalSavageryMask: {
+		DisplayName: Primal Savagery Mask
+		Tooltip:
+			'''
+			+8% Reaper damage 
+			+7% critical strike chance
+			+15 armor penetration against Tarred or Oiled enemies
+			Soul consumption abilities cost 10% less to activate
+			'''
+	}
+
+	TempleReaverBoots: {
+		DisplayName: Temple Reaver Boots
+		Tooltip:
+			'''
+			+6% Reaper damage and critical strike chance
+			+15 max life
+			+4% damage reduction
+			+16% movement speed
+			'''
+	}
+
+	TempleReaverMask: {
+		DisplayName: Temple Reaver Mask
+		Tooltip:
+			'''
+			+6% Reaper damage and critical strike chance
+			+15 max life
+			+4% damage reduction
+			Soul consumption abilities cost 10% less to activate
+			'''
+	}
+
+	TempleReaverPlate: {
+		DisplayName: Temple Reaver Plate
+		Tooltip:
+			'''
+			+7% Reaper damage and critical strike chance
+			+20 max life
+			+4% damage reduction
+			+3 souls generated per second
+			'''
 	}
 }
 

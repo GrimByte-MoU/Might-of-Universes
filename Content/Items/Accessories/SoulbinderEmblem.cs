@@ -29,7 +29,7 @@ namespace MightofUniverses.Content.Items.Accessories
             // Increase Reaper and Magic damage
             player.GetDamage(DamageClass.Magic) += 0.12f;
             var reaperPlayer = player.GetModPlayer<ReaperPlayer>();
-            reaperPlayer.reaperDamageMultiplier *= 1.12f;
+            reaperPlayer.reaperDamageMultiplier += 1.12f;
 
             // Increase Reaper and Magic crit chance
             player.GetCritChance(DamageClass.Magic) += 10;

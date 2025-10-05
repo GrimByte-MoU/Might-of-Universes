@@ -25,7 +25,8 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height,
-                Main.rand.NextBool() ? DustID.CursedTorch : DustID.IchorTorch, Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f);
+            Main.rand.NextBool() ? DustID.CursedTorch : DustID.IchorTorch, Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f);
+            Projectile.gfxOffY = -16f;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

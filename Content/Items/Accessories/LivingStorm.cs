@@ -22,6 +22,7 @@ namespace MightofUniverses.Content.Items.Accessories
             Item.value = Item.sellPrice(silver: 75);
             Item.rare = ItemRarityID.Blue;
             Item.accessory = true;
+            Item.DamageType = ModContent.GetInstance<ReaperDamageClass>();
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)

@@ -13,7 +13,7 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class TitaniumScythe : ModItem, IHasSoulCost
     {
-        public float BaseSoulCost => 75f;
+        public float BaseSoulCost => 130f;
 
         public override void SetDefaults()
         {

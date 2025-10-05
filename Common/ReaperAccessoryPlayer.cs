@@ -17,6 +17,13 @@ namespace MightofUniverses.Common.Players
         public int   SoulCostFlatReduction;
         public const float MinEffectiveCostMultiplier = 0.10f;
 
+        // NEW: Empowerment-specific cost multiplier (applies only to abilities that grant Soul Empowerment)
+        public float EmpowerCostMultiplier;
+
+        // NEW: Empowerment duration scaling and flat bonus (ticks)
+        public float EmpowerDurationMultiplier;
+        public int   EmpowerExtraDurationTicks;
+
         // =========================
         // Refund Mechanics
         // =========================
@@ -110,6 +117,11 @@ namespace MightofUniverses.Common.Players
             RefundFraction             = 0f;
             GuaranteedSoulRefund       = 0;
             RefundAtLeastOne           = true;
+
+            // NEW (Empowerment-specific)
+            EmpowerCostMultiplier      = 1f;
+            EmpowerDurationMultiplier  = 1f;
+            EmpowerExtraDurationTicks  = 0;
 
             // Ferryman
             HasFerrymansToken          = false;

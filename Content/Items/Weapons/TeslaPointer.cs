@@ -3,8 +3,8 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
-using MightofUniverses.Content.Items.Materials;
 using MightofUniverses.Content.Items.Projectiles;
+using MightofUniverses.Content.Items.Materials;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
@@ -16,8 +16,8 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.height = 40;
             Item.damage = 85;
             Item.DamageType = DamageClass.Melee;
-            Item.useTime = 24;
-            Item.useAnimation = 24;
+            Item.useTime = 18;
+            Item.useAnimation = 18;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 4f;
             Item.value = Item.sellPrice(gold: 5);
@@ -28,23 +28,42 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shootSpeed = 16f;
         }
 
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-{
-    // Shoot two projectiles that curve outward and back in
-    float spreadAngle = MathHelper.ToRadians(15);
-    
-    Vector2 velocity1 = velocity.RotatedBy(-spreadAngle);
-    Vector2 velocity2 = velocity.RotatedBy(spreadAngle);
-    
-    Projectile.NewProjectile(source, position, velocity1, type, damage, knockback, player.whoAmI, ai1: 1);
-    Projectile.NewProjectile(source, position, velocity2, type, damage, knockback, player.whoAmI, ai1: -1);
-    
-    return false;
-}
-
-        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source,
+            Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            target.AddBuff(BuffID.Electrified, 300);
+            // Small forward offset so it never spawns “inside” player & immediately collides.
+            position += velocity.SafeNormalize(Vector2.UnitX) * 12f;
+
+            float amplitude = 70f; // peak lateral offset in pixels (tweak)
+            float travelTime = 36f; // ticks; matches projectile timeLeft
+
+            // Left arc
+            Projectile.NewProjectile(
+                source,
+                position,
+                velocity,
+                type,
+                damage,
+                knockback,
+                player.whoAmI,
+                ai0: amplitude,
+                ai1: 1f,   // direction +1
+                ai2: travelTime
+            );
+            // Right arc
+            Projectile.NewProjectile(
+                source,
+                position,
+                velocity,
+                type,
+                damage,
+                knockback,
+                player.whoAmI,
+                ai0: amplitude,
+                ai1: -1f,  // direction -1
+                ai2: travelTime
+            );
+            return false; // we handled spawning both
         }
 
         public override void AddRecipes()
@@ -57,6 +76,10 @@ namespace MightofUniverses.Content.Items.Weapons
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
         }
+
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            target.AddBuff(BuffID.Electrified, 300);
+        }
     }
 }
-

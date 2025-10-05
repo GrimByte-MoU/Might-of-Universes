@@ -130,6 +130,14 @@ namespace MightofUniverses.Common.Players
             var state = player.GetModPlayer<ReaperEmpowermentState>();
             var vals = new ReaperEmpowermentValues();
             configure?.Invoke(vals);
+
+            // NEW: apply gear-driven empowerment duration modifiers
+            var acc = player.GetModPlayer<ReaperAccessoryPlayer>();
+            if (acc.EmpowerDurationMultiplier > 1f)
+                durationTicks = (int)(durationTicks * acc.EmpowerDurationMultiplier);
+            if (acc.EmpowerExtraDurationTicks > 0)
+                durationTicks += acc.EmpowerExtraDurationTicks;
+
             state.Values = vals;
             player.AddBuff(ModContent.BuffType<SoulEmpowerment>(), durationTicks);
         }

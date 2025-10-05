@@ -14,6 +14,7 @@ namespace MightofUniverses.Content.Items.Accessories
             Item.accessory = true;
             Item.rare = ItemRarityID.LightRed;
             Item.value = Item.sellPrice(gold: 5);
+            Item.DamageType = ModContent.GetInstance<PacifistDamageClass>();
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)

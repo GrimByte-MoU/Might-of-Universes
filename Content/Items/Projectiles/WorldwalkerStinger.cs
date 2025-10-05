@@ -17,13 +17,15 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.penetrate = 1;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = true;
-            Projectile.timeLeft = 60;
+            Projectile.timeLeft = 90;
         }
 
         public override void AI()
         {
-            Projectile.velocity *= 0.94f; // Quick deceleration
+            Projectile.velocity *= 0.99f;
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.JungleSpore);
+            Projectile.rotation = Projectile.velocity.ToRotation();
+            Projectile.gfxOffY = -32f;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

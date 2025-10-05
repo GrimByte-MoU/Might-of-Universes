@@ -19,7 +19,7 @@ namespace MightofUniverses.Content.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             ReaperPlayer reaperPlayer = player.GetModPlayer<ReaperPlayer>();
-            reaperPlayer.reaperDamageMultiplier *= 1.15f;
+            reaperPlayer.reaperDamageMultiplier += 1.15f;
         }
     }
 }
