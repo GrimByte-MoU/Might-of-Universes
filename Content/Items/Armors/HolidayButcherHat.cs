@@ -41,6 +41,7 @@ namespace MightofUniverses.Content.Items.Armors
                 "Soul Empowerment abilities cost 15% less and last 2 seconds longer";
             player.GetModPlayer<HolidayButcherPlayer>().FullSetEquipped = true;
             player.GetModPlayer<ReaperPlayer>().hasReaperArmor = true;
+            player.GetModPlayer<ReaperPlayer>().maxSoulEnergy += 300;
         }
 
         public override void AddRecipes()

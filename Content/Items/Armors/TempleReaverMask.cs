@@ -45,6 +45,7 @@ namespace MightofUniverses.Content.Items.Armors
 
             player.GetModPlayer<TempleReaverPlayer>().FullSetEquipped = true;
             player.GetModPlayer<ReaperPlayer>().hasReaperArmor = true;
+            player.GetModPlayer<ReaperPlayer>().maxSoulEnergy += 350;
         }
 
         public override void AddRecipes()

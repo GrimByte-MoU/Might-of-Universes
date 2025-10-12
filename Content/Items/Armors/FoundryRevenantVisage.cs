@@ -45,6 +45,7 @@ namespace MightofUniverses.Content.Items.Armors
             var foundry = player.GetModPlayer<FoundryRevenantPlayer>();
             player.GetModPlayer<ReaperPlayer>().hasReaperArmor = true;
             foundry.FullSetEquipped = true;
+            player.GetModPlayer<ReaperPlayer>().maxSoulEnergy += 250;
         }
 
         public override void AddRecipes()

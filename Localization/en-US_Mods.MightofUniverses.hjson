@@ -410,6 +410,16 @@ Buffs: {
 			+30 armor penetration
 			'''
 	}
+
+	Frostfeed: {
+		DisplayName: Frostfeed
+		Description: Rapid lifeloss and a 26% chance to paralyze
+	}
+
+	Paralyze: {
+		DisplayName: Paralyze
+		Description: Unable to move
+	}
 }
 
 Projectiles: {
@@ -710,6 +720,12 @@ Projectiles: {
 	GravetenderThorn.DisplayName: Gravetender Thorn
 	AccursedSoul.DisplayName: Accursed Soul
 	BlizzardSnowController.DisplayName: Blizzard Snow Controller
+	SerrasalmidPiranha.DisplayName: Serrasalmid Piranha
+	ClawDemonSickle.DisplayName: Claw Demon Sickle
+	AetherSerpentBolt.DisplayName: Aether Serpent Bolt
+	AetherSerpentMain.DisplayName: Aether Serpent Main
+	HorrorTongueStream.DisplayName: Horror Tongue Stream
+	VenomSpewerBubble.DisplayName: Venom Spewer Bubble
 }
 
 Keybinds: {
@@ -4200,6 +4216,53 @@ Items: {
 			+4% damage reduction
 			+3 souls generated per second
 			'''
+	}
+
+	SerrasalmidGun: {
+		DisplayName: Serrasalmid Gun
+		Tooltip:
+			'''
+			Fires a pod of ancient piranhas to latch onto enemies
+			Ancient piranhas inflict Tarred for 0.5 seconds on critical hits
+			'''
+	}
+
+	Chillrend: {
+		DisplayName: Chillrend
+		Tooltip: Inflicts Frostfeed for 3 seconds on hit and has a 26% chance to paralyze non-boss enemies for 2 seconds
+	}
+
+	Windlass: {
+		DisplayName: Windlass
+		Tooltip: Ignores 40 defense
+	}
+
+	ClawoftheDamned: {
+		DisplayName: Claw of the Damned
+		Tooltip: Fires a piercing sickle that inflicts Demonfire for 3 seconds
+	}
+
+	AetherialSerpent: {
+		DisplayName: Aetherial Serpent
+		Tooltip:
+			'''
+			Fires a homing aetherial bolt that splits into a few smaller homing bolts
+			The large aetherial bolt inflicts Rebuking Light for 3 seconds and the smaller bolts inflict Rebuking Light for 1 second
+			'''
+	}
+
+	HorrorTongue: {
+		DisplayName: Horror Tongue
+		Tooltip:
+			'''
+			Fires two Ichor splashes which bounce off walls that inflict Ichor and Bleeding for 3 seconds
+			The Horror Tongue itself will lifesteal
+			'''
+	}
+
+	VenomSpewer: {
+		DisplayName: Venom Spewer
+		Tooltip: Fires out toxic bubbles that inflict Venom for 3 seconds and Deadly Corruption for 1 second
 	}
 }
 
