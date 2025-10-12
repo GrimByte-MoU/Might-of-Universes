@@ -13,7 +13,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.hostile = false;
             Projectile.ignoreWater = false;
             Projectile.tileCollide = true;
-            Projectile.penetrate = 1;
+            Projectile.penetrate = 3;
             Projectile.timeLeft = 180;
             Projectile.DamageType = DamageClass.Magic;
             Projectile.extraUpdates = 1;

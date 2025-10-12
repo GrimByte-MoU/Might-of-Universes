@@ -64,7 +64,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             if (Projectile.owner != Main.myPlayer) return;
 
-            int bolts = 4;
+            int bolts = 7;
             for (int i = 0; i < bolts; i++)
             {
                 Vector2 v = (Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi)) * Main.rand.NextFloat(7f, 10f);

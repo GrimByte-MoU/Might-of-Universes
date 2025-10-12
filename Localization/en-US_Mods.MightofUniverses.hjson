@@ -726,6 +726,7 @@ Projectiles: {
 	AetherSerpentMain.DisplayName: Aether Serpent Main
 	HorrorTongueStream.DisplayName: Horror Tongue Stream
 	VenomSpewerBubble.DisplayName: Venom Spewer Bubble
+	HorrorIchorSplash.DisplayName: Horror Ichor Splash
 }
 
 Keybinds: {
@@ -4263,6 +4264,33 @@ Items: {
 	VenomSpewer: {
 		DisplayName: Venom Spewer
 		Tooltip: Fires out toxic bubbles that inflict Venom for 3 seconds and Deadly Corruption for 1 second
+	}
+
+	UnderworldSorcererBoots: {
+		DisplayName: Underworld Sorcerer Boots
+		Tooltip:
+			'''
+			+5% magic damage and critical strike chance
+			-6% mana usage
+			'''
+	}
+
+	UnderworldSorcererMask: {
+		DisplayName: Underworld Sorcerer Mask
+		Tooltip:
+			'''
+			+6% magic damage and +5% critical strike chance
+			-10% mana usage
+			'''
+	}
+
+	UnderworldSorcererRobes: {
+		DisplayName: Underworld Sorcerer Robes
+		Tooltip:
+			'''
+			+5% magic damage and critical strike chance
+			+12% movement speed
+			'''
 	}
 }
 

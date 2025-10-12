@@ -4,6 +4,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using MightofUniverses.Content.Items.Materials;
+using MightofUniverses.Content.Items.Projectiles;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
@@ -16,6 +17,8 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.damage = 80;
             Item.useTime = 20;
             Item.useAnimation = 20;
+            Item.shoot = ModContent.ProjectileType<HorrorIchorSplash>();
+            Item.shootSpeed = 12f;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
@@ -24,26 +27,19 @@ namespace MightofUniverses.Content.Items.Weapons
             Vector2 v1 = velocity.RotatedBy(-spread * 0.5f);
             Vector2 v2 = velocity.RotatedBy( spread * 0.5f);
 
-            Projectile.NewProjectile(source, position, v1, type, damage, knockback, player.whoAmI);
-            Projectile.NewProjectile(source, position, v2, type, damage, knockback, player.whoAmI);
-            return false; // suppress default single shot
+            int projType = Item.shoot;
+            Projectile.NewProjectile(source, position, v1, projType, damage, knockback, player.whoAmI);
+            Projectile.NewProjectile(source, position, v2, projType, damage, knockback, player.whoAmI);
+            return false;
         }
 
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
+            // This only runs for direct melee swings, not projectile hits.
             if (damageDone <= 0 || player.moonLeech) return;
             int heal = Utils.Clamp((int)(damageDone * 0.05f), 1, 50);
             player.statLife = Utils.Clamp(player.statLife + heal, 0, player.statLifeMax2);
             player.HealEffect(heal, broadcast: true);
-        }
-
-        public override void AddRecipes()
-        {
-            CreateRecipe()
-                .AddIngredient(ItemID.Bladetongue, 1)
-                .AddIngredient(ModContent.ItemType<SanguineEssence>(), 10)
-                .AddTile(TileID.MythrilAnvil)
-                .Register();
         }
     }
 }
