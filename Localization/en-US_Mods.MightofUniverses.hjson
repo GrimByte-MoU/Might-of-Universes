@@ -727,6 +727,7 @@ Projectiles: {
 	HorrorTongueStream.DisplayName: Horror Tongue Stream
 	VenomSpewerBubble.DisplayName: Venom Spewer Bubble
 	HorrorIchorSplash.DisplayName: Horror Ichor Splash
+	VaporwaveSun.DisplayName: Vaporwave Sun
 }
 
 Keybinds: {
@@ -740,7 +741,8 @@ Keybinds: {
 	"Ability 3.DisplayName": Ability 3
 	"Ability 4.DisplayName": Ability 4
 	"Ability 5.DisplayName": Ability 5
-	"Overclock Remote.DisplayName": Overclock
+	"Overclock Remote.DisplayName": Ability 6
+	"Armor Set Ability.DisplayName": Armor Set Ability
 }
 
 DamageClasses: {
@@ -4291,6 +4293,90 @@ Items: {
 			+5% magic damage and critical strike chance
 			+12% movement speed
 			'''
+	}
+
+	CorruptScaleBoots: {
+		DisplayName: Corrupt Scale Boots
+		Tooltip: 
+		'''
+		Reduces weapon damage by 20%
+		Increases armor and accessory damage by 25%
+		+15% movement speed
+		'''
+	}
+
+	CorruptScaleChestplate: {
+		DisplayName: Corrupt Scale Chestplate
+		Tooltip: 
+		'''
+		Reduces weapon damage by 20%
+		Increases armor and accessory damage by 30%
+		'''
+	}
+
+	CorruptScaleHood: {
+		DisplayName: Corrupt Scale Hood
+		Tooltip: 
+		'''
+		Reduces weapon damage by 20%
+		Increases armor and accessory damage by 25%
+		'''
+	}
+
+	CrimsonHideBoots: {
+		DisplayName: Crimson Hide Boots
+		Tooltip: 
+		'''
+		Reduces weapon damage by 20%
+		Increases armor and accessory damage by 20%
+		+15% movement speed
+		'''
+	}
+
+	CrimsonHideCloak: {
+		DisplayName: Crimson Hide Cloak
+		Tooltip: 
+		'''
+		Reduces weapon damage by 20%
+		Increases armor and accessory damage by 30%
+		'''
+	}
+
+	CrimsonHideMask: {
+		DisplayName: Crimson Hide Mask
+		Tooltip: 
+		'''
+		Reduces weapon damage by 20%
+		Increases armor and accessory damage by 20%
+		'''
+	}
+
+	VaporParadiseArmoredShirt: {
+		DisplayName: Vapor Paradise Armored Shirt
+		Tooltip: 
+		'''
+		Reduces weapon damage by 20%
+		Increases armor and accessory damage by 35%
+		'''
+	}
+
+	VaporParadiseHat: {
+		DisplayName: Vapor Paradise Hat
+		Tooltip: 
+		'''
+		Reduces weapon damage by 20%
+		Increases armor and accessory damage by 25%
+		'''
+	}
+
+	VaporParadiseShoes: {
+		DisplayName: Vapor Paradise Shoes
+		Tooltip: 
+		'''
+		Reduces weapon damage by 20%
+		Increases armor and accessory damage by 30%
+		+20% movement speed
+		'''
 	}
 }
 

@@ -34,7 +34,7 @@ namespace MightofUniverses.Content.Items.Armors
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "Increases armor set bonus and accessory damage by 25%\n Grants the player an extra jump";
+            player.setBonus = "Increases armor set bonus and accessory damage by 25% but also reduces all class damage by 25%\n +30% jump speed and increased jump height";
             player.GetModPlayer<StonegemPlayer>().hasStonegemSet = true;
         }
 

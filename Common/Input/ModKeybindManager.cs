@@ -3,8 +3,7 @@ using Terraria.ModLoader;
 
 namespace MightofUniverses.Common.Input
 {
-    // Loads only on client; avoids registering keybinds on dedicated server
-    [Autoload(Side = ModSide.Client)]
+    // Try without the Autoload attribute
     public class ModKeybindManager : ModSystem
     {
         public static ModKeybind Ability1;
@@ -12,15 +11,18 @@ namespace MightofUniverses.Common.Input
         public static ModKeybind Ability3;
         public static ModKeybind Ability4;
         public static ModKeybind Ability5;
+        public static ModKeybind ArmorAbility;
 
         public override void Load()
         {
-            // Default bindings can be "", letting players bind them themselves if you prefer
+            if (Main.dedServ) return;
+
             Ability1 = KeybindLoader.RegisterKeybind(Mod, "Ability 1", "Z");
             Ability2 = KeybindLoader.RegisterKeybind(Mod, "Ability 2", "X");
             Ability3 = KeybindLoader.RegisterKeybind(Mod, "Ability 3", "C");
             Ability4 = KeybindLoader.RegisterKeybind(Mod, "Ability 4", "V");
             Ability5 = KeybindLoader.RegisterKeybind(Mod, "Ability 5", "B");
+            ArmorAbility = KeybindLoader.RegisterKeybind(Mod, "Armor Set Ability", "Q");
         }
 
         public override void Unload()
@@ -30,6 +32,7 @@ namespace MightofUniverses.Common.Input
             Ability3 = null;
             Ability4 = null;
             Ability5 = null;
+            ArmorAbility = null;
         }
     }
 }
