@@ -38,7 +38,7 @@ namespace MightofUniverses.Content.Items.Armors
                 ? ModKeybindManager.ArmorAbility.GetAssignedKeys()[0] 
                 : "[Unbound]";
             
-            player.setBonus = $"+60% pacifist damage, -30% damage to all classes\nFour Vaporwave Suns orbit the player dealing 45 damage\nPress '{key}' to boost suns: 2x speed, 2x damage, 25 blocks for 5 seconds\nThis ability has a 20 second cooldown";
+            player.setBonus = $"+60% pacifist damage, -30% damage to all classes\nFour Vaporwave Suns orbit the player dealing 45 damage\nPress '{key}' to summon 4 more suns that orbit the player twice as fast, orbit further and deal double damage for 5 seconds\nThis ability has a 20 second cooldown";
             player.GetModPlayer<VaporParadisePlayer>().hasVaporParadiseSet = true;
         }
 

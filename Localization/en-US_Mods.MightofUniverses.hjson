@@ -728,6 +728,8 @@ Projectiles: {
 	VenomSpewerBubble.DisplayName: Venom Spewer Bubble
 	HorrorIchorSplash.DisplayName: Horror Ichor Splash
 	VaporwaveSun.DisplayName: Vaporwave Sun
+	PrimalSpike.DisplayName: Primal Spike
+	TwirlyWhirly.DisplayName: Twirly Whirly
 }
 
 Keybinds: {
@@ -4297,86 +4299,142 @@ Items: {
 
 	CorruptScaleBoots: {
 		DisplayName: Corrupt Scale Boots
-		Tooltip: 
-		'''
-		Reduces weapon damage by 20%
-		Increases armor and accessory damage by 25%
-		+15% movement speed
-		'''
+		Tooltip:
+			'''
+			Reduces weapon damage by 20%
+			Increases armor and accessory damage by 25%
+			+15% movement speed
+			'''
 	}
 
 	CorruptScaleChestplate: {
 		DisplayName: Corrupt Scale Chestplate
-		Tooltip: 
-		'''
-		Reduces weapon damage by 20%
-		Increases armor and accessory damage by 30%
-		'''
+		Tooltip:
+			'''
+			Reduces weapon damage by 20%
+			Increases armor and accessory damage by 30%
+			'''
 	}
 
 	CorruptScaleHood: {
 		DisplayName: Corrupt Scale Hood
-		Tooltip: 
-		'''
-		Reduces weapon damage by 20%
-		Increases armor and accessory damage by 25%
-		'''
+		Tooltip:
+			'''
+			Reduces weapon damage by 20%
+			Increases armor and accessory damage by 25%
+			'''
 	}
 
 	CrimsonHideBoots: {
 		DisplayName: Crimson Hide Boots
-		Tooltip: 
-		'''
-		Reduces weapon damage by 20%
-		Increases armor and accessory damage by 20%
-		+15% movement speed
-		'''
+		Tooltip:
+			'''
+			Reduces weapon damage by 20%
+			Increases armor and accessory damage by 20%
+			+15% movement speed
+			'''
 	}
 
 	CrimsonHideCloak: {
 		DisplayName: Crimson Hide Cloak
-		Tooltip: 
-		'''
-		Reduces weapon damage by 20%
-		Increases armor and accessory damage by 30%
-		'''
+		Tooltip:
+			'''
+			Reduces weapon damage by 20%
+			Increases armor and accessory damage by 30%
+			'''
 	}
 
 	CrimsonHideMask: {
 		DisplayName: Crimson Hide Mask
-		Tooltip: 
-		'''
-		Reduces weapon damage by 20%
-		Increases armor and accessory damage by 20%
-		'''
+		Tooltip:
+			'''
+			Reduces weapon damage by 20%
+			Increases armor and accessory damage by 20%
+			'''
 	}
 
 	VaporParadiseArmoredShirt: {
 		DisplayName: Vapor Paradise Armored Shirt
-		Tooltip: 
-		'''
-		Reduces weapon damage by 20%
-		Increases armor and accessory damage by 35%
-		'''
+		Tooltip:
+			'''
+			Reduces weapon damage by 20%
+			Increases armor and accessory damage by 35%
+			'''
 	}
 
 	VaporParadiseHat: {
 		DisplayName: Vapor Paradise Hat
-		Tooltip: 
-		'''
-		Reduces weapon damage by 20%
-		Increases armor and accessory damage by 25%
-		'''
+		Tooltip:
+			'''
+			Reduces weapon damage by 20%
+			Increases armor and accessory damage by 25%
+			'''
 	}
 
 	VaporParadiseShoes: {
 		DisplayName: Vapor Paradise Shoes
-		Tooltip: 
-		'''
-		Reduces weapon damage by 20%
-		Increases armor and accessory damage by 30%
-		+20% movement speed
-		'''
+		Tooltip:
+			'''
+			Reduces weapon damage by 20%
+			Increases armor and accessory damage by 30%
+			+20% movement speed
+			'''
+	}
+
+	MasterworkBoilerplate: {
+		DisplayName: Masterwork Boilerplate
+		Tooltip:
+			'''
+			Reduces weapon damage by 20%
+			Increases armor and accessory damage by 40%
+			'''
+	}
+
+	MasterworkMask: {
+		DisplayName: Masterwork Mask
+		Tooltip:
+			'''
+			Reduces weapon damage by 20%
+			Increases armor and accessory damage by 30%
+			'''
+	}
+
+	MasterworkTreads: {
+		DisplayName: Masterwork Treads
+		Tooltip:
+			'''
+			Reduces weapon damage by 20%
+			Increases armor and accessory damage by 30%
+			+25% movement speed
+			'''
+	}
+
+	PrimalPlateChestplate: {
+		DisplayName: Primal Plate Chestplate
+		Tooltip:
+			'''
+			Reduces weapon damage by 20%
+			Increases armor and accessory damage by 50%
+			'''
+	}
+
+	PrimalPlateGreaves: {
+		DisplayName: Primal Plate Greaves
+		Tooltip:
+			'''
+			Reduces weapon damage by 20%
+			Increases armor and accessory damage by 35%
+			+30% movement speed
+			'''
+	}
+
+	PrimalPlateMask: {
+		DisplayName: Primal Plate Mask
+		Tooltip:
+			'''
+			Reduces weapon damage by 20%
+			Increases armor and accessory damage by 35%
+			'''
 	}
 }
 

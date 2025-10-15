@@ -37,15 +37,44 @@ namespace MightofUniverses.Content.Items.Projectiles
 
             var vaporPlayer = player.GetModPlayer<Common.Players.VaporParadisePlayer>();
             
+            // Determine if this is an ability sun (ai[2] == 1) or base sun (ai[2] == 0)
+            bool isAbilitySun = Projectile.ai[2] == 1f;
+            
             // Get radius and speed based on ability state
-            float radius = vaporPlayer.abilityActive ? 25 * 16 : 15 * 16;
-            float rotationSpeed = vaporPlayer.abilityActive ? 0.08f : 0.04f;
+            float radius;
+            float rotationSpeed;
+            int totalSunCount;
             
-            // Update damage based on ability
-            Projectile.damage = vaporPlayer.abilityActive ? 90 : 45;
+            if (vaporPlayer.abilityActive)
+            {
+                // During ability: all suns orbit far and fast
+                radius = 25 * 16;
+                rotationSpeed = 0.08f;
+                Projectile.damage = 90;
+                totalSunCount = 8;
+            }
+            else
+            {
+                // Normal state: only base suns orbit close and slow
+                if (isAbilitySun)
+                {
+                    // Ability suns should be killed when ability ends
+                    // (handled in VaporParadisePlayer)
+                    return;
+                }
+                radius = 15 * 16;
+                rotationSpeed = 0.04f;
+                Projectile.damage = 45;
+                totalSunCount = 4;
+            }
             
-            // Orbit calculation
-            float rotation = Projectile.ai[0] * MathHelper.TwoPi / 4f; // 4 suns evenly spaced
+            // Use ai[0] as the fixed position index
+            // Base suns: 0, 1, 2, 3
+            // Extra suns: 0.5, 1.5, 2.5, 3.5
+            float sunPosition = Projectile.ai[0];
+            
+            // Orbit calculation based on fixed position
+            float rotation = sunPosition * MathHelper.TwoPi / 4f; // Always divide by 4 to get even spacing
             rotation += Projectile.ai[1]; // Current rotation angle
             
             Vector2 offset = new Vector2(
@@ -58,8 +87,9 @@ namespace MightofUniverses.Content.Items.Projectiles
             // Increment rotation
             Projectile.ai[1] += rotationSpeed;
             
-            // Visual effects - vaporwave aesthetic (pink/cyan/purple)
-            if (Main.rand.NextBool(3))
+            // Visual effects - more intense for ability suns
+            float dustChance = isAbilitySun ? 2f : 3f;
+            if (Main.rand.NextBool((int)dustChance))
             {
                 Color dustColor = Main.rand.Next(3) switch
                 {
@@ -68,13 +98,15 @@ namespace MightofUniverses.Content.Items.Projectiles
                     _ => new Color(200, 100, 255)  // Purple
                 };
                 
-                Dust dust = Dust.NewDustPerfect(Projectile.Center, DustID.RainbowMk2, Vector2.Zero, 100, dustColor, 1.2f);
+                float scale = isAbilitySun ? 1.5f : 1.2f;
+                Dust dust = Dust.NewDustPerfect(Projectile.Center, DustID.RainbowMk2, Vector2.Zero, 100, dustColor, scale);
                 dust.noGravity = true;
                 dust.velocity = Vector2.Zero;
             }
             
-            // Sun glow
-            Lighting.AddLight(Projectile.Center, 1f, 0.6f, 1f); // Purple-pink glow
+            // Sun glow - brighter for ability suns
+            float lightIntensity = isAbilitySun ? 1.5f : 1f;
+            Lighting.AddLight(Projectile.Center, 1f * lightIntensity, 0.6f * lightIntensity, 1f * lightIntensity);
         }
     }
 }
