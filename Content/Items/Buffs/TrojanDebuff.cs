@@ -1,7 +1,6 @@
 using System;
 using Terraria;
 using Terraria.ModLoader;
-using System.Linq;
 using System.Collections.Generic;
 
 namespace MightofUniverses.Content.Items.Buffs
@@ -30,7 +29,6 @@ namespace MightofUniverses.Content.Items.Buffs
 
         public override void Update(NPC npc, ref int buffIndex)
         {
-            // If buff is ending, restore defense
             if (npc.buffTime[buffIndex] == 1 && npcDefenseStolen.ContainsKey(npc.whoAmI))
             {
                 npc.defense += npcDefenseStolen[npc.whoAmI];
@@ -39,4 +37,3 @@ namespace MightofUniverses.Content.Items.Buffs
         }
     }
 }
-

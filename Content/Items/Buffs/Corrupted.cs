@@ -17,24 +17,21 @@ namespace MightofUniverses.Content.Items.Buffs
         }
 
         public override void Update(NPC npc, ref int buffIndex)
-{
-    if (Main.GameUpdateCount % 60 == 0)
-    {
-        npc.StrikeNPC(new NPC.HitInfo { Damage = 20 });
-    }
-    
-    if (Main.rand.NextBool(2))
-    {
-        Dust dust = Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.CursedTorch, 0f, 0f, 100, default, 0.8f);
-        dust.noGravity = true;
-        dust.fadeIn = 0.2f;
-    }
-}
-
+        {
+            npc.lifeRegen -= 40;
+            
+            if (Main.rand.NextBool(2))
+            {
+                Dust dust = Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.CursedTorch, 0f, 0f, 100, default, 0.8f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.2f;
+            }
+        }
 
         public override void Update(Player player, ref int buffIndex)
         {
             player.lifeRegen -= 20;
+
             if (Main.rand.NextBool(2))
             {
                 Dust dust = Dust.NewDustDirect(player.position, player.width, player.height, DustID.CursedTorch, 0f, 0f, 100, default, 0.8f);

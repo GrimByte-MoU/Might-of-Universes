@@ -16,20 +16,16 @@ namespace MightofUniverses.Content.Items.Buffs
             BuffID.Sets.LongerExpertDebuff[Type] = true;
         }
 
-       public override void Update(NPC npc, ref int buffIndex)
-{
-    if (Main.GameUpdateCount % 12 == 0)
-    {
-        npc.StrikeNPC(new NPC.HitInfo { Damage = 35 });
-    }
-    
-    if (Main.rand.NextBool(2))
-    {
-        Dust dust = Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.Dirt, 0f, 0f, 100, default, 0.8f);
-        dust.noGravity = true;
-        dust.fadeIn = 0.2f;
-    }
-}
-
+        public override void Update(NPC npc, ref int buffIndex)
+        {
+            npc.lifeRegen -= 350;
+            
+            if (Main.rand.NextBool(2))
+            {
+                Dust dust = Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.Dirt, 0f, 0f, 100, default, 0.8f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.2f;
+            }
+        }
     }
 }

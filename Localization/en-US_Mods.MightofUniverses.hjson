@@ -730,6 +730,16 @@ Projectiles: {
 	VaporwaveSun.DisplayName: Vaporwave Sun
 	PrimalSpike.DisplayName: Primal Spike
 	TwirlyWhirly.DisplayName: Twirly Whirly
+	GaeBulgProjectile.DisplayName: Gae Bulg Projectile
+	ShadowDaggerProjectile.DisplayName: Shadow Dagger Projectile
+	TitanoboaMini.DisplayName: Titanoboa Mini
+	TitanoboaProjectile.DisplayName: Titanoboa Projectile
+	MegaBusterChargeLevel1.DisplayName: Mega Buster Charge Level1
+	MegaBusterChargeLevel2.DisplayName: Mega Buster Charge Level2
+	MegaBusterShot.DisplayName: Mega Buster Shot
+	MegaBusterWeakCharge.DisplayName: Mega Buster Weak Charge
+	LaserSaberBeam.DisplayName: Laser Saber Beam
+	SoundFractureBeam.DisplayName: Sound Fracture Beam
 }
 
 Keybinds: {
@@ -4435,6 +4445,81 @@ Items: {
 			Reduces weapon damage by 20%
 			Increases armor and accessory damage by 35%
 			'''
+	}
+
+	GaeBulg: {
+		DisplayName: Gae Bulg
+		Tooltip:
+			'''
+			"It's pronounced gay bolg, not guy bulge!"
+			Inflicts Rebuking Light for 3 seconds
+			'''
+	}
+
+	ShadowDagger: {
+		DisplayName: Shadow Dagger
+		Tooltip: Launch a ricocheting dagger that inflicts Shadowflame for 5-10 seconds and ignores 25 defense
+	}
+
+	Titanoboa: {
+		DisplayName: Titanoboa
+		Tooltip:
+			'''
+			Fires a Tar Spear that splits into several homing and ricocheting Tar Balls
+			Inflicts Tarred for 3 seconds
+			'''
+	}
+
+	SongOfWinter: {
+		DisplayName: Song Of Winter
+		Tooltip:
+			'''
+			"A frozen tablet inscribed with a song of cold"
+			Every 3 seconds, sends out a wave of chilly energy that travels out and damages enemies
+			The wave inflicts Paralyzed for 3 seconds against nonboss enemies
+			'''
+	}
+
+	MegaBuster: {
+		DisplayName: Mega Buster
+		Tooltip:
+			'''
+			Fires armor piercing blasts or highly piercing charge shots
+			Right click to swap between modes:
+			Standard Mode: Quickly fires a blast of energy that doesn't pierce but ignores all defense
+			Charge Mode: Press and hold to start charging a powerful shot, if released instantly it will fire a weak shot that deals 50% damage and pierces 3 enemies
+			After 1.5 seconds, the shot will charge to level 1, if released it will deal 500% damage and pierce 10 enemies
+			After 3 seconds, the shot will charge to level 2, if released it will deal 1000% damage and pierce 20 enemies
+			'''
+	}
+
+	CyberBanditsFalchion: {
+		DisplayName: Cyber Bandit's Falchion
+		Tooltip: Inflicts Code Destabilized for 5 seconds
+	}
+
+	LaserSaber: {
+		DisplayName: Laser Saber
+		Tooltip:
+			'''
+			Fires a beam of energy that pierces 50 defense
+			The sword itself pierces all defense
+			'''
+	}
+
+	Slaughterspray: {
+		DisplayName: Slaughterspray
+		Tooltip:
+			'''
+			Inflicts Bleeding and Mortal Wound for 3 seconds
+			Lifesteals for 0.5% of the damage against bleeding enemies
+			Deals more damage the more health you have (capped at +50% damage at max health)
+			'''
+	}
+
+	SoundFractureBow: {
+		DisplayName: Sound Fracture Bow
+		Tooltip: Fires highly piercing, bouncing bolts that travel incredibly quickly
 	}
 }
 

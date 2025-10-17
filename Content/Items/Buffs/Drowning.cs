@@ -1,7 +1,6 @@
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
-using Terraria.Localization;
 
 namespace MightofUniverses.Content.Items.Buffs
 {
@@ -19,10 +18,7 @@ namespace MightofUniverses.Content.Items.Buffs
 
         public override void Update(Player player, ref int buffIndex)
         {
-            if (Main.GameUpdateCount % 60 == 0) // Once per second (60 ticks)
-            {
-                player.Hurt(Terraria.DataStructures.PlayerDeathReason.ByCustomReason(NetworkText.FromKey(player.name + "drowned.")), 75, 0);
-            }
+            player.lifeRegen -= 150;
 
             if (Main.rand.NextBool(2))
             {
@@ -35,10 +31,7 @@ namespace MightofUniverses.Content.Items.Buffs
 
         public override void Update(NPC npc, ref int buffIndex)
         {
-            if (Main.GameUpdateCount % 60 == 0) // Once per second (60 ticks)
-            {
-                npc.StrikeNPC(new NPC.HitInfo { Damage = 75 });
-            }
+            npc.lifeRegen -= 300;
 
             if (Main.rand.NextBool(2))
             {

@@ -18,16 +18,10 @@ namespace MightofUniverses.Content.Items.Buffs
 
         public override void Update(NPC npc, ref int buffIndex)
         {
-            
-            if (Main.GameUpdateCount % 4 == 0)
-            {
-                npc.StrikeNPC(new NPC.HitInfo { Damage = 50, Knockback = 0 });
-            }
+            npc.lifeRegen -= 1500;
 
-            // Create bright orange light
             Lighting.AddLight(npc.Center, 1.0f, 0.6f, 0.0f);
 
-            // Create on fire visual effect
             if (Main.rand.NextBool(2))
             {
                 Dust dust = Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.Torch, 0f, 0f, 100, default, 1.5f);
@@ -47,13 +41,10 @@ namespace MightofUniverses.Content.Items.Buffs
 
         public override void Update(Player player, ref int buffIndex)
         {
-            // Deal 75 damage per second
-            player.lifeRegen -= 150; // -150 life regen = 75 damage per second
+            player.lifeRegen -= 150;
 
-            // Create bright orange light
             Lighting.AddLight(player.Center, 1.0f, 0.6f, 0.0f);
 
-            // Create on fire visual effect
             if (Main.rand.NextBool(2))
             {
                 Dust dust = Dust.NewDustDirect(player.position, player.width, player.height, DustID.Torch, 0f, 0f, 100, default, 1.5f);

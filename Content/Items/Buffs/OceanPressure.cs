@@ -18,10 +18,7 @@ namespace MightofUniverses.Content.Items.Buffs
 
         public override void Update(Player player, ref int buffIndex)
         {
-            // Reduce defense by 50%
-            player.statDefense *= player.statDefense * 0.5f;
-            
-            // Reduce vertical speed by 50%
+            player.statDefense -= (int)(player.statDefense * 0.5f);
             player.jumpSpeedBoost *= 0.5f;
             player.jumpBoost = false;
             
@@ -35,10 +32,7 @@ namespace MightofUniverses.Content.Items.Buffs
 
         public override void Update(NPC npc, ref int buffIndex)
         {
-            if (Main.GameUpdateCount % 12 == 0) // Once per second (60 ticks)
-            {
-                npc.StrikeNPC(new NPC.HitInfo { Damage = 100 });
-            }
+            npc.lifeRegen -= 800;
 
             if (Main.rand.NextBool(2))
             {

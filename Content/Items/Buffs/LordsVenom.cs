@@ -1,7 +1,6 @@
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
-using Terraria.Localization;
 
 namespace MightofUniverses.Content.Items.Buffs
 {
@@ -19,10 +18,7 @@ namespace MightofUniverses.Content.Items.Buffs
 
         public override void Update(Player player, ref int buffIndex)
         {
-            if (Main.GameUpdateCount % 60 == 0) // Once per second (60 ticks)
-            {
-                player.Hurt(Terraria.DataStructures.PlayerDeathReason.ByCustomReason(NetworkText.FromKey(player.name + " was dissolved by Lord's Venom.")), 75, 0);
-            }
+            player.lifeRegen -= 150;
 
             if (Main.rand.NextBool(2))
             {
@@ -34,10 +30,7 @@ namespace MightofUniverses.Content.Items.Buffs
 
         public override void Update(NPC npc, ref int buffIndex)
         {
-            if (Main.GameUpdateCount % 6 == 0)
-            {
-                npc.StrikeNPC(new NPC.HitInfo { Damage = 100 });
-            }
+            npc.lifeRegen -= 2000;
 
             if (Main.rand.NextBool(2))
             {

@@ -19,23 +19,11 @@ namespace MightofUniverses.Content.Items.Buffs
 
         public override void Update(NPC npc, ref int buffIndex)
         {
-            // Reduce damage by 25%
             npc.damage = (int)(npc.damage * 0.75f);
             
-            // Visual effect - chains/binding
             if (Main.rand.NextBool(3))
             {
-                Dust dust = Dust.NewDustDirect(
-                    npc.position,
-                    npc.width,
-                    npc.height,
-                    DustID.Wraith,
-                    0f,
-                    0f,
-                    100,
-                    Color.Gray,
-                    1.0f
-                );
+                Dust dust = Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.Wraith, 0f, 0f, 100, Color.Gray, 1.0f);
                 dust.noGravity = true;
                 dust.fadeIn = 0.5f;
             }
@@ -43,7 +31,6 @@ namespace MightofUniverses.Content.Items.Buffs
 
         public override void Update(Player player, ref int buffIndex)
         {
-            // Make player immobile
             player.velocity.X *= 0.1f;
             
             if (!player.justJumped && !player.sliding)
@@ -51,20 +38,9 @@ namespace MightofUniverses.Content.Items.Buffs
                 player.velocity.Y *= 0.9f;
             }
             
-            // Visual effect - chains/binding
             if (Main.rand.NextBool(3))
             {
-                Dust dust = Dust.NewDustDirect(
-                    player.position,
-                    player.width,
-                    player.height,
-                    DustID.Wraith,
-                    0f,
-                    0f,
-                    100,
-                    Color.Gray,
-                    1.0f
-                );
+                Dust dust = Dust.NewDustDirect(player.position, player.width, player.height, DustID.Wraith, 0f, 0f, 100, Color.Gray, 1.0f);
                 dust.noGravity = true;
                 dust.fadeIn = 0.5f;
             }
