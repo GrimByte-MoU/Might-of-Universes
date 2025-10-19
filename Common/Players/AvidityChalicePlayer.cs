@@ -7,15 +7,13 @@ namespace MightofUniverses.Common.Players
     public class AvidityChalicePlayer : ModPlayer
     {
         public bool hasAvidityChalice;
-
-        // Ability state
         private bool chaliceActive = false;
         private int chaliceCooldown = 0;
 
         // Drop control
         private int spawnTimer = 0;
         private int totalDrops = 0;
-        private const int dropRate = 1;   // ticks between drops
+        private const int dropRate = 1;
         private const int maxDrops = 20;
 
         public override void ResetEffects()
