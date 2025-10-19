@@ -90,22 +90,22 @@ The community will get to choose which one happens first:
 - Several new materials
 - 1 Superboss
 
-## 🎯 The Vision
+## The Vision
 
 Might of Universes aims to provide engaging post-Moon Lord content that feels like a natural extension of Terraria. I would like:
 - **Balanced Gameplay**: Challenging but fair encounters
 - **Unique Mechanics**: Weapons and systems that feel fresh and interesting
 - **Atmospheric Audio**: Music and sounds that enhance immersion
 
-## 📜 License
+## License
 
 MIT License - Copyright (c) 2025 GrimByte-MoU
 
-## 🙏 Credits
+## Credits
 
 **Lead Developer**: GrimByte-MoU
 **Contributors**: [List will grow as people join!]
 
 ---
 
-**⭐ If you're interested in this mod, please star the repository and spread the word! ⭐**
+** If you're interested in this mod, please star the repository and spread the word! **
