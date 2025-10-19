@@ -1,4 +1,4 @@
-# Might of Universes
+# Might of Universes 
 
 An expansive content mod for tModLoader that largely adds post-Moon Lord content to Terraria!
 
@@ -11,7 +11,7 @@ Might of Universes is a post-Moon Lord content expansion featuring:
 - **Post-Moon Lord Focus**: Challenging endgame content designed for experienced players
 - **Pre-Moonlord Expansion and Rebalancing**: Rebalancing of plenty of vanilla weapons, accessories and bosses to better fit the power of the mod
 - **New Class and Subclass**: Introducing the Reaper class, they utilize scythes and soul lanterns to gather and consume souls, a new mechanic. Also,
-  there is also a new subclass that focuses on nonweapon (armor and accessories) damage, this "class" is called pacifist! All damaging vanilla accessories have been reclassed to this
+  there is a new subclass that focuses on nonweapon (armor and accessories) damage, this "class" is called pacifist! All damaging vanilla accessories have been reclassed to this
 
 ## I Need Your Help!
 
