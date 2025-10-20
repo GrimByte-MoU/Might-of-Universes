@@ -60,7 +60,7 @@ Interested in joining the team? Here's how to get involved:
 ## Current Development Status
 
 **Planned For Initial Release:**
-- 2 new biomes with unique themes
+- 3 new biomes with unique themes
 - 2 new events; Armies of Hell and Desert Storm
 - 10 progression important Post-Moonlord boss encounters
 - 1 optional Post-Moon Lord
