@@ -32,7 +32,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             Player player = Main.player[Projectile.owner];
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(1.2f, target.Center);
+            reaper.AddSoulEnergy(6f, target.Center);
             player.Heal(5);
         }
     }

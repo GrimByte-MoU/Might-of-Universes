@@ -52,7 +52,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             }
 
             // Rotation
-            Projectile.rotation += 0.3f;
+            //Projectile.rotation += 0.3f;
 
             // Create flame effects
             if (Main.rand.NextBool(3))

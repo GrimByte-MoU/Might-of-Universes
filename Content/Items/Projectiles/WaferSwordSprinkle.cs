@@ -34,7 +34,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         public override void AI()
         {
             float targetRotation = Projectile.velocity.ToRotation();
-            Projectile.rotation = targetRotation;
+            //Projectile.rotation = targetRotation;
         }
     }
 }

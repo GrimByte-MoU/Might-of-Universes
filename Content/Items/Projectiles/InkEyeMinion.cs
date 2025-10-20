@@ -64,7 +64,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             // Rigidly lock above the player's mounted center (best reference for head position)
             Projectile.Center = player.MountedCenter + new Vector2(0f, IdleOffsetY);
             Projectile.velocity = Vector2.Zero;
-            Projectile.rotation = 0f;
+            //Projectile.rotation = 0f;
 
             // "Black light" vibe (Terraria light is additive; this is a faint desaturated violet/gray)
             Lighting.AddLight(Projectile.Center, 0.05f, 0.02f, 0.06f);

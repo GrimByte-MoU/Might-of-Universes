@@ -16,7 +16,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.height = 120;
             Projectile.friendly = true;
             Projectile.DamageType = ModContent.GetInstance<ReaperDamageClass>();
-            Projectile.penetrate = 5;
+            Projectile.penetrate = 4;
             Projectile.timeLeft = 60;
             Projectile.light = 1f;
             Projectile.tileCollide = false;
@@ -38,7 +38,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             Player player = Main.player[Projectile.owner];
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(1f, target.Center);
+            reaper.AddSoulEnergy(5f, target.Center);
         }
     }
 }

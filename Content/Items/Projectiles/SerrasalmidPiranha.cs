@@ -63,7 +63,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
             // Face movement direction if moving
             if (Projectile.velocity.LengthSquared() > 0.01f)
-                Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
+                //Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
 
             // Handle states
             if (Projectile.ai[1] == 2f)
@@ -169,7 +169,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
             // Rotate towards travel direction
             if (Projectile.velocity.LengthSquared() > 0.01f)
-                Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
+                //Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
 
             // Soft fade while recalling
             Projectile.alpha = (byte)MathHelper.Clamp(Projectile.alpha + 4, 0, 255);

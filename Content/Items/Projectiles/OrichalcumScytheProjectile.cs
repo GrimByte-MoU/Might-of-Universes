@@ -28,7 +28,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         Projectile.rotation = Projectile.velocity.ToRotation();
 
 // Optional: Add this if you want the sprite to be oriented differently
-// Projectile.rotation += MathHelper.PiOver2; // Rotates sprite 90 degrees
+// //Projectile.rotation += MathHelper.PiOver2; // Rotates sprite 90 degrees
 
             
             if (Main.rand.NextBool(3))
@@ -42,7 +42,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             Player player = Main.player[Projectile.owner];
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(0.4f, target.Center);
+            reaper.AddSoulEnergy(2f, target.Center);
         }
     }
 }

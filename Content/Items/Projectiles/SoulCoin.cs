@@ -22,7 +22,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            Projectile.rotation += 0.4f;
+            //Projectile.rotation += 0.4f;
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GoldCoin);
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GemEmerald);
         }
@@ -31,7 +31,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             Player player = Main.player[Projectile.owner];
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(1f, target.Center);
+            reaper.AddSoulEnergy(5f, target.Center);
             player.lifeSteal += 0.05f;
         }
     }

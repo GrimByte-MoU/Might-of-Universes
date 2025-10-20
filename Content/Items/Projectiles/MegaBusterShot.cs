@@ -18,6 +18,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.light = 0.5f;
             Projectile.extraUpdates = 1;
             Projectile.ArmorPenetration = 9999;
+            Projectile.scale = 1.25f;
         }
 
         public override void AI()

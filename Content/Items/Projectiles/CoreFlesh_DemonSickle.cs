@@ -34,7 +34,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             {
                 // Spin in place
                 Projectile.velocity *= 0.92f;
-                Projectile.rotation += 0.45f * Projectile.direction;
+                //Projectile.rotation += 0.45f * Projectile.direction;
                 if (Projectile.velocity.LengthSquared() < 0.01f)
                     Projectile.velocity = Vector2.Zero;
 
@@ -67,7 +67,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             else
             {
                 // Flight
-                Projectile.rotation += 0.25f * Projectile.direction;
+                //Projectile.rotation += 0.25f * Projectile.direction;
                 Lighting.AddLight(Projectile.Center, new Vector3(0.6f, 0.2f, 0.8f) * 0.5f);
             }
         }

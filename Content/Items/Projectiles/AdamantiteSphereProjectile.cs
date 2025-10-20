@@ -22,6 +22,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.timeLeft = 300;
             Projectile.light = 0.8f;
             Projectile.ignoreWater = true;
+            Projectile.scale = 1.35f;
         }
 
         public override void AI()
@@ -51,7 +52,7 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Projectile.velocity = Vector2.Lerp(Projectile.velocity, targetDirection * Projectile.velocity.Length(), HOMING_STRENGTH);
             }
 
-            Projectile.rotation += 0.4f;
+            //Projectile.rotation += 0.4f;
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Adamantite);
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Electric);
             Lighting.AddLight(Projectile.Center, 0.8f, 0f, 0.2f);

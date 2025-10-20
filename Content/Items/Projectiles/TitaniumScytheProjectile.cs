@@ -24,14 +24,14 @@ namespace MightofUniverses.Content.Items.Projectiles
         public override void AI()
         {
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch);
-            Projectile.rotation += 0.4f;
+            //Projectile.rotation += 0.4f;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Player player = Main.player[Projectile.owner];
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(0.6f, target.Center);
+            reaper.AddSoulEnergy(3f, target.Center);
             target.AddBuff(BuffID.OnFire3, 180);
         }
     }

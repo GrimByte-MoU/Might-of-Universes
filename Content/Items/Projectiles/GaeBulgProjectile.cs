@@ -18,7 +18,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         public override void AI()
         {
             base.AI();
-            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
+            Projectile.rotation = Projectile.velocity.ToRotation();
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

@@ -10,14 +10,15 @@ namespace MightofUniverses.Content.Items.Projectiles
     {
         public override void SetDefaults()
         {
-            Projectile.width = 10;
-            Projectile.height = 10;
+            Projectile.width = 32;
+            Projectile.height = 32;
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.penetrate = 1;
             Projectile.timeLeft = 120;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
+            Projectile.scale = 1.5f;
 
             Projectile.DamageType = DamageClass.Magic;
             Projectile.ArmorPenetration = 25;

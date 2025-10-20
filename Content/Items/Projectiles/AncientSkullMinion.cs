@@ -27,8 +27,8 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void SetDefaults()
         {
-            Projectile.width = 26;
-            Projectile.height = 26;
+            Projectile.width = 32;
+            Projectile.height = 32;
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.minion = true;
@@ -37,6 +37,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.timeLeft = 18000;
+            Projectile.scale = 2.0f;
 
             Projectile.penetrate = -1;
             Projectile.usesLocalNPCImmunity = true;
@@ -125,7 +126,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             {
                 // Idle near player, offset to side for formations
                 desiredPos = owner.Center + new Vector2(sideOffset, IdleOffsetY + bob);
-                Projectile.rotation = 0f;
+                //Projectile.rotation = 0f;
                 Projectile.localAI[1] = 0f; // beam accumulator
                 Projectile.localAI[0] = 0f; // lock timer
             }
@@ -134,7 +135,7 @@ namespace MightofUniverses.Content.Items.Projectiles
                 // Hold above and to the side of the target
                 desiredPos = target.Center + new Vector2(sideOffset, AboveTargetOffsetY + bob);
                 Vector2 toTarget = target.Center - Projectile.Center;
-                Projectile.rotation = toTarget.ToRotation();
+                //Projectile.rotation = toTarget.ToRotation();
 
                 // Increase lock time
                 Projectile.localAI[0] += 1f;

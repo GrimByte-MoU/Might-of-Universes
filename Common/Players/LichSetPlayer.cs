@@ -13,7 +13,6 @@ namespace MightofUniverses.Common.Players
         private const int SpawnIntervalTicks = 120;
         private const int SpawnCount = 2;
         private const float SpawnRadiusTiles = 15f;
-        private const int MaxSoulBonus = 125;
 
         private bool wearing;
         private int spawnTimer;
@@ -32,7 +31,7 @@ namespace MightofUniverses.Common.Players
                 wearing = true;
                 var reaper = Player.GetModPlayer<ReaperPlayer>();
                 reaper.hasReaperArmor = true;
-                reaper.maxSoulEnergy += MaxSoulBonus; // Direct like Eclipse
+                // Soul capacity bonus is handled by ReaperPlayer.ComputeImmediateSetBonus()
             }
         }
 

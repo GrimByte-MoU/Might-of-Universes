@@ -51,7 +51,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            Main.player[Projectile.owner].GetModPlayer<ReaperPlayer>().AddSoulEnergy(0.4f, target.Center);
+            Main.player[Projectile.owner].GetModPlayer<ReaperPlayer>().AddSoulEnergy(2f, target.Center);
         }
     }
 }

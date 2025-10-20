@@ -11,8 +11,8 @@ namespace MightofUniverses.Content.Items.Projectiles
     {
         public override void SetDefaults()
         {
-            Projectile.width = 10;
-            Projectile.height = 10;
+            Projectile.width = 32;
+            Projectile.height = 32;
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.ignoreWater = false;

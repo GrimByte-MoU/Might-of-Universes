@@ -8,8 +8,8 @@ namespace MightofUniverses.Content.Items.Projectiles
     {
         public override void SetDefaults()
         {
-            Projectile.width = 16;
-            Projectile.height = 16;
+            Projectile.width = 32;
+            Projectile.height = 32;
             Projectile.aiStyle = ProjAIStyleID.Arrow;
             AIType = ProjectileID.WoodenArrowFriendly;
 

@@ -8,15 +8,14 @@ namespace MightofUniverses.Content.Items.Projectiles
         private const float HomingSpeed = 8f;
         public override void SetDefaults()
         {
-            Projectile.width = 18;
-            Projectile.height = 18;
+            Projectile.width = 32;
+            Projectile.height = 32;
             Projectile.aiStyle = 0;
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.penetrate = 1;
             Projectile.tileCollide = false;
             Projectile.timeLeft = 600;
-            Projectile.scale = 1f;
             Projectile.DamageType = ModContent.GetInstance<ReaperDamageClass>();
         }
 

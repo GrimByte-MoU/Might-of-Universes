@@ -7,8 +7,8 @@ namespace MightofUniverses.Content.Items.Projectiles
     {
         public override void SetDefaults()
         {
-            Projectile.width = 8;
-            Projectile.height = 8;
+            Projectile.width = 32;
+            Projectile.height = 32;
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.ignoreWater = false;
@@ -17,6 +17,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.timeLeft = 180;
             Projectile.DamageType = DamageClass.Magic;
             Projectile.extraUpdates = 1;
+            Projectile.scale = 0.75f;
         }
 
         public override void AI()

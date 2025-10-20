@@ -83,12 +83,12 @@ namespace MightofUniverses.Content.Items.Projectiles
 
                 Vector2 attackPos = target.Center + swipeOffset;
                 Projectile.velocity = (attackPos - Projectile.Center) * 0.20f;
-                Projectile.rotation = toTarget.ToRotation();
+                //Projectile.rotation = toTarget.ToRotation();
             }
             else
             {
                 Projectile.velocity = (targetPos - Projectile.Center) * 0.20f;
-                Projectile.rotation = (player.Center - Projectile.Center).ToRotation() + MathHelper.PiOver2;
+                //Projectile.rotation = (player.Center - Projectile.Center).ToRotation() + MathHelper.PiOver2;
             }
 
             if (Main.rand.NextBool(12))

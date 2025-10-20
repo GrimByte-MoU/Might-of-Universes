@@ -144,7 +144,7 @@ namespace MightofUniverses.Common.Players
             {
                 projectileType = ModContent.ProjectileType<MegaBusterWeakCharge>();
                 damage = (int)(player.HeldItem.damage * 0.5f);
-                scale = 0.8f;
+                scale = 1.0f;
             }
             else if (chargeLevel == 1)
             {

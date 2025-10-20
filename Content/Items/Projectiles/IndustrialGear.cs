@@ -28,7 +28,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            Projectile.rotation += 0.6f;
+            //Projectile.rotation += 0.6f;
 
             if (!isSpinning)
             {
@@ -53,7 +53,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             var reaperPlayer = player.GetModPlayer<ReaperPlayer>();
             
             target.AddBuff(ModContent.BuffType<Shred>(), 120);
-            reaperPlayer.AddSoulEnergy(0.2f, target.Center);
+            reaperPlayer.AddSoulEnergy(1f, target.Center);
         }
     }
 }

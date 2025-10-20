@@ -51,11 +51,11 @@ namespace MightofUniverses.Content.Items.Projectiles
 
             if (Projectile.spriteDirection == -1)
             {
-                Projectile.rotation += MathHelper.ToRadians(45f);
+                //Projectile.rotation += MathHelper.ToRadians(45f);
             }
             else
             {
-                Projectile.rotation += MathHelper.ToRadians(135f);
+                //Projectile.rotation += MathHelper.ToRadians(135f);
             }
 
             if (Projectile.timeLeft == duration - 1)

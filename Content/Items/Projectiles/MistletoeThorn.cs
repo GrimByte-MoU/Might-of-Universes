@@ -23,8 +23,6 @@ namespace MightofUniverses.Content.Items.Projectiles
         public override void AI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
-            
-            // Bright gold and blue lighting
             Lighting.AddLight(Projectile.Center, 0.7f, 0.6f, 0.2f); // Gold
             Lighting.AddLight(Projectile.Center, 0.2f, 0.5f, 1f); // Blue
             

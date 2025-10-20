@@ -53,7 +53,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             {
                 Projectile.spriteDirection = Projectile.velocity.X > 0 ? 1 : -1;
             }
-            Projectile.rotation = 0f;
+            //Projectile.rotation = 0f;
 
             if (Projectile.velocity.Length() < 0.1f)
             {

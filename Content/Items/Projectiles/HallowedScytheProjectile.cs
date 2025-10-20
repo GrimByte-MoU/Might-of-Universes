@@ -21,7 +21,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            Projectile.rotation += 0.4f;
+            //Projectile.rotation += 0.4f;
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.HallowedTorch);
             Lighting.AddLight(Projectile.Center, 1f, 1f, 1f);
         }
@@ -30,7 +30,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             Player player = Main.player[Projectile.owner];
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(0.6f, target.Center);
+            reaper.AddSoulEnergy(3f, target.Center);
         }
     }
 }

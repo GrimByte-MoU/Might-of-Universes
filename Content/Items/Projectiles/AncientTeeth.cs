@@ -16,8 +16,8 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void SetDefaults()
         {
-            Projectile.width = 12;
-            Projectile.height = 12;
+            Projectile.width = 32;
+            Projectile.height = 32;
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.penetrate = 9;
@@ -25,6 +25,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.timeLeft = 180;
+            Projectile.scale = 1.5f;
 
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 8;

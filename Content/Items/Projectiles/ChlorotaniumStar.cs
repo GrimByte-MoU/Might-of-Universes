@@ -14,7 +14,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.height = 24;
             Projectile.friendly = true;
             Projectile.DamageType = ModContent.GetInstance<ReaperDamageClass>();
-            Projectile.penetrate = 3;
+            Projectile.penetrate = 2;
             Projectile.timeLeft = 180;
             Projectile.light = 1f;
             Projectile.aiStyle = -1;
@@ -22,7 +22,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            Projectile.rotation += 0.2f;
+            //Projectile.rotation += 0.2f;
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GreenTorch);
         }
 
@@ -30,7 +30,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             Player player = Main.player[Projectile.owner];
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(1f, target.Center);
+            reaper.AddSoulEnergy(5f, target.Center);
             target.AddBuff(BuffID.CursedInferno, 180);
         }
     }

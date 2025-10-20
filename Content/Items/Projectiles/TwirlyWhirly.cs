@@ -29,7 +29,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         public override void AI()
         {
             // Spinning visual effect
-            Projectile.rotation += 0.3f;
+            //Projectile.rotation += 0.3f;
 
             // Emit glow particles
             if (Main.rand.NextBool(3))

@@ -25,7 +25,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            Projectile.rotation += 0.4f;
+            //Projectile.rotation += 0.4f;
             if (Main.rand.NextBool(3))
             {
                 Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<CandyDust>());

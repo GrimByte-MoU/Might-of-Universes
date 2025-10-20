@@ -80,8 +80,10 @@ namespace MightofUniverses.Content.Items.Projectiles
                 // Face the target
                 Vector2 toTarget = target.Center - Projectile.Center;
                 if (toTarget.LengthSquared() > 0.001f)
+                {
                     Projectile.rotation = toTarget.ToRotation();
-                Projectile.spriteDirection = Projectile.rotation > MathHelper.PiOver2 || Projectile.rotation < -MathHelper.PiOver2 ? -1 : 1;
+                    Projectile.spriteDirection = Projectile.rotation > MathHelper.PiOver2 || Projectile.rotation < -MathHelper.PiOver2 ? -1 : 1;
+                }
 
                 // Shooting
                 DoShooting(player, target);
@@ -93,15 +95,14 @@ namespace MightofUniverses.Content.Items.Projectiles
                 float angle = (float)(Main.GameUpdateCount * 0.03f) + (index * MathHelper.TwoPi / Math.Max(1, total));
                 desiredPos = player.Center + (IdleRadius + wobble) * angle.ToRotationVector2();
                 speed = 14f;
-                inertia = 30f;
-
+                inertia = 15f;
                 // Face outward slightly
                 Vector2 outward = desiredPos - Projectile.Center;
                 if (outward.LengthSquared() > 0.001f)
+                {
                     Projectile.rotation = outward.ToRotation();
-                Projectile.spriteDirection = Projectile.rotation > MathHelper.PiOver2 || Projectile.rotation < -MathHelper.PiOver2 ? -1 : 1;
-
-                // Cooldown ticks down but no shooting
+                    Projectile.spriteDirection = Projectile.rotation > MathHelper.PiOver2 || Projectile.rotation < -MathHelper.PiOver2 ? -1 : 1;
+                }
                 if (Projectile.localAI[0] > 0) Projectile.localAI[0]--;
             }
 

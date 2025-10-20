@@ -10,15 +10,14 @@ namespace MightofUniverses.Content.Items.Projectiles
     {
         public override void SetDefaults()
         {
-            Projectile.width = 16;
-            Projectile.height = 16;
+            Projectile.width = 32;
+            Projectile.height = 32;
             Projectile.friendly = true;
             Projectile.DamageType = ModContent.GetInstance<ReaperDamageClass>();
             Projectile.penetrate = 3;
             Projectile.timeLeft = 180;
             Projectile.light = 1f;
             Projectile.aiStyle = 1;
-            Projectile.scale = 0.75f;
         }
         public override void AI()
         {
