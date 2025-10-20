@@ -12,8 +12,8 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void SetDefaults()
         {
-            Projectile.width = 5;
-            Projectile.height = 5;
+            Projectile.width = 32;
+            Projectile.height = 32;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.penetrate = 4;
@@ -22,6 +22,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.tileCollide = true;
             Projectile.extraUpdates = 2;
             Projectile.aiStyle = -1;
+            Projectile.scale = 1.0f;
         }
 
         public override void AI()

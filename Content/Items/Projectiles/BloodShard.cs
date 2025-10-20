@@ -10,8 +10,8 @@ namespace MightofUniverses.Content.Items.Projectiles
     {
         public override void SetDefaults()
         {
-            Projectile.width = 20;
-            Projectile.height = 20;
+            Projectile.width = 32;
+            Projectile.height = 32;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Melee;
             Projectile.penetrate = 1;
@@ -19,7 +19,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.ignoreWater = true;
             Projectile.tileCollide = true;
             Projectile.aiStyle = -1;
-            Projectile.scale = 1f;
+            Projectile.scale = 0.3f;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
