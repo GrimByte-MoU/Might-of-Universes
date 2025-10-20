@@ -12,7 +12,11 @@ Might of Universes is a post-Moon Lord content expansion featuring:
 - **Pre-Moonlord Expansion and Rebalancing**: Rebalancing of plenty of vanilla weapons, accessories and bosses to better fit the power of the mod
 - **New Class and Subclass**: Introducing the Reaper class, they utilize scythes and soul lanterns to gather and consume souls, a new mechanic. Also,
   there is a new subclass that focuses on nonweapon (armor and accessories) damage, this "class" is called pacifist! All damaging vanilla accessories have been reclassed to this
-- **New Biomes**: 3 New Biomes: The Candy biome (Sweetlands, pastel colored and whimsical), the Techno biome (Glitchlands, matrix and vaporwave theme) which generates upon reaching hardmode and the Celestial Expanse/Starforge (starry and crystalline expanse alongside the celestial forge)
+- **New Biomes**: 3 New Biomes across different progression stages:
+  - *The Sweetlands* (Pre-Hardmode) A pastel candy wonderland filled with whimsical creatures
+  - *The Glitchlands* (Hardmode) A matrix-inspired vaporwave dimension that generates after defeating the Wall of Flesh
+  - *The Starforge and Celestial Expanse* (Post-Moon Lord) Celestial asteroids and an ancient stellar foundry floating above the world, 
+    home to the Celestial Forge, a divine crafting station for the most alien materials in existence
 
 ## I Need Your Help!
 
