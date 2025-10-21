@@ -34,7 +34,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             
             Vector2 offset = new Vector2(distanceFromCenter, 0).RotatedBy(rotation);
             Projectile.Center = Owner.Center + offset;
-            //Projectile.rotation += 0.2f;
+            Projectile.rotation += 0.2f;
 
             // Visual effects
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.PurpleTorch);

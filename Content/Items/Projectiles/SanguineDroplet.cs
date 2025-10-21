@@ -23,7 +23,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             timeElapsed++;
             float targetRotation = Projectile.velocity.ToRotation();
-            //Projectile.rotation = targetRotation;
+            Projectile.rotation = targetRotation;
             
             if (timeElapsed > 30)
             {

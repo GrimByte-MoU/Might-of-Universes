@@ -23,7 +23,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             Lighting.AddLight(Projectile.Center, 1f, 0.1f, 0.1f);
             float targetRotation = Projectile.velocity.ToRotation();
-            //Projectile.rotation = targetRotation;
+            Projectile.rotation = targetRotation;
             
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.RedTorch, 0f, 0f, 0, default, 1f);
         }

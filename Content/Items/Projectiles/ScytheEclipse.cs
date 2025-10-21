@@ -45,7 +45,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             float angle = Projectile.ai[0] + elapsed * OrbitSpeed;
 
             Projectile.Center = anchor + new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * OrbitRadius;
-            //Projectile.rotation += 0.2f;
+            Projectile.rotation += 0.2f;
 
             if (Main.rand.NextBool(6))
             {

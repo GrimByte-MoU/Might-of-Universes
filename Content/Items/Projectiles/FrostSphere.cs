@@ -26,7 +26,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             Lighting.AddLight(Projectile.Center, 0.1f, 0.6f, 1f);
             Projectile.spriteDirection = 1;
-            //Projectile.rotation += 0.2f;
+            Projectile.rotation += 0.2f;
 
             if (Main.rand.NextBool(2))
             {

@@ -19,7 +19,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         }
             public override void AI()
     {
-        //Projectile.rotation += 0.3f;
+        Projectile.rotation += 0.3f;
     }
     }
 }

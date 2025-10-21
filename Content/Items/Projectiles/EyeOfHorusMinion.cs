@@ -59,7 +59,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             // Rigid anchor above player's mounted center
             Projectile.Center = player.MountedCenter + new Vector2(0f, IdleOffsetY);
             Projectile.velocity = Vector2.Zero;
-            //Projectile.rotation = 0f;
+            Projectile.rotation = 0f;
 
             Lighting.AddLight(Projectile.Center, 0.15f, 0.12f, 0.02f);
 

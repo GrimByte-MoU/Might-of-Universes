@@ -44,7 +44,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Lighting.AddLight(Projectile.Center, 0.9f, 0.6f, 0.2f); // RGB values for a brassy look
 
             // Optional: spin gear visually
-            //Projectile.rotation += 0.1f;
+            Projectile.rotation += 0.1f;
         }
 
         public override bool? CanHitNPC(NPC target) => false;

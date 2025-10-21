@@ -32,7 +32,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             // Hovering bobbing motion above player
             Vector2 hoverOffset = new Vector2(0f, -60f + (float)Math.Sin(Main.GameUpdateCount * 0.1f) * 5f);
             Projectile.Center = player.Center + hoverOffset;
-            //Projectile.rotation += 0.02f;
+            Projectile.rotation += 0.02f;
 
             // Heal + mana restore every 2 seconds (every 120 ticks)
             if (++Projectile.localAI[0] >= 120)

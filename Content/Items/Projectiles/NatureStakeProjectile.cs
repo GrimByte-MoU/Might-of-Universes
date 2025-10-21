@@ -46,7 +46,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             }
             
             // Rotate the projectile based on velocity
-            //Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
+            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

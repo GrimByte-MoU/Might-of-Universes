@@ -19,7 +19,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            //Projectile.rotation += 0.4f;
+            Projectile.rotation += 0.4f;
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.HallowedTorch);
             Lighting.AddLight(Projectile.Center, 1f, 1f, 1f);
         }

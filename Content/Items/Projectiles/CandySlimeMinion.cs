@@ -97,7 +97,7 @@ namespace MightofUniverses.Content.Items.Projectiles
                 }
             }
 
-            //Projectile.rotation += 0.05f * Projectile.direction;
+            Projectile.rotation += 0.05f * Projectile.direction;
         }
     }
 }

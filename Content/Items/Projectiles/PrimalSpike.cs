@@ -65,7 +65,7 @@ namespace MightofUniverses.Content.Items.Projectiles
                 
                 Projectile.Center = player.Center + offset;
                 Vector2 awayDirection = Projectile.Center - player.Center;
-                //Projectile.rotation = awayDirection.ToRotation();
+                Projectile.rotation = awayDirection.ToRotation();
                 Projectile.timeLeft = 60;
             }
 

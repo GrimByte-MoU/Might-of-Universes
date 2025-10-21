@@ -20,7 +20,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         public override void AI()
         {
             Lighting.AddLight(Projectile.Center, Color.Red.ToVector3() * 0.6f);
-            //Projectile.rotation += 0.4f;
+            Projectile.rotation += 0.4f;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

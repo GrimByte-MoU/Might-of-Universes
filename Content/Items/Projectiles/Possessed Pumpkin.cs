@@ -49,7 +49,7 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Projectile.velocity = (Projectile.velocity * 20f + direction * projSpeed) / 21f;
             }
 
-            //Projectile.rotation += 0.4f;
+            Projectile.rotation += 0.4f;
 
             // Enhanced flame effects
             if (Main.rand.NextBool(2))

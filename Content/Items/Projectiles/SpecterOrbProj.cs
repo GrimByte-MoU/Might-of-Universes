@@ -31,7 +31,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             if (player == null || !player.active) { Projectile.Kill(); return; }
 
             // Subtle bob + easing
-            //Projectile.rotation += 0.02f * Projectile.direction;
+            Projectile.rotation += 0.02f * Projectile.direction;
             float bob = (float)System.Math.Sin(Main.GlobalTimeWrappedHourly * 6f + Projectile.whoAmI) * 0.3f;
             Projectile.velocity *= 0.98f;
             Projectile.velocity.Y += bob * 0.02f;
