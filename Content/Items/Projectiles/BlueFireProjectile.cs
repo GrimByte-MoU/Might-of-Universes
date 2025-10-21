@@ -7,12 +7,10 @@ using MightofUniverses.Common;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class BlueFireProjectile : ModProjectile
+    public class BlueFireProjectile : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 12;
-            Projectile.height = 12;
             Projectile.friendly = true;
             Projectile.penetrate = 1;
             Projectile.tileCollide = true;

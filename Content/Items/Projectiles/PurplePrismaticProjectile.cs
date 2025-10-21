@@ -6,12 +6,10 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class PurplePrismaticProjectile : ModProjectile
+    public class PurplePrismaticProjectile : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 18;
-            Projectile.height = 18;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Melee;
             Projectile.penetrate = 1;

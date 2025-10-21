@@ -7,15 +7,13 @@ using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class CodeBolt : ModProjectile
+    public class CodeBolt : MoUProjectile
     {
         private const float HOMING_STRENGTH = 0.5f;
         private const float MAX_HOMING_DISTANCE = 900f;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 32;
-            Projectile.height = 32;
             Projectile.friendly = true;
             Projectile.DamageType = ModContent.GetInstance<ReaperDamageClass>();
             Projectile.penetrate = 1;

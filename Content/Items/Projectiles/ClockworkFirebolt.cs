@@ -7,12 +7,10 @@ using  MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class ClockworkFirebolt : ModProjectile
+    public class ClockworkFirebolt : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 16;
-            Projectile.height = 16;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Summon;
             Projectile.penetrate = 4;

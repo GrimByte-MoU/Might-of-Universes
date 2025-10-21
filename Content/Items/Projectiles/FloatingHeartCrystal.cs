@@ -5,12 +5,10 @@ using Terraria.ID;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class FloatingHeartCrystal : ModProjectile
+    public class FloatingHeartCrystal : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 22;
-            Projectile.height = 22;
             Projectile.friendly = false;
             Projectile.hostile = false;
             Projectile.tileCollide = false;

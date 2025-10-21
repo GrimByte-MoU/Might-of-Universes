@@ -7,12 +7,10 @@ using MightofUniverses.Common;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class VolatileSandShard : ModProjectile
+    public class VolatileSandShard : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 6;
-            Projectile.height = 10;
             Projectile.friendly = true;
             Projectile.penetrate = -1;
             Projectile.DamageType = ModContent.GetInstance<PacifistDamageClass>();

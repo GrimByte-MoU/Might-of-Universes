@@ -7,12 +7,10 @@ using System;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class FloatingHeartCrystalMage : ModProjectile
+    public class FloatingHeartCrystalMage : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 18;
-            Projectile.height = 18;
             Projectile.friendly = false;
             Projectile.hostile = false;
             Projectile.penetrate = -1;

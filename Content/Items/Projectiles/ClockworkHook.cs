@@ -4,12 +4,10 @@ using Terraria.ID;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class ClockworkHook : ModProjectile
+    public class ClockworkHook : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 14;
-            Projectile.height = 14;
             Projectile.aiStyle = 1;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;

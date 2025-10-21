@@ -8,7 +8,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 {
     // Invisible, near-instant zap that chains up to 3 times (4 hits total).
     // Slim visuals, robust line collision to prevent misses (especially on grounded targets).
-    public class InkZapProjectile : ModProjectile
+    public class InkZapProjectile : MoUProjectile
     {
         // Your current multipliers (keep as-is)
         private static readonly float[] ChainMultipliers = new float[] { 1.5f, 1.25f, 1f, 0.75f };
@@ -21,10 +21,8 @@ namespace MightofUniverses.Content.Items.Projectiles
         private const float BeamVisualThicknessPx = 1f;  // dust spread (visual only)
         private const float BeamHitboxThicknessPx = 8f;  // collision thickness (slightly thicker to avoid misses)
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 2;
-            Projectile.height = 2;
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.penetrate = 1;
@@ -42,7 +40,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.hide = true;
         }
 
-        public override bool PreDraw(ref Color lightColor) => false;
+        public override bool SafePreDraw(ref Color lightColor) => false;
 
         public override void AI()
         {

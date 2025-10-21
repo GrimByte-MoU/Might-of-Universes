@@ -6,13 +6,11 @@ using Terraria.ModLoader;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class ObeSadeeToothProjectile : ModProjectile
+    public class ObeSadeeToothProjectile : MoUProjectile
     {
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 12;
-            Projectile.height = 12;
             Projectile.friendly = false;
             Projectile.hostile = true;
             Projectile.penetrate = 1;

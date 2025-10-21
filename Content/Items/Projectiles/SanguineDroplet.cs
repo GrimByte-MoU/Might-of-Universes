@@ -5,14 +5,12 @@ using Terraria.ID;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class SanguineDroplet : ModProjectile
+    public class SanguineDroplet : MoUProjectile
     {
         private int timeElapsed = 0;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 16;
-            Projectile.height = 16;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Melee;
             Projectile.penetrate = 1;

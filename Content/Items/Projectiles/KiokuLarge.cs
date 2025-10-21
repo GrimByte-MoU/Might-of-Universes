@@ -4,12 +4,10 @@ using Microsoft.Xna.Framework;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class KiokuLarge : ModProjectile
+    public class KiokuLarge : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 28;
-            Projectile.height = 28;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Magic;
             Projectile.penetrate = 2;

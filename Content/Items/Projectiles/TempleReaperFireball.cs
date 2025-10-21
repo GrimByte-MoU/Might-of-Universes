@@ -6,14 +6,12 @@ using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class TempleReaperFireball : ModProjectile
+    public class TempleReaperFireball : MoUProjectile
     {
         private int bounceCount = 0;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 14;
-            Projectile.height = 14;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Magic;
             Projectile.penetrate = 5; // Number of bounces

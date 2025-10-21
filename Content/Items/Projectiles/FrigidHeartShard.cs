@@ -6,12 +6,10 @@ using MightofUniverses.Common;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class FrigidHeartShard : ModProjectile
+    public class FrigidHeartShard : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 12;
-            Projectile.height = 12;
             Projectile.friendly = true;
             Projectile.penetrate = 1;
             Projectile.timeLeft = 300;

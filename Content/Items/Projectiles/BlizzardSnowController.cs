@@ -6,17 +6,15 @@ using Terraria.DataStructures;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class BlizzardSnowController : ModProjectile
+    public class BlizzardSnowController : MoUProjectile
     {
         // ai[0] = total snowflakes to spawn
         // ai[1] = total duration ticks
         // localAI[0] = spawned so far
         // localAI[1] = tick counter
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 10;
-            Projectile.height = 10;
             Projectile.timeLeft = 600; // safety
             Projectile.tileCollide = false;
             Projectile.penetrate = -1;

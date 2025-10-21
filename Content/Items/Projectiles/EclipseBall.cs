@@ -6,17 +6,15 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class EclipseBall : ModProjectile
+    public class EclipseBall : MoUProjectile
     {
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 1;
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 12;
-            Projectile.height = 12;
             Projectile.friendly = false;
             Projectile.tileCollide = false;
             Projectile.timeLeft = 120;

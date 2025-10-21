@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class RubyMinion : ModProjectile
+    public class RubyMinion : MoUProjectile
     {
         public override void SetStaticDefaults()
         {
@@ -13,10 +13,8 @@ namespace MightofUniverses.Content.Items.Projectiles
             Main.projPet[Projectile.type] = true;
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 32;
-            Projectile.height = 32;
             Projectile.friendly = true;
             Projectile.minion = true;
             Projectile.minionSlots = 1;

@@ -5,13 +5,11 @@ using Terraria.ModLoader;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class TerraiumDaggerProjectile : ModProjectile
+    public class TerraiumDaggerProjectile : MoUProjectile
     {
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 16;
-            Projectile.height = 16;
             Projectile.aiStyle = 0;
             Projectile.friendly = true;
             Projectile.hostile = false;

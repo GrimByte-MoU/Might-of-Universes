@@ -7,14 +7,12 @@ using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class CobaltShotProjectile : ModProjectile
+    public class CobaltShotProjectile : MoUProjectile
     {
         private float speedMultiplier = 1f;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 75;
-            Projectile.height = 75;
             Projectile.friendly = true;
             Projectile.DamageType = ModContent.GetInstance<ReaperDamageClass>();
             Projectile.penetrate = 1;

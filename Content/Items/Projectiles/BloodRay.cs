@@ -6,14 +6,12 @@ using Terraria.Audio;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class BloodRay : ModProjectile
+    public class BloodRay : MoUProjectile
     {
         private bool initialized = false;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 32;
-            Projectile.height = 32;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.penetrate = 4;

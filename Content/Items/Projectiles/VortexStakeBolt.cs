@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class VortexStakeBolt : ModProjectile
+    public class VortexStakeBolt : MoUProjectile
     {
         // Constants for helix motion
         private const float HELIX_RADIUS = 20f;
@@ -22,10 +22,8 @@ namespace MightofUniverses.Content.Items.Projectiles
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;         // Smooth trail
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 12;
-            Projectile.height = 12;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.penetrate = 1;       // No piercing
@@ -149,7 +147,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             return true; // Destroy the projectile
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool SafePreDraw(ref Color lightColor)
         {
             // Get projectile texture
             Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;

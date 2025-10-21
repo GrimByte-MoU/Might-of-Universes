@@ -6,12 +6,10 @@ using MightofUniverses.Common;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class SpookyflyMinion : ModProjectile
+    public class SpookyflyMinion : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 18;
-            Projectile.height = 18;
             Projectile.friendly = true;
             Projectile.penetrate = 1;
             Projectile.tileCollide = false;

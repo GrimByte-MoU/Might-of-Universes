@@ -6,12 +6,10 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class ColoredSpearhead : ModProjectile
+    public class ColoredSpearhead : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 10;
-            Projectile.height = 10;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Melee;
             Projectile.penetrate = 1;

@@ -8,16 +8,14 @@ namespace MightofUniverses.Content.Items.Projectiles
 {
     // ai[0] = base phase (0, π/2, π, 3π/2)
     // localAI[0] anchorX, localAI[1] anchorY, localAI[2] init flag
-    public class ScytheEclipse : ModProjectile
+    public class ScytheEclipse : MoUProjectile
     {
         private const float OrbitRadius = 140f;
         private const float OrbitSpeed = 0.04f;
         private const int Lifetime = 240;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 40;
-            Projectile.height = 40;
             Projectile.friendly = true;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;

@@ -6,15 +6,13 @@ using Microsoft.Xna.Framework;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class MoonWave : ModProjectile
+    public class MoonWave : MoUProjectile
     {
         private float curveDirection = 1f;
         private const float CURVE_STRENGTH = 0.1f;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 20;
-            Projectile.height = 20;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Melee;
             Projectile.penetrate = 4;

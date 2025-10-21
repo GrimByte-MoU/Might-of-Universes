@@ -6,12 +6,10 @@ using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class ChlorotaniumStar : ModProjectile
+    public class ChlorotaniumStar : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 24;
-            Projectile.height = 24;
             Projectile.friendly = true;
             Projectile.DamageType = ModContent.GetInstance<ReaperDamageClass>();
             Projectile.penetrate = 2;

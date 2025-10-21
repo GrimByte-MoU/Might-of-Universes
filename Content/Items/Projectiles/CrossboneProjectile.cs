@@ -5,12 +5,10 @@ using MightofUniverses.Common;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class CrossboneProjectile : ModProjectile
+    public class CrossboneProjectile : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 16;
-            Projectile.height = 16;
             Projectile.friendly = true;
             Projectile.penetrate = 1;
             Projectile.tileCollide = true;

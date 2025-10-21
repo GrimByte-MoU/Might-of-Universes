@@ -6,13 +6,11 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class WorldwalkerFireWave : ModProjectile
+    public class WorldwalkerFireWave : MoUProjectile
     {
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 28;
-            Projectile.height = 28;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Melee;
             Projectile.penetrate = -1;

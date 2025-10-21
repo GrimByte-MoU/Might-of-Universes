@@ -6,12 +6,10 @@ using Terraria.Audio;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class MistletoeThorn : ModProjectile
+    public class MistletoeThorn : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 8;
-            Projectile.height = 8;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Summon;
             Projectile.penetrate = 1;

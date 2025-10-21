@@ -6,12 +6,10 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class TarPellet : ModProjectile
+    public class TarPellet : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 6;
-            Projectile.height = 6;
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.penetrate = 3;

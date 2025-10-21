@@ -8,10 +8,10 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class DawnsPiercerBolt : ModProjectile
+    public class DawnsPiercerBolt : MoUProjectile
     {
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             Projectile.width        = 8;
             Projectile.height       = 8;

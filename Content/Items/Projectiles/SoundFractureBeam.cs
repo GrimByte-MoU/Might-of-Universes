@@ -5,9 +5,9 @@ using Microsoft.Xna.Framework;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class SoundFractureBeam : ModProjectile
+    public class SoundFractureBeam : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.PulseBolt);
             

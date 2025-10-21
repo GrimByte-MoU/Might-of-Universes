@@ -5,12 +5,10 @@ using Microsoft.Xna.Framework;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class SweetGlob : ModProjectile
+    public class SweetGlob : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 14;
-            Projectile.height = 14;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Summon;
             Projectile.penetrate = 1;

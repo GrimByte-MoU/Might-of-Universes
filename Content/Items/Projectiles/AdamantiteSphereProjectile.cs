@@ -7,15 +7,13 @@ using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class AdamantiteSphereProjectile : ModProjectile
+    public class AdamantiteSphereProjectile : MoUProjectile
     {
         private const float HOMING_STRENGTH = 0.30f;
         private const float MAX_HOMING_DISTANCE = 400f;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 32;
-            Projectile.height = 32;
             Projectile.friendly = true;
             Projectile.DamageType = ModContent.GetInstance<ReaperDamageClass>();
             Projectile.penetrate = 1;

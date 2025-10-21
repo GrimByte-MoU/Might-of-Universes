@@ -5,17 +5,15 @@ using Terraria.ID;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class ClockworkGear : ModProjectile
+    public class ClockworkGear : MoUProjectile
     {
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 1;
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 40;
-            Projectile.height = 40;
             Projectile.friendly = false;
             Projectile.hostile = false;
             Projectile.penetrate = -1;

@@ -6,12 +6,10 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class PrismaticFractureProjectile9 : ModProjectile
+    public class PrismaticFractureProjectile9 : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 48;
-            Projectile.height = 48;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Magic;
             Projectile.penetrate = 1;

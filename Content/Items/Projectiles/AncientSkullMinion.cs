@@ -7,7 +7,7 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class AncientSkullMinion : ModProjectile
+    public class AncientSkullMinion : MoUProjectile
     {
         // Behavior constants
         private const float AcquireRangePx = 960f;
@@ -25,10 +25,8 @@ namespace MightofUniverses.Content.Items.Projectiles
             Main.projFrames[Projectile.type] = 1;
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 32;
-            Projectile.height = 32;
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.minion = true;

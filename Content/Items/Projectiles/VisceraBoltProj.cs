@@ -7,13 +7,11 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class VisceraBoltProj : ModProjectile
+    public class VisceraBoltProj : MoUProjectile
     {
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 10;
-            Projectile.height = 10;
             Projectile.friendly = true;
             Projectile.penetrate = 1;
             Projectile.timeLeft = 180;

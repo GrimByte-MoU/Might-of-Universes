@@ -5,12 +5,10 @@ using Microsoft.Xna.Framework;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class TreatSpikerCone : ModProjectile
+    public class TreatSpikerCone : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 28;
-            Projectile.height = 28;
             Projectile.aiStyle = 1;
             Projectile.friendly = true;
             Projectile.hostile = false;

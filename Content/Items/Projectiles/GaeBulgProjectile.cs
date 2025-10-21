@@ -6,9 +6,9 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class GaeBulgProjectile : ModProjectile
+    public class GaeBulgProjectile : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             // Clone Gungnir projectile
             Projectile.CloneDefaults(ProjectileID.Gungnir);

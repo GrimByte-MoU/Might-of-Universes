@@ -5,12 +5,10 @@ using Microsoft.Xna.Framework;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class UnmeiBloom : ModProjectile
+    public class UnmeiBloom : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 22;
-            Projectile.height = 22;
             Projectile.friendly = true;
             Projectile.penetrate = 5;
             Projectile.timeLeft = 300;

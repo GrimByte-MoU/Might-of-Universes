@@ -5,12 +5,10 @@ using Terraria.ID;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class ViralFragment : ModProjectile
+    public class ViralFragment : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 16;
-            Projectile.height = 16;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Magic;
             Projectile.penetrate = 6;

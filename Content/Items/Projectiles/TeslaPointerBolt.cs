@@ -6,7 +6,7 @@ using System;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class TeslaPointerBolt : ModProjectile
+    public class TeslaPointerBolt : MoUProjectile
     {
         // ai0 = amplitude (pixels)
         // ai1 = direction (+1 or -1)
@@ -19,10 +19,8 @@ namespace MightofUniverses.Content.Items.Projectiles
         private Vector2 forward;
         private Vector2 perp;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 8;
-            Projectile.height = 8;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Melee;
             Projectile.penetrate = 1;

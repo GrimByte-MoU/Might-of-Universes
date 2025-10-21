@@ -6,12 +6,10 @@ using System;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class FearPumpkin : ModProjectile
+    public class FearPumpkin : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 26;
-            Projectile.height = 26;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Magic;
             Projectile.penetrate = 1;

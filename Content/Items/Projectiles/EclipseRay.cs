@@ -9,15 +9,13 @@ namespace MightofUniverses.Content.Items.Projectiles
 {
     // ai[0] = phase (0 or π)
     // localAI[0] ticks, localAI[1] previous sine
-    public class EclipseRay : ModProjectile
+    public class EclipseRay : MoUProjectile
     {
         private const float HelixSpeed = 0.80f;
         private const float HelixAmplitude = 8f;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 24;
-            Projectile.height = 24;
             Projectile.friendly = true;
             Projectile.DamageType = ModContent.GetInstance<ReaperDamageClass>();
             Projectile.penetrate = 3;

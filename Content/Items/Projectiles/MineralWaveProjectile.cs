@@ -6,14 +6,12 @@ using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class MineralWaveProjectile : ModProjectile
+    public class MineralWaveProjectile : MoUProjectile
     {
         private float speedMultiplier = 1f;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 150;
-            Projectile.height = 150;
             Projectile.friendly = true;
             Projectile.DamageType = ModContent.GetInstance<ReaperDamageClass>();
             Projectile.penetrate = 4;

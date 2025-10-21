@@ -7,7 +7,7 @@ using System;
 namespace MightofUniverses.Content.Items.Projectiles
 {
 
-    public class WorldwalkerChilly : ModProjectile
+    public class WorldwalkerChilly : MoUProjectile
     {
         // ====== CONFIG (Primary Projectile) ======
         private const int IcicleCount = 6;
@@ -21,10 +21,8 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         private bool spawnedVolley;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 14;
-            Projectile.height = 14;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Melee;
             Projectile.penetrate = 1;
@@ -107,7 +105,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         }
     }
 
-    public class ChillyIcicle : ModProjectile
+    public class ChillyIcicle : MoUProjectile
     {
         // ====== CONFIG (Homing Icicles) ======
         private const float GravityAccel = 0.55f;
@@ -138,10 +136,8 @@ namespace MightofUniverses.Content.Items.Projectiles
         private const bool RequireLineOfSight = false;      // set true if you want tile checks
 
         // ai0 = original npcIndex (may be -1); ai1 = finisherFlag (1 = last), localAI[0] = elapsed, localAI[1] = lastAcquiredNpc (persist)
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 14;
-            Projectile.height = 24;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Melee;
             Projectile.penetrate = Pierce;

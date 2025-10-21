@@ -5,14 +5,12 @@ using Terraria.ID;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class VaporBombSpawner : ModProjectile
+    public class VaporBombSpawner : MoUProjectile
     {
         public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.None;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 1;
-            Projectile.height = 1;
             Projectile.friendly = false;
             Projectile.hostile = false;
             Projectile.timeLeft = 3600; // 1 minute lifespan

@@ -6,16 +6,14 @@ using Terraria.ID;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class ViralOrb : ModProjectile
+    public class ViralOrb : MoUProjectile
     {
         private int fragmentCooldown = 0;
         private int timeStationary = 0;
         private bool hasSlowed = false;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 36;
-            Projectile.height = 36;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Magic;
             Projectile.penetrate = -1;

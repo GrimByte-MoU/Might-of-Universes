@@ -6,7 +6,7 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class CandySlimeMinion : ModProjectile
+    public class CandySlimeMinion : MoUProjectile
     {
         public override void SetStaticDefaults()
         {
@@ -16,10 +16,8 @@ namespace MightofUniverses.Content.Items.Projectiles
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 28;
-            Projectile.height = 28;
             Projectile.friendly = true;
             Projectile.minion = true;
             Projectile.minionSlots = 0.66f; // 3 slimes = 2 slots

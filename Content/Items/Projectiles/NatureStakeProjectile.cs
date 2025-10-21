@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class NatureStakeProjectile : ModProjectile
+    public class NatureStakeProjectile : MoUProjectile
     {
         // Track number of bounces
         private int bounceCount = 0;
@@ -18,10 +18,8 @@ namespace MightofUniverses.Content.Items.Projectiles
             // DisplayName.SetDefault("Nature Stake");
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 20;
-            Projectile.height = 56;
             Projectile.aiStyle = 1; // Arrow-like movement
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;

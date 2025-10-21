@@ -7,12 +7,10 @@ using MightofUniverses.Common;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class GreenChaliceDrop : ModProjectile
+    public class GreenChaliceDrop : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 24;
-            Projectile.height = 24;
             Projectile.friendly = true;
             Projectile.penetrate = 1;
             Projectile.timeLeft = 120;

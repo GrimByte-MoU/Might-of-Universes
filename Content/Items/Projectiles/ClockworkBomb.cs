@@ -7,12 +7,10 @@ using Terraria.Audio;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class ClockworkBomb : ModProjectile
+    public class ClockworkBomb : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 50;
-            Projectile.height = 50;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Summon;
             Projectile.penetrate = 1;

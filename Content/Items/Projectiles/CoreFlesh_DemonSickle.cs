@@ -7,15 +7,13 @@ using MightofUniverses.Common; // ReaperDamageClass
 namespace MightofUniverses.Content.Items.Projectiles
 {
     // Spins in place for ~0.5s then launches in the original aim direction. Very high damage. Ignores up to 50 defense.
-    public class CoreFlesh_DemonSickle : ModProjectile
+    public class CoreFlesh_DemonSickle : MoUProjectile
     {
         private const int SpinTime = 30; // ticks
         private const float LaunchSpeed = 14f;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 28;
-            Projectile.height = 28;
             Projectile.aiStyle = 0;
             Projectile.friendly = true;
             Projectile.hostile = false;

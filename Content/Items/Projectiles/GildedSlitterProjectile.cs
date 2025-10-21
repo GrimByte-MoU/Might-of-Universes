@@ -7,12 +7,10 @@ using System;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class GildedSlitterProjectile : ModProjectile
+    public class GildedSlitterProjectile : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 14;
-            Projectile.height = 14;
             Projectile.aiStyle = 113;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Melee;

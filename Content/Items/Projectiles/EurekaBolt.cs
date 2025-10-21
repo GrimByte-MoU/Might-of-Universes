@@ -5,12 +5,10 @@ using Terraria.ModLoader;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class EurekaBolt : ModProjectile
+    public class EurekaBolt : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 20;
-            Projectile.height = 20;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Magic;
             Projectile.penetrate = 19;

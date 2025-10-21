@@ -8,17 +8,15 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class SollutumStakeProjectile : ModProjectile
+    public class SollutumStakeProjectile : MoUProjectile
     {
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Sollutum Stake");
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 20;
-            Projectile.height = 56;
             Projectile.aiStyle = 1; 
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;

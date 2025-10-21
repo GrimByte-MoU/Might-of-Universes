@@ -5,9 +5,9 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class VenomSpewerBubble : ModProjectile
+    public class VenomSpewerBubble : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.Bubble);
             AIType = ProjectileID.Bubble;

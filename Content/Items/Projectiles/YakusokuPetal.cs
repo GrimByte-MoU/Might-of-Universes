@@ -5,12 +5,10 @@ using Microsoft.Xna.Framework;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class YakusokuPetal : ModProjectile
+    public class YakusokuPetal : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 30;
-            Projectile.height = 30;
             Projectile.aiStyle = 0;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Melee;

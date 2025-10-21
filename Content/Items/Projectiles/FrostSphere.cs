@@ -7,14 +7,12 @@ using MightofUniverses.Content.Items.Projectiles;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class FrostSphere : ModProjectile
+    public class FrostSphere : MoUProjectile
     {
         private int timer = 0;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 24;
-            Projectile.height = 24;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Magic;
             Projectile.penetrate = 14;

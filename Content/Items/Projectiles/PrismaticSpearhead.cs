@@ -9,7 +9,7 @@ using MightofUniverses.Content.Items.Projectiles;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class PrismaticSpearhead : ModProjectile
+    public class PrismaticSpearhead : MoUProjectile
     {
         private int colorTimer = 0;
         private readonly Color[] prismaticColors = new Color[]
@@ -22,10 +22,8 @@ namespace MightofUniverses.Content.Items.Projectiles
             new Color(148, 0, 211)    // Purple
         };
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 30;
-            Projectile.height = 30;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Melee;
             Projectile.penetrate = 9;

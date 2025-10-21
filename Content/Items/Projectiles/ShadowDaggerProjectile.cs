@@ -5,9 +5,9 @@ using Microsoft.Xna.Framework;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class ShadowDaggerProjectile : ModProjectile
+    public class ShadowDaggerProjectile : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             // Clone Shadowflame Knife projectile
             Projectile.CloneDefaults(ProjectileID.ShadowFlameKnife);

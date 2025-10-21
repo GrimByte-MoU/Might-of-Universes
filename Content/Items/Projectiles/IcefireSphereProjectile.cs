@@ -7,16 +7,14 @@ using MightofUniverses.Common;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class IcefireSphereProjectile : ModProjectile
+    public class IcefireSphereProjectile : MoUProjectile
     {
         private float rotation = 0f;
         private const float ORBIT_RADIUS = 75f;
         private const float ROTATION_SPEED = 0.1f;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 16;
-            Projectile.height = 16;
             Projectile.friendly = true;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;

@@ -7,7 +7,7 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class ObsidianDaggerMinion : ModProjectile
+    public class ObsidianDaggerMinion : MoUProjectile
     {
         public override void SetStaticDefaults()
         {
@@ -17,10 +17,8 @@ namespace MightofUniverses.Content.Items.Projectiles
             ProjectileID.Sets.MinionTargettingFeature[Type] = true;
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 24;
-            Projectile.height = 24;
             Projectile.friendly = true;
             Projectile.minion = true;
             Projectile.minionSlots = 0.5f;

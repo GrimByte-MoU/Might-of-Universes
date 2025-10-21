@@ -7,16 +7,14 @@ using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Projectiles 
 {
-    public class SolunarScytheMedallion : ModProjectile
+    public class SolunarScytheMedallion : MoUProjectile
     {
         private float rotationSpeed = 0.1f;
         private float distanceFromCenter = 50f;
         private Player Owner => Main.player[Projectile.owner];
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 32;
-            Projectile.height = 32;
             Projectile.friendly = true;
             Projectile.DamageType = ModContent.GetInstance<ReaperDamageClass>();
             Projectile.penetrate = -1;

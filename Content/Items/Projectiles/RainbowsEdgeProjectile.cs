@@ -8,16 +8,14 @@ using MightofUniverses.Content.Items.Weapons;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class RainbowsEdgeProjectile : ModProjectile
+    public class RainbowsEdgeProjectile : MoUProjectile
     {
         protected virtual float HoldoutRangeMin => 44f;
         protected virtual float HoldoutRangeMax => 116f;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.Spear);
-            Projectile.width = 34;
-            Projectile.height = 34;
             Projectile.scale = 2f;
         }
 

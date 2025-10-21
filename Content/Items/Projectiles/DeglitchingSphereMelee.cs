@@ -7,17 +7,15 @@ using System.Collections.Generic;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class DeglitchingSphereMelee : ModProjectile
+    public class DeglitchingSphereMelee : MoUProjectile
     {
         private const float RADIUS = 7f * 16f;
         private const int BASE_DAMAGE = 120;
         private const int DAMAGE_PER_ENEMY = 12;
         private int damageTimer;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 32;
-            Projectile.height = 32;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Melee;
             Projectile.penetrate = -1;

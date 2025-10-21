@@ -4,12 +4,10 @@ using Terraria.ModLoader;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class AncientBoneArrow : ModProjectile
+    public class AncientBoneArrow : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 32;
-            Projectile.height = 32;
             Projectile.aiStyle = ProjAIStyleID.Arrow;
             AIType = ProjectileID.WoodenArrowFriendly;
 

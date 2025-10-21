@@ -11,12 +11,10 @@ namespace MightofUniverses.Content.Items.Projectiles
     // 0 = seeking, 1 = latched, 2 = recall
     // ai[0] = targetIndex (int), -1 if none
     // localAI[0],[1] = latched offset from target.Center
-    public class SerrasalmidPiranha : ModProjectile
+    public class SerrasalmidPiranha : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 16;
-            Projectile.height = 16;
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.tileCollide = false;

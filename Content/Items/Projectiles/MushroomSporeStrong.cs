@@ -6,12 +6,10 @@ using MightofUniverses.Common;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class MushroomSporeStrong : ModProjectile
+    public class MushroomSporeStrong : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 16;
-            Projectile.height = 16;
             Projectile.friendly = true;
             Projectile.penetrate = -1;
             Projectile.DamageType = ModContent.GetInstance<PacifistDamageClass>();

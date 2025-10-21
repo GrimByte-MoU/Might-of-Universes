@@ -7,7 +7,7 @@ using System;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class HollyFighter : ModProjectile
+    public class HollyFighter : MoUProjectile
     {
         private const float SHOOT_RATE = 12f;
         private float attackTimer = 0f;
@@ -20,10 +20,8 @@ namespace MightofUniverses.Content.Items.Projectiles
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 24;
-            Projectile.height = 24;
             Projectile.friendly = true;
             Projectile.minion = true;
             Projectile.DamageType = DamageClass.Summon;

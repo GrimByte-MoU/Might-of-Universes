@@ -6,12 +6,10 @@ using MightofUniverses.Content.Items.Projectiles;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class FungShuiTrap2 : ModProjectile
+    public class FungShuiTrap2 : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 16;
-            Projectile.height = 16;
             Projectile.friendly = false;
             Projectile.penetrate = -1;
             Projectile.timeLeft = 300;

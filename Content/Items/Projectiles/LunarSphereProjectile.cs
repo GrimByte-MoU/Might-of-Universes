@@ -8,16 +8,14 @@ using MightofUniverses.Common;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class LunarSphereProjectile : ModProjectile
+    public class LunarSphereProjectile : MoUProjectile
 {
     private float rotation = 0f;
     private const float ORBIT_RADIUS = 125f;
     private const float ROTATION_SPEED = 0.2f;
 
-    public override void SetDefaults()
+    public override void SafeSetDefaults()
     {
-        Projectile.width = 48;
-        Projectile.height = 48;
         Projectile.friendly = true;
         Projectile.penetrate = -1;
         Projectile.tileCollide = false;

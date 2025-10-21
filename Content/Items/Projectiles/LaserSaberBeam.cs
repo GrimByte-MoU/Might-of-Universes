@@ -5,9 +5,9 @@ using Microsoft.Xna.Framework;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class LaserSaberBeam : ModProjectile
+    public class LaserSaberBeam : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.EnchantedBeam);
             

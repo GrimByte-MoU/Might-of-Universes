@@ -6,7 +6,7 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class AncientTeeth : ModProjectile
+    public class AncientTeeth : MoUProjectile
     {
         public override void SetStaticDefaults()
         {
@@ -14,10 +14,8 @@ namespace MightofUniverses.Content.Items.Projectiles
             ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 32;
-            Projectile.height = 32;
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.penetrate = 9;

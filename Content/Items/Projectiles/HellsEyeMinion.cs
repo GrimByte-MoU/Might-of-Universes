@@ -10,7 +10,7 @@ using MightofUniverses.Common.Players; // For Overclock suppression
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class HellsEyeMinion : ModProjectile
+    public class HellsEyeMinion : MoUProjectile
     {
         private const float PlayerDetectRangePx = 50f * 16f;
         private const float OrbitRadius = 96f;
@@ -25,10 +25,8 @@ namespace MightofUniverses.Content.Items.Projectiles
             ProjectileID.Sets.MinionTargettingFeature[Type] = true; // right-click target support
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 22;
-            Projectile.height = 22;
             Projectile.friendly = true;
             Projectile.minion = true;
             Projectile.DamageType = DamageClass.Summon;

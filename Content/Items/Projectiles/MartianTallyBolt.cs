@@ -8,16 +8,14 @@ using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class MartianTallyBolt : ModProjectile
+    public class MartianTallyBolt : MoUProjectile
     {
         private float zigzagTimer = 0f;
         private const float ZIGZAG_SPEED = 0.2f;
         private const float ZIGZAG_WIDTH = 60f;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 24;
-            Projectile.height = 24;
             Projectile.friendly = true;
             Projectile.DamageType = ModContent.GetInstance<ReaperDamageClass>();
             Projectile.penetrate = 3;

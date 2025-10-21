@@ -6,9 +6,9 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class TitanoboaMini : ModProjectile
+    public class TitanoboaMini : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             // Clone Scourge mini projectile
             Projectile.CloneDefaults(ProjectileID.TinyEater);

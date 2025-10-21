@@ -1,11 +1,9 @@
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class GravetenderThorn : ModProjectile
+    public class GravetenderThorn : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 12;
-            Projectile.height = 12;
             Projectile.aiStyle = 0;
             Projectile.friendly = true;
             Projectile.hostile = false;

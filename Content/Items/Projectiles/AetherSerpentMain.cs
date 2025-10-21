@@ -7,12 +7,10 @@ using System;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class AetherSerpentMain : ModProjectile
+    public class AetherSerpentMain : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 32;
-            Projectile.height = 32;
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.ignoreWater = false;

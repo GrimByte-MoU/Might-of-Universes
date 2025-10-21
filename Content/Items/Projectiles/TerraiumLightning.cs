@@ -7,15 +7,13 @@ using System;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class TerraiumLightning : ModProjectile
+    public class TerraiumLightning : MoUProjectile
     {
         private List<Vector2> lightningPath;
         private int currentSegment;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 10;
-            Projectile.height = 60;
             Projectile.aiStyle = -1;
             Projectile.timeLeft = 60;
             Projectile.friendly = true;

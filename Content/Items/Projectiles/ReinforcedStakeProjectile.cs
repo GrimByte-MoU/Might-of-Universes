@@ -5,17 +5,15 @@ using Microsoft.Xna.Framework;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class ReinforcedStakeProjectile : ModProjectile
+    public class ReinforcedStakeProjectile : MoUProjectile
     {
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Reinforced Stake");
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 20;
-            Projectile.height = 20;
             Projectile.aiStyle = 1; // Standard arrow/stake aiStyle
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;

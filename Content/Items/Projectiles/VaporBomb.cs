@@ -6,16 +6,14 @@ using Terraria.ID;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class VaporBomb : ModProjectile
+    public class VaporBomb : MoUProjectile
     {
         private int timer = 0;
         private bool triggered = false;
         private NPC target;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 18;
-            Projectile.height = 18;
             Projectile.timeLeft = 600; // 10 seconds
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;

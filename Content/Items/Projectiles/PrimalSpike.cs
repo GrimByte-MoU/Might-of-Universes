@@ -9,12 +9,10 @@ using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class PrimalSpike : ModProjectile
+    public class PrimalSpike : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 30;
-            Projectile.height = 30;
             Projectile.friendly = true;
             Projectile.penetrate = 1;
             Projectile.tileCollide = false;

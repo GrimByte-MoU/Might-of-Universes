@@ -9,16 +9,14 @@ using Terraria.DataStructures;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class IndustrialGear : ModProjectile
+    public class IndustrialGear : MoUProjectile
     {
         private bool isSpinning = false;
         private int spinTimer = 0;
         private const int SPIN_DURATION = 180;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 32;
-            Projectile.height = 32;
             Projectile.friendly = true;
             Projectile.DamageType = ModContent.GetInstance<ReaperDamageClass>();
             Projectile.penetrate = -1;

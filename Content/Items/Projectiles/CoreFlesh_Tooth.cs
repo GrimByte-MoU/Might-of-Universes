@@ -9,16 +9,14 @@ namespace MightofUniverses.Content.Items.Projectiles
     // - No pierce (penetrate = 1)
     // - Grants +2 souls to the owner on hit (handled here)
     // - Gravity toggle via ai[1] (1 = gravity on)
-    public class CoreFlesh_Tooth : ModProjectile
+    public class CoreFlesh_Tooth : MoUProjectile
     {
         // Tweakable gravity and speed caps
         private const float Gravity = 0.35f;
         private const float MaxFallSpeed = 18f;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 12;
-            Projectile.height = 12;
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.penetrate = 1;              

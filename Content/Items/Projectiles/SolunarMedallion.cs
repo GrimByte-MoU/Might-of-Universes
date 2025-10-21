@@ -7,16 +7,14 @@ namespace MightofUniverses.Content.Items.Projectiles
 {
     // ai[0] = initial phase (0 or π)
     // localAI[0] anchorX, localAI[1] anchorY, localAI[2] initialized flag (0/1)
-    public class SolunarMedallion : ModProjectile
+    public class SolunarMedallion : MoUProjectile
     {
         private const float OrbitRadius = 150f;
         private const float OrbitSpeed = 0.035f;
         private const int   Lifetime   = 240;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 20;
-            Projectile.height = 20;
             Projectile.friendly = true;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;

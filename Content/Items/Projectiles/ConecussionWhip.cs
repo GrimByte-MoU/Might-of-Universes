@@ -9,12 +9,12 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class ConecussionWhip : ModProjectile
+    public class ConecussionWhip : MoUProjectile
     {
         public override void SetStaticDefaults()
             => ProjectileID.Sets.IsAWhip[Type] = true;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             Projectile.DefaultToWhip();
             Projectile.WhipSettings.Segments = 7;
@@ -55,7 +55,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool SafePreDraw(ref Color lightColor)
         {
             SpriteBatch sb = Main.spriteBatch;
             List<Vector2> points = new();

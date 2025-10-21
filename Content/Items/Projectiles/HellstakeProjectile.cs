@@ -8,13 +8,11 @@ using Terraria.ModLoader;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class HellstakeProjectile : ModProjectile
+    public class HellstakeProjectile : MoUProjectile
     {
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 20;
-            Projectile.height = 56;
             Projectile.aiStyle = 1;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;

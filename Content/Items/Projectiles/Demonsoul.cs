@@ -7,14 +7,12 @@ using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class Demonsoul : ModProjectile
+    public class Demonsoul : MoUProjectile
     {
         private float speedMultiplier = 1f;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 70;
-            Projectile.height = 70;
             Projectile.friendly = true;
             Projectile.DamageType = ModContent.GetInstance<ReaperDamageClass>();
             Projectile.penetrate = 4;

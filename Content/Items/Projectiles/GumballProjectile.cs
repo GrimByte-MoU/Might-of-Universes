@@ -7,12 +7,10 @@ using MightofUniverses.Content.Dusts;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class GumballProjectile : ModProjectile
+    public class GumballProjectile : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 20;
-            Projectile.height = 20;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Melee;
             Projectile.penetrate = 1;

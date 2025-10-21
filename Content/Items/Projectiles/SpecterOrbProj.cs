@@ -8,15 +8,13 @@ using MightofUniverses.Content.Items.Buffs; // CagedSoul
 namespace MightofUniverses.Content.Items.Projectiles
 {
     // Specter Orb (Spectercage Artifact): homes to the owner, grants 5 souls, heals 10, applies Caged Soul for 3s.
-    public class SpecterOrbProj : ModProjectile
+    public class SpecterOrbProj : MoUProjectile
     {
         private const int SoulsGranted = 5;
         private const int HealAmount = 10;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 18;
-            Projectile.height = 18;
             Projectile.friendly = true;
             Projectile.timeLeft = 600;
             Projectile.penetrate = -1;

@@ -5,15 +5,13 @@ using Microsoft.Xna.Framework;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class StationaryEclipseProjectile : ModProjectile
+    public class StationaryEclipseProjectile : MoUProjectile
     {
         private const int DAMAGE_INTERVAL = 20;
         private int damageTimer;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 32;
-            Projectile.height = 32;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.penetrate = -1;

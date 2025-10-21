@@ -5,7 +5,7 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class ClawDemonSickle : ModProjectile
+    public class ClawDemonSickle : MoUProjectile
     {
         public override void SetStaticDefaults()
         {
@@ -13,7 +13,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             ProjectileID.Sets.TrailingMode[Type] = 0;
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.DemonSickle);
             AIType = ProjectileID.DemonSickle;

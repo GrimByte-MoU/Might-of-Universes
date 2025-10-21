@@ -6,12 +6,10 @@ using MightofUniverses.Common;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class BlueSkullProjectile : ModProjectile
+    public class BlueSkullProjectile : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 22;
-            Projectile.height = 22;
             Projectile.friendly = true;
             Projectile.penetrate = 1;
             Projectile.tileCollide = true;

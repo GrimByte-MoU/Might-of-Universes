@@ -9,15 +9,13 @@ namespace MightofUniverses.Content.Items.Projectiles
 {
     // ai[0] = phase (0 or π)
     // localAI[0] ticks, localAI[1] previous sine
-    public class SolunarProjectile : ModProjectile
+    public class SolunarProjectile : MoUProjectile
     {
         private const float HelixSpeed = 0.65f;
         private const float HelixAmplitude = 6f;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 24;
-            Projectile.height = 24;
             Projectile.friendly = true;
             Projectile.DamageType = ModContent.GetInstance<ReaperDamageClass>();
             Projectile.penetrate = 2;

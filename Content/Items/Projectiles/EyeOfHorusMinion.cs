@@ -9,7 +9,7 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class EyeOfHorusMinion : ModProjectile
+    public class EyeOfHorusMinion : MoUProjectile
     {
         private const float IdleOffsetY = -64f;
         private const float DetectTiles = 50f; // around the PLAYER
@@ -31,10 +31,8 @@ namespace MightofUniverses.Content.Items.Projectiles
             ProjectileID.Sets.MinionTargettingFeature[Type] = true;
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 20;
-            Projectile.height = 20;
             Projectile.friendly = true;
             Projectile.minion = true;
             Projectile.minionSlots = 1f;
@@ -91,7 +89,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool SafePreDraw(ref Color lightColor)
         {
             Texture2D tex = TextureAssets.Projectile[Projectile.type].Value;
             int frames = Main.projFrames[Projectile.type];

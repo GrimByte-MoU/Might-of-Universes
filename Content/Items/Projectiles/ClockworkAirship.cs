@@ -8,7 +8,7 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class ClockworkAirship : ModProjectile
+    public class ClockworkAirship : MoUProjectile
     {
         private int attackCooldown = 0;
         private int bombCooldown = 0;
@@ -21,10 +21,8 @@ namespace MightofUniverses.Content.Items.Projectiles
             ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 100;
-            Projectile.height = 100;
             Projectile.tileCollide = false;
             Projectile.friendly = true;
             Projectile.minion = true;

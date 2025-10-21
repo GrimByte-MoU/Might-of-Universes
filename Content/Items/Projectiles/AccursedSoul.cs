@@ -2,14 +2,12 @@ using System;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class AccursedSoul : ModProjectile
+    public class AccursedSoul : MoUProjectile
     {
         private const float DetectionRadius = 320f;
         private const float HomingSpeed = 8f;
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 32;
-            Projectile.height = 32;
             Projectile.aiStyle = 0;
             Projectile.friendly = true;
             Projectile.hostile = false;

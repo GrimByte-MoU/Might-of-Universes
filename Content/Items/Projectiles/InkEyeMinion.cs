@@ -9,7 +9,7 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class InkEyeMinion : ModProjectile
+    public class InkEyeMinion : MoUProjectile
     {
         private const float IdleOffsetY = -64f;
         private const float DetectTiles = 50f;
@@ -32,10 +32,8 @@ namespace MightofUniverses.Content.Items.Projectiles
             ProjectileID.Sets.MinionTargettingFeature[Type] = true;
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 20;
-            Projectile.height = 20;
             Projectile.friendly = true;
             Projectile.minion = true;
             Projectile.minionSlots = 1f; // costs 1 slot, item enforces only one exists
@@ -97,7 +95,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         }
 
         // Manual draw at Projectile.Center so the sprite is exactly where the dust is.
-        public override bool PreDraw(ref Color lightColor)
+        public override bool SafePreDraw(ref Color lightColor)
         {
             Texture2D tex = TextureAssets.Projectile[Projectile.type].Value;
             int frames = Main.projFrames[Projectile.type];

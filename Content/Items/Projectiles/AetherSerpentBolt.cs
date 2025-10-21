@@ -3,12 +3,10 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class AetherSerpentBolt : ModProjectile
+    public class AetherSerpentBolt : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 32;
-            Projectile.height = 32;
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.ignoreWater = false;

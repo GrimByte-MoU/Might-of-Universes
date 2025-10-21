@@ -5,12 +5,10 @@ using Terraria.ModLoader;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class FungShuiTrap1 : ModProjectile
+    public class FungShuiTrap1 : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 16;
-            Projectile.height = 16;
             Projectile.friendly = false;
             Projectile.penetrate = -1;
             Projectile.timeLeft = 300;

@@ -7,12 +7,10 @@ using MightofUniverses.Common;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class HomingSkullProjectile : ModProjectile
+    public class HomingSkullProjectile : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 18;
-            Projectile.height = 18;
             Projectile.friendly = true;
             Projectile.penetrate = 1;
             Projectile.tileCollide = true;

@@ -7,16 +7,14 @@ using Terraria.DataStructures;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class EclipseSphere : ModProjectile
+    public class EclipseSphere : MoUProjectile
     {
         private float rotation = 0f;
         private const float ORBIT_RADIUS = 200f; // Increased radius from Solunar
         private const float ROTATION_SPEED = 0.075f; // Faster rotation
         
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 24;
-            Projectile.height = 24;
             Projectile.friendly = true;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;

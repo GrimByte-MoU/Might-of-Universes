@@ -7,12 +7,10 @@ using MightofUniverses.Common; // ReaperDamageClass
 namespace MightofUniverses.Content.Items.Projectiles
 {
     // Fast piercing laser, pierces once (2 hits total), no souls on hit
-    public class CoreFlesh_Laser : ModProjectile
+    public class CoreFlesh_Laser : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 6;
-            Projectile.height = 6;
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.timeLeft = 80;

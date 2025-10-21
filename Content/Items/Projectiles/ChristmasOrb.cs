@@ -8,12 +8,10 @@ using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class ChristmasOrb : ModProjectile
+    public class ChristmasOrb : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 14;
-            Projectile.height = 14;
             Projectile.timeLeft = 60;
             Projectile.tileCollide = false;
             Projectile.penetrate = -1;

@@ -9,12 +9,10 @@ using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class KetsumatsuPetal : ModProjectile
+    public class KetsumatsuPetal : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 14;
-            Projectile.height = 14;
             Projectile.friendly = true;
             Projectile.penetrate = 1;
             Projectile.timeLeft = 180;

@@ -7,12 +7,10 @@ using System;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class SprinkleNeedle : ModProjectile
+    public class SprinkleNeedle : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 4;
-            Projectile.height = 14;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Magic;
             Projectile.penetrate = 3;

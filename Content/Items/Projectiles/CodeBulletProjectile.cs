@@ -6,12 +6,10 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class CodeBulletProjectile : ModProjectile
+    public class CodeBulletProjectile : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 4;
-            Projectile.height = 4;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.penetrate = 3;
@@ -53,7 +51,7 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Projectile.owner
             );
 
-            if (Main.projectile[proj].ModProjectile is CodeBlastProjectile blast)
+            if (Main.projectile[proj].MoUProjectile is CodeBlastProjectile blast)
             {
                 blast.targetNPC = target;
             }

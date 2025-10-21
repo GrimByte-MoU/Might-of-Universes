@@ -6,15 +6,13 @@ using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class CodeBlastProjectile : ModProjectile
+    public class CodeBlastProjectile : MoUProjectile
     {
         public NPC targetNPC;
         private const float HOMING_STRENGTH = 0.3f;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 24;
-            Projectile.height = 24;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.penetrate = 1;

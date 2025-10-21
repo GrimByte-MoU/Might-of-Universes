@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace MightofUniverses.Content.Items.Projectiles
 {
     // Basic custom whip projectile for Whipsword's whip stance.
-    public class WhipswordWhipProj : ModProjectile
+    public class WhipswordWhipProj : MoUProjectile
     {
         public override void SetStaticDefaults()
         {
@@ -14,7 +14,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.scale = 1.25f;
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             // Sets up most whip behavior (aiStyle, friendly, local immunity, etc.)
             Projectile.DefaultToWhip();

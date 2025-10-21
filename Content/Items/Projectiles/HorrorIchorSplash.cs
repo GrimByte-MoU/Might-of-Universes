@@ -5,9 +5,9 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class HorrorIchorSplash : ModProjectile
+    public class HorrorIchorSplash : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.IchorSplash);
             AIType = ProjectileID.IchorSplash;

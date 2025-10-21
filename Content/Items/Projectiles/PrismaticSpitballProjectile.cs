@@ -5,12 +5,10 @@ using Terraria.ModLoader;
 using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles;
-public class PrismaticSpitballProjectile : ModProjectile
+public class PrismaticSpitballProjectile : MoUProjectile
 {
-    public override void SetDefaults()
+    public override void SafeSetDefaults()
     {
-        Projectile.width = 16;
-        Projectile.height = 16;
         Projectile.friendly = true;
         Projectile.penetrate = 1;
         Projectile.DamageType = DamageClass.Generic;

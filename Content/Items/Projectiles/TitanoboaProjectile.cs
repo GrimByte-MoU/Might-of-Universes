@@ -6,9 +6,9 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class TitanoboaProjectile : ModProjectile
+    public class TitanoboaProjectile : MoUProjectile
     {
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             // Clone Scourge of the Corruptor projectile
             Projectile.CloneDefaults(ProjectileID.EatersBite);

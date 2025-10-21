@@ -7,17 +7,15 @@ using Terraria.ModLoader;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    public class EnvenomedStakeProjectile : ModProjectile
+    public class EnvenomedStakeProjectile : MoUProjectile
     {
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Envenomed Stake");
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile.width = 20;
-            Projectile.height = 56;
             Projectile.aiStyle = 1; // Arrow-like movement
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;
