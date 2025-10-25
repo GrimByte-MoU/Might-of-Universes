@@ -16,7 +16,6 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.timeLeft = 180;
             Projectile.light = 1f;
             Projectile.aiStyle = 1;
-            Projectile.scale = 0.3f;
         }
 
         public override void AI()

@@ -6,25 +6,25 @@ using MightofUniverses.Content.Items.Materials;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class MegaBuster : ModItem
+    public class MegaBusterX1 : ModItem
     {
         public override void SetDefaults()
         {
-            Item.damage = 140;
+            Item.damage = 200;
             Item.DamageType = DamageClass.Ranged;
             Item.width = 54;
             Item.height = 24;
-            Item.useTime = 8;
-            Item.useAnimation = 8;
+            Item.useTime = 6;
+            Item.useAnimation = 6;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.noMelee = true;
-            Item.knockBack = 3f;
-            Item.value = Item.sellPrice(gold: 15);
-            Item.rare = ItemRarityID.Yellow;
+            Item.knockBack = 4.5f;
+            Item.value = Item.sellPrice(gold: 20);
+            Item.rare = ItemRarityID.Purple;
             Item.UseSound = SoundID.Item12;
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<Projectiles.MegaBusterShot>();
-            Item.shootSpeed = 20f;
+            Item.shootSpeed = 24f;
             Item.useAmmo = AmmoID.None;
             Item.channel = true;
             Item.scale = 1.2f;
@@ -48,7 +48,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override bool CanUseItem(Player player)
         {
-            var modPlayer = player.GetModPlayer<MegaBusterPlayer>();
+            var modPlayer = player.GetModPlayer<MegaBusterX1Player>();
             
             if (modPlayer.isChargeMode)
             {
@@ -60,7 +60,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            var modPlayer = player.GetModPlayer<MegaBusterPlayer>();
+            var modPlayer = player.GetModPlayer<MegaBusterX1Player>();
             
             if (modPlayer.isChargeMode)
             {
@@ -85,9 +85,8 @@ namespace MightofUniverses.Content.Items.Weapons
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.VenusMagnum)
-                .AddIngredient(ItemID.MartianConduitPlating, 20)
-                .AddIngredient(ItemID.SoulofMight, 10)
+                .AddIngredient(ModContent.ItemType<MegaBuster>())
+                .AddIngredient(ItemID.LunarBar, 8)
                 .AddTile(TileID.LunarCraftingStation)
                 .Register();
         }

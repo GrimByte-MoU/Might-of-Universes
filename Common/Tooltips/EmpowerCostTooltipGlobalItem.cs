@@ -38,7 +38,7 @@ namespace MightofUniverses.Common.Tooltips
                 ["OrichalcumScythe"] = 40f,
                 ["TitaniumScythe"] = 75f,
                 ["AdamantiteScythe"] = 40f,
-                ["BloodTithe"] = 50f,
+                ["BloodTithe"] = 100f,
                 ["CobaltScythe"] = 40f,
                 ["CriticalFailure"] = 35f,
                 ["DemonsFinger"] = 40f,

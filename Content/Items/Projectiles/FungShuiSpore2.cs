@@ -14,6 +14,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.timeLeft = 180;
             Projectile.penetrate = -1;
             Projectile.DamageType = ModContent.GetInstance<PacifistDamageClass>();
+            Projectile.scale = 2f;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

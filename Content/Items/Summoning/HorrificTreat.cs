@@ -29,7 +29,6 @@ namespace MightofUniverses.Content.Items.Summoning
 
         public override bool CanUseItem(Player player)
         {
-            // Only allow use if boss is not already alive
             return !NPC.AnyNPCs(ModContent.NPCType<ObeSadee>());
         }
 

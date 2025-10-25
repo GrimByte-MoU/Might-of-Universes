@@ -51,7 +51,7 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Projectile.owner
             );
 
-            if (Main.projectile[proj].MoUProjectile is CodeBlastProjectile blast)
+            if (Main.projectile[proj].ModProjectile is CodeBlastProjectile blast)
             {
                 blast.targetNPC = target;
             }
