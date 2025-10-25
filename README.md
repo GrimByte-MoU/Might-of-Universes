@@ -20,7 +20,7 @@ Might of Universes is a post-Moon Lord content expansion featuring:
 
 ## I Need Your Help!
 
-**Might of Universes is actively looking for contributors!** I'm currently a solo developer working hard to bring this mod to life, and I'd love your help in these areas:
+**Might of Universes is actively looking for contributors!** I'm currently the head developer working hard to bring this mod to life, and I'd love your help in these areas:
 
 ### **Spriters Needed**
 I need talented pixel artists to create:
