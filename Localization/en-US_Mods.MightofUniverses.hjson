@@ -420,6 +420,11 @@ Buffs: {
 		DisplayName: Paralyze
 		Description: Unable to move
 	}
+
+	LunarShroudBuff: {
+		DisplayName: Lunar Shroud Buff
+		Description: +5 health regen per second, +8 defense, +100 max health and +30% movement speed
+	}
 }
 
 Projectiles: {
@@ -3596,7 +3601,7 @@ Items: {
 		Tooltip:
 			'''
 			"The finality of the ancient's lives are inscribed in this scythe"
-			Gathers 10 souls per strike
+			Gathers 8 souls per strike
 			Consume {0} souls to gain the Primal Savagery buff for 5 seconds
 			'''
 	}
@@ -4488,8 +4493,8 @@ Items: {
 			Right click to swap between modes:
 			Standard Mode: Quickly fires a blast of energy that doesn't pierce but ignores all defense
 			Charge Mode: Press and hold to start charging a powerful shot, if released instantly it will fire a weak shot that deals 50% damage and pierces 3 enemies
-			After 1.5 seconds, the shot will charge to level 1, if released it will deal 500% damage and pierce 10 enemies
-			After 3 seconds, the shot will charge to level 2, if released it will deal 1000% damage and pierce 20 enemies
+			After 1.5 seconds, the shot will charge to level 1, if released it will deal 600% damage and pierce 10 enemies
+			After 3 seconds, the shot will charge to level 2, if released it will deal 1200% damage and pierce 20 enemies
 			'''
 	}
 
@@ -4521,18 +4526,65 @@ Items: {
 		DisplayName: Sound Fracture Bow
 		Tooltip: Fires highly piercing, bouncing bolts that travel incredibly quickly
 	}
+
+	MegaBusterX1: {
+		DisplayName: Mega Buster X1
+		Tooltip:
+			'''
+			An iconic blaster with potentil for several different types of upgrades
+			Fires armor piercing blasts or highly piercing charge shots
+			Right click to swap between modes:
+			Standard Mode: Quickly fires a blast of energy that doesn't pierce but ignores all defense
+			Charge Mode: Press and hold to start charging a powerful shot, if released instantly it will fire a weak shot that deals 65% damage and pierces 3 enemies
+			After 1 second, the shot will charge to level 1, if released it will deal 1000% damage and pierce 10 enemies
+			After 2 seconds, the shot will charge to level 2, if released it will deal 2000% damage and pierce 20 enemies
+			'''
+	}
+
+	LunarShroudChestplate: {
+		DisplayName: Lunar Shroud Chestplate
+		Tooltip:
+			'''
+			+8% Reaper critical strike chance
+			+10% Reaper attack speed
+			+5% damage reduction
+			Soul consumption abilities cost 10% less to activate
+			'''
+	}
+
+	LunarShroudCowl: {
+		DisplayName: Lunar Shroud Cowl
+		Tooltip:
+			'''
+			+20% Reaper damage
+			+8% Reaper critical strike chance
+			+2% damage reduction
+			+10% Reaper attack speed
+			Soul consumption abilities cost 5% less to activate
+			'''
+	}
+
+	LunarShroudPants: {
+		DisplayName: Lunar Shroud Pants
+		Tooltip:
+			'''
+			+20% movement speed
+			+3% damage reduction
+			Reaper abilities cost 5% less soul to activate
+			'''
+	}
 }
 
 Prefixes: {
-	HeartyPrefix.DisplayName: Hearty Prefix
-	HealingPrefix.DisplayName: Healing Prefix
-	HealthyPrefix.DisplayName: Healthy Prefix
-	MendingPrefix.DisplayName: Mending Prefix
-	RegenerativePrefix.DisplayName: Regenerative Prefix
-	RestoringPrefix.DisplayName: Restoring Prefix
-	RobustPrefix.DisplayName: Robust Prefix
-	VitalPrefix.DisplayName: Vital Prefix
-	HardyPrefix.DisplayName: Hardy Prefix
+	HeartyPrefix.DisplayName: Hearty
+	HealingPrefix.DisplayName: Healing
+	HealthyPrefix.DisplayName: Healthy
+	MendingPrefix.DisplayName: Mending
+	RegenerativePrefix.DisplayName: Regenerative
+	RestoringPrefix.DisplayName: Restoring
+	RobustPrefix.DisplayName: Robust
+	VitalPrefix.DisplayName: Vital
+	HardyPrefix.DisplayName: Hardy
 }
 
 NPCs: {

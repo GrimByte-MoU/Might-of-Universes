@@ -1,9 +1,3 @@
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using MightofUniverses.Content.Items.Materials;
-
 namespace MightofUniverses.Content.Items.Weapons
 {
     public class MegaBusterX1 : ModItem
@@ -32,7 +26,8 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override void HoldItem(Player player)
         {
-            var modPlayer = player.GetModPlayer<MegaBusterPlayer>();
+            // Use the X1-specific player class so charge mode toggles the correct state
+            var modPlayer = player.GetModPlayer<MegaBusterX1Player>();
             
             Item.autoReuse = !modPlayer.isChargeMode;
             

@@ -31,7 +31,7 @@ namespace MightofUniverses.Common.Players
                 wearing = true;
                 var reaper = Player.GetModPlayer<ReaperPlayer>();
                 reaper.hasReaperArmor = true;
-                // Soul capacity bonus is handled by ReaperPlayer.ComputeImmediateSetBonus()
+                reaper.maxSoulEnergy += 125f;
             }
         }
 

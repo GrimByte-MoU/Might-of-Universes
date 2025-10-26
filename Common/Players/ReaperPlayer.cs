@@ -153,6 +153,12 @@ namespace MightofUniverses.Common.Players
         legs == ModContent.ItemType<Content.Items.Armors.TempleReaverBoots>();
     if (TempleReaver) bonus += 350f;
 
+    bool LunarShroud =
+        head == ModContent.ItemType<Content.Items.Armors.LunarShroudCowl>() &&
+        body == ModContent.ItemType<Content.Items.Armors.LunarShroudCowl>() &&
+        legs == ModContent.ItemType<Content.Items.Armors.LunarShroudPants>();
+    if (LunarShroud) bonus += 400f;
+
             return bonus;
         }
 
