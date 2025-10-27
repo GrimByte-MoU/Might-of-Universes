@@ -1,10 +1,12 @@
 using System;
 using System.Reflection;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.GameInput;
+using Terraria.ModLoader.IO;
 
 namespace MightofUniverses.Common.Players
 {
@@ -272,7 +274,6 @@ namespace MightofUniverses.Common.Players
 
         public override void PostUpdate()
         {
-            // After sets & accessories have fully modified maxSoulEnergy, bring it up to at least the immediate set value (UI consistency)
             float setImmediate = BaseMaxSoulEnergy + ComputeImmediateSetBonus();
             if (maxSoulEnergy < setImmediate)
                 maxSoulEnergy = setImmediate;
@@ -319,14 +320,81 @@ namespace MightofUniverses.Common.Players
 
             return false;
         }
-        public enum SoulReleaseResult
 
+        // --- Death mark helpers / persistence & networking ---
+
+        // Adds up to MAX_DEATH_MARKS and syncs to clients (server authoritative)
+        public void AddDeathMarks(int amount)
         {
+            if (amount <= 0) return;
+            int old = deathMarks;
+            deathMarks = Math.Min(MAX_DEATH_MARKS, deathMarks + amount);
+            if (deathMarks != old)
+            {
+                if (Main.netMode == NetmodeID.Server)
+                    SyncDeathMarks();
+            }
+        }
 
+        // Consume a number of marks. Returns true if successful.
+        public bool ConsumeDeathMarks(int amount)
+        {
+            if (amount <= 0) return true;
+            if (deathMarks >= amount)
+            {
+                deathMarks -= amount;
+                if (Main.netMode == NetmodeID.Server)
+                    SyncDeathMarks();
+                return true;
+            }
+            return false;
+        }
+
+        // Force clear (e.g., on death)
+        public void ForceClearDeathMarks()
+        {
+            if (deathMarks == 0) return;
+            deathMarks = 0;
+            if (Main.netMode == NetmodeID.Server)
+                SyncDeathMarks();
+        }
+
+        // Server -> clients quick sync helper (send a small packet with marks)
+        public void SyncDeathMarks()
+        {
+            if (Main.netMode != NetmodeID.Server) return;
+            var packet = Mod.GetPacket();
+            packet.Write((byte)1); // opcode 1 = DeathMarks sync packet (handle in Mod.HandlePacket)
+            packet.Write((byte)Player.whoAmI);
+            packet.Write((byte)deathMarks);
+            packet.Send();
+        }
+
+        public override void SaveData(TagCompound tag)
+        {
+            tag["DeathMarks"] = deathMarks;
+        }
+
+        public override void LoadData(TagCompound tag)
+        {
+            if (tag.ContainsKey("DeathMarks"))
+                deathMarks = tag.GetInt("DeathMarks");
+        }
+
+        public void NetSend(BinaryWriter writer)
+        {
+            writer.Write((int)deathMarks);
+        }
+
+        public void NetReceive(BinaryReader reader)
+        {
+            deathMarks = reader.ReadInt32();
+        }
+
+        public enum SoulReleaseResult
+        {
             Success,
-
             Failure
-
         }
     }
 }

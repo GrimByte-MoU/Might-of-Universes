@@ -1,7 +1,16 @@
+using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
+using Terraria.ID;
+using Terraria.ModLoader;
 using MightofUniverses.Content.Items.Materials;
 using MightofUniverses.Content.Items.Buffs;
 using System;
+using MightofUniverses.Common;
+using MightofUniverses.Common.Players;
+using MightofUniverses.Common.Abstractions;
+using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
@@ -85,41 +94,38 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             Vector2 center = player.Center;
 
-            // central short-lived burst of dust
+            int travelTime = 30;
+            float speedForTravel = PulseRadiusPx / Math.Max(1, travelTime);
+
             for (int i = 0; i < 48; i++)
             {
                 float angle = MathHelper.TwoPi * i / 48f;
                 Vector2 dir = angle.ToRotationVector2();
-                float speed = 16f;
-                Vector2 velocity = dir * speed;
+                Vector2 velocity = dir * (speedForTravel * 0.9f);
                 var dust = Dust.NewDustPerfect(center, DustID.Smoke, velocity, 150, new Color(180, 180, 180), 1.2f);
                 dust.noGravity = true;
                 dust.fadeIn = 0.8f;
+                dust.alpha = 255 - (travelTime + 6);
             }
-            int ringCount = 4;
-            int dirsPerRing = 18;
-            float travelTime = 30f;
-            float speedForTravel = PulseRadiusPx / travelTime;
 
+            int ringCount = 4;
+            int dirsPerRing = 36;
             for (int r = 0; r < ringCount; r++)
             {
-                float ringPhase = r / (float)ringCount;
                 for (int i = 0; i < dirsPerRing; i++)
                 {
-                    float angle = MathHelper.TwoPi * i / dirsPerRing + Main.rand.NextFloat(0.1f);
+                    float angle = MathHelper.TwoPi * i / dirsPerRing + Main.rand.NextFloat(0.02f);
                     Vector2 dir = angle.ToRotationVector2();
-                    float ringDelay = r * 4;
-                    for (int s = 0; s < 3; s++)
-                    {
-                        Vector2 spawnPos = center;
-                        Vector2 velocity = dir * (speedForTravel * (1f + s * 0.12f));
-                        var d = Dust.NewDustPerfect(spawnPos, DustID.Smoke, velocity, 180, new Color(120, 120, 120), 1.0f);
-                        d.noGravity = true;
-                        d.velocity *= 1.0f + (s * 0.05f);
-                        d.fadeIn = 1.0f;
-                    }
+                    float speedMult = 1f + (r * 0.05f) + Main.rand.NextFloat(-0.08f, 0.08f);
+                    Vector2 velocity = dir * (speedForTravel * speedMult);
+
+                    var d = Dust.NewDustPerfect(center, DustID.Smoke, velocity, 180, new Color(120, 120, 120), 1.0f);
+                    d.noGravity = true;
+                    d.fadeIn = 0.9f;
+                    d.alpha = 255 - (travelTime + 10);
                 }
             }
+
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 for (int i = 0; i < Main.maxNPCs; i++)
@@ -140,6 +146,7 @@ namespace MightofUniverses.Content.Items.Weapons
                             Knockback = 0f,
                             HitDirection = hitDir
                         });
+
                         for (int k = 0; k < 8; k++)
                         {
                             Vector2 dustPos = n.Center + Main.rand.NextVector2Circular(12f, 12f);

@@ -15,7 +15,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.tileCollide = false;
             Projectile.timeLeft = 600;
             Projectile.DamageType = ModContent.GetInstance<ReaperDamageClass>();
-            Projectile.scale = 0.5f;
+            Projectile.scale = 0.75f;
         }
 
         public override void AI()
