@@ -52,7 +52,6 @@ namespace MightofUniverses.Common.Players
                 Player.GetCritChance(reaperClass) += 10f;
             }
 
-            // Savage buff effect while active: +30 Reaper armor penetration
             if (Player.HasBuff(ModContent.BuffType<Savage>()))
             {
                 Player.GetArmorPenetration(reaperClass) += 30;
@@ -138,7 +137,7 @@ namespace MightofUniverses.Common.Players
             }
 
             // Fallback: try local mod with just "Tarred"
-            if (ModContent.TryFind<ModBuff>("Tarred", out tarred))
+            if (ModContent.TryFind("Tarred", out tarred))
             {
                 _tarredBuffType = tarred.Type;
                 return _tarredBuffType;

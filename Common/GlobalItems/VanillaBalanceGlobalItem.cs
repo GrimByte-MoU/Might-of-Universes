@@ -51,6 +51,7 @@ namespace MightofUniverses.Common.GlobalItems
                 case ItemID.Spear:
                 case ItemID.StakeLauncher:
                 case ItemID.StarCannon:
+                case ItemID.SuperStarCannon:
                 case ItemID.StardustCellStaff:
                 case ItemID.Starfury:
                 case ItemID.Terragrim:
@@ -236,6 +237,11 @@ namespace MightofUniverses.Common.GlobalItems
                     item.damage = 50;
                     item.useTime = 6;
                     item.useAnimation = 18;
+                    item.reuseDelay = 30;
+                    break;
+                case ItemID.SuperStarCannon:
+                    item.useTime = 4;
+                    item.useAnimation = 20;
                     item.reuseDelay = 30;
                     break;
                 case ItemID.StardustCellStaff:

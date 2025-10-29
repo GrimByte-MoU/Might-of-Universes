@@ -4573,6 +4573,11 @@ Items: {
 			Reaper abilities cost 5% less soul to activate
 			'''
 	}
+
+	StellarPulser: {
+		DisplayName: Stellar Pulser
+		Tooltip: ""
+	}
 }
 
 Prefixes: {
