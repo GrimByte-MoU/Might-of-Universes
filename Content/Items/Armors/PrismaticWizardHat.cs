@@ -2,10 +2,12 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using MightofUniverses.Content.Items.Materials;
+using MightofUniverses.Common.Players; // <- required for setting flags
 
 namespace MightofUniverses.Content.Items.Armors
 {
-    public class PrismaticWizardHood : ModItem
+    [AutoloadEquip(EquipType.Head)]
+    public class PrismaticWizardHat : ModItem
     {
 
         public override void SetDefaults()
@@ -25,9 +27,10 @@ namespace MightofUniverses.Content.Items.Armors
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "+10% magic damage and magic weapons inflict Prismatic Rend for 3 seconds.\n Press {key} to restore 200 mana and remove mana sickness.\n This ability has a 5 second cooldown";
+            player.setBonus = "+10% magic damage and magic weapons inflict Prismatic Rend for 3 seconds.\n Press {key} to restore 200 mana and remove mana sickness.\n This ability has a 5 second cooldown.";
             player.GetDamage(DamageClass.Magic) += 0.10f;
-            player.GetModPlayer<PrismaticPlayer>();
+            // Mark the wizard set active on the player's PrismaticPlayer so global hooks and the key logic use it.
+            player.GetModPlayer<PrismaticPlayer>().prismaticWizardSet = true;
         }
 
         public override void UpdateEquip(Player player)

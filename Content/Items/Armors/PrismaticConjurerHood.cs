@@ -2,9 +2,11 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using MightofUniverses.Content.Items.Materials;
+using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Armors
 {
+    [AutoloadEquip(EquipType.Head)]
     public class PrismaticConjurerHood : ModItem
     {
 
@@ -29,7 +31,7 @@ namespace MightofUniverses.Content.Items.Armors
             player.GetDamage(DamageClass.Summon) += 0.10f;
             player.maxMinions += 3;
             player.maxTurrets += 3;
-            player.GetModPlayer<PrismaticPlayer>();
+            player.GetModPlayer<PrismaticPlayer>().prismaticConjurerSet = true;
         }
 
         public override void UpdateEquip(Player player)

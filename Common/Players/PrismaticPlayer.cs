@@ -23,10 +23,24 @@ namespace MightofUniverses.Common.Players
         // Sentinel tracking
         private int sentinelProjectileId = -1;
 
+        // Flags set by head.UpdateArmorSet when a full prismatic set is equipped.
+        public bool prismaticWizardSet = false;
+        public bool prismaticKnightSet = false;
+        public bool prismaticCommandoSet = false;
+        public bool prismaticConjurerSet = false;
+
         public override void ResetEffects()
         {
+            // Reset booleans and multipliers each tick
+            prismaticWizardSet = false;
+            prismaticKnightSet = false;
+            prismaticCommandoSet = false;
+            prismaticConjurerSet = false;
+
             meleeSizeMultiplier = 1f;
             rangedVelocityMultiplier = 1f;
+            // ammoConserveChance is additive from gear and not reset here so UpdateEquip may add to it directly.
+            ammoConserveChance = 0f;
         }
 
         public override void PostUpdate()
@@ -45,8 +59,8 @@ namespace MightofUniverses.Common.Players
                 }
             }
 
-            // Maintain Conjurer sentinel if conjurer set is equipped
-            if (IsWearingConjurerSet())
+            // Maintain Conjurer sentinel if conjurer set is active
+            if (prismaticConjurerSet)
             {
                 EnsureSentinelExists();
             }
@@ -70,7 +84,8 @@ namespace MightofUniverses.Common.Players
         {
             if (armorAbilityCooldown > 0) return;
 
-            if (IsWearingWizardSet())
+            // Use the boolean flags set by UpdateArmorSet; this is more reliable than inspecting Player.armor[] repeatedly.
+            if (prismaticWizardSet)
             {
                 int restore = 200;
                 Player.statMana += restore;
@@ -82,37 +97,35 @@ namespace MightofUniverses.Common.Players
                 }
 
                 SoundEngine.PlaySound(SoundID.Item4, Player.position);
-                armorAbilityCooldown = 300;
+                armorAbilityCooldown = 300; // 5s
                 armorAbilityTimer = 0;
                 armorAbilityType = 1;
                 Main.NewText("Prismatic Wizard Armor Ability used: restored 200 mana.", Color.MediumPurple);
-                // Sync in multiplayer
-                if (Main.netMode == NetmodeID.MultiplayerClient)
-                {
-                    // placeholder - add packet if you need sync
-                }
+                // TODO: sync packet if multiplayer behavior needs announcement
                 return;
             }
 
-            if (IsWearingKnightSet())
+            if (prismaticKnightSet)
             {
                 armorAbilityType = 2;
-                armorAbilityTimer = 300;
-                armorAbilityCooldown = 600;
+                armorAbilityTimer = 300; // 5s
+                armorAbilityCooldown = 600; // 10s
                 SoundEngine.PlaySound(SoundID.Item11, Player.position);
                 Main.NewText("Prismatic Knight Armor Ability active.", Color.OrangeRed);
                 return;
             }
 
-            if (IsWearingCommandoSet())
+            if (prismaticCommandoSet)
             {
                 armorAbilityType = 3;
-                armorAbilityTimer = 180;
-                armorAbilityCooldown = 600;
+                armorAbilityTimer = 180; // 3s
+                armorAbilityCooldown = 600; // 10s
                 SoundEngine.PlaySound(SoundID.Item11, Player.position);
                 Main.NewText("Prismatic Commando Armor Ability active.", Color.LightSkyBlue);
                 return;
             }
+
+            // Conjurer set is passive (sentinel) — no armor key action here
         }
 
         public override void UpdateDead()
@@ -124,6 +137,7 @@ namespace MightofUniverses.Common.Players
 
         public override void UpdateEquips()
         {
+            // Apply active ability effects while armorAbilityTimer > 0
             if (armorAbilityTimer > 0)
             {
                 if (armorAbilityType == 2)
@@ -134,39 +148,21 @@ namespace MightofUniverses.Common.Players
                 }
                 else if (armorAbilityType == 3)
                 {
+                    // Add attack speed to approximate tripled firing speed while active
                     Player.GetAttackSpeed(DamageClass.Ranged) += 2.0f;
                     rangedVelocityMultiplier = 2.0f;
                 }
             }
+
+            // ammoConserveChance should be accumulated from UpdateEquip of head if Commando hat is equipped
+            // (UpdateEquip on commando hat must set player.GetModPlayer<PrismaticPlayer>().ammoConserveChance += 0.25f;)
         }
 
-        private bool IsWearingWizardSet()
-        {
-            return Player.armor[0].type == ModContent.ItemType<PrismaticWizardHood>()
-                && Player.armor[1].type == ModContent.ItemType<PrismaticChestplate>()
-                && Player.armor[2].type == ModContent.ItemType<PrismaticGreaves>();
-        }
-
-        private bool IsWearingKnightSet()
-        {
-            return Player.armor[0].type == ModContent.ItemType<PrismaticKnightHelmet>()
-                && Player.armor[1].type == ModContent.ItemType<PrismaticChestplate>()
-                && Player.armor[2].type == ModContent.ItemType<PrismaticGreaves>();
-        }
-
-        private bool IsWearingCommandoSet()
-        {
-            return Player.armor[0].type == ModContent.ItemType<PrismaticCommandoHat>()
-                && Player.armor[1].type == ModContent.ItemType<PrismaticChestplate>()
-                && Player.armor[2].type == ModContent.ItemType<PrismaticGreaves>();
-        }
-
-        private bool IsWearingConjurerSet()
-        {
-            return Player.armor[0].type == ModContent.ItemType<PrismaticConjurerHood>()
-                && Player.armor[1].type == ModContent.ItemType<PrismaticChestplate>()
-                && Player.armor[2].type == ModContent.ItemType<PrismaticGreaves>();
-        }
+        // Optional helper checks kept for compatibility; they now simply read the flags
+        private bool IsWearingWizardSet() => prismaticWizardSet;
+        private bool IsWearingKnightSet() => prismaticKnightSet;
+        private bool IsWearingCommandoSet() => prismaticCommandoSet;
+        private bool IsWearingConjurerSet() => prismaticConjurerSet;
 
         private void EnsureSentinelExists()
         {

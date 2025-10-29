@@ -29,6 +29,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.tileCollide = false;
             Projectile.netImportant = true;
             Projectile.penetrate = -1;
+            Projectile.scale = 1.5f;
         }
 
         private int shootTimer = 0;
@@ -78,7 +79,7 @@ namespace MightofUniverses.Content.Items.Projectiles
                 {
                     Vector2 dir = Vector2.Normalize(Main.npc[target].Center - Projectile.Center);
                     Vector2 vel = dir * 8f;
-                    int bolt = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, vel, ModContent.ProjectileType<PrismaticBolt>(), (int)(20 * owner.GetDamage(DamageClass.Summon).Multiplicative), 1f, owner.whoAmI);
+                    int bolt = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, vel, ModContent.ProjectileType<PrismaticBolt>(), (int)(100 * owner.GetDamage(DamageClass.Summon).Multiplicative), 1f, owner.whoAmI);
                     Main.projectile[bolt].netUpdate = true;
                 }
             }

@@ -36,7 +36,7 @@ namespace MightofUniverses.Common.UI
         private int[] deathSlotFlash = new int[DeathMaxSlots];
         private float[] deathGlowAlpha = new float[DeathMaxSlots];
         private int prevDeathMarks = -1;
-        private int deathIconSize = 32; // fallback until we read texture size
+        private int deathIconSize = 32; 
         private int deathSpacing = 6;
         private int deathPaddingFromBar = 8;
 
@@ -45,21 +45,17 @@ namespace MightofUniverses.Common.UI
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            // Quick guard: ensure LocalPlayer exists
             Player player = Main.LocalPlayer;
             if (player == null || !player.active) return;
 
             ReaperPlayer reaper = player.GetModPlayer<ReaperPlayer>();
             if (reaper == null) return;
 
-            // Optional: if you want the UI always visible for testing, comment this check
             if (!reaper.hasReaperArmor) return;
 
-            // Load soul bar textures (these should be present)
             Texture2D barTexture = ModContent.Request<Texture2D>(SOUL_BAR_PATH).Value;
             Texture2D fillTexture = ModContent.Request<Texture2D>(SOUL_FILL_PATH).Value;
 
-            // Robust lazy-load for death textures (try both Common/UI and Content/UI)
             if (deathEmptyTex == null)
             {
                 try { deathEmptyTex = ModContent.Request<Texture2D>(DEATH_EMPTY_PATH_COMMON).Value; }
@@ -70,8 +66,6 @@ namespace MightofUniverses.Common.UI
                 try { deathFilledTex = ModContent.Request<Texture2D>(DEATH_FILLED_PATH_COMMON).Value; }
                 catch { try { deathFilledTex = ModContent.Request<Texture2D>(DEATH_FILLED_PATH_CONTENT).Value; } catch { deathFilledTex = null; } }
             }
-
-            // Print load info once (so you can see whether the textures loaded at runtime)
             if (!printedLoadInfo)
             {
                 string emptyInfo = deathEmptyTex == null ? "NULL" : $"{deathEmptyTex.Width}x{deathEmptyTex.Height}";
@@ -80,13 +74,8 @@ namespace MightofUniverses.Common.UI
                 printedLoadInfo = true;
             }
 
-            // Prefer native texture size for layout when available
-            if (deathEmptyTex != null)
-                deathIconSize = Math.Max(8, Math.Min(deathEmptyTex.Width, deathEmptyTex.Height));
-            else if (deathFilledTex != null)
-                deathIconSize = Math.Max(8, Math.Min(deathFilledTex.Width, deathFilledTex.Height));
-            else
-                deathIconSize = 32;
+            // Fixed size for consistent UI scaling
+            deathIconSize = 32;
 
             // --- Soul bar drawing (unchanged) ---
             Vector2 position = new Vector2(500, 80);
@@ -110,41 +99,11 @@ namespace MightofUniverses.Common.UI
                 bool isFull = (reaper.maxSoulEnergy > 0f && reaper.soulEnergy >= reaper.maxSoulEnergy - 0.001f)
                               || displayedSoulPercent >= 0.995f;
 
-                if (isFull)
-                {
-                    Rectangle fillDst = new Rectangle((int)fillPos.X, (int)fillPos.Y, fillSrc.Width, fillSrc.Height);
-
-                    // Additive glow pass (end/begin then restore UI state)
-                    float time = (float)Main.GlobalTimeWrappedHourly;
-                    float pulse = 0.5f + 0.5f * (float)Math.Sin(time * 4.0f);
-                    float baseGlow = 0.25f;
-                    float pulseGlow = 0.35f;
-                    var glowColor = new Color(120, 255, 220);
-
-                    spriteBatch.End();
-                    spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.UIScaleMatrix);
-
-                    float glowA = baseGlow + pulseGlow * pulse;
-                    spriteBatch.Draw(fillTexture, fillDst, fillSrc, glowColor * glowA);
-
-                    float shimmerSpeed = 80f;
-                    int shimmerWidth = 14;
-                    float shimmerAlpha = 0.55f;
-                    float sweep = (time * shimmerSpeed) % Math.Max(1, fillDst.Width);
-                    int bandLeft = fillDst.Left + (int)sweep - shimmerWidth / 2;
-                    int srcOffsetX = bandLeft - fillDst.Left;
-                    int srcX = FILL_LEFT_PAD_PX + Math.Clamp(srcOffsetX, 0, Math.Max(0, fillSrc.Width - 1));
-                    int srcWidth = Math.Max(0, Math.Min(shimmerWidth, fillSrc.Width - Math.Clamp(srcOffsetX, 0, fillSrc.Width)));
-                    if (srcWidth > 0)
-                    {
-                        Rectangle bandSrc = new Rectangle(srcX, 0, srcWidth, fillSrc.Height);
-                        Rectangle drawDst = new Rectangle(bandLeft + Math.Max(0, -srcOffsetX), fillDst.Top, srcWidth, fillDst.Height);
-                        spriteBatch.Draw(fillTexture, drawDst, bandSrc, glowColor * shimmerAlpha);
-                    }
-
-                    spriteBatch.End();
-                    spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.UIScaleMatrix);
-                }
+                // Temporarily disabled glow effect to prevent UI state corruption
+                // if (isFull)
+                // {
+                //     // ... glow code ...
+                // }
 
                 // occasional dust
                 if (reaper.soulEnergy > 0 && Main.rand.NextFloat() < 0.1f)

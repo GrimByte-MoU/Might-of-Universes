@@ -5,6 +5,7 @@ using MightofUniverses.Content.Items.Materials;
 
 namespace MightofUniverses.Content.Items.Armors
 {
+    [AutoloadEquip(EquipType.Body)]
     public class PrismaticChestplate : ModItem
     {
 

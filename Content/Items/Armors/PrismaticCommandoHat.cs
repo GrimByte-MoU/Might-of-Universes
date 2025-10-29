@@ -2,9 +2,11 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using MightofUniverses.Content.Items.Materials;
+using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Armors
 {
+    [AutoloadEquip(EquipType.Head)]
     public class PrismaticCommandoHat : ModItem
     {
 
@@ -27,13 +29,14 @@ namespace MightofUniverses.Content.Items.Armors
         {
             player.setBonus = "+10% ranged damage and ranged weapons inflict Prismatic Rend for 3 seconds.\n Press {key} to gain tripled firing speed and doubled velocity for 3 seconds.\n This ability has a 10 second cooldown.";
             player.GetDamage(DamageClass.Ranged) += 0.10f;
-            player.GetModPlayer<PrismaticPlayer>();
+            player.GetModPlayer<PrismaticPlayer>().prismaticCommandoSet = true;
         }
 
         public override void UpdateEquip(Player player)
         {
             player.GetDamage(DamageClass.Ranged) += 0.07f;
             player.GetCritChance(DamageClass.Ranged) += 18;
+            player.GetModPlayer<PrismaticPlayer>().ammoConserveChance += 0.25f;
         }
 
         public override void AddRecipes()

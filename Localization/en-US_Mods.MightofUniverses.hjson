@@ -745,6 +745,9 @@ Projectiles: {
 	MegaBusterWeakCharge.DisplayName: Mega Buster Weak Charge
 	LaserSaberBeam.DisplayName: Laser Saber Beam
 	SoundFractureBeam.DisplayName: Sound Fracture Beam
+	PrismaticBolt.DisplayName: Prismatic Bolt
+	PrismaticSentinel.DisplayName: Prismatic Sentinel
+	PrismaticShard.DisplayName: Prismatic Shard
 }
 
 Keybinds: {
@@ -4576,7 +4579,66 @@ Items: {
 
 	StellarPulser: {
 		DisplayName: Stellar Pulser
-		Tooltip: ""
+		Tooltip: Now fires two stars at once!
+	}
+
+	PrismaticChestplate: {
+		DisplayName: Prismatic Chestplate
+		Tooltip:
+			'''
+			+8% damage
+			+35 max life
+			'''
+	}
+
+	PrismaticCommandoHat: {
+		DisplayName: Prismatic Commando Hat
+		Tooltip:
+			'''
+			+7% Ranged damage
+			+18% Ranged critical strike chance
+			25% chance to not consume ammo
+			'''
+	}
+
+	PrismaticConjurerHood: {
+		DisplayName: Prismatic Conjurer Hood
+		Tooltip:
+			'''
+			+7% Summon Damage
+			+2 max minions
+			+15% whip speed
+			'''
+	}
+
+	PrismaticGreaves: {
+		DisplayName: Prismatic Greaves
+		Tooltip:
+			'''
+			+7% damage
+			+15% movement speed
+			'''
+	}
+
+	PrismaticKnightMask: {
+		DisplayName: Prismatic Knight Mask
+		Tooltip:
+			'''
+			+7% Melee damage
+			+18% Melee critical strike chance
+			+10% Melee attack speed
+			'''
+	}
+
+	PrismaticWizardHat: {
+		DisplayName: Prismatic Wizard Hat
+		Tooltip:
+			'''
+			+7% Magic damage
+			+18% Magic critical strike chance
+			Increases max mana by 100
+			15% reduced mana cost
+			'''
 	}
 }
 

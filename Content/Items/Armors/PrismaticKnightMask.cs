@@ -2,10 +2,12 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using MightofUniverses.Content.Items.Materials;
+using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Armors
 {
-    public class PrismaticKnightHelmet : ModItem
+    [AutoloadEquip(EquipType.Head)]
+    public class PrismaticKnightMask : ModItem
     {
 
         public override void SetDefaults()
@@ -25,9 +27,9 @@ namespace MightofUniverses.Content.Items.Armors
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "+10% melee damage and melee weapons inflict Prismatic Rend for 3 seconds.\n Press {key} to gain 10% melee critical strike chance, 15% melee attack speed, and 25% melee size for 5 seconds.\n This ability has a 10 second cooldown.";
+            player.setBonus = "+10% melee damage and melee weapons inflict Prismatic Rend for 3 seconds.\n Press {key} to gain 10% melee critical strike chance, 15% melee attack speed, and 25% melee size for 5 seconds.";
             player.GetDamage(DamageClass.Melee) += 0.10f;
-            player.GetModPlayer<PrismaticPlayer>();
+            player.GetModPlayer<PrismaticPlayer>().prismaticKnightSet = true;
         }
 
         public override void UpdateEquip(Player player)
