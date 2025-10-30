@@ -9,25 +9,27 @@ namespace MightofUniverses.Content.Items.Projectiles
     public class MoonWave : MoUProjectile
     {
         private float curveDirection = 1f;
-        private const float CURVE_STRENGTH = 0.1f;
+        private const float CURVE_STRENGTH = 0.2f;
 
         public override void SafeSetDefaults()
         {
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Melee;
-            Projectile.penetrate = 4;
-            Projectile.timeLeft = 60;
+            Projectile.penetrate = 1;
+            Projectile.timeLeft = 30;
             Projectile.light = 0.5f;
             Projectile.alpha = 100;
+            Projectile.scale = 1.15f;
         }
 
         public override void AI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
             curveDirection = Projectile.ai[1];
-            Projectile.velocity = Projectile.velocity.RotatedBy(CURVE_STRENGTH * curveDirection);
-            
-            // Electric effects
+            if (Projectile.timeLeft < 8)
+            {
+                Projectile.velocity = Projectile.velocity.RotatedBy(CURVE_STRENGTH * curveDirection);
+            }
             Lighting.AddLight(Projectile.Center, 0.2f, 0.2f, 1f);
             
             if (Main.rand.NextBool(2))

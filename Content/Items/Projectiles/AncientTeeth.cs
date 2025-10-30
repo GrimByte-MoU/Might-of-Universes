@@ -31,7 +31,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            Projectile.rotation = Projectile.velocity.ToRotation();
 
             if (Main.rand.NextBool(5))
             {
@@ -39,11 +38,12 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Main.dust[d].noGravity = true;
                 Main.dust[d].velocity *= 0.2f;
             }
+            Projectile.rotation = Projectile.velocity.ToRotation();
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(ModContent.BuffType<Tarred>(), 60 * 3); // 3 seconds
+            target.AddBuff(ModContent.BuffType<Tarred>(), 180);
         }
     }
 }

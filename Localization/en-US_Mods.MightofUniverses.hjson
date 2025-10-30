@@ -1903,8 +1903,8 @@ Items: {
 		DisplayName: Moon Blade
 		Tooltip:
 			'''
-			An unusually shaped lunar blade
-			It fires out two crescents that circle back around you
+			A blade forged by metals from the moon
+			Fires 2 crescents which travel apart then curve in to meet after a certain distance
 			The blade inflicts Lunar Reap for 4 seconds, the crescents inflict it for 2 seconds
 			'''
 	}

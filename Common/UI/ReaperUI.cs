@@ -39,8 +39,6 @@ namespace MightofUniverses.Common.UI
         private int deathIconSize = 32; 
         private int deathSpacing = 6;
         private int deathPaddingFromBar = 8;
-
-        // debug print guard (prints once on first Draw)
         private bool printedLoadInfo = false;
 
         public override void Draw(SpriteBatch spriteBatch)

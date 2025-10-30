@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MightofUniverses")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1c14c59a0f14b884734a3f8204e656fd4048f0ff")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+943802c71d76dff8dcb605f6f74214963aef8247")]
 [assembly: System.Reflection.AssemblyProductAttribute("MightofUniverses")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MightofUniverses")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

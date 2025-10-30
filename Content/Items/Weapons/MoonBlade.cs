@@ -27,12 +27,12 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.UseSound = SoundID.Item71;
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<MoonWave>();
-            Item.shootSpeed = 18f;
+            Item.shootSpeed = 20f;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            float spreadAngle = MathHelper.ToRadians(15);
+            float spreadAngle = MathHelper.ToRadians(5);
             
             Vector2 velocity1 = velocity.RotatedBy(-spreadAngle);
             Vector2 velocity2 = velocity.RotatedBy(spreadAngle);

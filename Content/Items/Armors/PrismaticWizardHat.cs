@@ -2,7 +2,8 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using MightofUniverses.Content.Items.Materials;
-using MightofUniverses.Common.Players; // <- required for setting flags
+using MightofUniverses.Common.Players;
+using MightofUniverses.Common.Input;
 
 namespace MightofUniverses.Content.Items.Armors
 {
@@ -27,7 +28,11 @@ namespace MightofUniverses.Content.Items.Armors
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "+10% magic damage and magic weapons inflict Prismatic Rend for 3 seconds.\n Press {key} to restore 200 mana and remove mana sickness.\n This ability has a 5 second cooldown.";
+        string key = ModKeybindManager.ArmorAbility?.GetAssignedKeys().Count > 0 
+                ? ModKeybindManager.ArmorAbility.GetAssignedKeys()[0] 
+                : "[Unbound]";
+
+            player.setBonus = "+10% magic damage and magic weapons inflict Prismatic Rend for 3 seconds.\n Press '{key}' to restore 200 mana and remove mana sickness.\n This ability has a 5 second cooldown.";
             player.GetDamage(DamageClass.Magic) += 0.10f;
             // Mark the wizard set active on the player's PrismaticPlayer so global hooks and the key logic use it.
             player.GetModPlayer<PrismaticPlayer>().prismaticWizardSet = true;

@@ -33,7 +33,6 @@ namespace MightofUniverses.Content.Items.Armors
 
         public override void UpdateArmorSet(Player player)
         {
-            // Get the keybind dynamically
             string key = ModKeybindManager.ArmorAbility?.GetAssignedKeys().Count > 0 
                 ? ModKeybindManager.ArmorAbility.GetAssignedKeys()[0] 
                 : "[Unbound]";
