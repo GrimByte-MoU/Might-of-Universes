@@ -12,7 +12,7 @@ namespace MightofUniverses.Common.Players
     {
         private bool wearingFull;
         public bool HasChloroChest;
-        private const int   MaxSoulBonus        = 200;      // previously added
+        private const int   MaxSoulBonus        = 200;
 
         public override void ResetEffects()
         {
@@ -28,10 +28,8 @@ namespace MightofUniverses.Common.Players
                 var reaper = Player.GetModPlayer<ReaperPlayer>();
                 reaper.hasReaperArmor = true;
 
-                // Max souls
                 reaper.maxSoulEnergy += MaxSoulBonus;
 
-                // Set-wide bonuses
                 var reaperClass = ModContent.GetInstance<ReaperDamageClass>();
                 Player.GetDamage(reaperClass) += 0.1f;
                 Player.endurance += 0.1f;
@@ -49,7 +47,6 @@ namespace MightofUniverses.Common.Players
             }
         }
 
-        // Apply scythe-only damage bonus (kept from previous behavior)
         public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
         {
             ApplyScytheDamage(item, ref modifiers);
@@ -83,7 +80,6 @@ namespace MightofUniverses.Common.Players
             }
         }
 
-        // Item-specific attack speed (swing speed)
         public override void ModifyItemScale(Item item, ref float scale)
         {
             if (wearingFull && item != null && item.type == ModContent.ItemType<ChlorotaniumScythe>())
@@ -98,6 +94,30 @@ namespace MightofUniverses.Common.Players
             return Player.armor[0].type == ModContent.ItemType<ChlorotaniumMaskedHelmet>()
                 && Player.armor[1].type == ModContent.ItemType<ChlorotaniumChestplate>()
                 && Player.armor[2].type == ModContent.ItemType<ChlorotaniumGreaves>();
+        }
+
+        public override void PostUpdate()
+        {
+            if (!wearingFull) return;
+
+            Lighting.AddLight(Player.Center, 0f, 0.8f, 0.5f);
+
+            if (Main.rand.NextBool(3))
+            {
+                int dustType = Main.rand.NextBool() ? DustID.Titanium : DustID.Chlorophyte;
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, dustType, 0f, 0f, 100, default, 0.8f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.2f;
+            }
+
+            if (Main.rand.NextBool(2))
+            {
+                Color color = Main.rand.NextBool() ? Color.Green : Color.Silver;
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, DustID.Torch, Player.velocity.X * 0.5f, Player.velocity.Y * 0.5f, 100, color, 0.5f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.1f;
+                dust.scale *= Main.rand.NextFloat(0.8f, 1.2f);
+            }
         }
     }
 }

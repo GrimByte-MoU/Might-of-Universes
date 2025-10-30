@@ -17,9 +17,8 @@ namespace MightofUniverses.Common.Players
         {
             if (!hasCrimsonHideSet) return;
 
-            // Apply set bonus stats
-            Player.GetDamage(DamageClass.Generic) *= 0.80f; // -20% weapon damage (set bonus)
-            Player.GetModPlayer<PacifistPlayer>().pacifistDamageMultiplier += 0.30f; // +30% pacifist damage (set bonus)
+            Player.GetDamage(DamageClass.Generic) *= 0.80f;
+            Player.GetModPlayer<PacifistPlayer>().pacifistDamageMultiplier += 0.30f;
         }
 
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
@@ -32,21 +31,19 @@ namespace MightofUniverses.Common.Players
 
         private void ApplyLifesteal(int damageDone)
         {
-            // 50% chance to lifesteal
             if (Main.rand.NextBool(2))
             {
                 int healAmount;
 
                 if (Main.rand.NextBool(2))
                 {
-                    healAmount = (int)(damageDone * 0.02f); // 0.5% + 1.5% = 2%
+                    healAmount = (int)(damageDone * 0.02f);
                 }
                 else
                 {
-                    healAmount = (int)(damageDone * 0.005f); // 0.5%
+                    healAmount = (int)(damageDone * 0.005f);
                 }
 
-                // Minimum 1 HP if damage was dealt
                 if (damageDone > 0 && healAmount < 1)
                     healAmount = 1;
 
@@ -74,6 +71,28 @@ namespace MightofUniverses.Common.Players
                         dust.noGravity = true;
                     }
                 }
+            }
+        }
+
+        public override void PostUpdate()
+        {
+            if (!hasCrimsonHideSet) return;
+
+            Lighting.AddLight(Player.Center, 0.9f, 0.1f, 0.1f);
+
+            if (Main.rand.NextBool(3))
+            {
+                int dustType = Main.rand.NextBool(4) ? DustID.Blood : DustID.IchorTorch;
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, dustType, 0f, 0f, 100, default, 0.8f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.2f;
+            }
+
+            if (Main.rand.NextBool(4))
+            {
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, DustID.Torch, Player.velocity.X * 0.3f, Player.velocity.Y * 0.3f, 100, Color.Red, 0.6f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.1f;
             }
         }
     }

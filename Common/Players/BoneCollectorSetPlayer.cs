@@ -1,5 +1,10 @@
 using Terraria;
 using Terraria.ModLoader;
+using Terraria.ID;
+using MightofUniverses.Content.Items.Armors;
+using MightofUniverses.Common;
+using MightofUniverses.Common.Players;
+using MightofUniverses.Content.Items.Weapons;
 
 namespace MightofUniverses.Common.Players
 {
@@ -36,6 +41,21 @@ namespace MightofUniverses.Common.Players
         {
             if (wearing)
                 Player.setBonus = "+100 max souls\nSoul consumption costs 10% less.\n2% chance to fully refund consumed souls.";
+        }
+
+        public override void PostUpdate()
+        {
+            if (!wearing) return;
+
+            Lighting.AddLight(Player.Center, 0.2f, 0.5f, 0.8f);
+
+            if (Main.rand.NextBool(3))
+            {
+                int dustType = Main.rand.NextBool(4) ? DustID.Bone : DustID.Water;
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, dustType, 0f, 0f, 100, default, 0.8f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.2f;
+            }
         }
     }
 }

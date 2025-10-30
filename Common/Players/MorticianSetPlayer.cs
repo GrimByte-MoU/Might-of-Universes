@@ -52,6 +52,22 @@ namespace MightofUniverses.Common.Players
                 }
                 Terraria.Audio.SoundEngine.PlaySound(SoundID.Item4, Player.position);
             }
+
+            Lighting.AddLight(Player.Center, 0f, 0.3f, 0.8f);
+
+            if (Main.rand.NextBool(5))
+            {
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, DustID.BlueCrystalShard, 0f, 0f, 100, default, 0.8f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.2f;
+            }
+
+            if (Main.rand.NextBool(6))
+            {
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, DustID.Smoke, 0f, 0f, 100, default, 0.6f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.1f;
+            }
         }
     }
 }

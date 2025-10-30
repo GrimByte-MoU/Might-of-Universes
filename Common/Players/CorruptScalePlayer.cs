@@ -22,7 +22,6 @@ namespace MightofUniverses.Common.Players
         {
             if (!hasCorruptScaleSet) return;
 
-            // Apply set bonus stats
             Player.GetDamage(DamageClass.Generic) *= 0.75f;
             Player.GetModPlayer<PacifistPlayer>().pacifistDamageMultiplier += 0.55f;
         }
@@ -33,7 +32,7 @@ namespace MightofUniverses.Common.Players
             if (Main.rand.NextBool(3))
             {
                 float angle = Main.rand.NextFloat(0f, MathHelper.TwoPi);
-                float distance = Main.rand.NextFloat(0f, 10 * 16); // 10 tiles
+                float distance = Main.rand.NextFloat(0f, 10 * 16);
                 Vector2 position = Player.Center + new Vector2(
                     (float)Math.Cos(angle) * distance,
                     (float)Math.Sin(angle) * distance
@@ -50,6 +49,16 @@ namespace MightofUniverses.Common.Players
                 auraTick = 0;
                 DamageNearbyEnemies();
             }
+
+            Lighting.AddLight(Player.Center, 0.3f, 0f, 0.5f);
+
+            if (Main.rand.NextBool(3))
+            {
+                int dustType = Main.rand.NextBool(4) ? DustID.CorruptGibs : DustID.GreenTorch;
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, dustType, 0f, 0f, 100, default, 0.8f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.2f;
+            }
         }
 
         private void DamageNearbyEnemies()
@@ -57,7 +66,6 @@ namespace MightofUniverses.Common.Players
             float auraRadius = 160;
             float baseDamage = 15f;
             
-            // Apply pacifist damage multiplier
             float pacifistMult = Player.GetModPlayer<PacifistPlayer>().pacifistDamageMultiplier;
             int finalDamage = (int)(baseDamage * pacifistMult);
 
@@ -70,7 +78,6 @@ namespace MightofUniverses.Common.Players
                 float distance = Vector2.Distance(Player.Center, npc.Center);
                 if (distance <= auraRadius)
                 {
-                    // Deal damage with StrikeNPC
                     NPC.HitInfo hit = new NPC.HitInfo();
                     hit.Damage = finalDamage;
                     hit.Knockback = 0f;
@@ -79,13 +86,11 @@ namespace MightofUniverses.Common.Players
                     npc.StrikeNPC(hit);
                     npc.AddBuff(ModContent.BuffType<Corrupted>(), 60);
                     
-                    // Visual feedback
                     if (Main.rand.NextBool(4))
                     {
                         Dust.NewDust(npc.position, npc.width, npc.height, DustID.Shadowflame, 0f, 0f, 100, default, 0.8f);
                     }
 
-                    // Sync in multiplayer
                     if (Main.netMode != NetmodeID.SinglePlayer)
                     {
                         NetMessage.SendStrikeNPC(npc, hit);

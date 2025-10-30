@@ -11,7 +11,6 @@ namespace MightofUniverses.Common.Players
     public class GravetenderSetPlayer : ModPlayer
     {
         private const int MaxSoulBonus = 40;
-
         private bool wearing;
         private int thornCooldown;
         public float poisonArmorPen;
@@ -33,6 +32,9 @@ namespace MightofUniverses.Common.Players
                 reaper.hasReaperArmor = true;
                 reaper.maxSoulEnergy += MaxSoulBonus;
             }
+
+            if (thornCooldown > 0)
+                thornCooldown--;
         }
 
         public override void PostUpdateEquips()
@@ -43,7 +45,24 @@ namespace MightofUniverses.Common.Players
 
         public override void PostUpdate()
         {
-            if (thornCooldown > 0) thornCooldown--;
+            if (!wearing) return;
+
+            Lighting.AddLight(Player.Center, 0.5f, 0f, 0.8f);
+
+            if (Main.rand.NextBool(3))
+            {
+                Vector2 dustPos = Player.Bottom + new Vector2(Main.rand.NextFloat(-Player.width / 2, Player.width / 2), Main.rand.NextFloat(-5, 5));
+                Dust dust = Dust.NewDustDirect(dustPos, 1, 1, DustID.JungleSpore, 0f, 0f, 100, default, 0.8f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.2f;
+            }
+
+            if (Main.rand.NextBool(4))
+            {
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, DustID.Smoke, 0f, 0f, 100, default, 0.8f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.2f;
+            }
         }
 
         public override void OnHitByNPC(NPC npc, Player.HurtInfo info)

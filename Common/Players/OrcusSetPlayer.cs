@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Common.Players
 {
@@ -71,6 +72,23 @@ namespace MightofUniverses.Common.Players
                         n.AddBuff(buff, 10);
                 }
             }
+
+            Lighting.AddLight(Player.Center, 1f, 0.95f, 0.8f);
+
+            if (Main.rand.NextBool(3))
+            {
+                int dustType = Main.rand.NextBool(4) ? DustID.Gold : DustID.Marble;
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, dustType, 0f, 0f, 100, default, 0.8f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.2f;
+            }
+
+            if (Main.rand.NextBool(5))
+            {
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, DustID.HallowedTorch, 0f, 0f, 100, default, 0.8f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.2f;
+            }
         }
 
         public override void PostUpdateMiscEffects()
@@ -118,7 +136,7 @@ namespace MightofUniverses.Common.Players
                 }
             }
 
-            if (orcusChestplatePen > 0f && target.HasBuff(ModContent.BuffType<Content.Items.Buffs.RebukingLight>()))
+            if (orcusChestplatePen > 0f && target.HasBuff(ModContent.BuffType<RebukingLight>()))
             {
                 float frac = MathHelper.Clamp(orcusChestplatePen / 100f, 0f, 0.9f);
                 modifiers.DefenseEffectiveness *= 1f - frac;

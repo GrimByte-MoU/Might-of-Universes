@@ -54,6 +54,23 @@ namespace MightofUniverses.Common.Players
                 }
                 Terraria.Audio.SoundEngine.PlaySound(SoundID.Item21, Player.position);
             }
+
+            Lighting.AddLight(Player.Center, 0f, 0.4f, 0.9f);
+
+            if (Main.rand.NextBool(4))
+            {
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, DustID.Ice, 0f, 0f, 100, default, 0.8f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.2f;
+            }
+
+            if (Main.rand.NextBool(3))
+            {
+                Color color = Main.rand.NextBool() ? new Color(0.8f, 0.5f, 1f) : new Color(1f, 0.5f, 0.8f);
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, DustID.Snow, 0f, 0f, 100, color, 0.8f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.2f;
+            }
         }
 
         private bool IsWearingFullMurkyIceSet()

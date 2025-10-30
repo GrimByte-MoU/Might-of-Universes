@@ -2,7 +2,7 @@ using System;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
-using MightofUniverses.Common; // ReaperDamageClass
+using MightofUniverses.Common;
 using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Common.Players
@@ -20,11 +20,35 @@ namespace MightofUniverses.Common.Players
         {
             if (!FullSetEquipped) return;
 
-            // When souls are consumed (any ability), apply Holiday Scream for 5s
             var reaper = Player.GetModPlayer<ReaperPlayer>();
             if (reaper.justConsumedSouls)
             {
                 Player.AddBuff(ModContent.BuffType<HolidayScream>(), 300);
+            }
+
+            Lighting.AddLight(Player.Center, 0.9f, 0.1f, 0.1f);
+
+            if (Main.rand.NextBool(5))
+            {
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, DustID.Confetti, 0f, 0f, 100, default, 0.8f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.2f;
+            }
+
+            if (Main.rand.NextBool(4))
+            {
+                int dustType = Main.rand.NextBool() ? DustID.Snow : DustID.Blood;
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, dustType, 0f, 0f, 100, default, 0.8f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.2f;
+            }
+
+            if (Main.rand.NextBool(3))
+            {
+                Color color = Main.rand.NextBool() ? Color.Red : Color.White;
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, DustID.Torch, Player.velocity.X * 0.4f, Player.velocity.Y * 0.4f, 100, color, 0.7f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.1f;
             }
         }
 
@@ -36,10 +60,8 @@ namespace MightofUniverses.Common.Players
 
             if (Player.HasBuff(ModContent.BuffType<HolidayScream>()))
             {
-                // +12% DR
                 Player.endurance += 0.12f;
 
-                // +20% positive life regen: if lifeRegen > 0, increase by +20%
                 if (Player.lifeRegen > 0)
                 {
                     int bonus = (int)Math.Round(Player.lifeRegen * 0.20f);
@@ -48,7 +70,6 @@ namespace MightofUniverses.Common.Players
             }
         }
 
-        // +25% healing from items (potions, etc.) while buff is active
         public override void GetHealLife(Item item, bool quickHeal, ref int healValue)
         {
             if (Player.HasBuff(ModContent.BuffType<HolidayScream>()) && healValue > 0 && !quickHeal)

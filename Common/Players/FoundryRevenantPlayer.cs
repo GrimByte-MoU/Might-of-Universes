@@ -104,5 +104,19 @@ namespace MightofUniverses.Common.Players
                 Main.dust[d].noGravity = true;
             }
         }
+
+        public override void PostUpdate()
+        {
+            if (!FullSetEquipped) return;
+
+            Lighting.AddLight(Player.Center, 1f, 0.4f, 0f);
+
+            if (Main.rand.NextBool(4))
+            {
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, DustID.Torch, 0f, 0f, 100, default, 0.8f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.2f;
+            }
+        }
     }
 }

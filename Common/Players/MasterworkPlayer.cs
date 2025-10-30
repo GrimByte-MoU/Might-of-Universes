@@ -29,18 +29,41 @@ namespace MightofUniverses.Common.Players
         {
             if (!hasMasterworkSet) return;
 
-            // Handle cooldown
             if (abilityCooldown > 0)
             {
                 abilityCooldown--;
             }
 
-            // Check for armor ability key press
             if (ModKeybindManager.ArmorAbility != null && 
                 ModKeybindManager.ArmorAbility.JustPressed && 
                 abilityCooldown <= 0)
             {
                 ActivateAbility();
+            }
+
+            Lighting.AddLight(Player.Center, 0.9f, 0.7f, 0.2f);
+
+            if (Main.rand.NextBool(4))
+            {
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, DustID.Copper, 0f, 0f, 100, default, 0.8f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.2f;
+            }
+
+            if (Main.rand.NextBool(3))
+            {
+                Color color = Main.rand.NextBool() ? Color.Gold : Color.Silver;
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, DustID.Torch, Player.velocity.X * 0.3f, Player.velocity.Y * 0.3f, 100, color, 0.6f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.1f;
+            }
+
+            if (Main.rand.NextBool(6))
+            {
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, DustID.Electric, 0f, 0f, 100, default, 0.5f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.2f;
+                dust.velocity *= 2f;
             }
         }
 
@@ -48,7 +71,6 @@ namespace MightofUniverses.Common.Players
         {
             abilityCooldown = 600;
 
-            // Fire 15 Twirly Whirlies at random velocities
             if (Main.myPlayer == Player.whoAmI)
             {
                 for (int i = 0; i < 15; i++)
@@ -60,21 +82,20 @@ namespace MightofUniverses.Common.Players
                         Player.Center,
                         randomVelocity,
                         ModContent.ProjectileType<TwirlyWhirly>(),
-                        100, // Base damage
-                        2f,  // Knockback
+                        100,
+                        2f,
                         Player.whoAmI
                     );
                 }
             }
 
-            // Visual/audio feedback
             for (int i = 0; i < 30; i++)
             {
                 Color dustColor = Main.rand.Next(3) switch
                 {
-                    0 => new Color(255, 200, 100), // Gold
-                    1 => new Color(200, 200, 200), // Silver
-                    _ => new Color(150, 100, 50)   // Bronze
+                    0 => new Color(255, 200, 100),
+                    1 => new Color(200, 200, 200),
+                    _ => new Color(150, 100, 50)
                 };
 
                 Vector2 velocity = Main.rand.NextVector2Circular(10f, 10f);
@@ -82,7 +103,7 @@ namespace MightofUniverses.Common.Players
                 dust.noGravity = true;
             }
 
-            Terraria.Audio.SoundEngine.PlaySound(SoundID.Item37, Player.Center); // Mechanical sound
+            Terraria.Audio.SoundEngine.PlaySound(SoundID.Item37, Player.Center);
         }
 
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)

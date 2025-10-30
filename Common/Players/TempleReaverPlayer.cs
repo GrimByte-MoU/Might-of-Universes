@@ -10,8 +10,6 @@ namespace MightofUniverses.Common.Players
     {
         public bool FullSetEquipped;
         public bool ChestSoulGenActive;
-
-        // While this > 0, the player cannot gain souls
         private int noSoulGainTimer;
 
         public override void ResetEffects()
@@ -36,43 +34,48 @@ namespace MightofUniverses.Common.Players
 
             if (noSoulGainTimer > 0)
                 noSoulGainTimer--;
+
+            if (!FullSetEquipped) return;
+
+            Lighting.AddLight(Player.Center, 0.8f, 0.6f, 0.3f);
+
+            if (Main.rand.NextBool(3))
+            {
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, DustID.Lihzahrd, 0f, 0f, 100, default, 0.8f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.2f;
+            }
+
+            if (Main.rand.NextBool(4))
+            {
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, DustID.Torch, 0f, 0f, 100, default, 0.8f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.2f;
+            }
         }
 
         public override void PostUpdateEquips()
         {
             if (!FullSetEquipped)
                 return;
-
-            // +10% DR (set bonus)
             Player.endurance += 0.10f;
-
-            // Double Soul Empowerment duration for soul-consume abilities
             var acc = Player.GetModPlayer<ReaperAccessoryPlayer>();
-            // Ensure we at least double; if some other item sets a different multiplier, take the max
             if (acc.EmpowerDurationMultiplier < 2f)
                 acc.EmpowerDurationMultiplier = 2f;
-
-            // If under "no soul gain" penalty, block gains by nullifying gather multiplier
             if (noSoulGainTimer > 0)
             {
                 var reaper = Player.GetModPlayer<ReaperPlayer>();
                 reaper.soulGatherMultiplier = 0f;
             }
         }
-
-        // When the player actually takes damage
         public override void OnHurt(Player.HurtInfo info)
         {
             if (!FullSetEquipped)
                 return;
-
-            // If currently Empowered, strip it and apply 5s "no soul gain"
             if (Player.HasBuff(ModContent.BuffType<SoulEmpowerment>()))
             {
                 Player.ClearBuff(ModContent.BuffType<SoulEmpowerment>());
                 noSoulGainTimer = 60 * 5;
-
-                // Tiny visual for feedback
                 for (int i = 0; i < 10; i++)
                 {
                     int d = Dust.NewDust(Player.position, Player.width, Player.height, DustID.Smoke, 0f, -1.5f, 150);

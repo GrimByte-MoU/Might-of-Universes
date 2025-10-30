@@ -7,17 +7,17 @@ using MightofUniverses.Common.Players;
 using MightofUniverses.Content.Items.Armors;
 using MightofUniverses.Common;
 using Terraria.Audio;
-using MightofUniverses.Content.Items.Buffs; // MortalWound assumed here
+using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Common.Players
 {
     public class MechaCactusSetPlayer : ModPlayer
     {
         private const float MaxSoulBonus = 150f;
-        private const float DamageThresholdFraction = 0.10f;      // 10% max life
-        private const float ThornsDamageMultiplier = 2.5f;        // 250%
-        private const int   MortalWoundDuration = 300;            // 5s (60 * 5)
-        private const int   SoulGainCooldownTicks = 180;          // 3s
+        private const float DamageThresholdFraction = 0.10f;
+        private const float ThornsDamageMultiplier = 2.5f;
+        private const int   MortalWoundDuration = 300;
+        private const int   SoulGainCooldownTicks = 180;
         private const int   ThornDustCount = 20;
 
         private bool wearingSet;
@@ -37,7 +37,6 @@ namespace MightofUniverses.Common.Players
                 var reaper = Player.GetModPlayer<ReaperPlayer>();
                 reaper.hasReaperArmor = true;
 
-                // Direct Eclipse-style increase so soul gains see it immediately.
                 reaper.maxSoulEnergy += MaxSoulBonus;
             }
 
@@ -56,7 +55,6 @@ namespace MightofUniverses.Common.Players
             }
         }
 
-        // Damage reduction vs NPC melee/projectile while the NPC has Mortal Wound
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
         {
             if (!wearingSet) return;
@@ -79,7 +77,6 @@ namespace MightofUniverses.Common.Players
             }
         }
 
-        // Trigger conditions for retaliation: OnHitByNPC & OnHitByProjectile (player being hit)
         public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
         {
             if (!wearingSet || !Player.active || Player.dead) return;
@@ -103,12 +100,10 @@ namespace MightofUniverses.Common.Players
             float threshold = Player.statLifeMax2 * DamageThresholdFraction;
             if (damageTaken <= threshold) return;
 
-            // Retaliation damage
             int thornsDamage = (int)Math.Max(1, damageTaken * ThornsDamageMultiplier);
 
             if (sourceNpc != null && sourceNpc.active && !sourceNpc.friendly && !sourceNpc.townNPC)
             {
-                // Deal instant retaliatory damage (true damage style not needed; using regular strike)
                 sourceNpc.StrikeNPC(new NPC.HitInfo
                 {
                     Damage = thornsDamage,
@@ -116,14 +111,11 @@ namespace MightofUniverses.Common.Players
                     HitDirection = Player.direction
                 });
 
-                // Apply Mortal Wound debuff
                 sourceNpc.AddBuff(ModContent.BuffType<MortalWound>(), MortalWoundDuration);
             }
 
-            // Visual feedback
             PlayThornEffects(impactCenter, thornsDamage);
 
-            // Soul gain (cooldown-limited)
             if (soulGainCooldown <= 0)
             {
                 var reaper = Player.GetModPlayer<ReaperPlayer>();
@@ -156,6 +148,28 @@ namespace MightofUniverses.Common.Players
             return Player.armor[0].type == ModContent.ItemType<MechaCactusHelmet>()
                 && Player.armor[1].type == ModContent.ItemType<MechaCactusBreastplate>()
                 && Player.armor[2].type == ModContent.ItemType<MechaCactusLeggings>();
+        }
+
+        public override void PostUpdate()
+        {
+            if (!wearingSet) return;
+
+            Lighting.AddLight(Player.Center, 0f, 0.8f, 0.2f);
+
+            if (Main.rand.NextBool(4))
+            {
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, DustID.GreenFairy, 0f, 0f, 100, default, 0.8f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.2f;
+            }
+
+            if (Main.rand.NextBool(3))
+            {
+                int dustType = Main.rand.NextBool() ? DustID.GreenFairy : DustID.Titanium;
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, dustType, 0f, 0f, 100, default, 0.8f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.2f;
+            }
         }
     }
 }

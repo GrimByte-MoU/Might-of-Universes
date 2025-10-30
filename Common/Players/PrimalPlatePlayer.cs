@@ -11,8 +11,8 @@ namespace MightofUniverses.Common.Players
     public class PrimalPlatePlayer : ModPlayer
     {
         public bool hasPrimalPlateSet = false;
-        public float[] spikeRespawnTimers = new float[8]; // Track respawn for each spike
-        public float globalSpikeRotation = 0f; // Shared rotation for all spikes
+        public float[] spikeRespawnTimers = new float[8];
+        public float globalSpikeRotation = 0f;
 
         public override void ResetEffects()
         {
@@ -22,31 +22,15 @@ namespace MightofUniverses.Common.Players
         public override void PostUpdateEquips()
         {
             if (!hasPrimalPlateSet) return;
-
-            // Apply set bonus stats
-            Player.GetDamage(DamageClass.Generic) *= 0.70f; // -30% weapon damage (set bonus)
-            Player.GetModPlayer<PacifistPlayer>().pacifistDamageMultiplier += 1.00f; // +100% pacifist damage (set bonus)
-            
-            // Update global rotation for all spikes
+            Player.GetDamage(DamageClass.Generic) *= 0.70f;
+            Player.GetModPlayer<PacifistPlayer>().pacifistDamageMultiplier += 1.00f;
             globalSpikeRotation += 0.05f;
-            
-            // Maintain spikes
             MaintainSpikes();
         }
 
         public override void PostUpdate()
         {
-            if (!hasPrimalPlateSet)
-            {
-                // Reset timers when not wearing set
-                for (int i = 0; i < 8; i++)
-                {
-                    spikeRespawnTimers[i] = 0;
-                }
-                return;
-            }
-
-            // Update respawn timers
+            if (!hasPrimalPlateSet) return;
             for (int i = 0; i < 8; i++)
             {
                 if (spikeRespawnTimers[i] > 0)
@@ -54,12 +38,32 @@ namespace MightofUniverses.Common.Players
                     spikeRespawnTimers[i]--;
                 }
             }
-
-            // Check for armor ability key press
             if (ModKeybindManager.ArmorAbility != null && 
                 ModKeybindManager.ArmorAbility.JustPressed)
             {
                 LaunchAllSpikes();
+            }
+
+            if (Main.rand.NextBool(3))
+            {
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, DustID.Bone, 0f, 0f, 100, default, 0.8f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.2f;
+            }
+
+            if (Main.rand.NextBool(4))
+            {
+                int dustType = Main.rand.NextBool() ? DustID.AmberBolt : DustID.Shadowflame;
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, dustType, 0f, 0f, 100, default, 0.8f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.2f;
+            }
+
+            if (Main.rand.NextBool(5))
+            {
+                Dust dust = Dust.NewDustDirect(Player.position, Player.width, Player.height, DustID.Torch, Player.velocity.X * 0.3f, Player.velocity.Y * 0.3f, 100, Color.Orange, 0.6f);
+                dust.noGravity = true;
+                dust.fadeIn = 0.1f;
             }
         }
 
@@ -82,8 +86,6 @@ namespace MightofUniverses.Common.Players
                     }
                 }
             }
-
-            // Spawn missing spikes (if respawn timer is ready)
             if (Main.myPlayer == Player.whoAmI)
             {
                 for (int i = 0; i < 8; i++)
@@ -95,12 +97,12 @@ namespace MightofUniverses.Common.Players
                             Player.Center,
                             Vector2.Zero,
                             ModContent.ProjectileType<PrimalSpike>(),
-                            125, // Base damage
-                            5f,  // Knockback
+                            125,
+                            5f,
                             Player.whoAmI,
-                            ai0: i,   // Spike index (0-7)
-                            ai1: 0f,  // Launch flag (0 = orbit, 1 = launch)
-                            ai2: 0f   // Unused now (using globalSpikeRotation instead)
+                            ai0: i,
+                            ai1: 0f,
+                            ai2: 0f
                         );
                     }
                 }
@@ -110,31 +112,24 @@ namespace MightofUniverses.Common.Players
         private void LaunchAllSpikes()
         {
             int launchedCount = 0;
-
-            // Find all active spikes and mark them for launch
             for (int i = 0; i < Main.maxProjectiles; i++)
             {
                 Projectile proj = Main.projectile[i];
                 if (proj.active && 
                     proj.type == ModContent.ProjectileType<PrimalSpike>() && 
                     proj.owner == Player.whoAmI &&
-                    proj.ai[1] == 0f) // Not already launched
+                    proj.ai[1] == 0f)
                 {
-                    // Set launch flag
                     proj.ai[1] = 1f;
-                    
-                    // Set respawn timer for this spike (5 seconds)
                     int spikeIndex = (int)proj.ai[0];
                     if (spikeIndex >= 0 && spikeIndex < 8)
                     {
-                        spikeRespawnTimers[spikeIndex] = 300; // 5 seconds (60 fps * 5)
+                        spikeRespawnTimers[spikeIndex] = 300;
                     }
                     
                     launchedCount++;
                 }
             }
-
-            // Visual/audio feedback if any spikes were launched
             if (launchedCount > 0)
             {
                 for (int i = 0; i < 20; i++)
@@ -150,7 +145,7 @@ namespace MightofUniverses.Common.Players
                     dust.noGravity = true;
                 }
                 
-                Terraria.Audio.SoundEngine.PlaySound(SoundID.Item71, Player.Center); // Primal/earth sound
+                Terraria.Audio.SoundEngine.PlaySound(SoundID.Item71, Player.Center);
             }
         }
     }
