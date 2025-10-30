@@ -78,10 +78,8 @@ namespace MightofUniverses.Content.Items.Accessories
                     var reaperPlayer = Player.GetModPlayer<ReaperPlayer>();
                     reaperPlayer.soulEnergy = System.Math.Max(0, reaperPlayer.soulEnergy - 10);
                 }
-
-                // Apply damage reduction and life regen
-                Player.endurance += 0.1f; // 10% damage reduction
-                Player.lifeRegen += 5;
+                Player.endurance += 0.1f;
+                Player.lifeRegen += 3;
             }
             else
             {

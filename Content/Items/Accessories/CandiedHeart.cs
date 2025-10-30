@@ -27,7 +27,7 @@ public class CandiedHeart : ModItem
         }
         else
         {
-            player.lifeRegen += 6;
+            player.lifeRegen += 4;
             player.endurance += 0.10f;
         }
     }

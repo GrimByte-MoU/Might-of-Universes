@@ -21,7 +21,7 @@ namespace MightofUniverses.Content.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.statDefense += 6;
-            player.lifeRegen += 3; // +1 health per second (2 = 1 hp/sec)
+            player.lifeRegen += 2;
             player.statLifeMax2 += 30;
             player.statManaMax2 += 30;
             

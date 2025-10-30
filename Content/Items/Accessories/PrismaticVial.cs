@@ -43,28 +43,18 @@ namespace MightofUniverses.Content.Items.Accessories
 
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            ApplyPrismaticRendIfReaper(target);
-        }
-
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            ApplyPrismaticRendIfReaper(target);
-        }
-
-        private void ApplyPrismaticRendIfReaper(NPC target)
-        {
-            if (hasPrismaticVial && IsReaperDamage())
+            if (hasPrismaticVial && item.DamageType == ModContent.GetInstance<ReaperDamageClass>())
             {
-                // Apply PrismaticRend debuff for 3 seconds (180 frames)
                 target.AddBuff(ModContent.BuffType<PrismaticRend>(), 180);
             }
         }
 
-        private bool IsReaperDamage()
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            // Check if the player is using reaper weapons or has reaper armor
-            var reaperPlayer = Player.GetModPlayer<ReaperPlayer>();
-            return reaperPlayer.hasReaperArmor || reaperPlayer.reaperDamageMultiplier > 1f;
+            if (hasPrismaticVial && proj.DamageType == ModContent.GetInstance<ReaperDamageClass>())
+            {
+                target.AddBuff(ModContent.BuffType<PrismaticRend>(), 180);
+            }
         }
     }
 }

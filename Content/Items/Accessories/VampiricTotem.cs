@@ -47,59 +47,50 @@ namespace MightOfUniverses.Content.Items.Accessories
 
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            ApplyLifestealIfReaper(damageDone);
+            if (hasVampiricTotem && item.DamageType == ModContent.GetInstance<ReaperDamageClass>())
+            {
+                ApplyLifesteal(damageDone);
+            }
         }
 
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            ApplyLifestealIfReaper(damageDone);
-        }
-
-        private void ApplyLifestealIfReaper(int damageDone)
-        {
-            if (hasVampiricTotem && IsReaperDamage())
+            if (hasVampiricTotem && proj.DamageType == ModContent.GetInstance<ReaperDamageClass>())
             {
-                // Calculate healing amount (5% of damage)
-                int healAmount = (int)(damageDone * LIFESTEAL_PERCENT);
-                
-                // Ensure at least 1 health is restored if damage was dealt
-                if (damageDone > 0 && healAmount < 1)
-                    healAmount = 1;
-                
-                if (healAmount > 0)
-                {
-                    // Heal the player
-                    Player.HealEffect(healAmount);
-                    Player.statLife += healAmount;
-                    
-                    // Cap health at max
-                    if (Player.statLife > Player.statLifeMax2)
-                        Player.statLife = Player.statLifeMax2;
-                    
-                    // Visual effect - red particles
-                    for (int i = 0; i < 5; i++)
-                    {
-                        Dust.NewDust(
-                            Player.position,
-                            Player.width,
-                            Player.height,
-                            DustID.Blood,
-                            Main.rand.NextFloat(-2f, 2f),
-                            Main.rand.NextFloat(-2f, 2f),
-                            0,
-                            default,
-                            Main.rand.NextFloat(0.7f, 1.2f)
-                        );
-                    }
-                }
+                ApplyLifesteal(damageDone);
             }
         }
 
-        private bool IsReaperDamage()
+        private void ApplyLifesteal(int damageDone)
         {
-            // Check if the player is using reaper weapons or has reaper armor
-            var reaperPlayer = Player.GetModPlayer<ReaperPlayer>();
-            return reaperPlayer.hasReaperArmor || reaperPlayer.reaperDamageMultiplier > 1f;
+            int healAmount = (int)(damageDone * LIFESTEAL_PERCENT);
+            
+            if (damageDone > 0 && healAmount < 1)
+                healAmount = 1;
+            
+            if (healAmount > 0)
+            {
+                Player.HealEffect(healAmount);
+                Player.statLife += healAmount;
+                
+                if (Player.statLife > Player.statLifeMax2)
+                    Player.statLife = Player.statLifeMax2;
+                
+                for (int i = 0; i < 5; i++)
+                {
+                    Dust.NewDust(
+                        Player.position,
+                        Player.width,
+                        Player.height,
+                        DustID.Blood,
+                        Main.rand.NextFloat(-2f, 2f),
+                        Main.rand.NextFloat(-2f, 2f),
+                        0,
+                        default,
+                        Main.rand.NextFloat(0.7f, 1.2f)
+                    );
+                }
+            }
         }
     }
 }

@@ -22,7 +22,7 @@ namespace MightofUniverses.Content.Items.Weapons
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            float spreadDegrees = 4f;
+            float spreadDegrees = 2f;
             float spread = MathHelper.ToRadians(spreadDegrees);
             float rot1 = Main.rand.NextFloat(-spread, spread);
             Vector2 vel1 = velocity.RotatedBy(rot1);

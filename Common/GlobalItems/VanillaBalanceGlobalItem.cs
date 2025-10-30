@@ -1,6 +1,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Common.GlobalItems
 {
@@ -21,6 +22,7 @@ namespace MightofUniverses.Common.GlobalItems
                 case ItemID.DaedalusStormbow:
                 case ItemID.DarkLance:
                 case ItemID.ElfMelter:
+                case ItemID.Excalibur:
                 case ItemID.Flamelash:
                 case ItemID.Flamethrower:
                 case ItemID.FlareGun:
@@ -49,11 +51,10 @@ namespace MightofUniverses.Common.GlobalItems
                 case ItemID.ScourgeoftheCorruptor:
                 case ItemID.SilverShortsword:
                 case ItemID.Spear:
-                case ItemID.StakeLauncher:
                 case ItemID.StarCannon:
-                case ItemID.SuperStarCannon:
                 case ItemID.StardustCellStaff:
                 case ItemID.Starfury:
+                case ItemID.SuperStarCannon:
                 case ItemID.Terragrim:
                 case ItemID.TheRottedFork:
                 case ItemID.TinShortsword:
@@ -65,6 +66,12 @@ namespace MightofUniverses.Common.GlobalItems
                 case ItemID.VampireKnives:
                 case ItemID.WaterBolt:
                 case ItemID.Zenith:
+                case ItemID.FairyQueenMagicItem:
+                case ItemID.EmpressBlade:
+                case ItemID.FairyQueenRangedItem:
+                case ItemID.PiercingStarlight:
+                case ItemID.RainbowWhip:
+                case ItemID.RainbowCrystalStaff:
                     return true;
                 default:
                     return false;
@@ -302,13 +309,37 @@ namespace MightofUniverses.Common.GlobalItems
             switch (item.type)
             {
                 case ItemID.AdamantiteGlaive:
-                    target.AddBuff(BuffID.Electrified, 60 * 5);
+                    target.AddBuff(BuffID.Electrified, 300);
                     break;
                 case ItemID.ChlorophytePartisan:
-                    target.AddBuff(BuffID.Venom, 60 * 3);
+                    target.AddBuff(BuffID.Venom, 180);
+                    break;
+                case ItemID.Excalibur:
+                    target.AddBuff(ModContent.BuffType<RebukingLight>(), 120);
+                    break;
+                case ItemID.Gungnir:
+                    target.AddBuff(ModContent.BuffType<RebukingLight>(), 120);
+                    break;
+                case ItemID.FairyQueenMagicItem:
+                    target.AddBuff(ModContent.BuffType<RebukingLight>(), 180);
+                    break;
+                case ItemID.EmpressBlade:
+                    target.AddBuff(ModContent.BuffType<RebukingLight>(), 180);
+                    break;
+                case ItemID.FairyQueenRangedItem:
+                    target.AddBuff(ModContent.BuffType<RebukingLight>(), 180);
+                    break;
+                case ItemID.PiercingStarlight:
+                    target.AddBuff(ModContent.BuffType<RebukingLight>(), 180);
+                    break;
+                case ItemID.RainbowWhip:
+                    target.AddBuff(ModContent.BuffType<RebukingLight>(), 180);
+                    break;
+                case ItemID.RainbowCrystalStaff:
+                    target.AddBuff(ModContent.BuffType<PrismaticRend>(), 300);
                     break;
                 case ItemID.TitaniumTrident:
-                    target.AddBuff(BuffID.OnFire3, 60 * 5);
+                    target.AddBuff(BuffID.OnFire3, 300);
                     break;
             }
         }

@@ -19,7 +19,7 @@ namespace MightofUniverses.Content.Items.Buffs
 
         public override void Update(NPC npc, ref int buffIndex)
         {
-            npc.lifeRegen -= 160;
+            npc.lifeRegen -= 80;
             
             if (Main.rand.NextBool(2))
             {
@@ -38,7 +38,7 @@ namespace MightofUniverses.Content.Items.Buffs
 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.lifeRegen -= 100;
+            player.lifeRegen -= 40;
             
             if (Main.rand.NextBool(2))
             {

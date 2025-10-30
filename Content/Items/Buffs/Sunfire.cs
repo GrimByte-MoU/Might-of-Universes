@@ -18,7 +18,7 @@ namespace MightofUniverses.Content.Items.Buffs
 
         public override void Update(NPC npc, ref int buffIndex)
         {
-            npc.lifeRegen -= 1500;
+            npc.lifeRegen -= 750;
 
             Lighting.AddLight(npc.Center, 1.0f, 0.6f, 0.0f);
 
@@ -41,7 +41,7 @@ namespace MightofUniverses.Content.Items.Buffs
 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.lifeRegen -= 150;
+            player.lifeRegen -= 75;
 
             Lighting.AddLight(player.Center, 1.0f, 0.6f, 0.0f);
 

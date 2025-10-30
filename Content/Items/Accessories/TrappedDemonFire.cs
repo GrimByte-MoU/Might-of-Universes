@@ -43,29 +43,18 @@ namespace MightofUniverses.Content.Items.Accessories
 
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            ApplyDemonFireIfReaper(target);
-        }
-
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            ApplyDemonFireIfReaper(target);
-        }
-
-        private void ApplyDemonFireIfReaper(NPC target)
-        {
-            if (hasTrappedDemonFire && IsReaperDamage())
+            if (hasTrappedDemonFire && item.DamageType == ModContent.GetInstance<ReaperDamageClass>())
             {
-                // Apply Corrupted debuff for 3 seconds (180 frames)
                 target.AddBuff(ModContent.BuffType<Demonfire>(), 180);
             }
         }
 
-        private bool IsReaperDamage()
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            // Check if the player is using reaper weapons or has reaper armor
-            // This is a placeholder - implement based on your mod's logic
-            var reaperPlayer = Player.GetModPlayer<ReaperPlayer>();
-            return reaperPlayer.hasReaperArmor || reaperPlayer.reaperDamageMultiplier > 1f;
+            if (hasTrappedDemonFire && proj.DamageType == ModContent.GetInstance<ReaperDamageClass>())
+            {
+                target.AddBuff(ModContent.BuffType<Demonfire>(), 180);
+            }
         }
     }
 }

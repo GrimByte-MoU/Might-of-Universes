@@ -43,27 +43,18 @@ namespace MightofUniverses.Content.Items.Accessories
 
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            ApplyLiquidTerraIfReaper(target);
-        }
-
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            ApplyLiquidTerraIfReaper(target);
-        }
-
-        private void ApplyLiquidTerraIfReaper(NPC target)
-        {
-            if (hasLiquidTerra && IsReaperDamage())
+            if (hasLiquidTerra && item.DamageType == ModContent.GetInstance<ReaperDamageClass>())
             {
-                // Apply Elements Harmony debuff for 3 seconds (180 frames)
                 target.AddBuff(ModContent.BuffType<ElementsHarmony>(), 180);
             }
         }
 
-        private bool IsReaperDamage()
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            var reaperPlayer = Player.GetModPlayer<ReaperPlayer>();
-            return reaperPlayer.hasReaperArmor || reaperPlayer.reaperDamageMultiplier > 1f;
+            if (hasLiquidTerra && proj.DamageType == ModContent.GetInstance<ReaperDamageClass>())
+            {
+                target.AddBuff(ModContent.BuffType<ElementsHarmony>(), 180);
+            }
         }
     }
 }

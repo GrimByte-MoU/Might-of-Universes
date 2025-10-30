@@ -29,7 +29,7 @@ namespace MightofUniverses.Content.Items.Armors
         public override void UpdateArmorSet(Player player)
         {
 
-            player.setBonus = "+10% summon damage. +3 max minion and sentry slots.\n Whips and Minions inflict Prismatic Rend for 3 seconds.\n A Prismatic sentinel will defend you.";
+            player.setBonus = $"+10% summon damage. +3 max minion and sentry slots.\n Whips and Minions inflict Prismatic Rend for 3 seconds.\n A Prismatic sentinel will defend you.";
             player.GetDamage(DamageClass.Summon) += 0.10f;
             player.maxMinions += 3;
             player.maxTurrets += 3;

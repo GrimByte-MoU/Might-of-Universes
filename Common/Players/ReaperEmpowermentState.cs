@@ -92,7 +92,7 @@ namespace MightofUniverses.Common.Players
                 Player.statDefense += Values.Defense;
 
             if (Values.LifeRegen != 0)
-                Player.lifeRegen += Values.LifeRegen; // Note: +2 ~= +1 HP/sec
+                Player.lifeRegen += Values.LifeRegen;
         }
 
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)

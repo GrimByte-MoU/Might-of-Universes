@@ -20,10 +20,10 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             Item.width = 50;
             Item.height = 50;
-            Item.damage = 90;
+            Item.damage = 115;
             Item.DamageType = ModContent.GetInstance<ReaperDamageClass>();
-            Item.useTime = 18;
-            Item.useAnimation = 18;
+            Item.useTime = 12;
+            Item.useAnimation = 12;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 4f;
             Item.value = Item.sellPrice(gold: 7);
@@ -31,7 +31,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.UseSound = SoundID.Item71;
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<TempleReaperShard>();
-            Item.shootSpeed = 10f;
+            Item.shootSpeed = 14f;
         }
 
         public override void HoldItem(Player player)
@@ -64,7 +64,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            float spread = MathHelper.ToRadians(10);
+            float spread = MathHelper.ToRadians(6);
             float baseSpeed = velocity.Length();
             double startAngle = Math.Atan2(velocity.Y, velocity.X) - spread / 2;
             double deltaAngle = spread / 2;

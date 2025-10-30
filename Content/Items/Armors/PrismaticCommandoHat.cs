@@ -32,7 +32,7 @@ namespace MightofUniverses.Content.Items.Armors
                 ? ModKeybindManager.ArmorAbility.GetAssignedKeys()[0] 
                 : "[Unbound]";
 
-            player.setBonus = "+10% ranged damage and ranged weapons inflict Prismatic Rend for 3 seconds.\n Press '{key}' to gain tripled firing speed and doubled velocity for 3 seconds.\n This ability has a 10 second cooldown.";
+            player.setBonus = $"+10% ranged damage and ranged weapons inflict Prismatic Rend for 3 seconds.\n Press '{key}' to gain tripled firing speed and doubled velocity for 3 seconds.\n This ability has a 10 second cooldown.";
             player.GetDamage(DamageClass.Ranged) += 0.10f;
             player.GetModPlayer<PrismaticPlayer>().prismaticCommandoSet = true;
         }

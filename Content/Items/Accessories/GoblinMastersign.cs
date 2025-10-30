@@ -32,7 +32,7 @@ namespace MightofUniverses.Content.Items.Accessories
             // Goblin Plating effects
             player.statLifeMax2 += (int)(player.statLifeMax * 0.15f);
             player.endurance += 0.08f;
-            player.lifeRegen += 3;
+            player.lifeRegen += 2;
             player.accDreamCatcher = true;
             player.thorns += 1f;
 

@@ -46,7 +46,7 @@ namespace MightofUniverses.Content.Items.Accessories
         {
             if (hasBloodsoakedRing)
             {
-                Player.lifeRegen += 6; // +3 hp/sec
+                Player.lifeRegen += 6;
                 Player.statLifeMax2 = (int)(Player.statLifeMax2 * 1.25f);
             }
 

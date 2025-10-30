@@ -1,6 +1,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Common.GlobalProjectiles
 {
@@ -66,6 +67,36 @@ namespace MightofUniverses.Common.GlobalProjectiles
 
                 case ProjectileID.TitaniumTrident:
                     target.AddBuff(BuffID.OnFire3, 300);
+                    break;
+
+                case ProjectileID.Excalibur:
+                    target.AddBuff(ModContent.BuffType<RebukingLight>(), 120);
+                    break;
+
+                case ProjectileID.Gungnir:
+                    target.AddBuff(ModContent.BuffType<RebukingLight>(), 120);
+                    break;
+
+                case ProjectileID.FairyQueenMagicItemShot:
+                    target.AddBuff(ModContent.BuffType<RebukingLight>(), 180);
+                    break;
+                case ProjectileID.EmpressBlade:
+                    target.AddBuff(ModContent.BuffType<RebukingLight>(), 180);
+                    break;
+                case ProjectileID.PiercingStarlight:
+                    target.AddBuff(ModContent.BuffType<RebukingLight>(), 180);
+                    break;
+                case ProjectileID.RainbowWhip:
+                    target.AddBuff(ModContent.BuffType<RebukingLight>(), 180);
+                    break;
+                case ProjectileID.RainbowCrystal:
+                    target.AddBuff(ModContent.BuffType<PrismaticRend>(), 300);
+                    break;
+                case ProjectileID.RainbowCrystalExplosion:
+                    target.AddBuff(ModContent.BuffType<PrismaticRend>(), 300);
+                    break;
+                case ProjectileID.FairyQueenRangedItemShot:
+                    target.AddBuff(ModContent.BuffType<RebukingLight>(), 180);
                     break;
             }
         }

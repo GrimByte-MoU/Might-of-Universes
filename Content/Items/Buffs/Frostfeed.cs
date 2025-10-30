@@ -19,7 +19,7 @@ namespace MightofUniverses.Content.Items.Buffs
             if (npc.lifeRegen > 0)
                 npc.lifeRegen = 0;
 
-            npc.lifeRegen -= 300;
+            npc.lifeRegen -= 150;
 
             if (Main.rand.NextBool(10)) 
                 Dust.NewDust(npc.position, npc.width, npc.height, DustID.Ice);
