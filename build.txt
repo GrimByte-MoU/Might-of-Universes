@@ -1,3 +1,9 @@
-displayName = Might of the Universes
-author = Grimbyte
+displayName = Might of Universes
+author = GrimByte-MoU
 version = 0.1
+homepage = https://github.com/GrimByte-MoU/Might-of-Universes
+hideCode = false
+hideResources = false
+includeSource = true
+buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*, .git\*
+side = Both

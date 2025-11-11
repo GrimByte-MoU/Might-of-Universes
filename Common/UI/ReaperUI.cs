@@ -11,16 +11,12 @@ using System;
 
 namespace MightofUniverses.Common.UI
 {
-    // Integrated Reaper UI: draws soul bar and Death Marks immediately to its right.
     public class ReaperUI : UIState
     {
         private const string SOUL_BAR_PATH = "MightofUniverses/Common/UI/SoulBar";
         private const string SOUL_FILL_PATH = "MightofUniverses/Common/UI/SoulBarFill";
-
-        private const string DEATH_EMPTY_PATH_COMMON = "MightofUniverses/Common/UI/DeathMark_Empty";
-        private const string DEATH_FILLED_PATH_COMMON = "MightofUniverses/Common/UI/DeathMark_Filled";
-        private const string DEATH_EMPTY_PATH_CONTENT = "MightofUniverses/Content/UI/DeathMark_Empty";
-        private const string DEATH_FILLED_PATH_CONTENT = "MightofUniverses/Content/UI/DeathMark_Filled";
+        private const string DEATH_EMPTY_PATH = "MightofUniverses/Common/UI/DeathMark_Empty";
+        private const string DEATH_FILLED_PATH = "MightofUniverses/Common/UI/DeathMark_Filled";
 
         private const int FILL_LEFT_PAD_PX = 66;
         private const int FILL_RIGHT_PAD_PX = 10;
@@ -39,7 +35,47 @@ namespace MightofUniverses.Common.UI
         private int deathIconSize = 32; 
         private int deathSpacing = 6;
         private int deathPaddingFromBar = 8;
-        private bool printedLoadInfo = false;
+        private bool texturesLoaded = false;
+        private bool attemptedLoad = false;
+
+        private void LoadDeathMarkTextures()
+        {
+            if (attemptedLoad) return;
+            attemptedLoad = true;
+
+            try
+            {
+                deathEmptyTex = ModContent.Request<Texture2D>(DEATH_EMPTY_PATH, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+                Main.NewText($"[ReaperUI] ✓ Loaded empty texture: {deathEmptyTex.Width}x{deathEmptyTex.Height}", Color.Lime);
+            }
+            catch (Exception ex)
+            {
+                Main.NewText($"[ReaperUI] ✗ Failed to load empty texture: {ex.Message}", Color.Red);
+                deathEmptyTex = null;
+            }
+
+            try
+            {
+                deathFilledTex = ModContent.Request<Texture2D>(DEATH_FILLED_PATH, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+                Main.NewText($"[ReaperUI] ✓ Loaded filled texture: {deathFilledTex.Width}x{deathFilledTex.Height}", Color.Lime);
+            }
+            catch (Exception ex)
+            {
+                Main.NewText($"[ReaperUI] ✗ Failed to load filled texture: {ex.Message}", Color.Red);
+                deathFilledTex = null;
+            }
+
+            texturesLoaded = (deathEmptyTex != null && deathFilledTex != null);
+            
+            if (!texturesLoaded)
+            {
+                Main.NewText("[ReaperUI] ⚠ WARNING: Death Mark textures failed to load! Using fallback squares.", Color.Orange);
+            }
+            else
+            {
+                Main.NewText("[ReaperUI] ✓ Death Mark system initialized successfully!", Color.Cyan);
+            }
+        }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -51,31 +87,16 @@ namespace MightofUniverses.Common.UI
 
             if (!reaper.hasReaperArmor) return;
 
+            // Load textures on first draw
+            if (!attemptedLoad)
+            {
+                LoadDeathMarkTextures();
+            }
+
             Texture2D barTexture = ModContent.Request<Texture2D>(SOUL_BAR_PATH).Value;
             Texture2D fillTexture = ModContent.Request<Texture2D>(SOUL_FILL_PATH).Value;
 
-            if (deathEmptyTex == null)
-            {
-                try { deathEmptyTex = ModContent.Request<Texture2D>(DEATH_EMPTY_PATH_COMMON).Value; }
-                catch { try { deathEmptyTex = ModContent.Request<Texture2D>(DEATH_EMPTY_PATH_CONTENT).Value; } catch { deathEmptyTex = null; } }
-            }
-            if (deathFilledTex == null)
-            {
-                try { deathFilledTex = ModContent.Request<Texture2D>(DEATH_FILLED_PATH_COMMON).Value; }
-                catch { try { deathFilledTex = ModContent.Request<Texture2D>(DEATH_FILLED_PATH_CONTENT).Value; } catch { deathFilledTex = null; } }
-            }
-            if (!printedLoadInfo)
-            {
-                string emptyInfo = deathEmptyTex == null ? "NULL" : $"{deathEmptyTex.Width}x{deathEmptyTex.Height}";
-                string filledInfo = deathFilledTex == null ? "NULL" : $"{deathFilledTex.Width}x{deathFilledTex.Height}";
-                Main.NewText($"[ReaperUI] Death textures: empty={emptyInfo}, filled={filledInfo}", Color.YellowGreen);
-                printedLoadInfo = true;
-            }
-
-            // Fixed size for consistent UI scaling
-            deathIconSize = 32;
-
-            // --- Soul bar drawing (unchanged) ---
+            // --- Soul bar drawing ---
             Vector2 position = new Vector2(500, 80);
 
             float targetFillPercent = 0f;
@@ -94,16 +115,6 @@ namespace MightofUniverses.Common.UI
                 Vector2 fillPos = position + new Vector2(FILL_LEFT_PAD_PX, 0f);
                 spriteBatch.Draw(fillTexture, fillPos, fillSrc, Color.White);
 
-                bool isFull = (reaper.maxSoulEnergy > 0f && reaper.soulEnergy >= reaper.maxSoulEnergy - 0.001f)
-                              || displayedSoulPercent >= 0.995f;
-
-                // Temporarily disabled glow effect to prevent UI state corruption
-                // if (isFull)
-                // {
-                //     // ... glow code ...
-                // }
-
-                // occasional dust
                 if (reaper.soulEnergy > 0 && Main.rand.NextFloat() < 0.1f)
                 {
                     Rectangle dustRect = new Rectangle((int)(position.X + FILL_LEFT_PAD_PX), (int)position.Y, visibleUsableWidth, fillTexture.Height);
@@ -133,9 +144,15 @@ namespace MightofUniverses.Common.UI
             }
 
             // ----------------------------
-            // Draw Death Marks immediately to the right of the soul bar
+            // Draw Death Marks 
             // ----------------------------
-            int marks = Math.Max(0, Math.Min(DeathMaxSlots, reaper.deathMarks)); // safe clamp
+            int marks = Math.Max(0, Math.Min(DeathMaxSlots, reaper.deathMarks));
+
+            // Debug text to show current mark count
+            string debugText = $"Death Marks: {marks}/{DeathMaxSlots}";
+            Vector2 debugTextSize = FontAssets.MouseText.Value.MeasureString(debugText);
+            Vector2 debugTextPos = position + new Vector2(barTexture.Width + deathPaddingFromBar, -24);
+            Utils.DrawBorderString(spriteBatch, debugText, debugTextPos, Color.Cyan);
 
             // detect increases/decreases and trigger animations
             if (prevDeathMarks == -1)
@@ -173,7 +190,7 @@ namespace MightofUniverses.Common.UI
                 Rectangle dest = new Rectangle((int)slotPos.X, (int)slotPos.Y, deathIconSize, deathIconSize);
                 bool filled = i < marks;
 
-                // glow behind filled slot (uses filled texture if available)
+                // glow behind filled slot
                 if (filled && deathGlowAlpha[i] > 0.01f && deathFilledTex != null)
                 {
                     float glowScale = 1.35f + (deathSlotScale[i] - 1f) * 0.35f;
@@ -184,7 +201,7 @@ namespace MightofUniverses.Common.UI
                     spriteBatch.Draw(deathFilledTex, new Rectangle((int)glowPos.X, (int)glowPos.Y, gw, gh), glowColor);
                 }
 
-                // texture or fallback
+                // Draw the actual icon
                 Texture2D tex = filled ? deathFilledTex : deathEmptyTex;
                 if (tex != null)
                 {
@@ -193,7 +210,7 @@ namespace MightofUniverses.Common.UI
                     int drawH = (int)(deathIconSize * scale);
                     Vector2 drawPos = slotPos + new Vector2((deathIconSize - drawW) / 2f, (deathIconSize - drawH) / 2f);
                     Color color = Color.White;
-                    if (!filled) color = Color.Lerp(Color.Gray, Color.White, 0.15f);
+                    if (!filled) color = Color.Lerp(Color.Gray, Color.White, 0.3f);
                     spriteBatch.Draw(tex, new Rectangle((int)drawPos.X, (int)drawPos.Y, drawW, drawH), color);
 
                     if (deathSlotFlash[i] > 0)
@@ -204,9 +221,15 @@ namespace MightofUniverses.Common.UI
                 }
                 else
                 {
-                    // fallback square so UI is always visible (helps debugging)
-                    Color fallback = filled ? Color.LimeGreen * 0.9f : Color.Gray * 0.65f;
+                    // Fallback squares - ALWAYS visible for debugging
+                    Color fallback = filled ? Color.Purple * 0.9f : Color.DarkGray * 0.65f;
                     spriteBatch.Draw(TextureAssets.MagicPixel.Value, dest, fallback);
+                    
+                    // Draw border so you can SEE them
+                    spriteBatch.Draw(TextureAssets.MagicPixel.Value, new Rectangle(dest.X, dest.Y, dest.Width, 2), Color.White * 0.5f);
+                    spriteBatch.Draw(TextureAssets.MagicPixel.Value, new Rectangle(dest.X, dest.Bottom - 2, dest.Width, 2), Color.White * 0.5f);
+                    spriteBatch.Draw(TextureAssets.MagicPixel.Value, new Rectangle(dest.X, dest.Y, 2, dest.Height), Color.White * 0.5f);
+                    spriteBatch.Draw(TextureAssets.MagicPixel.Value, new Rectangle(dest.Right - 2, dest.Y, 2, dest.Height), Color.White * 0.5f);
                 }
             }
         }

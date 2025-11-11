@@ -10,20 +10,18 @@ namespace MightofUniverses.Content.Items.Projectiles
     {
         public override void SafeSetDefaults()
         {
-            // Clone Gungnir projectile
             Projectile.CloneDefaults(ProjectileID.Gungnir);
             AIType = ProjectileID.Gungnir;
+            Projectile.scale = 1.5f;
         }
 
         public override void AI()
         {
             base.AI();
-            Projectile.rotation = Projectile.velocity.ToRotation();
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            // ONLY inflict Rebuking Light for 3 seconds (no other debuffs)
             target.AddBuff(ModContent.BuffType<RebukingLight>(), 180);
         }
     }

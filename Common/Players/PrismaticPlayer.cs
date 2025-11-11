@@ -142,8 +142,7 @@ namespace MightofUniverses.Common.Players
                 if (armorAbilityType == 2)
                 {
                     Player.GetCritChance(DamageClass.Melee) += 10;
-                    Player.GetAttackSpeed(DamageClass.Melee) += 0.15f;
-                    meleeSizeMultiplier = 1.25f;
+                    Player.GetAttackSpeed(DamageClass.Melee) += 1f;
                 }
                 else if (armorAbilityType == 3)
                 {

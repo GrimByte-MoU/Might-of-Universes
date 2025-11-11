@@ -7,6 +7,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.GameInput;
 using Terraria.ModLoader.IO;
+using Terraria.Audio;
 
 namespace MightofUniverses.Common.Players
 {
@@ -23,15 +24,34 @@ namespace MightofUniverses.Common.Players
         public int deathMarks;
         public const int MAX_DEATH_MARKS = 5;
         public static ModKeybind SoulReleaseKey;
+        public static ModKeybind Ability2Key; // NEW
         public bool justConsumedSouls;
         public int TempleBuffTimer;
         public bool chillingPresence;
 
+        // NEW: Death Mark decay system
+        private int outOfCombatTimer = 0;
+        private const int OUT_OF_COMBAT_THRESHOLD = 300; // 5 seconds at 60fps
+        private const int DEATH_MARK_DECAY_RATE = 1800; // 30 seconds at 60fps
+        private int lastHitTime = 0;
+
+        // NEW: Accessory flags
+        public bool hasUnstableCharm = false;
+        public bool hasMortalityBell = false;
+        private int mortalityBellCooldown = 0;
+        private const int MORTALITY_BELL_COOLDOWN = 3600; // 60 seconds at 60fps
+
         public override void Load()
         {
             SoulReleaseKey = KeybindLoader.RegisterKeybind(Mod, "Release Soul Energy", "R");
+            Ability2Key = KeybindLoader.RegisterKeybind(Mod, "Ability 2", "F"); // NEW
         }
-        public override void Unload() => SoulReleaseKey = null;
+
+        public override void Unload()
+        {
+            SoulReleaseKey = null;
+            Ability2Key = null; // NEW
+        }
 
         public override void Initialize()
         {
@@ -45,6 +65,12 @@ namespace MightofUniverses.Common.Players
             TempleBuffTimer = 0;
             maxSoulEnergy = BaseMaxSoulEnergy;
             chillingPresence = false;
+            // NEW
+            outOfCombatTimer = 0;
+            lastHitTime = 0;
+            hasUnstableCharm = false;
+            hasMortalityBell = false;
+            mortalityBellCooldown = 0;
         }
 
         public override void ResetEffects()
@@ -57,6 +83,10 @@ namespace MightofUniverses.Common.Players
             reaperCritChance = 0f;
             justConsumedSouls = false;
             chillingPresence = false;
+            // NEW
+            hasUnstableCharm = false;
+            hasMortalityBell = false;
+
             if (TempleBuffTimer > 0)
                 TempleBuffTimer--;
         }
@@ -280,6 +310,159 @@ namespace MightofUniverses.Common.Players
 
             if (soulEnergy > maxSoulEnergy)
                 soulEnergy = maxSoulEnergy;
+
+            // === NEW: DEATH MARK DECAY SYSTEM ===
+            if (deathMarks > 0)
+            {
+                // Track time since last combat action
+                lastHitTime++;
+
+                // Check if out of combat (5 seconds of no hits)
+                if (lastHitTime > OUT_OF_COMBAT_THRESHOLD)
+                {
+                    outOfCombatTimer++;
+
+                    // Every 30 seconds out of combat, remove 1 Death Mark
+                    if (outOfCombatTimer >= DEATH_MARK_DECAY_RATE)
+                    {
+                        outOfCombatTimer = 0;
+                        deathMarks = Math.Max(0, deathMarks - 1);
+                        
+                        // Visual feedback for decay
+                        if (Main.myPlayer == Player.whoAmI)
+                        {
+                            CombatText.NewText(Player.getRect(), Color.Gray, "-1 Death Mark (Decay)", true);
+                        }
+
+                        if (Main.netMode == NetmodeID.Server)
+                            SyncDeathMarks();
+                    }
+                }
+                else
+                {
+                    // In combat - reset decay timer
+                    outOfCombatTimer = 0;
+                }
+            }
+            else
+            {
+                // No marks - reset timers
+                outOfCombatTimer = 0;
+                lastHitTime = 0;
+            }
+
+            // NEW: Update Mortality Bell cooldown
+            if (mortalityBellCooldown > 0)
+            {
+                mortalityBellCooldown--;
+            }
+
+            // NEW: Unstable Charm teleport
+            if (hasUnstableCharm && Ability2Key != null && Ability2Key.JustPressed)
+            {
+                TryUnstableCharmTeleport();
+            }
+        }
+
+        // NEW: Combat detection methods
+        public override void ModifyHurt(ref Player.HurtModifiers modifiers)
+        {
+            lastHitTime = 0;
+        }
+
+        public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            lastHitTime = 0;
+        }
+
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            lastHitTime = 0;
+        }
+
+        // NEW: Death handling
+        public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
+        {
+            if (deathMarks > 0)
+            {
+                ForceClearDeathMarks();
+            }
+        }
+
+        // NEW: Mortality Bell death save
+        public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
+        {
+            if (hasMortalityBell && mortalityBellCooldown <= 0 && deathMarks > 0)
+            {
+                int healAmount = (int)(Player.statLifeMax2 * 0.10f * deathMarks);
+                int marksConsumed = deathMarks;
+
+                ForceClearDeathMarks();
+
+                Player.Heal(healAmount);
+                Player.immune = true;
+                Player.immuneTime = 120;
+
+                mortalityBellCooldown = MORTALITY_BELL_COOLDOWN;
+
+                SoundEngine.PlaySound(SoundID.Item4, Player.Center);
+                
+                for (int i = 0; i < 50; i++)
+                {
+                    Vector2 dustVel = Main.rand.NextVector2Circular(8f, 8f);
+                    int dustIndex = Dust.NewDust(Player.position, Player.width, Player.height, DustID.LifeCrystal, 
+                        dustVel.X, dustVel.Y, 100, Color.LightGreen, 2f);
+                    Main.dust[dustIndex].noGravity = true;
+                }
+
+                CombatText.NewText(Player.getRect(), Color.LightGreen, $"Saved by {marksConsumed} Death Marks!", true);
+
+                return false;
+            }
+
+            return base.PreKill(damage, hitDirection, pvp, ref playSound, ref genGore, ref damageSource);
+        }
+
+        // NEW: Unstable Charm teleport
+        private void TryUnstableCharmTeleport()
+        {
+            if (deathMarks <= 0) return;
+
+            Vector2 cursorDirection = Main.MouseWorld - Player.Center;
+            if (cursorDirection.LengthSquared() < 0.0001f)
+                cursorDirection = new Vector2(Player.direction, 0f);
+            cursorDirection.Normalize();
+
+            Vector2 teleportOffset = cursorDirection * (10f * 16f);
+            Vector2 newPosition = Player.Center + teleportOffset;
+
+            Point tilePos = newPosition.ToTileCoordinates();
+            if (WorldGen.InWorld(tilePos.X, tilePos.Y))
+            {
+                RemoveDeathMark(1);
+
+                Player.position = newPosition - new Vector2(Player.width / 2f, Player.height / 2f);
+                Player.velocity = Vector2.Zero;
+
+                SoundEngine.PlaySound(SoundID.Item6, Player.Center);
+
+                for (int i = 0; i < 30; i++)
+                {
+                    Vector2 oldDustPos = Player.Center - teleportOffset;
+                    int d1 = Dust.NewDust(oldDustPos + Main.rand.NextVector2Circular(20f, 20f), 4, 4,
+                        DustID.MagicMirror, 0, 0, 100, Color.Purple, 1.5f);
+                    Main.dust[d1].noGravity = true;
+                    Main.dust[d1].velocity = Main.rand.NextVector2Circular(3f, 3f);
+
+                    int d2 = Dust.NewDust(Player.Center + Main.rand.NextVector2Circular(20f, 20f), 4, 4,
+                        DustID.MagicMirror, 0, 0, 100, Color.Purple, 1.5f);
+                    Main.dust[d2].noGravity = true;
+                    Main.dust[d2].velocity = Main.rand.NextVector2Circular(3f, 3f);
+                }
+
+                Player.immune = true;
+                Player.immuneTime = 20;
+            }
         }
 
         public void UpdateReaperDamageMultiplier(float amt) =>
@@ -350,6 +533,15 @@ namespace MightofUniverses.Common.Players
             return false;
         }
 
+        // NEW: Remove marks without checking (for decay/teleport)
+        public void RemoveDeathMark(int amount)
+        {
+            if (amount <= 0) return;
+            deathMarks = Math.Max(0, deathMarks - amount);
+            if (Main.netMode == NetmodeID.Server)
+                SyncDeathMarks();
+        }
+
         // Force clear (e.g., on death)
         public void ForceClearDeathMarks()
         {
@@ -372,13 +564,13 @@ namespace MightofUniverses.Common.Players
 
         public override void SaveData(TagCompound tag)
         {
-            tag["DeathMarks"] = deathMarks;
+            // NEW: Intentionally NOT saving deathMarks - they reset on world leave
         }
 
         public override void LoadData(TagCompound tag)
         {
-            if (tag.ContainsKey("DeathMarks"))
-                deathMarks = tag.GetInt("DeathMarks");
+            // NEW: Death marks always start at 0 when loading
+            deathMarks = 0;
         }
 
         public void NetSend(BinaryWriter writer)
