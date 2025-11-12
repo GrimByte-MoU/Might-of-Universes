@@ -4670,13 +4670,63 @@ Items: {
 
 	NewMoon: {
 		DisplayName: New Moon
-		Tooltip: 
-		'''
-		Fires a Moon Sickle that starts off stationary and quickly accelerates
-		Both the scythe and sickle gather 7 souls on strike
-		The scythe inflicts Lunar Reap for 3 seconds and the sickle inflicts it for 2 seconds
-		Consume {0} souls to instantly heal the player 100 health, then give the player +15 defense and +10% damage reduction for 5 seconds
-		'''
+		Tooltip:
+			'''
+			Fires a Moon Sickle that starts off stationary and quickly accelerates
+			Both the scythe and sickle gather 7 souls on strike
+			The scythe inflicts Lunar Reap for 3 seconds and the sickle inflicts it for 2 seconds
+			Consume {0} souls to instantly heal the player 100 health, then give the player +15 defense and +10% damage reduction for 5 seconds
+			'''
+	}
+
+	CharmOfMorbidFocus: {
+		DisplayName: Charm Of Morbid Focus
+		Tooltip: +3% Reaper crit chance per Death Mark
+	}
+
+	DeathRecords: {
+		DisplayName: Death Records
+		Tooltip: +7% Reaper damage per Death Mark
+	}
+
+	GauntletsOfHaste: {
+		DisplayName: Gauntlets Of Haste
+		Tooltip: +4% Reaper attack speed per Death Mark
+	}
+
+	MortalityBell: {
+		DisplayName: Mortality Bell
+		Tooltip:
+			'''
+			Whenever the player would die, instead all Death Marks are consumed
+			For each Death Mark consumed, the player will heal for 10% of their max health
+			This has a 60 second cooldown
+			'''
+	}
+
+	UnstableCharm: {
+		DisplayName: Unstable Charm
+		Tooltip: Press '{keyName}' to consume 1 Death Mark and teleport 15 blocks toward your cursor
+	}
+
+	CultistTapestry: {
+		DisplayName: Cultist Tapestry
+		Tooltip: Whenever a Death Mark decays due to being out of combat, the player will heal 50 health and have 20% of their max soul capacity filled
+	}
+
+	LoomOfFate: {
+		DisplayName: Loom Of Fate
+		Tooltip:
+			'''
+				All positive, passive soul generation grants positive life regen at a rate of 65%
+				Upon reaching 20% or less health, the player will generate 30 souls per second for 5 seconds
+				The soul generation has a 15 second cooldown
+			'''
+	}
+
+	ChronoWheel: {
+		DisplayName: Chrono Wheel
+		Tooltip: Cycles between the time of day
 	}
 }
 

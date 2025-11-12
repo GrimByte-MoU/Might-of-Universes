@@ -108,34 +108,40 @@ namespace MightofUniverses.Common.Players
         private int visceraPulseTimer;     // every 3s pulses
         private int consumePulseICD;       // debounce for frequent spenders (~0.1s)
 
+public bool accLoomOfFate = false;
+public bool loomOfFateActive = false;
+public bool loomOfFateOnCooldown = false;
+public int loomOfFateDuration = 0;
+public int loomOfFateCooldown = 0;
+
         public override void ResetEffects()
         {
             // Cost modifiers
-            SoulCostMultiplier         = 1f;
-            SoulCostFlatReduction      = 0;
-            RefundChance               = 0f;
-            RefundFraction             = 0f;
-            GuaranteedSoulRefund       = 0;
-            RefundAtLeastOne           = true;
+            SoulCostMultiplier = 1f;
+            SoulCostFlatReduction = 0;
+            RefundChance = 0f;
+            RefundFraction = 0f;
+            GuaranteedSoulRefund = 0;
+            RefundAtLeastOne = true;
 
             // NEW (Empowerment-specific)
-            EmpowerCostMultiplier      = 1f;
-            EmpowerDurationMultiplier  = 1f;
-            EmpowerExtraDurationTicks  = 0;
+            EmpowerCostMultiplier = 1f;
+            EmpowerDurationMultiplier = 1f;
+            EmpowerExtraDurationTicks = 0;
 
             // Ferryman
-            HasFerrymansToken          = false;
+            HasFerrymansToken = false;
             FerrymanCooldownMultiplier = 1f;
             FerrymanCooldownFlatReduction = 0;
-            FerrymanHealScale          = 0.5f;
-            FerrymanMaxHeal            = 0;
+            FerrymanHealScale = 0.5f;
+            FerrymanMaxHeal = 0;
 
             // Crit / misc
-            HasUndertakersBrooch       = false;
-            HasGravediggersRing        = false;
-            HasCharmOfDepths           = false;
-            HasMonkeysPaw              = false;
-            HasSoulSiphoningArtifact   = false;
+            HasUndertakersBrooch = false;
+            HasGravediggersRing = false;
+            HasCharmOfDepths = false;
+            HasMonkeysPaw = false;
+            HasSoulSiphoningArtifact = false;
 
             UseLargestSpendWindowForFerryman = false;
             ClearOnlyDebuffs = true;
@@ -153,6 +159,7 @@ namespace MightofUniverses.Common.Players
             accSkeletonKnickknack = false;
             accSpiritTalisman = false;
             accVisceraNovelty = false;
+            accLoomOfFate = false;
 
             // Max souls modifiers (re-collected each tick)
             flatMaxSoulsBonus = 0;

@@ -24,33 +24,34 @@ namespace MightofUniverses.Common.Players
         public int deathMarks;
         public const int MAX_DEATH_MARKS = 5;
         public static ModKeybind SoulReleaseKey;
-        public static ModKeybind Ability2Key; // NEW
+        public static ModKeybind Ability2Key;
         public bool justConsumedSouls;
         public int TempleBuffTimer;
         public bool chillingPresence;
 
-        // NEW: Death Mark decay system
+        // Death Mark decay system
         private int outOfCombatTimer = 0;
         private const int OUT_OF_COMBAT_THRESHOLD = 300; // 5 seconds at 60fps
         private const int DEATH_MARK_DECAY_RATE = 1800; // 30 seconds at 60fps
         private int lastHitTime = 0;
 
-        // NEW: Accessory flags
+        // Accessory flags
         public bool hasUnstableCharm = false;
         public bool hasMortalityBell = false;
+        public bool hasCultistTapestry = false; // NEW
         private int mortalityBellCooldown = 0;
         private const int MORTALITY_BELL_COOLDOWN = 3600; // 60 seconds at 60fps
 
         public override void Load()
         {
             SoulReleaseKey = KeybindLoader.RegisterKeybind(Mod, "Release Soul Energy", "R");
-            Ability2Key = KeybindLoader.RegisterKeybind(Mod, "Ability 2", "F"); // NEW
+            Ability2Key = KeybindLoader.RegisterKeybind(Mod, "Ability 2", "F");
         }
 
         public override void Unload()
         {
             SoulReleaseKey = null;
-            Ability2Key = null; // NEW
+            Ability2Key = null;
         }
 
         public override void Initialize()
@@ -65,11 +66,11 @@ namespace MightofUniverses.Common.Players
             TempleBuffTimer = 0;
             maxSoulEnergy = BaseMaxSoulEnergy;
             chillingPresence = false;
-            // NEW
             outOfCombatTimer = 0;
             lastHitTime = 0;
             hasUnstableCharm = false;
             hasMortalityBell = false;
+            hasCultistTapestry = false; // NEW
             mortalityBellCooldown = 0;
         }
 
@@ -83,9 +84,9 @@ namespace MightofUniverses.Common.Players
             reaperCritChance = 0f;
             justConsumedSouls = false;
             chillingPresence = false;
-            // NEW
             hasUnstableCharm = false;
             hasMortalityBell = false;
+            hasCultistTapestry = false; // NEW
 
             if (TempleBuffTimer > 0)
                 TempleBuffTimer--;
@@ -156,40 +157,40 @@ namespace MightofUniverses.Common.Players
             if (MechaCactus) bonus += 150f;
 
             bool Chlorotanium =
-    head == ModContent.ItemType<Content.Items.Armors.ChlorotaniumMaskedHelmet>() &&
-    body == ModContent.ItemType<Content.Items.Armors.ChlorotaniumChestplate>() &&
-    legs == ModContent.ItemType<Content.Items.Armors.ChlorotaniumGreaves>();
+                head == ModContent.ItemType<Content.Items.Armors.ChlorotaniumMaskedHelmet>() &&
+                body == ModContent.ItemType<Content.Items.Armors.ChlorotaniumChestplate>() &&
+                legs == ModContent.ItemType<Content.Items.Armors.ChlorotaniumGreaves>();
             if (Chlorotanium) bonus += 200f;
 
-    bool FoundryRevenant =
-        head == ModContent.ItemType<Content.Items.Armors.FoundryRevenantVisage>() &&
-        body == ModContent.ItemType<Content.Items.Armors.FoundryRevenantBoilerplate>() &&
-        legs == ModContent.ItemType<Content.Items.Armors.FoundryRevenantTreads>();
-                if (FoundryRevenant) bonus += 250f;
+            bool FoundryRevenant =
+                head == ModContent.ItemType<Content.Items.Armors.FoundryRevenantVisage>() &&
+                body == ModContent.ItemType<Content.Items.Armors.FoundryRevenantBoilerplate>() &&
+                legs == ModContent.ItemType<Content.Items.Armors.FoundryRevenantTreads>();
+            if (FoundryRevenant) bonus += 250f;
 
-    bool HolidayButcher =
-        head == ModContent.ItemType<Content.Items.Armors.HolidayButcherHat>() &&
-        body == ModContent.ItemType<Content.Items.Armors.HolidayButcherChestplate>() &&
-        legs == ModContent.ItemType<Content.Items.Armors.HolidayButcherGreaves>();
-                if (HolidayButcher) bonus += 300f;
+            bool HolidayButcher =
+                head == ModContent.ItemType<Content.Items.Armors.HolidayButcherHat>() &&
+                body == ModContent.ItemType<Content.Items.Armors.HolidayButcherChestplate>() &&
+                legs == ModContent.ItemType<Content.Items.Armors.HolidayButcherGreaves>();
+            if (HolidayButcher) bonus += 300f;
 
-    bool PrimalSavagery =
-        head == ModContent.ItemType<Content.Items.Armors.PrimalSavageryMask>() &&
-        body == ModContent.ItemType<Content.Items.Armors.PrimalSavageryChestplate>() &&
-        legs == ModContent.ItemType<Content.Items.Armors.PrimalSavageryBoots>();
-    if (PrimalSavagery) bonus += 350f;
+            bool PrimalSavagery =
+                head == ModContent.ItemType<Content.Items.Armors.PrimalSavageryMask>() &&
+                body == ModContent.ItemType<Content.Items.Armors.PrimalSavageryChestplate>() &&
+                legs == ModContent.ItemType<Content.Items.Armors.PrimalSavageryBoots>();
+            if (PrimalSavagery) bonus += 350f;
 
-    bool TempleReaver =
-        head == ModContent.ItemType<Content.Items.Armors.TempleReaverMask>() &&
-        body == ModContent.ItemType<Content.Items.Armors.TempleReaverPlate>() &&
-        legs == ModContent.ItemType<Content.Items.Armors.TempleReaverBoots>();
-    if (TempleReaver) bonus += 350f;
+            bool TempleReaver =
+                head == ModContent.ItemType<Content.Items.Armors.TempleReaverMask>() &&
+                body == ModContent.ItemType<Content.Items.Armors.TempleReaverPlate>() &&
+                legs == ModContent.ItemType<Content.Items.Armors.TempleReaverBoots>();
+            if (TempleReaver) bonus += 350f;
 
-    bool LunarShroud =
-        head == ModContent.ItemType<Content.Items.Armors.LunarShroudCowl>() &&
-        body == ModContent.ItemType<Content.Items.Armors.LunarShroudCowl>() &&
-        legs == ModContent.ItemType<Content.Items.Armors.LunarShroudPants>();
-    if (LunarShroud) bonus += 400f;
+            bool LunarShroud =
+                head == ModContent.ItemType<Content.Items.Armors.LunarShroudCowl>() &&
+                body == ModContent.ItemType<Content.Items.Armors.LunarShroudCowl>() &&
+                legs == ModContent.ItemType<Content.Items.Armors.LunarShroudPants>();
+            if (LunarShroud) bonus += 400f;
 
             return bonus;
         }
@@ -311,7 +312,7 @@ namespace MightofUniverses.Common.Players
             if (soulEnergy > maxSoulEnergy)
                 soulEnergy = maxSoulEnergy;
 
-            // === NEW: DEATH MARK DECAY SYSTEM ===
+            // === DEATH MARK DECAY SYSTEM ===
             if (deathMarks > 0)
             {
                 // Track time since last combat action
@@ -334,6 +335,31 @@ namespace MightofUniverses.Common.Players
                             CombatText.NewText(Player.getRect(), Color.Gray, "-1 Death Mark (Decay)", true);
                         }
 
+                        // NEW: Cultist Tapestry effect
+                        if (hasCultistTapestry)
+                        {
+                            // Heal 50 HP
+                            Player.Heal(50);
+
+                            // Grant 20% of max soul capacity
+                            float soulGain = maxSoulEnergy * 0.20f;
+                            AddSoulEnergy(soulGain);
+
+                            // Visual/sound effects
+                            SoundEngine.PlaySound(SoundID.Item4, Player.Center);
+                            
+                            for (int i = 0; i < 20; i++)
+                            {
+                                Vector2 dustVel = Main.rand.NextVector2Circular(5f, 5f);
+                                int dust = Dust.NewDust(Player.position, Player.width, Player.height, 
+                                    DustID.GreenTorch, dustVel.X, dustVel.Y, 100, Color.Lime, 1.8f);
+                                Main.dust[dust].noGravity = true;
+                            }
+
+                            CombatText.NewText(Player.getRect(), Color.Lime, 
+                                $"+50 HP, +{(int)soulGain} Souls", true);
+                        }
+
                         if (Main.netMode == NetmodeID.Server)
                             SyncDeathMarks();
                     }
@@ -351,20 +377,20 @@ namespace MightofUniverses.Common.Players
                 lastHitTime = 0;
             }
 
-            // NEW: Update Mortality Bell cooldown
+            // Update Mortality Bell cooldown
             if (mortalityBellCooldown > 0)
             {
                 mortalityBellCooldown--;
             }
 
-            // NEW: Unstable Charm teleport
+            // Unstable Charm teleport
             if (hasUnstableCharm && Ability2Key != null && Ability2Key.JustPressed)
             {
                 TryUnstableCharmTeleport();
             }
         }
 
-        // NEW: Combat detection methods
+        // Combat detection methods
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
             lastHitTime = 0;
@@ -380,7 +406,7 @@ namespace MightofUniverses.Common.Players
             lastHitTime = 0;
         }
 
-        // NEW: Death handling
+        // Death handling
         public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
         {
             if (deathMarks > 0)
@@ -389,7 +415,7 @@ namespace MightofUniverses.Common.Players
             }
         }
 
-        // NEW: Mortality Bell death save
+        // Mortality Bell death save
         public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
         {
             if (hasMortalityBell && mortalityBellCooldown <= 0 && deathMarks > 0)
@@ -423,7 +449,7 @@ namespace MightofUniverses.Common.Players
             return base.PreKill(damage, hitDirection, pvp, ref playSound, ref genGore, ref damageSource);
         }
 
-        // NEW: Unstable Charm teleport
+        // Unstable Charm teleport
         private void TryUnstableCharmTeleport()
         {
             if (deathMarks <= 0) return;
@@ -533,7 +559,7 @@ namespace MightofUniverses.Common.Players
             return false;
         }
 
-        // NEW: Remove marks without checking (for decay/teleport)
+        // Remove marks without checking (for decay/teleport)
         public void RemoveDeathMark(int amount)
         {
             if (amount <= 0) return;
@@ -564,12 +590,12 @@ namespace MightofUniverses.Common.Players
 
         public override void SaveData(TagCompound tag)
         {
-            // NEW: Intentionally NOT saving deathMarks - they reset on world leave
+            // Intentionally NOT saving deathMarks - they reset on world leave
         }
 
         public override void LoadData(TagCompound tag)
         {
-            // NEW: Death marks always start at 0 when loading
+            // Death marks always start at 0 when loading
             deathMarks = 0;
         }
 
