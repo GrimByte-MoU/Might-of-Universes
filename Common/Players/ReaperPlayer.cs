@@ -459,7 +459,7 @@ namespace MightofUniverses.Common.Players
                 cursorDirection = new Vector2(Player.direction, 0f);
             cursorDirection.Normalize();
 
-            Vector2 teleportOffset = cursorDirection * (10f * 16f);
+            Vector2 teleportOffset = cursorDirection * (15f * 16f);
             Vector2 newPosition = Player.Center + teleportOffset;
 
             Point tilePos = newPosition.ToTileCoordinates();

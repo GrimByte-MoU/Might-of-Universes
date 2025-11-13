@@ -54,7 +54,8 @@ namespace MightofUniverses.Common.Tooltips
                 ["AncientBoneScythe"] = 100f,
                 ["Ketsumatsu"] = 125f,
                 ["CelestialReaper"] = 125f,
-                ["NewMoon"] = 150f
+                ["NewMoon"] = 150f,
+                ["ReapersEcho"] = 200f,
             };
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)

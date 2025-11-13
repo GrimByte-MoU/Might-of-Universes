@@ -4728,6 +4728,18 @@ Items: {
 		DisplayName: Chrono Wheel
 		Tooltip: Cycles between the time of day
 	}
+
+	ReapersEcho: {
+		DisplayName: Reaper's Echo
+		Tooltip:
+		'''
+		"A scythe with a story of going from nothing to slaying the remnant of an ancient god etched into the handle"
+		Fires mirages of the player at the cursor six times per second which pierces infinitely
+		Mirages gather 8 souls on strike
+		Consume {0} souls to conjure a ring of 8 mirages which all pause before flying at the cursor
+		These mirages each do 300% damage
+		'''
+	}
 }
 
 Prefixes: {

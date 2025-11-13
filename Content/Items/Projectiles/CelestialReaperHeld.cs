@@ -40,6 +40,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.DamageType = DamageClass.Generic;
             Projectile.timeLeft = 9999;
             Projectile.usesLocalNPCImmunity = true;
+            Projectile.DamageType = ModContent.GetInstance<ReaperDamageClass>();
             Projectile.localNPCHitCooldown = 10; // Hit enemies while spinning
         }
 

@@ -32,6 +32,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.ignoreWater = false;
             Projectile.alpha = 0;
             Projectile.scale = 0.75f;
+            Projectile.DamageType = ModContent.GetInstance<ReaperDamageClass>();
         }
 
         public override void AI()

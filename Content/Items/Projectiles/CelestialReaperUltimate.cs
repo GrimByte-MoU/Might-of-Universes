@@ -36,6 +36,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 15;
             Projectile.scale = 1.5f;
+            Projectile.DamageType = ModContent.GetInstance<ReaperDamageClass>();
         }
 
         public override void AI()
