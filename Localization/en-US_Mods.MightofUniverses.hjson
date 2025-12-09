@@ -753,6 +753,9 @@ Projectiles: {
 	CelestialReaperThrown.DisplayName: Celestial Reaper Thrown
 	CelestialReaperUltimate.DisplayName: Celestial Reaper Ultimate
 	NewMoonProjectile.DisplayName: New Moon Projectile
+	DemonicSickle.DisplayName: Demonic Sickle
+	FleshGlob.DisplayName: Flesh Glob
+	YellowLaser.DisplayName: Yellow Laser
 }
 
 Keybinds: {
@@ -3809,18 +3812,7 @@ Items: {
 
 	CoreOfFlesh: {
 		DisplayName: Core Of Flesh
-		Tooltip:
-			'''
-			Gives off a light that gives all players within it the Guiding Light buff
-			Right click to cycle between 3 different powers within the lantern:
-			Teeth: Sends out a spread of two fast traveling, gravity affected teeth three times per second
-			The teeth gather 2 souls on hit, deal 75% damage and do not pierce
-			Lasers: Fires out bursts of 3 lasers with a brief pause after firing
-			The lasers do 80% damage and pierce 1 enemy, they do not gather souls
-			Demon Sickle: Fires out demonic sickles that start slow but travel quickly at enemies consuming 30 souls per second
-			The sickles do 250% damage, don't pierce and ignore 50 defense
-			When running out of souls, it switches to Lasers automatically
-			'''
+		Tooltip: Gives off a light that gives all players within it the Guiding Light buff
 	}
 
 	TabulatingMachine: {
@@ -4584,7 +4576,7 @@ Items: {
 
 	StellarPulser: {
 		DisplayName: Stellar Pulser
-		Tooltip: Now fires two stars at once!
+		Tooltip: Now fires two bursts of stars at once!
 	}
 
 	PrismaticChestplate: {
@@ -4726,19 +4718,19 @@ Items: {
 
 	ChronoWheel: {
 		DisplayName: Chrono Wheel
-		Tooltip: Cycles between the time of day
+		Tooltip: Cycles between sunrise, noon, sunset and midnight
 	}
 
 	ReapersEcho: {
 		DisplayName: Reaper's Echo
 		Tooltip:
-		'''
-		"A scythe with a story of going from nothing to slaying the remnant of an ancient god etched into the handle"
-		Fires mirages of the player at the cursor six times per second which pierces infinitely
-		Mirages gather 8 souls on strike
-		Consume {0} souls to conjure a ring of 8 mirages which all pause before flying at the cursor
-		These mirages each do 300% damage
-		'''
+			'''
+			"A scythe with a story of going from nothing to slaying the remnant of an ancient god etched into the handle"
+			Fires mirages of the player at the cursor six times per second which pierces infinitely
+			Mirages gather 8 souls on strike
+			Consume {0} souls to conjure a ring of 8 mirages which all pause before flying at the cursor
+			These mirages each do 300% damage
+			'''
 	}
 }
 

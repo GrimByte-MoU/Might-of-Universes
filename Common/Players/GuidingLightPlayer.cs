@@ -1,54 +1,54 @@
 using Terraria;
-using Terraria.ModLoader;
-using MightofUniverses.Content.Items.Buffs;
+using Terraria. ModLoader;
+using MightofUniverses.Content.Items. Buffs;
 
-namespace MightofUniverses.Common.Players
+namespace MightofUniverses.Common. Players
 {
-    // Handles precise 15% faster expiration of debuffs while Guiding Light is active.
+    /// <summary>
+    /// Handles Guiding Light's debuff reduction effect: debuffs expire 20% faster.
+    /// Uses per-debuff fractional accumulators for precise timing.
+    /// </summary>
     public class GuidingLightPlayer : ModPlayer
     {
-        // Per-debuff fractional accumulators so each debuff is reduced by 15% independently.
-        // Player.MaxBuffs is the correct size for buffType/buffTime arrays.
-        private float[] _debuffExtraTickAcc;
+        private float[] _debuffExtraTickAccumulator;
 
         public override void Initialize()
         {
-            _debuffExtraTickAcc = new float[Player.MaxBuffs];
-        }
-
-        public override void ResetEffects()
-        {
-            // No reset needed here for the accumulators; keeping them preserves precision across frames.
+            _debuffExtraTickAccumulator = new float[Player.MaxBuffs];
         }
 
         public override void PostUpdateBuffs()
         {
+            // Only active while Guiding Light buff is present
             int guidingLightType = ModContent.BuffType<GuidingLight>();
-            if (!Player.HasBuff(guidingLightType))
-            {
+            if (!Player. HasBuff(guidingLightType))
                 return;
-            }
-            const float extraTicksPerSecond = 12f;
-            const float extraTicksPerTick = extraTicksPerSecond / 60f;
 
-            for (int i = 0; i < Player.MaxBuffs; i++)
+            // 20% faster expiration = 12 extra ticks per second (60 * 0.20 = 12)
+            const float ExtraTicksPerSecond = 12f;
+            const float ExtraTicksPerFrame = ExtraTicksPerSecond / 60f;
+
+            for (int i = 0; i < Player. MaxBuffs; i++)
             {
-                int type = Player.buffType[i];
-                if (type <= 0) continue;
-                if (!Main.debuff[type]) continue; // Only touch debuffs
-                int time = Player.buffTime[i];
+                int buffType = Player.buffType[i];
+                if (buffType <= 0) continue;
 
-                // Ignore timeless/infinite debuffs (time <= 0 often means disabled countdown)
-                if (time <= 0) continue;
+                // Only affect debuffs
+                if (!Main. debuff[buffType]) continue;
 
-                // Accumulate fractional extra countdown per debuff
-                _debuffExtraTickAcc[i] += extraTicksPerTick;
+                int buffTime = Player. buffTime[i];
 
-                // For each whole extra tick accumulated, subtract 1 additional tick from this debuff's time.
-                while (_debuffExtraTickAcc[i] >= 1f && Player.buffTime[i] > 0)
+                // Ignore infinite/disabled debuffs (time <= 0)
+                if (buffTime <= 0) continue;
+
+                // Accumulate fractional extra ticks
+                _debuffExtraTickAccumulator[i] += ExtraTicksPerFrame;
+
+                // Apply whole ticks
+                while (_debuffExtraTickAccumulator[i] >= 1f && Player. buffTime[i] > 0)
                 {
                     Player.buffTime[i]--;
-                    _debuffExtraTickAcc[i] -= 1f;
+                    _debuffExtraTickAccumulator[i] -= 1f;
                 }
             }
         }

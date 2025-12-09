@@ -1,15 +1,24 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
-using MightofUniverses.Content.Items.Buffs;
+using MightofUniverses. Content.Items.Buffs;
 
 namespace MightofUniverses.Common.Players
 {
+    /// <summary>
+    /// Handles Soul Lantern aura effects - applies Guiding Light buff to player and nearby allies. 
+    /// </summary>
     public class LanternAuraPlayer : ModPlayer
     {
+        /// <summary>Base aura radius in tiles (set by equipped lantern)</summary>
         public float BaseAuraRadiusTiles;
+
+        /// <summary>Bonus aura radius from accessories/buffs</summary>
         public float BonusAuraRadiusTiles;
+
+        /// <summary>Whether player is currently holding a lantern that grants Guiding Light</summary>
         public bool HasGuidingLightSource;
+
         public override void ResetEffects()
         {
             BaseAuraRadiusTiles = 0f;
@@ -17,34 +26,36 @@ namespace MightofUniverses.Common.Players
             HasGuidingLightSource = false;
         }
 
+        /// <summary>Calculates total aura radius in pixels</summary>
         public float GetAuraRadiusPixels()
         {
-            float tiles = BaseAuraRadiusTiles + BonusAuraRadiusTiles;
-            if (tiles < 0f) tiles = 0f; // safety
-            return tiles * 16f;
+            float totalTiles = BaseAuraRadiusTiles + BonusAuraRadiusTiles;
+            if (totalTiles < 0f) totalTiles = 0f;
+            return totalTiles * 16f; // 1 tile = 16 pixels
         }
 
         public override void PostUpdate()
         {
-            if (!HasGuidingLightSource || BaseAuraRadiusTiles <= 0f)
+            if (Player.dead || !HasGuidingLightSource || BaseAuraRadiusTiles <= 0f)
                 return;
 
-            float radiusPx = GetAuraRadiusPixels();
+            float radiusPixels = GetAuraRadiusPixels();
             int buffType = ModContent.BuffType<GuidingLight>();
-            const int applyTime = 120;
+            const int BuffDuration = 10;
 
-            // Self always gets it
-            Player.AddBuff(buffType, applyTime);
+            Player.AddBuff(buffType, BuffDuration);
 
-            // Grant to nearby allies
-            for (int i = 0; i < Main.maxPlayers; i++)
+            if (Main.netMode != 0)
             {
-                Player other = Main.player[i];
-                if (other == null || !other.active || other.dead || other.whoAmI == Player.whoAmI)
-                    continue;
-                if (Vector2.Distance(other.Center, Player.Center) <= radiusPx)
+                for (int i = 0; i < Main.maxPlayers; i++)
                 {
-                    other.AddBuff(buffType, applyTime);
+                    Player ally = Main.player[i];
+                    if (ally == null || ! ally.active || ally.dead || ally.whoAmI == Player.whoAmI)
+                        continue;
+                    if (Vector2. Distance(ally.Center, Player.Center) <= radiusPixels)
+                    {
+                        ally.AddBuff(buffType, BuffDuration);
+                    }
                 }
             }
         }
