@@ -20,10 +20,6 @@ public class HeartAttackGlob : ModItem
     {
         player.statLifeMax2 -= 20;
           player.GetDamage(DamageClass.Generic) += 0.1f;
-            player.GetDamage(DamageClass.Melee) += 0.1f;
-            player.GetDamage(DamageClass.Ranged) += 0.1f;
-            player.GetDamage(DamageClass.Magic) += 0.1f;
-            player.GetDamage(DamageClass.Summon) += 0.1f;
             player.moveSpeed += 0.15f;
     }
 }

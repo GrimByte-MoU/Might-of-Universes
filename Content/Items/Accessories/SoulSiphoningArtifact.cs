@@ -14,11 +14,26 @@ namespace MightofUniverses.Content.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.reaperDamageMultiplier += 0.05f;
+            player.GetDamage<ReaperDamageClass>() += 0.05f;
 
             var acc = player.GetModPlayer<ReaperAccessoryPlayer>();
             acc.HasSoulSiphoningArtifact = true;
             acc.ApplyMaxSoulFromHP(0.05f);
+        }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ItemID.Diamond, 2)
+                .AddIngredient(ItemID.TissueSample, 10)
+                .AddTile(TileID.Anvils)
+                .Register();
+
+            CreateRecipe()
+                .AddIngredient(ItemID.Diamond, 2)
+                .AddIngredient(ItemID.RottenChunk, 10)
+                .AddTile(TileID.Anvils)
+                .Register();
         }
     }
 }

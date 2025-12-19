@@ -12,7 +12,7 @@ namespace MightofUniverses.Content.Items.Accessories
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetDamage(ModContent.GetInstance<ReaperDamageClass>()) += 0.07f;
+            player.GetDamage<ReaperDamageClass>() += 0.07f;
             var acc = player.GetModPlayer<ReaperAccessoryPlayer>();
             acc.accShackledArtifact = true;
             acc.ApplyMaxSoulFromHP(0.075f);

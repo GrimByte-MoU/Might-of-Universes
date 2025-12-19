@@ -3,13 +3,11 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using System;
-using Terraria.Audio;
 using MightofUniverses.Content.Items.Buffs;
-using MightofUniverses.Content.Items.Projectiles;
+using MightofUniverses. Content.Items.Projectiles;
 using MightofUniverses.Content.Items.Materials;
 
-namespace MightofUniverses.Content.Items.Weapons
+namespace MightofUniverses. Content.Items.Weapons
 {
     public class AirshipBeacon : ModItem
     {
@@ -17,7 +15,7 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true;
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
-            ItemID.Sets.StaffMinionSlotsRequired[Type] = 4f;
+            ItemID.Sets.StaffMinionSlotsRequired[Type] = 5f;
         }
 
         public override void SetDefaults()
@@ -29,9 +27,9 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.height = 44;
             Item.useTime = 36;
             Item.useAnimation = 36;
-            Item.useStyle = ItemUseStyleID.Swing;
+            Item.useStyle = ItemUseStyleID. Swing;
             Item.value = Item.sellPrice(gold: 5);
-            Item.rare = ItemRarityID.Lime;
+            Item.rare = ItemRarityID. Lime;
             Item.UseSound = SoundID.Item44;
             Item.noMelee = true;
             Item.DamageType = DamageClass.Summon;
@@ -48,7 +46,6 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             player.AddBuff(Item.buffType, 2);
             
-            // Remove existing airships
             for (int i = 0; i < Main.maxProjectiles; i++)
             {
                 if (Main.projectile[i].active && Main.projectile[i].type == Item.shoot && Main.projectile[i].owner == player.whoAmI)
@@ -57,21 +54,21 @@ namespace MightofUniverses.Content.Items.Weapons
                 }
             }
 
-            var projectile = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, Main.myPlayer);
+            var projectile = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI);
             projectile.originalDamage = Item.damage;
 
             return false;
         }
 
-       public override void AddRecipes()
-       {
-           CreateRecipe()
-               .AddIngredient(ModContent.ItemType<BrassBar>(), 25)
-               .AddIngredient(ItemID.SoulofFlight, 20)
-               .AddIngredient(ItemID.SoulofMight, 10)
-               .AddIngredient(ItemID.Cog, 100)
-               .AddTile(TileID.MythrilAnvil)
-               .Register();
-       }
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ModContent.ItemType<BrassBar>(), 25)
+                .AddIngredient(ItemID.SoulofFlight, 20)
+                .AddIngredient(ItemID.SoulofMight, 10)
+                .AddIngredient(ItemID. Cog, 100)
+                .AddTile(TileID.MythrilAnvil)
+                .Register();
+        }
     }
 }

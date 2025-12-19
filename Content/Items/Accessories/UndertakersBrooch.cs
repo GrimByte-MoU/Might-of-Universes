@@ -20,13 +20,12 @@ namespace MightofUniverses.Content.Items.Accessories
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
             reaper.maxSoulEnergy += 50f;
-            reaper.reaperCritChance += 6f; // your internal crit system
+            reaper.reaperCritChance += 6f;
             player.GetModPlayer<ReaperAccessoryPlayer>().HasUndertakersBrooch = true;
         }
 
         public override void AddRecipes()
         {
-            // Graveyard recipe: require player to be in a Graveyard when crafting (tModLoader automatically enforces environment)
             CreateRecipe()
                 .AddIngredient(ItemID.Wood, 15)
                 .AddIngredient(ItemID.Bone, 25)

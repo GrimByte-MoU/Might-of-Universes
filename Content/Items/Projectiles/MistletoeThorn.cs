@@ -1,10 +1,9 @@
-using Microsoft.Xna.Framework;
+using Microsoft. Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Audio;
 
-namespace MightofUniverses.Content.Items.Projectiles
+namespace MightofUniverses. Content.Items.Projectiles
 {
     public class MistletoeThorn : MoUProjectile
     {
@@ -13,36 +12,39 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Summon;
             Projectile.penetrate = 1;
-            Projectile.timeLeft = 90;
-            Projectile.ignoreWater = true;
+            Projectile.timeLeft = 180;
             Projectile.tileCollide = true;
+            Projectile.ignoreWater = false;
             Projectile.scale = 0.75f;
         }
+
         public override void AI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
-            Lighting.AddLight(Projectile.Center, 0.7f, 0.6f, 0.2f); // Gold
-            Lighting.AddLight(Projectile.Center, 0.2f, 0.5f, 1f); // Blue
             
-            // Gold and blue particles
-            if (Main.rand.NextBool(2))
+            Lighting.AddLight(Projectile. Center, 0.5f, 0.8f, 1f);
+
+            if (Main.rand.NextBool(3))
             {
-                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GoldCoin);
-                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.BlueTorch);
+                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height,
+                    DustID.BlueTorch, 0f, 0f, 100, default, 1.2f);
                 dust.noGravity = true;
+                dust.velocity *= 0.3f;
             }
+        }
+
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            target.AddBuff(BuffID.Frostburn2, 180);
         }
 
         public override void Kill(int timeLeft)
         {
-            SoundEngine.PlaySound(SoundID.Shatter, Projectile.position);
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 8; i++)
             {
-                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GoldCoin);
-                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.BlueTorch);
+                Dust. NewDust(Projectile.position, Projectile.width, Projectile.height,
+                    DustID.BlueTorch, Projectile.velocity.X * 0.3f, Projectile.velocity.Y * 0.3f, 100, default, 1.5f);
             }
         }
     }
 }
-
-

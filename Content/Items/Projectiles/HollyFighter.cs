@@ -1,15 +1,16 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
+using Terraria.Audio;
 using Terraria.ModLoader;
-using MightofUniverses.Content.Items.Buffs;
+using MightofUniverses. Content.Items.Buffs;
 using System;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
     public class HollyFighter : MoUProjectile
     {
-        private const float SHOOT_RATE = 12f;
+        private const float SHOOT_RATE = 15f;
         private float attackTimer = 0f;
 
         public override void SetStaticDefaults()
@@ -17,7 +18,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Main.projPet[Projectile.type] = true;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
-            ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
+            ProjectileID.Sets. CultistIsResistantTo[Projectile.type] = true;
         }
 
         public override void SafeSetDefaults()
@@ -25,14 +26,14 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.friendly = true;
             Projectile.minion = true;
             Projectile.DamageType = DamageClass.Summon;
-            Projectile.minionSlots = 1f;
-            Projectile.penetrate = -1;
+            Projectile. minionSlots = 1f;
+            Projectile. penetrate = -1;
             Projectile.tileCollide = false;
         }
 
         public override void AI()
         {
-            Player owner = Main.player[Projectile.owner];
+            Player owner = Main.player[Projectile. owner];
 
             if (!CheckActive(owner))
                 return;
@@ -47,29 +48,25 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         private void HandleVisuals()
         {
-            if (Projectile.velocity.X != 0)
-            {
-                Projectile.spriteDirection = Projectile.velocity.X > 0 ? 1 : -1;
-            }
+            float velocityThreshold = 2f;
+            
+            if (Projectile.velocity.X > velocityThreshold)
+                Projectile.spriteDirection = 1;
+            else if (Projectile.velocity.X < -velocityThreshold)
+                Projectile.spriteDirection = -1;
+
             Projectile.rotation = 0f;
 
-            if (Projectile.velocity.Length() < 0.1f)
-            {
-                Projectile.velocity = Vector2.Zero;
-            }
-            else
-            {
-                Projectile.velocity *= 0.98f;
-            }
-
-            if (Main.rand.NextBool(2))
+            if (Main.rand.NextBool(3))
             {
                 Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, 
-                    DustID.BlueTorch, 0f, 0f, 100, default, 1.5f);
+                    DustID.BlueTorch, 0f, 0f, 100, default, 1.2f);
                 dust.noGravity = true;
-                dust.velocity *= 0.3f;
-                dust.scale = Main.rand.NextFloat(1f, 1.5f);
+                dust.velocity *= 0.2f;
+                dust.scale = Main.rand.NextFloat(0.8f, 1.3f);
             }
+
+            Lighting.AddLight(Projectile.Center, 0.5f, 0.7f, 1f);
         }
 
         private bool CheckActive(Player owner)
@@ -80,7 +77,7 @@ namespace MightofUniverses.Content.Items.Projectiles
                 return false;
             }
 
-            if (owner.HasBuff(ModContent.BuffType<HollyFighterBuff>()))
+            if (owner. HasBuff(ModContent.BuffType<HollyFighterBuff>()))
             {
                 Projectile.timeLeft = 2;
             }
@@ -90,17 +87,17 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         private void GeneralBehavior(Player owner, out Vector2 vectorToIdlePosition, out float distanceToIdlePosition)
         {
-            Vector2 idlePosition = owner.Center;
-            idlePosition.Y -= 96f;
+            Vector2 idlePosition = owner. Center;
+            idlePosition. Y -= 96f;
 
             vectorToIdlePosition = idlePosition - Projectile.Center;
-            distanceToIdlePosition = vectorToIdlePosition.Length();
+            distanceToIdlePosition = vectorToIdlePosition. Length();
 
-            if (Main.myPlayer == owner.whoAmI && distanceToIdlePosition > 2000f)
+            if (Main. myPlayer == owner.whoAmI && distanceToIdlePosition > 2000f)
             {
                 Projectile.position = idlePosition;
                 Projectile.velocity *= 0.1f;
-                Projectile.netUpdate = true;
+                Projectile. netUpdate = true;
             }
         }
 
@@ -110,7 +107,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             targetCenter = Projectile.position;
             foundTarget = false;
 
-            if (owner.HasMinionAttackTargetNPC)
+            if (owner. HasMinionAttackTargetNPC)
             {
                 NPC npc = Main.npc[owner.MinionAttackTargetNPC];
                 float between = Vector2.Distance(npc.Center, Projectile.Center);
@@ -124,15 +121,14 @@ namespace MightofUniverses.Content.Items.Projectiles
 
             if (!foundTarget)
             {
-                for (int i = 0; i < Main.maxNPCs; i++)
+                foreach (var npc in Main.ActiveNPCs)
                 {
-                    NPC npc = Main.npc[i];
                     if (npc.CanBeChasedBy())
                     {
                         float between = Vector2.Distance(npc.Center, Projectile.Center);
                         bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
                         bool inRange = between < distanceFromTarget;
-                        bool lineOfSight = Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, npc.position, npc.width, npc.height);
+                        bool lineOfSight = Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, npc. position, npc.width, npc.height);
 
                         if (((closest && inRange) || !foundTarget) && lineOfSight)
                         {
@@ -147,54 +143,68 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         private void Movement(bool foundTarget, float distanceFromTarget, Vector2 targetCenter, float distanceToIdlePosition, Vector2 vectorToIdlePosition)
         {
-            float speed = 18f;
-            float inertia = 6f;
+            float speed = 16f;
+            float inertia = 20f;
 
             for (int i = 0; i < Main.maxProjectiles; i++)
             {
                 Projectile other = Main.projectile[i];
-                if (other.active && other.type == Projectile.type && other.owner == Projectile.owner && other.whoAmI != Projectile.whoAmI)
+                if (other. active && other.type == Projectile.type && other.owner == Projectile.owner && other.whoAmI != Projectile.whoAmI)
                 {
                     Vector2 distanceToOther = Projectile.Center - other.Center;
-                    if (distanceToOther.Length() < 50f)
+                    float distance = distanceToOther.Length();
+                    if (distance < 60f && distance > 0f)
                     {
-                        Projectile.velocity += distanceToOther * 0.08f;
+                        distanceToOther.Normalize();
+                        Projectile.velocity += distanceToOther * 0.05f;
                     }
                 }
+            }
+
+            if (Projectile.velocity.Length() > speed * 1.3f)
+            {
+                Projectile.velocity = Projectile.velocity.SafeNormalize(Vector2.Zero) * speed * 1.3f;
             }
 
             if (foundTarget)
             {
                 Vector2 targetPosition = targetCenter;
-                float strafingOffset = (float)Math.Sin(Main.GameUpdateCount * 0.04f + Projectile.whoAmI * 0.5f) * 150f;
-                targetPosition.X += strafingOffset;
-                targetPosition.Y -= 112f + (Projectile.whoAmI * 30);
                 
-                if (distanceFromTarget > 40f)
+                float strafingOffset = (float)Math.Sin(Main.GameUpdateCount * 0.03f + Projectile.whoAmI * 0.8f) * 120f;
+                targetPosition.X += strafingOffset;
+                targetPosition.Y -= 100f + (Projectile.whoAmI % 3) * 40f;
+                
+                Vector2 direction = targetPosition - Projectile.Center;
+                float distanceToTarget = direction.Length();
+
+                if (distanceToTarget > 30f)
                 {
-                    Vector2 direction = targetPosition - Projectile.Center;
                     direction.Normalize();
                     direction *= speed;
                     Projectile.velocity = (Projectile.velocity * (inertia - 1) + direction) / inertia;
+                }
+                else
+                {
+                    Projectile.velocity *= 0.96f;
                 }
             }
             else
             {
                 Vector2 idleOffset = new Vector2(
-                    (float)Math.Cos(Main.GameUpdateCount * 0.015f + Projectile.whoAmI * 0.3f) * 100f,
-                    (float)Math.Sin(Main.GameUpdateCount * 0.008f + Projectile.whoAmI * 0.5f) * 50f
+                    (float)Math.Cos(Main.GameUpdateCount * 0.02f + Projectile.whoAmI * 0.5f) * 80f,
+                    (float)Math.Sin(Main.GameUpdateCount * 0.015f + Projectile.whoAmI * 0.7f) * 40f
                 );
-                vectorToIdlePosition += idleOffset;
+                Vector2 targetIdlePos = vectorToIdlePosition + idleOffset;
 
-                if (distanceToIdlePosition > 10f)
+                if (targetIdlePos.Length() > 20f)
                 {
-                    vectorToIdlePosition.Normalize();
-                    vectorToIdlePosition *= speed;
-                    Projectile.velocity = (Projectile.velocity * (inertia - 1) + vectorToIdlePosition) / inertia;
+                    targetIdlePos.Normalize();
+                    targetIdlePos *= speed * 0.8f;
+                    Projectile.velocity = (Projectile. velocity * (inertia - 1) + targetIdlePos) / inertia;
                 }
                 else
                 {
-                    Projectile.velocity *= 0.95f;
+                    Projectile.velocity *= 0.96f;
                 }
             }
         }
@@ -210,12 +220,14 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Projectile.NewProjectile(
                     Projectile.GetSource_FromThis(),
                     Projectile.Center,
-                    direction * 32f,
+                    direction * 20f,
                     ModContent.ProjectileType<MistletoeThorn>(),
                     Projectile.damage,
                     Projectile.knockBack,
                     Projectile.owner
                 );
+
+                SoundEngine.PlaySound(SoundID.Item17, Projectile.Center);
             }
         }
     }

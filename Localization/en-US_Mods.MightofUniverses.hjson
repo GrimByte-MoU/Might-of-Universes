@@ -425,6 +425,11 @@ Buffs: {
 		DisplayName: Lunar Shroud Buff
 		Description: +5 health regen per second, +8 defense, +100 max health and +30% movement speed
 	}
+
+	TerrasRend: {
+		DisplayName: Terras Rend
+		Description: Mods.MightofUniverses.Buffs.TerrasRend.Description
+	}
 }
 
 Projectiles: {
@@ -756,6 +761,10 @@ Projectiles: {
 	DemonicSickle.DisplayName: Demonic Sickle
 	FleshGlob.DisplayName: Flesh Glob
 	YellowLaser.DisplayName: Yellow Laser
+	CrimruptionBolt.DisplayName: Crimruption Bolt
+	ForestLeaf.DisplayName: Forest Leaf
+	HallowedSpear.DisplayName: Hallowed Spear
+	UnderworldFireball.DisplayName: Underworld Fireball
 }
 
 Keybinds: {
@@ -1246,7 +1255,7 @@ Items: {
 		Tooltip:
 			'''
 			A bright beacon used to summon a mighty clockwork airship to your aid.
-			Takes 4 minion slots and there can only be one airship at a times
+			Takes 5 minion slots and there can only be one airship at a time.
 			'''
 	}
 
@@ -3480,7 +3489,11 @@ Items: {
 
 	FireheartArtifact: {
 		DisplayName: Fireheart Artifact
-		Tooltip: ""
+		Tooltip:
+			'''
+			+10% summon damage
+			+1 max minion
+			'''
 	}
 
 	FireheartShard: {
@@ -3488,7 +3501,7 @@ Items: {
 		Tooltip:
 			'''
 			"A small shard of a powerful demon's heart"
-			+1 minion slot
+			+1 max minion
 			'''
 	}
 

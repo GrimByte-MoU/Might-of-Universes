@@ -23,7 +23,6 @@ namespace MightofUniverses.Content.Items.Accessories
             Item.rare = ItemRarityID.Purple;
             Item.accessory = true;
             
-            // Set the wing slot without using AutoloadEquip
             Item.wingSlot = 2;
         }
 

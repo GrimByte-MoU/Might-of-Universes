@@ -26,7 +26,6 @@ namespace MightofUniverses.Content.Items.Accessories
             player.GetDamage(DamageClass.Magic) *= 0.5f;
             player.GetDamage(DamageClass.Summon) *= 1.25f;
             
-            // Add the lifesteal effect flag to the player
             player.GetModPlayer<StarharvestPlayer>().hasStarharvest = true;
         }
 

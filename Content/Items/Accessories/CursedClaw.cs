@@ -22,7 +22,7 @@ namespace MightofUniverses.Content.Items.Accessories
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
             reaper.maxSoulEnergy += 75f;
-            reaper.reaperDamageMultiplier += 0.15f;
+            player.GetDamage<ReaperDamageClass>() += 0.15f;
             var acc = player.GetModPlayer<ReaperAccessoryPlayer>();
             acc.SoulCostMultiplier *= 1.10f;
             player.statLifeMax2 = (int)(player.statLifeMax2 * 1.15f);

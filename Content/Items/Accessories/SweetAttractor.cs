@@ -20,7 +20,7 @@ namespace MightofUniverses.Content.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.maxMinions += 2;
-            player.GetDamage(DamageClass.Summon) *= 0.9f; // Reduces minion damage by 10%
+            player.GetDamage(DamageClass.Summon) *= 0.9f;
         }
 
         public override void AddRecipes()

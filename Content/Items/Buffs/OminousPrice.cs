@@ -14,7 +14,8 @@ namespace MightofUniverses.Content.Items.Buffs
 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.lifeRegen -= 10;
+            player.lifeRegen -= 20;
+            player.lifeRegenTime = 0;
         }
     }
 }

@@ -1,11 +1,12 @@
 using Terraria;
-using Terraria.ID;
+using Terraria. ID;
 using Terraria.ModLoader;
 using MightofUniverses.Content.Items.Materials;
+using MightofUniverses. Common.Players;
 
 namespace MightofUniverses.Content.Items.Accessories
 {
-    public class LunaticBanner : ModItem
+    public class LunaticBanner :  ModItem
     {
         public override void SetDefaults()
         {
@@ -19,16 +20,16 @@ namespace MightofUniverses.Content.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             var reaperPlayer = player.GetModPlayer<ReaperPlayer>();
-            reaperPlayer.reaperDamageMultiplier += 0.15f;
-            reaperPlayer.reaperCritChance += 10;
+            player.GetDamage<ReaperDamageClass>() += 0.15f;
+            player.GetCritChance<ReaperDamageClass>() += 10f;
             player.GetModPlayer<LunaticBannerPlayer>().hasLunaticBanner = true;
         }
 
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ModContent.ItemType<LunaticCloth>(), 5) // Requires 5 Lunatic Cloth
-                .AddIngredient(ModContent.ItemType<ReaperEmblem>(), 1) // Requires 1 Reaper Emblem
+                .AddIngredient(ModContent.ItemType<LunaticCloth>(), 5)
+                .AddIngredient(ModContent. ItemType<ReaperEmblem>(), 1)
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
         }
@@ -43,30 +44,23 @@ namespace MightofUniverses.Content.Items.Accessories
             hasLunaticBanner = false;
         }
 
-        // Hook into the soul energy consumption event
         public override void PostUpdateEquips()
         {
             if (hasLunaticBanner)
             {
-                // Get the ReaperPlayer instance to access soul energy information
                 var reaperPlayer = Player.GetModPlayer<ReaperPlayer>();
 
-                // Check if soul energy was consumed this frame
                 if (reaperPlayer.justConsumedSouls)
                 {
-                    // Calculate healing amount (15% of max health)
                     int healAmount = (int)(Player.statLifeMax2 * 0.15f);
 
-                    // Heal the player
                     Player.statLife += healAmount;
 
-                    // Cap health at max health
                     if (Player.statLife > Player.statLifeMax2)
                     {
                         Player.statLife = Player.statLifeMax2;
                     }
 
-                    // Show healing text
                     if (healAmount > 0)
                     {
                         Player.HealEffect(healAmount);

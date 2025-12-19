@@ -21,7 +21,7 @@ namespace MightofUniverses.Content.Items.Accessories
             
             if (modPlayer.justConsumedSouls)
             {
-                player.AddBuff(ModContent.BuffType<TurtlesVitality>(), 300); // 300 ticks = 5 seconds // 300 ticks = 5 seconds
+                player.AddBuff(ModContent.BuffType<TurtlesVitality>(), 300); 
             }
         }
 

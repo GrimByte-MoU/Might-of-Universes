@@ -8,10 +8,6 @@ namespace MightofUniverses.Content.Items.Accessories
 {
     public class WraithwalkerEmblem : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            // DisplayName and Tooltip are set in localization files
-        }
 
         public override void SetDefaults()
         {
@@ -27,11 +23,11 @@ namespace MightofUniverses.Content.Items.Accessories
             // Increase Reaper and Ranged damage
             player.GetDamage(DamageClass.Ranged) += 0.12f;
             var reaperPlayer = player.GetModPlayer<ReaperPlayer>();
-            reaperPlayer.reaperDamageMultiplier += 0.12f;
+            player.GetDamage<ReaperDamageClass>() += 0.12f;
 
             // Increase Reaper and Ranged crit chance
             player.GetCritChance(DamageClass.Ranged) += 10;
-            reaperPlayer.reaperCritChance += 10;
+            player.GetCritChance<ReaperDamageClass>() += 10f;
 
             // Apply the Wraithwalker effects
             player.GetModPlayer<WraithwalkerEmblemPlayer>().hasWraithwalkerEmblem = true;

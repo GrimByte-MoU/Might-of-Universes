@@ -26,11 +26,10 @@ namespace MightofUniverses.Content.Items.Accessories
             // Increase Reaper and Melee damage
             player.GetDamage(DamageClass.Melee) += 0.12f;
             var reaperPlayer = player.GetModPlayer<ReaperPlayer>();
-            reaperPlayer.reaperDamageMultiplier += 1.12f;
-
+            player.GetDamage<ReaperDamageClass>() += 0.12f;
             // Increase Reaper and Melee crit chance
             player.GetCritChance(DamageClass.Melee) += 10;
-            reaperPlayer.reaperCritChance += 10;
+            player.GetCritChance<ReaperDamageClass>() += 10f;
 
             // Apply the Deathknight effects
             player.GetModPlayer<DeathknightEmblemPlayer>().hasDeathknightEmblem = true;

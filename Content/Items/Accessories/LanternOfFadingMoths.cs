@@ -27,7 +27,7 @@ namespace MightofUniverses.Content.Items.Accessories
             // Time-based damage bonus
             if (!Main.dayTime)
             {
-                reaper.reaperDamageMultiplier += 0.06f;
+            player.GetDamage<ReaperDamageClass>() += 0.15f;
                 // Night-only faint gray light
                 Lighting.AddLight(player.Center, 0.15f, 0.15f, 0.15f);
 

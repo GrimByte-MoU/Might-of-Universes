@@ -12,7 +12,7 @@ namespace MightofUniverses.Content.Items.Accessories
         {
             Item.width = 24;
             Item.height = 24;
-            Item.accessory = true; // Can be worn in accessory slot, but not required
+            Item.accessory = true;
             Item.rare = ItemRarityID.Green;
             Item.value = Item.buyPrice(gold: 2);
         }

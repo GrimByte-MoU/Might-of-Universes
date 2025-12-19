@@ -12,7 +12,7 @@ namespace MightofUniverses.Content.Items.Accessories
             Item.width = 20;
             Item.height = 20;
             Item.value = Item.sellPrice(gold: 10);
-            Item.rare = ItemRarityID.Yellow;
+            Item.rare = ItemRarityID.Cyan;
             Item.accessory = true;
             Item.defense = 4;
         }
@@ -53,15 +53,16 @@ namespace MightofUniverses.Content.Items.Accessories
 
         public override void AddRecipes()
 {
-    CreateRecipe()
+        CreateRecipe()
         .AddIngredient(ModContent.ItemType<GoblinCore>())
         .AddIngredient(ModContent.ItemType<GoblinPlating>())
         .AddIngredient(ModContent.ItemType<GoblinSigil>())
         .AddIngredient(ModContent.ItemType<GoblinRadar>())
         .AddIngredient(ModContent.ItemType<BrassBar>(), 25)
+        .AddIngredient(ItemID.LunarBar, 10)
         .AddIngredient(ItemID.SteampunkPlatform, 10)
         .AddIngredient(ItemID.Wire, 100)
-        .AddTile(TileID.MythrilAnvil)
+        .AddTile(TileID.LunarCraftingStation)
         .Register();
 }
 

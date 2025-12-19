@@ -1,12 +1,11 @@
 using Microsoft.Xna.Framework;
-using System;
 using Terraria;
-using Terraria.ID;
-using Terraria.Audio;
+using Terraria. ID;
+using Terraria. Audio;
 using Terraria.ModLoader;
-using MightofUniverses.Content.Items.Buffs;
+using MightofUniverses.Content. Items.Buffs;
 
-namespace MightofUniverses.Content.Items.Projectiles
+namespace MightofUniverses. Content.Items.Projectiles
 {
     public class ClockworkAirship : MoUProjectile
     {
@@ -27,14 +26,14 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.friendly = true;
             Projectile.minion = true;
             Projectile.DamageType = DamageClass.Summon;
-            Projectile.minionSlots = 3f;
+            Projectile.minionSlots = 5f;
             Projectile.penetrate = -1;
-            Projectile.scale = 3f;
+            Projectile.scale = 2f;
         }
 
         public override void AI()
         {
-            Player owner = Main.player[Projectile.owner];
+            Player owner = Main.player[Projectile. owner];
 
             if (!CheckActive(owner)) return;
 
@@ -51,43 +50,47 @@ namespace MightofUniverses.Content.Items.Projectiles
             {
                 if (attackCooldown <= 0)
                 {
-                    Vector2 fireboltPosition = Projectile.Center + new Vector2(0, -20f); // Just above center
-                    Vector2 direction = (targetCenter - fireboltPosition).SafeNormalize(Vector2.Zero) * 12f;
+                    Vector2 fireboltPosition = Projectile.Center + new Vector2(30f * Projectile.spriteDirection, 10f);
+                    Vector2 direction = (targetCenter - fireboltPosition).SafeNormalize(Vector2.Zero) * 16f;
+
+                    int fireboltDamage = (int)(Projectile.damage * 0.75f);
 
                     Projectile.NewProjectile(
                         Projectile.GetSource_FromThis(),
                         fireboltPosition,
                         direction,
                         ModContent.ProjectileType<ClockworkFirebolt>(),
-                        Projectile.damage,
-                        Projectile.knockBack,
+                        fireboltDamage,
+                        Projectile. knockBack,
                         Projectile.owner
                     );
 
+                    SoundEngine.PlaySound(SoundID.Item34, Projectile.Center);
                     attackCooldown = 5;
                 }
 
                 if (bombCooldown <= 0)
                 {
-                    Vector2 bombPosition = Projectile.Center + new Vector2(0, 10f); // Slightly below center
-                    Vector2 direction = (targetCenter - bombPosition).SafeNormalize(Vector2.Zero) * 12f;
+                    Vector2 bombPosition = Projectile.Center + new Vector2(0, 30f * Projectile.scale);
+                    Vector2 bombVelocity = new Vector2(0, 4f);
 
                     Projectile.NewProjectile(
                         Projectile.GetSource_FromThis(),
                         bombPosition,
-                        direction,
+                        bombVelocity,
                         ModContent.ProjectileType<ClockworkBomb>(),
-                        Projectile.damage * 5,
-                        Projectile.knockBack * 5,
-                        Projectile.owner
+                        Projectile.damage * 4,
+                        Projectile. knockBack * 4,
+                        Projectile. owner
                     );
 
+                    SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
                     bombCooldown = 120;
                 }
             }
 
-            attackCooldown--;
-            bombCooldown--;
+            if (attackCooldown > 0) attackCooldown--;
+            if (bombCooldown > 0) bombCooldown--;
         }
 
         private bool CheckActive(Player owner)
@@ -98,7 +101,7 @@ namespace MightofUniverses.Content.Items.Projectiles
                 return false;
             }
 
-            if (owner.HasBuff(ModContent.BuffType<ClockworkAirshipBuff>()))
+            if (owner.HasBuff(ModContent. BuffType<ClockworkAirshipBuff>()))
             {
                 Projectile.timeLeft = 2;
             }
@@ -125,26 +128,38 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         private void Movement(bool foundTarget, float distanceFromTarget, Vector2 targetCenter, float distanceToIdlePosition, Vector2 vectorToIdlePosition)
         {
-            float speed = 12f;
-            float inertia = 8f;
+            float speed = 14f;
+            float inertia = 10f;
 
             if (foundTarget)
             {
-                if (distanceFromTarget > 300f)
+                Vector2 desiredPosition = targetCenter;
+                desiredPosition.Y -= 250f;
+
+                float distanceToDesired = Vector2.Distance(Projectile.Center, desiredPosition);
+
+                if (distanceToDesired > 40f)
                 {
-                    Vector2 direction = targetCenter - Projectile.Center;
-                    direction.Normalize();
+                    Vector2 direction = (desiredPosition - Projectile.Center).SafeNormalize(Vector2.Zero);
                     direction *= speed;
                     Projectile.velocity = (Projectile.velocity * (inertia - 1) + direction) / inertia;
+                }
+                else
+                {
+                    Projectile.velocity *= 0.92f;
                 }
             }
             else
             {
                 if (distanceToIdlePosition > 20f)
                 {
-                    vectorToIdlePosition.Normalize();
+                    vectorToIdlePosition. Normalize();
                     vectorToIdlePosition *= speed;
                     Projectile.velocity = (Projectile.velocity * (inertia - 1) + vectorToIdlePosition) / inertia;
+                }
+                else
+                {
+                    Projectile.velocity *= 0.92f;
                 }
             }
         }
@@ -158,7 +173,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             if (owner.HasMinionAttackTargetNPC)
             {
                 NPC npc = Main.npc[owner.MinionAttackTargetNPC];
-                float between = Vector2.Distance(npc.Center, Projectile.Center);
+                float between = Vector2.Distance(npc.Center, Projectile. Center);
 
                 if (between < 2000f)
                 {
@@ -172,9 +187,9 @@ namespace MightofUniverses.Content.Items.Projectiles
             {
                 foreach (var npc in Main.ActiveNPCs)
                 {
-                    if (npc.CanBeChasedBy())
+                    if (npc. CanBeChasedBy())
                     {
-                        float between = Vector2.Distance(npc.Center, Projectile.Center);
+                        float between = Vector2.Distance(npc.Center, Projectile. Center);
                         bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
                         bool inRange = between < distanceFromTarget;
                         bool lineOfSight = Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, npc.position, npc.width, npc.height);
@@ -192,14 +207,23 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         private void Visuals()
         {
-            if (Projectile.velocity.X != 0)
-            {
-                Projectile.spriteDirection = Projectile.velocity.X > 0 ? 1 : -1;
-            }
+            float velocityThreshold = 2f;
+            
+            if (Projectile.velocity.X > velocityThreshold)
+                Projectile.spriteDirection = 1;
+            else if (Projectile.velocity.X < -velocityThreshold)
+                Projectile.spriteDirection = -1;
 
             Projectile.rotation = 0f;
-            Lighting.AddLight(Projectile.Center, Color.Orange.ToVector3() * 0.78f);
+            Lighting.AddLight(Projectile. Center, 1f, 0.6f, 0.2f);
+
+            if (Main.rand.NextBool(5))
+            {
+                Dust steam = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height,
+                    DustID. Smoke, 0f, 2f, 100, default, 1.2f);
+                steam.velocity. Y += 1f;
+                steam.noGravity = false;
+            }
         }
     }
 }
-

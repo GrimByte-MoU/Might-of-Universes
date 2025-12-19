@@ -8,11 +8,6 @@ namespace MightofUniverses.Content.Items.Accessories
 {
     public class SweetsoulJar : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            // DisplayName + Tooltip via localization:
-            // Tooltip suggestion: "Generates 1 soul per second while not at maximum."
-        }
 
         public override void SetDefaults()
         {

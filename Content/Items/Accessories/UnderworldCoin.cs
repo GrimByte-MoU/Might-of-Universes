@@ -19,9 +19,6 @@ namespace MightofUniverses.Content.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.maxMinions += 1;
-
-            // +2% summon damage per minion currently summoned (counts slots used)
-            // Use slotsMinions (float) and round up to get "per minion" feel even with >1 slot minions
             int minionCount = (int)Math.Ceiling(player.slotsMinions);
             if (minionCount > 0)
                 player.GetDamage(DamageClass.Summon) += 0.02f * minionCount;

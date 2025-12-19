@@ -25,10 +25,9 @@ namespace MightofUniverses.Content.Items.Accessories
             // Increase Reaper and Summon damage
             player.GetDamage(DamageClass.Summon) += 0.12f;
             var reaperPlayer = player.GetModPlayer<ReaperPlayer>();
-            reaperPlayer.reaperDamageMultiplier += 1.12f;
-            reaperPlayer.reaperCritChance += 10;
+            player.GetDamage<ReaperDamageClass>() += 0.12f;
+            player.GetCritChance<ReaperDamageClass>() += 10f;
 
-            // Apply the Necromaster effects
             player.GetModPlayer<NecromasterEmblemPlayer>().hasNecromasterEmblem = true;
         }
 

@@ -1,15 +1,14 @@
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna. Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using MightofUniverses.Common;
-using MightofUniverses.Content. Items.Projectiles;
+using MightofUniverses.Content.Items.Projectiles;
 using MightofUniverses.Common.Players;
 
-namespace MightofUniverses.Content.Items. Weapons
+namespace MightofUniverses.Content.Items.Weapons
 {
     public class CoreOfFlesh : ModItem
     {
@@ -21,19 +20,19 @@ namespace MightofUniverses.Content.Items. Weapons
         public override void SetDefaults()
         {
             Item.width = 32;
-            Item. height = 32;
+            Item.height = 32;
             Item.damage = 35;
             Item.DamageType = ModContent.GetInstance<ReaperDamageClass>();
             Item.useTime = 20;
             Item.useAnimation = 20;
             Item.useStyle = ItemUseStyleID. HoldUp;
-            Item. knockBack = 4f;
+            Item.knockBack = 4f;
             Item.rare = ItemRarityID.LightRed;
-            Item. value = Item.sellPrice(gold: 2);
+            Item.value = Item.sellPrice(gold: 2);
             Item.UseSound = SoundID.Item34;
             Item.autoReuse = true;
-            Item. noMelee = true;
-            Item.shoot = ModContent. ProjectileType<FleshGlob>();
+            Item.noMelee = true;
+            Item.shoot = ModContent.ProjectileType<FleshGlob>();
             Item.shootSpeed = 14f;
         }
 
@@ -54,14 +53,14 @@ namespace MightofUniverses.Content.Items. Weapons
             if (cfPlayer.ForceSwitchToLaser)
             {
                 currentMode = 2;
-                cfPlayer. ForceSwitchToLaser = false;
-                Main.NewText("Out of souls!  Switched to Laser Beam.", 255, 200, 100);
+                cfPlayer.ForceSwitchToLaser = false;
+                Main.NewText("Out of souls! Switched to Laser Beam.", 255, 200, 100);
             }
 
             if (currentMode == 3)
             {
                 var reaperPlayer = player.GetModPlayer<ReaperPlayer>();
-                if (reaperPlayer. soulEnergy < 30)
+                if (reaperPlayer.soulEnergy < 30)
                 {
                     Main. NewText("Not enough souls for Sickle mode!", 255, 100, 100);
                     return false;
@@ -89,12 +88,14 @@ namespace MightofUniverses.Content.Items. Weapons
                 _ => "Unknown"
             };
 
-            Main.NewText($"Switched to:  {modeName}", 200, 255, 200);
+            Main.NewText($"Switched to: {modeName}", 200, 255, 200);
             SoundEngine.PlaySound(SoundID.MenuTick, player. Center);
 
             laserBurstCount = 0;
             laserBurstCooldown = 0;
             sickleCooldown = 0;
+            Item.useTime = 20;
+            Item.useAnimation = 20;
         }
 
         public override void HoldItem(Player player)
@@ -114,37 +115,11 @@ namespace MightofUniverses.Content.Items. Weapons
             {
                 sickleCooldown--;
             }
-        }
 
-        public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
-        {
-            Player holder = Main.player. Length > 0 ? Main.player[0] : null;
-            if (holder != null && holder.HeldItem == Item)
+            if (currentMode != 2)
             {
-                DrawAuraCircle(spriteBatch, holder);
-            }
-        }
-
-        private void DrawAuraCircle(SpriteBatch spriteBatch, Player player)
-        {
-            float radius = 12f * 16f;
-            int segments = 64;
-            float alpha = 0.3f + (float)System.Math.Sin(Main.GameUpdateCount * 0.05f) * 0.1f;
-            Color auraColor = new Color(230, 200, 100) * alpha;
-
-            Vector2 center = player.Center - Main.screenPosition;
-
-            for (int i = 0; i < segments; i++)
-            {
-                float angle1 = MathHelper.TwoPi / segments * i;
-                float angle2 = MathHelper.TwoPi / segments * (i + 1);
-
-                Vector2 point1 = center + new Vector2((float)System.Math.Cos(angle1), (float)System.Math.Sin(angle1)) * radius;
-                Vector2 point2 = center + new Vector2((float)System.Math.Cos(angle2), (float)System.Math.Sin(angle2)) * radius;
-
-                Dust dust = Dust.NewDustPerfect(point1 + Main.screenPosition, DustID. YellowTorch, Vector2.Zero, 100, auraColor, 0.8f);
-                dust.noGravity = true;
-                dust.fadeIn = 0.8f;
+                Item.useTime = 20;
+                Item.useAnimation = 20;
             }
         }
 
@@ -184,7 +159,7 @@ namespace MightofUniverses.Content.Items. Weapons
                     ModContent.ProjectileType<FleshGlob>(), fleshDamage, knockback, player.whoAmI);
             }
 
-            SoundEngine.PlaySound(SoundID. Item17, position);
+            SoundEngine.PlaySound(SoundID.Item17, position);
         }
 
         private void ShootLaserBurst(Player player, IEntitySource source, Vector2 position, Vector2 direction, int damage, float knockback)
@@ -224,7 +199,7 @@ namespace MightofUniverses.Content.Items. Weapons
             Projectile.NewProjectile(source, position, Vector2.Zero,
                 ModContent.ProjectileType<DemonicSickle>(), sickleDamage, knockback, player.whoAmI, 0f, storedAngle);
 
-            SoundEngine.PlaySound(SoundID. Item71, position);
+            SoundEngine.PlaySound(SoundID.Item71, position);
 
             sickleCooldown = 15;
         }
@@ -233,9 +208,9 @@ namespace MightofUniverses.Content.Items. Weapons
         {
             tooltips.Add(new TooltipLine(Mod, "Mode", $"[c/FFD700:Current Mode:  {GetModeName()}]"));
             tooltips.Add(new TooltipLine(Mod, "ModeSwitch", "[c/808080:Right-click to cycle modes]"));
-            tooltips. Add(new TooltipLine(Mod, "FleshGlob", "[c/FF6B6B:Flesh Glob: ] 2 globs, +2 souls per hit, 75% damage"));
-            tooltips.Add(new TooltipLine(Mod, "Laser", "[c/FFFF00:Laser Beam:] 3-shot burst, high knockback, 80% damage"));
-            tooltips.Add(new TooltipLine(Mod, "Sickle", "[c/9B59B6:Sickle of Demons:] 250% damage, -50 defense, -30 souls/sickle"));
+            tooltips.Add(new TooltipLine(Mod, "FleshGlob", "[c/FF6B6B:Flesh Glob:] 2 globs, +2 souls per hit, 75% damage"));
+            tooltips.Add(new TooltipLine(Mod, "Laser", "[c/FFFF00:Laser Beam:] 3-shot burst, 80% damage"));
+            tooltips.Add(new TooltipLine(Mod, "Sickle", "[c/9B59B6:Sickle of Demons:] 250% damage, -30 souls/sickle, ignores 50 defense"));
         }
 
         private string GetModeName()

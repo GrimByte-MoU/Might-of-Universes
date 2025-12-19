@@ -20,8 +20,8 @@ namespace MightofUniverses.Content.Items.Accessories
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
         player.GetModPlayer<SnackPouchPlayer>().hasGummyClusterPouch = true;
-        var reaperPlayer = player.GetModPlayer<ReaperPlayer>();
-        reaperPlayer.reaperDamageMultiplier += 0.07f;
+        player.GetModPlayer<ReaperPlayer>();
+        player.GetDamage<ReaperDamageClass>() += 0.07f;
     }
 
     public override void AddRecipes()

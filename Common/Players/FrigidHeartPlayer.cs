@@ -2,9 +2,11 @@ using Terraria;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
-using MightofUniverses.Content.Items.Projectiles;
+using MightofUniverses. Content.Items.Projectiles;
+using Terraria.Audio;
+using System.Collections.Generic;
 
-namespace MightofUniverses.Common.Players
+namespace MightofUniverses. Common.Players
 {
     public class FrigidHeartPlayer : ModPlayer
     {
@@ -19,49 +21,124 @@ namespace MightofUniverses.Common.Players
 
         public override void PostUpdate()
         {
-            if (!hasFrigidHeart)
+            if (! hasFrigidHeart)
                 return;
 
             int shardType = ModContent.ProjectileType<FrigidHeartShard>();
-            int currentShards = 0;
-
-            foreach (Projectile proj in Main.projectile)
-            {
-                if (proj.active && proj.type == shardType && proj.owner == Player.whoAmI)
-                    currentShards++;
-            }
+            int currentShards = CountOrbitingShards();
 
             if (currentShards < maxShards)
             {
                 shardSpawnTimer++;
                 if (shardSpawnTimer >= 90)
                 {
-                    Vector2 spawnPos = Player.Center + new Vector2(32, 0).RotatedByRandom(MathHelper.TwoPi);
-                    Projectile.NewProjectile(Player.GetSource_FromThis(), spawnPos, Vector2.Zero, shardType, 0, 0f, Player.whoAmI);
+                    int index = Projectile.NewProjectile(
+                        Player.GetSource_FromThis(),
+                        Player.Center,
+                        Vector2.Zero,
+                        shardType,
+                        0,
+                        0f,
+                        Player. whoAmI
+                    );
+
+                    if (index >= 0 && index < Main.maxProjectiles)
+                    {
+                        Main.projectile[index]. ai[1] = Main.rand.NextFloat(0f, MathHelper.TwoPi);
+                    }
+
                     shardSpawnTimer = 0;
                 }
             }
         }
 
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
+        private int CountOrbitingShards()
         {
-            TryFireShardOnCrit(target, hit, damageDone);
+            int count = 0;
+            for (int i = 0; i < Main.maxProjectiles; i++)
+            {
+                Projectile proj = Main.projectile[i];
+                if (proj.active &&
+                    proj.type == ModContent.ProjectileType<FrigidHeartShard>() &&
+                    proj.owner == Player.whoAmI &&
+                    proj.ai[0] == 0f)
+                {
+                    count++;
+                }
+            }
+            return count;
         }
 
-        private void TryFireShardOnCrit(NPC target, NPC.HitInfo hit, int damageDone)
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (!hasFrigidHeart || !hit.Crit)
-                return;
-
-            int count = Player.statLife <= Player.statLifeMax2 / 2 ? 2 : 1;
-            int projType = ModContent.ProjectileType<FrigidHeartShard>();
-
-            for (int i = 0; i < count; i++)
+            if (proj.owner == Player.whoAmI && hit.Crit && hasFrigidHeart)
             {
-                Vector2 velocity = (target.Center - Player.Center).SafeNormalize(Vector2.UnitX).RotatedByRandom(MathHelper.ToRadians(10f)) * 10f;
-                Projectile.NewProjectile(Player.GetSource_FromThis(), Player.Center, velocity, projType, damageDone, 0f, Player.whoAmI);
+                TryFireShardOnCrit(target, damageDone);
+            }
+        }
+
+        public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (hit.Crit && hasFrigidHeart)
+            {
+                TryFireShardOnCrit(target, damageDone);
+            }
+        }
+
+        private void TryFireShardOnCrit(NPC target, int damageDone)
+        {
+            int shardsToFire = Player.statLife <= (Player.statLifeMax2 / 2) ? 2 : 1;
+            int shardType = ModContent.ProjectileType<FrigidHeartShard>();
+
+            Vector2 baseDirection = (target.Center - Player.Center).SafeNormalize(Vector2.UnitX);
+
+            List<int> shardsToFireList = new List<int>();
+
+            for (int i = 0; i < Main.maxProjectiles; i++)
+            {
+                if (shardsToFireList.Count >= shardsToFire)
+                    break;
+
+                Projectile proj = Main.projectile[i];
+
+                if (!proj. active || proj.type != shardType || proj.owner != Player. whoAmI || proj.ai[0] != 0f)
+                    continue;
+
+                shardsToFireList.Add(i);
+            }
+
+            for (int j = 0; j < shardsToFireList.Count; j++)
+            {
+                int projIndex = shardsToFireList[j];
+                Projectile proj = Main.projectile[projIndex];
+
+                Vector2 direction = baseDirection;
+
+                if (shardsToFireList.Count == 2)
+                {
+                    float spreadAngle = MathHelper.ToRadians(j == 0 ? -15f : 15f);
+                    direction = direction.RotatedBy(spreadAngle);
+                }
+
+                proj.ai[0] = 1f;
+                proj.velocity = direction * 14f;
+                proj.damage = damageDone;
+                proj.penetrate = 3;
+                proj. tileCollide = true;
+                proj.timeLeft = 300;
+                proj.netUpdate = true;
+            }
+
+            if (shardsToFireList.Count > 0)
+            {
+                SoundEngine.PlaySound(SoundID.Item28, Player.Center);
+
+                if (Main.myPlayer == Player.whoAmI)
+                {
+                    string message = shardsToFireList.Count == 2 ? "Double Shard!" : "Shard Fired!";
+                    CombatText.NewText(Player.getRect(), Color.Cyan, message, false);
+                }
             }
         }
     }
 }
-

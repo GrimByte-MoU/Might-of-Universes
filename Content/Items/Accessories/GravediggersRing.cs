@@ -21,7 +21,7 @@ namespace MightofUniverses.Content.Items.Accessories
             var reaper = player.GetModPlayer<ReaperPlayer>();
             var acc = player.GetModPlayer<ReaperAccessoryPlayer>();
 
-            reaper.reaperDamageMultiplier += 0.10f;
+            player.GetDamage<ReaperDamageClass>() += 0.10f;
             reaper.maxSoulEnergy += 75f;
 
             acc.HasGravediggersRing = true;

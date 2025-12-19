@@ -29,7 +29,7 @@ namespace MightofUniverses.Content.Items.Accessories
             // All damage types +5%
             player.GetDamage(DamageClass.Generic) += 0.05f;
             player.GetModPlayer<PacifistPlayer>().pacifistDamageMultiplier += 0.2f;
-            player.endurance += 0.05f; // Damage reduction
+            player.endurance += 0.05f;
             player.moveSpeed += 0.10f;
             player.maxMinions += 1;
             

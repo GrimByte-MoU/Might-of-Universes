@@ -54,7 +54,7 @@ namespace MightofUniverses.Content.Items.Accessories
                 if (info.Damage > damageThreshold)
                 {
                     Player.statLife += info.Damage;
-                    int debuffDuration = (int)((info.Damage * 2f / 10f) * 60);
+                    int debuffDuration = (int)(info.Damage * 2f / 10f * 60);
                     Player.AddBuff(ModContent.BuffType<OminousPrice>(), debuffDuration);
                     cooldownTimer = 600;
                 }
