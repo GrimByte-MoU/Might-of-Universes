@@ -25,7 +25,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.DamageType = ModContent.GetInstance<ReaperDamageClass>();
             Item.useTime = 20;
             Item.useAnimation = 20;
-            Item.useStyle = ItemUseStyleID. HoldUp;
+            Item.useStyle = ItemUseStyleID.HoldUp;
             Item.knockBack = 4f;
             Item.rare = ItemRarityID.LightRed;
             Item.value = Item.sellPrice(gold: 2);
@@ -34,6 +34,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.noMelee = true;
             Item.shoot = ModContent.ProjectileType<FleshGlob>();
             Item.shootSpeed = 14f;
+            Item.maxStack = 1;
         }
 
         public override bool AltFunctionUse(Player player)

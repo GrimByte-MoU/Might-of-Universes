@@ -26,6 +26,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shoot = ProjectileID.Bullet;
             Item.shootSpeed = 20f;
             Item.useAmmo = AmmoID.Bullet;
+            Item.maxStack = 1;
         }
 
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)

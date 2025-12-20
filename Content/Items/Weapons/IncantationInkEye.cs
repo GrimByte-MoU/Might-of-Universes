@@ -29,6 +29,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.buffType = ModContent.BuffType<InkEyeBuff>();
             Item.shootSpeed = 0f;
             Item.autoReuse = true;
+            Item.maxStack = 1;
         }
 
         public override bool Shoot(Player player, Terraria.DataStructures.EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

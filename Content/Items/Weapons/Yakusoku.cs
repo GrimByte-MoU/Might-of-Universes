@@ -27,6 +27,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.UseSound = SoundID.Item1;
             Item.shoot = ModContent.ProjectileType<YakusokuPetal>();
             Item.shootSpeed = 10f;
+            Item.maxStack = 1;
         }
 
         public override void AddRecipes()

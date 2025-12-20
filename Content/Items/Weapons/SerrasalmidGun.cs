@@ -21,6 +21,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.channel = true;
             Item.noMelee = true;
             Item.noUseGraphic = true;
+            Item.maxStack = 1;
         }
 
         public override bool CanUseItem(Player player)

@@ -12,12 +12,13 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             Item.CloneDefaults(ItemID.Cutlass);
 
-            Item.damage = 110;
+            Item.damage = 200;
             Item.useTime = 10;
             Item.useAnimation = 10;
             Item.rare = ItemRarityID.Purple;
             Item.value = Item.sellPrice(gold: 10);
             Item.scale = 2f;
+            Item.maxStack = 1;
         }
 
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)

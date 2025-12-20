@@ -1,12 +1,11 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using MightofUniverses.Common.Players;
 using Microsoft.Xna.Framework;
 
-namespace MightofUniverses.Content.Items.Accessories
+namespace MightofUniverses.Content.Items. Accessories
 {
-    public class WarcallerEmblem : ModItem
+    public class WarcallerEmblem :  ModItem
     {
         public override void SetDefaults()
         {
@@ -19,9 +18,9 @@ namespace MightofUniverses.Content.Items.Accessories
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetDamage(DamageClass.Melee) += 0.12f;
-            player.GetDamage(DamageClass.Summon) += 0.12f;
-            player.GetCritChance(DamageClass.Melee) += 10;
+            player.GetDamage(DamageClass. Melee) += 0.12f;
+            player.GetDamage(DamageClass. Summon) += 0.12f;
+            player.GetCritChance(DamageClass. Melee) += 10;
             player.GetModPlayer<WarcallerPlayer>().warcallerEffect = true;
         }
 
@@ -33,6 +32,32 @@ namespace MightofUniverses.Content.Items.Accessories
                 .AddIngredient(ItemID.DestroyerEmblem)
                 .AddTile(TileID.LunarCraftingStation)
                 .Register();
+        }
+    }
+
+    public class WarcallerPlayer : ModPlayer
+    {
+        public bool warcallerEffect;
+
+        public override void ResetEffects()
+        {
+            warcallerEffect = false;
+        }
+
+        public override void UpdateEquips()
+        {
+            if (warcallerEffect)
+            {
+                Player.statDefense += Player.numMinions * 2;
+            }
+        }
+
+        public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (warcallerEffect && item.DamageType == DamageClass. Melee)
+            {
+                Player.MinionAttackTargetNPC = target.whoAmI;
+            }
         }
     }
 }

@@ -32,6 +32,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<SoulCoin>();
             Item.shootSpeed = 16f;
+            Item.maxStack = 1;
         }
 
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)

@@ -39,7 +39,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override void SetDefaults()
         {
-            Item.damage = 185;
+            Item.damage = 200;
             Item.DamageType = DamageClass.Melee;
             Item.width = 60;
             Item.height = 60;
@@ -54,6 +54,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.scale = 1.25f;
             Item.shoot = ProjectileID.PurificationPowder;
             Item.shootSpeed = 12f;
+            Item.maxStack = 1;
         }
 
         public override bool AltFunctionUse(Player player) => true;
@@ -110,7 +111,7 @@ namespace MightofUniverses.Content.Items.Weapons
                     break;
                 case 2: // Jungle Swarm (multi stinger, half damage each)
                     projType = ModContent.ProjectileType<WorldwalkerStinger>();
-                    projDamage = (int)(damage * 0.5f);
+                    projDamage = (int)(damage * 0.65f);
                     break;
                 case 3: // Infernal Wave
                     projType = ModContent.ProjectileType<WorldwalkerFireWave>();
@@ -127,7 +128,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
             if (projType == ModContent.ProjectileType<WorldwalkerStinger>())
             {
-                int count = Main.rand.Next(5, 8);
+                int count = Main.rand.Next(8, 11);
                 for (int i = 0; i < count; i++)
                 {
                     Vector2 perturbed = velocity.RotatedByRandom(MathHelper.ToRadians(5));

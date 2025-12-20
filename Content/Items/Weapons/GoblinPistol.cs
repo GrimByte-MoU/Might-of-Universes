@@ -23,12 +23,13 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.useAnimation = 24;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.autoReuse = true;
-            
+
             Item.UseSound = SoundID.Item11;
             Item.shoot = ProjectileID.Bullet;
             Item.useAmmo = AmmoID.Bullet;
             Item.shootSpeed = 16f;
             Item.noMelee = true;
+            Item.maxStack = 1;
         }
          public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
     {

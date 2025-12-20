@@ -28,7 +28,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.rare = ModContent.RarityType<TerraiumRarity>();
             Item.UseSound = SoundID.Item1;
             Item.autoReuse = true;
-
+            Item.maxStack = 1;
             Item.shoot = ModContent.ProjectileType<TerraiumDaggerProjectile>();
             Item.shootSpeed = 12f;
         }

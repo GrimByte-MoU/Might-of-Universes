@@ -25,6 +25,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.UseSound = SoundID.Item20;
             Item.shoot = ModContent.ProjectileType<FrostingBolt>();
             Item.shootSpeed = 12f;
+            Item.maxStack = 1;
         }
     }
 }

@@ -955,12 +955,11 @@ Items: {
 		DisplayName: World's Balance Gauntlet
 		Tooltip:
 			'''
-			Improves melee damage, attack speed, and knockback
-			Increases melee damage by 30%
-			Increases melee attack speed by 30%
-			Increases melee knockback by 30%
+			Increases melee damage by 20%
+			Increases melee attack speed by 20%
+			Increases melee knockback by 20%
 			Enables auto-swing
-			Melee attacks inflict Element's Harmony
+			Melee attacks inflict Element's Harmony for 3 seconds
 			'''
 	}
 
@@ -1000,9 +999,10 @@ Items: {
 		Tooltip:
 			'''
 			+12% magic and melee damage
-			+10% magic and melee critical strike chance
-			Melee attacks increase mana regeneration
-			+5 defense while above 50% mana
+			 		+10% magic and melee critical strike chance
+			 		+10 defense while above 50% mana
+			 		+5 mana regeneration per second while holding a melee weapon
+			 		Melee strikes greatly increase mana regeneration for 3 seconds
 			'''
 	}
 
@@ -1010,10 +1010,10 @@ Items: {
 		DisplayName: Spellshot Emblem
 		Tooltip:
 			'''
-			+12% magic and ranged damage
-			+10% magic and ranged critical strike chance
-			Ranged weapons consume mana and deal bonus damage equal to its use speed
-			Mage weapons consume bullets and deal bonus damage equal to the bullets damage
+			 		+12% magic and ranged damage
+			 		+10% magic and ranged critical strike chance
+			 		Ranged weapons have a 10% chance to restore 20 mana on hit
+			 		Magic weapons have a 10% chance to restore 1 ammo on hit
 			'''
 	}
 
@@ -1022,9 +1022,9 @@ Items: {
 		Tooltip:
 			'''
 			+12% magic and summon damage
-			+10% magic critical strike chance
-			+2% magic crit chance for each minion
-			Summon damage restores 5 mana
+			 		+10% magic critical strike chance
+			 		+2% magic critical strike chance for each active minion
+			 		Minion strikes restore 5 mana
 			'''
 	}
 
@@ -1032,10 +1032,11 @@ Items: {
 		DisplayName: Vigilante Emblem
 		Tooltip:
 			'''
-			+12% melee and ranged damage
-			+10% melee and ranged critical strike chance
-			Melee weapons deal increased damage based on how far away you are, up to 20%
-			Ranged weapons deal increased damage based on how close you are, up to 20%
+						+12% melee and ranged damage
+			 		+10% melee and ranged critical strike chance
+			 		Melee weapons deal up to 20% more damage based on distance from the target
+			 		Ranged weapons deal up to 20% more damage the closer you are to the target
+			 		Ranged weapons lifesteal 5% of damage dealt when within 10 tiles of the target
 			'''
 	}
 
@@ -1043,10 +1044,10 @@ Items: {
 		DisplayName: Warcaller Emblem
 		Tooltip:
 			'''
-			+12% melee and summon damage
-			+10% melee critical strike chance
-			+2 defense for each minion
-			Melee strikes cause minions to focus struck enemies
+			 		+12% melee and summon damage
+			 		+10% melee critical strike chance
+			 		+2 defense for each active minion
+						Melee strikes cause minions to focus struck enemies
 			'''
 	}
 
@@ -1054,10 +1055,10 @@ Items: {
 		DisplayName: Commander Emblem
 		Tooltip:
 			'''
-			+12% ranged and summon damage
-			+10% ranged critical strike chance
-			+5% ranged speed for each minion
-			While below 50% health, all minions deal bonus damage equal to your ammos damage
+						+12% ranged and summon damage
+			 		+10% ranged critical strike chance
+			 		+3% ranged attack speed for each active minion
+			 		While below 50% health, minions deal bonus damage equal to your equipped ammo's damage
 			'''
 	}
 
@@ -2510,10 +2511,12 @@ Items: {
 		DisplayName: Deathknight Emblem
 		Tooltip:
 			'''
-			+12% Reaper and Melee damage
-			+10% Reaper and Melee critical strike chance
-			Whenever the player takes damage, they gain soul energy equal to half the damage taken. This ability has a 3 second cooldown
-			When holding a melee weapon, the player loses 10 soul energy per second 
+			 		+12% Reaper and melee damage
+			 		+10% Reaper and melee critical strike chance
+			 		Taking damage grants soul energy equal to half the damage taken
+			 		This effect has a 3 second cooldown
+			 		While holding a melee weapon, lose 10 soul energy per second
+			 		but gain 10% damage reduction and 3 life regeneration per second
 			'''
 	}
 
@@ -2532,11 +2535,12 @@ Items: {
 		DisplayName: Necromaster Emblem
 		Tooltip:
 			'''
-			+12% Reaper and Summon damage
-			+10% Reaper crit chance
-			Summoned minions gather 1 soul whenever they attack an enemy
-			+2 hp/sec regen for each summoned minion
-			If the player control no minions, +2 defense and +1 soul gathered when striking for each unused minion slot
+			 		+12% Reaper and summon damage
+			 		+10% Reaper critical strike chance
+			 		Minions gather 1 soul energy whenever they strike an enemy
+			 		+2 life regeneration per second for each active minion
+			 		If controlling no minions, gain +2 defense and +2 armor penetration per unused minion slot
+			 		Unused minion slots also grant +1 soul energy per enemy killed
 			'''
 	}
 
@@ -2544,10 +2548,11 @@ Items: {
 		DisplayName: Soulbinder Emblem
 		Tooltip:
 			'''
-			+12% Reaper and Magic damage
-			+10% Reaper and Magic critical strike chance
-			If the player would lose health whether by damage or sacrifice, instead that much mana. This has a 3 second cooldown.
-			Mana costs instead costs health
+			+12% Reaper and magic damage
+			 		+10% Reaper and magic critical strike chance
+			 		50% of damage taken is absorbed by mana instead of health
+			 		This effect has a 3 second cooldown
+			 		Mana spent on spells converts to soul energy at a 2:1 ratio
 			'''
 	}
 
@@ -2555,10 +2560,11 @@ Items: {
 		DisplayName: Wraithwalker Emblem
 		Tooltip:
 			'''
-			+12% Reaper and Ranged damage
-			+10% Reaper and Ranged critical strike chance
-			Every 2 seconds, the player consumes one ammo to gain soul energy equal to half of the ammo's damage
-			For every 10 soul energy the player has, the player gets +1% ranged damage, attack speed and +1 armor penetration
+			 		+12% Reaper and ranged damage
+			 		+10% Reaper and ranged critical strike chance
+			 		Every 2 seconds, consume 1 ammo to gain soul energy equal to half its damage
+			 		For every 10 soul energy, gain +0.5% ranged damage, +0.5% ranged attack speed, and +1 armor penetration
+			 		Bonus caps at 300 soul energy
 			'''
 	}
 

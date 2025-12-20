@@ -25,13 +25,14 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.noMelee = true;
             Item.knockBack = 2f;
             Item.value = Item.sellPrice(platinum: 20);
-            Item.rare =  ModContent.RarityType<StarsteelRarity>();
+            Item.rare = ModContent.RarityType<StarsteelRarity>();
             Item.UseSound = SoundID.Item41;
             Item.autoReuse = true;
             Item.shoot = ProjectileID.Bullet;
             Item.shootSpeed = 25f;
             Item.useAmmo = AmmoID.Bullet;
             Item.scale = 0.5f;
+            Item.maxStack = 1;
         }
 
        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

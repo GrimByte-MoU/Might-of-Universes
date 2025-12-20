@@ -17,13 +17,13 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.height = 40;
             Item.rare = ItemRarityID.Pink;
             Item.value = Item.sellPrice(gold: 5);
-            
+
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.useTime = 45;
             Item.useAnimation = 45;
             Item.autoReuse = true;
             Item.staff[Item.type] = true;
-            
+
             Item.DamageType = DamageClass.Magic;
             Item.damage = 150;
             Item.knockBack = 4f;
@@ -32,6 +32,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shoot = ModContent.ProjectileType<FrostSphere>();
             Item.shootSpeed = 8f;
             Item.noMelee = true;
+            Item.maxStack = 1;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

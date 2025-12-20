@@ -12,12 +12,13 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             Item.CloneDefaults(ItemID.PsychoKnife);
 
-            Item.damage = 120;
+            Item.damage = 140;
             Item.useTime = 8;
             Item.useAnimation = 8;
             Item.rare = ItemRarityID.Purple;
             Item.value = Item.sellPrice(gold: 15);
             Item.scale = 1.25f;
+            Item.maxStack = 1;
         }
 
         public override void ModifyWeaponDamage(Player player, ref StatModifier damage)

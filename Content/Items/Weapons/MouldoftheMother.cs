@@ -20,7 +20,7 @@ namespace MightofUniverses. Content.Items.Weapons
             Item.height = 40;
             Item.useTime = 30;
             Item.useAnimation = 30;
-            Item.useStyle = ItemUseStyleID. HoldUp;
+            Item.useStyle = ItemUseStyleID.HoldUp;
             Item.knockBack = 5f;
             Item.value = Item.buyPrice(0, 50, 0, 0);
             Item.rare = ItemRarityID.Red;
@@ -28,6 +28,7 @@ namespace MightofUniverses. Content.Items.Weapons
             Item.noMelee = true;
             Item.buffType = ModContent.BuffType<MiniAegisBuff>();
             Item.shoot = ModContent.ProjectileType<MiniAegis>();
+            Item.maxStack = 1;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

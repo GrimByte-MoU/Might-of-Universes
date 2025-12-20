@@ -27,6 +27,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<KiokuLarge>();
             Item.shootSpeed = 10f;
+            Item.maxStack = 1;
         }
 
 

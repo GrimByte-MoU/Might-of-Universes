@@ -30,6 +30,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.UseSound = SoundID.Item43;
             Item.shoot = ModContent.ProjectileType<ArcaneGladiusProjectile>();
             Item.shootSpeed = 12f;
+            Item.maxStack = 1;
         }
 
         public override bool Shoot(Player player, Terraria.DataStructures.EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

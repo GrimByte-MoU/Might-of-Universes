@@ -28,6 +28,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.useAmmo = AmmoID.None;
             Item.channel = true;
             Item.scale = 1.2f;
+            Item.maxStack = 1;
         }
 
         public override void HoldItem(Player player)

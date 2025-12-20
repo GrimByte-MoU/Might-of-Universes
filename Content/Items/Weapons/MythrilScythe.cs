@@ -31,6 +31,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<MythrilScytheProjectile>();
             Item.shootSpeed = 10f;
+            Item.maxStack = 1;
         }
 
         public override void HoldItem(Player player)

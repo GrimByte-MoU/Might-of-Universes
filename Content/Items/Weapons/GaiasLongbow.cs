@@ -27,7 +27,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<GaiasArrow>();
             Item.shootSpeed = 18f;
-
+            Item.maxStack = 1;
             Item.useAmmo = AmmoID.Arrow;
         }
 

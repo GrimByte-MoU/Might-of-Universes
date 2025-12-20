@@ -30,6 +30,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.crit = 10;
             Item.shootSpeed = 20f;
             Item.shoot = ProjectileID.PurificationPowder;
+            Item.maxStack = 1;
         }
 
         public override void HoldItem(Player player)

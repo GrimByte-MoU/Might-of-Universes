@@ -16,6 +16,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.mana = 12;
             Item.rare = ItemRarityID.LightRed;
             Item.shoot = ModContent.ProjectileType<Projectiles.ClawDemonSickle>();
+            Item.maxStack = 1;
         }
 
         public override void AddRecipes()

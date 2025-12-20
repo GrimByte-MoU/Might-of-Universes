@@ -15,6 +15,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.useTime = 14;
             Item.useAnimation = 14;
             Item.ArmorPenetration = 40;
+            Item.maxStack = 1;
         }
 
         public override void AddRecipes()

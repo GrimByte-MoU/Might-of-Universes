@@ -2,6 +2,8 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
+using MightofUniverses.Content.Items.Buffs;
+using System;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
@@ -12,7 +14,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Melee;
-            Projectile.penetrate = 4; // 3 pierces + 1 final
+            Projectile.penetrate = 12;
             Projectile.timeLeft = 300; // 5 seconds
             Projectile.ignoreWater = true;
             Projectile.tileCollide = true;
@@ -31,6 +33,21 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             target.AddBuff(BuffID.CursedInferno, 300);
             target.AddBuff(BuffID.Ichor, 300);
+            target.AddBuff(ModContent.BuffType<DeadlyCorrupt>(), 180);
+            Player owner = Main.player[Projectile.owner];
+    int heal = damageDone / 10;
+    owner.statLife = Math.Min(owner. statLife + heal, owner.statLifeMax2);
+    owner.HealEffect(heal);
+
+            for (int i = 0; i < 3; i++)
+            {
+                Vector2 velocity = Main.rand.NextVector2Circular(8f, 8f);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(),
+                    target.Center, velocity,
+                    ProjectileID.Shadowflames,
+                    Projectile.damage / 2,
+                    2f, Projectile.owner);
+            }
         }
     }
 }

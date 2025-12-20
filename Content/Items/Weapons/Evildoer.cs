@@ -35,6 +35,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<EvildoerProjectile>();
             Item.shootSpeed = 12f;
+            Item.maxStack = 1;
         }
 
         public override void HoldItem(Player player)

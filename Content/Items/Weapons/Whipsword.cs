@@ -24,6 +24,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.crit = 4;
             Item.value = Item.buyPrice(gold: 6);
             Item.rare = ItemRarityID.Pink;
+            Item.maxStack = 1;
 
             // Default to sword stance on spawn; CanUseItem will swap settings dynamically
             ConfigureAsSword();

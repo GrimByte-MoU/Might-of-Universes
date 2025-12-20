@@ -17,6 +17,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.rare = ItemRarityID.Lime;
             Item.shoot = ProjectileID.None;
             Item.shootSpeed = 0f;
+            Item.maxStack = 1;
         }
 
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)

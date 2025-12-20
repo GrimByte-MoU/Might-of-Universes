@@ -30,6 +30,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
             Item.rare = ItemRarityID.Yellow;
             Item.value = Item.sellPrice(gold: 10);
+            Item.maxStack = 1;
         }
 
         public override bool Shoot(Player player, Terraria.DataStructures.EntitySource_ItemUse_WithAmmo source,

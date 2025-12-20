@@ -30,6 +30,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shootSpeed = 32f;
             Item.useAmmo = AmmoID.Bullet;
             Item.value = Item.sellPrice(gold: 8);
+            Item.maxStack = 1;
         }
 
         public override Vector2? HoldoutOffset()

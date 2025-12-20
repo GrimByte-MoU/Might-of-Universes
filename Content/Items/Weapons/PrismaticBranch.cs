@@ -29,6 +29,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shoot = ModContent.ProjectileType<PrismaticNeedleRed>();
             Item.shootSpeed = 16f;
             Item.mana = 5;
+            Item.maxStack = 1;
         }
 
         private int specialSprayCooldown = 0;

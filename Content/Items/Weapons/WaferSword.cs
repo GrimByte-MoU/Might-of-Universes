@@ -26,6 +26,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.crit = 6;
             Item.shoot = ModContent.ProjectileType<WaferSwordSprinkle>();
             Item.shootSpeed = 16f;
+            Item.maxStack = 1;
         }
 
         public override void HoldItem(Player player)

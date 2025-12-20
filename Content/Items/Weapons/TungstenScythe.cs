@@ -28,6 +28,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.rare = ItemRarityID.Blue;
             Item.UseSound = SoundID.Item1;
             Item.autoReuse = true;
+            Item.maxStack = 1;
         }
 
         public override void HoldItem(Player player)

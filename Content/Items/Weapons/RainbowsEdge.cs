@@ -16,7 +16,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.height = 50;
             Item.rare = ItemRarityID.Pink;
             Item.value = Item.sellPrice(gold: 5);
-            
+
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.useAnimation = 24;
             Item.useTime = 24;
@@ -27,6 +27,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.noUseGraphic = true;
             Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.shoot = ModContent.ProjectileType<RainbowsEdgeProjectile>();
+            Item.maxStack = 1;
         }
 
         public override bool CanUseItem(Player player)

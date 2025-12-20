@@ -33,6 +33,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shoot = ModContent.ProjectileType<MartianTallyBolt>();
             Item.shootSpeed = 14f;
             Item.scale = 1.5f;
+            Item.maxStack = 1;
         }
 
         public override void HoldItem(Player player)

@@ -25,6 +25,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.UseSound = SoundID.Item1;
             Item.autoReuse = true;
             Item.scale = 1.5f;
+            Item.maxStack = 1;
         }
 
         public override void MeleeEffects(Player player, Rectangle hitbox)

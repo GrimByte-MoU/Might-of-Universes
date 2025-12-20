@@ -34,6 +34,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shoot = ProjectileID.Bullet;
             Item.shootSpeed = 16f;
             Item.useAmmo = AmmoID.Bullet;
+            Item.maxStack = 1;
         }
 
         public override void UpdateInventory(Player player)

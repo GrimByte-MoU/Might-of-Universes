@@ -24,20 +24,21 @@ namespace MightofUniverses.Content.Items. Weapons
             Item.height = 44;
             Item.rare = ItemRarityID.Yellow;
             Item.value = Item.sellPrice(gold: 8);
-            
-            Item.useStyle = ItemUseStyleID. Swing;
+
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.useTime = 30;
             Item.useAnimation = 30;
             Item.autoReuse = true;
             Item.UseSound = SoundID.Item44;
             Item.noMelee = true;
-            
+
             Item.DamageType = DamageClass.Summon;
             Item.damage = 50;
             Item.knockBack = 3f;
             Item.mana = 10;
             Item.shoot = ModContent.ProjectileType<HollyFighter>();
             Item.buffType = ModContent.BuffType<HollyFighterBuff>();
+            Item.maxStack = 1;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

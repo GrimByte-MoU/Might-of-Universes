@@ -18,13 +18,13 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.height = 84;
             Item.rare = ItemRarityID.Lime;
             Item.value = Item.sellPrice(gold: 5);
-            
+
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.useTime = 12;
             Item.useAnimation = 12;
             Item.autoReuse = true;
             Item.useAmmo = AmmoID.Arrow;
-            
+
             Item.DamageType = DamageClass.Ranged;
             Item.damage = 48;
             Item.knockBack = 3f;
@@ -32,6 +32,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shoot = ProjectileID.WoodenArrowFriendly;
             Item.shootSpeed = 12f;
             Item.noMelee = true;
+            Item.maxStack = 1;
         }
 
         public override void HoldItem(Player player)

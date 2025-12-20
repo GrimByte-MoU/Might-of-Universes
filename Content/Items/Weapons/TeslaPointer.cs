@@ -26,6 +26,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<TeslaPointerBolt>();
             Item.shootSpeed = 16f;
+            Item.maxStack = 1;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source,

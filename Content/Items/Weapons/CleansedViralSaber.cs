@@ -25,6 +25,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.rare = ItemRarityID.LightPurple;
             Item.UseSound = SoundID.Item1;
             Item.autoReuse = true;
+            Item.maxStack = 1;
         }
 
         public override void ModifyHitNPC(Player player, NPC target, ref NPC.HitModifiers modifiers)

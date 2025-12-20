@@ -25,6 +25,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shoot = ModContent.ProjectileType<SapphireMinion>();
             Item.shootSpeed = 10f;
             Item.buffType = ModContent.BuffType<SapphireGlaiveBuff>();
+            Item.maxStack = 1;
         }
 
         public override bool Shoot(Player player, Terraria.DataStructures.EntitySource_ItemUse_WithAmmo source, Microsoft.Xna.Framework.Vector2 position, Microsoft.Xna.Framework.Vector2 velocity, int type, int damage, float knockback)

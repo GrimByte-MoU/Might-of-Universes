@@ -18,6 +18,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shoot = ModContent.ProjectileType<Projectiles.SoundFractureBeam>();
             Item.useAmmo = AmmoID.Arrow;
             Item.scale = 1.2f;
+            Item.maxStack = 1;
         }
 
         public override void AddRecipes()

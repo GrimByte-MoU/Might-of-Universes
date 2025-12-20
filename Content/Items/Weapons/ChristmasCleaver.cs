@@ -25,6 +25,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.damage = 200;
             Item.knockBack = 8f;
             Item.crit = 10;
+            Item.maxStack = 1;
         }
 
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)

@@ -44,6 +44,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
             Item.noMelee = false;
             Item.scale = 1.3f;
+            Item.maxStack = 1;
         }
 
         public override void HoldItem(Player player)

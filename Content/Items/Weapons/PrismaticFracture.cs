@@ -32,6 +32,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shootSpeed = 12f;
             Item.mana = 14;
             Item.noMelee = true;
+            Item.maxStack = 1;
         }
 
         public override void HoldItem(Player player)

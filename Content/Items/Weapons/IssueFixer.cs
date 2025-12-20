@@ -28,6 +28,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shoot = ProjectileID.Bullet;
             Item.shootSpeed = 9f;
             Item.useAmmo = AmmoID.Bullet;
+            Item.maxStack = 1;
         }
 
         public override void AddRecipes()

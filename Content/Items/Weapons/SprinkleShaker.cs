@@ -27,6 +27,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shoot = ModContent.ProjectileType<SprinkleNeedle>();
             Item.shootSpeed = 10f;
             Item.scale = 1.5f;
+            Item.maxStack = 1;
         }
 
         public override bool Shoot(Player player, Terraria.DataStructures.EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

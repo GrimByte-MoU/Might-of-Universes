@@ -14,6 +14,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.DamageType = DamageClass.Summon;
             Item.rare = ItemRarityID.Green;
             Item.value = Item.sellPrice(gold: 3);
+            Item.maxStack = 1;
         }
 
         public override bool MeleePrefix() => true;

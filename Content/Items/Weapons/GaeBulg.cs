@@ -11,15 +11,14 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             // Clone Gungnir
             Item.CloneDefaults(ItemID.Gungnir);
-
-            // Modify stats
-            Item.damage = 95; // Increased damage
-            Item.useTime = 18; // Faster (was 28)
+            Item.damage = 95;
+            Item.useTime = 18;
             Item.useAnimation = 18;
             Item.rare = ItemRarityID.Yellow;
             Item.value = Item.sellPrice(gold: 10);
             Item.shoot = ModContent.ProjectileType<Projectiles.GaeBulgProjectile>();
             Item.scale = 1.5f;
+            Item.maxStack = 1;
         }
 
         public override void AddRecipes()

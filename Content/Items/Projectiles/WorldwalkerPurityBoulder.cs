@@ -2,6 +2,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
+using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
@@ -12,7 +13,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Melee;
-            Projectile.penetrate = 6; // 5 pierce + 1 for final hit
+            Projectile.penetrate = 12; 
             Projectile.tileCollide = true;
             Projectile.ignoreWater = true;
             Projectile.timeLeft = 600;
@@ -28,20 +29,30 @@ namespace MightofUniverses.Content.Items.Projectiles
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)
-        {
-            Projectile.ai[0]++; // bounce count
-            if (Projectile.ai[0] >= 3) Projectile.Kill();
-            else
-            {
-                if (Projectile.velocity.X != oldVelocity.X) Projectile.velocity.X = -oldVelocity.X * 0.7f;
-                if (Projectile.velocity.Y != oldVelocity.Y) Projectile.velocity.Y = -oldVelocity.Y * 0.7f;
-            }
-            return false;
-        }
+{
+    Projectile.ai[0]++;
+    if (Projectile.ai[0] >= 6)  // 6 bounces (up from 3)
+        Projectile.Kill();
+    else
+    {
+        // Better bounce retention
+        if (Projectile.velocity.X != oldVelocity.X) 
+            Projectile.velocity. X = -oldVelocity.X * 0.90f;  // 90% retention
+        if (Projectile.velocity.Y != oldVelocity.Y) 
+            Projectile.velocity.Y = -oldVelocity. Y * 0.90f;
+    }
+    return false;
+}
+
+// Add lifesteal
+public override void OnHitNPC(NPC target, NPC. HitInfo hit, int damageDone)
+{
+    target.AddBuff(ModContent.BuffType<TerrasRend>(), 120);
+}
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            modifiers.Defense *= 0.7f; // Ignores 30% defense
+            modifiers.Defense *= 0.5f; 
         }
     }
 }

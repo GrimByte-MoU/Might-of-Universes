@@ -10,22 +10,23 @@ namespace MightofUniverses.Content.Items.Weapons
 {
 public class FearCaster : ModItem
 {
-    public override void SetDefaults()
-    {
-        Item.width = 40;
-        Item.height = 40;
-        Item.damage = 70;
-        Item.DamageType = DamageClass.Magic;
-        Item.mana = 12;
-        Item.rare = ItemRarityID.Lime;
-        Item.value = Item.sellPrice(0, 5, 0, 0);
-        Item.useTime = 20;
-        Item.useAnimation = 20;
-        Item.useStyle = ItemUseStyleID.Shoot;
-        Item.noMelee = true;
-        Item.autoReuse = true;
-        Item.shoot = ModContent.ProjectileType<FearPumpkin>();
-        Item.shootSpeed = 0f;
+        public override void SetDefaults()
+        {
+            Item.width = 40;
+            Item.height = 40;
+            Item.damage = 70;
+            Item.DamageType = DamageClass.Magic;
+            Item.mana = 12;
+            Item.rare = ItemRarityID.Lime;
+            Item.value = Item.sellPrice(0, 5, 0, 0);
+            Item.useTime = 20;
+            Item.useAnimation = 20;
+            Item.useStyle = ItemUseStyleID.Shoot;
+            Item.noMelee = true;
+            Item.autoReuse = true;
+            Item.shoot = ModContent.ProjectileType<FearPumpkin>();
+            Item.shootSpeed = 0f;
+            Item.maxStack = 1;
     }
 
     public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

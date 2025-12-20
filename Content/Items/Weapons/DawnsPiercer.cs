@@ -15,22 +15,23 @@ namespace MightofUniverses.Content.Items.Weapons
     {
         public override void SetDefaults()
         {
-            Item.width        = 54;
-            Item.height       = 28;
-            Item.value        = Item.sellPrice(gold: 20);
-            Item.rare         = ModContent.RarityType<SollutumRarity>();
-            Item.damage       = 120;
-            Item.DamageType   = DamageClass.Ranged;
-            Item.useTime      = 12;
+            Item.width = 54;
+            Item.height = 28;
+            Item.value = Item.sellPrice(gold: 20);
+            Item.rare = ModContent.RarityType<SollutumRarity>();
+            Item.damage = 200;
+            Item.DamageType = DamageClass.Ranged;
+            Item.useTime = 12;
             Item.useAnimation = 12;
-            Item.useStyle     = ItemUseStyleID.Shoot;
-            Item.noMelee      = true;
-            Item.knockBack    = 6f;
-            Item.shoot        = ProjectileID.Stake;
-            Item.shootSpeed   = 20f;
-            Item.useAmmo      = AmmoID.Stake;
-            Item.autoReuse    = true;
-            Item.UseSound     = SoundID.Item11;
+            Item.useStyle = ItemUseStyleID.Shoot;
+            Item.noMelee = true;
+            Item.knockBack = 6f;
+            Item.shoot = ProjectileID.Stake;
+            Item.shootSpeed = 20f;
+            Item.useAmmo = AmmoID.Stake;
+            Item.autoReuse = true;
+            Item.UseSound = SoundID.Item11;
+            Item.maxStack = 1;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

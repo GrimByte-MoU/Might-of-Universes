@@ -32,6 +32,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<EclipseRay>();
             Item.shootSpeed = 15f;
+            Item.maxStack = 1;
         }
 
         public override void HoldItem(Player player)

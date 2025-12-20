@@ -27,7 +27,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.autoReuse = true;
             Item.UseSound = SoundID.Item11;
-            
+
             Item.DamageType = DamageClass.Ranged;
             Item.damage = 35;
             Item.knockBack = 1f;
@@ -36,6 +36,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shoot = ProjectileID.Bullet;
             Item.shootSpeed = 25f;
             Item.useAmmo = AmmoID.Bullet;
+            Item.maxStack = 1;
         }
 
         public override Vector2? HoldoutOffset()

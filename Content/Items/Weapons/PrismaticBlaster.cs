@@ -15,28 +15,29 @@ public class PrismaticBlaster : ModItem
 {
     private int grenadeTimer = 0;
 
-    public override void SetDefaults()
-    {
-        Item.width = 50;
-        Item.height = 50;
-        Item.rare = ItemRarityID.Green;
-        Item.value = Item.sellPrice(gold: 2);
-        Item.scale = 1f;
+        public override void SetDefaults()
+        {
+            Item.width = 50;
+            Item.height = 50;
+            Item.rare = ItemRarityID.Green;
+            Item.value = Item.sellPrice(gold: 2);
+            Item.scale = 1f;
 
-        Item.useTime = 8;
-        Item.useAnimation = 8;
-        Item.useStyle = ItemUseStyleID.Shoot;
-        Item.autoReuse = true;
-        Item.UseSound = SoundID.Item11;
-        
-        Item.DamageType = DamageClass.Ranged;
-        Item.damage = 35;
-        Item.knockBack = 1f;
-        Item.noMelee = true;
+            Item.useTime = 8;
+            Item.useAnimation = 8;
+            Item.useStyle = ItemUseStyleID.Shoot;
+            Item.autoReuse = true;
+            Item.UseSound = SoundID.Item11;
 
-        Item.shoot = ProjectileID.Bullet;
-        Item.shootSpeed = 25f;
-        Item.useAmmo = AmmoID.Bullet;
+            Item.DamageType = DamageClass.Ranged;
+            Item.damage = 35;
+            Item.knockBack = 1f;
+            Item.noMelee = true;
+
+            Item.shoot = ProjectileID.Bullet;
+            Item.shootSpeed = 25f;
+            Item.useAmmo = AmmoID.Bullet;
+            Item.maxStack = 1;
     }
 
     public override Vector2? HoldoutOffset()

@@ -25,6 +25,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.mana = 2;
             Item.channel = true;
             Item.useTurn = true;
+            Item.maxStack = 1;
         }
 
         public override void HoldItem(Player player)

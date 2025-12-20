@@ -26,6 +26,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shoot = ModContent.ProjectileType<TreatSpikerCone>();
             Item.useAmmo = AmmoID.Arrow;
             Item.shootSpeed = 6f;
+            Item.maxStack = 1;
         }
 
         public override bool CanConsumeAmmo(Item ammo, Player player) => ammo.type != ItemID.WoodenArrow;

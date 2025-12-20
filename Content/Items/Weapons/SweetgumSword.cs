@@ -25,6 +25,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<GumballProjectile>();
             Item.shootSpeed = 8f;
+            Item.maxStack = 1;
         }
 
         public override void AddRecipes()

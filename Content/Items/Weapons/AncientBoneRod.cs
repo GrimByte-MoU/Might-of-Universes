@@ -43,6 +43,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.value = Item.sellPrice(gold: 10);
             Item.shoot = ModContent.ProjectileType<TarPellet>();
             Item.shootSpeed = 16f;
+            Item.maxStack = 1;
         }
 
         public override bool AltFunctionUse(Player player) => true;

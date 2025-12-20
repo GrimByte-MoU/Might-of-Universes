@@ -27,6 +27,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<TacticalGlaiveProjectile>();
             Item.shootSpeed = 16f;
+            Item.maxStack = 1;
         }
 
         public override void AddRecipes()

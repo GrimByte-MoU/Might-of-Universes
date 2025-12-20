@@ -3,34 +3,29 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using System;
+using MightofUniverses.Common;
+using MightofUniverses.Common.Players;
 
-namespace MightofUniverses.Content.Items.Accessories
+namespace MightofUniverses.Content. Items.Accessories
 {
     public class WraithwalkerEmblem : ModItem
     {
-
         public override void SetDefaults()
         {
-            Item.width = 28;
+            Item. width = 28;
             Item.height = 28;
             Item.value = Item.sellPrice(gold: 5);
             Item.rare = ItemRarityID.Red;
-            Item.accessory = true;
+            Item. accessory = true;
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            // Increase Reaper and Ranged damage
-            player.GetDamage(DamageClass.Ranged) += 0.12f;
-            var reaperPlayer = player.GetModPlayer<ReaperPlayer>();
+            player. GetDamage(DamageClass.Ranged) += 0.12f;
             player.GetDamage<ReaperDamageClass>() += 0.12f;
-
-            // Increase Reaper and Ranged crit chance
             player.GetCritChance(DamageClass.Ranged) += 10;
             player.GetCritChance<ReaperDamageClass>() += 10f;
-
-            // Apply the Wraithwalker effects
-            player.GetModPlayer<WraithwalkerEmblemPlayer>().hasWraithwalkerEmblem = true;
+            player.GetModPlayer<WraithwalkerPlayer>().hasWraithwalkerEmblem = true;
         }
 
         public override void AddRecipes()
@@ -39,120 +34,68 @@ namespace MightofUniverses.Content.Items.Accessories
                 .AddIngredient(ItemID.FragmentVortex, 15)
                 .AddIngredient(ModContent.ItemType<ReaperEmblem>(), 1)
                 .AddIngredient(ItemID.DestroyerEmblem, 1)
-                .AddTile(TileID.LunarCraftingStation)
+                .AddTile(TileID. LunarCraftingStation)
                 .Register();
         }
     }
 
-    public class WraithwalkerEmblemPlayer : ModPlayer
+    public class WraithwalkerPlayer : ModPlayer
     {
         public bool hasWraithwalkerEmblem = false;
-        private int ammoConsumptionTimer = 0;
+        private int ammoConsumeTimer = 0;
 
         public override void ResetEffects()
         {
             hasWraithwalkerEmblem = false;
         }
 
-        public override void PostUpdate()
+        public override void PostUpdateEquips()
         {
-            if (!hasWraithwalkerEmblem) return;
+            if (! hasWraithwalkerEmblem) return;
 
-            // Consume ammo every 2 seconds
-            ammoConsumptionTimer++;
-            if (ammoConsumptionTimer >= 120)
-            {
-                ammoConsumptionTimer = 0;
-                ConsumeAmmoForSouls();
-            }
-
-            // Apply soul-based bonuses to ranged attacks
             var reaperPlayer = Player.GetModPlayer<ReaperPlayer>();
-            float soulBonus = reaperPlayer.soulEnergy / 10f;
-            
-            // Damage bonus
-            Player.GetDamage(DamageClass.Ranged) += soulBonus / 100f; // 1% per 10 soul energy
-            
-            // Attack speed bonus
-            Player.GetAttackSpeed(DamageClass.Ranged) += soulBonus / 100f; // 1% per 10 soul energy
-            
-            // Armor penetration bonus
-            Player.GetArmorPenetration(DamageClass.Ranged) += (int)(soulBonus); // +1 per 10 soul energy
-        }
+            int soulEnergy = (int)reaperPlayer.soulEnergy;
 
-        private void ConsumeAmmoForSouls()
-        {
-            // Find ammo in inventory
-            Item ammo = null;
-            int ammoSlot = -1;
-            
-            // Check for ammo in ammo slots first
-            for (int i = 54; i < 58; i++)
+            // Per 10 souls:  +0.5% ranged damage, +0.5% attack speed, +1 armor pen
+            // Capped at 30 stacks (300 souls max)
+            int stacks = Math.Min(soulEnergy / 10, 30);
+
+            Player.GetDamage(DamageClass.Ranged) += stacks * 0.005f;
+            Player.GetAttackSpeed(DamageClass.Ranged) += stacks * 0.005f;
+            Player.GetArmorPenetration(DamageClass. Ranged) += stacks;
+
+            // Every 2 seconds:  Consume 1 ammo for souls
+            ammoConsumeTimer++;
+            if (ammoConsumeTimer >= 120)
             {
-                Item item = Player.inventory[i];
-                if (item.ammo != AmmoID.None && item.stack > 0)
+                ammoConsumeTimer = 0;
+
+                // Find ammo in inventory
+                for (int i = 54; i < 58; i++)
                 {
-                    ammo = item;
-                    ammoSlot = i;
-                    break;
-                }
-            }
-            
-            // If no ammo in ammo slots, check regular inventory
-            if (ammo == null)
-            {
-                for (int i = 0; i < 54; i++)
-                {
-                    Item item = Player.inventory[i];
-                    if (item.ammo != AmmoID.None && item.stack > 0)
+                    Item ammo = Player.inventory[i];
+                    if ((ammo. ammo == AmmoID.Bullet || ammo.ammo == AmmoID. Arrow) && ammo.stack > 0)
                     {
-                        ammo = item;
-                        ammoSlot = i;
+                        int soulGain = ammo.damage / 2;
+                        ammo.stack--;
+                        if (ammo.stack <= 0)
+                            ammo.TurnToAir();
+
+                        reaperPlayer.AddSoulEnergy(soulGain, Player.Center);
+
+                        // Visual effect
+                        for (int j = 0; j < 5; j++)
+                        {
+                            Dust. NewDust(Player.position, Player.width, Player.height, 
+                                DustID. Smoke, 0, 0, 100, Color.Gray, 1.5f);
+                        }
+
+                        if (Main.myPlayer == Player. whoAmI)
+                        {
+                            CombatText. NewText(Player.getRect(), Color. Cyan, "+" + soulGain + " Souls", false);
+                        }
                         break;
                     }
-                }
-            }
-            
-            // If ammo found, consume it and gain souls
-            if (ammo != null && ammoSlot != -1)
-            {
-                // Calculate base damage of the ammo
-                int ammoDamage = ammo.damage;
-                
-                // Consume one ammo
-                Player.inventory[ammoSlot].stack--;
-                if (Player.inventory[ammoSlot].stack <= 0)
-                {
-                    Player.inventory[ammoSlot].TurnToAir();
-                }
-                
-                // Calculate soul energy to gain (half of ammo damage)
-                int soulEnergyGain = Math.Max(1, ammoDamage / 2);
-                
-                // Add soul energy
-                var reaperPlayer = Player.GetModPlayer<ReaperPlayer>();
-                reaperPlayer.AddSoulEnergy(soulEnergyGain, Player.Center);
-                
-                // Visual effect
-                for (int i = 0; i < 5; i++)
-                {
-                    Dust.NewDust(
-                        Player.position,
-                        Player.width,
-                        Player.height,
-                        DustID.Vortex,
-                        Main.rand.NextFloat(-2f, 2f),
-                        Main.rand.NextFloat(-2f, 2f),
-                        0,
-                        default,
-                        Main.rand.NextFloat(1f, 1.5f)
-                    );
-                }
-                
-                // Show text
-                if (Main.myPlayer == Player.whoAmI)
-                {
-                    CombatText.NewText(Player.getRect(), Color.Cyan, "+" + soulEnergyGain + " Soul Energy");
                 }
             }
         }

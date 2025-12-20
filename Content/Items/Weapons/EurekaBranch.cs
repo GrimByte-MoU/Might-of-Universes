@@ -30,6 +30,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shootSpeed = 12f;
             Item.noMelee = true;
             Item.mana = 12;
+            Item.maxStack = 1;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

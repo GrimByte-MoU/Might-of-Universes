@@ -21,9 +21,9 @@ namespace MightofUniverses.Content.Items.Accessories
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetDamage(DamageClass.Melee) += 0.3f;
-            player.GetAttackSpeed(DamageClass.Melee) += 0.3f;
-            player.GetKnockback(DamageClass.Melee) += 0.3f;
+            player.GetDamage(DamageClass.Melee) += 0.2f;
+            player.GetAttackSpeed(DamageClass.Melee) += 0.2f;
+            player.GetKnockback(DamageClass.Melee) += 0.2f;
             player.autoReuseGlove = true;
             player.GetModPlayer<WorldsBalanceGauntletPlayer>().hasWorldsBalanceGauntlet = true;
         }

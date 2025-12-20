@@ -10,7 +10,7 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             Item.CloneDefaults(ItemID.BeamSword);
 
-            Item.damage = 100;
+            Item.damage = 120;
             Item.useTime = 15;
             Item.useAnimation = 15;
             Item.rare = ItemRarityID.Purple;
@@ -18,6 +18,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shoot = ModContent.ProjectileType<Projectiles.LaserSaberBeam>();
             Item.ArmorPenetration = 500;
             Item.scale = 2f;
+            Item.maxStack = 1;
         }
 
         public override void AddRecipes()

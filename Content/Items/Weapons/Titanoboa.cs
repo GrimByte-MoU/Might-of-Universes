@@ -17,6 +17,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.rare = ItemRarityID.Cyan;
             Item.value = Item.sellPrice(gold: 20);
             Item.shoot = ModContent.ProjectileType<Projectiles.TitanoboaProjectile>();
+            Item.maxStack = 1;
         }
 
         public override void AddRecipes()

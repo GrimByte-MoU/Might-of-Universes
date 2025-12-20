@@ -14,6 +14,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.rare = ItemRarityID.Lime;
             Item.value = Item.sellPrice(gold: 8);
             Item.shoot = ModContent.ProjectileType<Projectiles.ShadowDaggerProjectile>();
+            Item.maxStack = 1;
         }
 
         public override void AddRecipes()

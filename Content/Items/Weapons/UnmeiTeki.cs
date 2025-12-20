@@ -28,6 +28,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shoot = ModContent.ProjectileType<UnmeiPetal>();
             Item.shootSpeed = 10f;
             Item.useAmmo = AmmoID.Bullet;
+            Item.maxStack = 1;
         }
 
         public override void AddRecipes()

@@ -28,6 +28,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<PalladiumScytheProjectile>();
             Item.shootSpeed = 8f;
+            Item.maxStack = 1;
         }
 
         public override void HoldItem(Player player)

@@ -30,6 +30,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shoot = ModContent.ProjectileType<Worldbolt>();
             Item.shootSpeed = 10f;
             Item.mana = 10;
+            Item.maxStack = 1;
         }
 
         public override bool AltFunctionUse(Player player) => true;

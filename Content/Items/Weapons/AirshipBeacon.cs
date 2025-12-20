@@ -35,6 +35,7 @@ namespace MightofUniverses. Content.Items.Weapons
             Item.DamageType = DamageClass.Summon;
             Item.buffType = ModContent.BuffType<ClockworkAirshipBuff>();
             Item.shoot = ModContent.ProjectileType<ClockworkAirship>();
+            Item.maxStack = 1;
         }
 
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)

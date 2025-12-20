@@ -42,7 +42,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             // Apply Demonfire & Hellfire
             target.AddBuff(ModContent.BuffType<Demonfire>(), 300); // Custom buff (-75 HP/sec)
             target.AddBuff(BuffID.OnFire3, 300); // Hellfire
-            Projectile.damage = (int)(Projectile.damage * 0.9f);
+            Projectile.damage = (int)(Projectile.damage * 0.97f);
         }
     }
 }

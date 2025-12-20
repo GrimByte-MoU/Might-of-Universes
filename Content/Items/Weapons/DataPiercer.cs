@@ -28,6 +28,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.shoot = ProjectileID.WoodenArrowFriendly;
             Item.shootSpeed = 12f;
             Item.useAmmo = AmmoID.Arrow;
+            Item.maxStack = 1;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position,
