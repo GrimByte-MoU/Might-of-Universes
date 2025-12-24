@@ -24,9 +24,10 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
 
         public override void AI()
         {
+            Projectile.rotation = Projectile.velocity.ToRotation();
             if (Projectile.ai[0] == 1f)
             {
-                Player target = Main.player[Player. FindClosest(Projectile. position, Projectile.width, Projectile.height)];
+                Player target = Main.player[Player.FindClosest(Projectile.position, Projectile.width, Projectile.height)];
                 Vector2 direction = (target.Center - Projectile.Center).SafeNormalize(Vector2.Zero);
                 Projectile.velocity = Vector2.Lerp(Projectile.velocity, direction * Projectile.velocity.Length(), 0.01f);
             }

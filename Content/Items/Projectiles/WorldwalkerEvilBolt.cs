@@ -35,7 +35,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             target.AddBuff(BuffID.Ichor, 300);
             target.AddBuff(ModContent.BuffType<DeadlyCorrupt>(), 180);
             Player owner = Main.player[Projectile.owner];
-    int heal = damageDone / 10;
+    int heal = damageDone / 25;
     owner.statLife = Math.Min(owner. statLife + heal, owner.statLifeMax2);
     owner.HealEffect(heal);
 
@@ -44,7 +44,7 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Vector2 velocity = Main.rand.NextVector2Circular(8f, 8f);
                 Projectile.NewProjectile(Projectile.GetSource_FromThis(),
                     target.Center, velocity,
-                    ProjectileID.Shadowflames,
+                    ProjectileID.NightsEdge,
                     Projectile.damage / 2,
                     2f, Projectile.owner);
             }

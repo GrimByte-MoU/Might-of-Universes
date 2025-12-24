@@ -25,6 +25,7 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
 
         public override void AI()
         {
+            Projectile.rotation = Projectile.velocity.ToRotation();
             float pulseScale = 1f + (float)Math.Sin(Main.GameUpdateCount * 0.1f) * 0.1f;
             Projectile.scale = pulseScale;
 

@@ -29,7 +29,7 @@ namespace MightofUniverses.Content.Items.Projectiles
                     DustID.WhiteTorch, 0f, 0f, 100, default, 1f);
             }
             
-            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
+            Projectile.rotation = Projectile.velocity.ToRotation();
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

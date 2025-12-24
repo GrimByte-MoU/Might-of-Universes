@@ -765,6 +765,17 @@ Projectiles: {
 	ForestLeaf.DisplayName: Forest Leaf
 	HallowedSpear.DisplayName: Hallowed Spear
 	UnderworldFireball.DisplayName: Underworld Fireball
+	AegisChunk.DisplayName: Aegis Chunk
+	AegisFragment.DisplayName: Aegis Fragment
+	AegisShard.DisplayName: Aegis Shard
+	JungleNeedle.DisplayName: Jungle Needle
+	OceanSphere.DisplayName: Ocean Sphere
+	SkySpark.DisplayName: Sky Spark
+	SnowSpike.DisplayName: Snow Spike
+	WorldAegisBolt.DisplayName: World Aegis Bolt
+	WorldAegisFireball.DisplayName: World Aegis Fireball
+	WorldAegisLeaf.DisplayName: World Aegis Leaf
+	WorldAegisWater.DisplayName: World Aegis Water
 }
 
 Keybinds: {
@@ -2069,7 +2080,7 @@ Items: {
 
 	FearsomeRound: {
 		DisplayName: Fearsome Round
-		Tooltip: Aggresively homes in on enemies
+		Tooltip: Aggresively homes in on enemies and inflicts Terrified
 	}
 
 	FrozenBullet: {
@@ -2093,7 +2104,7 @@ Items: {
 
 	SanguineBullet: {
 		DisplayName: Sanguine Bullet
-		Tooltip: Lifesteals and inflicts Sanguine Rend
+		Tooltip: Lifesteals
 	}
 
 	Bloodletter: {
@@ -3273,7 +3284,7 @@ Items: {
 		Tooltip:
 			'''
 			A sentimental weapon held by Aegon, he never used it
-			Fires 3 arrows at once and replaces all arrows fired from this bow with Gaia's Arrows.
+			Fires 4 arrows at once and replaces all arrows fired from this bow with Gaia's Arrows.
 			Gaia's Arrows travel very quickly, home and will shatter into bright shards that also home.
 			The arrows inflict Terra's Rend for 3 seconds, the shards inflict it for 1 second.
 			'''
@@ -3311,11 +3322,11 @@ Items: {
 			The spear pierces four enemies.
 			Chilly Blade: Fires a Chilly sword that explodes into fragments that causes fragments to rain down.
 			Both the chilly sword and the fragments inflict Frostburn for 5 seconds.
-			         Jungle Swarm: Fires a spread of 5-7 poisonous stingers that decelerate. The stingers inflict Poison and Acid Venom for 5 seconds.
-			         Infernal Wave: Fires a wave of fire that inflicts Demonfire and Hellfire for 5 seconds.
-			The wave pierces infinitely but does 10% less damage to each enemy hit after the first
-			         Forest's Fist: Fires a piercing and bouncing boulder that ignores 30% defense.
-			The boulder can bounce up to 3 times and pierces 5 enemies.
+			         Jungle Swarm: Fires a spread of 8-10 poisonous stingers that decelerate. The stingers inflict Poison and Acid Venom for 5 seconds.
+			         Infernal Wave: Fires a wave of fire that inflicts Demonfire, Hell's Mark and Hellfire for 5 seconds.
+			The wave pierces infinitely but does 3% less damage to each enemy hit after the first
+			         Forest's Fist: Fires a piercing and bouncing boulder that ignores 50% defense and inflicts Terra's Rend for 3 seconds.
+			The boulder can bounce up to 6 times and pierces 12 enemies.
 			'''
 	}
 
@@ -4751,6 +4762,34 @@ Items: {
 			These mirages each do 300% damage
 			'''
 	}
+
+	AegisReplica: {
+		DisplayName: Aegis Replica
+		Tooltip:
+			'''
+			+15 defense
+			      Creates a shield that absorbs 1,500 damage
+			      The shield regenerates 30 seconds after breaking
+			      Grants immunity to knockback while the shield is active
+			      Grants immunity to several deadly debuffs
+			'''
+	}
+
+	EarthenCrown: {
+		DisplayName: Earthen Crown
+		Tooltip:
+			'''
+			'Heavy is the head that wears the crown'
+			+25% damage to all classes
+			+150% pacifist damage
+			+15% crit chance
+			'''
+	}
+
+	WorldsoulsMedallion: {
+		DisplayName: Worldsouls Medallion
+		Tooltip: ""
+	}
 }
 
 Prefixes: {
@@ -4768,4 +4807,7 @@ Prefixes: {
 NPCs: {
 	ObeSadeeHealerMinion.DisplayName: Obe Sadee Healer Minion
 	ObeSadee.DisplayName: Obe Sadee
+	Aegon.DisplayName: Aegon
+	AegonMirage.DisplayName: Aegon Mirage
+	WorldAegis.DisplayName: World Aegis
 }

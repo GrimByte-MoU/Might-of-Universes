@@ -50,7 +50,6 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
             Projectile.light = 0.8f;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = true;
-            Projectile.damage = 120;
         }
 
         public override void AI()

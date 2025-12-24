@@ -11,7 +11,6 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.Localization;
 using Terraria.ModLoader.Utilities;
 using MightofUniverses.Content.Items.Projectiles;
-using MightofUniverses.Content.NPCs.Bosses.Minions;
 using MightofUniverses.Common.Systems;
 using MightofUniverses.Content.Items.Consumables.BossBags;
 

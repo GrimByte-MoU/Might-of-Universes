@@ -40,8 +40,9 @@ namespace MightofUniverses.Content.Items.Projectiles
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             // Apply Demonfire & Hellfire
-            target.AddBuff(ModContent.BuffType<Demonfire>(), 300); // Custom buff (-75 HP/sec)
-            target.AddBuff(BuffID.OnFire3, 300); // Hellfire
+            target.AddBuff(ModContent.BuffType<Demonfire>(), 300);
+            target.AddBuff(BuffID.OnFire3, 300); 
+            target.AddBuff(ModContent.BuffType<HellsMark>(), 300);
             Projectile.damage = (int)(Projectile.damage * 0.97f);
         }
     }

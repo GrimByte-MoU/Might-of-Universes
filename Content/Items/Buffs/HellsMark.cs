@@ -60,7 +60,7 @@ namespace MightofUniverses.Content.Items.Buffs
     {
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (projectile.DamageType == DamageClass.Magic && target.HasBuff(ModContent.BuffType<HellsMark>()))
+            if (projectile.DamageType == DamageClass.Generic && target.HasBuff(ModContent.BuffType<HellsMark>()))
             {
                 for (int i = 0; i < 30; i++)
                 {

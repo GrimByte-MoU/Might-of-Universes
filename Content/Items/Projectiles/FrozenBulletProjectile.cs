@@ -45,7 +45,7 @@ namespace MightofUniverses.Content.Items.Projectiles
                     Projectile.Center,
                     velocity,
                     ModContent.ProjectileType<FrozenFragmentProjectile>(),
-                    (int)(Projectile.damage * 0.25f),
+                    (int)(Projectile.damage * 0.4f),
                     Projectile.knockBack * 0.5f,
                     Projectile.owner
                 );

@@ -15,7 +15,7 @@ namespace MightofUniverses.Content.Items.Ammo
 
         public override void SetDefaults() 
         {
-            Item.damage = 15;
+            Item.damage = 12;
             Item.DamageType = DamageClass.Ranged;
             Item.width = 8;
             Item.height = 8;

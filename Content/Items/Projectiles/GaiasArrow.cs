@@ -14,7 +14,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.DamageType = DamageClass.Ranged;
-            Projectile.penetrate = 1; // shatter on first hit
+            Projectile.penetrate = 1;
             Projectile.timeLeft = 360;
             Projectile.aiStyle = 0;
             Projectile.ignoreWater = true;
@@ -31,7 +31,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             NPC target = FindClosestTarget(Projectile.Center, 480f);
             if (target != null)
             {
-                float accel = 0.18f; // homing acceleration
+                float accel = 0.18f;
                 float maxSpeed = 18f;
 
                 Vector2 desired = Projectile.DirectionTo(target.Center) * maxSpeed;
@@ -58,13 +58,12 @@ namespace MightofUniverses.Content.Items.Projectiles
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             // 3 seconds of Terra's Rend
-            target.AddBuff(ModContent.BuffType<ElementsHarmony>(), 120);
+            target.AddBuff(ModContent.BuffType<TerrasRend>(), 180);
             Shatter();
         }
 
         public override void Kill(int timeLeft)
         {
-            // If somehow expired without shattering, still shatter
             if (Projectile.localAI[0] == 0f)
                 Shatter();
         }
@@ -91,14 +90,14 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         private void Shatter()
         {
-            if (Projectile.localAI[0] != 0f) // already shattered
+            if (Projectile.localAI[0] != 0f)
                 return;
 
             Projectile.localAI[0] = 1f;
 
             if (Projectile.owner == Main.myPlayer)
             {
-                int shardCount = 5;
+                int shardCount = 10;
                 for (int i = 0; i < shardCount; i++)
                 {
                     Vector2 vel = Main.rand.NextVector2Circular(4.5f, 4.5f);
@@ -107,15 +106,13 @@ namespace MightofUniverses.Content.Items.Projectiles
                         Projectile.Center,
                         vel,
                         ModContent.ProjectileType<GaiasShard>(),
-                        (int)(Projectile.damage * 0.25f),
+                        (int)(Projectile.damage * 0.4f),
                         Projectile.knockBack,
                         Projectile.owner
                     );
                 }
             }
-
-            // Dust pop (optional visual)
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < 3; i++)
             {
                 int d = Dust.NewDust(Projectile.Center, 1, 1, DustID.Grass, 0f, 0f, 0, default, 1.2f);
                 Main.dust[d].noGravity = true;

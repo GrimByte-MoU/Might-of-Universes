@@ -21,20 +21,20 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
             Projectile.light = 0.2f;
             Projectile. ignoreWater = true;
             Projectile.tileCollide = true;
-            Projectile.damage = 100;
         }
 
         public override void AI()
         {
+            Projectile.rotation = Projectile.velocity.ToRotation();
 
 
             if (Main.rand.NextBool(3))
             {
                 Dust dust = Dust.NewDustDirect(
                     Projectile.position,
-                    Projectile. width,
+                    Projectile.width,
                     Projectile.height,
-                    DustID. Grass,
+                    DustID.Grass,
                     0f, 0f, 100,
                     default(Color),
                     0.8f

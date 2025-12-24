@@ -47,7 +47,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 // Add lifesteal
 public override void OnHitNPC(NPC target, NPC. HitInfo hit, int damageDone)
 {
-    target.AddBuff(ModContent.BuffType<TerrasRend>(), 120);
+    target.AddBuff(ModContent.BuffType<TerrasRend>(), 180);
 }
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)

@@ -23,7 +23,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            // Small sparkle trail (optional)
             if (Main.rand.NextBool(4))
             {
                 int d = Dust.NewDust(Projectile.Center, 1, 1, DustID.GreenTorch, 0f, 0f, 0, default, 1f);
@@ -60,8 +59,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            // 1 second of Terra's Rend
-            target.AddBuff(ModContent.BuffType<ElementsHarmony>(), 60);
+            target.AddBuff(ModContent.BuffType<TerrasRend>(), 60);
         }
 
         private NPC FindClosestTarget(Vector2 from, float maxRange)

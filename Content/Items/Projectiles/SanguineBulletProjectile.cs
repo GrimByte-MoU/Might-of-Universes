@@ -32,13 +32,22 @@ namespace MightofUniverses.Content.Items.Projectiles
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            // Lifesteal effect
-            Player player = Main.player[Projectile.owner];
-            player.Heal(damageDone / 2);
-            player.statLife += damageDone / 2;
-            if (player.statLife > player.statLifeMax2)
-                player.statLife = player.statLifeMax2;
-        }
+{
+    Player player = Main.player[Projectile.owner];
+    
+    // 8% lifesteal (balanced)
+    int heal = damageDone / 12;  // ~8% lifesteal
+    player.statLife = System.Math.Min(player.statLife + heal, player.statLifeMax2);
+    player.HealEffect(heal);
+    
+    // Visual blood particles
+    for (int i = 0; i < 3; i++)
+    {
+        Vector2 vel = (player.Center - target.Center).SafeNormalize(Vector2.UnitY) * 4f;
+        int dust = Dust.NewDust(target.Center, 0, 0, DustID.Blood, 
+            vel.X, vel.Y, 100, default, 1.2f);
+        Main.dust[dust].noGravity = true;
+    }
+}
     }
 }
