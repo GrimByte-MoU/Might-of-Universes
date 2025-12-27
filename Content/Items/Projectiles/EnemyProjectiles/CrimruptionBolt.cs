@@ -6,10 +6,10 @@ using Terraria.ModLoader;
 
 namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
 {
-    public class CrimruptionBolt : ModProjectile
+    public class CrimruptionBolt : MoUProjectile
     {
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             Projectile.width = 20;
             Projectile.height = 20;
@@ -66,18 +66,23 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
                 dust.velocity *= 0.3f;
             }
         }
+        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
+{
+    modifiers.FinalDamage.Base = Projectile.damage;
+}
 
-        public override void OnHitPlayer(Player target, Player. HurtInfo info)
+
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             int ichorDuration = 120;
 
             if (Main.expertMode)
-                ichorDuration = 180; 
+                ichorDuration = 180;
 
             if (Main.masterMode)
                 ichorDuration = 240;
 
-            target.AddBuff(BuffID. Ichor, ichorDuration);
+            target.AddBuff(BuffID.Ichor, ichorDuration);
 
             int cursedDuration = 120;
 

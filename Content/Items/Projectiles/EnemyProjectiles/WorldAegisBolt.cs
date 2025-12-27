@@ -7,14 +7,14 @@ using Microsoft. Xna.Framework;
 
 namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
 {
-    public class WorldAegisBolt : ModProjectile
+    public class WorldAegisBolt : MoUProjectile
     {
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 1;
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             Projectile.width = 14;
             Projectile.height = 14;
@@ -43,16 +43,22 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
             Lighting.AddLight(Projectile.Center, 0.6f, 0.6f, 0.6f);
         }
 
-        public override void OnHitPlayer(Player target, Player.HurtInfo info)
-        {
-            for (int i = 0; i < 6; i++)
-            {
-                Vector2 velocity = Main.rand.NextVector2Circular(2.5f, 2.5f);
-                int dust = Dust.NewDust(Projectile.Center, 0, 0, DustID.SilverCoin,
-                    velocity. X, velocity.Y, 100, Color.Silver, 1.1f);
-                Main.dust[dust].noGravity = true;
-            }
-        }
+        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
+{
+    modifiers.FinalDamage.Base = Projectile.damage;
+}
+
+public override void OnHitPlayer(Player target, Player.HurtInfo info)
+{
+
+    for (int i = 0; i < 6; i++)
+    {
+        Vector2 velocity = Main.rand.NextVector2Circular(2.5f, 2.5f);
+        int dust = Dust.NewDust(Projectile.Center, 0, 0, DustID.SilverCoin,
+            velocity.X, velocity.Y, 100, Color.Silver, 1.1f);
+        Main.dust[dust].noGravity = true;
+    }
+}
 
         public override Color? GetAlpha(Color lightColor)
         {

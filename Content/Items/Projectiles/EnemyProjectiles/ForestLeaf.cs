@@ -5,10 +5,10 @@ using Terraria.ModLoader;
 
 namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
 {
-    public class ForestLeaf : ModProjectile
+    public class ForestLeaf : MoUProjectile
     {
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             Projectile.width = 16;
             Projectile.height = 16;
@@ -47,6 +47,11 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
                 Projectile.alpha += 8;
             }
         }
+        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
+{
+    modifiers.FinalDamage.Base = Projectile.damage;
+}
+
 
         public override void Kill(int timeLeft)
         {
@@ -61,7 +66,7 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
                     Main.rand.NextFloat(-2f, 2f),
                     100, default(Color), 1.2f
                 );
-                dust. noGravity = true;
+                dust.noGravity = true;
             }
         }
 

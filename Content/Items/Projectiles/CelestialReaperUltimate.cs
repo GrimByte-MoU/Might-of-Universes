@@ -13,7 +13,7 @@ namespace MightofUniverses.Content.Items.Projectiles
     {
         private List<int> hitNPCs = new List<int>();
         private int currentTarget = -1;
-        private const int LIFETIME = 300;
+        private const int LIFETIME = 150;
         private int searchCooldown = 0;
 
         public override void SetStaticDefaults()

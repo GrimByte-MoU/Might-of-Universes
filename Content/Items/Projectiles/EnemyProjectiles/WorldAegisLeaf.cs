@@ -8,14 +8,14 @@ using System;
 
 namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
 {
-    public class WorldAegisLeaf : ModProjectile
+    public class WorldAegisLeaf : MoUProjectile
     {
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 1;
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             Projectile.width = 18;
             Projectile.height = 18;
@@ -31,7 +31,7 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
 
         public override void AI()
         {
-            Projectile.rotation += 0.1f;
+            Projectile.rotation = Projectile.velocity.ToRotation();
 
             Projectile.velocity. X += (float)Math.Sin(Projectile.ai[0] * 0.1f) * 0.2f;
             Projectile. ai[0]++;
@@ -46,6 +46,11 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
 
             Lighting.AddLight(Projectile. Center, 0.3f, 0.6f, 0.3f);
         }
+        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
+{
+    modifiers.FinalDamage.Base = Projectile.damage;
+}
+
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
@@ -54,7 +59,7 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
                 Vector2 velocity = Main.rand.NextVector2Circular(3f, 3f);
                 int dust = Dust.NewDust(Projectile.Center, 0, 0, DustID.Grass,
                     velocity.X, velocity.Y, 100, Color.ForestGreen, 1.2f);
-                Main.dust[dust]. noGravity = true;
+                Main.dust[dust].noGravity = true;
             }
         }
 

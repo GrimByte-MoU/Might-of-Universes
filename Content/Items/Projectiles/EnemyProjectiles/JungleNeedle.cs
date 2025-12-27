@@ -5,14 +5,14 @@ using Microsoft.Xna.Framework;
 
 namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
 {
-    public class JungleNeedle : ModProjectile
+    public class JungleNeedle : MoUProjectile
     {
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 1;
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             Projectile.width = 12;
             Projectile.height = 12;
@@ -51,12 +51,17 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
             // Lighting
             Lighting.AddLight(Projectile.Center, 0.3f, 0.6f, 0.1f);
         }
+        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
+{
+    modifiers.FinalDamage.Base = Projectile.damage;
+}
+
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            int difficulty = Main.masterMode ? 2 : (Main.expertMode ?  1 : 0);
+            int difficulty = Main.masterMode ? 2 : (Main.expertMode ? 1 : 0);
             int[] venomDuration = { 120, 180, 240 };
-            
+
             target.AddBuff(BuffID.Venom, venomDuration[difficulty]);
 
             // Venom splash

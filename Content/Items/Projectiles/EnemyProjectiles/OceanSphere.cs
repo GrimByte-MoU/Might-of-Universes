@@ -6,14 +6,14 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
 {
-    public class OceanSphere : ModProjectile
+    public class OceanSphere : MoUProjectile
     {
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 1;
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             Projectile.width = 20;
             Projectile.height = 20;
@@ -47,13 +47,18 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
             // Lighting
             Lighting.AddLight(Projectile. Center, 0.2f, 0.4f, 0.8f);
         }
+        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
+{
+    modifiers.FinalDamage.Base = Projectile.damage;
+}
+
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             int difficulty = Main.masterMode ? 2 : (Main.expertMode ? 1 : 0);
             int[] drowningDuration = { 120, 180, 240 };
-            
-                        target.AddBuff(ModContent.BuffType<Drowning>(), drowningDuration[difficulty]);
+
+            target.AddBuff(ModContent.BuffType<Drowning>(), drowningDuration[difficulty]);
             for (int i = 0; i < 15; i++)
             {
                 Vector2 velocity = Main.rand.NextVector2Circular(4f, 4f);

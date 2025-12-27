@@ -7,14 +7,14 @@ using Microsoft.Xna.Framework;
 
 namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
 {
-    public class WorldAegisFireball : ModProjectile
+    public class WorldAegisFireball : MoUProjectile
     {
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 1;
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             Projectile.width = 20;
             Projectile.height = 20;
@@ -49,12 +49,17 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
 
             Lighting.AddLight(Projectile.Center, 1.0f, 0.5f, 0.1f);
         }
+        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
+{
+    modifiers.FinalDamage.Base = Projectile.damage;
+}
+
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             int difficulty = Main.masterMode ? 2 : (Main.expertMode ? 1 : 0);
             int[] hellfireDuration = { 120, 180, 240 };
-            
+
             target.AddBuff(BuffID.OnFire3, hellfireDuration[difficulty]);
 
             for (int i = 0; i < 15; i++)

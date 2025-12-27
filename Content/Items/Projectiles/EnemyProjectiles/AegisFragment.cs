@@ -8,14 +8,14 @@ using MightofUniverses.Content.Items. Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
 {
-    public class AegisFragment : ModProjectile
+    public class AegisFragment : MoUProjectile
     {
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 1;
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             Projectile. width = 20;
             Projectile.height = 20;
@@ -43,19 +43,24 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
 
             Lighting.AddLight(Projectile.Center, 1.0f, 0.7f, 0.3f);
         }
+        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
+{
+    modifiers.FinalDamage.Base = Projectile.damage;
+}
+
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            int difficulty = Main.masterMode ? 2 : (Main.expertMode ?  1 : 0);
+            int difficulty = Main.masterMode ? 2 : (Main.expertMode ? 1 : 0);
             int[] terrasRendDuration = { 90, 180, 270 };
-            
+
             target.AddBuff(ModContent.BuffType<TerrasRend>(), terrasRendDuration[difficulty]);
 
             for (int i = 0; i < 12; i++)
             {
                 Vector2 velocity = Main.rand.NextVector2Circular(4f, 4f);
                 int dust = Dust.NewDust(Projectile.Center, 0, 0, DustID.GoldCoin,
-                    velocity.X, velocity. Y, 100, Color.Orange, 1.5f);
+                    velocity.X, velocity.Y, 100, Color.Orange, 1.5f);
                 Main.dust[dust].noGravity = true;
             }
         }

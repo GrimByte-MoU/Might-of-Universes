@@ -8,14 +8,14 @@ using MightofUniverses.Content. Items.Buffs;
 
 namespace MightofUniverses. Content.Items.Projectiles. EnemyProjectiles
 {
-    public class AegisShard : ModProjectile
+    public class AegisShard : MoUProjectile
     {
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 1;
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             Projectile.width = 16;
             Projectile.height = 16;
@@ -43,12 +43,17 @@ namespace MightofUniverses. Content.Items.Projectiles. EnemyProjectiles
 
             Lighting.AddLight(Projectile. Center, 0.8f, 0.6f, 0.2f);
         }
+        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
+{
+    modifiers.FinalDamage.Base = Projectile.damage;
+}
+
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            int difficulty = Main.masterMode ? 2 : (Main.expertMode ?  1 : 0);
+            int difficulty = Main.masterMode ? 2 : (Main.expertMode ? 1 : 0);
             int[] terrasRendDuration = { 60, 120, 180 };
-            
+
             target.AddBuff(ModContent.BuffType<TerrasRend>(), terrasRendDuration[difficulty]);
 
             for (int i = 0; i < 8; i++)

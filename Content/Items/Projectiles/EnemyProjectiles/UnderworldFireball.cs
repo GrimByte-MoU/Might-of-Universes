@@ -5,10 +5,10 @@ using Terraria.ModLoader;
 
 namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
 {
-    public class UnderworldFireball : ModProjectile
+    public class UnderworldFireball : MoUProjectile
     {
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             Projectile.width = 24;
             Projectile.height = 24;
@@ -62,6 +62,11 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
                 );
             }
         }
+        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
+{
+    modifiers.FinalDamage.Base = Projectile.damage;
+}
+
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {

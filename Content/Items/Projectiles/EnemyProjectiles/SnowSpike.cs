@@ -5,14 +5,14 @@ using Microsoft.Xna.Framework;
 
 namespace MightofUniverses.Content.Items. Projectiles.EnemyProjectiles
 {
-    public class SnowSpike : ModProjectile
+    public class SnowSpike : MoUProjectile
     {
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 1;
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             Projectile. width = 14;
             Projectile.height = 14;
@@ -48,13 +48,18 @@ namespace MightofUniverses.Content.Items. Projectiles.EnemyProjectiles
 
             Lighting.AddLight(Projectile.Center, 0.4f, 0.6f, 0.8f);
         }
+        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
+{
+    modifiers.FinalDamage.Base = Projectile.damage;
+}
 
-        public override void OnHitPlayer(Player target, Player. HurtInfo info)
+
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            int difficulty = Main.masterMode ? 2 : (Main.expertMode ? 1 :  0);
+            int difficulty = Main.masterMode ? 2 : (Main.expertMode ? 1 : 0);
             int[] frostbiteDuration = { 180, 240, 300 };
             int[] frostburnDuration = { 120, 180, 240 };
-            
+
             target.AddBuff(BuffID.Frostburn, frostburnDuration[difficulty]);
             target.AddBuff(BuffID.Frostburn2, frostbiteDuration[difficulty]);
 

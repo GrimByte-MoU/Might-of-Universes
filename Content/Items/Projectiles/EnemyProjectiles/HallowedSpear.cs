@@ -5,11 +5,10 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using MightofUniverses.Content.Items.Buffs;
 
-namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
+namespace MightofUniverses.Content.Items.Projectiles. EnemyProjectiles
 {
-    public class HallowedSpear : ModProjectile
+    public class HallowedSpear :  MoUProjectile
     {
-        // AI states
         private enum AIState
         {
             Moving,
@@ -29,7 +28,7 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
             set => Projectile. ai[1] = value;
         }
 
-        private Vector2 targetPosition;
+        private Vector2 targetPosition; // Store where player WAS
 
         public override void SetStaticDefaults()
         {
@@ -37,20 +36,25 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
             ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             Projectile.width = 32;
             Projectile.height = 8;
             Projectile.aiStyle = -1;
-            Projectile.hostile = true;
-            Projectile. friendly = false;
+            Projectile. hostile = true;
+            Projectile.friendly = false;
             Projectile.penetrate = 1;
-            Projectile.timeLeft = 600;
+            Projectile.timeLeft = 300;
             Projectile.alpha = 0;
             Projectile.light = 0.8f;
-            Projectile.ignoreWater = true;
+            Projectile. ignoreWater = true;
             Projectile.tileCollide = true;
         }
+
+        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
+{
+    modifiers.FinalDamage.Base = Projectile.damage;
+}
 
         public override void AI()
         {
@@ -71,10 +75,8 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
                     break;
             }
 
-            // Lighting effect
             Lighting.AddLight(Projectile.Center, 0.9f, 0.8f, 0.3f);
 
-            // Dust trail
             if (Main.rand.NextBool(2))
             {
                 Dust dust = Dust.NewDustDirect(
@@ -95,18 +97,15 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
 
-            // After traveling ~5 blocks (80 pixels), stop
-            if (StateTimer >= 20) // ~0.33 seconds at 60fps
+            if (StateTimer >= 20) // After ~0.33 seconds, stop
             {
-                // Store player position when stopping
+                // STORE player position when stopping (not live tracking)
                 Player target = Main.player[Player.FindClosest(Projectile.position, Projectile.width, Projectile.height)];
-                targetPosition = target.Center;
+                targetPosition = target.Center; // ← SNAPSHOT, not updated
 
-                // Stop moving
                 Projectile.velocity = Vector2.Zero;
-                Projectile.tileCollide = false; // Don't collide while spinning
+                Projectile. tileCollide = false;
 
-                // Switch to spinning
                 State = AIState.Spinning;
                 StateTimer = 0;
             }
@@ -114,63 +113,54 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
 
         private void AI_Spinning()
         {
-            // Rapid spin
             Projectile.rotation += 0.3f;
 
-            // Spin for ~1 second
-            if (StateTimer >= 60)
+            if (StateTimer >= 60) // Spin for 1 second
             {
-                // Calculate direction to player
-                Player target = Main.player[Player.FindClosest(Projectile.position, Projectile.width, Projectile.height)];
-                Vector2 direction = (target. Center - Projectile.Center).SafeNormalize(Vector2.UnitX);
+                // Launch toward STORED position (not current player position)
+                Vector2 direction = (targetPosition - Projectile.Center).SafeNormalize(Vector2.UnitX);
+                Projectile.velocity = direction * 16f;
 
-                // Launch at player
-                Projectile.velocity = direction * 16f; // Fast homing speed
-
-                // Switch to homing
-                State = AIState.Homing;
+                State = AIState. Homing;
                 StateTimer = 0;
             }
         }
 
         private void AI_Homing()
         {
-            // Point in direction of movement
-            Projectile.rotation = Projectile. velocity.ToRotation();
+            Projectile.rotation = Projectile.velocity.ToRotation();
 
-            // Gentle homing (not too aggressive)
-            Player target = Main.player[Player. FindClosest(Projectile. position, Projectile.width, Projectile.height)];
-            Vector2 direction = (target.Center - Projectile.Center).SafeNormalize(Vector2.Zero);
+            // NO HOMING - just fly straight toward stored position
+            // (Or very minimal correction)
             
-            // Slight homing adjustment
-            Projectile.velocity = Vector2.Lerp(Projectile.velocity, direction * 16f, 0.02f);
+            // Optional:  VERY gentle course correction (almost none)
+            Vector2 direction = (targetPosition - Projectile.Center).SafeNormalize(Vector2.Zero);
+            Projectile.velocity = Vector2.Lerp(Projectile.velocity, direction * 16f, 0.005f); // ← 0.005 = almost no homing
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            int rebukeDuration = 60; // 1 second (Normal)
-            int subjugatedDuration = 30; // 0.5 seconds (Normal)
+            int rebukeDuration = 60;
+            int subjugatedDuration = 30;
 
             if (Main.expertMode)
             {
-                rebukeDuration = 120; // 2 seconds
-                subjugatedDuration = 60; // 1 second
+                rebukeDuration = 120;
+                subjugatedDuration = 60;
             }
 
             if (Main.masterMode)
             {
-                rebukeDuration = 180; // 3 seconds
-                subjugatedDuration = 90; // 1.5 seconds
+                rebukeDuration = 180;
+                subjugatedDuration = 90;
             }
 
-            // Apply custom debuffs (you'll need to create these)
-            target.AddBuff(ModContent.BuffType<RebukingLight>(), rebukeDuration);
+            target.AddBuff(ModContent. BuffType<RebukingLight>(), rebukeDuration);
             target.AddBuff(ModContent.BuffType<Subjugated>(), subjugatedDuration);
         }
 
         public override void Kill(int timeLeft)
         {
-            // Golden explosion
             for (int i = 0; i < 20; i++)
             {
                 Dust dust = Dust.NewDustDirect(
@@ -182,19 +172,19 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
                     Main.rand.NextFloat(-4f, 4f),
                     100, default(Color), 1.5f
                 );
-                dust. noGravity = true;
+                dust.noGravity = true;
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool SafePreDraw(ref Color lightColor)
         {
             Main.instance.LoadProjectile(Projectile.type);
             Microsoft.Xna.Framework.Graphics. Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Projectile.type]. Value;
 
-            for (int i = 0; i < Projectile.oldPos.Length; i++)
+            for (int i = 0; i < Projectile.oldPos. Length; i++)
             {
                 Vector2 drawPos = Projectile.oldPos[i] - Main.screenPosition + new Vector2(Projectile.width, Projectile.height) / 2f;
-                Color color = Color.Gold * ((Projectile.oldPos. Length - i) / (float)Projectile.oldPos.Length) * 0.5f;
+                Color color = Color.Gold * ((Projectile.oldPos.Length - i) / (float)Projectile.oldPos.Length) * 0.5f;
                 Main.EntitySpriteDraw(texture, drawPos, null, color, Projectile.rotation, texture.Size() / 2f, Projectile.scale, Microsoft.Xna.Framework.Graphics.SpriteEffects.None, 0);
             }
 
@@ -203,7 +193,7 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
 
         public override Color? GetAlpha(Color lightColor)
         {
-            return Color.White; // Always bright
+            return Color.White;
         }
     }
 }

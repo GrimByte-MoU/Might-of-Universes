@@ -6,14 +6,14 @@ using System;
 
 namespace MightofUniverses.Content.Items. Projectiles.EnemyProjectiles
 {
-    public class SkySpark : ModProjectile
+    public class SkySpark : MoUProjectile
     {
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 1;
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             Projectile.width = 16;
             Projectile.height = 16;
@@ -53,12 +53,17 @@ namespace MightofUniverses.Content.Items. Projectiles.EnemyProjectiles
             float pulse = (float)Math.Sin(Projectile.ai[0] * 0.2f) * 0.3f + 0.7f;
             Lighting.AddLight(Projectile.Center, 0.8f * pulse, 0.8f * pulse, 0.3f * pulse);
         }
+        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
+{
+    modifiers.FinalDamage.Base = Projectile.damage;
+}
+
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            int difficulty = Main.masterMode ?  2 : (Main.expertMode ? 1 : 0);
+            int difficulty = Main.masterMode ? 2 : (Main.expertMode ? 1 : 0);
             int[] electrifiedDuration = { 240, 300, 360 };
-            
+
             target.AddBuff(BuffID.Electrified, electrifiedDuration[difficulty]);
 
             for (int i = 0; i < 20; i++)
