@@ -44,7 +44,7 @@ namespace MightofUniverses.Content.Items.Projectiles. EnemyProjectiles
             Projectile. hostile = true;
             Projectile.friendly = false;
             Projectile.penetrate = 1;
-            Projectile.timeLeft = 300;
+            Projectile.timeLeft = 210;
             Projectile.alpha = 0;
             Projectile.light = 0.8f;
             Projectile. ignoreWater = true;
@@ -53,7 +53,7 @@ namespace MightofUniverses.Content.Items.Projectiles. EnemyProjectiles
 
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
 {
-    modifiers.FinalDamage.Base = Projectile.damage;
+    modifiers.FinalDamage.Base = 120;
 }
 
         public override void AI()
@@ -94,48 +94,42 @@ namespace MightofUniverses.Content.Items.Projectiles. EnemyProjectiles
         }
 
         private void AI_Moving()
-        {
-            Projectile.rotation = Projectile.velocity.ToRotation();
+{
+    Projectile.rotation = Projectile.velocity.ToRotation();
 
-            if (StateTimer >= 20) // After ~0.33 seconds, stop
-            {
-                // STORE player position when stopping (not live tracking)
-                Player target = Main.player[Player.FindClosest(Projectile.position, Projectile.width, Projectile.height)];
-                targetPosition = target.Center; // ← SNAPSHOT, not updated
+    if (StateTimer >= 20)
+    {
 
-                Projectile.velocity = Vector2.Zero;
-                Projectile. tileCollide = false;
+        Projectile.velocity = Vector2.Zero;
+        Projectile.tileCollide = false;
 
-                State = AIState.Spinning;
-                StateTimer = 0;
-            }
-        }
+        State = AIState.Spinning;
+        StateTimer = 0;
+    }
+}
 
         private void AI_Spinning()
-        {
-            Projectile.rotation += 0.3f;
+{
+    Projectile.rotation += 0.4f;
 
-            if (StateTimer >= 60) // Spin for 1 second
-            {
-                // Launch toward STORED position (not current player position)
-                Vector2 direction = (targetPosition - Projectile.Center).SafeNormalize(Vector2.UnitX);
-                Projectile.velocity = direction * 16f;
+    if (StateTimer >= 60)
+    {
+        Player target = Main.player[Player.FindClosest(Projectile.position, Projectile.width, Projectile.height)];
+        targetPosition = target.Center;
 
-                State = AIState. Homing;
-                StateTimer = 0;
-            }
-        }
+        Vector2 direction = (targetPosition - Projectile.Center).SafeNormalize(Vector2.UnitX);
+        Projectile.velocity = direction * 16f;
+
+        State = AIState.Homing;
+        StateTimer = 0;
+    }
+}
 
         private void AI_Homing()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
-
-            // NO HOMING - just fly straight toward stored position
-            // (Or very minimal correction)
-            
-            // Optional:  VERY gentle course correction (almost none)
             Vector2 direction = (targetPosition - Projectile.Center).SafeNormalize(Vector2.Zero);
-            Projectile.velocity = Vector2.Lerp(Projectile.velocity, direction * 16f, 0.005f); // ← 0.005 = almost no homing
+            Projectile.velocity = Vector2.Lerp(Projectile.velocity, direction * 16f, 0.01f);
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)

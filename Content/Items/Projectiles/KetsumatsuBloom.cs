@@ -33,10 +33,10 @@ namespace MightofUniverses.Content.Items.Projectiles
             if (Projectile.localAI[0] == 1f) return; // Prevent double-trigger
             Projectile.localAI[0] = 1f;
 
-            // Radial burst of 32 sakura petals
-            for (int i = 0; i < 40; i++)
+            // Radial burst of 24 sakura petals
+            for (int i = 0; i < 24; i++)
             {
-                Vector2 velocity = Vector2.UnitX.RotatedBy(MathHelper.TwoPi * i / 40f) * 8f;
+                Vector2 velocity = Vector2.UnitX.RotatedBy(MathHelper.TwoPi * i / 24f) * 8f;
                 Projectile.NewProjectile(
                     Projectile.GetSource_Death(),
                     Projectile.Center,
@@ -49,7 +49,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             }
 
             // Bloom dust effect
-            for (int i = 0; i < 40; i++)
+            for (int i = 0; i < 24; i++)
             {
                 Dust.NewDustPerfect(Projectile.Center, DustID.PinkCrystalShard, Main.rand.NextVector2Circular(6f, 6f), 150, Color.LightPink, 1.5f).noGravity = true;
             }

@@ -11,7 +11,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
 {
     public class AegonArena
     {
-        // Arena data
+        public static AegonArena Current;
         public Vector2 Center { get; private set; }
         public float Radius { get; private set; }
         public bool IsActive { get; private set; }
@@ -26,12 +26,12 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             public bool active;
         }
 
-// Content/NPCs/Bosses/Aegon/AegonArena.cs
+        // Content/NPCs/Bosses/Aegon/AegonArena.cs
 
-// Arena sizes based on difficulty
-        private const float ARENA_RADIUS_NORMAL = 50.5f;  // 101 blocks diameter (was 100.5)
-        private const float ARENA_RADIUS_EXPERT = 43.5f;  // 87 blocks diameter (was 87.5)
-        private const float ARENA_RADIUS_MASTER = 37.5f;  // 75 blocks diameter (was 75.5)
+        // Arena sizes based on difficulty
+        private const float ARENA_RADIUS_NORMAL = 65.5f;
+        private const float ARENA_RADIUS_EXPERT = 57.5f;
+        private const float ARENA_RADIUS_MASTER = 50.5f;
 
         public AegonArena(Vector2 center)
         {
@@ -85,7 +85,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                         };
 
                         // Place indestructible Lihzahrd Brick
-                        tile.TileType = TileID.LihzahrdBrick;
+                        tile.TileType = TileID.WoodenSpikes;
                         tile.HasTile = true;
                         
                         // Sync in multiplayer

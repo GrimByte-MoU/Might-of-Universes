@@ -22,7 +22,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         public override void AI()
         {
             Projectile.rotation += 0.2f * Projectile.direction;
-            Projectile.velocity.Y += 0.4f;
+            Projectile.velocity.Y += 0.1f;
 
             // Bounce logic
             if (Projectile.velocity.Y > 16f) Projectile.velocity.Y = 16f;

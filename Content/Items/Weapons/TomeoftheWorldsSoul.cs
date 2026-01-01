@@ -14,7 +14,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override void SetDefaults()
         {
-            Item.damage = 170;
+            Item.damage = 225;
             Item.DamageType = DamageClass.Magic;
             Item.width = 40;
             Item.height = 40;
@@ -37,7 +37,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override bool CanUseItem(Player player)
         {
-            if (player.altFunctionUse == 2) // Right-click = swap mode
+            if (player.altFunctionUse == 2)
             {
                 Mode = 1 - Mode;
                 if (Main.myPlayer == player.whoAmI)
@@ -51,14 +51,14 @@ namespace MightofUniverses.Content.Items.Weapons
             {
                 if (Mode == 0)
                 {
-                    Item.useTime = 15; // 4 shots/sec
-                    Item.useAnimation = 15;
+                    Item.useTime = 12;
+                    Item.useAnimation = 12;
                     Item.shoot = ModContent.ProjectileType<Worldbolt>();
                 }
                 else
                 {
-                    Item.useTime = 20; // 3 shots/sec
-                    Item.useAnimation = 20;
+                    Item.useTime = 15;
+                    Item.useAnimation = 15;
                     Item.shoot = ModContent.ProjectileType<TerraBall>();
                 }
                 return true;

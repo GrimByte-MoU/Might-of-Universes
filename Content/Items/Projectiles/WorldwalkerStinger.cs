@@ -20,7 +20,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            Projectile.velocity *= 0.99f;
+            Projectile.velocity *= 0.95f;
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.JungleSpore);
             Projectile.rotation = Projectile.velocity.ToRotation();
             Projectile.gfxOffY = -32f;

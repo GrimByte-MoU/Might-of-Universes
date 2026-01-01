@@ -16,7 +16,7 @@ namespace MightofUniverses.Content.Items.Buffs
             if (npc.lifeRegen > 0) 
                 npc.lifeRegen = 0;
 
-            npc.lifeRegen -= 50;
+            npc.lifeRegen -= 100;
         }
     }
 }

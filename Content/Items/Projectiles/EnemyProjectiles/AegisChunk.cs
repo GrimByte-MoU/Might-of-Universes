@@ -25,7 +25,7 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
             Projectile.timeLeft = 600;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
-            Projectile. alpha = 0;
+            Projectile.alpha = 0;
             Projectile.aiStyle = -1;
         }
 
@@ -52,7 +52,7 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
         }
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
 {
-    modifiers.FinalDamage.Base = Projectile.damage;
+    modifiers.FinalDamage.Base = 130;
 }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)

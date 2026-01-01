@@ -35,7 +35,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             target.AddBuff(BuffID.Ichor, 300);
             target.AddBuff(ModContent.BuffType<DeadlyCorrupt>(), 180);
             Player owner = Main.player[Projectile.owner];
-    int heal = damageDone / 25;
+    int heal = damageDone / 50;
     owner.statLife = Math.Min(owner. statLife + heal, owner.statLifeMax2);
     owner.HealEffect(heal);
 

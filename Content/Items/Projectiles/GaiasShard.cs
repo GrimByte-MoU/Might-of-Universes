@@ -48,6 +48,11 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Projectile.velocity *= 0.99f;
             }
             Lighting.AddLight(Projectile.Center, 0f, 2f, 0f);
+            if (Main.rand.NextBool(3))
+            {
+                int d = Dust.NewDust(Projectile.Center, 0, 0, DustID.TerraBlade, 0, 0, 120, Color.LimeGreen, 1.2f);
+                Main.dust[d].noGravity = true;
+            }
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)

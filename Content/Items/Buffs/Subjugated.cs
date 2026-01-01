@@ -31,11 +31,11 @@ namespace MightofUniverses.Content.Items.Buffs
 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.velocity.X *= 0.1f;
+            player.velocity.X *= 0.5f;
             
             if (!player.justJumped && !player.sliding)
             {
-                player.velocity.Y *= 0.9f;
+                player.velocity.Y *= 0.5f;
             }
             
             if (Main.rand.NextBool(3))

@@ -5,7 +5,7 @@ using MightofUniverses.Content.Rarities;
 
 namespace MightofUniverses.Content.Items.Materials
 {
-    public class AegisShard : ModItem
+    public class AegisRemains : ModItem
     {
         public override void SetDefaults()
         {

@@ -50,7 +50,7 @@ namespace MightofUniverses.Content.Items. Projectiles.EnemyProjectiles
         }
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
 {
-    modifiers.FinalDamage.Base = Projectile.damage;
+    modifiers.FinalDamage.Base = 110;
 }
 
 

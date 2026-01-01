@@ -97,7 +97,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
             if (Projectile.owner == Main.myPlayer)
             {
-                int shardCount = 10;
+                int shardCount = 5;
                 for (int i = 0; i < shardCount; i++)
                 {
                     Vector2 vel = Main.rand.NextVector2Circular(4.5f, 4.5f);
@@ -106,7 +106,7 @@ namespace MightofUniverses.Content.Items.Projectiles
                         Projectile.Center,
                         vel,
                         ModContent.ProjectileType<GaiasShard>(),
-                        (int)(Projectile.damage * 0.4f),
+                        (int)(Projectile.damage * 0.25f),
                         Projectile.knockBack,
                         Projectile.owner
                     );
@@ -114,9 +114,14 @@ namespace MightofUniverses.Content.Items.Projectiles
             }
             for (int i = 0; i < 3; i++)
             {
-                int d = Dust.NewDust(Projectile.Center, 1, 1, DustID.Grass, 0f, 0f, 0, default, 1.2f);
+                int d = Dust.NewDust(Projectile.Center, 1, 1, DustID.TerraBlade, 0f, 0f, 0, default, 1.2f);
                 Main.dust[d].noGravity = true;
                 Main.dust[d].velocity = Main.rand.NextVector2Circular(2f, 2f);
+            }
+            if (Main.rand.NextBool(3))
+            {
+                int d = Dust.NewDust(Projectile.Center, 0, 0, DustID.TerraBlade, 0, 0, 120, Color.LimeGreen, 1.2f);
+                Main.dust[d].noGravity = true;
             }
 
             Projectile.Kill();

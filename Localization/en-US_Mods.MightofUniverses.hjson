@@ -776,6 +776,9 @@ Projectiles: {
 	WorldAegisFireball.DisplayName: World Aegis Fireball
 	WorldAegisLeaf.DisplayName: World Aegis Leaf
 	WorldAegisWater.DisplayName: World Aegis Water
+	BiomeCleanserSpearProjectile.DisplayName: Biome Cleanser Spear Projectile
+	BiomeCleanserSpinProjectile.DisplayName: Biome Cleanser Spin Projectile
+	WorldsoulCrystalProjectile.DisplayName: Worldsoul Crystal Projectile
 }
 
 Keybinds: {
@@ -3101,12 +3104,7 @@ Items: {
 
 	SigilOfWinter: {
 		DisplayName: Sigil Of Winter
-		Tooltip:
-			'''
-			Upon activation, the player will get +30 defense and +25% damage reduction for 5 seconds, however the player will also get -90% movement speed for the same duration
-			This effect will end early if the player is hit
-			If the effect doesn't end early, the player will heal 50 health and rinse all debuffs from themselves
-			'''
+		Tooltip: ""
 	}
 
 	FrozenFrappe: {
@@ -3307,7 +3305,7 @@ Items: {
 			'''
 			A book seeming to be a personal journal of Aegon's 
 			Cycles through two different modes: Channel and Punish
-			Channel: Fires a piercing bolt that inflicts Ichor, Acid Venom, Cursed Inferno, Frostburn, Hellfire and Electrified for 7 seconds
+			Channel: Fires a piercing bolt that inflicts Ichor, Acid Venom, Cursed Inferno, Frostburn, Hellfire and Electrified for 7 seconds as well as Terra's Rend for 3.5 seconds.
 			Punish: Fires a piercing ball that deals bonus damage for each debuff on the enemy but reduces all that enemy's debuffs by 0.5 seconds
 			'''
 	}
@@ -3361,7 +3359,7 @@ Items: {
 			Gathers 10 souls per hit and fires out one or two petals at random
 			Each petal gathers 5 souls on hit
 			Consume {0} souls to spawn a Sakura Bloom on your cursor which damage an enemy for 400% damage
-			When making contact with an enemy, the bloom will explode into a radial burst of 40 Sakura Petals
+			When making contact with an enemy, the bloom will explode into a radial burst of 24 Sakura Petals
 			The Sakura Petals deal 66% damage of the bloom and don't pierce
 			'''
 	}
@@ -4790,6 +4788,29 @@ Items: {
 		DisplayName: Worldsouls Medallion
 		Tooltip: ""
 	}
+
+	WorldAegisBag: {
+		DisplayName: World Aegis Bag
+		Tooltip: ""
+	}
+
+	AegisRemains: {
+		DisplayName: Aegis Remains
+		Tooltip: ""
+	}
+
+	BiomeCleanser: {
+		DisplayName: Biome's Cleanser
+		Tooltip:
+			'''
+			Hold to spin the scythe defensively around yourself, leaving a trail of glowing green streaks.
+			      While spinning, the scythe deals 150% damage, grants 10 souls per strike, and inflicts Terra's Rend for 4 seconds.
+			      Fires Worldsoul Crystals toward the cursor four times per second while spinning
+				  The crystal pierces 3 enemies, grants 7 souls, and inflicts Terra's Rend for 3 seconds.
+			      Consume {0} souls to unleash a radial burst of 16 Biome Cleanser spears that spin in place before homing into nearby enemies
+				  The spears deal 350% damage each and inflict Terra's Rend and Bleeding for 5 seconds.
+			'''
+	}
 }
 
 Prefixes: {
@@ -4807,7 +4828,8 @@ Prefixes: {
 NPCs: {
 	ObeSadeeHealerMinion.DisplayName: Obe Sadee Healer Minion
 	ObeSadee.DisplayName: Obe Sadee
-	Aegon.DisplayName: Aegon
+	Aegon.DisplayName: Aegon, the World's Aegis
 	AegonMirage.DisplayName: Aegon Mirage
-	WorldAegis.DisplayName: World Aegis
+	WorldAegis.DisplayName: The World Aegis
+	AegonPatienceMirage.DisplayName: Aegon Mirage
 }

@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
@@ -38,6 +39,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             target.AddBuff(BuffID.Frostburn, dur);
             target.AddBuff(BuffID.OnFire3, dur);
             target.AddBuff(BuffID.Electrified, dur);
+            target.AddBuff(ModContent.BuffType<TerrasRend>(), 210);
         }
     }
 }

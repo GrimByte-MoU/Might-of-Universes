@@ -43,15 +43,15 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.DamageType = DamageClass.Melee;
             Item.width = 60;
             Item.height = 60;
-            Item.useTime = 10;
-            Item.useAnimation = 10;
+            Item.useTime = 20;
+            Item.useAnimation = 20;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 6;
             Item.value = Item.sellPrice(0, 50, 0, 0);
             Item.rare = ModContent.RarityType<TerraiumRarity>();
             Item.UseSound = SoundID.Item1;
             Item.autoReuse = true;
-            Item.scale = 1.25f;
+            Item.scale = 1.2f;
             Item.shoot = ProjectileID.PurificationPowder;
             Item.shootSpeed = 12f;
             Item.maxStack = 1;
@@ -150,10 +150,11 @@ namespace MightofUniverses.Content.Items.Weapons
             if (Main.rand.NextBool(6))
             {
                 var c = ModeColors[mode];
-                int d = Dust.NewDust(player.Center - new Vector2(4, 4), 8, 8, DustID.Dirt,
+                int d = Dust.NewDust(player.Center - new Vector2(4, 4), 8, 8, DustID.TerraBlade,
                     player.velocity.X * 0.2f, player.velocity.Y * 0.2f, 150, c, 0.9f);
                 Main.dust[d].noGravity = true;
             }
+            
         }
 
         public override void ModifyTooltips(List<TooltipLine> tooltips)

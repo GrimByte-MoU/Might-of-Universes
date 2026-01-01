@@ -36,9 +36,8 @@ namespace MightofUniverses.Content.Items.Projectiles
                 if (target.buffType[i] > 0) debuffCount++;
             }
             if (debuffCount > 0)
-                modifiers.SourceDamage += 0.20f * debuffCount;
+                modifiers.SourceDamage += 0.4f * debuffCount;
 
-            // Reduce all debuff durations by 1s
             for (int i = 0; i < target.buffType.Length; i++)
             {
                 if (target.buffType[i] > 0 && target.buffTime[i] > 30)
