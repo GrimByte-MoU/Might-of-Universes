@@ -22,13 +22,13 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             Item.width = 90;
             Item.height = 90;
-            Item.damage = 225;
+            Item.damage = 150;
             Item.DamageType = ModContent.GetInstance<ReaperDamageClass>();
             Item.noUseGraphic = true;
             Item.noMelee = true;
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.useTime = 12;
-            Item.useAnimation = 12;
+            Item.useTime = 15;
+            Item.useAnimation = 15;
             Item.rare = ModContent.RarityType<TerraiumRarity>();
             Item.value = Item.sellPrice(gold: 24);
             Item.UseSound = SoundID.Item71;

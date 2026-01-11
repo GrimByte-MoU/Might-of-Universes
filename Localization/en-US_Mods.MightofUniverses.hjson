@@ -427,8 +427,22 @@ Buffs: {
 	}
 
 	TerrasRend: {
-		DisplayName: Terras Rend
-		Description: Mods.MightofUniverses.Buffs.TerrasRend.Description
+		DisplayName: Terra's Rend
+		Description: The force of the world bears down on you!
+	}
+
+	GlacialArmor: {
+		DisplayName: Glacial Armor
+		Description:
+			'''
+			An armor of cold protects you
+			+10 defense, +5% damage reduction
+			'''
+	}
+
+	SheerCold: {
+		DisplayName: Sheer Cold
+		Description: A deep chill permeates your being
 	}
 }
 
@@ -779,6 +793,19 @@ Projectiles: {
 	BiomeCleanserSpearProjectile.DisplayName: Biome Cleanser Spear Projectile
 	BiomeCleanserSpinProjectile.DisplayName: Biome Cleanser Spin Projectile
 	WorldsoulCrystalProjectile.DisplayName: Worldsoul Crystal Projectile
+	HellsMarkExplosion.DisplayName: Hells Mark Explosion
+	ElementalFanNeedle.DisplayName: Elemental Fan Needle
+	TerraiumRifleShot.DisplayName: Terraium Rifle Shot
+	AncientArrow.DisplayName: Ancient Arrow
+	AncientSphere.DisplayName: Ancient Sphere
+	AncientHarpoon.DisplayName: Ancient Harpoon
+	TerraiumStaffOrb.DisplayName: Terraium Staff Orb
+	TerraLeaf.DisplayName: Terra Leaf
+	TerraOrbProjectile.DisplayName: Terra Orb Projectile
+	MiniatureWorldsoul.DisplayName: Miniature Worldsoul
+	MiniWorldsoulBolt.DisplayName: Mini Worldsoul Bolt
+	TerraiumKnightGlaive.DisplayName: Terraium Knight Glaive
+	TerraMissile.DisplayName: Terra Missile
 }
 
 Keybinds: {
@@ -1084,15 +1111,6 @@ Items: {
 	EclipseLight: {
 		DisplayName: Eclipse Light
 		Tooltip: A dark shard of pure light, an anomaly that shouldn't be
-	}
-
-	ElementalCore: {
-		DisplayName: Elemental Core
-		Tooltip:
-			'''
-			A sphere of formidable power. 
-			All of the elements exist in equilibrium within it
-			'''
 	}
 
 	FestiveSpirit: {
@@ -4672,6 +4690,7 @@ Items: {
 			'''
 			An ancient concoction of prehistoric remains
 			All weapons inflict Tarred for 5 seconds
+			+10% damage and +5% crit chance
 			'''
 	}
 
@@ -4786,7 +4805,7 @@ Items: {
 
 	WorldsoulsMedallion: {
 		DisplayName: Worldsouls Medallion
-		Tooltip: ""
+		Tooltip: '''"An ancient medallion used by those who wish to face all the challenge the world has to offer"'''
 	}
 
 	WorldAegisBag: {
@@ -4796,7 +4815,7 @@ Items: {
 
 	AegisRemains: {
 		DisplayName: Aegis Remains
-		Tooltip: ""
+		Tooltip: Fragments of an inimitable metal that made up the now destroyed World Aegis
 	}
 
 	BiomeCleanser: {
@@ -4809,6 +4828,191 @@ Items: {
 				  The crystal pierces 3 enemies, grants 7 souls, and inflicts Terra's Rend for 3 seconds.
 			      Consume {0} souls to unleash a radial burst of 16 Biome Cleanser spears that spin in place before homing into nearby enemies
 				  The spears deal 350% damage each and inflict Terra's Rend and Bleeding for 5 seconds.
+			'''
+	}
+
+	PermafrostGreatsword: {
+		DisplayName: Permafrost Greatsword
+		Tooltip:
+			'''
+			Inflicts Sheer Cold for 3 seconds on strike
+			Hitting enemies gives the player Glacial Armor, Rage and Wrath for 3 seconds
+			'''
+	}
+
+	HallowedCore: {
+		DisplayName: Hallowed Core
+		Tooltip:
+			'''
+			All weapons inflict Rebuking Light for 2 seconds
+			+5 defense
+			+50 max life
+			+7% damage
+			'''
+	}
+
+	PrismaticCore: {
+		DisplayName: Prismatic Core
+		Tooltip:
+			'''
+			All weapons inflict Prismatic Rend for 2 seconds
+			+7 defense
+			+65 max life
+			+10% damage
+			'''
+	}
+
+	RunedDemonScale: {
+		DisplayName: Runed Demon Scale
+		Tooltip:
+			'''
+			All attacks inflict Demonfire and Hell's Mark for 2 seconds
+			+10% damage
+			+10% attack speed
+			-20 max life
+			'''
+	}
+
+	ElementalFan: {
+		DisplayName: Elemental Fan
+		Tooltip:
+			'''
+			Rapidly fires a stream and occasional spread of Elemental Needles
+			The Elemental Needles inflict Element's Harmony for 3 seconds
+			'''
+	}
+
+	TerraiumRifle: {
+		DisplayName: Terraium Rifle
+		Tooltip:
+			'''
+			Replaces musket balls with armor piercing Terraium Shots
+			Terraium Shots bounce between enemies and inflict Terra's Rend for 3 seconds
+			'''
+	}
+
+	TerraiumLobber: {
+		DisplayName: Terraium Lobber
+		Tooltip:
+			'''
+			Replaces all rockets with Acient Spheres
+			Ancient Spheres inflict Terra's Rend for 3 seconds and will explode in a 15 tile radius upon expiring
+			The explosion will deal 200% damage and inflict Terra's Rend for 4 seconds
+			'''
+	}
+
+	TerraiumRepeater: {
+		DisplayName: Terraium Repeater
+		Tooltip:
+			'''
+			Fires out bursts of arrows
+			Replaces Wooden Arrows with Ancient Arrows
+			Ancient Arrows deal more damage the higher the enemy's defense
+			'''
+	}
+
+	IncantationTerraOrb: {
+		DisplayName: Incantation: Terra Orb
+		Tooltip:
+			'''
+			Summon a controllable orb of worldsoul magic that follows the cursor
+			Enemies hit by the orb will take 200% damage and be inflicted with Terra Rend for 3 seconds
+			The orb will rapidly fire homing leaves in a 5 degree spread at nearby enemies
+			The leaves deal 50% damage and inflict Terra's Rend for 1 second
+			The orb itself can hit 5 enemies before exploding to deal 250% damage over a 10 tile radius and inflict Terra's Rend for 4 seconds
+			'''
+	}
+
+	TerraiumBow: {
+		DisplayName: Terraium Bow
+		Tooltip:
+			'''
+			When landing a crit, the Primordial Bow will fire an Ancient Harpoon at the enemy
+			The harpoon deals 500% damagehas high pierce and inflicts Terra's Rend for 3 seconds
+			The harpoon can be fired up to twice per second
+			'''
+	}
+
+	TerraiumStaff: {
+		DisplayName: Terraium Staff
+		Tooltip:
+			'''
+			Click and hold to charge a homing ball of energy, then release to fire the homing energy ball
+			Every half second makes the projectile deal double damage (100% -> 200% -> 400% -> 800% -> 1600%)
+			The energy ball's damage is capped at 1,600% damage
+			'''
+	}
+
+	TerraiumChestplate: {
+		DisplayName: Terraium Chestplate
+		Tooltip:
+			'''
+			+5% damage reduction
+			+100 max life
+			+5 hp/sec regen
+			'''
+	}
+
+	TerraiumKnightMask: {
+		DisplayName: Terraium Knight Mask
+		Tooltip:
+			'''
+			+40% Melee damage
+			+30% Melee critical strike chance
+			+20% Melee attack speed
+			+5% damage reduction
+			'''
+	}
+
+	TerraiumLeggings: {
+		DisplayName: Terraium Leggings
+		Tooltip:
+			'''
+			+5% damage reduction
+			+30% movement speed
+			'''
+	}
+
+	TerraiumRangerVisor: {
+		DisplayName: Terraium Ranger Visor
+		Tooltip:
+			'''
+			+40% Ranged damage
+			+30% Ranged critical strike chance
+			+30% chance to not consume ammo
+			+20% Ranged attack speed
+			'''
+	}
+
+	TerraiumReaperHood: {
+		DisplayName: Terraium Reaper Hood
+		Tooltip:
+			'''
+			+38% Reaper damage
+			+35% Reaper critical strike chance
+			+8 souls generated per second
+			Soul consumption abilities cost 20% less to activate
+			'''
+	}
+
+	TerraiumSummonerCrown: {
+		DisplayName: Terraium Summoner Crown
+		Tooltip:
+			'''
+			+35% Summon damage
+			+3 max minions
+			+30% whip speed and size
+			'''
+	}
+
+	TerraiumWizardHat: {
+		DisplayName: Terraium Wizard Hat
+		Tooltip:
+			'''
+			+40% Magic damage
+			+25% Magic critical strike chance
+			+100 max mana
+			-25% mana costs
 			'''
 	}
 }

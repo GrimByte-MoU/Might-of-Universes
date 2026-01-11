@@ -33,7 +33,7 @@ namespace MightofUniverses.Content.Items.Armors
         public override void UpdateArmorSet(Player player)
         {
             player.statManaMax2 += 100;
-            player.setBonus = "+100 max mana\n Magic attacks inflict Hellfire for 3 seconds and Demonfire for 2 seconds";
+            player.setBonus = "+100 max mana\n Magic attacks inflict Hellfire for 3 seconds and Demonfire and Hell's Mark for 2 seconds";
             player.GetModPlayer<UnderworldSorcererPlayer>().setActive = true;
         }
 

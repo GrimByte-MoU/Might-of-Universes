@@ -1,10 +1,9 @@
 using Terraria;
-using Terraria.ModLoader;
+using Terraria. ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
 using System;
-using Microsoft.Xna.Framework.Graphics;
-using MightofUniverses.Content.Items.Buffs;
+using MightofUniverses.Content. Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
@@ -17,25 +16,28 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void SafeSetDefaults()
         {
-            Projectile.width = 64; 
+            Projectile.width = 64;
             Projectile.height = 64;
             Projectile.penetrate = -1;
             Projectile.friendly = true;
+            Projectile.hostile = false;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.DamageType = ModContent.GetInstance<ReaperDamageClass>();
-            Projectile.ownerHitCheck = true;
             Projectile.timeLeft = 18000;
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 10;
         }
 
         public override void AI()
         {
             Player player = Main.player[Projectile.owner];
-            if (!player.active || player.dead || !player.channel)
+            if (!player.active || player.dead || ! player.channel)
             {
                 Projectile.Kill();
                 return;
             }
+            
             float angle = Projectile.ai[0] += MathHelper.TwoPi / 30f;
             float radius = 70f;
             Vector2 offset = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * radius;
@@ -50,31 +52,28 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Dust dust = Dust.NewDustPerfect(drawPos, DustID.TerraBlade, Vector2.Zero, 0, clr, 1.7f);
                 dust.noGravity = true;
             }
+            
             if (++Projectile.ai[1] >= 12f)
             {
                 Projectile.ai[1] = 0f;
                 Vector2 toMouse = (Main.MouseWorld - player.Center).SafeNormalize(Vector2.UnitY);
-                int crystal = Projectile.NewProjectile(
+                
+                Projectile.NewProjectile(
                     Projectile.GetSource_FromAI(),
                     player.Center + toMouse * 20f,
                     toMouse * 13f,
-                    ModContent.ProjectileType<WorldsoulCrystalProjectile>(),
-                    Projectile.originalDamage,
+                    ModContent. ProjectileType<WorldsoulCrystalProjectile>(),
+                    Projectile.damage,
                     2f,
                     player.whoAmI
                 );
             }
         }
 
-        public override bool? CanHitNPC(NPC target)
-        {
-            return !target.friendly && target.CanBeChasedBy();
-        }
-
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Player player = Main.player[Projectile.owner];
-            target.AddBuff(ModContent.BuffType<TerrasRend>(), 240);
+            target. AddBuff(ModContent.BuffType<TerrasRend>(), 240);
             player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(10f, target.Center);
         }
     }

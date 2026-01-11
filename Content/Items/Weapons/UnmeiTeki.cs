@@ -12,7 +12,7 @@ namespace MightofUniverses.Content.Items.Weapons
     {
         public override void SetDefaults()
         {
-            Item.damage = 190;
+            Item.damage = 175;
             Item.DamageType = DamageClass.Ranged;
             Item.width = 64;
             Item.height = 64;

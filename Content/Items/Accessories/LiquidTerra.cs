@@ -26,7 +26,8 @@ namespace MightofUniverses.Content.Items.Accessories
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ModContent.ItemType<ElementalCore>(), 5)
+                .AddIngredient(ModContent.ItemType<TerraiumBar>(), 5)
+                .AddIngredient(ModContent.ItemType<PrismaticVial>())
                 .AddTile(TileID.Anvils)
                 .Register();
         }

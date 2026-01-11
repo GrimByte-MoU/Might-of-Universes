@@ -1,0 +1,48 @@
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
+using Microsoft.Xna.Framework;
+using MightofUniverses.Content.Rarities;
+using MightofUniverses.Content.Items.Materials;
+using System.Collections.Generic;
+using MightofUniverses.Content.Items.Projectiles;
+
+namespace MightofUniverses.Content.Items.Weapons
+{
+    public class TerraiumLobber : ModItem
+    {
+        public override void SetDefaults()
+        {
+            Item.damage = 200;
+            Item.DamageType = DamageClass. Ranged;
+            Item. width = 64;
+            Item.height = 32;
+            Item.useTime = 20;
+            Item.useAnimation = 20;
+            Item.useStyle = ItemUseStyleID. Shoot;
+            Item.knockBack = 6;
+            Item.value = Item.sellPrice(gold: 50);
+            Item.rare = ModContent.RarityType<TerraiumRarity>();
+            Item.UseSound = SoundID.Item61;
+            Item.autoReuse = true;
+            Item.shoot = ModContent.ProjectileType<AncientSphere>();
+            Item.shootSpeed = 16f;
+            Item.noMelee = true;
+            Item.useAmmo = AmmoID.Rocket;
+        }
+
+        public override bool Shoot(Player player, Terraria.DataStructures.EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            Projectile. NewProjectile(source, position, velocity, ModContent.ProjectileType<AncientSphere>(), damage, knockback, player.whoAmI);
+            return false;
+        }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient(ModContent.ItemType<TerraiumBar>(), 12)
+                .AddTile(TileID.LunarCraftingStation)
+                .Register();
+        }
+    }
+}

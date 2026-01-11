@@ -20,12 +20,12 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override void SetDefaults()
         {
-            Item.damage = 180;
+            Item.damage = 160;
             Item.DamageType = ModContent.GetInstance<ReaperDamageClass>();
             Item.width = 64;
             Item.height = 64;
-            Item.useTime = 12;
-            Item.useAnimation = 12;
+            Item.useTime = 15;
+            Item.useAnimation = 15;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 6f;
             Item.value = Item.sellPrice(0, 25, 0, 0);

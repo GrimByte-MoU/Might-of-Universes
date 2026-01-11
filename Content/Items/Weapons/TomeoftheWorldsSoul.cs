@@ -10,11 +10,11 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class TomeoftheWorldsSoul : ModItem
     {
-        public static int Mode = 0; // 0 = World Channel, 1 = World's Punishment
+        public static int Mode = 0;
 
         public override void SetDefaults()
         {
-            Item.damage = 225;
+            Item.damage = 125;
             Item.DamageType = DamageClass.Magic;
             Item.width = 40;
             Item.height = 40;

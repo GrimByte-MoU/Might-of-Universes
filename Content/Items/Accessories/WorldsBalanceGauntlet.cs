@@ -33,7 +33,6 @@ namespace MightofUniverses.Content.Items.Accessories
             CreateRecipe()
                 .AddIngredient(ModContent.ItemType<PrismaticGauntlet>())
                 .AddIngredient(ModContent.ItemType<TerraiumBar>(), 8)
-                .AddIngredient(ModContent.ItemType<ElementalCore>(), 3)
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
         }

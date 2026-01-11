@@ -392,9 +392,14 @@ namespace MightofUniverses.Common.Players
                 bonus += 350f;
 
             if (head == ModContent.ItemType<Content. Items.Armors.LunarShroudCowl>() &&
-                body == ModContent.ItemType<Content.Items.Armors.LunarShroudCowl>() &&
+                body == ModContent.ItemType<Content.Items.Armors.LunarShroudChestplate>() &&
                 legs == ModContent.ItemType<Content.Items. Armors.LunarShroudPants>())
                 bonus += 400f;
+
+            if (head == ModContent.ItemType<Content. Items.Armors.TerraiumReaperHood>() &&
+                body == ModContent.ItemType<Content.Items.Armors.TerraiumChestplate>() &&
+                legs == ModContent.ItemType<Content.Items. Armors.TerraiumLeggings>())
+                bonus += 500f;
 
             return bonus;
         }

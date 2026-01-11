@@ -20,6 +20,8 @@ namespace MightofUniverses.Content.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.GetModPlayer<PrehistoricSamplePlayer>().hasPrehistoricSample = true;
+            player.GetDamage(DamageClass.Generic) += 0.10f;
+            player.GetCritChance(DamageClass.Generic) += 5;
         }
 
         public override void AddRecipes()

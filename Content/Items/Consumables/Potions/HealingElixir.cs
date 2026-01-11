@@ -34,7 +34,7 @@ namespace MightofUniverses.Content.Items.Consumables.Potions
         {
             CreateRecipe()
                 .AddIngredient(ItemID.SuperHealingPotion, 1)
-                .AddIngredient(ModContent.ItemType<ElementalCore>(), 1)
+                .AddIngredient(ModContent.ItemType<AegisRemains>(), 1)
                 .AddTile(TileID.Bottles)
                 .Register();
         }

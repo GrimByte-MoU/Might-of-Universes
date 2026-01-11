@@ -14,7 +14,7 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             Item.width = 32;
             Item.height = 32;
-            Item.damage = 175;
+            Item.damage = 130;
             Item.DamageType = DamageClass.Ranged;
             Item.useTime = 20;
             Item.useAnimation = 20;

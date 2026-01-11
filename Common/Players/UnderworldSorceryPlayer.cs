@@ -20,6 +20,7 @@ namespace MightofUniverses.Common.Players
             {
                 target.AddBuff(ModContent.BuffType<Demonfire>(), 120);
                 target.AddBuff(BuffID.OnFire3, 180); 
+                target.AddBuff(ModContent.BuffType<HellsMark>(), 120);
             }
         }
 
@@ -29,6 +30,7 @@ namespace MightofUniverses.Common.Players
             {
                 target.AddBuff(ModContent.BuffType<Demonfire>(), 120);
                 target.AddBuff(BuffID.OnFire3, 180);
+                target.AddBuff(ModContent.BuffType<HellsMark>(), 120);
             }
         }
     }

@@ -26,8 +26,6 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             public bool active;
         }
 
-        // Content/NPCs/Bosses/Aegon/AegonArena.cs
-
         // Arena sizes based on difficulty
         private const float ARENA_RADIUS_NORMAL = 65.5f;
         private const float ARENA_RADIUS_EXPERT = 57.5f;
@@ -51,7 +49,13 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
         /// </summary>
         public void Create()
         {
-            if (IsActive) return;
+            if (IsActive)
+            {
+                Main.NewText("[ARENA DEBUG] Arena already active, skipping creation", Color.Yellow);
+                return;
+            }
+
+            Main.NewText("[ARENA DEBUG] Creating arena...", Color.Green);
 
             Point centerTile = Center. ToTileCoordinates();
             int radiusTiles = (int)Radius;
@@ -84,7 +88,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                             active = tile.HasTile
                         };
 
-                        // Place indestructible Lihzahrd Brick
+                        // Place arena wall
                         tile.TileType = TileID.WoodenSpikes;
                         tile.HasTile = true;
                         
@@ -98,23 +102,28 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             }
 
             IsActive = true;
+            Main. NewText($"[ARENA DEBUG] Arena created!  {originalTiles.Count} tiles stored", Color.Green);
 
             // Visual effect - dust ring
             CreateDustRing();
         }
 
         /// <summary>
-        /// Removes the arena and restores original tiles
+        /// Removes the arena and restores original tiles - FORCEFUL VERSION
         /// </summary>
         public void Remove()
         {
-            if (! IsActive) return;
+            Main.NewText($"[ARENA DEBUG] Remove() called.  IsActive={IsActive}, Tiles stored={originalTiles.Count}", Color.Orange);
+
+            // REMOVED THE EARLY RETURN - ALWAYS TRY TO CLEAN UP
+            // if (! IsActive) return;  <-- THIS WAS THE PROBLEM! 
 
             // Restore all original tiles
+            int restoredCount = 0;
             foreach (var kvp in originalTiles)
             {
                 Point pos = kvp.Key;
-                TileData data = kvp. Value;
+                TileData data = kvp.Value;
 
                 if (pos.X < 0 || pos.X >= Main.maxTilesX || pos.Y < 0 || pos.Y >= Main.maxTilesY)
                     continue;
@@ -129,13 +138,19 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                 {
                     NetMessage.SendTileSquare(-1, pos.X, pos.Y, 1);
                 }
+                
+                restoredCount++;
             }
+
+            Main.NewText($"[ARENA DEBUG] Restored {restoredCount} tiles", Color.Green);
 
             originalTiles.Clear();
             IsActive = false;
 
             // Visual effect - dust explosion
             CreateDustExplosion();
+            
+            Main.NewText("[ARENA DEBUG] Arena removed successfully!", Color.Green);
         }
 
         /// <summary>
@@ -182,10 +197,10 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             Point tilePos = new Point(x, y);
             
             // Can't break arena tiles
-            if (originalTiles. ContainsKey(tilePos))
+            if (originalTiles.ContainsKey(tilePos))
             {
                 Tile tile = Main.tile[x, y];
-                if (tile.TileType == TileID.LihzahrdBrick)
+                if (tile.TileType == TileID.WoodenSpikes)
                     return false;
             }
 
@@ -206,7 +221,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                     (float)Math.Sin(angle) * Radius * 16f
                 );
 
-                int dust = Dust.NewDust(position, 0, 0, DustID.Stone, 0f, 0f, 100, Color.Brown, 2f);
+                int dust = Dust.NewDust(position, 0, 0, DustID. Stone, 0f, 0f, 100, Color.Brown, 2f);
                 Main.dust[dust].noGravity = true;
                 Main.dust[dust].velocity = Vector2.Zero;
             }
@@ -227,7 +242,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                     (float)Math.Sin(angle) * distance
                 );
 
-                int dust = Dust.NewDust(position, 0, 0, DustID.Stone, 0f, 0f, 100, Color.Brown, 1.5f);
+                int dust = Dust. NewDust(position, 0, 0, DustID. Stone, 0f, 0f, 100, Color.Brown, 1.5f);
                 Main.dust[dust].noGravity = true;
                 Main.dust[dust].velocity = (position - Center).SafeNormalize(Vector2.Zero) * 3f;
             }

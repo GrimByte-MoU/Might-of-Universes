@@ -39,7 +39,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override void SetDefaults()
         {
-            Item.damage = 200;
+            Item.damage = 175;
             Item.DamageType = DamageClass.Melee;
             Item.width = 60;
             Item.height = 60;

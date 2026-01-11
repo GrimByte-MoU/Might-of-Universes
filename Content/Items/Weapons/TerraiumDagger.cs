@@ -14,7 +14,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override void SetDefaults()
         {
-            Item.damage = 190;
+            Item.damage = 150;
             Item.DamageType = DamageClass.Melee;
             Item.width = 34;
             Item.height = 34;
@@ -63,7 +63,7 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             CreateRecipe()
                 .AddIngredient(ModContent.ItemType<TerraiumBar>(), 8)
-                .AddTile(TileID.MythrilAnvil)
+                .AddTile(TileID.LunarCraftingStation)
                 .Register();
         }
     }
