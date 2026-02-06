@@ -43,7 +43,7 @@ namespace MightofUniverses.Content.Items.Armors
         {
             player.setBonus = "Ranged attacks inflict Terra's Rend\n" +
                              "Attack speed increases the longer you fire\n" +
-                             "Up to +50% ranged attack speed after 10 seconds";
+                             "Up to +50% ranged attack speed after 5 seconds";
             
             var modPlayer = player.GetModPlayer<TerraiumArmorPlayer>();
             modPlayer.rangerSetBonus = true;

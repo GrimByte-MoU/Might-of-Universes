@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.Audio;
 using Terraria.ID;
+using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
@@ -17,7 +18,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.ignoreWater = true;
             Projectile.tileCollide = true;
             Projectile.aiStyle = -1;
-            Projectile.scale = 0.3f;
+            Projectile.scale = 0.5f;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -26,6 +27,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             int lifeSteal = (int)(damageDone * 0.05f);
             player.statLife += lifeSteal;
             player.Heal(lifeSteal);
+            target.AddBuff(ModContent.BuffType<EnemyBleeding>(), 60);
         }
 
         public override void Kill(int timeLeft)
@@ -46,7 +48,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
 {
-    modifiers.DefenseEffectiveness *= 0.7f; // Reduces defense effectiveness by 30%
+    modifiers.DefenseEffectiveness *= 0.7f;
 }
 
     }

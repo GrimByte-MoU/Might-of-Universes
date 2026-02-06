@@ -21,7 +21,7 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             Item.width = 50;
             Item.height = 50;
-            Item.damage = 165;
+            Item.damage = 125;
             Item.DamageType = ModContent.GetInstance<ReaperDamageClass>();
             Item.useTime = 18;
             Item.useAnimation = 18;

@@ -18,7 +18,6 @@ namespace MightofUniverses.Content.Items.Accessories
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            // +20% whip speed handled via ModPlayer.ModifyWeaponAttackSpeed
             player.GetModPlayer<MOUPlayer>().EquippedSkyRibbon = true;
         }
     }

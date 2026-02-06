@@ -3,29 +3,14 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using MightofUniverses.Content.Items.Buffs;
-using MightofUniverses.Common.Players; // ADD THIS LINE!!!
+using MightofUniverses.Common.Players;
 using System;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
     public class MiniatureWorldsoul : ModProjectile
     {
-        public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.BabyEater;
 
-        private enum AIState
-        {
-            Dormant,
-            Ramming,
-            Shooting
-        }
-
-        private AIState CurrentState
-        {
-            get => (AIState)Projectile.ai[0];
-            set => Projectile.ai[0] = (float)value;
-        }
-
-        private ref float StateTimer => ref Projectile.ai[1];
         private ref float SwayOffset => ref Projectile.localAI[0];
         private int shootTimer = 0;
         private NPC targetNPC = null;
@@ -40,7 +25,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             Projectile.width = 48;
             Projectile.height = 48;
-            Projectile.friendly = true;
+            Projectile.friendly = false;
             Projectile.minion = true;
             Projectile.DamageType = DamageClass.Summon;
             Projectile.penetrate = -1;
@@ -49,17 +34,13 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.ignoreWater = true;
             Projectile.minionSlots = 0f;
             Projectile.netImportant = true;
-            
-            // Use ID Static immunity
-            Projectile.usesIDStaticNPCImmunity = true;
-            Projectile.idStaticNPCHitCooldown = 20;
         }
 
         public override void AI()
         {
             Player player = Main.player[Projectile.owner];
 
-            if (!player.active || player. dead)
+            if (!player.active || player.dead)
             {
                 Projectile.Kill();
                 return;
@@ -74,57 +55,35 @@ namespace MightofUniverses.Content.Items.Projectiles
 
             Projectile.timeLeft = 18000;
 
-            // Find target
-            targetNPC = FindClosestEnemy(600f);
+            targetNPC = FindClosestEnemy(800f);
 
             if (targetNPC == null)
             {
-                CurrentState = AIState.Dormant;
-                StateTimer = 0;
                 DormantBehavior(player);
             }
             else
             {
-                // State switching logic
-                StateTimer++;
-
-                if (StateTimer >= 300) // Switch states every 5 seconds
-                {
-                    StateTimer = 0;
-                    shootTimer = 0;
-                    
-                    if (CurrentState == AIState.Ramming)
-                        CurrentState = AIState.Shooting;
-                    else
-                        CurrentState = AIState.Ramming;
-                }
-
-                // Execute current state
-                if (CurrentState == AIState.Ramming)
-                {
-                    RammingBehavior();
-                }
-                else if (CurrentState == AIState.Shooting)
-                {
-                    ShootingBehavior();
-                }
+                ShootingBehavior();
             }
 
-            // Visual effects
             Projectile.rotation += 0.15f;
 
             if (Main.rand.NextBool(2))
             {
-                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.TerraBlade, 0, 0, 100, Color. Cyan, 1.5f);
-                dust. noGravity = true;
+                Dust dust = Dust.NewDustDirect(
+                    Projectile.position, 
+                    Projectile.width, 
+                    Projectile.height, 
+                    DustID.TerraBlade, 
+                    0, 0, 100, 
+                    Color.Cyan, 
+                    1.5f
+                );
+                dust.noGravity = true;
                 dust.velocity *= 0.3f;
             }
 
-            // Different color based on state
-            Color lightColor = CurrentState == AIState.Ramming ? Color.Red : 
-                              CurrentState == AIState.Shooting ? Color.Yellow : 
-                              Color.Cyan;
-            
+            Color lightColor = targetNPC != null ? Color.Yellow : Color.Lime;
             Lighting.AddLight(Projectile.Center, lightColor.R / 255f * 0.5f, lightColor.G / 255f * 0.8f, lightColor.B / 255f * 0.8f);
         }
 
@@ -134,39 +93,21 @@ namespace MightofUniverses.Content.Items.Projectiles
             float swayX = (float)Math.Sin(SwayOffset) * 20f;
             float swayY = (float)Math.Sin(SwayOffset * 0.7f) * 10f;
 
-            // Position behind and above player
-            Vector2 idlePosition = player.Center + new Vector2((-70 * player.direction) + swayX, -40 + swayY);
-            Vector2 direction = (idlePosition - Projectile. Center);
+            Vector2 idlePosition = player.Center + new Vector2((-70 * player.direction) + swayX, -60 + swayY);
+            Vector2 direction = idlePosition - Projectile.Center;
             float distance = direction.Length();
 
             if (distance > 30f)
             {
-                direction. Normalize();
+                direction.Normalize();
                 Projectile.velocity = direction * Math.Min(distance * 0.2f, 12f);
             }
             else
             {
                 Projectile.velocity *= 0.90f;
             }
-        }
 
-        private void RammingBehavior()
-        {
-            if (targetNPC == null || ! targetNPC.active)
-                return;
-
-            SwayOffset += 0.12f;
-            
-            // Create figure-8 swiping pattern
-            float swayX = (float)Math.Sin(SwayOffset) * 50f;
-            float swayY = (float)Math.Sin(SwayOffset * 2f) * 40f;
-
-            Vector2 targetPos = targetNPC.Center + new Vector2(swayX, swayY);
-            Vector2 direction = (targetPos - Projectile.Center).SafeNormalize(Vector2.UnitX);
-            
-            // More aggressive movement
-            float speed = 20f;
-            Projectile.velocity = Vector2.Lerp(Projectile.velocity, direction * speed, 0.12f);
+            shootTimer = 0;
         }
 
         private void ShootingBehavior()
@@ -176,27 +117,26 @@ namespace MightofUniverses.Content.Items.Projectiles
 
             SwayOffset += 0.08f;
             
-            // Circle around target
-            float circleX = (float)Math.Sin(SwayOffset) * 80f;
-            float circleY = (float)Math.Cos(SwayOffset * 0.6f) * 60f;
+            float circleRadius = 200f;
+            float circleX = (float)Math.Cos(SwayOffset) * circleRadius;
+            float circleY = (float)Math.Sin(SwayOffset) * (circleRadius * 0.6f);
 
-            Vector2 hoverPosition = targetNPC.Center + new Vector2(circleX, -140 + circleY);
-            Vector2 direction = (hoverPosition - Projectile.Center);
+            Vector2 hoverPosition = targetNPC.Center + new Vector2(circleX, -100 + circleY);
+            Vector2 direction = hoverPosition - Projectile.Center;
             float distance = direction.Length();
 
             if (distance > 40f)
             {
                 direction.Normalize();
-                Projectile.velocity = direction * Math. Min(distance * 0.15f, 14f);
+                Projectile.velocity = direction * Math.Min(distance * 0.15f, 14f);
             }
             else
             {
                 Projectile.velocity *= 0.85f;
             }
 
-            // Fire bolts
             shootTimer++;
-            if (shootTimer >= 15) // Fire every 0.25 seconds (4 times per second)
+            if (shootTimer >= 15)
             {
                 shootTimer = 0;
                 FireWorldsoulBolt();
@@ -208,21 +148,37 @@ namespace MightofUniverses.Content.Items.Projectiles
             if (Main.myPlayer != Projectile.owner || targetNPC == null)
                 return;
 
-            Vector2 direction = (targetNPC. Center - Projectile.Center).SafeNormalize(Vector2.UnitX);
-            Vector2 velocity = direction * 16f;
+            Vector2 targetVelocity = targetNPC.velocity * 10f;
+            Vector2 predictedPosition = targetNPC.Center + targetVelocity;
+            Vector2 direction = (predictedPosition - Projectile.Center).SafeNormalize(Vector2.UnitX);
+            Vector2 velocity = direction * 18f;
 
-            Projectile. NewProjectile(
+            Projectile.NewProjectile(
                 Projectile.GetSource_FromThis(),
                 Projectile.Center,
                 velocity,
                 ModContent.ProjectileType<MiniWorldsoulBolt>(),
                 Projectile.damage,
                 2f,
-                Projectile. owner
+                Projectile.owner
             );
 
-            // Visual/audio feedback
             Terraria.Audio.SoundEngine.PlaySound(SoundID.Item8, Projectile.Center);
+
+            for (int i = 0; i < 5; i++)
+            {
+                Dust dust = Dust.NewDustDirect(
+                    Projectile.Center,
+                    0, 0,
+                    DustID.TerraBlade,
+                    direction.X * 3f,
+                    direction.Y * 3f,
+                    100,
+                    Color.Yellow,
+                    1.8f
+                );
+                dust.noGravity = true;
+            }
         }
 
         private NPC FindClosestEnemy(float maxDistance)
@@ -234,13 +190,13 @@ namespace MightofUniverses.Content.Items.Projectiles
             {
                 NPC npc = Main.npc[i];
                 
-                if (! npc.active || npc. friendly || npc. dontTakeDamage)
+                if (!npc.active || npc.friendly || npc.dontTakeDamage)
                     continue;
                 
-                if (npc.type == NPCID. TargetDummy)
+                if (npc.type == NPCID.TargetDummy)
                     continue;
 
-                float distance = Vector2.Distance(Projectile. Center, npc.Center);
+                float distance = Vector2.Distance(Projectile.Center, npc.Center);
                 if (distance < closestDist)
                 {
                     closestDist = distance;
@@ -253,25 +209,10 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override Color? GetAlpha(Color lightColor)
         {
-            // Color based on state
-            if (CurrentState == AIState. Ramming)
-                return Color. Lerp(Color. Cyan, Color.Red, 0.5f);
-            else if (CurrentState == AIState. Shooting)
-                return Color. Lerp(Color. Cyan, Color.Yellow, 0.5f);
+            if (targetNPC != null)
+                return Color.Lerp(Color.Lime, Color.Yellow, 0.6f);
             
-            return Color.Cyan;
-        }
-
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            target. AddBuff(ModContent.BuffType<TerrasRend>(), 180);
-
-            for (int i = 0; i < 15; i++)
-            {
-                Dust dust = Dust.NewDustDirect(target.position, target.width, target.height, DustID.TerraBlade, 0, 0, 100, Color. Cyan, 2.0f);
-                dust. noGravity = true;
-                dust.velocity = new Vector2(Main.rand.NextFloat(-4f, 4f), Main.rand.NextFloat(-4f, 4f));
-            }
+            return Color.Lime;
         }
     }
 }

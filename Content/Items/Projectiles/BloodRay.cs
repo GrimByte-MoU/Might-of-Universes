@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Audio;
+using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
@@ -48,10 +49,11 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             for (int i = 0; i < 10; i++)
             {
-                Dust.NewDust(target.position, target.width, target.height, DustID.Blood, 
+                Dust.NewDust(target.position, target.width, target.height, DustID.Blood,
                     Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f, 100, default, 1.2f);
             }
             SoundEngine.PlaySound(SoundID.NPCHit13, target.position);
+            target.AddBuff(ModContent.BuffType<EnemyBleeding>(), 180);
         }
     }
 }

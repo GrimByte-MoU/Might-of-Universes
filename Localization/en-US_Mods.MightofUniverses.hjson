@@ -442,7 +442,22 @@ Buffs: {
 
 	SheerCold: {
 		DisplayName: Sheer Cold
-		Description: A deep chill permeates your being
+		Description: A deep chill permeates your being!
+	}
+
+	CoreHeat: {
+		DisplayName: Core Heat
+		Description: The heat of the world's core scorches you!
+	}
+
+	DeltaShock: {
+		DisplayName: Delta Shock
+		Description: Atmospheric electricity electrocutes you!
+	}
+
+	NaturesToxin: {
+		DisplayName: Natures Toxin
+		Description: A deadly toxin found in nature sickens you!
 	}
 }
 
@@ -806,6 +821,18 @@ Projectiles: {
 	MiniWorldsoulBolt.DisplayName: Mini Worldsoul Bolt
 	TerraiumKnightGlaive.DisplayName: Terraium Knight Glaive
 	TerraMissile.DisplayName: Terra Missile
+	EmberfangsBlade.DisplayName: Emberfangs Blade
+	FrozenTyrantShard.DisplayName: Frozen Tyrant Shard
+	FrozenTyrantSphere.DisplayName: Frozen Tyrant Sphere
+	IceAgeBlizzardBall.DisplayName: Ice Age Blizzard Ball
+	IceAgeFragment.DisplayName: Ice Age Fragment
+	IceAgeSpike.DisplayName: Ice Age Spike
+	CycloneKamaGiantBlade.DisplayName: Cyclone Kama Giant Blade
+	CycloneKamaSpinProjectile.DisplayName: Cyclone Kama Spin Projectile
+	KasurikamaGiantSickle.DisplayName: Kasurikama Giant Sickle
+	KasurikamaSpinProjectile.DisplayName: Kasurikama Spin Projectile
+	PyroclastArrow.DisplayName: Pyroclast Arrow
+	PyroclastMagma.DisplayName: Pyroclast Magma
 }
 
 Keybinds: {
@@ -5013,6 +5040,94 @@ Items: {
 			+25% Magic critical strike chance
 			+100 max mana
 			-25% mana costs
+			'''
+	}
+
+	Emberfangs: {
+		DisplayName: Emberfangs
+		Tooltip:
+			'''
+			Hold to spin twin flaming blades around you
+			      The inner blade spins slower but hits harder
+			      The outer blade spins faster and reaches further
+			      Release to unleash a double sweep attack
+			      Both blades inflict Core Heat for 3 seconds
+			'''
+	}
+
+	TheFrozenTyrant: {
+		DisplayName: The Frozen Tyrant
+		Tooltip:
+			'''
+			Right click to switch between modes
+			Subjugate: Fire icy spheres that inflict Sheer Cold for 3 seconds
+			Punish: Rain down icy shards that inflict Sheer Cold for 1 second
+			'''
+	}
+
+	IceAge: {
+		DisplayName: Ice Age
+		Tooltip:
+			'''
+			Fires a fragment of ice that gathers 6 souls, inflicts Sheer Cold for 2 seconds and shatters on impact into piercing shards
+			The shards gather 1 soul each and inflict Sheer Cold for 1 second
+			Ice Age itself inflicts Sheer Cold for 3 seconds
+			Consume {0} souls to conjure Blizzard Balls that orbit the player for a short time
+			After 2 seconds, the balls will fire in rapid succession at the cursor
+			'''
+	}
+
+	CycloneKama: {
+		DisplayName: Cyclone Sickle
+		Tooltip:
+			'''
+			Hold to spin the Cyclone Sickle clockwise around the player
+			The Cyclone Sickle gathers 8 souls per strike, inflicts Delta Shock for 3 seconds and zaps up to 2 nearby enemies
+			The zaps deal 75% damage and inflict Delta Shock for 2 seconds
+			Consume {0} souls to spin a Cyclone Blade around the player
+			The Cyclone Blade deals 1,000% damage and inflicts Delta Shock for 10 seconds
+			'''
+	}
+
+	Kasurikama: {
+		DisplayName: Kasurikama
+		Tooltip:
+			'''
+			Hold to spin the Kasurikama clockwise around the player
+			The Kasurikama gathers 4 souls per strike and inflicts Bleeding for 2 seconds
+			Consume {0} souls to spin a Giant Sickle around the player
+			The Giant Sickle deals 500% damage and inflicts Bleeding for 5 seconds
+			'''
+	}
+
+	IgneousBow: {
+		DisplayName: Igneous Bow
+		Tooltip:
+			'''
+			"Nature's Napalm!"
+			Replaces Wooden Arrows with Pyroclast Arrows
+			Pyroclast Arrows don't pierce but will dissolve into sticky magma which sticks to enemies
+			The magma rapidly deals 50% and inflicts Core Heat for 5 seconds
+			The magma fades away after 3 seconds
+			'''
+	}
+
+	WindQuiver: {
+		DisplayName: Wind Quiver
+		Tooltip:
+			'''
+			Arrows inflict Delta Shock depending on how long the arrow has traveled (capped at 3 seconds)
+			Shows where arrows will hit
+			+5% arrow damage per second of flight (capped at +50% damage)
+			'''
+	}
+
+	PermafrostNecklace: {
+		DisplayName: Subzero Necklace
+		Tooltip:
+			'''
+			+2 max minions
+			All minions and whips inflict Sheer Cold for 3 seconds and ignore 20 defense
 			'''
 	}
 }

@@ -126,42 +126,49 @@ namespace MightofUniverses.Common.Players
 
         private void UpdateRangerSetBonus()
 {
-    if (Player.HeldItem.DamageType == DamageClass.Ranged && Player.itemAnimation > 0 && Player.HeldItem.useTime > 0)
+    // Check if player is holding a ranged weapon and actively using it
+    if (Player.HeldItem. DamageType == DamageClass.Ranged && 
+        Player.HeldItem. useTime > 0 && 
+        ! Player.noItems && 
+        ! Player.CCed)
     {
         if (Player.HeldItem.type == lastUsedItemType)
         {
-            rangerAttackTimer++;
+            if (Player.itemAnimation > 0 || Player.controlUseItem)
+            {
+                rangerAttackTimer++;
+            }
         }
         else
         {
             rangerAttackTimer = 0;
-            lastUsedItemType = Player.HeldItem.type;
+            lastUsedItemType = Player. HeldItem.type;
         }
-        int maxTimer = 600;
+        int maxTimer = 300;
         rangerAttackTimer = Math.Min(rangerAttackTimer, maxTimer);
         float bonusAttackSpeed = rangerAttackTimer / (float)maxTimer * 0.50f;
-        Player.GetAttackSpeed(DamageClass. Ranged) += bonusAttackSpeed;
-        if (rangerAttackTimer > 300 && Main.rand.NextBool(10))
+        Player.GetAttackSpeed(DamageClass.Ranged) += bonusAttackSpeed;
+        if (rangerAttackTimer > 150 && Main.rand.NextBool(8))
         {
             Dust speedDust = Dust.NewDustDirect(
                 Player.position,
                 Player.width,
                 Player.height,
                 DustID.TerraBlade,
-                Player.velocity.X * 0.5f,
-                Player.velocity.Y * 0.5f,
+                Player.velocity. X * 0.5f,
+                Player. velocity.Y * 0.5f,
                 100,
-                Color.Orange,
-                1.5f
+                Color. Lerp(Color.Orange, Color.Red, (rangerAttackTimer - 150) / 150f),
+                1.5f + (rangerAttackTimer / 300f)
             );
-            speedDust. noGravity = true;
+            speedDust.noGravity = true;
         }
     }
     else
     {
         if (rangerAttackTimer > 0)
         {
-            rangerAttackTimer -= 5;
+            rangerAttackTimer -= 3;
             if (rangerAttackTimer < 0)
                 rangerAttackTimer = 0;
         }

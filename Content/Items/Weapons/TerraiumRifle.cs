@@ -15,12 +15,12 @@ namespace MightofUniverses.Content.Items.Weapons
     {
         public override void SetDefaults()
         {
-            Item.damage = 170;
+            Item.damage = 200;
             Item.DamageType = DamageClass.Ranged;
             Item.width = 64;
             Item.height = 32;
-            Item.useTime = 12;
-            Item.useAnimation = 12;
+            Item.useTime = 20;
+            Item.useAnimation = 20;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 4;
             Item.value = Item.sellPrice(gold: 50);

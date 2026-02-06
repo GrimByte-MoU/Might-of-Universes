@@ -20,8 +20,8 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.value = Item.sellPrice(gold: 5);
 
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.useTime = 12;
-            Item.useAnimation = 12;
+            Item.useTime = 20;
+            Item.useAnimation = 20;
             Item.autoReuse = true;
             Item.useAmmo = AmmoID.Arrow;
 
@@ -59,7 +59,7 @@ Vector2 shootPosition = position + muzzleOffset;
                 Projectile.NewProjectile(source, shootPosition, arrowVelocity, type, damage, knockback, player.whoAmI);
             }
 
-            float spreadAngle = 15f;
+            float spreadAngle = 12f;
             float startAngle = -spreadAngle / 2f;
             float angleStep = spreadAngle / 3f;
 

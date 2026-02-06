@@ -4,16 +4,14 @@ using System.Globalization;
 using Terraria;
 using Terraria.ModLoader;
 using MightofUniverses.Common.Util;
-using MightofUniverses.Common.Abstractions; // optional interface for per-item base cost
+using MightofUniverses.Common.Abstractions;
 
 namespace MightofUniverses.Common.Tooltips
 {
-    // Replaces {0} in localized tooltips with the player's effective soul cost.
     public class EmpowerCostTooltipGlobalItem : GlobalItem
     {
         public override bool InstancePerEntity => false;
 
-        // Optional fallback while migrating items to IHasSoulCost.
         private static readonly Dictionary<string, float> BaseSoulCosts =
             new(StringComparer.OrdinalIgnoreCase)
             {
@@ -56,6 +54,9 @@ namespace MightofUniverses.Common.Tooltips
                 ["CelestialReaper"] = 125f,
                 ["NewMoon"] = 150f,
                 ["ReapersEcho"] = 200f,
+                ["IceAge"] = 225f,
+                ["Kasurikama"] = 60f,
+                ["CycloneKama"] = 200f,
             };
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
@@ -63,8 +64,6 @@ namespace MightofUniverses.Common.Tooltips
             var modItem = item.ModItem;
             if (modItem == null || modItem.Mod?.Name != "MightofUniverses")
                 return;
-
-            // Fast path: only proceed if any line contains {0}
             bool hasPlaceholder = false;
             for (int i = 0; i < tooltips.Count; i++)
             {
@@ -77,8 +76,6 @@ namespace MightofUniverses.Common.Tooltips
             }
             if (!hasPlaceholder)
                 return;
-
-            // Determine base cost via interface first, then fallback dictionary
             float baseCost;
             if (modItem is IHasSoulCost hasCost)
             {

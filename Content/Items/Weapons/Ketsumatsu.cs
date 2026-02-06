@@ -20,7 +20,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override void SetDefaults()
         {
-            Item.damage = 160;
+            Item.damage = 150;
             Item.DamageType = ModContent.GetInstance<ReaperDamageClass>();
             Item.width = 64;
             Item.height = 64;
