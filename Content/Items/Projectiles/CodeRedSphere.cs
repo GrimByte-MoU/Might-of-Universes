@@ -108,7 +108,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         private void HandleDamage()
         {
             damageTimer++;
-            if (damageTimer >= 6) // Increased to 10 times per second (60 / 6 = 10)
+            if (damageTimer >= 6)
             {
                 damageTimer = 0;
                 List<NPC> affectedNPCs = new List<NPC>();

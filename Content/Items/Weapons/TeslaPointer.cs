@@ -32,13 +32,11 @@ namespace MightofUniverses.Content.Items.Weapons
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source,
             Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            // Small forward offset so it never spawns “inside” player & immediately collides.
             position += velocity.SafeNormalize(Vector2.UnitX) * 12f;
 
-            float amplitude = 70f; // peak lateral offset in pixels (tweak)
-            float travelTime = 36f; // ticks; matches projectile timeLeft
+            float amplitude = 70f;
+            float travelTime = 36f;
 
-            // Left arc
             Projectile.NewProjectile(
                 source,
                 position,
@@ -48,10 +46,10 @@ namespace MightofUniverses.Content.Items.Weapons
                 knockback,
                 player.whoAmI,
                 ai0: amplitude,
-                ai1: 1f,   // direction +1
+                ai1: 1f,
                 ai2: travelTime
             );
-            // Right arc
+
             Projectile.NewProjectile(
                 source,
                 position,
@@ -61,10 +59,10 @@ namespace MightofUniverses.Content.Items.Weapons
                 knockback,
                 player.whoAmI,
                 ai0: amplitude,
-                ai1: -1f,  // direction -1
+                ai1: -1f,
                 ai2: travelTime
             );
-            return false; // we handled spawning both
+            return false;
         }
 
         public override void AddRecipes()

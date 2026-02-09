@@ -8,14 +8,10 @@ namespace MightofUniverses.Content.Items.Projectiles
 {
     public class BlizzardSnowController : MoUProjectile
     {
-        // ai[0] = total snowflakes to spawn
-        // ai[1] = total duration ticks
-        // localAI[0] = spawned so far
-        // localAI[1] = tick counter
 
         public override void SafeSetDefaults()
         {
-            Projectile.timeLeft = 600; // safety
+            Projectile.timeLeft = 600;
             Projectile.tileCollide = false;
             Projectile.penetrate = -1;
             Projectile.hide = true;
@@ -36,11 +32,8 @@ namespace MightofUniverses.Content.Items.Projectiles
                 return;
             }
 
-            // Evenly distribute: expected spawn index for this tick
-            // fraction = ticks / duration -> expected total = total * fraction
             float expected = total * (ticks / (float)duration);
 
-            // Spawn until we meet expected (handles fractional accumulation smoothly)
             while (spawned < total && spawned < expected)
             {
                 SpawnOne();

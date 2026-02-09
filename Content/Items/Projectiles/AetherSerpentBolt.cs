@@ -40,7 +40,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            // Small bounce then die
             if (Projectile.velocity.X != oldVelocity.X) Projectile.velocity.X = -oldVelocity.X * 0.5f;
             if (Projectile.velocity.Y != oldVelocity.Y) Projectile.velocity.Y = -oldVelocity.Y * 0.5f;
             Projectile.penetrate--;

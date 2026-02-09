@@ -17,7 +17,7 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             Item.width = 40;
             Item.height = 20;
-            Item.damage = 400;
+            Item.damage = 300;
             Item.DamageType = DamageClass.Ranged;
             Item.useTime = 1;
             Item.useAnimation = 1;
@@ -45,12 +45,12 @@ namespace MightofUniverses.Content.Items.Weapons
                Projectile.NewProjectile(source, position, sphereVelocity, ModContent.ProjectileType<CodeRedSphere>(), damage, knockback, player.whoAmI);
            }
        
-           int numShots = 5;
+           int numShots = 3;
            float rand = Main.rand.NextFloat();
        
-           if (rand < 0.30f) numShots = 6;
-           else if (rand < 0.20f) numShots = 8;
-           else if (rand < 0.10f) numShots = 10;
+           if (rand < 0.30f) numShots = 4;
+           else if (rand < 0.20f) numShots = 5;
+           else if (rand < 0.10f) numShots = 6;
        
            for (int i = 0; i < numShots; i++)
            {

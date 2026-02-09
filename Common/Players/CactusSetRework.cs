@@ -3,16 +3,15 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using MightofUniverses.Common;               // ReaperDamageClass
-using MightofUniverses.Common.Players;       // ReaperPlayer
+using MightofUniverses.Common;
+using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Common.Players
 {
     public class CactusSetRework : ModPlayer
     {
-        private const int SoulOnHitCooldownTicks = 30; // 0.5s @ 60 FPS
+        private const int SoulOnHitCooldownTicks = 30;
         private const int SoulOnHitAmount = 5;
-        private const int SetBonusMaxSouls = 20;
 
         private bool wearingCactusSet;
         private int soulOnHitCooldown;
@@ -27,14 +26,8 @@ namespace MightofUniverses.Common.Players
             if (IsWearingFullCactusSet())
             {
                 wearingCactusSet = true;
-
-                // Mark as “Reaper armor” so the SoulBar UI draws.
                 var reaper = Player.GetModPlayer<ReaperPlayer>();
                 reaper.hasReaperArmor = true;
-
-                // Add to max souls via a bonus accumulator if your ReaperPlayer supports it.
-                // Prefer a bonus field that gets summed into max each tick.
-                // Replace this line with your exact field name.
                 reaper.maxSoulEnergy += 20f;
             }
         }

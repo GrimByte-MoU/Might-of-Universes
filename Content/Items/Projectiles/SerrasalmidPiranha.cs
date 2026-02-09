@@ -7,10 +7,6 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    // States (ai[1]):
-    // 0 = seeking, 1 = latched, 2 = recall
-    // ai[0] = targetIndex (int), -1 if none
-    // localAI[0],[1] = latched offset from target.Center
     public class SerrasalmidPiranha : MoUProjectile
     {
         public override void SafeSetDefaults()
@@ -20,10 +16,8 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.penetrate = -1;
-            Projectile.timeLeft = 2; // refreshed while channeling
+            Projectile.timeLeft = 2;
             Projectile.DamageType = DamageClass.Ranged;
-
-            // Repeated hits while overlapping
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 10;
 
@@ -32,8 +26,8 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void OnSpawn(IEntitySource source)
         {
-            Projectile.ai[0] = -1f; // no target
-            Projectile.ai[1] = 0f;  // seeking
+            Projectile.ai[0] = -1f;
+            Projectile.ai[1] = 0f;
         }
 
         public override void AI()
@@ -43,27 +37,22 @@ namespace MightofUniverses.Content.Items.Projectiles
                                       owner.HeldItem.type == ModContent.ItemType<SerrasalmidGun>();
             bool channeling = holdingSerrasalmid && owner.channel;
 
-            // Enter recall when released or weapon not held
             if (!channeling && Projectile.ai[1] != 2f)
             {
                 StartRecall();
             }
 
-            // If player starts channeling again while recalling, immediately resume outward
             if (channeling && Projectile.ai[1] == 2f)
             {
                 ResumeFromRecall(owner);
             }
 
-            // Keep alive only while channeling; during recall we let timeLeft tick down
             if (channeling)
                 Projectile.timeLeft = 2;
 
-            // Face movement direction if moving
             if (Projectile.velocity.LengthSquared() > 0.01f)
                 Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
 
-            // Handle states
             if (Projectile.ai[1] == 2f)
             {
                 DoRecall(owner);
@@ -74,7 +63,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
             if (Projectile.ai[1] == 0f)
             {
-                // Seeking
                 if (targetIndex < 0 || !ValidTarget(targetIndex))
                 {
                     targetIndex = AcquireTarget(Projectile.Center, 900f);
@@ -94,7 +82,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                 }
                 else
                 {
-                    // Drift forward if no target
                     desiredVel = Projectile.velocity.SafeNormalize(Vector2.UnitX) * speed;
                 }
 
@@ -113,11 +100,9 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Vector2 offset = new Vector2(Projectile.localAI[0], Projectile.localAI[1]);
                 Projectile.Center = t.Center + offset;
 
-                // Slight wobble for life
                 Projectile.position += new Vector2(Main.rand.NextFloat(-0.1f, 0.1f), Main.rand.NextFloat(-0.1f, 0.1f));
                 Projectile.velocity *= 0.95f;
 
-                // Point roughly outward from the latched spot
                 Vector2 look = t.Center - Projectile.Center;
                 if (look.LengthSquared() > 0.001f)
                     Projectile.rotation = look.ToRotation() + MathHelper.PiOver2;
@@ -126,28 +111,24 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         private void StartRecall()
         {
-            // Switch to recall, stop dealing damage, allow time to fly back
             Projectile.ai[1] = 2f;
             Projectile.ai[0] = -1f;
             Projectile.friendly = false;
             Projectile.netUpdate = true;
 
-            // Give up to 3 seconds to return
             if (Projectile.timeLeft < 180)
                 Projectile.timeLeft = 180;
         }
 
         private void ResumeFromRecall(Player owner)
         {
-            Projectile.ai[1] = 0f;   // back to seeking
+            Projectile.ai[1] = 0f;
             Projectile.ai[0] = -1f;
             Projectile.friendly = true;
             Projectile.alpha = 0;
             Projectile.timeLeft = 2;
             Projectile.netUpdate = true;
-
-            // Kick outward immediately toward the cursor
-            Vector2 dir = (Main.MouseWorld - owner.MountedCenter);
+            Vector2 dir = Main.MouseWorld - owner.MountedCenter;
             if (dir.LengthSquared() < 0.01f)
                 dir = Vector2.UnitX.RotatedByRandom(0.5f);
             dir.Normalize();
@@ -156,7 +137,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         private void DoRecall(Player owner)
         {
-            // Fly back smoothly to the player's mounted center
             Vector2 toOwner = owner.MountedCenter - Projectile.Center;
             float dist = toOwner.Length();
             float speed = 18f;
@@ -165,25 +145,20 @@ namespace MightofUniverses.Content.Items.Projectiles
             Vector2 desired = toOwner.SafeNormalize(Vector2.UnitX) * speed;
             Projectile.velocity = (Projectile.velocity * (inertia - 1f) + desired) / inertia;
 
-            // Rotate towards travel direction
             if (Projectile.velocity.LengthSquared() > 0.01f)
                 Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
 
-            // Soft fade while recalling
             Projectile.alpha = (byte)MathHelper.Clamp(Projectile.alpha + 4, 0, 255);
 
-            // Despawn when close enough
             if (dist < 24f)
                 Projectile.Kill();
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            // Ignore hits during recall for safety
             if (Projectile.ai[1] == 2f)
                 return;
 
-            // First hit latches
             if (Projectile.ai[1] == 0f && target.CanBeChasedBy())
             {
                 Projectile.ai[1] = 1f;

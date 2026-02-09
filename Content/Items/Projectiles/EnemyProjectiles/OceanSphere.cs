@@ -19,7 +19,7 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
             Projectile.height = 20;
             Projectile.hostile = true;
             Projectile.friendly = false;
-            Projectile.penetrate = 1;
+            Projectile.penetrate = 5;
             Projectile.timeLeft = 600;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
@@ -31,7 +31,6 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
         {
             Projectile.rotation += 0.1f;
 
-            // Water bubble visual effect
             if (Main.rand.NextBool(3))
             {
                 int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height,
@@ -40,11 +39,8 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
                 Main.dust[dust].velocity *= 0.3f;
             }
 
-            // Gentle floating motion
             Projectile.velocity. Y += (float)System.Math.Sin(Projectile.ai[0] * 0.05f) * 0.05f;
             Projectile. ai[0]++;
-
-            // Lighting
             Lighting.AddLight(Projectile. Center, 0.2f, 0.4f, 0.8f);
         }
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)

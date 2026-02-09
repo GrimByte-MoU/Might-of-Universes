@@ -72,7 +72,6 @@ namespace MightofUniverses.Common.Players
                         if (Player.statLife > Player.statLifeMax2)
                             Player.statLife = Player.statLifeMax2;
 
-                        // Remove all debuffs
                         for (int i = 0; i < Player.buffType.Length; i++)
                         {
                             int buffType = Player.buffType[i];

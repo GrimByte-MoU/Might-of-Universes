@@ -16,8 +16,7 @@ namespace MightofUniverses.Content.Items.Buffs
         public override void Update(Player player, ref int buffIndex)
         {
             int daggerType = ModContent.ProjectileType<ObsidianDaggerMinion>();
-
-            // Keep buff alive while any dagger exists
+            
             if (player.ownedProjectileCounts[daggerType] > 0)
                 player.buffTime[buffIndex] = 18000;
             if (player.whoAmI == Main.myPlayer)

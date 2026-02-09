@@ -28,7 +28,7 @@ public override bool? CanHitNPC(NPC target) => true;
     Player player = Main.player[Projectile.owner];
     
     rotation += ROTATION_SPEED;
-    float offsetRotation = rotation + (MathHelper.TwoPi * Projectile.ai[0] / 2f); // 2 spheres
+    float offsetRotation = rotation + (MathHelper.TwoPi * Projectile.ai[0] / 2f);
 
     Vector2 offset = new Vector2(
         ORBIT_RADIUS * (float)System.Math.Cos(offsetRotation),

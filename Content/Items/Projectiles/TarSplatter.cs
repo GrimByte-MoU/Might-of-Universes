@@ -19,7 +19,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
             Projectile.DamageType = DamageClass.Ranged;
 
-            // Arrow-like gravity/behavior
             Projectile.aiStyle = ProjAIStyleID.Arrow;
             AIType = ProjectileID.WoodenArrowFriendly;
             Projectile.arrow = false;

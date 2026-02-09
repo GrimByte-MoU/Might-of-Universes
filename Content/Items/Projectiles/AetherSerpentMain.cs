@@ -65,7 +65,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             int bolts = 7;
             for (int i = 0; i < bolts; i++)
             {
-                Vector2 v = (Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi)) * Main.rand.NextFloat(7f, 10f);
+                Vector2 v = Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi) * Main.rand.NextFloat(7f, 10f);
                 int dmg = (int)(Projectile.damage * 0.6f);
                 Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, v,
                     ModContent.ProjectileType<AetherSerpentBolt>(), dmg, Projectile.knockBack * 0.8f, Projectile.owner);

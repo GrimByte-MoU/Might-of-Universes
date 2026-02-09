@@ -36,20 +36,16 @@ public override bool? CanHitNPC(NPC target) => true;
     );
 
         Projectile.Center = player.Center + offset;
-        
-        // Rainbow lighting
-       // Star lighting
-Lighting.AddLight(Projectile.Center, 0.9f, 0.9f, 0.3f); // Golden star-like glow
 
-// Star dust effects
+Lighting.AddLight(Projectile.Center, 0.9f, 0.9f, 0.3f);
+
 if (Main.rand.NextBool(2))
 {
-    // Main star effect
     Dust dust = Dust.NewDustDirect(
         Projectile.position,
         Projectile.width,
         Projectile.height,
-        DustID.PlatinumCoin,  // Or DustID.PlatinumCoin for white stars
+        DustID.PlatinumCoin,
         0f, 0f,
         100,
         default,
@@ -59,7 +55,6 @@ if (Main.rand.NextBool(2))
     dust.fadeIn = 0.1f;
     dust.alpha = 100;
 
-    // Additional sparkle effect
     if (Main.rand.NextBool(3))
     {
         Dust sparkle = Dust.NewDustDirect(

@@ -11,7 +11,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 {
     public class CelestialReaperHeld : MoUProjectile
     {
-        private const float MAX_CHARGE_TIME = 240f; // 4 seconds at 60fps
+        private const float MAX_CHARGE_TIME = 240f;
         private const float HALF_CHARGE_TIME = 120f;
         private float chargeTime = 0f;
         private float spinSpeed = 0f;
@@ -48,7 +48,6 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             Player player = Main.player[Projectile.owner];
 
-            // Kill if player stops channeling or dies
             if (!player.channel || player.dead || !player.active)
             {
                 if (!released)
@@ -66,30 +65,18 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         private void HoldingBehavior(Player player)
         {
-            // Keep projectile at player
             Projectile.Center = player.Center;
             player.itemTime = 2;
             player.itemAnimation = 2;
-
-            // Increase charge time
             chargeTime = Math.Min(MAX_CHARGE_TIME, chargeTime + 1f);
-
-            // Calculate spin speed (0 to 1)
             float targetSpinSpeed = ChargePercent;
             spinSpeed = MathHelper.Lerp(spinSpeed, targetSpinSpeed, 0.05f);
-
-            // Rotate scythe - starts slow, gets faster
-            float rotationSpeed = 0.1f + (spinSpeed * 0.4f); // 0.1 to 0.5 radians per frame
+            float rotationSpeed = 0.1f + (spinSpeed * 0.4f);
             Projectile.rotation += rotationSpeed;
-
-            // Point player in mouse direction
             Vector2 toMouse = Main.MouseWorld - player.Center;
             player.direction = toMouse.X > 0 ? 1 : -1;
-
-            // Spawn celestial orbs
             SpawnCelestialOrbs(player);
 
-            // Visual effects at half charge
             if (IsHalfCharged)
             {
                 if (Main.rand.NextBool(3))
@@ -100,7 +87,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                 }
             }
 
-            // Extra effects at full charge
             if (IsFullyCharged)
             {
                 Projectile.scale = 1f + (float)Math.Sin(Main.GameUpdateCount * 0.1f) * 0.1f;
@@ -121,33 +107,29 @@ namespace MightofUniverses.Content.Items.Projectiles
             int spawnRate;
             if (IsFullyCharged)
             {
-                spawnRate = 5; // 12 per second (60fps / 5 = 12)
+                spawnRate = 5;
             }
             else if (IsHalfCharged)
             {
-                spawnRate = 10; // 6 per second (60fps / 10 = 6)
+                spawnRate = 10;
             }
             else
             {
-                return; // Don't spawn if not half charged yet
+                return;
             }
 
             if (orbSpawnTimer >= spawnRate)
             {
                 orbSpawnTimer = 0;
-
-                // Spawn orb from random position around scythe
                 float angle = Main.rand.NextFloat(MathHelper.TwoPi);
                 Vector2 spawnOffset = angle.ToRotationVector2() * 40f;
                 Vector2 spawnPos = Projectile.Center + spawnOffset;
-
-                // Find nearest enemy for homing
                 NPC target = FindClosestNPC(Projectile.Center, 600f);
                 Vector2 velocity;
                 
                 if (target != null)
                 {
-                    velocity = (target.Center - spawnPos);
+                    velocity = target.Center - spawnPos;
                     velocity.Normalize();
                     velocity *= 8f;
                 }
@@ -169,11 +151,9 @@ namespace MightofUniverses.Content.Items.Projectiles
             if (direction.LengthSquared() < 0.0001f)
                 direction = new Vector2(player.direction, 0f);
             direction.Normalize();
-
-            // Spawn thrown projectile, passing charge state via ai[0]
             Projectile.NewProjectile(Projectile.GetSource_FromThis(), player.Center, direction * 20f,
                 ModContent.ProjectileType<CelestialReaperThrown>(), Projectile.damage, Projectile.knockBack, player.whoAmI, 
-                IsFullyCharged ? 1f : 0f); // ai[0] = 1 if fully charged, 0 otherwise
+                IsFullyCharged ? 1f : 0f);
 
             SoundEngine.PlaySound(SoundID.Item1, Projectile.position);
             Projectile.Kill();
@@ -207,6 +187,9 @@ namespace MightofUniverses.Content.Items.Projectiles
             ReaperPlayer reaperPlayer = player.GetModPlayer<ReaperPlayer>();
             reaperPlayer.AddSoulEnergy(10f, target.Center);
             target.AddBuff(BuffID.Daybreak, 180);
+            target.AddBuff(BuffID.Frostburn2, 180);
+            target.AddBuff(BuffID.Venom, 180);
+            target.AddBuff(BuffID.Ichor, 180);
         }
 
         public override bool SafePreDraw(ref Color lightColor)
@@ -215,14 +198,12 @@ namespace MightofUniverses.Content.Items.Projectiles
             Vector2 drawOrigin = texture.Size() * 0.5f;
             Vector2 drawPos = Projectile.Center - Main.screenPosition;
 
-            // Glow effect when half charged or more
             if (IsHalfCharged)
             {
                 Color glowColor = new Color(100, 200, 255, 0) * (spinSpeed * 0.5f);
                 Main.EntitySpriteDraw(texture, drawPos, null, glowColor, Projectile.rotation, drawOrigin, Projectile.scale * 1.2f, SpriteEffects.None, 0);
             }
 
-            // Main draw
             Main.EntitySpriteDraw(texture, drawPos, null, lightColor, Projectile.rotation, drawOrigin, Projectile.scale, SpriteEffects.None, 0);
 
             return false;

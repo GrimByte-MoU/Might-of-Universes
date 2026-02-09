@@ -12,7 +12,7 @@ namespace MightofUniverses.Common.Players
         public bool holdingTablet = false;
         private int tabletTimer = 0;
         private bool spawnRed = false;
-        private const float radius = 30f * 16f; // 30 tiles
+        private const float radius = 30f * 16f;
 
         public override void ResetEffects()
         {
@@ -25,7 +25,7 @@ namespace MightofUniverses.Common.Players
                 return;
 
             tabletTimer++;
-            int interval = Main.rand.Next(6, 31); // 0.1s to 0.5s in ticks
+            int interval = Main.rand.Next(6, 31);
 
             if (tabletTimer >= interval)
             {
@@ -59,7 +59,6 @@ namespace MightofUniverses.Common.Players
                 }
             }
 
-            // Draw aura dust outline
             const int POINTS = 60;
             for (int i = 0; i < POINTS; i++)
             {

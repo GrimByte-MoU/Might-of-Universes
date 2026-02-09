@@ -1,7 +1,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using MightofUniverses.Common; // ReaperDamageClass
+using MightofUniverses.Common;
 using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Armors
@@ -23,10 +23,8 @@ namespace MightofUniverses.Content.Items.Armors
             var reaper = ModContent.GetInstance<ReaperDamageClass>();
             player.GetDamage(reaper) += 0.06f;
             player.GetCritChance(reaper) += 6f;
-
             player.statLifeMax2 += 15;
             player.endurance += 0.04f;
-            
             player.moveSpeed += 0.16f;
         }
 

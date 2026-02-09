@@ -27,13 +27,11 @@ namespace MightofUniverses.Content.Items.Projectiles
             if (!target.active)
                 return;
 
-            // Visual burst
             for (int i = 0; i < 20; i++)
             {
                 Dust.NewDust(Projectile.Center, 0, 0, DustID.Sandnado, Scale: 1.5f);
             }
 
-            // Spawn 6 upward sand needles
             for (int i = 0; i < 6; i++)
             {
                 Vector2 velocity = new Vector2(Main.rand.NextFloat(-2f, 2f), Main.rand.NextFloat(-8f, -5f));

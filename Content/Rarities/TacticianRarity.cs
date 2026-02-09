@@ -13,9 +13,9 @@ namespace MightofUniverses.Content.Rarities
             {
                 float time = Main.GameUpdateCount * 0.05f;
                 Color[] colors = new Color[] {
-                    new Color(0, 0, 0),         // Black
-                    new Color(139, 0, 0),       // Dark Red
-                    new Color(255, 255, 255),   // White
+                    new Color(0, 0, 0),
+                    new Color(139, 0, 0),
+                    new Color(255, 255, 255),
                 };
                 int currentIndex = (int)(time % colors.Length);
                 int nextIndex = (currentIndex + 1) % colors.Length;

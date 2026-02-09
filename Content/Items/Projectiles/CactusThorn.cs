@@ -20,13 +20,13 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.scale = 0.5f;
             AIType = ProjectileID.WoodenArrowFriendly;
         }
-
+        
         public override void AI()
         {
-float rotation = Projectile.velocity.ToRotation();
-Projectile.rotation = rotation;
+            float rotation = Projectile.velocity.ToRotation();
+            Projectile.rotation = rotation;
 
-            
+
             if (Main.rand.NextBool(3))
             {
                 Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.t_Cactus);

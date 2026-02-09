@@ -54,17 +54,12 @@ namespace MightofUniverses.Content.Items.Accessories
 
             if (minionCount > 0)
             {
-                // +2 HP/sec regen per minion
                 Player.lifeRegen += minionCount * 2;
             }
             else
             {
                 int unusedMinionSlots = Player.maxMinions;
-                
-                // +2 defense per unused minion slot (unchanged)
                 Player.statDefense += unusedMinionSlots * 2;
-                
-                // NEW: +2 armor penetration per unused minion slot - BUFFED
                 Player.GetArmorPenetration(DamageClass.Generic) += unusedMinionSlots * 2;
 
                 if (Main.rand.NextBool(20))

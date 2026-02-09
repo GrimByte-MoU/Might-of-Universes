@@ -14,7 +14,6 @@ namespace MightofUniverses.Common.Players
 
         public override void ResetEffects()
         {
-            // Add accessory slot if consumed
             if (usedKeyOfTheVoidGate)
             {
                 Player.extraAccessorySlots += 1;
@@ -37,10 +36,8 @@ namespace MightofUniverses.Common.Players
             if (!usedKeyOfTheVoidGate || Main.rand.NextFloat() >= DodgeChance)
                 return;
 
-            // Cancel the damage
             modifiers.SetMaxDamage(0);
             
-            // Smoke effect
             for (int i = 0; i < 20; i++)
             {
                 Dust.NewDust(Player.position, Player.width, Player.height, DustID.Shadowflame, Main.rand.NextFloat(-3, 3), Main.rand.NextFloat(-3, 3), 150, default, 1.5f);
@@ -51,7 +48,6 @@ namespace MightofUniverses.Common.Players
         {
             if (usedKeyOfTheVoidGate && Main.rand.NextFloat() < DodgeChance)
             {
-                // Heal for the damage that would have been taken
                 Player.Heal(info.Damage);
             }
         }

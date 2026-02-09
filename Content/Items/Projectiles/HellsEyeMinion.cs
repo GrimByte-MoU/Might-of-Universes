@@ -6,7 +6,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 using MightofUniverses.Content.Items.Buffs;
-using MightofUniverses.Common.Players; // For Overclock suppression
+using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
@@ -15,14 +15,14 @@ namespace MightofUniverses.Content.Items.Projectiles
         private const float PlayerDetectRangePx = 50f * 16f;
         private const float OrbitRadius = 96f;
         private const float IdleRadius = 64f;
-        private const int ShootCooldownTicks = 24; // 1.5 shots/sec per eye
+        private const int ShootCooldownTicks = 24;
         private const float LaserSpeed = 18f;
         private const float LaserDamageMult = 0.65f;
 
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.MinionSacrificable[Type] = true;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true; // right-click target support
+            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
         }
 
         public override void SafeSetDefaults()
@@ -51,51 +51,40 @@ namespace MightofUniverses.Content.Items.Projectiles
                 return;
             }
 
-            // Keep alive while buff is active
             if (player.HasBuff(ModContent.BuffType<HellsEyeBuff>()))
                 Projectile.timeLeft = 2;
-
-            // Acquire target: prefer player's marked target
             NPC target = GetTarget(player);
-
-            // Find index among owner's eyes for spacing
             int total = player.ownedProjectileCounts[Type];
             int index = GetOwnIndex();
-
-            // Movement
             Vector2 desiredPos;
             float inertia;
             float speed;
 
             if (target != null && Vector2.DistanceSquared(player.Center, target.Center) <= PlayerDetectRangePx * PlayerDetectRangePx)
             {
-                // Orbit the enemy
                 float angle = (float)(Main.GameUpdateCount * 0.05f) + (index * MathHelper.TwoPi / Math.Max(1, total));
                 desiredPos = target.Center + OrbitRadius * angle.ToRotationVector2();
                 speed = 18f;
                 inertia = 20f;
-
-                // Face the target
                 Vector2 toTarget = target.Center - Projectile.Center;
+
                 if (toTarget.LengthSquared() > 0.001f)
                 {
                     Projectile.rotation = toTarget.ToRotation();
                     Projectile.spriteDirection = Projectile.rotation > MathHelper.PiOver2 || Projectile.rotation < -MathHelper.PiOver2 ? -1 : 1;
                 }
 
-                // Shooting
                 DoShooting(player, target);
             }
             else
             {
-                // Idle swarm near player in a loose ring with a little wobble
                 float wobble = (float)Math.Sin((Main.GameUpdateCount + index * 13) * 0.08f) * 14f;
                 float angle = (float)(Main.GameUpdateCount * 0.03f) + (index * MathHelper.TwoPi / Math.Max(1, total));
                 desiredPos = player.Center + (IdleRadius + wobble) * angle.ToRotationVector2();
                 speed = 14f;
                 inertia = 15f;
-                // Face outward slightly
                 Vector2 outward = desiredPos - Projectile.Center;
+
                 if (outward.LengthSquared() > 0.001f)
                 {
                     Projectile.rotation = outward.ToRotation();
@@ -104,9 +93,8 @@ namespace MightofUniverses.Content.Items.Projectiles
                 if (Projectile.localAI[0] > 0) Projectile.localAI[0]--;
             }
 
-            // Smooth move toward desiredPos
             Vector2 toDesired = desiredPos - Projectile.Center;
-            if (toDesired.Length() > 200f) // snap faster if far
+            if (toDesired.Length() > 200f)
             {
                 Projectile.velocity = Vector2.Lerp(Projectile.velocity, toDesired.SafeNormalize(Vector2.Zero) * speed, 0.25f);
             }
@@ -116,13 +104,11 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Projectile.velocity = (Projectile.velocity * (inertia - 1f) + wantVel) / inertia;
             }
 
-            // Small light/visual
             Lighting.AddLight(Projectile.Center, 0.25f, 0.05f, 0.05f);
         }
 
         private NPC GetTarget(Player player)
         {
-            // Right-clicked target
             if (player.MinionAttackTargetNPC >= 0)
             {
                 NPC forced = Main.npc[player.MinionAttackTargetNPC];
@@ -130,7 +116,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                     return forced;
             }
 
-            // Closest enemy to player within detect range
             NPC chosen = null;
             float best = PlayerDetectRangePx * PlayerDetectRangePx;
             for (int i = 0; i < Main.maxNPCs; i++)
@@ -175,7 +160,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                 return;
             }
 
-            // Fire if in reasonable range and line-of-sight is clear enough
             Vector2 toTarget = target.Center - Projectile.Center;
             float dist = toTarget.Length();
             if (dist <= 700f)

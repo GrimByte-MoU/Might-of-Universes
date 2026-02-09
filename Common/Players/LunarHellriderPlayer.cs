@@ -47,11 +47,7 @@ public class LunarHellriderPlayer : ModPlayer
             Player.AddBuff(ModContent.BuffType<LunarVision>(), 480);
             timeSinceLastDodge = 0;
             dodgeChance = 0.20f;
-
-            // Spawn Lunar Blasts
             SpawnLunarBlasts(5);
-            
-            // Affect nearby enemies
             for (int i = 0; i < Main.maxNPCs; i++)
             {
                 NPC npc = Main.npc[i];

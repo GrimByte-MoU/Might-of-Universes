@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
-using MightofUniverses.Common; // ReaperDamageClass
+using MightofUniverses.Common;
 using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Common.Players

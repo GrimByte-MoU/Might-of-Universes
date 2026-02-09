@@ -26,7 +26,7 @@ namespace MightofUniverses.Content.Items.Consumables.Food
             Item.rare = ItemRarityID.Yellow;
             Item.value = Item.sellPrice(gold: 1);
             Item.buffType = ModContent.BuffType<CakeBlessing>();
-            Item.buffTime = 1800; // 30 seconds
+            Item.buffTime = 1800;
         }
 
         public override void AddRecipes()

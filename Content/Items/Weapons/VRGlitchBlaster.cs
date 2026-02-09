@@ -12,7 +12,7 @@ namespace MightofUniverses.Content.Items.Weapons
     {
         private bool rapidFire = false;
         private int rapidFireTimer = 0;
-        private const int RAPID_FIRE_DURATION = 30; // 1/2 second
+        private const int RAPID_FIRE_DURATION = 30;
         private const int NORMAL_USE_TIME = 16;
 
         public override void SetDefaults()

@@ -39,7 +39,6 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             var fracturePlayer = player.GetModPlayer<FracturePlayer>();
 
-            // Slowly decay if not attacking
             if (player.itemAnimation == 0 && fracturePlayer.prismaticChargeTimer > 0)
             {
                 fracturePlayer.prismaticChargeTimer = Math.Max(0, fracturePlayer.prismaticChargeTimer - 1);
@@ -49,8 +48,6 @@ namespace MightofUniverses.Content.Items.Weapons
         public override bool CanUseItem(Player player)
         {
             var fracturePlayer = player.GetModPlayer<FracturePlayer>();
-
-            // Speed scaling
             int minUseTime = 12;
             int baseUseTime = 40;
             int speedStep = fracturePlayer.prismaticChargeTimer / 30;
@@ -87,7 +84,7 @@ namespace MightofUniverses.Content.Items.Weapons
                 Projectile.NewProjectile(source, spawnPos, finalVelocity, randomProj, damage, knockback, player.whoAmI);
             }
 
-            return false; // prevent default projectile
+            return false;
         }
 
         public override void AddRecipes()

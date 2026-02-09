@@ -1,7 +1,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using MightofUniverses.Common; // ReaperDamageClass
+using MightofUniverses.Common;
 using MightofUniverses.Common.Players;
 using MightofUniverses.Content.Items.Materials;
 
@@ -24,14 +24,8 @@ namespace MightofUniverses.Content.Items.Armors
             var reaper = ModContent.GetInstance<ReaperDamageClass>();
             player.GetDamage(reaper) += 0.08f;
             player.GetCritChance(reaper) += 7f;
-
-            // +15 armor penetration vs Oiled or Tarred (conditional)
             player.GetModPlayer<PrimalSavageryPlayer>().ChestEquipped = true;
-
-            // +4 souls/sec
             player.GetModPlayer<PrimalSavageryPlayer>().ChestSoulGenActive = true;
-
-            // Crits ignite Oiled enemies (Hellfire 3s) handled in PrimalSavageryPlayer.OnHit hooks
         }
 
         public override void AddRecipes()

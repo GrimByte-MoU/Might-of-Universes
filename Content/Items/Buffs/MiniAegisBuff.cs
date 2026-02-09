@@ -23,13 +23,9 @@ namespace MightofUniverses.Content.Items.Buffs
                 buffIndex--;
             }
         }
-
-        // THIS ADDS THE COUNTER
         public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare)
         {
             Player player = Main.LocalPlayer;
-            
-            // Find the Mini Aegis projectile
             int empowerLevel = 0;
             for (int i = 0; i < Main.maxProjectiles; i++)
             {

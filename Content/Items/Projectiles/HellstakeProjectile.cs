@@ -28,7 +28,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            // Create a trail of fire particles
             if (Main.rand.NextBool(3))
             {
                 Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, 
@@ -38,33 +37,26 @@ namespace MightofUniverses.Content.Items.Projectiles
                 dust.velocity *= 0.3f;
             }
             
-            // Rotate the projectile based on velocity
-            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
+            Projectile.rotation = Projectile.velocity.ToRotation();
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            // Apply debuffs to the direct hit target
             target.AddBuff(BuffID.OnFire3, 180);
             target.AddBuff(ModContent.BuffType<Demonfire>(), 180);
-            
-            // Create explosion
             CreateExplosion();
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            // Create explosion when hitting a tile
             CreateExplosion();
-            return true; // Destroy the projectile
+            return true;
         }
         
         private void CreateExplosion()
         {
-            // Play explosion sound
             SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
             
-            // Create explosion visual effect
             for (int i = 0; i < 50; i++)
             {
                 Vector2 speed = Main.rand.NextVector2CircularEdge(1f, 1f);
@@ -76,8 +68,7 @@ namespace MightofUniverses.Content.Items.Projectiles
                     dust.type = DustID.Flare;
                 }
             }
-            
-            // Damage enemies in explosion radius
+
             float explosionRadius = 100f;
             for (int i = 0; i < Main.maxNPCs; i++)
             {
@@ -87,14 +78,10 @@ namespace MightofUniverses.Content.Items.Projectiles
                     float distance = Vector2.Distance(npc.Center, Projectile.Center);
                     if (distance < explosionRadius)
                     {
-                        // Apply debuffs to enemies hit by explosion (shorter duration)
-                        npc.AddBuff(BuffID.OnFire, 60); // 1 second of Hellfire
+                        npc.AddBuff(BuffID.OnFire, 60);
                         npc.AddBuff(ModContent.BuffType<Demonfire>(), 60);
-                        
-                        // Calculate damage based on distance from explosion center
                         int explosionDamage = (int)(Projectile.damage * 0.75f * (1f - distance / explosionRadius));
-                        
-                        // Deal damage
+
                         if (explosionDamage > 0)
                         {
                             npc.SimpleStrikeNPC(explosionDamage, 0);

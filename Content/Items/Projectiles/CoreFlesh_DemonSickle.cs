@@ -2,11 +2,10 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using MightofUniverses.Common; // ReaperDamageClass
+using MightofUniverses.Common;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    // Spins in place for ~0.5s then launches in the original aim direction. Very high damage. Ignores up to 50 defense.
     public class CoreFlesh_DemonSickle : MoUProjectile
     {
         private const int SpinTime = 30; // ticks
@@ -30,7 +29,6 @@ namespace MightofUniverses.Content.Items.Projectiles
             int timer = (int)Projectile.ai[1];
             if (timer < SpinTime)
             {
-                // Spin in place
                 Projectile.velocity *= 0.92f;
                 Projectile.rotation += 0.45f * Projectile.direction;
                 if (Projectile.velocity.LengthSquared() < 0.01f)
@@ -48,7 +46,6 @@ namespace MightofUniverses.Content.Items.Projectiles
             }
             else if (timer == SpinTime)
             {
-                // Launch
                 float ang = Projectile.ai[0];
                 Vector2 dir = ang.ToRotationVector2();
                 Projectile.velocity = dir * LaunchSpeed;
@@ -64,7 +61,6 @@ namespace MightofUniverses.Content.Items.Projectiles
             }
             else
             {
-                // Flight
                 Projectile.rotation += 0.25f * Projectile.direction;
                 Lighting.AddLight(Projectile.Center, new Vector3(0.6f, 0.2f, 0.8f) * 0.5f);
             }

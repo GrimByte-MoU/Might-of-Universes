@@ -24,7 +24,7 @@ namespace MightofUniverses.Common.Players
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (!hasCrimsonHideSet) return;
-            if (proj.DamageType != ModContent.GetInstance<Common.PacifistDamageClass>()) return;
+            if (proj.DamageType != ModContent.GetInstance<PacifistDamageClass>()) return;
 
             ApplyLifesteal(damageDone);
         }

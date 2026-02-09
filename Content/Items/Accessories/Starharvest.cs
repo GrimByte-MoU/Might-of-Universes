@@ -24,7 +24,7 @@ namespace MightofUniverses.Content.Items.Accessories
             player.GetDamage(DamageClass.Melee) *= 0.5f;
             player.GetDamage(DamageClass.Ranged) *= 0.5f;
             player.GetDamage(DamageClass.Magic) *= 0.5f;
-            player.GetDamage(DamageClass.Summon) *= 1.25f;
+            player.GetDamage(DamageClass.Summon) *= 1.15f;
             
             player.GetModPlayer<StarharvestPlayer>().hasStarharvest = true;
         }

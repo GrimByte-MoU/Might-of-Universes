@@ -17,15 +17,12 @@ namespace MightofUniverses.Content.Items.Materials
             Item.material = true;
         }
     }
-
-    // Add this class to handle the drop from Lunatic Cultist
     public class LunaticClothDrops : GlobalNPC
     {
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
             if (npc.type == NPCID.CultistBoss)
             {
-                // Add Lunatic Cloth drop (50-75)
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<LunaticCloth>(), 1, 50, 76));
             }
         }

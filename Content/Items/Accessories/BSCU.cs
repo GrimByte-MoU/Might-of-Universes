@@ -25,8 +25,7 @@ namespace MightofUniverses.Content.Items.Accessories
     player.GetModPlayer<BSCUPlayer>().hasBSCU = true;
     int desiredSpheres = 3;
     int activeSpheres = 0;
-    
-    // Count existing spheres
+
     for (int i = 0; i < Main.maxProjectiles; i++)
     {
         Projectile proj = Main.projectile[i];
@@ -37,13 +36,12 @@ namespace MightofUniverses.Content.Items.Accessories
         }
     }
 
-    // Spawn missing spheres
     while (activeSpheres < desiredSpheres)
     {
         Projectile.NewProjectile(
             player.GetSource_Accessory(Item),
             player.Center,
-            Microsoft.Xna.Framework.Vector2.Zero,
+            Vector2.Zero,
             ModContent.ProjectileType<BSCUProjectile>(),
             60,
             1f,

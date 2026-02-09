@@ -20,29 +20,21 @@ namespace MightofUniverses.Common.Players
         public int regenTimer;
         public int healCooldown;
         public int emergencyHealCooldown;
-
-        // Green Ring
         private const float GREEN_RADIUS = 30f * 16f;
-        private const int GREEN_BASE_DAMAGE = 100;
-        private const int GREEN_DAMAGE_PER_ENEMY = 20;
+        private const int GREEN_BASE_DAMAGE = 50;
+        private const int GREEN_DAMAGE_PER_ENEMY = 10;
         private const float GREEN_DAMAGE_INTERVAL = 20f;
         private int greenDamageTimer;
-
-        // Yellow Ring
         private const float YELLOW_RADIUS = 20f * 16f;
-        private const int YELLOW_BASE_DAMAGE = 100;
-        private const int YELLOW_DAMAGE_PER_ENEMY = 25;
+        private const int YELLOW_BASE_DAMAGE = 75;
+        private const int YELLOW_DAMAGE_PER_ENEMY = 15;
         private const float YELLOW_DAMAGE_INTERVAL = 10f;
         private int yellowDamageTimer;
-
-        // Red Ring
         private const float RED_RADIUS = 10f * 16f;
         private const int RED_BASE_DAMAGE = 100;
-        private const int RED_DAMAGE_PER_ENEMY = 30;
+        private const int RED_DAMAGE_PER_ENEMY = 25;
         private const float RED_DAMAGE_INTERVAL = 5f;
         private int redDamageTimer;
-
-        // Custom double-tap detection
         private bool rightKeyDown;
         private bool leftKeyDown;
         private int rightKeyPressTime;
@@ -51,9 +43,7 @@ namespace MightofUniverses.Common.Players
         private int leftKeyReleaseTime;
         private int rightTapCount;
         private int leftTapCount;
-        private const int TAP_WINDOW = 15; // Frames to consider a double-tap
-
-        // Dash constants
+        private const int TAP_WINDOW = 15;
         private const int DASH_DURATION = 20;
         private const int DASH_COOLDOWN = 200;
         private const float DASH_VELOCITY = 15f;
@@ -73,20 +63,16 @@ namespace MightofUniverses.Common.Players
             dashTimer = DASH_DURATION;
             dashDirection = direction;
             dashCooldown = DASH_COOLDOWN;
-            
-            // Play a dash sound
             SoundEngine.PlaySound(SoundID.Item74, Player.Center);
         }
 
         public override void PreUpdate()
         {
-            // Handle dash cooldown
             if (dashCooldown > 0)
             {
                 dashCooldown--;
             }
-            
-            // Handle dash timer
+
             if (dashTimer > 0)
             {
                 dashTimer--;
@@ -95,8 +81,7 @@ namespace MightofUniverses.Common.Players
                     dashing = false;
                 }
             }
-            
-            // Custom double-tap detection
+
             if (hasSatelliteGrid)
             {
                 HandleDoubleTapDetection();
@@ -107,8 +92,7 @@ namespace MightofUniverses.Common.Players
                 Player.velocity.X = DASH_VELOCITY * dashDirection;
                 Player.immune = true;
                 Player.immuneTime = 6;
-                
-                // Create dash visual effects
+
                 for (int i = 0; i < 3; i++)
                 {
                     Dust dust = Dust.NewDustDirect(
@@ -140,7 +124,6 @@ namespace MightofUniverses.Common.Players
                     dust2.velocity *= 0.5f;
                 }
 
-                // Check for collisions with NPCs
                 Rectangle hitbox = Player.Hitbox;
                 for (int i = 0; i < Main.maxNPCs; i++)
                 {
@@ -153,8 +136,7 @@ namespace MightofUniverses.Common.Players
                             Knockback = 8f,
                             HitDirection = dashDirection
                         });
-                        
-                        // Add impact effects
+
                         SoundEngine.PlaySound(SoundID.Item14, npc.Center);
                         for (int d = 0; d < 10; d++)
                         {
@@ -177,14 +159,12 @@ namespace MightofUniverses.Common.Players
         
         private void HandleDoubleTapDetection()
         {
-            // Track right key
             bool rightKeyPressed = Player.controlRight && !Player.controlLeft;
             if (rightKeyPressed && !rightKeyDown)
             {
                 rightKeyDown = true;
                 rightKeyPressTime = 0;
-                
-                // Check if this is a second tap within the window
+
                 if (rightKeyReleaseTime < TAP_WINDOW)
                 {
                     rightTapCount++;
@@ -204,15 +184,13 @@ namespace MightofUniverses.Common.Players
                 rightKeyDown = false;
                 rightKeyReleaseTime = 0;
             }
-            
-            // Track left key
+
             bool leftKeyPressed = Player.controlLeft && !Player.controlRight;
             if (leftKeyPressed && !leftKeyDown)
             {
                 leftKeyDown = true;
                 leftKeyPressTime = 0;
-                
-                // Check if this is a second tap within the window
+
                 if (leftKeyReleaseTime < TAP_WINDOW)
                 {
                     leftTapCount++;
@@ -232,8 +210,7 @@ namespace MightofUniverses.Common.Players
                 leftKeyDown = false;
                 leftKeyReleaseTime = 0;
             }
-            
-            // Increment timers
+
             if (rightKeyDown)
             {
                 rightKeyPressTime++;
@@ -251,8 +228,7 @@ namespace MightofUniverses.Common.Players
             {
                 leftKeyReleaseTime++;
             }
-            
-            // Reset tap count if too much time has passed
+
             if (rightKeyReleaseTime > TAP_WINDOW * 2)
             {
                 rightTapCount = 0;

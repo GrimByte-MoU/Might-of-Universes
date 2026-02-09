@@ -40,10 +40,9 @@ namespace MightofUniverses.Content.Items.Weapons
                 {
                     DataZapSystem.TryZapEnemies(player, position, velocity, damage, knockback);
                 }
-                return false; // Skip normal arrows
+                return false;
             }
 
-            // Fire 2 regular arrows
             float spread = 0.1f;
             for (int i = 0; i < 2; i++)
             {

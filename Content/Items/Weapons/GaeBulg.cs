@@ -9,7 +9,6 @@ namespace MightofUniverses.Content.Items.Weapons
     {
         public override void SetDefaults()
         {
-            // Clone Gungnir
             Item.CloneDefaults(ItemID.Gungnir);
             Item.damage = 95;
             Item.useTime = 18;

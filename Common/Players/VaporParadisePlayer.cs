@@ -46,8 +46,7 @@ namespace MightofUniverses.Common.Players
                     DespawnExtraSuns();
                 }
             }
-
-            // Handle cooldown
+            
             if (abilityCooldown > 0)
             {
                 abilityCooldown--;

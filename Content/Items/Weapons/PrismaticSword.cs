@@ -35,13 +35,11 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override void HoldItem(Player player)
         {
-            // Bright rainbow lighting
             float r = Main.DiscoR / 255f;
             float g = Main.DiscoG / 255f;
             float b = Main.DiscoB / 255f;
             Lighting.AddLight(player.Center, r * 1.5f, g * 1.5f, b * 1.5f);
 
-           // Toned down rainbow particles
         if (Main.rand.NextBool(3))
 {
     Dust dust = Dust.NewDustDirect(player.position, player.width, player.height, DustID.RainbowTorch, 0f, 0f, 100, default, 0.8f);

@@ -14,9 +14,9 @@ namespace MightofUniverses.Content.Rarities
                 float time = Main.GlobalTimeWrappedHourly * 1.2f;
                 Color[] colors = new Color[]
                 {
-                    new Color(48, 25, 52),   // Dark Purple
-                    new Color(88, 24, 69),   // Dark Magenta
-                    new Color(60, 12, 80)    // Deep Magenta
+                    new Color(48, 25, 52),
+                    new Color(88, 24, 69),
+                    new Color(60, 12, 80)
                 };
                 int currentIndex = (int)(time % colors.Length);
                 int nextIndex = (currentIndex + 1) % colors.Length;

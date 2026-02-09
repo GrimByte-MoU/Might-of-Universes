@@ -40,7 +40,7 @@ public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
     if (hasPiratePower && !wasHitDuringBuff)
     {
         wasHitDuringBuff = true;
-        Player.AddBuff(BuffID.PotionSickness, 600); // 10 seconds
+        Player.AddBuff(BuffID.PotionSickness, 600);
         Player.ClearBuff(ModContent.BuffType<PiratePower>());
     }
 }

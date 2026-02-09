@@ -36,7 +36,7 @@ namespace MightofUniverses.Content.Items.Buffs
 
         public void TriggerDodgeBoost()
         {
-            dodgeTimer = 120; // 2 seconds
+            dodgeTimer = 120;
         }
 
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
@@ -45,7 +45,7 @@ namespace MightofUniverses.Content.Items.Buffs
     {
         modifiers.ModifyHurtInfo += delegate (ref Player.HurtInfo info)
         {
-            Player.immuneTime += 60; // +1s extra immunity
+            Player.immuneTime += 60;
         };
     }
 }
@@ -56,7 +56,7 @@ public override void ModifyHitByProjectile(Projectile proj, ref Player.HurtModif
     {
         modifiers.ModifyHurtInfo += delegate (ref Player.HurtInfo info)
         {
-            Player.immuneTime += 60; // +1s extra immunity
+            Player.immuneTime += 60;
         };
     }
 }

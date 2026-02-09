@@ -74,7 +74,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            int projectileCount = Main.rand.Next(1, 3); // 1 or 2 projectiles
+            int projectileCount = Main.rand.Next(1, 3);
             for (int i = 0; i < projectileCount; i++)
             {
                 Vector2 newVelocity = velocity.RotatedBy(MathHelper.ToRadians(Main.rand.NextFloat(-5f, 5f)));

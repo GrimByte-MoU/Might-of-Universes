@@ -23,14 +23,12 @@ namespace MightofUniverses.Content.Items.Accessories
 
         public override void AddRecipes()
         {
-            // Rotten Chunk variant
             Recipe r1 = CreateRecipe();
             r1.AddIngredient(ItemID.FallenStar, 3);
             r1.AddIngredient(ItemID.RottenChunk, 5);
             r1.AddTile(TileID.WorkBenches);
             r1.Register();
 
-            // Vertebrae variant
             Recipe r2 = CreateRecipe();
             r2.AddIngredient(ItemID.FallenStar, 3);
             r2.AddIngredient(ItemID.Vertebrae, 5);

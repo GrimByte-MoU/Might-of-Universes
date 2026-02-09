@@ -22,12 +22,9 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            // Constant forward velocity
             if (Projectile.velocity.Length() < 8f)
                 Projectile.velocity = Vector2.Normalize(Projectile.velocity) * 8f;
             Projectile.gfxOffY = -32f;
-
-            // Light & dust effect
             Lighting.AddLight(Projectile.Center, 1f, 0.4f, 0.1f);
             if (Main.rand.NextBool(2))
             {
@@ -39,7 +36,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            // Apply Demonfire & Hellfire
             target.AddBuff(ModContent.BuffType<Demonfire>(), 300);
             target.AddBuff(BuffID.OnFire3, 300); 
             target.AddBuff(ModContent.BuffType<HellsMark>(), 300);

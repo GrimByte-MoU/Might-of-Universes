@@ -50,7 +50,6 @@ namespace MightofUniverses.Content.Items. Accessories
         {
             if (! spellshotEffect || proj. owner != Player.whoAmI) return;
 
-            // Ranged weapons: 10% chance to restore 20 mana (NO COOLDOWN) - BUFFED
             if (proj.DamageType == DamageClass.Ranged && Main.rand.NextBool(10))
             {
                 Player.statMana = Math.Min(Player.statMana + 20, Player.statManaMax2);
@@ -69,8 +68,6 @@ namespace MightofUniverses.Content.Items. Accessories
                     }
                 }
             }
-
-            // Magic weapons: 10% chance to restore 1 ammo (NO COOLDOWN) - BUFFED
             if (proj.DamageType == DamageClass.Magic && Main.rand.NextBool(10))
             {
                 for (int i = 54; i < 58; i++)

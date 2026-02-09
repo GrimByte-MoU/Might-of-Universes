@@ -27,8 +27,6 @@ namespace MightofUniverses.Content.Items.Accessories
         {
             player.GetModPlayer<FirewallPlayer>().hasFirewall = true;
             player.statDefense += 6;
-            
-            // Ankh Shield immunities
             player.buffImmune[BuffID.Poisoned] = true;
             player.buffImmune[BuffID.Confused] = true;
             player.buffImmune[BuffID.CursedInferno] = true;
@@ -49,8 +47,6 @@ namespace MightofUniverses.Content.Items.Accessories
         public int dashTimer;
         public int dashCooldown;
         public int dashDirection;
-        
-        // Custom double-tap detection
         private bool rightKeyDown;
         private bool leftKeyDown;
         private int rightKeyPressTime;
@@ -59,13 +55,11 @@ namespace MightofUniverses.Content.Items.Accessories
         private int leftKeyReleaseTime;
         private int rightTapCount;
         private int leftTapCount;
-        private const int TAP_WINDOW = 15; // Frames to consider a double-tap
+        private const int TAP_WINDOW = 15;
 
         public override void ResetEffects()
         {
             hasFirewall = false;
-            
-            // Don't reset dashing here to allow dash to complete even if accessory is removed
         }
 
         public bool CanUseDash()
@@ -79,20 +73,16 @@ namespace MightofUniverses.Content.Items.Accessories
             dashTimer = Firewall.DASH_DURATION;
             dashDirection = direction;
             dashCooldown = Firewall.DASH_COOLDOWN;
-            
-            // Play a dash sound
             SoundEngine.PlaySound(SoundID.Item74, Player.Center);
         }
 
         public override void PreUpdate()
         {
-            // Handle dash cooldown
             if (dashCooldown > 0)
             {
                 dashCooldown--;
             }
-            
-            // Handle dash timer
+
             if (dashTimer > 0)
             {
                 dashTimer--;
@@ -101,21 +91,18 @@ namespace MightofUniverses.Content.Items.Accessories
                     dashing = false;
                 }
             }
-            
-            // Custom double-tap detection
+
             HandleDoubleTapDetection();
         }
         
         private void HandleDoubleTapDetection()
         {
-            // Track right key
             bool rightKeyPressed = Player.controlRight && !Player.controlLeft;
             if (rightKeyPressed && !rightKeyDown)
             {
                 rightKeyDown = true;
                 rightKeyPressTime = 0;
-                
-                // Check if this is a second tap within the window
+
                 if (rightKeyReleaseTime < TAP_WINDOW)
                 {
                     rightTapCount++;
@@ -135,15 +122,13 @@ namespace MightofUniverses.Content.Items.Accessories
                 rightKeyDown = false;
                 rightKeyReleaseTime = 0;
             }
-            
-            // Track left key
+
             bool leftKeyPressed = Player.controlLeft && !Player.controlRight;
             if (leftKeyPressed && !leftKeyDown)
             {
                 leftKeyDown = true;
                 leftKeyPressTime = 0;
-                
-                // Check if this is a second tap within the window
+
                 if (leftKeyReleaseTime < TAP_WINDOW)
                 {
                     leftTapCount++;
@@ -163,8 +148,7 @@ namespace MightofUniverses.Content.Items.Accessories
                 leftKeyDown = false;
                 leftKeyReleaseTime = 0;
             }
-            
-            // Increment timers
+
             if (rightKeyDown)
             {
                 rightKeyPressTime++;
@@ -182,8 +166,7 @@ namespace MightofUniverses.Content.Items.Accessories
             {
                 leftKeyReleaseTime++;
             }
-            
-            // Reset tap count if too much time has passed
+
             if (rightKeyReleaseTime > TAP_WINDOW * 2)
             {
                 rightTapCount = 0;
@@ -202,8 +185,7 @@ namespace MightofUniverses.Content.Items.Accessories
                 Player.immune = true;
                 Player.immuneTime = 6;
                 Player.velocity.X = Firewall.DASH_VELOCITY * dashDirection;
-                
-                // Create dash visual effects
+
                 for (int i = 0; i < 3; i++)
                 {
                     Dust dust = Dust.NewDustDirect(
@@ -221,7 +203,6 @@ namespace MightofUniverses.Content.Items.Accessories
                     dust.velocity *= 0.3f;
                 }
 
-                // Check for collisions with NPCs
                 Rectangle hitbox = Player.Hitbox;
                 for (int i = 0; i < Main.maxNPCs; i++)
                 {

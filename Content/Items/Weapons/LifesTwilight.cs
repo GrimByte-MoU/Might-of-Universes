@@ -49,8 +49,6 @@ namespace MightofUniverses.Content.Items.Weapons
                 IEntitySource src = player.GetSource_ItemUse(Item);
                 int damage = player.GetWeaponDamage(Item);
                 float kb = player.GetWeaponKnockback(Item);
-
-                // Four orbiters at fixed world anchor: phases 0, π/2, π, 3π/2
                 float[] phases = {
                     0f,
                     MathHelper.PiOver2,
@@ -64,25 +62,21 @@ namespace MightofUniverses.Content.Items.Weapons
                         src,
                         player.Center,
                         Vector2.Zero,
-                        ModContent.ProjectileType<ScytheEclipse>(), // Make sure this matches the file below
+                        ModContent.ProjectileType<ScytheEclipse>(),
                         damage * 2,
                         kb,
                         player.whoAmI,
                         ai0: phase
                     );
                 }
-
-                // Optional debug:
-                // Main.NewText("Life's Twilight ability spawned 4 eclipses.", Microsoft.Xna.Framework.Color.Orange);
             }
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source,
             Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            // Two helix strands: phases 0 & π (NOT ±0.5f)
             Vector2 dir = velocity.SafeNormalize(Vector2.UnitX);
-            float lateral = 14f; // narrower than old 20 to reduce ground hits
+            float lateral = 14f;
 
             Vector2 perp = dir.RotatedBy(MathHelper.PiOver2) * lateral;
 

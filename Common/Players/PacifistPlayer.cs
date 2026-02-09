@@ -11,8 +11,6 @@ namespace MightofUniverses.Common.Players
     {
         pacifistDamageMultiplier = 1f;
     }
-
-    // For items used directly as weapons
     public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
     {
         if (item.DamageType == ModContent.GetInstance<PacifistDamageClass>())
@@ -20,8 +18,6 @@ namespace MightofUniverses.Common.Players
             damage *= pacifistDamageMultiplier;
         }
     }
-
-    // For projectiles spawned by accessories/armor/etc.
     public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
     {
         if (proj.DamageType == ModContent.GetInstance<PacifistDamageClass>())

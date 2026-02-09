@@ -13,30 +13,28 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             Projectile.friendly = true;
             Projectile.penetrate = 1;
-            Projectile.timeLeft = 600; // 10 seconds max lifespan
+            Projectile.timeLeft = 600;
             Projectile.tileCollide = true;
             Projectile.ignoreWater = false;
             Projectile.DamageType = ModContent.GetInstance<PacifistDamageClass>();
         }
 
         private bool hasFoundTarget = false;
-        private const float DetectionRange = 300f; // ~18 tiles
+        private const float DetectionRange = 300f;
         private const float HomingStrength = 0.3f;
         private const float MaxSpeed = 16f;
 
         public override void AI()
         {
-            // Spinning visual effect
             Projectile.rotation += 0.3f;
 
-            // Emit glow particles
             if (Main.rand.NextBool(3))
             {
                 Color dustColor = Main.rand.Next(3) switch
                 {
-                    0 => new Color(255, 200, 100), // Gold
-                    1 => new Color(200, 200, 200), // Silver
-                    _ => new Color(150, 100, 50)   // Bronze
+                    0 => new Color(255, 200, 100),
+                    1 => new Color(200, 200, 200),
+                    _ => new Color(150, 100, 50)
                 };
 
                 Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Copper, 0f, 0f, 100, dustColor, 0.8f);
@@ -44,17 +42,12 @@ namespace MightofUniverses.Content.Items.Projectiles
                 dust.velocity *= 0.3f;
             }
 
-            // Lighting
             Lighting.AddLight(Projectile.Center, 0.8f, 0.7f, 0.4f);
-
-            // Find nearest enemy
             NPC target = FindNearestEnemy();
 
             if (target != null)
             {
                 hasFoundTarget = true;
-
-                // Home towards target
                 Vector2 direction = target.Center - Projectile.Center;
                 direction.Normalize();
 
@@ -96,7 +89,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            // Visual impact effect
             for (int i = 0; i < 8; i++)
             {
                 Color dustColor = Main.rand.Next(2) switch
@@ -113,7 +105,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            // Bounce off tiles
             if (Math.Abs(Projectile.velocity.X - oldVelocity.X) > float.Epsilon)
             {
                 Projectile.velocity.X = -oldVelocity.X * 0.7f;

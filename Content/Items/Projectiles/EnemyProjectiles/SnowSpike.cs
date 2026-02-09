@@ -18,7 +18,7 @@ namespace MightofUniverses.Content.Items. Projectiles.EnemyProjectiles
             Projectile.height = 14;
             Projectile.hostile = true;
             Projectile.friendly = false;
-            Projectile.penetrate = 1;
+            Projectile.penetrate = 5;
             Projectile.timeLeft = 600;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
@@ -63,7 +63,6 @@ namespace MightofUniverses.Content.Items. Projectiles.EnemyProjectiles
             target.AddBuff(BuffID.Frostburn, frostburnDuration[difficulty]);
             target.AddBuff(BuffID.Frostburn2, frostbiteDuration[difficulty]);
 
-            // Shatter effect
             for (int i = 0; i < 10; i++)
             {
                 Vector2 velocity = Main.rand.NextVector2Circular(3f, 3f);

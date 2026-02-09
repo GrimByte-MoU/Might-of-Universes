@@ -2,12 +2,11 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using MightofUniverses.Common.Players;      // ReaperAccessoryPlayer.ReportPassiveSoulGain
-using MightofUniverses.Content.Items.Buffs; // CagedSoul
+using MightofUniverses.Common.Players;
+using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    // Specter Orb (Spectercage Artifact): homes to the owner, grants 5 souls, heals 10, applies Caged Soul for 3s.
     public class SpecterOrbProj : MoUProjectile
     {
         private const int SoulsGranted = 5;
@@ -30,13 +29,10 @@ namespace MightofUniverses.Content.Items.Projectiles
             Player player = Main.player[owner];
             if (player == null || !player.active) { Projectile.Kill(); return; }
 
-            // Subtle bob + easing
             Projectile.rotation += 0.02f * Projectile.direction;
             float bob = (float)System.Math.Sin(Main.GlobalTimeWrappedHourly * 6f + Projectile.whoAmI) * 0.3f;
             Projectile.velocity *= 0.98f;
             Projectile.velocity.Y += bob * 0.02f;
-
-            // Home to player
             Vector2 to = player.Center - Projectile.Center;
             float dist = to.Length();
             if (dist > 6f)
@@ -47,10 +43,8 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Projectile.velocity = Vector2.Lerp(Projectile.velocity, desired, 0.12f);
             }
 
-            // Ghostly light
             Lighting.AddLight(Projectile.Center, new Vector3(0.35f, 0.75f, 0.95f) * 0.8f);
 
-            // Sparkle trail
             if (Main.rand.NextBool(4))
             {
                 int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.DungeonSpirit,
@@ -59,7 +53,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Main.dust[d].velocity *= 0.3f;
             }
 
-            // Pickup
             if (dist <= 20f)
             {
                 ReaperAccessoryPlayer.ReportPassiveSoulGain(player, SoulsGranted);
@@ -67,7 +60,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                 player.Heal(HealAmount);
                 player.AddBuff(ModContent.BuffType<CagedSoulBuff>(), 180);
 
-                // Pickup burst
                 for (int i = 0; i < 12; i++)
                 {
                     Vector2 v = Main.rand.NextVector2Circular(2.4f, 2.4f);

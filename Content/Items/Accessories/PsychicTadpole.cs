@@ -21,31 +21,24 @@ namespace MightofUniverses.Content.Items.Accessories
             Item.value = Item.sellPrice(gold: 5);
             Item.rare = ItemRarityID.LightRed;
             Item.accessory = true;
-            
-            // Set the wing slot without using AutoloadEquip
             Item.wingSlot = 1;
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            // Get the mod player to handle flight mechanics
             var modPlayer = player.GetModPlayer<TadpolePlayer>();
             modPlayer.hasPsychicTadpole = true;
-
-            // Apply stat bonuses
             player.statLifeMax2 += 20;
             player.moveSpeed += 0.2f;
             player.GetDamage(DamageClass.Generic) += 0.07f;
-            
-            // Apply slow fall effect
             player.slowFall = true;
         }
 
         public override void VerticalWingSpeeds(Player player, ref float ascentWhenFalling, ref float ascentWhenRising,
             ref float maxCanAscendMultiplier, ref float maxAscentMultiplier, ref float constantAscend)
         {
-            ascentWhenFalling = 0.5f;      // Falling glide speed
-            ascentWhenRising = 0.15f;      // Rising speed
+            ascentWhenFalling = 0.5f;
+            ascentWhenRising = 0.15f;
             maxCanAscendMultiplier = 1f;
             maxAscentMultiplier = 1.5f;
             constantAscend = 0.15f;

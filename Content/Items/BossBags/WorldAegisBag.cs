@@ -37,17 +37,10 @@ namespace MightofUniverses.Content.Items.BossBags
                 ModContent.ItemType<WorldwalkerSword>(),
                 ModContent.ItemType<BiomeCleanser>(),
             };
-
-            // Guarantee two unique weapons
-            itemLoot.Add(new FewFromOptionsDropRule(1, 1, 2, weapons));
-
-            // 300-400 Aegis Remains
+            
+            itemLoot.Add(new FewFromOptionsDropRule(2, 2, 2, weapons));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<AegisRemains>(), 1, 300, 401));
-
-            // Expert exclusive: Aegis Replica (guaranteed)
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<AegisReplica>()));
-
-            // Master exclusive: Earthen Crown (guaranteed)
             itemLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<EarthenCrown>()));
         }
     }

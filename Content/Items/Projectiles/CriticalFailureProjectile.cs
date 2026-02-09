@@ -13,7 +13,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.friendly = true;
             Projectile.DamageType = ModContent.GetInstance<ReaperDamageClass>();
             Projectile.penetrate = 3;
-            Projectile.timeLeft = 100; // Medium lifetime
+            Projectile.timeLeft = 100;
             Projectile.light = 0.5f;
         }
 

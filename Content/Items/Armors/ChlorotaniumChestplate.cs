@@ -30,14 +30,12 @@ namespace MightofUniverses.Content.Items.Armors
 
         public override void AddRecipes()
         {
-            // Titanium variant
             CreateRecipe()
                 .AddIngredient(ItemID.ChlorophyteBar, 24)
                 .AddIngredient(ItemID.TitaniumBar, 24)
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
 
-            // Adamantite variant
             CreateRecipe()
                 .AddIngredient(ItemID.ChlorophyteBar, 24)
                 .AddIngredient(ItemID.AdamantiteBar, 24)

@@ -40,13 +40,13 @@ namespace MightofUniverses.Content.Items.Projectiles
             {
                 timeStationary++;
                 fragmentCooldown++;
-                if (fragmentCooldown >= 30) // every second
+                if (fragmentCooldown >= 30)
                 {
                     FireRadialFragments();
                     fragmentCooldown = 0;
                 }
 
-                if (timeStationary >= 120) // after 2 seconds
+                if (timeStationary >= 120)
                 {
                     FinalBurst();
                     Projectile.Kill();

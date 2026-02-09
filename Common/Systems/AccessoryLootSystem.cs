@@ -8,7 +8,6 @@ namespace MightofUniverses.Common.Systems
 {
     public class AccessoryLootSystem : ModSystem
     {
-        // (1.4.4+) Add new fishing loot entries
         #if TML_144
                 public override void ModifyFishingLoot(FishingLoot loot)
                 {
@@ -35,14 +34,12 @@ namespace MightofUniverses.Common.Systems
     // -------------------------
     // Fishing Conditions
     // -------------------------
-    public class EvilBiomeFishingCondition : IItemDropRuleCondition /* (and implicitly IProvideItemConditionDescription in newer tML) */
+    public class EvilBiomeFishingCondition : IItemDropRuleCondition
     {
         public bool CanDrop(DropAttemptInfo info)
             => info.player.ZoneCrimson || info.player.ZoneCorrupt;
 
         public bool CanShowItemDropInUI() => true;
-
-        // Required in current tModLoader (if interface demands a description).
         public string GetConditionDescription() => "Fished in an evil biome";
     }
 
@@ -55,10 +52,6 @@ namespace MightofUniverses.Common.Systems
 
         public string GetConditionDescription() => "Fished in the Ocean after defeating Skeletron";
     }
-
-    // -------------------------
-    // Enemy drops (Soul Siphoning Artifact)
-    // -------------------------
     public class AccessoryGlobalNPC : GlobalNPC
     {
         public override void OnKill(NPC npc)
@@ -66,7 +59,6 @@ namespace MightofUniverses.Common.Systems
             if (npc.SpawnedFromStatue)
                 return;
 
-            // 5% chance from specific skeleton-type enemies
             if (IsSkeletonTarget(npc.type) && Main.rand.NextFloat() < 0.05f)
             {
                 Item.NewItem(npc.GetSource_Loot(), npc.getRect(),
@@ -93,10 +85,10 @@ namespace MightofUniverses.Common.Systems
             if (shop.NpcType != NPCID.SkeletonMerchant)
                 return;
 
-            if (NPC.downedBoss1) // Eye defeated
+            if (NPC.downedBoss1)
                 shop.Add(ModContent.ItemType<FerrymansToken>());
 
-            if (NPC.downedBoss2) // Brain/Eater defeated
+            if (NPC.downedBoss2)
                 shop.Add(ModContent.ItemType<GravediggersRing>());
         }
     }

@@ -18,7 +18,7 @@ namespace MightofUniverses.Common.GlobalNPCs
 
             if (npc.type == NPCID.Vampire)
             {
-                if (Main.rand.NextFloat() < .50f) // 50% chance
+                if (Main.rand.NextFloat() < .50f)
                 {
                     Item.NewItem(npc.GetSource_Loot(), npc.getRect(), ModContent.ItemType<EclipseLight>(), Main.rand.Next(1, 4));
                 }

@@ -34,7 +34,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            // Crit and +50% damage on final segment
             if (Projectile.ai[0] >= Projectile.WhipSettings.Segments - 1 - 0.001f)
             {
                 modifiers.FinalDamage *= 1.5f;

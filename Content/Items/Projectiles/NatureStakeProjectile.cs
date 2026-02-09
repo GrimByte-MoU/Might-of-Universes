@@ -9,21 +9,19 @@ namespace MightofUniverses.Content.Items.Projectiles
 {
     public class NatureStakeProjectile : MoUProjectile
     {
-        // Track number of bounces
         private int bounceCount = 0;
         private const int MAX_BOUNCES = 3;
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Nature Stake");
         }
 
         public override void SafeSetDefaults()
         {
-            Projectile.aiStyle = 1; // Arrow-like movement
+            Projectile.aiStyle = 1;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;
-            Projectile.penetrate = 4; // Pierce 4 enemies
+            Projectile.penetrate = 4;
             Projectile.timeLeft = 600;
             Projectile.light = 0.5f;
             Projectile.ignoreWater = true;
@@ -35,7 +33,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            // Create a trail of leaf particles
             if (Main.rand.NextBool(3))
             {
                 Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, 
@@ -45,13 +42,11 @@ namespace MightofUniverses.Content.Items.Projectiles
                 dust.velocity *= 0.3f;
             }
             
-            // Rotate the projectile based on velocity
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            // Create a burst of leaves on hit
             for (int i = 0; i < 15; i++)
             {
                 Vector2 speed = Main.rand.NextVector2CircularEdge(1f, 1f);
@@ -62,14 +57,11 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            // Handle bouncing off walls
             bounceCount++;
             if (bounceCount <= MAX_BOUNCES)
             {
-                // Play bounce sound
                 SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
                 
-                // Bounce logic
                 if (Math.Abs(Projectile.velocity.X - oldVelocity.X) > float.Epsilon)
                 {
                     Projectile.velocity.X = -oldVelocity.X * 0.9f;
@@ -80,7 +72,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                     Projectile.velocity.Y = -oldVelocity.Y * 0.9f;
                 }
                 
-                // Create dust effect on bounce
                 for (int i = 0; i < 10; i++)
                 {
                     Vector2 speed = Main.rand.NextVector2CircularEdge(1f, 1f);
@@ -88,10 +79,10 @@ namespace MightofUniverses.Content.Items.Projectiles
                     dust.noGravity = true;
                 }
                 
-                return false; // Don't destroy the projectile
+                return false;
             }
             
-            return true; // Destroy the projectile after MAX_BOUNCES
+            return true;
         }
     }
 }

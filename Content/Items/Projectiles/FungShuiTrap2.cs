@@ -13,7 +13,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         private const float SearchRadius = 600f;
         private const float HomingSpeed = 10f;
         private const float HomingInertia = 20f;
-        private const float ExplodeDistance = 28f;
+        private const float ExplodeDistance = 0f;
 
         public override void SafeSetDefaults()
         {
@@ -28,7 +28,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            // Acquire nearest valid target
             int targetIndex = -1;
             float bestDistSq = SearchRadius * SearchRadius;
             for (int i = 0; i < Main.maxNPCs; i++)
@@ -59,7 +58,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                     Projectile.velocity = (Projectile.velocity * (HomingInertia - 1f) + desired) / HomingInertia;
                 }
 
-                // Explode when close enough
                 if (Vector2.Distance(Projectile.Center, target.Center) <= ExplodeDistance)
                 {
                     Explode();
@@ -68,11 +66,9 @@ namespace MightofUniverses.Content.Items.Projectiles
             }
             else
             {
-                // Idle: slight drift
                 Projectile.velocity *= 0.98f;
             }
 
-            // Visual light
             Lighting.AddLight(Projectile.Center, 0.3f, 0.3f, 0.8f);
             Projectile.rotation += 0.02f;
         }
@@ -95,7 +91,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             }
 
             Projectile.netUpdate = true;
-            Projectile.Kill(); // Kill() spawns FungShuiSpore2 in original Kill implementation
+            Projectile.Kill();
         }
 
         public override void Kill(int timeLeft)

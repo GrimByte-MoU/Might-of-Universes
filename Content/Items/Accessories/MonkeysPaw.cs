@@ -20,12 +20,8 @@ namespace MightofUniverses.Content.Items.Accessories
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
             var acc = player.GetModPlayer<ReaperAccessoryPlayer>();
-
-            // +15% max health (additive approach)
             player.statLifeMax2 += (int)(player.statLifeMax2 * 0.15f);
             reaper.maxSoulEnergy += 50f;
-
-            // Increase damage taken by 25%: negative endurance
             player.endurance -= 0.25f;
             if (player.endurance < -0.9f) player.endurance = -0.9f;
 

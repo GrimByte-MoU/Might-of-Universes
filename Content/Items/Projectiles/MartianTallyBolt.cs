@@ -27,27 +27,21 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            // Store the original velocity direction
             if (Projectile.ai[0] == 0)
             {
                 Projectile.ai[0] = Projectile.velocity.ToRotation();
                 Projectile.ai[1] = Projectile.velocity.Length();
             }
 
-            // Zigzag movement
             zigzagTimer += ZIGZAG_SPEED;
-            float baseRotation = Projectile.ai[0];
-            float zigzagOffset = (float)Math.Sin(zigzagTimer) * ZIGZAG_WIDTH;
-            
+            float baseRotation = Projectile.ai[0];            
             Vector2 baseDirection = new Vector2((float)Math.Cos(baseRotation), (float)Math.Sin(baseRotation));
             Vector2 perpendicular = new Vector2(-baseDirection.Y, baseDirection.X);
             
             Projectile.velocity = baseDirection * Projectile.ai[1] + perpendicular * (float)Math.Cos(zigzagTimer) * 4f;
             
-            // Visual effects
             Projectile.rotation = Projectile.velocity.ToRotation();
             
-            // Emit particles
             if (Main.rand.NextBool(2))
             {
                 Dust neonGreen = Dust.NewDustDirect(
@@ -72,8 +66,7 @@ namespace MightofUniverses.Content.Items.Projectiles
                 electric.velocity *= 0.3f;
             }
             
-            // Light emission
-            Lighting.AddLight(Projectile.Center, 0.3f, 1f, 0.3f); // Neon green light
+            Lighting.AddLight(Projectile.Center, 0.3f, 1f, 0.3f);
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -82,7 +75,6 @@ namespace MightofUniverses.Content.Items.Projectiles
             var reaper = player.GetModPlayer<ReaperPlayer>();
             reaper.AddSoulEnergy(5f, target.Center);
             
-            // Create electric impact effect
             for (int i = 0; i < 10; i++)
             {
                 Dust.NewDust(target.position, target.width, target.height, DustID.Electric);

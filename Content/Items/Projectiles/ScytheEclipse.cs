@@ -6,8 +6,6 @@ using Terraria.ID;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    // ai[0] = base phase (0, π/2, π, 3π/2)
-    // localAI[0] anchorX, localAI[1] anchorY, localAI[2] init flag
     public class ScytheEclipse : MoUProjectile
     {
         private const float OrbitRadius = 140f;

@@ -39,7 +39,6 @@ namespace MightofUniverses.Common.Players
             if (!hasPalladiumRangedSet)
                 return;
 
-            // Check if one already exists
             for (int i = 0; i < Main.maxProjectiles; i++)
             {
                 Projectile proj = Main.projectile[i];
@@ -49,7 +48,6 @@ namespace MightofUniverses.Common.Players
                 }
             }
 
-            // Spawn at a distance from player
             Vector2 offset = new Vector2(Main.rand.NextFloat(200, 300), 0).RotatedByRandom(MathHelper.TwoPi);
             Vector2 spawnPos = Player.Center + offset;
 
@@ -59,7 +57,7 @@ namespace MightofUniverses.Common.Players
 
         private void TryMagicHealPulse()
         {
-            if (!hasPalladiumMagicSet || !Main.rand.NextBool(2)) // 50% chance
+            if (!hasPalladiumMagicSet || !Main.rand.NextBool(2))
                 return;
 
             bool healed = false;
@@ -87,7 +85,7 @@ namespace MightofUniverses.Common.Players
 
             if (healed)
             {
-                SoundEngine.PlaySound(SoundID.Item4, Player.Center); // Fairy-like healing sound
+                SoundEngine.PlaySound(SoundID.Item4, Player.Center);
             }
         }
     }

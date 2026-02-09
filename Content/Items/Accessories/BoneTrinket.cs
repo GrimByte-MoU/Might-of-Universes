@@ -11,8 +11,6 @@ namespace MightofUniverses.Content.Items.Accessories
     {
         public override void SetStaticDefaults()
         {
-            // +15 max soul energy
-            // Generates 1 soul per second while below 30% soul capacity.
         }
 
         public override void SetDefaults()
@@ -26,12 +24,7 @@ namespace MightofUniverses.Content.Items.Accessories
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            // Prefer the shared extra-max-souls pathway so all max-soul math is centralized.
             player.GetModPlayer<ReaperAccessoryPlayer>().flatMaxSoulsBonus += 15;
-
-            // If your system still reads max directly from ReaperPlayer, uncomment this line:
-            // player.GetModPlayer<ReaperPlayer>().maxSoulEnergy += 15f;
-
             player.GetModPlayer<BoneTrinketPlayer>().HasBoneTrinket = true;
         }
 
@@ -62,8 +55,6 @@ namespace MightofUniverses.Content.Items.Accessories
                 regenTimer = 0;
                 return;
             }
-
-            // 1 soul per second if below 30% capacity
             if (++regenTimer >= 60)
             {
                 regenTimer = 0;
@@ -74,11 +65,9 @@ namespace MightofUniverses.Content.Items.Accessories
                 {
                     if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        // Actually add 1 soul (server-side)
                         reaper.AddSoulEnergy(1f, Player.Center);
                     }
-
-                    // Report passive soul gain so Spirit String/Threads can convert it to life regen
+                    
                     ReaperAccessoryPlayer.ReportPassiveSoulGain(Player, 1f);
                 }
             }

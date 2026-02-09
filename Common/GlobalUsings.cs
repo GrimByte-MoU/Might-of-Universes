@@ -1,4 +1,3 @@
-// Common global usings to avoid per-file boilerplate across the mod
 global using Microsoft.Xna.Framework;
 global using Terraria;
 global using Terraria.ID;

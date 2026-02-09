@@ -16,7 +16,7 @@ namespace MightofUniverses.Common.GlobalNPCs
 
             if (npc.type == NPCID.MourningWood)
             {
-                if (Main.rand.NextFloat() < .75f) // 75% chance
+                if (Main.rand.NextFloat() < .75f)
                 {
                     Item.NewItem(npc.GetSource_Loot(), npc.getRect(), ModContent.ItemType<PureTerror>(), Main.rand.Next(2, 8));
                 }
@@ -24,7 +24,7 @@ namespace MightofUniverses.Common.GlobalNPCs
 
             if (npc.type == NPCID.HeadlessHorseman)
             {
-                if (Main.rand.NextFloat() < .50f) // 50% chance
+                if (Main.rand.NextFloat() < .50f)
                 {
                     Item.NewItem(npc.GetSource_Loot(), npc.getRect(), ModContent.ItemType<PureTerror>(), Main.rand.Next(1, 4));
                 }

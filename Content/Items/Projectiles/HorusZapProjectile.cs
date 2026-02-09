@@ -6,8 +6,6 @@ using Terraria;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    // Invisible, near-instant golden zap that chains up to 3 times (4 hits total).
-    // Slim visuals, robust line collision to prevent misses.
     public class HorusZapProjectile : MoUProjectile
     {
         private static readonly float[] ChainMultipliers = new float[] { 1f, 0.85f, 0.60f, 0.45f };
@@ -16,8 +14,8 @@ namespace MightofUniverses.Content.Items.Projectiles
         private const float TravelSpeed = 100f;
         private const int ExtraUpdates = 10;
 
-        private const float BeamVisualThicknessPx = 1.2f; // visual dust spread
-        private const float BeamHitboxThicknessPx = 6f;   // collision thickness (slightly thicker than before)
+        private const float BeamVisualThicknessPx = 1.2f;
+        private const float BeamHitboxThicknessPx = 6f;
 
         public override void SafeSetDefaults()
         {
@@ -51,19 +49,16 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Projectile.localAI[1] = 1f;
             }
 
-            // Trail across full-tick path
             Vector2 end = Projectile.Center;
-            Vector2 start = end - Projectile.velocity; // full-tick segment
+            Vector2 start = end - Projectile.velocity;
             SpawnBeamDustAlong(start, end, BeamVisualThicknessPx);
-
-            // Warm gold light
             Lighting.AddLight(Projectile.Center, 0.2f, 0.16f, 0.04f);
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
             Vector2 end = Projectile.Center;
-            Vector2 start = end - Projectile.velocity; // full-tick path
+            Vector2 start = end - Projectile.velocity;
             float _ = 0f;
             if (Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, BeamHitboxThicknessPx, ref _))
                 return true;

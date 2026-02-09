@@ -20,9 +20,9 @@ namespace MightofUniverses.Common.Players
 
         public override void UpdateEquips()
         {
-            if (Player.armor[0].type == ModContent.ItemType<Content.Items.Armors.BoneCollectorHat>()
-             && Player.armor[1].type == ModContent.ItemType<Content.Items.Armors.BoneCollectorShirt>()
-             && Player.armor[2].type == ModContent.ItemType<Content.Items.Armors.BoneCollectorPants>())
+            if (Player.armor[0].type == ModContent.ItemType<BoneCollectorHat>()
+             && Player.armor[1].type == ModContent.ItemType<BoneCollectorShirt>()
+             && Player.armor[2].type == ModContent.ItemType<BoneCollectorPants>())
             {
                 wearing = true;
                 var reaper = Player.GetModPlayer<ReaperPlayer>();

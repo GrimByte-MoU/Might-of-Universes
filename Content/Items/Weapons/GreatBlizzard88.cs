@@ -46,8 +46,6 @@ namespace MightofUniverses.Content.Items.Weapons
         IEntitySource src = player.GetSource_ItemUse(Item);
         int damage = player.GetWeaponDamage(Item);
         float kb = player.GetWeaponKnockback(Item);
-
-        // Spawn one controller that rains snowflakes over 4 seconds.
         Projectile.NewProjectile(
             src,
             player.Center,

@@ -42,8 +42,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Projectile.Kill();
                 return;
             }
-
-            // Orbit the player (slow circular motion behind player's head)
             float orbitDistance = 48f;
             float orbitSpeed = 0.02f;
             float t = (Main.GameUpdateCount * orbitSpeed) + Projectile.identity;
@@ -54,7 +52,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
             Projectile.rotation = Projectile.velocity.ToRotation();
 
-            // Fire at nearest target every 30 ticks (2x/sec)
             shootTimer++;
             if (shootTimer >= 30)
             {

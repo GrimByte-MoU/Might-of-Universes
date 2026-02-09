@@ -2,11 +2,10 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using MightofUniverses.Common; // ReaperDamageClass
+using MightofUniverses.Common;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    // Fast piercing laser, pierces once (2 hits total), no souls on hit
     public class CoreFlesh_Laser : MoUProjectile
     {
         public override void SafeSetDefaults()

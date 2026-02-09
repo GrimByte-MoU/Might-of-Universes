@@ -22,7 +22,6 @@ namespace MightofUniverses.Content.Items.Buffs
                 return;
             }
 
-            // Keep the buff alive as long as at least one minion exists
             if (player.ownedProjectileCounts[ModContent.ProjectileType<HellsEyeMinion>()] > 0)
             {
                 player.buffTime[buffIndex] = 18000;

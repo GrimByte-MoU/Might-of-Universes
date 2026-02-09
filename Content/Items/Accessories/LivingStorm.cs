@@ -12,7 +12,6 @@ namespace MightofUniverses.Content.Items.Accessories
     {
         public override void SetStaticDefaults()
         {
-            // DisplayName and Tooltip are automatically set from .hjson files in 1.4.4
         }
 
         public override void SetDefaults()
@@ -44,9 +43,9 @@ namespace MightofUniverses.Content.Items.Accessories
     {
         public bool hasLivingStorm = false;
         private int stormTimer = 0;
-        private const int STORM_INTERVAL = 60; // 1 second
-        private const float STORM_RADIUS = 10f * 16f; // 10 tiles in pixels
-        private const int STORM_DAMAGE = 15; // Base damage
+        private const int STORM_INTERVAL = 60;
+        private const float STORM_RADIUS = 10f * 16f;
+        private const int STORM_DAMAGE = 15;
 
         public override void ResetEffects()
         {
@@ -56,9 +55,7 @@ namespace MightofUniverses.Content.Items.Accessories
         public override void PostUpdate()
         {
             if (!hasLivingStorm) return;
-
-            // Draw the circle outline
-            const int NUM_POINTS = 60; // Number of points in the circle
+            const int NUM_POINTS = 60;
             for (int i = 0; i < NUM_POINTS; i++)
             {
                 float angle = (float)(i * (2 * Math.PI) / NUM_POINTS);
@@ -67,8 +64,6 @@ namespace MightofUniverses.Content.Items.Accessories
                     (float)Math.Sin(angle) * STORM_RADIUS
                 );
                 Vector2 dustPos = Player.Center + offset;
-                
-                // Create bright yellow dust at each point
                 Dust dust = Dust.NewDustPerfect(
                     dustPos,
                     DustID.YellowTorch,
@@ -81,13 +76,10 @@ namespace MightofUniverses.Content.Items.Accessories
                 dust.noLight = false;
             }
 
-            // Handle damage every 60 ticks (1 second)
             stormTimer++;
             if (stormTimer >= STORM_INTERVAL)
             {
                 stormTimer = 0;
-                
-                // Find all NPCs in range
                 List<NPC> affectedNPCs = new List<NPC>();
                 for (int i = 0; i < Main.maxNPCs; i++)
                 {
@@ -99,44 +91,34 @@ namespace MightofUniverses.Content.Items.Accessories
                     }
                 }
 
-                // Apply damage and effects to each NPC
                 if (affectedNPCs.Count > 0)
                 {
                     var reaperPlayer = Player.GetModPlayer<ReaperPlayer>();
                     
                     foreach (NPC npc in affectedNPCs)
                     {
-                        // Apply damage
                         if (Main.myPlayer == Player.whoAmI)
                         {
                             npc.SimpleStrikeNPC(STORM_DAMAGE, 0);
-                            
-                            // Apply electrified debuff for 1 second
                             npc.AddBuff(BuffID.Electrified, 60);
                         }
-                        
-                        // Add soul energy (1 per enemy hit)
+        
                         reaperPlayer.AddSoulEnergy(1f, npc.Center);
-                        
-                        // Create lightning effect at enemy position
                         CreateLightningEffect(npc.Center);
                     }
-                    
-                    // Create storm sound effect
+
                     if (affectedNPCs.Count > 0 && Main.rand.NextBool(3))
                     {
                         SoundEngine.PlaySound(SoundID.Item122, Player.Center); // Thunder sound
                     }
                 }
-                
-                // Create additional storm visuals
+
                 CreateStormVisuals();
             }
         }
         
         private void CreateLightningEffect(Vector2 position)
         {
-            // Create electric dust at the target
             for (int i = 0; i < 10; i++)
             {
                 Vector2 velocity = Main.rand.NextVector2Circular(3f, 3f);
@@ -150,24 +132,18 @@ namespace MightofUniverses.Content.Items.Accessories
                 );
                 dust.noGravity = true;
             }
-            
-            // Occasionally create a lightning bolt from player to target
+
             if (Main.rand.NextBool(3))
             {
                 Vector2 direction = position - Player.Center;
                 float distance = direction.Length();
                 direction.Normalize();
-                
-                // Create a jagged lightning path
                 Vector2 currentPos = Player.Center;
                 int segments = (int)(distance / 30f);
                 for (int i = 0; i < segments; i++)
                 {
                     Vector2 nextPos = Player.Center + direction * distance * ((i + 1f) / segments);
-                    // Add some randomness to the path
                     nextPos += Main.rand.NextVector2Circular(10f, 10f);
-                    
-                    // Draw dust between points
                     Vector2 dustDir = nextPos - currentPos;
                     float dustDist = dustDir.Length();
                     dustDir.Normalize();
@@ -193,12 +169,10 @@ namespace MightofUniverses.Content.Items.Accessories
         
         private void CreateStormVisuals()
         {
-            // Create cloud and rain effects within the storm area
             for (int i = 0; i < 15; i++)
             {
                 Vector2 position = Player.Center + Main.rand.NextVector2Circular(STORM_RADIUS * 0.8f, STORM_RADIUS * 0.8f);
-                
-                // Cloud dust
+
                 if (Main.rand.NextBool(3))
                 {
                     Dust dust = Dust.NewDustPerfect(
@@ -211,8 +185,7 @@ namespace MightofUniverses.Content.Items.Accessories
                     );
                     dust.noGravity = true;
                 }
-                
-                // Rain dust
+
                 Dust rainDust = Dust.NewDustPerfect(
                     position,
                     DustID.Rain,

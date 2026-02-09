@@ -43,7 +43,6 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             Player player = Main.player[Projectile.owner];
 
-            // Fade in at start, fade out at end
             if (Projectile.timeLeft > LIFETIME - 30)
             {
                 Projectile.alpha = (int)(255 * (1f - ((LIFETIME - Projectile.timeLeft) / 30f)));
@@ -57,15 +56,13 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Projectile.alpha = 0;
             }
 
-            // Search for next target
             searchCooldown--;
             if (searchCooldown <= 0)
             {
-                searchCooldown = 5; // Search every 5 frames
+                searchCooldown = 5;
                 currentTarget = FindNextScreenEnemy(player);
             }
 
-            // Move to current target or die if none found
             if (currentTarget >= 0 && Main.npc[currentTarget].active && !Main.npc[currentTarget].dontTakeDamage)
             {
                 NPC target = Main.npc[currentTarget];
@@ -79,21 +76,18 @@ namespace MightofUniverses.Content.Items.Projectiles
                 }
                 else
                 {
-                    // Close enough, mark as hit and find next
                     if (!hitNPCs.Contains(currentTarget))
                     {
                         hitNPCs.Add(currentTarget);
                     }
                     currentTarget = -1;
-                    searchCooldown = 0; // Search immediately
+                    searchCooldown = 0;
                 }
             }
             else
             {
-                // No valid target - check if any enemies remain on screen
                 if (FindNextScreenEnemy(player) < 0)
                 {
-                    // No enemies left on screen - disappear
                     Projectile.Kill();
                     return;
                 }
@@ -101,7 +95,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
             Projectile.rotation += 0.5f;
 
-            // Epic rainbow trail
             if (Main.rand.NextBool())
             {
                 int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.RainbowMk2, 0f, 0f, 100, default, 2f);
@@ -125,16 +118,13 @@ namespace MightofUniverses.Content.Items.Projectiles
             for (int i = 0; i < Main.maxNPCs; i++)
             {
                 NPC npc = Main.npc[i];
-                
-                // Skip invalid targets
+
                 if (!npc.active || npc.friendly || npc.lifeMax <= 5 || npc.dontTakeDamage || !npc.CanBeChasedBy())
                     continue;
 
-                // Only target enemies on screen
                 if (!screenRect.Contains(npc.Center.ToPoint()))
                     continue;
 
-                // Prefer enemies we haven't hit yet
                 if (hitNPCs.Contains(i))
                     continue;
 
@@ -146,10 +136,9 @@ namespace MightofUniverses.Content.Items.Projectiles
                 }
             }
 
-            // If no unhit enemies, allow re-hitting
             if (closestIndex < 0)
             {
-                hitNPCs.Clear(); // Reset hit list to allow bouncing again
+                hitNPCs.Clear();
                 
                 for (int i = 0; i < Main.maxNPCs; i++)
                 {
@@ -174,7 +163,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            // Visual impact effect
             SoundEngine.PlaySound(SoundID.Item62 with { Volume = 0.7f, Pitch = 0.3f }, target.Center);
 
             for (int i = 0; i < 15; i++)
@@ -184,6 +172,9 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Main.dust[dust].noGravity = true;
             }
             target.AddBuff(BuffID.Daybreak, 180);
+            target.AddBuff(BuffID.Frostburn2, 180);
+            target.AddBuff(BuffID.Venom, 180);
+            target.AddBuff(BuffID.Ichor, 180);
         }
 
         public override bool SafePreDraw(ref Color lightColor)
@@ -191,7 +182,6 @@ namespace MightofUniverses.Content.Items.Projectiles
             Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
             Vector2 drawOrigin = texture.Size() * 0.5f;
 
-            // Rainbow trail
             for (int i = 0; i < Projectile.oldPos.Length; i++)
             {
                 float alpha = 1f - (i / (float)Projectile.oldPos.Length);
@@ -203,11 +193,9 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Main.EntitySpriteDraw(texture, drawPos, null, rainbowColor, Projectile.rotation, drawOrigin, Projectile.scale * 0.9f, SpriteEffects.None, 0);
             }
 
-            // Glow
             Color glowColor = Color.White * ((255 - Projectile.alpha) / 255f) * 0.3f;
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, null, glowColor, Projectile.rotation, drawOrigin, Projectile.scale * 1.3f, SpriteEffects.None, 0);
 
-            // Main draw
             Color mainColor = Color.White * ((255 - Projectile.alpha) / 255f);
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, null, mainColor, Projectile.rotation, drawOrigin, Projectile.scale, SpriteEffects.None, 0);
 

@@ -11,7 +11,6 @@ namespace MightofUniverses.Common.GlobalNPCs
 
         public override void OnKill(NPC npc)
         {
-            // Check if the player who killed the NPC is holding the TrickstersDue
             Player player = Main.player[Player.FindClosest(npc.position, npc.width, npc.height)];
             
             if (player.HeldItem.type == ModContent.ItemType<Content.Items.Weapons.TrickstersDue>())

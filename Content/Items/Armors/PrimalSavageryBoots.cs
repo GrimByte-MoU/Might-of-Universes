@@ -24,11 +24,7 @@ namespace MightofUniverses.Content.Items.Armors
             var reaper = ModContent.GetInstance<ReaperDamageClass>();
             player.GetDamage(reaper) += 0.08f;
             player.GetCritChance(reaper) += 7f;
-
-            // +15 armor penetration vs Oiled or Tarred (conditional)
             player.GetModPlayer<PrimalSavageryPlayer>().BootsEquipped = true;
-
-            // +20% movement speed
             player.moveSpeed += 0.20f;
         }
 

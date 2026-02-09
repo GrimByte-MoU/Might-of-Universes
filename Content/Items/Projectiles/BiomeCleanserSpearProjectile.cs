@@ -25,7 +25,6 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             if (Projectile.timeLeft > 90)
             {
-                // Spin in place
                 Projectile.rotation += 0.6f;
                 Projectile.velocity *= 0.91f;
                 if (Projectile.velocity.Length() < 1f)

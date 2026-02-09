@@ -13,14 +13,11 @@ namespace MightofUniverses.Common.Util
             var acc = player.GetModPlayer<ReaperAccessoryPlayer>();
             float cost = baseCost;
 
-            // Apply multiplier (clamp)
             float multi = Math.Max(ReaperAccessoryPlayer.MinEffectiveCostMultiplier, acc.SoulCostMultiplier);
             cost *= multi;
 
-            // Apply flat
             cost -= acc.SoulCostFlatReduction;
 
-            // Guarantee minimum raw cost BEFORE refunds (so refunds still matter)
             cost = Math.Max(1f, cost);
 
             return RoundCost(cost);

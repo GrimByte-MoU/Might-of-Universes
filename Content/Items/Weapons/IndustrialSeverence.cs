@@ -72,7 +72,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            int numGears = Main.rand.Next(1, 8); // 1-7 gears
+            int numGears = Main.rand.Next(1, 8);
             for (int i = 0; i < numGears; i++)
             {
                 float speedMultiplier = Main.rand.NextFloat(0.75f, 1.5f);

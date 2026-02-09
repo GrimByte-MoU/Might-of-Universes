@@ -18,7 +18,7 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
             Projectile.height = 12;
             Projectile.hostile = true;
             Projectile.friendly = false;
-            Projectile.penetrate = 1;
+            Projectile.penetrate = 5;
             Projectile.timeLeft = 600;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
@@ -28,19 +28,16 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
 
         public override void AI()
         {
-            // Point in direction of travel
             Projectile.rotation = Projectile. velocity.ToRotation();
-
-            // Poison drip trail
-            if (Main.rand. NextBool(3))
+            
+            if (Main.rand.NextBool(3))
             {
                 int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height,
                     DustID.JungleSpore, 0f, 0f, 100, Color.LimeGreen, 0.9f);
-                Main. dust[dust].noGravity = true;
+                Main.dust[dust].noGravity = true;
                 Main.dust[dust].velocity *= 0.2f;
             }
 
-            // Venom droplets
             if (Main.rand.NextBool(8))
             {
                 int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile. height,
@@ -48,7 +45,6 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
                 Main.dust[dust].noGravity = false;
             }
 
-            // Lighting
             Lighting.AddLight(Projectile.Center, 0.3f, 0.6f, 0.1f);
         }
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
@@ -64,7 +60,6 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
 
             target.AddBuff(BuffID.Venom, venomDuration[difficulty]);
 
-            // Venom splash
             for (int i = 0; i < 12; i++)
             {
                 Vector2 velocity = Main.rand.NextVector2Circular(3f, 3f);

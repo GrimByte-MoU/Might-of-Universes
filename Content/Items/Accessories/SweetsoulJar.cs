@@ -2,7 +2,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using MightofUniverses.Content.Items.Materials;
-using MightofUniverses.Common.Players; // Adjust if ReaperPlayer lives elsewhere
+using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Accessories
 {
@@ -32,12 +32,10 @@ namespace MightofUniverses.Content.Items.Accessories
                 .Register();
         }
     }
-
-    // Handles the timed soul generation
     public class SweetsoulJarPlayer : ModPlayer
     {
         public bool HasSweetsoulJar;
-        private int soulTickTimer; // counts ticks (60 = ~1 second)
+        private int soulTickTimer;
 
         public override void ResetEffects()
         {
@@ -58,11 +56,8 @@ namespace MightofUniverses.Content.Items.Accessories
                 soulTickTimer = 0;
 
                 var reaper = Player.GetModPlayer<ReaperPlayer>();
-
-                // Only add if not already at (or effectively at) cap
                 if (reaper.soulEnergy + 0.01f < reaper.maxSoulEnergy)
                 {
-                    // Server or singleplayer authoritative
                     if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         reaper.AddSoulEnergy(1f, Player.Center);

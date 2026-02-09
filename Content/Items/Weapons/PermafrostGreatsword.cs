@@ -43,7 +43,6 @@ namespace MightofUniverses. Content.Items.Weapons
             );
         }
 
-        // Emit light when held
         public override void HoldItem(Player player)
         {
             Lighting.AddLight(player.Center, 0.2f, 0.5f, 1.0f);
@@ -58,7 +57,6 @@ namespace MightofUniverses. Content.Items.Weapons
         }
         public override void UseStyle(Player player, Rectangle heldItemFrame)
         {
-            // Ice trail while swinging
             if (Main.rand.NextBool(2))
             {
                 Vector2 swordTip = player.Center + new Vector2(40 * player.direction, -10).RotatedBy(player.itemRotation);

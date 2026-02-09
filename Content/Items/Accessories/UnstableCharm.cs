@@ -20,12 +20,10 @@ namespace MightofUniverses.Content.Items.Accessories
 
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
-            // Get the keybind name
             string keyName = ReaperPlayer.Ability2Key?.GetAssignedKeys().Count > 0 
                 ? ReaperPlayer.Ability2Key.GetAssignedKeys()[0] 
                 : "(unbound)";
 
-            // Find and replace the Tooltip line
             foreach (var line in tooltips)
             {
                 if (line.Mod == "Terraria" && line.Name == "Tooltip0")

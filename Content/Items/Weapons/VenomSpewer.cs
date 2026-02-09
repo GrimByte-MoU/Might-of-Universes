@@ -8,7 +8,6 @@ using MightofUniverses.Content.Items.Projectiles;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    // Toxikarp upgrade (Post-Plantera); vanilla-like bubble behavior, faster/denser, more velocity.
     public class VenomSpewer : ModItem
     {
         public override void SetDefaults()
@@ -25,7 +24,6 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            // Fire two bubbles per use with a touch of spread and speed variance
             for (int i = 0; i < 2; i++)
             {
                 float rot = MathHelper.ToRadians(Main.rand.NextFloat(-4f, 4f));
@@ -34,7 +32,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
                 Projectile.NewProjectile(source, position, v, ModContent.ProjectileType<VenomSpewerBubble>(), damage, knockback, player.whoAmI);
             }
-            return false; // suppress default spawn
+            return false;
         }
 
         public override void AddRecipes()

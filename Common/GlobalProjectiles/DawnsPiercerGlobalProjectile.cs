@@ -1,4 +1,3 @@
-// Common/GlobalProjectiles/DawnsPiercerGlobalProjectile.cs
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;

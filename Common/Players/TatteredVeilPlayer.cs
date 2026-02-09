@@ -16,7 +16,7 @@ namespace MightofUniverses.Common.Players
                 Player.runAcceleration *= 1.5f;
                 Player.runSlowdown *= 1.5f;
                 Player.maxFallSpeed *= 1.5f;
-                Player.wingTimeMax += 60; // Adds extra flight time (1 second)
+                Player.wingTimeMax += 60;
                 Player.extraAccessorySlots += 1;
             }
         }

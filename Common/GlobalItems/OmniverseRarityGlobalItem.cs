@@ -15,7 +15,7 @@ namespace MightofUniverses.Common.GlobalItems
     float pulseIntensity = 0.2f;
     float pulseSpeed = 0.12f;
     float pulseScale = 1f + (float)Math.Sin(Main.GameUpdateCount * pulseSpeed) * pulseIntensity;
-    line.BaseScale *= pulseScale; // Using BaseScale instead of Scale
+    line.BaseScale *= pulseScale;
     
     return true;
 }

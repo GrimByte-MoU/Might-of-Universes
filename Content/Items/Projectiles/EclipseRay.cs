@@ -7,8 +7,6 @@ using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    // ai[0] = phase (0 or π)
-    // localAI[0] ticks, localAI[1] previous sine
     public class EclipseRay : MoUProjectile
     {
         private const float HelixSpeed = 0.80f;

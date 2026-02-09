@@ -15,7 +15,7 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
             Projectile.aiStyle = -1;
             Projectile.hostile = true;
             Projectile.friendly = false;
-            Projectile.penetrate = 3;
+            Projectile.penetrate = 5;
             Projectile.timeLeft = 600;
             Projectile. alpha = 0;
             Projectile.light = 0.2f;
@@ -36,7 +36,7 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
                     Projectile.height,
                     DustID.Grass,
                     0f, 0f, 100,
-                    default(Color),
+                    default,
                     0.8f
                 );
                 dust.noGravity = true;

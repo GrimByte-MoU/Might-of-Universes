@@ -33,7 +33,7 @@ namespace MightofUniverses.Content.Items.Buffs
 {
     if (hasFestiveComfort && IsColdEnemy(npc))
     {
-        modifiers.SourceDamage *= 0.7f; // Reduce damage by 30%
+        modifiers.SourceDamage *= 0.7f;
     }
 }
 

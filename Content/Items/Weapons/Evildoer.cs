@@ -45,7 +45,7 @@ namespace MightofUniverses.Content.Items.Weapons
             if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed && reaper.ConsumeSoulEnergy(SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost)))
             {
                 debuffsActive = true;
-                debuffTimer = 300; // 5 seconds
+                debuffTimer = 300;
             }
         }
 

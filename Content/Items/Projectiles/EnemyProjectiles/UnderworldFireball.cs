@@ -15,7 +15,7 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
             Projectile.aiStyle = -1;
             Projectile.hostile = true;
             Projectile. friendly = false;
-            Projectile.penetrate = 1;
+            Projectile.penetrate = 5;
             Projectile.timeLeft = 600;
             Projectile.alpha = 0;
             Projectile.ignoreWater = false;
@@ -57,7 +57,7 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
                     Projectile.height,
                     DustID.Smoke,
                     0f, 0f, 100,
-                    default(Color),
+                    default,
                     0.8f
                 );
             }
@@ -105,7 +105,7 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
                     DustID.Smoke,
                     Main.rand. NextFloat(-3f, 3f),
                     Main.rand.NextFloat(-3f, 3f),
-                    100, default(Color), 1.2f
+                    100, default, 1.2f
                 );
             }
         }

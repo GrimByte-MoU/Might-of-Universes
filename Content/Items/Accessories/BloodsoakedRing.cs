@@ -76,7 +76,7 @@ namespace MightofUniverses.Content.Items.Accessories
     {
         Vector2 sourcePosition = Player.position;
         Player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(info.Damage * 0.4f, sourcePosition);
-        bloodCooldown = 1200; // 20 seconds
+        bloodCooldown = 1200;
     }
 }
     }

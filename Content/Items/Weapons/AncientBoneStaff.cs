@@ -33,12 +33,12 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.maxStack = 1;
         }
 
-        public override bool Shoot(Player player, Terraria.DataStructures.EntitySource_ItemUse_WithAmmo source,
-            Microsoft.Xna.Framework.Vector2 position, Microsoft.Xna.Framework.Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source,
+        Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             player.AddBuff(Item.buffType, 2);
-            var spawnPos = player.Center - new Microsoft.Xna.Framework.Vector2(0, 40);
-            Projectile.NewProjectile(source, spawnPos, Microsoft.Xna.Framework.Vector2.Zero, type, damage, knockback, player.whoAmI);
+            var spawnPos = player.Center - new Vector2(0, 40);
+            Projectile.NewProjectile(source, spawnPos, Vector2.Zero, type, damage, knockback, player.whoAmI);
             return false;
         }
 

@@ -26,8 +26,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            // Draw the circle
-            const int NUM_POINTS = 42; // Number of points in the circle
+            const int NUM_POINTS = 24;
             for (int i = 0; i < NUM_POINTS; i++)
             {
                 float angle = (float)(i * (2 * Math.PI) / NUM_POINTS);
@@ -49,14 +48,12 @@ namespace MightofUniverses.Content.Items.Projectiles
                 dust.noLight = true;
             }
 
-            // Handle damage every 12 ticks (5 times per second)
             damageTimer++;
             if (damageTimer >= 8)
             {
                 damageTimer = 0;
                 List<NPC> affectedNPCs = new List<NPC>();
 
-                // Find all NPCs in range
                 for (int i = 0; i < Main.maxNPCs; i++)
                 {
                     NPC npc = Main.npc[i];
@@ -66,7 +63,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                     }
                 }
 
-                // Calculate and apply damage
                 if (affectedNPCs.Count > 0)
                 {
                     int damagePerNPC = BASE_DAMAGE + (affectedNPCs.Count * DAMAGE_PER_ENEMY);
@@ -79,7 +75,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                             HitDirection = 0
                         });
 
-                        // Create hit effect
                         for (int d = 0; d < 3; d++)
                         {
                             Dust.NewDust(

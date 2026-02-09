@@ -27,25 +27,14 @@ namespace MightofUniverses.Content.Items.Accessories
         {
             var modPlayer = player.GetModPlayer<SatelliteDefenseGridPlayer>();
             modPlayer.hasSatelliteGrid = true;
-
-            // Provide a defense boost.
             player.statDefense += 10;
-
-            // Ankh Shield immunities
             SetAnkhShieldImmunities(player);
-
-            // Handle health regeneration system
             HandleRegenSystem(player, modPlayer);
-
-            // Handle emergency healing if health is low
             HandleEmergencyHealing(player, modPlayer);
-
-            // The dash ability is now handled in the player class
         }
 
         private void SetAnkhShieldImmunities(Player player)
         {
-            // Set immunities for various debuffs
             int[] immuneBuffs = {
                 BuffID.Poisoned, BuffID.Confused, BuffID.CursedInferno, BuffID.Weak,
                 BuffID.Silenced, BuffID.BrokenArmor, BuffID.Bleeding, BuffID.Slow,
@@ -87,20 +76,23 @@ namespace MightofUniverses.Content.Items.Accessories
 
         private void ClearDebuffs(Player player)
         {
-            // Clear player from various debuffs
             int[] debuffsToClear = {
                 BuffID.Poisoned, BuffID.OnFire, BuffID.Bleeding, BuffID.Venom,
-                BuffID.CursedInferno, BuffID.OnFire3, BuffID.Electrified
+                BuffID.CursedInferno, BuffID.OnFire3, BuffID.Electrified, BuffID.Chilled,
+                BuffID.Darkness, BuffID.Blackout, BuffID.Silenced, BuffID.Silenced,
+                BuffID.Cursed, BuffID.Ichor, BuffID.BetsysCurse, BuffID.Slow, BuffID.Weak,
+                BuffID.BrokenArmor, BuffID.WitheredArmor, BuffID.WitheredWeapon, BuffID.Frostburn,
+                BuffID.Frostburn2, BuffID.Chilled, BuffID.Frozen, BuffID.ShadowFlame, BuffID.Stoned, 
+                BuffID.MoonLeech
             };
 
-            // Clear custom mod-related buffs
             int[] modBuffsToClear = {
                 ModContent.BuffType<Demonfire>(),
                 ModContent.BuffType<Corrupted>(),
                 ModContent.BuffType<PrismaticRend>(),
                 ModContent.BuffType<ElementsHarmony>(),
                 ModContent.BuffType<GoblinsCurse>(),
-                ModContent.BuffType<LunarReap>(),
+                ModContent.BuffType<TerrasRend>(),
                 ModContent.BuffType<DeadlyCorrupt>(),
                 ModContent.BuffType<Sunfire>(),
                 ModContent.BuffType<LordsVenom>(),
@@ -108,6 +100,13 @@ namespace MightofUniverses.Content.Items.Accessories
                 ModContent.BuffType<Subjugated>(),
                 ModContent.BuffType<OceanPressure>(),
                 ModContent.BuffType<Drowning>(),
+                ModContent.BuffType<CoreHeat>(),
+                ModContent.BuffType<DeltaShock>(),
+                ModContent.BuffType<SheerCold>(),
+                ModContent.BuffType<NaturesToxin>(),
+                ModContent.BuffType<HellsMark>(),
+                ModContent.BuffType<LunarReap>(),
+                ModContent.BuffType<OminousPrice>(),
             };
 
             foreach (int debuff in debuffsToClear)

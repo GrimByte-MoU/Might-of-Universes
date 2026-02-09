@@ -15,7 +15,7 @@ namespace MightofUniverses.Common.GlobalNPCs
                 npc.type == NPCID.SnowBalla || 
                 npc.type == NPCID.SnowmanGangsta)
             {
-                if (Main.rand.NextFloat() < .50f) // 30% chance
+                if (Main.rand.NextFloat() < .50f)
                 {
                     Item.NewItem(npc.GetSource_Loot(), npc.getRect(), ModContent.ItemType<FrozenFragment>(), 1);
                 }

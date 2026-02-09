@@ -15,7 +15,6 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class WorldwalkerSword : ModItem
     {
-        // Modes: 0 Evil, 1 Snow, 2 Jungle (multi stinger), 3 Underworld, 4 Purity
         private int mode;
 
         private static readonly string[] ModeNames =
@@ -27,14 +26,13 @@ namespace MightofUniverses.Content.Items.Weapons
             "Forest's Fist"
         };
 
-        // Visual theme colors (match your description):
         private static readonly Color[] ModeColors =
         {
-            new Color(160, 40, 170),  // Evil: purple/red blend
-            new Color(185, 235, 255), // Chilly: icy blue/white
-            new Color(40, 105, 40),   // Jungle: dull deep green
-            new Color(255, 150, 45),  // Infernal: orange/yellow
-            new Color(95, 75, 45)     // Forest: greenish brown
+            new Color(160, 40, 170),
+            new Color(185, 235, 255),
+            new Color(40, 105, 40),
+            new Color(255, 150, 45),
+            new Color(95, 75, 45)
         };
 
         public override void SetDefaults()
@@ -61,7 +59,6 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override bool CanUseItem(Player player)
         {
-            // Let right-click still play swing anim; you can block if undesired.
             return true;
         }
 
@@ -89,11 +86,9 @@ namespace MightofUniverses.Content.Items.Weapons
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source,
             Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            // Suppress projectile on right-click (mode switch)
             if (player.altFunctionUse == 2)
                 return false;
 
-            // Adjust spawn to front of player (avoid spawning inside player)
             position = player.MountedCenter;
             velocity = velocity.SafeNormalize(Vector2.UnitX) * Item.shootSpeed;
 
@@ -103,20 +98,20 @@ namespace MightofUniverses.Content.Items.Weapons
 
             switch (mode)
             {
-                case 0: // Evil Spear
+                case 0:
                     projType = ModContent.ProjectileType<WorldwalkerEvilBolt>();
                     break;
-                case 1: // Chilly Blade
+                case 1:
                     projType = ModContent.ProjectileType<WorldwalkerChilly>();
                     break;
-                case 2: // Jungle Swarm (multi stinger, half damage each)
+                case 2:
                     projType = ModContent.ProjectileType<WorldwalkerStinger>();
                     projDamage = (int)(damage * 0.65f);
                     break;
-                case 3: // Infernal Wave
+                case 3:
                     projType = ModContent.ProjectileType<WorldwalkerFireWave>();
                     break;
-                case 4: // Forest's Fist (Purity Boulder previously)
+                case 4:
                     projType = ModContent.ProjectileType<WorldwalkerPurityBoulder>();
                     break;
                 default:
@@ -141,7 +136,6 @@ namespace MightofUniverses.Content.Items.Weapons
                 Projectile.NewProjectile(source, position, velocity, projType, projDamage, projKB, player.whoAmI);
             }
 
-            // We manually spawned projectiles, so return false.
             return false;
         }
 
@@ -159,7 +153,6 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
-            // Show current mode & recolor item name
             var nameLine = tooltips.FirstOrDefault(t => t.Mod == "Terraria" && t.Name == "ItemName");
             if (nameLine != null)
             {
@@ -168,7 +161,6 @@ namespace MightofUniverses.Content.Items.Weapons
             tooltips.Add(new TooltipLine(Mod, "WorldwalkerMode", $"Mode: {ModeNames[mode]} (Right-click to cycle)"));
         }
 
-        // Persist the mode
         public override void SaveData(TagCompound tag)
         {
             tag["WWMode"] = mode;

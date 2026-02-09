@@ -31,9 +31,8 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.maxStack = 1;
         }
 
-        public override bool Shoot(Player player, Terraria.DataStructures.EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            // Only one Eye of Horus may exist at a time
             if (player.ownedProjectileCounts[type] > 0)
             {
                 player.AddBuff(Item.buffType, 2);

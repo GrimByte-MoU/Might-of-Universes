@@ -5,8 +5,6 @@ using System;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    // ai[0] = initial phase (0 or π)
-    // localAI[0] anchorX, localAI[1] anchorY, localAI[2] initialized flag (0/1)
     public class SolunarMedallion : MoUProjectile
     {
         private const float OrbitRadius = 150f;
@@ -32,7 +30,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                 return;
             }
 
-            // Initialize anchor only once
             if (Projectile.localAI[2] == 0f)
             {
                 Projectile.localAI[0] = Projectile.Center.X;

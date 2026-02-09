@@ -21,7 +21,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            // Green dust and light effects
             Lighting.AddLight(Projectile.Center, 0f, 1f, 0f);
             
             if (Main.rand.NextBool(2))
@@ -35,7 +34,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            // Spawn code blast on hit
             Vector2 randomPosition = Main.LocalPlayer.Center + new Vector2(
                 Main.rand.Next(-200, 201),
                 Main.rand.Next(-200, 201)

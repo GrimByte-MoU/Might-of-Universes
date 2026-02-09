@@ -57,8 +57,6 @@ namespace MightofUniverses. Content.Items.Weapons
                 {
                     int currentEmpowerLevel = (int)existingAegis.localAI[0];
                     int newEmpowerLevel = currentEmpowerLevel + 1;
-                    
-                    // FIXED: Calculate as float, then check
                     float usedSlots = player.slotsMinions;
                     float maxSlots = player.maxMinions;
                     float availableSlots = maxSlots - usedSlots;

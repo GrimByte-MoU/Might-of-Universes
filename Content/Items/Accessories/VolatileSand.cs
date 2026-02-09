@@ -52,12 +52,12 @@ namespace MightofUniverses.Content.Items.Accessories
                 return;
 
             sandTimer++;
-            if (sandTimer >= 120) // 2 seconds
+            if (sandTimer >= 120)
             {
                 sandTimer = 0;
                 NPC target = null;
                 float highestLife = 0f;
-                float maxRange = 50 * 16; // 50 tiles
+                float maxRange = 50 * 16;
 
                 foreach (NPC npc in Main.npc)
                 {

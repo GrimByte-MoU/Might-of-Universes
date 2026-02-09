@@ -31,7 +31,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
             Item.buffType = ModContent.BuffType<HellsEyeBuff>();
             Item.shoot = ModContent.ProjectileType<HellsEyeMinion>();
-            Item.shootSpeed = 0f; // minions ignore shootSpeed
+            Item.shootSpeed = 0f;
             Item.maxStack = 1;
         }
 

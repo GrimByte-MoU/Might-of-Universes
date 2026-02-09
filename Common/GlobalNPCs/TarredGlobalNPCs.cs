@@ -8,22 +8,20 @@ namespace MightofUniverses.Common.GlobalNPCs
 {
     public class TarredGlobalNPC : GlobalNPC
     {
-        // 5 tiles = 80 pixels
         private const float ExplosionRadiusPx = 5f * 16f;
         private const int ExplosionDamage = 200;
-        private const int TarredDurationTicks = 60 * 3; // 3 seconds
+        private const int TarredDurationTicks = 60 * 3;
 
         public override bool InstancePerEntity => true;
 
         public override void ModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
         {
             if (npc.HasBuff(ModContent.BuffType<Tarred>()))
-                modifiers.SourceDamage *= 1.20f; // +20% damage taken
+                modifiers.SourceDamage *= 1.20f;
         }
 
         public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
         {
-            // Only scale player-friendly damage
             if (npc.HasBuff(ModContent.BuffType<Tarred>()) && projectile.friendly && projectile.owner >= 0 && projectile.owner < Main.maxPlayers)
                 modifiers.SourceDamage *= 1.20f;
         }
@@ -33,7 +31,6 @@ namespace MightofUniverses.Common.GlobalNPCs
             if (!npc.HasBuff(ModContent.BuffType<Tarred>()))
                 return;
 
-            // Visuals on all clients
             for (int i = 0; i < 30; i++)
             {
                 int d = Dust.NewDust(npc.position, npc.width, npc.height, DustID.Smoke, Scale: Main.rand.NextFloat(1.1f, 1.6f));
@@ -63,7 +60,6 @@ namespace MightofUniverses.Common.GlobalNPCs
                     };
                     target.StrikeNPC(info);
 
-                    // Apply Tarred
                     target.AddBuff(ModContent.BuffType<Tarred>(), TarredDurationTicks);
                 }
             }

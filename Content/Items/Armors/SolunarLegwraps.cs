@@ -12,19 +12,19 @@ namespace MightofUniverses.Content.Items.Armors
 	{
 
 		public override void SetDefaults() {
-			Item.width = 18; // Width of the item
-			Item.height = 18; // Height of the item
-			Item.value = Item.sellPrice(gold: 1); // How many coins the item is worth
-			Item.rare = ItemRarityID.Green; // The rarity of the item
-			Item.defense = 6; // The amount of defense the item will give when equipped
+			Item.width = 18;
+			Item.height = 18;
+			Item.value = Item.sellPrice(gold: 1);
+			Item.rare = ItemRarityID.Green;
+			Item.defense = 6;
 		}
 
 		public override void UpdateEquip(Player player) {
-			player.moveSpeed *= 1.05f; // Increase the movement speed of the player
+			player.moveSpeed *= 1.05f;
 		}
-
-		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
-		public override void AddRecipes() {
+		
+		public override void AddRecipes()
+		{
 			CreateRecipe()
 				.AddIngredient(ModContent.ItemType<SolunarToken>(), 10)
 				.AddIngredient(ModContent.ItemType<DesertWrappings>(), 10)

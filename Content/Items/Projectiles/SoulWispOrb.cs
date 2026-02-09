@@ -23,7 +23,6 @@ namespace MightofUniverses.Content.Items.Projectiles
             }
             else
             {
-                // Collect
                 var reaper = owner.GetModPlayer<ReaperPlayer>();
                 reaper.AddSoulEnergy(0.2f, owner.Center);
                 int heal = Main.rand.Next(1, 3);
@@ -32,7 +31,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Projectile.Kill();
             }
 
-            // Cosmetic dust
             if (Main.rand.NextBool(5))
             {
                 int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.WhiteTorch, 0f, 0f, 150, Color.Cyan, 0.9f);

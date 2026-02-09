@@ -19,7 +19,7 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
             Projectile.height = 18;
             Projectile.hostile = true;
             Projectile.friendly = false;
-            Projectile.penetrate = 1;
+            Projectile.penetrate = 5;
             Projectile.timeLeft = 600;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
@@ -29,12 +29,10 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
 
         public override void AI()
         {
-            // Visual leaf sway only (does not affect flight path)
             Projectile.ai[0]++;
             float sway = (float)Math.Sin(Projectile.ai[0] * 0.15f) * 0.15f;
             Projectile.rotation = Projectile.velocity.ToRotation() + sway;
-
-            // Swaying particle trail (optional, visual only)
+            
             if (Main.rand.NextBool(3))
             {
                 float radius = 8f;

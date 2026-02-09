@@ -22,7 +22,7 @@ namespace MightofUniverses.Common.Players
                 return;
 
             spawnTimer++;
-            int interval = Main.eclipse ? 15 : 30; // every 0.25s or 0.5s
+            int interval = Main.eclipse ? 15 : 30;
 
             if (spawnTimer >= interval)
             {

@@ -26,7 +26,6 @@ namespace MightofUniverses.Content.Items.Armors
 			player.GetCritChance(ModContent.GetInstance<ReaperDamageClass>()) += 6f;
 		}
 
-		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
 		public override void AddRecipes() {
 			CreateRecipe()
 				.AddIngredient(ModContent.ItemType<SolunarBreastplate>())

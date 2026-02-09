@@ -28,7 +28,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.maxStack = 1;
         }
 
-        public override bool Shoot(Player player, Terraria.DataStructures.EntitySource_ItemUse_WithAmmo source, Microsoft.Xna.Framework.Vector2 position, Microsoft.Xna.Framework.Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Microsoft.Xna.Framework.Vector2 position, Microsoft.Xna.Framework.Vector2 velocity, int type, int damage, float knockback)
         {
             player.AddBuff(Item.buffType, 3600);
             position = Main.MouseWorld;

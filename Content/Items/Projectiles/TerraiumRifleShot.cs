@@ -10,8 +10,6 @@ namespace MightofUniverses.Content.Items. Projectiles
 {
     public class TerraiumRifleShot : ModProjectile
     {
-        public override string Texture => "Terraria/Images/Projectile_" + ProjectileID. Bullet;
-
         private int lastHitNPC = -1;
         private int bounceCount = 0;
         private const int maxBounces = 10;

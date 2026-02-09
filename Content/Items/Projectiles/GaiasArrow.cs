@@ -57,7 +57,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            // 3 seconds of Terra's Rend
             target.AddBuff(ModContent.BuffType<TerrasRend>(), 180);
             Shatter();
         }

@@ -10,8 +10,6 @@ namespace MightofUniverses.Common.Players
     {
         public bool hasPsychicTadpole;
         public bool hasStellarTadpole;
-        
-        // Visual effects
         private int dustTimer;
 
         public override void ResetEffects()
@@ -22,7 +20,6 @@ namespace MightofUniverses.Common.Players
 
         public override void PostUpdateEquips()
         {
-            // Create visual effects when flying with wings
             if ((hasPsychicTadpole || hasStellarTadpole) && Player.wingTime < Player.wingTimeMax)
             {
                 CreateFlightVisuals();
@@ -31,18 +28,14 @@ namespace MightofUniverses.Common.Players
         
         private void CreateFlightVisuals()
         {
-            // Create dust effects every few frames
             dustTimer++;
             if (dustTimer >= 3)
             {
                 dustTimer = 0;
-                
-                // Determine dust color based on which tadpole is equipped
                 Color dustColor = hasStellarTadpole ? 
-                    new Color(180, 120, 255) : // Purple for Stellar Tadpole
-                    new Color(255, 120, 180);  // Pink for Psychic Tadpole
-                
-                // Create dust at player's feet
+                    new Color(180, 120, 255) :
+                    new Color(255, 120, 180);
+                    
                 for (int i = 0; i < 2; i++)
                 {
                     Dust dust = Dust.NewDustDirect(

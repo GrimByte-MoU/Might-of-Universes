@@ -19,7 +19,7 @@ namespace MightofUniverses.Content.Items. Projectiles.EnemyProjectiles
             Projectile.height = 16;
             Projectile.hostile = true;
             Projectile.friendly = false;
-            Projectile.penetrate = 1;
+            Projectile.penetrate = 5;
             Projectile.timeLeft = 600;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;

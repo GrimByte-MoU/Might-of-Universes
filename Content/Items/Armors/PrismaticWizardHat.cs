@@ -34,7 +34,6 @@ namespace MightofUniverses.Content.Items.Armors
 
             player.setBonus = $"+10% magic damage and magic weapons inflict Prismatic Rend for 3 seconds.\n Press '{key}' to restore 200 mana and remove mana sickness.\n This ability has a 5 second cooldown.";
             player.GetDamage(DamageClass.Magic) += 0.10f;
-            // Mark the wizard set active on the player's PrismaticPlayer so global hooks and the key logic use it.
             player.GetModPlayer<PrismaticPlayer>().prismaticWizardSet = true;
         }
 

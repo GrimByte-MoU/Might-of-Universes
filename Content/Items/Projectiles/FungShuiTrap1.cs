@@ -13,7 +13,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         private const float SearchRadius = 600f;
         private const float HomingSpeed = 10f;
         private const float HomingInertia = 20f;
-        private const float ExplodeDistance = 28f;
+        private const float ExplodeDistance = 0f;
 
         public override void SafeSetDefaults()
         {
@@ -28,7 +28,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            // Acquire nearest valid target
             int targetIndex = -1;
             float bestDistSq = SearchRadius * SearchRadius;
             for (int i = 0; i < Main.maxNPCs; i++)
@@ -59,7 +58,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                     Projectile.velocity = (Projectile.velocity * (HomingInertia - 1f) + desired) / HomingInertia;
                 }
 
-                // Explode when close enough
                 if (Vector2.Distance(Projectile.Center, target.Center) <= ExplodeDistance)
                 {
                     Explode();
@@ -68,26 +66,21 @@ namespace MightofUniverses.Content.Items.Projectiles
             }
             else
             {
-                // Idle: slight drift so it's not perfectly static
                 Projectile.velocity *= 0.98f;
             }
 
-            // Visual light
             Lighting.AddLight(Projectile.Center, 0.3f, 0.3f, 0.8f);
-            // small rotation for visual motion
             Projectile.rotation += 0.02f;
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            // Explode on hitting terrain
             Explode();
             return false;
         }
 
         private void Explode()
         {
-            // Play sound & dust then kill to trigger Kill() logic (which spawns the spore)
             SoundEngine.PlaySound(SoundID.DD2_ExplosiveTrapExplode, Projectile.Center);
             for (int i = 0; i < 14; i++)
             {
@@ -98,7 +91,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             }
 
             Projectile.netUpdate = true;
-            Projectile.Kill(); // Kill() spawns FungShuiSpore1
+            Projectile.Kill();
         }
 
         public override void Kill(int timeLeft)
@@ -108,7 +101,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<FungShuiSpore1>(), 35, 0, Main.myPlayer);
             }
 
-            // Extra dust on death
             for (int i = 0; i < 8; i++)
             {
                 Vector2 vel = Main.rand.NextVector2Circular(2f, 2f);

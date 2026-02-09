@@ -25,8 +25,6 @@ namespace MightofUniverses.Content.Items.Projectiles
         public override void AI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
-            
-            // Create spirit trail effect
             Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height,
                 DustID.SpectreStaff, 0f, 0f, 100, Color.Lime, 1.2f);
             dust.noGravity = true;
@@ -35,7 +33,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            // Stick in the enemy
             if (Projectile.penetrate > 0)
             {
                 Projectile.ai[0] = 1f;
@@ -43,7 +40,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Projectile.velocity = (target.Center - Projectile.Center) * 0.75f;
                 Projectile.netUpdate = true;
                 
-                // Create impact effect
                 for (int i = 0; i < 15; i++)
                 {
                     Dust.NewDust(Projectile.position, Projectile.width, Projectile.height,

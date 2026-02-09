@@ -23,8 +23,6 @@ namespace MightofUniverses.Content.Items.Armors
             player.GetDamage(reaperClass) += 0.05f;
             player.GetCritChance(reaperClass) += 5f;
             player.statLifeMax2 += 25;
-
-            // -10% soul ability cost
             player.GetModPlayer<ReaperAccessoryPlayer>().SoulCostMultiplier *= 0.90f;
         }
 

@@ -62,7 +62,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             );
 
             Projectile.Center = player.MountedCenter + offset;
-            Projectile.rotation = currentAngle + MathHelper.PiOver4; // 45 degree tilt
+            Projectile.rotation = currentAngle + MathHelper.PiOver4;
 
             if (Main.rand.NextBool(3))
             {

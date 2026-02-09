@@ -21,7 +21,7 @@ namespace MightofUniverses.Common.Players
             if (fungalCollection)
             {
                 sporeTimer++;
-                if (sporeTimer >= 60) // Once per second
+                if (sporeTimer >= 60)
                 {
                     sporeTimer = 0;
                     Vector2 spawnPosition = Player.Center + new Vector2(Main.rand.Next(-240, 240), Main.rand.Next(-240, 240));

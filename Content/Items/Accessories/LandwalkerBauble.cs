@@ -25,15 +25,11 @@ namespace MightofUniverses.Content.Items.Accessories
             player.lifeRegen += 1;
             player.statLifeMax2 += 20;
             player.statManaMax2 += 20;
-            
-            // All damage types +5%
             player.GetDamage(DamageClass.Generic) += 0.05f;
             player.GetModPlayer<PacifistPlayer>().pacifistDamageMultiplier += 0.2f;
             player.endurance += 0.05f;
             player.moveSpeed += 0.10f;
             player.maxMinions += 1;
-            
-            // Movement improvements
             player.jumpSpeedBoost += 0.15f;
             player.jumpBoost = true;
             player.extraFall += 15;

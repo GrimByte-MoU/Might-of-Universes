@@ -52,7 +52,6 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             var mp = player.GetModPlayer<AncientBoneRodPlayer>();
 
-            // Right-click: swap mode
             if (player.altFunctionUse == 2)
             {
                 mp.RodMode = (RodMode)(((int)mp.RodMode + 1) % 2);

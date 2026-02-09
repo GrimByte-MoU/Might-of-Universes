@@ -4,39 +4,33 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria.ModLoader.IO;
 using MightofUniverses.Content.Items.Projectiles;
-// If DemonicEssence is in a different namespace, update this using:
 using MightofUniverses.Content.Items.Materials;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
     public class Whipsword : ModItem
     {
-        // 0 = Sword stance, 1 = Whip stance
         public int Mode;
 
         public override void SetDefaults()
         {
             Item.width = 40;
             Item.height = 40;
-
-            Item.damage = 55; // early/mid-hardmode baseline
+            Item.damage = 55;
             Item.knockBack = 5.5f;
             Item.crit = 4;
             Item.value = Item.buyPrice(gold: 6);
             Item.rare = ItemRarityID.Pink;
             Item.maxStack = 1;
-
-            // Default to sword stance on spawn; CanUseItem will swap settings dynamically
             ConfigureAsSword();
         }
 
-        public override bool AltFunctionUse(Player player) => true; // enable right-click
+        public override bool AltFunctionUse(Player player) => true;
 
         public override bool CanUseItem(Player player)
         {
             if (player.altFunctionUse == 2)
             {
-                // Toggle mode on right-click without using the item
                 Mode = 1 - Mode;
 
                 if (Main.myPlayer == player.whoAmI)
@@ -47,7 +41,6 @@ namespace MightofUniverses.Content.Items.Weapons
                 return false;
             }
 
-            // Apply mode-specific properties for the attack
             if (Mode == 0)
                 ConfigureAsSword();
             else
@@ -56,7 +49,6 @@ namespace MightofUniverses.Content.Items.Weapons
             return base.CanUseItem(player);
         }
 
-        // Make the sword stance 150% damage while keeping it a summoner weapon
         public override void ModifyWeaponDamage(Player player, ref StatModifier damage)
         {
             if (Mode == 0)
@@ -72,8 +64,8 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.useTime = 20;
             Item.useAnimation = 20;
             Item.UseSound = SoundID.Item1;
-            Item.noMelee = false;          // item hitbox deals damage
-            Item.noUseGraphic = false;     // show the sword
+            Item.noMelee = false;
+            Item.noUseGraphic = false;
             Item.channel = false;
             Item.shoot = ProjectileID.None;
             Item.shootSpeed = 0f;
@@ -83,7 +75,6 @@ namespace MightofUniverses.Content.Items.Weapons
 
         private void ConfigureAsWhip()
         {
-            // True whip (summon melee speed scaling)
             Item.DamageType = DamageClass.SummonMeleeSpeed;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.useTime = 30;

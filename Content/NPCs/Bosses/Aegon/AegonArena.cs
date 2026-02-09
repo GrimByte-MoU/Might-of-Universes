@@ -15,8 +15,6 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
         public Vector2 Center { get; private set; }
         public float Radius { get; private set; }
         public bool IsActive { get; private set; }
-        
-        // Stored tiles for restoration
         private Dictionary<Point, TileData> originalTiles = new Dictionary<Point, TileData>();
 
         private struct TileData
@@ -25,8 +23,6 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             public ushort wall;
             public bool active;
         }
-
-        // Arena sizes based on difficulty
         private const float ARENA_RADIUS_NORMAL = 65.5f;
         private const float ARENA_RADIUS_EXPERT = 57.5f;
         private const float ARENA_RADIUS_MASTER = 50.5f;
@@ -34,8 +30,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
         public AegonArena(Vector2 center)
         {
             Center = center;
-            
-            // Set radius based on difficulty
+
             if (Main.masterMode)
                 Radius = ARENA_RADIUS_MASTER;
             else if (Main.expertMode)
@@ -44,9 +39,6 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                 Radius = ARENA_RADIUS_NORMAL;
         }
 
-        /// <summary>
-        /// Creates the arena walls
-        /// </summary>
         public void Create()
         {
             if (IsActive)

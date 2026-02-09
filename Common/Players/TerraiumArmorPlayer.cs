@@ -126,7 +126,6 @@ namespace MightofUniverses.Common.Players
 
         private void UpdateRangerSetBonus()
 {
-    // Check if player is holding a ranged weapon and actively using it
     if (Player.HeldItem. DamageType == DamageClass.Ranged && 
         Player.HeldItem. useTime > 0 && 
         ! Player.noItems && 

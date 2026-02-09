@@ -36,8 +36,6 @@ namespace MightofUniverses.Content.Items.Projectiles
         public override void OnSpawn(IEntitySource source)
 {
     Player player = Main.player[Projectile.owner];
-
-    // Get both melee and magic bonuses
     float meleeBoost = player.GetDamage(DamageClass.Melee).Additive;
     float magicBoost = player.GetDamage(DamageClass.Magic).Additive;
     float totalBoost = 1f + meleeBoost + magicBoost;

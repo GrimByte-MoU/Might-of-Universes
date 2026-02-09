@@ -39,11 +39,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             float rotation = Main.GameUpdateCount * orbitSpeed + angleOffset;
 
             Projectile.Center = player.Center + new Vector2(radius, 0f).RotatedBy(rotation);
-
-            // Light emission — warm brass-like glow (Reddish-orange)
-            Lighting.AddLight(Projectile.Center, 0.9f, 0.6f, 0.2f); // RGB values for a brassy look
-
-            // Optional: spin gear visually
+            Lighting.AddLight(Projectile.Center, 0.9f, 0.6f, 0.2f);
             Projectile.rotation += 0.1f;
         }
 

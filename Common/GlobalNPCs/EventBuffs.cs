@@ -1087,7 +1087,6 @@ namespace MightofUniverses.Content.NPCs
     {
         if (npc.type == NPCID.PirateCaptain)
         {
-            // Cannon attack damage modifications
             if (projectile.type == ProjectileID.CannonballFriendly)
             {
                 modifiers.SourceDamage *= 2f;

@@ -37,11 +37,10 @@ namespace MightofUniverses.Content.Items.Projectiles
 
             float idleRadius = 80f;
             float idleSpeed = 6f;
-            float targetRadius = 240f; // 15 tiles
+            float targetRadius = 240f;
             int targetIndex = (int)Projectile.ai[1];
             NPC target = null;
 
-            // Lock-on logic
             if (targetIndex > 0 && targetIndex < Main.maxNPCs)
             {
                 NPC possible = Main.npc[targetIndex];
@@ -55,7 +54,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                 }
             }
 
-            // If no valid target, search for closest
             if (target == null)
             {
                 float closestDist = targetRadius;
@@ -86,16 +84,10 @@ namespace MightofUniverses.Content.Items.Projectiles
 
             if (target != null)
             {
-                // Float above the enemy
-                float aboveOffset = -60f; // 60 pixels above (adjust as desired)
-                // Gentle bobbing motion
+                float aboveOffset = -60f;
                 float bobbing = (float)System.Math.Sin(Main.GameUpdateCount / 20f + Projectile.whoAmI) * 16f;
-                // Small horizontal drift
                 float drift = (float)System.Math.Cos(Main.GameUpdateCount / 45f + Projectile.whoAmI) * 14f;
-
                 Vector2 desiredPosition = target.Center + new Vector2(drift, aboveOffset + bobbing);
-
-                // Move toward desired position smoothly
                 Vector2 toDesired = desiredPosition - Projectile.Center;
                 float moveSpeed = 12f;
                 if (toDesired.Length() > moveSpeed)
@@ -103,7 +95,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
                 Projectile.velocity = (Projectile.velocity * 14f + toDesired) / 15f;
 
-                // Shoot twice per second
                 if (++Projectile.localAI[0] >= 30)
                 {
                     Projectile.localAI[0] = 0;
@@ -123,10 +114,8 @@ namespace MightofUniverses.Content.Items.Projectiles
             }
             else
             {
-                // Loosely float around player (idle)
                 if (Projectile.ai[2] == 0 || Vector2.Distance(Projectile.Center, player.Center + new Vector2(Projectile.localAI[1], Projectile.localAI[2])) < 16f)
                 {
-                    // New wander target
                     float angle = Main.rand.NextFloat(MathHelper.TwoPi);
                     float dist = Main.rand.NextFloat(idleRadius * 0.5f, idleRadius);
                     Vector2 wanderOffset = new Vector2((float)System.Math.Cos(angle), (float)System.Math.Sin(angle)) * dist;

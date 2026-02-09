@@ -53,7 +53,6 @@ namespace MightofUniverses.Content.Items.Accessories
 
         public override void PostUpdate()
         {
-            // If not already enabled by equipped/inventory, scan personal banks (Piggy Bank, Safe, Defender’s Forge, Void Vault).
             if (!HasTabulatingMachine)
             {
                 int type = ModContent.ItemType<TabulatingMachine>();

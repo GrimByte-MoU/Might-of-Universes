@@ -6,21 +6,16 @@ using Terraria;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    // Invisible, near-instant zap that chains up to 3 times (4 hits total).
-    // Slim visuals, robust line collision to prevent misses (especially on grounded targets).
     public class InkZapProjectile : MoUProjectile
     {
-        // Your current multipliers (keep as-is)
         private static readonly float[] ChainMultipliers = new float[] { 1.5f, 1.25f, 1f, 0.75f };
 
         private const float DefaultChainRangePx = 25f * 16f;
         private const float TravelSpeed = 75f;
         private const int ExtraUpdates = 8;
 
-        // Visual vs collision thickness
-        private const float BeamVisualThicknessPx = 1f;  // dust spread (visual only)
-        private const float BeamHitboxThicknessPx = 8f;  // collision thickness (slightly thicker to avoid misses)
-
+        private const float BeamVisualThicknessPx = 1f;
+        private const float BeamHitboxThicknessPx = 8f;
         public override void SafeSetDefaults()
         {
             Projectile.friendly = true;
@@ -32,7 +27,6 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.extraUpdates = ExtraUpdates;
             Projectile.DamageType = DamageClass.Summon;
 
-            // Local immunity so each spawned hop can hit a target independently
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = -1;
 
@@ -44,7 +38,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            // Normalize speed once
             if (Projectile.localAI[1] == 0f)
             {
                 if (Projectile.velocity.LengthSquared() > 0.001f)
@@ -55,20 +48,16 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Projectile.localAI[1] = 1f;
             }
 
-            // Draw trail across the full-tick path so visuals match collision
             Vector2 end = Projectile.Center;
-            Vector2 start = end - Projectile.velocity; // full-tick segment, not sub-step
+            Vector2 start = end - Projectile.velocity;
             SpawnBeamDustAlong(start, end, BeamVisualThicknessPx);
-
-            // Faint dark “light”
             Lighting.AddLight(Projectile.Center, 0.02f, 0.01f, 0.03f);
         }
 
-        // Robust collision across the full tick path
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
             Vector2 end = Projectile.Center;
-            Vector2 start = end - Projectile.velocity; // full-tick path covers all sub-steps
+            Vector2 start = end - Projectile.velocity;
             float _ = 0f;
             if (Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, end, BeamHitboxThicknessPx, ref _))
                 return true;
@@ -86,8 +75,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                 return;
 
             float chainRangePx = Projectile.localAI[0] > 0 ? Projectile.localAI[0] : DefaultChainRangePx;
-
-            // Prefer a different target; fallback allows returning after at least one hop
             NPC next = FindNextTarget(target.Center, chainRangePx, avoidA: target.whoAmI, avoidB: lastHitId);
             if (next == null && lastHitId >= 0 && lastHitId < Main.maxNPCs)
             {
@@ -98,7 +85,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
             if (next != null)
             {
-                // Visual bridge between hops (center to center)
                 DrawZapBetween(target.Center, next.Center, BeamVisualThicknessPx);
 
                 int baseDamage = System.Math.Max(1, Projectile.originalDamage > 0 ? Projectile.originalDamage : Projectile.damage);

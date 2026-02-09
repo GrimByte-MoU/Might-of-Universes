@@ -8,9 +8,6 @@ using System;
 
 namespace MightofUniverses.Content.NPCs.Bosses.Aegon
 {
-    /// <summary>
-    /// Phase 5 patience mirage: stationary, sits in corner, fires attacks on patience cue.
-    /// </summary>
     public class AegonPatienceMirage : ModNPC
     {
         public override void SetStaticDefaults()
@@ -43,9 +40,8 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
 
         public override void AI()
         {
-            NPC.velocity = Vector2.Zero; // Stationary
+            NPC.velocity = Vector2.Zero;
 
-            // Optional: visuals
             if (Main.rand.NextBool(5))
             {
                 int dust = Dust.NewDust(NPC.Center, NPC.width, NPC.height, DustID.Electric, 0f, 0f, 100, Color.Cyan, 0.8f);
@@ -77,7 +73,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             return false;
         }
 
-        public override bool? CanBeHitByItem(Player player, Terraria.Item item) => false;
+        public override bool? CanBeHitByItem(Player player, Item item) => false;
         public override bool? CanBeHitByProjectile(Projectile projectile) => false;
         public override bool CheckActive() => false;
 

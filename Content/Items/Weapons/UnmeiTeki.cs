@@ -41,10 +41,9 @@ namespace MightofUniverses.Content.Items.Weapons
                 .Register();
         }
 
-        public override bool Shoot(Player player, Terraria.DataStructures.EntitySource_ItemUse_WithAmmo source,
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source,
             Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            // short-range petals
             for (int i = 0; i < 2; i++)
             {
                 Vector2 perturbed = velocity.RotatedByRandom(MathHelper.ToRadians(10)) * Main.rand.NextFloat(0.6f, 0.8f);
@@ -52,7 +51,6 @@ namespace MightofUniverses.Content.Items.Weapons
                     ModContent.ProjectileType<UnmeiPetal>(), (int)(damage * 0.2f), knockback, player.whoAmI);
             }
 
-            // long-range bloom
             if (Main.GameUpdateCount % 15 == 0)
             {
                 Projectile.NewProjectile(source, position, velocity * 1.5f,

@@ -27,7 +27,6 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override void HoldItem(Player player)
         {
-            // Use the X1-specific player class so charge mode toggles the correct state
             var modPlayer = player.GetModPlayer<MegaBusterX1Player>();
             
             Item.autoReuse = !modPlayer.isChargeMode;

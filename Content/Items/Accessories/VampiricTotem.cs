@@ -8,7 +8,6 @@ namespace MightOfUniverses.Content.Items.Accessories
     {
         public override void SetStaticDefaults()
         {
-            // DisplayName and Tooltip are automatically set from .hjson files in 1.4.4
         }
 
         public override void SetDefaults()
@@ -38,7 +37,7 @@ namespace MightOfUniverses.Content.Items.Accessories
     public class VampiricTotemPlayer : ModPlayer
     {
         public bool hasVampiricTotem = false;
-        private const float LIFESTEAL_PERCENT = 0.05f; // 5% lifesteal
+        private const float LIFESTEAL_PERCENT = 0.05f;
 
         public override void ResetEffects()
         {

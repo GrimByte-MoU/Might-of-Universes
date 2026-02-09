@@ -8,10 +8,6 @@ using MightofUniverses.Content.Items.Projectiles.EnemyProjectiles;
 
 namespace MightofUniverses.Content.NPCs.Bosses.Aegon
 {
-    /// <summary>
-    /// Phase 4 mirage (mirrors Aegon's position across the player horizontally)
-    /// Also contains all attack helpers for phase 4 mirage patterns.
-    /// </summary>
     public class AegonMirage : ModNPC
     {
         private int aegonIndex = -1;
@@ -46,7 +42,6 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
 
         public override void AI()
         {
-            // Find Aegon once
             if (aegonIndex == -1 || !Main.npc[aegonIndex].active || Main.npc[aegonIndex].type != ModContent.NPCType<Aegon>())
                 FindAegon();
 
@@ -59,13 +54,11 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             NPC aegon = Main.npc[aegonIndex];
             Player target = Main.player[aegon.target];
 
-            // Mirror position: horizontally across the player, match Y
             NPC.Center = new Vector2(
                 target.Center.X - (aegon.Center.X - target.Center.X),
                 aegon.Center.Y
             );
 
-            // Dust effect (optional)
             if (Main.rand.NextBool(5))
             {
                 int dust = Dust.NewDust(NPC.Center, NPC.width, NPC.height, DustID.Electric, 0f, 0f, 100, Color.Cyan, 0.8f);
@@ -80,10 +73,8 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             Vector2 drawPos = NPC.Center - screenPos;
             Vector2 origin = texture.Size() / 2f;
             Color mirageColor = drawColor * 0.6f;
-
             spriteBatch.Draw(texture, drawPos, null, mirageColor, NPC.rotation, origin, NPC.scale, SpriteEffects.None, 0f);
 
-            // Cyan "glow" effect
             for (int i = 0; i < 4; i++)
             {
                 Vector2 offset = new Vector2(
@@ -108,7 +99,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             }
         }
 
-        public override bool? CanBeHitByItem(Player player, Terraria.Item item) => false;
+        public override bool? CanBeHitByItem(Player player, Item item) => false;
         public override bool? CanBeHitByProjectile(Projectile projectile) => false;
         public override bool CheckActive() => false;
 

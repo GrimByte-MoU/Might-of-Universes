@@ -27,7 +27,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.Ichor, 120); // 2 seconds
+            target.AddBuff(BuffID.Ichor, 120);
             Main.player[Projectile.owner].GetModPlayer<ReaperPlayer>().AddSoulEnergy(2f, target.Center);
         }
     }

@@ -5,13 +5,8 @@ using Terraria.ModLoader;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
-    // Fast, gravity-affected tooth projectile.
-    // - No pierce (penetrate = 1)
-    // - Grants +2 souls to the owner on hit (handled here)
-    // - Gravity toggle via ai[1] (1 = gravity on)
     public class CoreFlesh_Tooth : MoUProjectile
     {
-        // Tweakable gravity and speed caps
         private const float Gravity = 0.35f;
         private const float MaxFallSpeed = 18f;
 
@@ -50,7 +45,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            // Simple shatter on impact
             Projectile.Kill();
             return false;
         }
@@ -71,7 +65,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void OnKill(int timeLeft)
         {
-            // Shatter dust
             for (int i = 0; i < 8; i++)
             {
                 Vector2 v = Main.rand.NextVector2Circular(2.5f, 2.5f);

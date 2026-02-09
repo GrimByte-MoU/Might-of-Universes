@@ -20,7 +20,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         public override void AI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
-            Lighting.AddLight(Projectile.Center, 1.0f, 0.6f, 0.8f); // Light pink glow
+            Lighting.AddLight(Projectile.Center, 1.0f, 0.6f, 0.8f);
         Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.PinkCrystalShard);
     }
     }

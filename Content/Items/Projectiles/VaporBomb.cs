@@ -14,7 +14,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void SafeSetDefaults()
         {
-            Projectile.timeLeft = 600; // 10 seconds
+            Projectile.timeLeft = 600;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
             Projectile.friendly = true;
@@ -39,7 +39,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             }
             else if (target != null && target.active)
             {
-                if (timer % 10 == 0 && timer <= 30) // Hits 3 times
+                if (timer % 10 == 0 && timer <= 30)
                 {
                     int dmg = Projectile.damage;
                     var hitInfo = new NPC.HitInfo()
@@ -64,7 +64,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Explode();
             }
 
-            // Vaporwave pink/purple dust pulse
             if (Main.rand.NextBool(2))
             {
                 Dust.NewDustPerfect(Projectile.Center, DustID.PinkTorch, Vector2.Zero, 0, Color.Pink, 1.5f).noGravity = true;

@@ -49,7 +49,6 @@ namespace MightofUniverses.Content.Items. Accessories
         {
             if (commanderEffect)
             {
-                // +3% ranged attack speed per minion (max 30% with 10 minions)
                 Player.GetAttackSpeed(DamageClass.Ranged) += Player.numMinions * 0.03f;
             }
         }
@@ -58,16 +57,13 @@ namespace MightofUniverses.Content.Items. Accessories
         {
             if (! commanderEffect || proj.DamageType != DamageClass.Summon) return;
 
-            // Below 50% HP:  Minions deal bonus damage equal to held ammo damage
             if (Player.statLife <= Player.statLifeMax2 * 0.5f)
             {
                 Item heldItem = Player.HeldItem;
                 int ammoDamage = 0;
 
-                // Check if holding a ranged weapon
                 if (heldItem.useAmmo > 0)
                 {
-                    // Find ammo in inventory
                     for (int i = 54; i < 58; i++)
                     {
                         Item ammo = Player.inventory[i];

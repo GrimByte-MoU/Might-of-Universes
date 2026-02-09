@@ -14,12 +14,12 @@ namespace MightofUniverses.Content.Items.Projectiles
         private int colorTimer = 0;
         private readonly Color[] prismaticColors = new Color[]
         {
-            new Color(255, 0, 0),     // Red
-            new Color(255, 127, 0),   // Orange
-            new Color(255, 255, 0),   // Yellow
-            new Color(0, 255, 0),     // Green
-            new Color(0, 0, 255),     // Blue
-            new Color(148, 0, 211)    // Purple
+            new Color(255, 0, 0),
+            new Color(255, 127, 0),
+            new Color(255, 255, 0),
+            new Color(0, 255, 0),
+            new Color(0, 0, 255),
+            new Color(148, 0, 211)
         };
 
         public override void SafeSetDefaults()
@@ -58,11 +58,11 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         private void ShootColoredSpearheads()
         {
-            int colorIndex = (Projectile.timeLeft / 10) % 6;
+            int colorIndex = Projectile.timeLeft / 10 % 6;
             if (colorIndex >= 0 && colorIndex < prismaticColors.Length)
             {
                 Vector2 velocity = Projectile.velocity * 1f;
-                float angle = (float)Math.PI / 3; // 60 degrees in radians
+                float angle = (float)Math.PI / 3;
                 Vector2 velocityAbove = velocity.RotatedBy(angle);
                 Vector2 velocityBelow = velocity.RotatedBy(-angle);
 

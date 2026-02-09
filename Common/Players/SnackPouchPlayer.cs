@@ -40,7 +40,7 @@ namespace MightofUniverses.Common.Players
             }
             else if (hasSnackPouch)
             {
-                if (reaperPlayer.hasReaperArmor) // Changed to check for Reaper armor instead
+                if (reaperPlayer.hasReaperArmor)
                 {
                     Player.Heal(2);
                 }

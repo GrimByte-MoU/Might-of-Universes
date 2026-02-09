@@ -10,8 +10,8 @@ namespace MightofUniverses.Content.Items.Projectiles
     public class EclipseSphere : MoUProjectile
     {
         private float rotation = 0f;
-        private const float ORBIT_RADIUS = 200f; // Increased radius from Solunar
-        private const float ROTATION_SPEED = 0.075f; // Faster rotation
+        private const float ORBIT_RADIUS = 200f;
+        private const float ROTATION_SPEED = 0.075f;
         
         public override void SafeSetDefaults()
         {
@@ -33,9 +33,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             }
             
             rotation += ROTATION_SPEED;
-            
-            // Offset each medallion by their index
-            float angleOffset = (Projectile.ai[0] * MathHelper.PiOver2);
+            float angleOffset = Projectile.ai[0] * MathHelper.PiOver2;
             float currentRotation = rotation + angleOffset;
 
             Vector2 offset = new Vector2(
@@ -44,8 +42,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             );
 
             Projectile.Center = player.Center + offset;
-            // Orange dust
-Lighting.AddLight(Projectile.Center, 1f, 0.5f, 0f); // Bright orange light
+Lighting.AddLight(Projectile.Center, 1f, 0.5f, 0f);
 
 if (Main.rand.NextBool(2))
 {
@@ -62,8 +59,7 @@ if (Main.rand.NextBool(2))
     );
     dust.noGravity = true;
     dust.velocity *= 0.3f;
-    
-    // Optional: mix in some fire dust for more effect
+
     if (Main.rand.NextBool(3))
     {
         Dust fireDust = Dust.NewDustDirect(
@@ -81,7 +77,6 @@ if (Main.rand.NextBool(2))
         fireDust.velocity *= 0.5f;
     }
 }
-
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

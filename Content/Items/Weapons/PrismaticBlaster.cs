@@ -71,7 +71,7 @@ public class PrismaticBlaster : ModItem
           SoundEngine.PlaySound(SoundID.Item61, player.position);
       }
   
-      return false; // Return false, OnHitNPC is not called from this method
+      return false;
   }
 
     public override void AddRecipes()

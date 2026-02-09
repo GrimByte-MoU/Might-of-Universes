@@ -25,25 +25,24 @@ namespace MightofUniverses.Content.Items.Projectiles
 
 public override bool? CanHitNPC(NPC target) => true;
         public override void AI()
-{
-    Player player = Main.player[Projectile.owner];
-    
-    rotation += ROTATION_SPEED;
-    float offsetRotation = rotation + (MathHelper.TwoPi * Projectile.ai[0] / 3f); // 3 spheres
+        {
+            Player player = Main.player[Projectile.owner];
 
-    Vector2 offset = new Vector2(
-        ORBIT_RADIUS * (float)System.Math.Cos(offsetRotation),
-        ORBIT_RADIUS * (float)System.Math.Sin(offsetRotation)
-    );
+            rotation += ROTATION_SPEED;
+            float offsetRotation = rotation + (MathHelper.TwoPi * Projectile.ai[0] / 3f); // 3 spheres
 
-    Projectile.Center = player.Center + offset;
-    
-    if (!player.GetModPlayer<BSCUPlayer>().hasBSCU)
-    {
-        Projectile.Kill();
-    }
-}
+            Vector2 offset = new Vector2(
+                ORBIT_RADIUS * (float)System.Math.Cos(offsetRotation),
+                ORBIT_RADIUS * (float)System.Math.Sin(offsetRotation)
+            );
 
+            Projectile.Center = player.Center + offset;
+
+            if (!player.GetModPlayer<BSCUPlayer>().hasBSCU)
+            {
+                Projectile.Kill();
+            }
+        }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
         target.AddBuff(ModContent.BuffType<Shred>(), 120);

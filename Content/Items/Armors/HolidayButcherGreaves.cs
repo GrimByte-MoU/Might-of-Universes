@@ -23,11 +23,7 @@ namespace MightofUniverses.Content.Items.Armors
             var reaper = ModContent.GetInstance<ReaperDamageClass>();
             player.GetDamage(reaper) += 0.06f;
             player.GetCritChance(reaper) += 6f;
-
-            // +3% DR
             player.endurance += 0.03f;
-
-            // +15% movement speed
             player.moveSpeed += 0.15f;
         }
 

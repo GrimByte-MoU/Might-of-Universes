@@ -28,7 +28,6 @@ namespace MightofUniverses.Content.Items.Projectiles
             rotationSpeed += 0.002f;
             distanceFromCenter += 2f;
 
-            // Update position relative to player in a circular motion
             float rotation = Projectile.ai[0] + rotationSpeed;
             Projectile.ai[0] = rotation;
             
@@ -36,12 +35,11 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.Center = Owner.Center + offset;
             Projectile.rotation += 0.2f;
 
-            // Visual effects
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.PurpleTorch);
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.OrangeTorch);
             
-            Lighting.AddLight(Projectile.Center, 0.8f, 0f, 0.8f); // Purple
-            Lighting.AddLight(Projectile.Center, 1f, 0.5f, 0f); // Orange
+            Lighting.AddLight(Projectile.Center, 0.8f, 0f, 0.8f);
+            Lighting.AddLight(Projectile.Center, 1f, 0.5f, 0f);
         }
     }
 }

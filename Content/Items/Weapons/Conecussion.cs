@@ -9,7 +9,6 @@ namespace MightofUniverses.Content.Items.Weapons
     {
         public override void SetDefaults()
         {
-            // DefaultToWhip handles useStyle, animation, etc.
             Item.DefaultToWhip(ModContent.ProjectileType<ConecussionWhip>(), 40, 2f, 20);
             Item.DamageType = DamageClass.Summon;
             Item.rare = ItemRarityID.Green;

@@ -25,7 +25,7 @@ namespace MightofUniverses.Content.Items.Ammo
             Item.value = Item.sellPrice(0, 0, 2, 0);
             Item.rare = ItemRarityID.Lime;
             Item.shoot = ModContent.ProjectileType<EclipseRoundProjectile>();
-            Item.shootSpeed = 18f; // Fast speed
+            Item.shootSpeed = 18f;
             Item.ammo = AmmoID.Bullet;
         }
 

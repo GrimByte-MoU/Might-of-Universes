@@ -86,7 +86,7 @@ namespace MightofUniverses.Content.Items. Projectiles
             if (totalOrbitingShards == 0)
                 totalOrbitingShards = 1;
 
-            float baseAngle = (MathHelper.TwoPi / 10f) * orbitIndex;
+            float baseAngle = MathHelper.TwoPi / 10f * orbitIndex;
             float rotationSpeed = 0.02f;
             Projectile.ai[1] += rotationSpeed;
 

@@ -2,7 +2,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using MightofUniverses.Common.Players; // Adjust namespace if different
+using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Accessories
 {
@@ -20,15 +20,10 @@ namespace MightofUniverses.Content.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
-
-            // Flat max soul increase
             reaper.maxSoulEnergy += 30f;
-
-            // Time-based damage bonus
             if (!Main.dayTime)
             {
             player.GetDamage<ReaperDamageClass>() += 0.15f;
-                // Night-only faint gray light
                 Lighting.AddLight(player.Center, 0.15f, 0.15f, 0.15f);
 
                 if (!hideVisual && Main.rand.NextBool(120))

@@ -36,11 +36,8 @@ public override bool? CanHitNPC(NPC target) => true;
     );
 
         Projectile.Center = player.Center + offset;
-        
-        // Rainbow lighting
         Lighting.AddLight(Projectile.Center, Main.DiscoColor.ToVector3() * 0.5f);
 
-        // Rainbow dust
         if (Main.rand.NextBool(2))
         {
             Dust dust = Dust.NewDustDirect(

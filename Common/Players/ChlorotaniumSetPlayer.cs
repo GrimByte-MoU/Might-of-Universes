@@ -12,7 +12,7 @@ namespace MightofUniverses.Common.Players
     {
         private bool wearingFull;
         public bool HasChloroChest;
-        private const int   MaxSoulBonus        = 200;
+        private const int MaxSoulBonus = 200;
 
         public override void ResetEffects()
         {

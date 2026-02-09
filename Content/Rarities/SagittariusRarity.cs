@@ -11,7 +11,7 @@ namespace MightofUniverses.Content.Rarities
         {
             get
             {
-                return new Color(0, 0, 0); // Pure Black
+                return new Color(0, 0, 0);
             }
         }
     }

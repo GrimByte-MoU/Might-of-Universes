@@ -13,13 +13,11 @@ namespace MightofUniverses.Common.GlobalNPCs
             if (npc.SpawnedFromStatue) return;
             if (npc.friendly || npc.lifeMax <= 1) return;
 
-            // Determine the player who killed it (owner of last hit)
             Player killer = Main.player[npc.lastInteraction];
             if (killer is null || !killer.active) return;
 
             var acc = killer.GetModPlayer<ReaperAccessoryPlayer>();
 
-            // Highest tier supersedes lower tiers
             if (acc.accSpectercageArtifact)
             {
                 Vector2 spawn = npc.Center + new Vector2(Main.rand.NextFloat(-20f, 20f), Main.rand.NextFloat(-20f, 20f));
@@ -37,7 +35,7 @@ namespace MightofUniverses.Common.GlobalNPCs
 
             if (acc.accSoulEnslavementArtifact)
             {
-                int count = Main.rand.Next(2, 4); // 2–3 wisps
+                int count = Main.rand.Next(2, 4);
                 for (int i = 0; i < count; i++)
                 {
                     Vector2 spawn = npc.Center + new Vector2(Main.rand.NextFloat(-20f, 20f), Main.rand.NextFloat(-20f, 20f));
@@ -50,7 +48,6 @@ namespace MightofUniverses.Common.GlobalNPCs
                         0f,
                         killer.whoAmI
                     );
-                    // Small stagger so they don't all reach at once
                     if (p >= 0) Main.projectile[p].timeLeft += i * 10;
                 }
                 return;
@@ -58,7 +55,7 @@ namespace MightofUniverses.Common.GlobalNPCs
 
             if (acc.accShackledArtifact)
             {
-                int count = Main.rand.Next(1, 4); // 1–3 wisps
+                int count = Main.rand.Next(1, 4);
                 for (int i = 0; i < count; i++)
                 {
                     Vector2 spawn = npc.Center + new Vector2(Main.rand.NextFloat(-20f, 20f), Main.rand.NextFloat(-20f, 20f));
@@ -76,10 +73,9 @@ namespace MightofUniverses.Common.GlobalNPCs
                 return;
             }
 
-            // Fallback: original Soul Siphoning Artifact behavior (your existing first form)
             if (acc.HasSoulSiphoningArtifact)
             {
-                int count = Main.rand.Next(1, 3); // 1–2 wisps
+                int count = Main.rand.Next(1, 3);
                 for (int i = 0; i < count; i++)
                 {
                     Vector2 spawn = npc.Center + new Vector2(Main.rand.NextFloat(-20f, 20f), Main.rand.NextFloat(-20f, 20f));

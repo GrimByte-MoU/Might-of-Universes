@@ -12,8 +12,8 @@ namespace MightofUniverses.Content.Rarities
             {
                 float time = Main.GlobalTimeWrappedHourly * 2f;
                 Color[] colors = new Color[] {
-                    new Color(0, 64, 128),     // Darker Blue
-                    new Color(64, 128, 128)    // Icy Green
+                    new Color(0, 64, 128),
+                    new Color(64, 128, 128)
                 };
                 int index = (int)(time % colors.Length);
                 int nextIndex = (index + 1) % colors.Length;

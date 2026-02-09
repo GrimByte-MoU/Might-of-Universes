@@ -15,14 +15,12 @@ namespace MightofUniverses.Common.Players
         {
             if (usedPearlOfTheAbyss)
             {
-                // Normalize gravity in low-gravity environments (like outer space)
                 if (Player.ZoneSkyHeight)
                 {
-                    Player.gravity = 0.4f; // Approximate default gravity
+                    Player.gravity = 0.4f;
                     Player.noFallDmg = true;
                 }
 
-                // Bonus oceanic adaptation perks
                 Player.gills = true;
                 Player.ignoreWater = true;
                 Player.accFlipper = true;

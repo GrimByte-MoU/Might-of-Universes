@@ -20,7 +20,7 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
             Projectile.height = 14;
             Projectile.hostile = true;
             Projectile.friendly = false;
-            Projectile.penetrate = 1;
+            Projectile.penetrate = 5;
             Projectile.timeLeft = 600;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
@@ -44,24 +44,8 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
         }
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
 {
-    // Set base damage for normal difficulty
     float baseDamage = 95f;
-
-    // Adjust base damage for expert and master mode
-    if (Main.masterMode)
-    {
-        baseDamage *= 3f;  // Triple damage for master
-    }
-    else if (Main.expertMode)
-    {
-        baseDamage *= 2f;  // Double damage for expert
-    }
-
-    // Now apply the adjusted damage to the HurtModifiers
     modifiers.FinalDamage.Base = baseDamage;
-
-    // Debugging message to confirm damage (will print in red text in the chat)
-    Main.NewText($"Projectile hit player with {baseDamage} damage (Expert: {Main.expertMode}, Master: {Main.masterMode})", 255, 0, 0);
 }
 
 public override void OnHitPlayer(Player target, Player.HurtInfo info)

@@ -23,8 +23,6 @@ namespace MightofUniverses.Content.Items.Accessories
             var accessoryPlayer = player.GetModPlayer<AccessoryPlayer>();
 
             accessoryPlayer.accessoryModeActive = true;
-
-            // Configure tier-specific bonuses
             accessoryPlayer.maxStacks = 6;
             accessoryPlayer.framesPerStack = 600;
             accessoryPlayer.idleDelay = 300;

@@ -2,7 +2,6 @@ using Terraria.ID;
 
 namespace MightofUniverses.Common.Util
 {
-    // Version-agnostic crate IDs, resolved lazily and safely (no exceptions).
     public static class CrateIds
     {
         private const int Unknown = int.MinValue;
@@ -13,12 +12,10 @@ namespace MightofUniverses.Common.Util
                            _stockade = Unknown, _seaside = Unknown, _hellstone = Unknown, _defiled = Unknown,
                            _hematic = Unknown, _shroomite = Unknown, _hallowed = Unknown;
 
-        // Generic HM crates (tiered)
         public static int Pearlwood => Resolve(ref _pearlwood, "PearlwoodCrate", "WoodenCrateHard");
         public static int Mythril   => Resolve(ref _mythril,   "MythrilCrate",   "IronCrateHard");
         public static int Titanium  => Resolve(ref _titanium,  "TitaniumCrate",  "GoldenCrateHard");
 
-        // Biome HM crates
         public static int Mirage    => Resolve(ref _mirage,    "MirageCrate",    "OasisCrateHard", "DesertCrateHard");
         public static int Bramble   => Resolve(ref _bramble,   "BrambleCrate",   "JungleCrateHard");
         public static int Boreal    => Resolve(ref _boreal,    "BorealCrate",    "FrozenCrateHard", "SnowCrateHard");
@@ -30,7 +27,6 @@ namespace MightofUniverses.Common.Util
         public static int Hematic   => Resolve(ref _hematic,   "HematicCrate",   "CrimsonCrateHard");
         public static int Shroomite => Resolve(ref _shroomite, "ShroomiteCrate", "MushroomCrateHard");
 
-        // Hallow HM crate has varied names across builds
         public static int Hallowed  => Resolve(ref _hallowed,  "HallowedCrate", "HallowedFishingCrate", "HallowedFishingCrateHard", "HallowedCrateHard");
 
         public static bool Is(int type, int crateId) => crateId > 0 && type == crateId;
@@ -41,14 +37,13 @@ namespace MightofUniverses.Common.Util
 
             foreach (var n in names)
             {
-                // TryGetId avoids KeyNotFound exceptions across tML versions
                 if (ItemID.Search.TryGetId(n, out int id) && id > 0)
                 {
                     cache = id;
                     return cache;
                 }
             }
-            cache = -1; // Not found on this build
+            cache = -1;
             return cache;
         }
     }

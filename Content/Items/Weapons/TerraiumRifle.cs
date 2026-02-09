@@ -33,7 +33,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.useAmmo = AmmoID.Bullet;
         }
 
-        public override bool Shoot(Player player, Terraria.DataStructures.EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Projectile.NewProjectile(source, position, velocity, ModContent.ProjectileType<TerraiumRifleShot>(), damage, knockback, player.whoAmI);
             return false;

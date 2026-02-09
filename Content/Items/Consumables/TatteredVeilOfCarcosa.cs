@@ -18,7 +18,7 @@ namespace MightofUniverses.Content.Items.Consumables
             Item.useTime = 30;
             Item.useAnimation = 30;
             Item.UseSound = SoundID.Item2;
-            Item.rare = ModContent.RarityType<Rarities.EldritchRarity>();
+            Item.rare = ModContent.RarityType<EldritchRarity>();
             Item.consumable = true;
             Item.maxStack = 1;
         }

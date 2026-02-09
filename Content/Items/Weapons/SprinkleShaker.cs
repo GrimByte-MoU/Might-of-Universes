@@ -30,7 +30,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.maxStack = 1;
         }
 
-        public override bool Shoot(Player player, Terraria.DataStructures.EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Vector2 perturbed = velocity.RotatedByRandom(MathHelper.ToRadians(15));
             Projectile.NewProjectile(source, position, perturbed, type, damage, knockback, player.whoAmI, Main.rand.Next(6));

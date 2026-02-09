@@ -57,7 +57,6 @@ namespace MightofUniverses.Content.Items.Accessories
                 if (Main.myPlayer == Player.whoAmI)
                 {
                     Vector2 direction = (Main.MouseWorld - Player.Center).SafeNormalize(Vector2.UnitX);
-                    // Replace Player.EquippedItem with Player.inventory[Player.selectedItem]
                 Projectile.NewProjectile(
                 Player.GetSource_Accessory(Player.inventory[Player.selectedItem]),
                 Player.Center,

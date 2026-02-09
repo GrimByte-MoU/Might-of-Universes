@@ -69,7 +69,6 @@ namespace MightofUniverses.Common.Players
 
         private void MaintainSpikes()
         {
-            // Check which spikes exist
             bool[] spikeExists = new bool[8];
             
             for (int i = 0; i < Main.maxProjectiles; i++)

@@ -9,12 +9,11 @@ namespace MightofUniverses.Content.Items.Projectiles
     {
         public override void SafeSetDefaults()
         {
-            // Clone Shadowflame Knife projectile
             Projectile.CloneDefaults(ProjectileID.ShadowFlameKnife);
             Projectile.penetrate = 5;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 10;
-            AIType = ProjectileID.ShadowFlameKnife; // Use same AI
+            AIType = ProjectileID.ShadowFlameKnife;
         }
 
         private int bounceCount = 0;
@@ -27,11 +26,9 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            // Inflict Shadowflame for 5-10 seconds
             int debuffDuration = Main.rand.Next(300, 601);
             target.AddBuff(BuffID.ShadowFlame, debuffDuration);
 
-            // Ricochet to another enemy if bounces remain
             if (bounceCount < MaxBounces)
             {
                 bounceCount++;
@@ -39,12 +36,10 @@ namespace MightofUniverses.Content.Items.Projectiles
                 
                 if (nextTarget != null)
                 {
-                    // Home towards next target
                     Vector2 direction = nextTarget.Center - Projectile.Center;
                     direction.Normalize();
                     Projectile.velocity = direction * Projectile.velocity.Length();
                     
-                    // Visual effect
                     for (int i = 0; i < 8; i++)
                     {
                         Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.OrangeTorch, 0f, 0f, 100, default, 1.5f);

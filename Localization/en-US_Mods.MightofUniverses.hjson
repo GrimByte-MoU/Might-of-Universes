@@ -873,7 +873,6 @@ Items: {
 			Increases critical strike chance by 10%
 			Increases mana regeneration
 			Grants critter guide, find treasure, detect creature, danger sense, night vision, and sonar potion
-			Increases defense by 4
 			'''
 	}
 
@@ -1036,7 +1035,7 @@ Items: {
 		Tooltip:
 			'''
 			Sugarload!
-			Increases max minions by 2 and summon damage by 5%
+			Increases max minions by 1 and summon damage by 5%
 			Reduces all other class damage by 20%
 			'''
 	}
@@ -1046,7 +1045,7 @@ Items: {
 		Tooltip:
 			'''
 			The colors simply melt in your mouth!
-			Increases your max minions by 3 and summon damage by 10%
+			Increases your max minions by 2 and summon damage by 10%
 			Reduces all other class damage by 40%
 			'''
 	}
@@ -1056,7 +1055,7 @@ Items: {
 		Tooltip:
 			'''
 			Who knew space tasted this good!
-			Increases your max minions by 3 and summon damage by 25%
+			Increases your max minions by 3 and summon damage by 15%
 			Summon damage also occasionally lifesteals
 			Reduces all other class damage by 50%
 			'''
@@ -2111,7 +2110,7 @@ Items: {
 			'''
 			Complete erasure at whatever you point at
 			Permanent rapid fire
-			Fires 5 to 10 bullets at once
+			Fires 3 to 6 bullets at once
 			5% chance to fire a sphere that razes life around it
 			'''
 	}
@@ -4726,10 +4725,10 @@ Items: {
 		Tooltip:
 			'''
 			Hold to spin the scythe and charge, starting slow and spinning faster over the course of 4 seconds. 
-			At half of its max speed, six times per second it starts to fire homing Celestial Orbs that gather 1 soul and inflict Daybroken for 1 second. 
+			At half of its max speed, six times per second it starts to fire homing Celestial Orbs that gather 1 soul and inflict several debuffs for 1 second. 
 			Celestial Orbs are fired twice as frequently when spinning at max speed. 
 			When thrown at max speed, the scythe will quickly fire radial bursts of celestial orbs.
-			The scythe gathers 10 souls when striking an enemy when being spun and 2 souls when thrown and inflicts Daybroken for 3 seconds.
+			The scythe gathers 10 souls when striking an enemy when being spun and 2 souls when thrown and inflicts several debuffs for 3 seconds.
 			Consume {0} souls to unleash a devastating scythe that relentlessly hunts all enemies on screen for 5 seconds.
 			'''
 	}

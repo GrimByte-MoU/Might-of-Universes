@@ -12,7 +12,7 @@ namespace MightofUniverses.Common.Players
     public class CyberSpherePlayer : ModPlayer
     {
         public bool hasCyberSphere;
-        private const float RADIUS = 20f * 16f; // Convert tiles to pixels
+        private const float RADIUS = 20f * 16f;
         private const int BASE_DAMAGE = 40;
         private const int DAMAGE_PER_ENEMY = 5;
         private int damageTimer;
@@ -26,8 +26,7 @@ namespace MightofUniverses.Common.Players
         {
             if (!hasCyberSphere) return;
 
-            // Draw the circle
-            const int NUM_POINTS = 72; // Number of points in the circle
+            const int NUM_POINTS = 72;
             for (int i = 0; i < NUM_POINTS; i++)
             {
                 float angle = (float)(i * (2 * Math.PI) / NUM_POINTS);
@@ -37,7 +36,6 @@ namespace MightofUniverses.Common.Players
                 );
                 Vector2 dustPos = Player.Center + offset;
                 
-                // Create dust at each point
                 Dust dust = Dust.NewDustPerfect(
                     dustPos,
                     DustID.GreenTorch,
@@ -50,14 +48,12 @@ namespace MightofUniverses.Common.Players
                 dust.noLight = true;
             }
 
-            // Handle damage every 60 ticks (1 second)
             damageTimer++;
             if (damageTimer >= 60)
             {
                 damageTimer = 0;
                 List<NPC> affectedNPCs = new List<NPC>();
 
-                // Find all NPCs in range
                 for (int i = 0; i < Main.maxNPCs; i++)
                 {
                     NPC npc = Main.npc[i];
@@ -67,7 +63,6 @@ namespace MightofUniverses.Common.Players
                     }
                 }
 
-                // Calculate and apply damage
                 if (affectedNPCs.Count > 0)
                 {
                     int damagePerNPC = BASE_DAMAGE + (affectedNPCs.Count * DAMAGE_PER_ENEMY);
@@ -81,7 +76,6 @@ namespace MightofUniverses.Common.Players
 });
 
                         
-                        // Create hit effect
                         for (int d = 0; d < 3; d++)
                         {
                             Dust.NewDust(

@@ -4,7 +4,6 @@ using MightofUniverses.Common;
 
 namespace MightofUniverses.Content.Items.Buffs
 {
-    // Temporary armor penetration for Reaper attacks
     public class CactusReaperPierce : ModBuff
     {
         public override void SetStaticDefaults()

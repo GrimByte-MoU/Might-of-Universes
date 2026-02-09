@@ -14,17 +14,14 @@ namespace MightofUniverses.Common.GlobalItems
         {
             var postEvil = new DownedEvilBossCondition();
 
-            // Pre-Hardmode Desert crate: Oasis Crate
             if (item.type == ItemID.OasisCrate)
             {
-                // Rarely = 10% per item, gated behind EoW/BoC defeat
                 itemLoot.Add(ItemDropRule.ByCondition(postEvil, ModContent.ItemType<DesertWrappings>(), 10, 3, 5));
                 itemLoot.Add(ItemDropRule.ByCondition(postEvil, ModContent.ItemType<SunSigil>(),        10, 1, 2));
                 itemLoot.Add(ItemDropRule.ByCondition(postEvil, ModContent.ItemType<MoonSigil>(),       10, 1, 2));
                 itemLoot.Add(ItemDropRule.ByCondition(postEvil, ModContent.ItemType<SolunarToken>(),    20, 1, 3));
             }
 
-            // Hardmode Desert crate: Mirage Crate
             if (item.type == ItemID.OasisCrateHard)
             {
                 itemLoot.Add(ItemDropRule.ByCondition(postEvil, ModContent.ItemType<DesertWrappings>(), 10, 5, 10));

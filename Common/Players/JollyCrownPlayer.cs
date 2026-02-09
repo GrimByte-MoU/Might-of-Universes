@@ -25,7 +25,7 @@ namespace MightofUniverses.Common.Players
             if (hitCooldown > 0)
                 hitCooldown--;
 
-            float auraRadius = 5 * 16f; // 5 tiles in pixels
+            float auraRadius = 5 * 16f;
             bool inSnow = Player.ZoneSnow;
             float reduction = inSnow ? 0.6f : 0.5f;
 

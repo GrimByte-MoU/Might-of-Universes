@@ -11,7 +11,7 @@ namespace MightofUniverses.Content.Items.Projectiles
     public class CelestialOrb : MoUProjectile
     {
         private int homingTimer = 0;
-        private int colorType = 0; // 0 = Solar, 1 = Vortex, 2 = Stardust, 3 = Nebula
+        private int colorType = 0;
 
         public override void SafeSetDefaults()
         {
@@ -29,14 +29,12 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            // Set random color type on first frame
             if (Projectile.ai[0] == 0f)
             {
                 colorType = Main.rand.Next(4);
                 Projectile.ai[0] = 1f;
             }
 
-            // Light homing
             homingTimer++;
             if (homingTimer > 10)
             {
@@ -81,6 +79,9 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Main.dust[dust].velocity *= 2f;
             }
             target.AddBuff(BuffID.Daybreak, 60);
+            target.AddBuff(BuffID.Frostburn2, 60);
+            target.AddBuff(BuffID.Venom, 60);
+            target.AddBuff(BuffID.Ichor, 60);
         }
 
         private NPC FindClosestNPC(Vector2 position, float maxDistance)
@@ -112,17 +113,15 @@ namespace MightofUniverses.Content.Items.Projectiles
             Vector2 drawPos = Projectile.Center - Main.screenPosition;
             Color orbColor = colorType switch
             {
-                0 => new Color(255, 200, 100), // Solar - Orange
-                1 => new Color(100, 255, 200), // Vortex - Cyan
-                2 => new Color(100, 200, 255), // Stardust - Blue
-                3 => new Color(255, 100, 255), // Nebula - Pink
+                0 => new Color(255, 200, 100),
+                1 => new Color(100, 255, 200),
+                2 => new Color(100, 200, 255),
+                3 => new Color(255, 100, 255),
                 _ => Color.White
             };
             Color glowColor = orbColor * 0.5f;
             glowColor.A = 0;
             Main.EntitySpriteDraw(texture, drawPos, null, glowColor, Projectile.rotation, drawOrigin, Projectile.scale * 1.3f, SpriteEffects.None, 0);
-
-            // Main orb
             Main.EntitySpriteDraw(texture, drawPos, null, orbColor, Projectile.rotation, drawOrigin, Projectile.scale, SpriteEffects.None, 0);
 
             return false;
@@ -132,10 +131,10 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             return colorType switch
             {
-                0 => new Color(255, 200, 100, 200), // Solar
-                1 => new Color(100, 255, 200, 200), // Vortex
-                2 => new Color(100, 200, 255, 200), // Stardust
-                3 => new Color(255, 100, 255, 200), // Nebula
+                0 => new Color(255, 200, 100, 200),
+                1 => new Color(100, 255, 200, 200),
+                2 => new Color(100, 200, 255, 200),
+                3 => new Color(255, 100, 255, 200),
                 _ => Color.White
             };
         }

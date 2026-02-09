@@ -50,19 +50,16 @@ namespace MightofUniverses.Content.Items.Accessories
         {
             if (!battlemageEffect) return;
 
-            // +10 defense while above 50% mana (BUFFED from +5)
             if (Player.statMana > Player.statManaMax2 * 0.5f)
             {
                 Player. statDefense += 10;
             }
 
-            // NEW: +5 mana/sec while holding melee weapon
             if (Player.HeldItem.CountsAsClass(DamageClass.Melee))
             {
                 Player.manaRegen += 10;
             }
 
-            // Mana regen buff from melee hits (lasts 3 seconds, stacks with above)
             if (manaRegenTimer > 0)
             {
                 Player.manaRegen += 10;

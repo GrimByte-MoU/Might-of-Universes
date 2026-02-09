@@ -42,12 +42,10 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            // Main needle spray — like Razorpine
             int mainType = GetRandomNeedle();
             Vector2 spreadVelocity = velocity.RotatedByRandom(MathHelper.ToRadians(9));
             Projectile.NewProjectile(source, position, spreadVelocity, mainType, damage, knockback, player.whoAmI);
 
-            // Special burst every 60 ticks
             if (specialSprayCooldown <= 0)
             {
                 specialSprayCooldown = 60;
@@ -57,11 +55,11 @@ namespace MightofUniverses.Content.Items.Weapons
                     int specialType = GetRandomNeedle();
                     Vector2 offsetVel = velocity.RotatedBy(MathHelper.ToRadians(-20 + i * 10)) * 0.5f;
                     int p = Projectile.NewProjectile(source, position, offsetVel, specialType, damage, knockback, player.whoAmI);
-                    Main.projectile[p].ai[0] = 1f; // flag it for acceleration
+                    Main.projectile[p].ai[0] = 1f;
                 }
             }
 
-            return false; // prevent vanilla projectile
+            return false;
         }
 
         public override void AddRecipes()

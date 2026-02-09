@@ -4,9 +4,6 @@ using Microsoft.Xna.Framework;
 
 namespace MightofUniverses.Content.Items.Buffs
 {
-    // While active, handled in the scythe's ModifyHitNPC:
-    // - +50 armor penetration
-    // - +30% damage (source multiplier)
     public class PrimalSavageryBuff : ModBuff
     {
         public override void SetStaticDefaults()

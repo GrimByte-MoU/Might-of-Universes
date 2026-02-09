@@ -17,7 +17,7 @@ namespace MightofUniverses.Content.Items.Buffs
         public override void Update(NPC npc, ref int buffIndex)
         {
             npc.GetGlobalNPC<MortalWoundNPC>().hasMortalWound = true;
-            npc.lifeRegen -= 100;
+            npc.lifeRegen -= 200;
 
             if (Main.rand.NextBool(3))
             {

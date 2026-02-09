@@ -14,7 +14,7 @@ namespace MightofUniverses.Common.Players
         public bool BootsEquipped;
         public bool ChestSoulGenActive;
 
-        private int _tarredBuffType = -2; // -2 = unknown/unresolved, -1 = not found, >=0 = valid buff type
+        private int _tarredBuffType = -2;
 
         public override void ResetEffects()
         {
@@ -82,7 +82,6 @@ namespace MightofUniverses.Common.Players
             if (FullSetEquipped && item.DamageType == reaperClass)
                 ApplyTarOil(target);
 
-            // Chest effect: crits ignite Oiled enemies (Hellfire 3s)
             if (ChestEquipped && hit.Crit && target.HasBuff(BuffID.Oiled))
                 target.AddBuff(BuffID.OnFire3, 180);
         }

@@ -41,7 +41,7 @@ namespace MightofUniverses.Content.Items.Weapons
                 Projectile.NewProjectile(source, position, sphereVelocity, ModContent.ProjectileType<DebuggingSphereMelee>(), damage, knockback, player.whoAmI);
             }
         
-            return false; // or return true, depending on the desired behavior
+            return false;
         }
 
         public override void AddRecipes()

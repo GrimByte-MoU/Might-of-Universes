@@ -22,15 +22,13 @@ namespace MightofUniverses.Content.Items.Tools
             Item.UseSound = SoundID.Item4;
             Item.rare = ItemRarityID.LightRed;
             Item.value = Item.sellPrice(gold: 5);
-            Item.consumable = false; // Non-consumable!
+            Item.consumable = false;
         }
 
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             tooltips.Add(new TooltipLine(Mod, "ChronoWheel1", 
                 "Cycles through the times of day: Sunrise → Noon → Sunset → Midnight"));
-            
-            // Show current time
             string currentTime = GetCurrentTimePhase();
             tooltips.Add(new TooltipLine(Mod, "ChronoWheel2", 
                 $"Current: {currentTime}")
@@ -43,18 +41,15 @@ namespace MightofUniverses.Content.Items.Tools
         {
             if (Main.netMode == NetmodeID.MultiplayerClient)
             {
-                // Client sends packet to server to change time
                 ModPacket packet = Mod.GetPacket();
-                packet.Write((byte)2); // Opcode 2 for time change
+                packet.Write((byte)2);
                 packet.Send();
             }
             else
             {
-                // Single player or server - change time directly
                 AdvanceToNextPhase();
             }
 
-            // Visual effects
             for (int i = 0; i < 30; i++)
             {
                 Vector2 dustVel = Main.rand.NextVector2Circular(8f, 8f);
@@ -69,26 +64,21 @@ namespace MightofUniverses.Content.Items.Tools
 
         private void AdvanceToNextPhase()
         {
-            // Time constants (in Terraria ticks)
-            const double SUNRISE = 0;        // 4:30 AM (start of day)
-            const double NOON = 27000;       // 12:00 PM (midday)
-            const double SUNSET = 0;         // 7:30 PM (start of night)
-            const double MIDNIGHT = 16200;   // 12:00 AM (midnight in night cycle)
+            const double SUNRISE = 0;
+            const double NOON = 27000;
+            const double SUNSET = 0;
+            const double MIDNIGHT = 16200;
 
-            // Determine what phase we're currently in and advance to next
             if (Main.dayTime)
             {
-                // Currently daytime
-                if (Main.time < 13500) // First half of day (before 10:15 AM)
+                if (Main.time < 13500)
                 {
-                    // Phase 1: Sunrise → Noon
                     Main.time = NOON;
                     Main.dayTime = true;
                     ShowTimeChangeMessage("Noon");
                 }
                 else
                 {
-                    // Phase 2: Noon → Sunset (switch to night)
                     Main.time = SUNSET;
                     Main.dayTime = false;
                     ShowTimeChangeMessage("Sunset");
@@ -96,24 +86,20 @@ namespace MightofUniverses.Content.Items.Tools
             }
             else
             {
-                // Currently nighttime
-                if (Main.time < 8100) // First half of night (before 10:15 PM)
+                if (Main.time < 8100)
                 {
-                    // Phase 3: Sunset → Midnight
                     Main.time = MIDNIGHT;
                     Main.dayTime = false;
                     ShowTimeChangeMessage("Midnight");
                 }
                 else
                 {
-                    // Phase 4: Midnight → Sunrise (switch to day)
                     Main.time = SUNRISE;
                     Main.dayTime = true;
                     ShowTimeChangeMessage("Sunrise");
                 }
             }
 
-            // Sync to clients if server
             if (Main.netMode == NetmodeID.Server)
             {
                 NetMessage.SendData(MessageID.WorldData);
@@ -162,7 +148,6 @@ namespace MightofUniverses.Content.Items.Tools
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
 
-            // Alt recipe with Gold Watch
             CreateRecipe()
                 .AddIngredient(ModContent.ItemType<SolunarToken>(), 10)
                 .AddIngredient(ItemID.GoldWatch, 1)

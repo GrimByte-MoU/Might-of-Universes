@@ -33,12 +33,8 @@ namespace MightofUniverses.Content.Items.Accessories
 public class HallowedMirrorPlayer : ModPlayer
 {
     public bool hasHallowedMirror;
-
-    // 20s cooldown (in ticks), 5s flash window (in ticks)
     private int cooldownTimer = 0;
     private int flashTimer = 0;
-
-    // Store base values so we can revert cleanly
     private bool boostApplied = false;
     private float savedMaxRunSpeed = 0f;
     private float savedRunAcceleration = 0f;
@@ -52,7 +48,6 @@ public class HallowedMirrorPlayer : ModPlayer
 
     public override void UpdateDead()
     {
-        // Ensure we revert if the player dies mid-boost
         if (boostApplied)
         {
             Player.maxRunSpeed = savedMaxRunSpeed;
@@ -60,8 +55,6 @@ public class HallowedMirrorPlayer : ModPlayer
             boostApplied = false;
         }
         flashTimer = 0;
-        // Optional: keep cooldown or clear it on death
-        // cooldownTimer = 0;
     }
 
     public override void PostUpdate()
@@ -71,7 +64,6 @@ public class HallowedMirrorPlayer : ModPlayer
         if (flashTimer > 0)
             flashTimer--;
 
-        // End-of-flash cleanup: revert speeds once when timer hits zero
         if (flashTimer == 0 && boostApplied)
         {
             Player.maxRunSpeed = savedMaxRunSpeed;
@@ -81,11 +73,10 @@ public class HallowedMirrorPlayer : ModPlayer
 
         if (hasHallowedMirror && cooldownTimer <= 0)
         {
-            // Detect large instantaneous movement (teleport) since last tick
             if (Vector2.Distance(Player.position, lastPosition) > 500f)
             {
-                cooldownTimer = 1200; // 20 seconds
-                flashTimer = 300;     // 5 seconds
+                cooldownTimer = 1200;
+                flashTimer = 300;
 
                 Player.immune = true;
                 Player.immuneTime = 60;
@@ -100,12 +91,8 @@ public class HallowedMirrorPlayer : ModPlayer
 
                     boostApplied = true;
                 }
-
-                CombatText.NewText(Player.Hitbox, Color.LightGoldenrodYellow, "Hallowed Flash!");
             }
         }
-
-        // Always update lastPosition each tick so teleport detection is accurate
         lastPosition = Player.position;
     }
 }

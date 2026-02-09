@@ -17,7 +17,6 @@ namespace MightofUniverses.Content.Items.Armors
             var reaper = ModContent.GetInstance<ReaperDamageClass>();
             player.GetDamage(reaper) += 0.08f;
             player.GetCritChance(reaper) += 5f;
-            player.statDefense += 0; // visual explicit
             player.GetModPlayer<OrcusSetPlayer>().orcusChestplatePen += 10f;
         }
 

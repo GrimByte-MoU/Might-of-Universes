@@ -67,13 +67,11 @@ namespace MightofUniverses.Content.Items.Projectiles
             {
                 Projectile.Center = lightningPath[currentSegment];
 
-                // Spawn dust along the segment
                 Dust.NewDustPerfect(Projectile.Center, DustID.Electric, Vector2.Zero, 150, Color.LightBlue, 1.5f).noGravity = true;
                 currentSegment++;
             }
             else
             {
-                // Strike at the end
                 NPC target = Main.npc[targetIndex];
                 if (target != null && target.active)
                 {

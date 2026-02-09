@@ -7,7 +7,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.aiStyle = 0;
             Projectile.friendly = true;
             Projectile.hostile = false;
-            Projectile.penetrate = 2; // pierce 1 enemy (can hit one then expire)
+            Projectile.penetrate = 2;
             Projectile.tileCollide = true;
             Projectile.ignoreWater = true;
             Projectile.timeLeft = 120;
@@ -17,8 +17,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
-            // trailing dust
+            Projectile.rotation = Projectile.velocity.ToRotation();
             if (Main.rand.NextBool(3))
             {
                 int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GoldCoin, Projectile.velocity.X * 0.1f, Projectile.velocity.Y * 0.1f, 100, default, 0.9f);
@@ -28,7 +27,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.Poisoned, 120); // 2 seconds
+            target.AddBuff(BuffID.Poisoned, 120);
             Player owner = Main.player[Projectile.owner];
             if (owner != null && owner.active)
             {

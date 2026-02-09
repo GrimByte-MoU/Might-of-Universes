@@ -49,8 +49,7 @@ namespace MightofUniverses.Content.Items.Weapons
                 IEntitySource src = player.GetSource_ItemUse(Item);
                 int damage = player.GetWeaponDamage(Item);
                 float kb = player.GetWeaponKnockback(Item);
-
-                // Two opposite medallions (anchor orbit)
+                
                 Projectile.NewProjectile(src, player.Center, Vector2.Zero,
                     ModContent.ProjectileType<SolunarMedallion>(), damage * 2, kb, player.whoAmI, 0f);
 

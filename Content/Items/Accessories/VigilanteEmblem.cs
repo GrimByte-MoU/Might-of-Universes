@@ -64,14 +64,12 @@ namespace MightofUniverses.Content.Items. Accessories
             }
         }
 
-        // NEW: Lifesteal at close range for ranged weapons - BUFFED
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (! vigilanteEffect || proj.DamageType != DamageClass.Ranged) return;
 
             float distance = Vector2.Distance(target.Center, Player.Center) / 16f;
 
-            // Close range (0-10 tiles): Lifesteal 5% of damage dealt
             if (distance < 10f)
             {
                 int heal = (int)(damageDone * 0.05f);

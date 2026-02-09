@@ -13,7 +13,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.friendly = true;
             Projectile.tileCollide = true;
             Projectile.ignoreWater = true;
-            Projectile.penetrate = 2; // Pierces 1 enemy
+            Projectile.penetrate = 2;
             Projectile.timeLeft = 300;
             Projectile.DamageType = ModContent.GetInstance<PacifistDamageClass>();
         }
@@ -26,7 +26,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.Poisoned, 120); // 2 seconds poison
+            target.AddBuff(BuffID.Poisoned, 120);
         }
     }
 }

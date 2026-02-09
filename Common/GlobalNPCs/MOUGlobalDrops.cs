@@ -33,12 +33,11 @@ namespace MightofUniverses.Common.GlobalNPCs
         }
         public override void OnKill(NPC npc)
         {
-            // Demon's Blood: Hardmode only, 30% chance, stack 1–3, demons only, no statue spawns
                         if (Main.hardMode && !npc.SpawnedFromStatue && (npc.type == NPCID.Demon || npc.type == NPCID.VoodooDemon || npc.type == NPCID.BoneSerpentHead))
                         {
-                            if (Main.rand.Next(10) < 3) // 30%
+                            if (Main.rand.Next(10) < 3)
                 {
-                    int stack = Main.rand.Next(1, 4); // 1–3
+                    int stack = Main.rand.Next(1, 4);
                     Item.NewItem(npc.GetSource_Loot(), npc.Hitbox, ModContent.ItemType<DemonicEssence>(), stack);
                 }
             }

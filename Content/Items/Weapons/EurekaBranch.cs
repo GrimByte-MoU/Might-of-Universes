@@ -35,8 +35,8 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            int numBolts = Main.rand.Next(1, 4); // Random 1-3 bolts
-            float spreadAngle = MathHelper.ToRadians(15); // 15 degree spread
+            int numBolts = Main.rand.Next(1, 4);
+            float spreadAngle = MathHelper.ToRadians(15);
 
             for (int i = 0; i < numBolts; i++)
             {

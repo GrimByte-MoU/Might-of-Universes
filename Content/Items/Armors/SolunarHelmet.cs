@@ -14,7 +14,7 @@ namespace MightofUniverses.Content.Items.Armors
     public class SolunarHelmet : ModItem
     {
         public static readonly float SoulMultiplierBonus = 1f;
-        public static readonly float MaxSoulEnergy = 100f; // Base in ReaperPlayer is already 100
+        public static readonly float MaxSoulEnergy = 100f;
         public static readonly float ReaperDamageBonus = 0.1f;
         public static LocalizedText SetBonusText { get; private set; }
 
@@ -51,8 +51,6 @@ namespace MightofUniverses.Content.Items.Armors
 
             reaperPlayer.hasReaperArmor = true;
             reaperPlayer.reaperDamageMultiplier += ReaperDamageBonus;
-
-            // Set Solunar to 200 total cap (base 100 + 100 from the set), stacking with accessories:
             reaperPlayer.maxSoulEnergy += 100f;
 
             SpawnMedallions(player);

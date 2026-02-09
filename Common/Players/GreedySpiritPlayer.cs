@@ -28,10 +28,8 @@ public override bool OnPickup(Item item)
          item.type == ItemID.GoldCoin || item.type == ItemID.PlatinumCoin))
     {
         item.stack = (int)(item.stack * 1.25f);
-        // Let coins (with bonus) be picked up
         return true;
     }
-    // Let all other items be picked up too!
     return true;
 }
 

@@ -24,7 +24,7 @@ namespace MightofUniverses.Content.Items.Buffs
                 {
                     Projectile.NewProjectile(player.GetSource_Buff(buffIndex),
                         player.Center,
-                        new Microsoft.Xna.Framework.Vector2(Main.rand.Next(-2, 3), -5),
+                        new Vector2(Main.rand.Next(-2, 3), -5),
                         ModContent.ProjectileType<CandySlimeMinion>(),
                         20,
                         0f,

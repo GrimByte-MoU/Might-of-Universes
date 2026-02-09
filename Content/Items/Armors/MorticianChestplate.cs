@@ -23,7 +23,7 @@ namespace MightofUniverses.Content.Items.Armors
             var reaper = ModContent.GetInstance<ReaperDamageClass>();
             player.GetDamage(reaper) += 0.03f;
             player.GetCritChance(reaper) += 1f;
-            player.lifeRegen += 2; // +1 HP per second -> lifeRegen units are half HP/sec, so +2
+            player.lifeRegen += 2;
         }
 
         public override void AddRecipes()

@@ -12,7 +12,6 @@ namespace MightofUniverses.Content.Items.Accessories
     {
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
-            // Compatible with all tModLoader versions
             string key = ModKeybindManager.Ability2 != null && ModKeybindManager.Ability2.GetAssignedKeys().Count > 0
                 ? string.Join(", ", ModKeybindManager.Ability2.GetAssignedKeys())
                 : "Unbound";

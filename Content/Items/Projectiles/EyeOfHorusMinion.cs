@@ -12,10 +12,10 @@ namespace MightofUniverses.Content.Items.Projectiles
     public class EyeOfHorusMinion : MoUProjectile
     {
         private const float IdleOffsetY = -64f;
-        private const float DetectTiles = 50f; // around the PLAYER
-        private const float DetectRangePx = DetectTiles * 16f; // 800 px
-        private const int FireCooldownTicks = 30; // twice per second
-        private const float ChainRangeTiles = 30f; // faster/longer chaining hops
+        private const float DetectTiles = 50f;
+        private const float DetectRangePx = DetectTiles * 16f;
+        private const int FireCooldownTicks = 30;
+        private const float ChainRangeTiles = 30f;
         private const float ChainRangePx = ChainRangeTiles * 16f;
         private const float FirstBeamThicknessPx = 1.5f;
 
@@ -55,8 +55,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                 return;
             }
             Projectile.timeLeft = 2;
-
-            // Rigid anchor above player's mounted center
             Projectile.Center = player.MountedCenter + new Vector2(0f, IdleOffsetY);
             Projectile.velocity = Vector2.Zero;
             Projectile.rotation = 0f;
@@ -81,7 +79,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                 NPC target = FindClosestEnemyNearPlayer(player, DetectRangePx);
                 if (target != null)
                 {
-                    // Visual: slim beam from eye to first target
                     DrawSlimZapBetween(Projectile.Center, target.Center, FirstBeamThicknessPx);
                     FireChain(player, target);
                     Projectile.localAI[0] = FireCooldownTicks;
@@ -121,19 +118,19 @@ namespace MightofUniverses.Content.Items.Projectiles
             if (toTarget.LengthSquared() < 4f) toTarget = new Vector2(0f, -1f);
             toTarget.Normalize();
 
-            float speed = 90f; // faster chaining
+            float speed = 90f;
             int projType = ModContent.ProjectileType<HorusZapProjectile>();
             int baseDamage = Projectile.damage;
 
             int idx = Projectile.NewProjectile(Projectile.GetSource_FromThis(), start, toTarget * speed, projType, baseDamage, 0f, Projectile.owner,
-                ai0: 0f, // step 0
-                ai1: -1f // prev target id none
+                ai0: 0f,
+                ai1: -1f
             );
 
             if (idx >= 0 && idx < Main.maxProjectiles)
             {
                 Main.projectile[idx].originalDamage = baseDamage;
-                Main.projectile[idx].localAI[0] = ChainRangePx; // pass chain range
+                Main.projectile[idx].localAI[0] = ChainRangePx;
             }
         }
 
@@ -170,11 +167,8 @@ namespace MightofUniverses.Content.Items.Projectiles
             {
                 float t = i / (float)points;
                 Vector2 p = Vector2.Lerp(a, b, t);
-
-                // Very slim: 1-2 particles per step, small spread
                 float off = Main.rand.NextFloat(-thicknessPx, thicknessPx);
                 Vector2 pos = p + perp * off;
-
                 int dustType = Main.rand.NextBool(3) ? DustID.Sand : DustID.GoldFlame;
                 var d = Dust.NewDustDirect(pos - new Vector2(1, 1), 2, 2, dustType, 0f, 0f, 100, default, Main.rand.NextFloat(1.0f, 1.4f));
                 d.noGravity = true;

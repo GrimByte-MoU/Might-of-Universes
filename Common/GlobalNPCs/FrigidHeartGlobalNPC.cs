@@ -19,7 +19,6 @@ namespace MightofUniverses.Common.GlobalNPCs
 
         public override void OnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
         {
-            // Get the owning player
             if (projectile.owner >= 0 && projectile.owner < Main.maxPlayers)
             {
                 Player player = Main.player[projectile.owner];

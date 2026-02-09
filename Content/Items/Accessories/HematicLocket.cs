@@ -25,14 +25,12 @@ namespace MightofUniverses.Content.Items.Accessories
 
         public override void AddRecipes()
         {
-            // Shadow Scale variant
             Recipe r1 = CreateRecipe();
             r1.AddIngredient(ItemID.LifeCrystal, 3);
             r1.AddIngredient(ItemID.ShadowScale, 5);
             r1.AddTile(TileID.Anvils);
             r1.Register();
-
-            // Tissue Sample variant
+            
             Recipe r2 = CreateRecipe();
             r2.AddIngredient(ItemID.LifeCrystal, 3);
             r2.AddIngredient(ItemID.TissueSample, 5);

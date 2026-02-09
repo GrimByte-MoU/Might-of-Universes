@@ -10,12 +10,9 @@ namespace MightofUniverses.Content.Items.Projectiles
     {
         public override void SafeSetDefaults()
         {
-            // Clone Scourge mini projectile
             Projectile.CloneDefaults(ProjectileID.TinyEater);
-            AIType = ProjectileID.TinyEater; // Use homing AI
-            
-            // Modify for more ricochets
-            Projectile.penetrate = 8; // Initial hit + 7 ricochets
+            AIType = ProjectileID.TinyEater;
+            Projectile.penetrate = 8;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 10;
         }
@@ -25,10 +22,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            // Inflict Tarred
             target.AddBuff(ModContent.BuffType<Tarred>(), 180);
-
-            // Ricochet to another enemy
             if (bounceCount < MaxBounces)
             {
                 bounceCount++;

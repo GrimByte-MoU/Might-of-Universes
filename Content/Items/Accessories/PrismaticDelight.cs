@@ -15,13 +15,13 @@ namespace MightofUniverses.Content.Items.Accessories
             Item.width = 28;
             Item.height = 28;
             Item.value = Item.sellPrice(gold: 3);
-            Item.rare = ItemRarityID.Green;
+            Item.rare = ItemRarityID.Yellow;
             Item.accessory = true;
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.maxMinions += 3;
+            player.maxMinions += 2;
             player.GetDamage(DamageClass.Melee) *= 0.6f;
             player.GetDamage(DamageClass.Ranged) *= 0.6f;
             player.GetDamage(DamageClass.Magic) *= 0.6f;

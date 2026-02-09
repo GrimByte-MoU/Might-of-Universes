@@ -25,7 +25,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(ModContent.BuffType<Buffs.CodeDestabilized>(), 180); // 3 seconds
+            target.AddBuff(ModContent.BuffType<Buffs.CodeDestabilized>(), 180);
         }
     }
 }

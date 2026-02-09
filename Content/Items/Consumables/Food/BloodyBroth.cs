@@ -18,7 +18,7 @@ namespace MightofUniverses.Content.Items.Consumables.Food
             Item.maxStack = 99;
             Item.rare = ItemRarityID.Yellow;
             Item.buffType = ModContent.BuffType<BrothVitality>();
-            Item.buffTime = 1800; // 30 seconds
+            Item.buffTime = 1800;
             Item.value = Item.sellPrice(silver: 50);
         }
 

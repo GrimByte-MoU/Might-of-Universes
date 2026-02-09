@@ -21,7 +21,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            Projectile.rotation = Projectile.velocity.ToRotation();
+            Projectile.rotation += 0.3f;
             Lighting.AddLight(Projectile.Center, 0.6f, 0.9f, 0.6f);
 
             if (Main.rand.NextBool(2))

@@ -34,13 +34,10 @@ namespace MightofUniverses.Content.Items.Projectiles
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 {
     Player player = Main.player[Projectile.owner];
-    
-    // 8% lifesteal (balanced)
-    int heal = damageDone / 12;  // ~8% lifesteal
+    int heal = damageDone / 12;
     player.statLife = System.Math.Min(player.statLife + heal, player.statLifeMax2);
     player.HealEffect(heal);
     
-    // Visual blood particles
     for (int i = 0; i < 3; i++)
     {
         Vector2 vel = (player.Center - target.Center).SafeNormalize(Vector2.UnitY) * 4f;

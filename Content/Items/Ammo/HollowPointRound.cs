@@ -24,8 +24,8 @@ namespace MightofUniverses.Content.Items.Ammo
             Item.knockBack = 2.5f;
             Item.value = Item.sellPrice(0, 0, 2, 0);
             Item.rare = ItemRarityID.Lime;
-            Item.shoot = ModContent.ProjectileType<Projectiles.HollowPointProjectile>();
-            Item.shootSpeed = 22f; // Extremely fast speed
+            Item.shoot = ModContent.ProjectileType<HollowPointProjectile>();
+            Item.shootSpeed = 22f;
             Item.ammo = AmmoID.Bullet;
         }
 

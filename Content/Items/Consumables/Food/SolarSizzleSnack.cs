@@ -29,7 +29,7 @@ namespace MightofUniverses.Content.Items.Consumables.Food
 
         public override bool? UseItem(Player player)
         {
-            player.AddBuff(ModContent.BuffType<EclipseBlessing>(), 1800); // 30s
+            player.AddBuff(ModContent.BuffType<EclipseBlessing>(), 1800);
             return true;
         }
 

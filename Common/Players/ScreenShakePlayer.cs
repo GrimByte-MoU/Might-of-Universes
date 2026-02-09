@@ -1,5 +1,3 @@
-// Common/Players/ScreenShakePlayer.cs
-
 using Terraria;
 using Terraria.ModLoader;
 

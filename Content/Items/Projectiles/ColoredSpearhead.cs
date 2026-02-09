@@ -21,7 +21,6 @@ namespace MightofUniverses.Content.Items.Projectiles
         public override void AI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
-            // Home in on enemies
             NPC target = null;
             float distance = 1000f;
             for (int i = 0; i < Main.npc.Length; i++)

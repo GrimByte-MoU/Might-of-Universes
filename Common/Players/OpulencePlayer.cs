@@ -16,7 +16,6 @@ namespace MightofUniverses.Common.Players
         {
             if (hasOpulence)
             {
-                // Implement any visual effects here if needed
             }
         }
     }

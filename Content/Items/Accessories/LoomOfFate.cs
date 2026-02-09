@@ -37,8 +37,6 @@ namespace MightofUniverses.Content.Items.Accessories
             {
                 p.loomOfFateDuration--;
                 reaperPlayer.AddSoulEnergy(0.5f);
-
-                // Visual effect every 10 frames
                 if (p.loomOfFateDuration % 10 == 0)
                 {
                     int dust = Dust.NewDust(player.position, player.width, player.height, 

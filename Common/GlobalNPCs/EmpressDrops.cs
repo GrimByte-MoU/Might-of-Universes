@@ -12,7 +12,6 @@ namespace MightofUniverses.Common.GlobalNPCs
         {
             if (npc.type == NPCID.HallowBoss)
             {
-                // Now correctly ordered with minimum (1) less than maximum (3)
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<HallowedLight>(), 1, 30, 51));
             }
         }

@@ -43,7 +43,7 @@ namespace MightofUniverses. Content.NPCs.Bosses.Aegon
         private Vector2 arenaCenter = Vector2.Zero;
         private bool arenaCenterSet = false;
         private bool hasCleanedUp = false;
-        private int debugCounter = 0; // Track how many times AI runs
+        private int debugCounter = 0;
 
         private static Asset<Texture2D> textureNormal;
         private static Asset<Texture2D> textureDamaged;
@@ -104,7 +104,7 @@ namespace MightofUniverses. Content.NPCs.Bosses.Aegon
 
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            if ((CurrentState == State.Phase2_FlewAway || CurrentState == State.Phase4_ScatterFragments))
+            if (CurrentState == State.Phase2_FlewAway || CurrentState == State.Phase4_ScatterFragments)
             {
                 if (Vector2.Distance(NPC.Center, Main.LocalPlayer.Center) > 2000f)
                     return false;
@@ -126,7 +126,6 @@ namespace MightofUniverses. Content.NPCs.Bosses.Aegon
 
         public override void AI()
         {
-            // DEBUG: Print every 60 ticks to show AI is running
             debugCounter++;
             if (debugCounter % 60 == 0)
             {
@@ -138,7 +137,6 @@ namespace MightofUniverses. Content.NPCs.Bosses.Aegon
             // ============================================================
             bool anyAlive = IsAnyPlayerAlive();
             
-            // DEBUG: Always show player status
             if (debugCounter % 60 == 0)
             {
                 Main. NewText($"[AI DEBUG] Any player alive?  {anyAlive}", anyAlive ? Color.Green : Color.Red);
@@ -154,7 +152,6 @@ namespace MightofUniverses. Content.NPCs.Bosses.Aegon
                     Main.NewText("[WORLD AEGIS DEBUG] Cleanup finished!", Color.Orange);
                 }
                 
-                // Force despawn even if cleanup didn't work
                 NPC.active = false;
                 return;
             }
@@ -229,7 +226,6 @@ namespace MightofUniverses. Content.NPCs.Bosses.Aegon
                 }
             }
             
-            // DEBUG: Show player counts every 60 ticks
             if (debugCounter % 60 == 0)
             {
                 Main.NewText($"[PLAYER DEBUG] {aliveCount} alive out of {totalCount} active players", Color.Yellow);
@@ -248,7 +244,6 @@ namespace MightofUniverses. Content.NPCs.Bosses.Aegon
                 Main.NewText($"[CLEANUP DEBUG] Arena. IsActive = {AegonArena.Current.IsActive}", Color.Orange);
             }
 
-            // Step 1: Remove arena
             if (AegonArena.Current != null)
             {
                 Main.NewText("[CLEANUP DEBUG] Calling Arena.Remove()...", Color.Yellow);
@@ -262,7 +257,6 @@ namespace MightofUniverses. Content.NPCs.Bosses.Aegon
                 Main.NewText("[CLEANUP DEBUG] Arena was already null!", Color.Red);
             }
 
-            // Step 2: Despawn all Aegon-related NPCs
             Main.NewText("[CLEANUP DEBUG] Searching for NPCs to despawn...", Color.Yellow);
             int despawnCount = 0;
             List<string> foundTypes = new List<string>();
@@ -302,7 +296,6 @@ namespace MightofUniverses. Content.NPCs.Bosses.Aegon
                 Main.NewText($"  - {type}", Color. Cyan);
             }
 
-            // Step 3: Despawn self
             Main.NewText("[CLEANUP DEBUG] Despawning WorldAegis...", Color.Yellow);
             NPC.active = false;
             NPC.life = 0;
@@ -352,7 +345,7 @@ namespace MightofUniverses. Content.NPCs.Bosses.Aegon
                 int projectileCount = NPC.life / (float)NPC.lifeMax > 0.8f ? 8 : 12;
                 for (int i = 0; i < projectileCount; i++)
                 {
-                    float angle = (i / (float)projectileCount) * MathHelper.TwoPi;
+                    float angle = i / (float)projectileCount * MathHelper.TwoPi;
                     Vector2 spawnOffset = new Vector2(
                         (float)Math.Cos(angle),
                         (float)Math.Sin(angle)
@@ -614,13 +607,11 @@ namespace MightofUniverses. Content.NPCs.Bosses.Aegon
                 hasCleanedUp = true;
             }
 
-            // Victory message
             if (Main.netMode != NetmodeID.Server)
             {
                 Main.NewText("Aegon has been defeated!", 50, 125, 255);
             }
 
-            // Drop loot (Normal mode only)
             if (!Main.expertMode && !Main.masterMode)
             {
                 int[] weapons = new int[]

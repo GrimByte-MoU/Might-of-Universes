@@ -92,7 +92,7 @@ namespace MightofUniverses. Content.Items.Buffs
             
             if (NPC.downedMoonlord)
             {
-                damagePercent = 0.45f;
+                damagePercent = 0.5f;
                 minimumDamage = 75;
             }
             else if (NPC.downedGolemBoss)

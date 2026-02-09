@@ -31,12 +31,10 @@ namespace MightofUniverses.Common.GlobalProjectiles
                     {
                         if (projectile.Hitbox.Intersects(gear.Hitbox))
                         {
-                            // Apply buffs
                             projectile.damage = (int)(projectile.damage * 1.3f);
                             projectile.velocity *= 1.5f;
                             player.GetModPlayer<ClockworkPlayer>().defensePenFlat += 20;
 
-                            // Fire ClockworkHook with cooldown
                             if (gear.localAI[0] <= 0f)
                             {
                                 NPC target = FindNearestTarget(gear.Center, 800f);
@@ -53,7 +51,7 @@ namespace MightofUniverses.Common.GlobalProjectiles
                                         player.whoAmI
                                     );
 
-                                    gear.localAI[0] = 30f; // 0.5 seconds at 60FPS
+                                    gear.localAI[0] = 30f;
                                 }
                             }
 
@@ -67,7 +65,6 @@ namespace MightofUniverses.Common.GlobalProjectiles
 
         public override void PostAI(Projectile projectile)
         {
-            // Reduce hook cooldown per gear
             if (projectile.type == ModContent.ProjectileType<ClockworkGear>())
             {
                 if (projectile.localAI[0] > 0f)

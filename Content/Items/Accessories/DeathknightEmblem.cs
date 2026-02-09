@@ -9,7 +9,6 @@ namespace MightofUniverses.Content.Items.Accessories
     {
         public override void SetStaticDefaults()
         {
-            // DisplayName and Tooltip are set in localization files
         }
 
         public override void SetDefaults()
@@ -23,15 +22,11 @@ namespace MightofUniverses.Content.Items.Accessories
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            // Increase Reaper and Melee damage
             player.GetDamage(DamageClass.Melee) += 0.12f;
             var reaperPlayer = player.GetModPlayer<ReaperPlayer>();
             player.GetDamage<ReaperDamageClass>() += 0.12f;
-            // Increase Reaper and Melee crit chance
             player.GetCritChance(DamageClass.Melee) += 10;
             player.GetCritChance<ReaperDamageClass>() += 10f;
-
-            // Apply the Deathknight effects
             player.GetModPlayer<DeathknightEmblemPlayer>().hasDeathknightEmblem = true;
         }
 
@@ -61,15 +56,12 @@ namespace MightofUniverses.Content.Items.Accessories
         {
             if (!hasDeathknightEmblem) return;
 
-            // Decrease cooldown timer
             if (soulGainCooldown > 0)
                 soulGainCooldown--;
 
-            // Check if holding a melee weapon
             bool holdingMelee = Player.HeldItem.CountsAsClass(DamageClass.Melee);
             if (holdingMelee)
             {
-                // Drain soul energy every second
                 soulDrainTimer++;
                 if (soulDrainTimer >= 60)
                 {
@@ -90,19 +82,14 @@ namespace MightofUniverses.Content.Items.Accessories
         {
             if (!hasDeathknightEmblem || soulGainCooldown > 0) return;
 
-            // Calculate soul energy to gain (half of damage taken)
             int soulEnergyGain = info.Damage / 2;
             
             if (soulEnergyGain > 0)
             {
-                // Add soul energy
                 var reaperPlayer = Player.GetModPlayer<ReaperPlayer>();
                 reaperPlayer.AddSoulEnergy(soulEnergyGain, Player.Center);
-                
-                // Start cooldown (3 seconds)
                 soulGainCooldown = 180;
-                
-                // Visual effect
+
                 for (int i = 0; i < 10; i++)
                 {
                     Dust.NewDust(
@@ -118,7 +105,6 @@ namespace MightofUniverses.Content.Items.Accessories
                     );
                 }
                 
-                // Show text
                 if (Main.myPlayer == Player.whoAmI)
                 {
                     CombatText.NewText(Player.getRect(), Color.Cyan, "+" + soulEnergyGain + " Soul Energy");

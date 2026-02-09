@@ -33,7 +33,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.maxStack = 1;
         }
 
-        public override bool Shoot(Player player, Terraria.DataStructures.EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             int numProjectiles = 3;
             float radius = 160f;
@@ -67,8 +67,6 @@ namespace MightofUniverses.Content.Items.Weapons
         public override void OnSpawn(IEntitySource source)
 {
     Player player = Main.player[Main.myPlayer];
-
-    // Get both melee and magic bonuses
     float meleeBoost = player.GetDamage(DamageClass.Melee).Additive;
     float magicBoost = player.GetDamage(DamageClass.Magic).Additive;
     float totalBoost = 1f + meleeBoost + magicBoost;

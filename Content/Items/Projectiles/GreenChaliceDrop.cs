@@ -26,10 +26,10 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.Ichor, 300); // 5 seconds
-            target.AddBuff(BuffID.Midas, 120); // 2 seconds
+            target.AddBuff(BuffID.Ichor, 300);
+            target.AddBuff(BuffID.Midas, 120);
             Player player = Main.player[Projectile.owner];
-            player.statLife += (int)(damageDone * 0.1f); // Lifesteal
+            player.statLife += (int)(damageDone * 0.1f);
             player.HealEffect((int)(damageDone * 0.1f), true);
             Main.player[Projectile.owner].GetModPlayer<ReaperPlayer>().AddSoulEnergy(5f, target.Center);
         }

@@ -14,7 +14,7 @@ namespace MightofUniverses.Content.Items.Summoning
     {
         public override void SetStaticDefaults()
         {
-            Item.ResearchUnlockCount = 3; // Journey mode research
+            Item.ResearchUnlockCount = 3;
         }
 
         public override void SetDefaults()
@@ -33,12 +33,10 @@ namespace MightofUniverses.Content.Items.Summoning
 
         public override bool CanUseItem(Player player)
         {
-            if (NPC.AnyNPCs(ModContent.NPCType<Content.NPCs.Bosses.Aegon.Aegon>()))
+            if (NPC.AnyNPCs(ModContent.NPCType<NPCs.Bosses.Aegon.Aegon>()))
             {
                 return false;
             }
-
-            // Can use anywhere (no time/biome restrictions)
             return true;
         }
 
@@ -46,41 +44,29 @@ namespace MightofUniverses.Content.Items.Summoning
         {
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                // Spawn Aegon at player's position
                 int npcIndex = NPC.NewNPC(
                     new EntitySource_ItemUse(player, Item),
                     (int)player.Center.X,
                     (int)player.Center.Y,
-                    ModContent.NPCType<Content.NPCs. Bosses.Aegon. Aegon>()
+                    ModContent.NPCType<NPCs. Bosses.Aegon. Aegon>()
                 );
 
                 if (npcIndex != Main.maxNPCs)
                 {
-                    NPC aegon = Main.npc[npcIndex];
-                    
-                    // The arena will be created by Aegon's OnSpawn() method
-                    // centered at the player's position when summoned
-                    
-                    // Sync in multiplayer
+                    NPC Aegon = Main.npc[npcIndex];
+
                     if (Main. netMode == NetmodeID. Server)
                     {
                         NetMessage.SendData(MessageID. SyncNPC, -1, -1, null, npcIndex);
                     }
                 }
-
-                // Visual effect - dramatic arena creation
                 CreateSummonEffect(player.Center);
             }
 
             return true;
         }
-
-        /// <summary>
-        /// Creates visual effect when boss is summoned
-        /// </summary>
         private void CreateSummonEffect(Vector2 position)
         {
-            // Calculate arena radius based on difficulty
             float arenaRadius;
             if (Main.masterMode)
                 arenaRadius = 75.5f;
@@ -89,11 +75,10 @@ namespace MightofUniverses.Content.Items.Summoning
             else
                 arenaRadius = 100.5f;
 
-            // Dust ring showing arena border
             int segments = 200;
             for (int i = 0; i < segments; i++)
             {
-                float angle = (i / (float)segments) * MathHelper.TwoPi;
+                float angle = i / (float)segments * MathHelper.TwoPi;
                 Vector2 dustPos = position + new Vector2(
                     (float)System.Math.Cos(angle) * arenaRadius * 16f,
                     (float)System.Math.Sin(angle) * arenaRadius * 16f
@@ -104,7 +89,6 @@ namespace MightofUniverses.Content.Items.Summoning
                 Main.dust[dust].velocity = Vector2.Zero;
             }
 
-            // Center explosion effect
             for (int i = 0; i < 50; i++)
             {
                 Vector2 velocity = Main.rand.NextVector2Circular(10f, 10f);
@@ -112,10 +96,9 @@ namespace MightofUniverses.Content.Items.Summoning
                 Main.dust[dust].noGravity = true;
             }
 
-            // Screen shake effect (optional)
             if (Main.LocalPlayer.Distance(position) < 2000f)
             {
-                Main.LocalPlayer.GetModPlayer<Common.Players.ScreenShakePlayer>()?. ScreenShake(15, 30);
+                Main.LocalPlayer.GetModPlayer<ScreenShakePlayer>()?. ScreenShake(15, 30);
             }
         }
 

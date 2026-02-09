@@ -65,7 +65,7 @@ namespace MightofUniverses.Content.Items.Accessories
             if (conjurerEffect && proj.DamageType == DamageClass. Summon && manaRestoreCooldown <= 0)
             {
                 Player.statMana = Math.Min(Player.statMana + 5, Player.statManaMax2);
-                manaRestoreCooldown = 30;  // Max 2 procs per second
+                manaRestoreCooldown = 30;
 
                 // Visual feedback
                 if (Main.rand.NextBool(3))

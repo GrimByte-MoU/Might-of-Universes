@@ -28,7 +28,7 @@ namespace MightofUniverses.Content.Items.Projectiles. EnemyProjectiles
             set => Projectile. ai[1] = value;
         }
 
-        private Vector2 targetPosition; // Store where player WAS
+        private Vector2 targetPosition;
 
         public override void SetStaticDefaults()
         {
@@ -43,7 +43,7 @@ namespace MightofUniverses.Content.Items.Projectiles. EnemyProjectiles
             Projectile.aiStyle = -1;
             Projectile. hostile = true;
             Projectile.friendly = false;
-            Projectile.penetrate = 1;
+            Projectile.penetrate = 5;
             Projectile.timeLeft = 210;
             Projectile.alpha = 0;
             Projectile.light = 0.8f;

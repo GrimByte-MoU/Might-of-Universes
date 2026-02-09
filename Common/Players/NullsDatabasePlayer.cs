@@ -32,7 +32,7 @@ public class NullsDatabasePlayer : ModPlayer
                 }
             }
             
-            healCooldown = 1800; // 30 seconds
+            healCooldown = 1800;
         }
     }
 }

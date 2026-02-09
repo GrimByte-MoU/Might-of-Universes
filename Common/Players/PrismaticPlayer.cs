@@ -15,15 +15,12 @@ namespace MightofUniverses.Common.Players
     {
         public int armorAbilityCooldown = 0;
         public int armorAbilityTimer = 0;
-        public int armorAbilityType = 0; // 0 = none, 1 = Wizard, 2 = Knight, 3 = Commando
+        public int armorAbilityType = 0;
         public float meleeSizeMultiplier = 1f;
         public float rangedVelocityMultiplier = 1f;
         public float ammoConserveChance = 0f;
 
-        // Sentinel tracking
         private int sentinelProjectileId = -1;
-
-        // Flags set by head.UpdateArmorSet when a full prismatic set is equipped.
         public bool prismaticWizardSet = false;
         public bool prismaticKnightSet = false;
         public bool prismaticCommandoSet = false;
@@ -100,7 +97,7 @@ namespace MightofUniverses.Common.Players
                 }
 
                 SoundEngine.PlaySound(SoundID.Item4, Player.position);
-                armorAbilityCooldown = 300; // 5s
+                armorAbilityCooldown = 300;
                 armorAbilityTimer = 0;
                 armorAbilityType = 1;
                 Main.NewText("Prismatic Wizard Armor Ability used: restored 200 mana.", Color.MediumPurple);
@@ -110,8 +107,8 @@ namespace MightofUniverses.Common.Players
             if (prismaticKnightSet)
             {
                 armorAbilityType = 2;
-                armorAbilityTimer = 300; // 5s
-                armorAbilityCooldown = 600; // 10s
+                armorAbilityTimer = 300;
+                armorAbilityCooldown = 600;
                 SoundEngine.PlaySound(SoundID.Item11, Player.position);
                 Main.NewText("Prismatic Knight Armor Ability active.", Color.OrangeRed);
                 return;
@@ -120,8 +117,8 @@ namespace MightofUniverses.Common.Players
             if (prismaticCommandoSet)
             {
                 armorAbilityType = 3;
-                armorAbilityTimer = 180; // 3s
-                armorAbilityCooldown = 600; // 10s
+                armorAbilityTimer = 180;
+                armorAbilityCooldown = 600;
                 SoundEngine.PlaySound(SoundID.Item11, Player.position);
                 Main.NewText("Prismatic Commando Armor Ability active.", Color.LightSkyBlue);
                 return;
@@ -151,10 +148,6 @@ namespace MightofUniverses.Common.Players
                 }
             }
         }
-        private bool IsWearingWizardSet() => prismaticWizardSet;
-        private bool IsWearingKnightSet() => prismaticKnightSet;
-        private bool IsWearingCommandoSet() => prismaticCommandoSet;
-        private bool IsWearingConjurerSet() => prismaticConjurerSet;
 
         private void EnsureSentinelExists()
         {

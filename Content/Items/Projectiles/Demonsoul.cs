@@ -9,7 +9,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 {
     public class Demonsoul : MoUProjectile
     {
-        private float speedMultiplier = 1f;
 
         public override void SafeSetDefaults()
         {

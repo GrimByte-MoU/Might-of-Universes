@@ -36,7 +36,6 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            // This only runs for direct melee swings, not projectile hits.
             if (damageDone <= 0 || player.moonLeech) return;
             int heal = Utils.Clamp((int)(damageDone * 0.05f), 1, 50);
             player.statLife = Utils.Clamp(player.statLife + heal, 0, player.statLifeMax2);

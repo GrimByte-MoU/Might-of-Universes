@@ -11,7 +11,7 @@ namespace MightofUniverses.Content.Items.Projectiles
     public class NewMoonProjectile : MoUProjectile
     {
         private int stationaryTime = 0;
-        private const int STATIONARY_DURATION = 15; // ~0.25 seconds
+        private const int STATIONARY_DURATION = 15;
         private bool hasAccelerated = false;
 
         public override void SetStaticDefaults()
@@ -37,13 +37,11 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            // Phase 1: Stationary
             if (stationaryTime < STATIONARY_DURATION)
             {
                 stationaryTime++;
                 if (Projectile.ai[0] == 0f)
                 {
-                    // Store velocity direction in ai slots
                     Projectile.ai[0] = Projectile.velocity.X;
                     Projectile.ai[1] = Projectile.velocity.Y;
                     Projectile.velocity = Vector2.Zero;
@@ -57,13 +55,12 @@ namespace MightofUniverses.Content.Items.Projectiles
                     Main.dust[dust].velocity *= 0.2f;
                 }
             }
-            // Phase 2: Rapid acceleration
             else if (!hasAccelerated)
             {
                 hasAccelerated = true;
                 Vector2 direction = new Vector2(Projectile.ai[0], Projectile.ai[1]);
                 direction.Normalize();
-                Projectile.velocity = direction * 3f; // Start slow
+                Projectile.velocity = direction * 3f;
                 SoundEngine.PlaySound(SoundID.Item8, Projectile.position);
                 for (int i = 0; i < 15; i++)
                 {
@@ -95,7 +92,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            // Dark impact effect
             for (int i = 0; i < 8; i++)
             {
                 Vector2 dustVel = Main.rand.NextVector2Circular(3f, 3f);
@@ -126,7 +122,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                     drawOrigin, Projectile.scale * 0.9f, SpriteEffects.None, 0);
             }
 
-            // Dark glow if stationary
             if (stationaryTime < STATIONARY_DURATION)
             {
                 Color glowColor = new Color(40, 40, 80, 0) * 0.5f;
@@ -134,7 +129,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                     glowColor, Projectile.rotation, drawOrigin, Projectile.scale * 1.3f, SpriteEffects.None, 0);
             }
 
-            // Main projectile (darkened)
             Color mainColor = Color.Lerp(lightColor, new Color(30, 30, 50), 0.5f);
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, null, 
                 mainColor, Projectile.rotation, drawOrigin, Projectile.scale, SpriteEffects.None, 0);
@@ -144,7 +138,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override Color? GetAlpha(Color lightColor)
         {
-            // New moon = dark appearance
             return new Color(30, 30, 60, 200);
         }
     }

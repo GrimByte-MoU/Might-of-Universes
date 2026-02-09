@@ -9,16 +9,14 @@ namespace MightofUniverses.Common.Systems
 {
     public static class DataZapSystem
     {
-        private const float MAX_DISTANCE = 480f; // 30 tiles
-        private const float ARC_ANGLE = 0.7853982f; // 45 degrees in radians (π/4)
+        private const float MAX_DISTANCE = 480f;
+        private const float ARC_ANGLE = 0.7853982f;
 
         public static void TryZapEnemies(Player player, Vector2 sourcePos, Vector2 aimDirection, int baseDamage, float knockback)
         {
             NPC firstTarget = FindFirstTarget(player, sourcePos, aimDirection);
             if (firstTarget == null)
                 return;
-
-            // Zap targets in order with damage scaling
             NPC[] zapChain = new NPC[4];
             float[] damageMult = { 1.2f, 1.0f, 0.75f, 0.5f };
 
@@ -44,7 +42,7 @@ namespace MightofUniverses.Common.Systems
                     zapChain[i].StrikeNPC(hitInfo);
                     zapChain[i].AddBuff(ModContent.BuffType<CodeDestabilized>(), 60);
 
-                    // Draw beam to previous
+
                     if (i > 0 && zapChain[i - 1] != null)
                         DrawGreenBeam(zapChain[i - 1].Center, zapChain[i].Center);
                 }

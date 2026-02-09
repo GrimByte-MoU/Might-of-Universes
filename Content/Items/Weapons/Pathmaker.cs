@@ -39,7 +39,6 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override void UpdateInventory(Player player)
         {
-            // Only ramp while held and not using another item
             if (player.HeldItem.type == Item.type && player.itemAnimation > 0)
             {
                 rampTimer++;
@@ -58,7 +57,6 @@ namespace MightofUniverses.Content.Items.Weapons
             }
             else
             {
-                // Reset when not in use
                 rampTimer = 0;
                 Item.useTime = Item.useAnimation = MAX_USE_TIME;
             }

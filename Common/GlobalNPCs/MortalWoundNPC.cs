@@ -18,7 +18,7 @@ namespace MightofUniverses.Common.GlobalNPCs
         {
             if (hasMortalWound)
             {
-                modifiers.FinalDamage *= 1.20f; // +20% damage taken
+                modifiers.FinalDamage *= 1.20f;
             }
         }
     }

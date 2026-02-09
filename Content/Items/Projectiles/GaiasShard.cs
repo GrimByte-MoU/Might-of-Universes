@@ -57,7 +57,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            // Shards are fragile; break on tiles
             Projectile.Kill();
             return false;
         }

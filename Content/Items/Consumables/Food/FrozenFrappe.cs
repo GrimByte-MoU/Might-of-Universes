@@ -18,7 +18,7 @@ namespace MightofUniverses.Content.Items.Consumables.Food
             Item.rare = ItemRarityID.Yellow;
             Item.value = Item.buyPrice(silver: 25);
             Item.buffType = ModContent.BuffType<WinterGrace>();
-            Item.buffTime = 30 * 60; // 30 seconds
+            Item.buffTime = 1800;
         }
 
         public override void AddRecipes()

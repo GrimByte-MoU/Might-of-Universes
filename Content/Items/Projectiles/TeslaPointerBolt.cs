@@ -8,13 +8,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 {
     public class TeslaPointerBolt : MoUProjectile
     {
-        // ai0 = amplitude (pixels)
-        // ai1 = direction (+1 or -1)
-        // ai2 = intended lifetime ticks (so math stays stable if you tweak timeLeft)
-        // localAI[0] initialization flag
-        // localAI[1] = stored startX
-        // localAI[2] = stored startY
-        // localAI[3] = ticks elapsed
 
         private Vector2 forward;
         private Vector2 perp;
@@ -28,7 +21,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.alpha = 0;
             Projectile.light = 0.5f;
             Projectile.ignoreWater = true;
-            Projectile.tileCollide = false; // disable to ensure smooth parametric arc
+            Projectile.tileCollide = false;
         }
 
         public override void AI()
@@ -40,7 +33,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Projectile.localAI[2] = Projectile.Center.Y;
                 forward = Projectile.velocity.SafeNormalize(Vector2.UnitX);
                 perp = forward.RotatedBy(MathHelper.PiOver2);
-                // lock forward speed magnitude
                 Projectile.localAI[3] = 0f;
             }
 
@@ -48,27 +40,16 @@ namespace MightofUniverses.Content.Items.Projectiles
             float dir = Math.Sign(Projectile.ai[1]);
             if (dir == 0) dir = 1f;
             float intendedLife = Projectile.ai[2] > 0 ? Projectile.ai[2] : 36f;
-
-            // Progress
-            float t = Projectile.localAI[3] / intendedLife; // 0..1
+            float t = Projectile.localAI[3] / intendedLife;
             Projectile.localAI[3]++;
-
             t = MathHelper.Clamp(t, 0f, 1f);
-
-            // Base forward distance (constant speed)
-            float forwardSpeed = 16f; // matches item shoot speed; you can pass via ai if you want
+            float forwardSpeed = 16f;
             float forwardDist = forwardSpeed * (Projectile.localAI[3] - 1);
-
-            // Lateral displacement: A * sin(pi * t)
             float lateral = amplitude * MathF.Sin(MathF.PI * t) * dir;
-
             Vector2 start = new Vector2(Projectile.localAI[1], Projectile.localAI[2]);
             Vector2 targetPos = start + forward * forwardDist + perp * lateral;
-
-            // Derive velocity so Terraria collision / damage timing stays consistent
             Projectile.velocity = targetPos - Projectile.Center;
             Projectile.Center = targetPos;
-
             Projectile.rotation = Projectile.velocity.ToRotation();
 
             if (Main.rand.NextBool(2))

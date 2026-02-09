@@ -22,7 +22,7 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             CreateRecipe()
                 .AddIngredient(ItemID.Cutlass, 1)
-                .AddIngredient(ModContent.ItemType<GreedySpirit>(), 1) // TODO: set counts
+                .AddIngredient(ModContent.ItemType<GreedySpirit>(), 7)
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
         }

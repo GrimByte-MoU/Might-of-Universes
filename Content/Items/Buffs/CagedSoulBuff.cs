@@ -4,7 +4,6 @@ using MightofUniverses.Common;
 
 namespace MightofUniverses.Content.Items.Buffs
 {
-    // Player buff: +10% Reaper damage
     public class CagedSoulBuff : ModBuff
     {
         public override void SetStaticDefaults()

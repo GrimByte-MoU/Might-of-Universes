@@ -43,7 +43,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
             Projectile.timeLeft = 2;
 
-            // Unique index across this player's daggers
             int totalDaggers = 0;
             int myIndex = 0;
             for (int i = 0; i < Main.maxProjectiles; i++)
@@ -57,7 +56,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                 }
             }
 
-            // Semicircle above player (-PI..0 maps to upper half; single dagger sits straight above)
             float formationRadius = 56f + 10f * Math.Max(0, totalDaggers - 1);
             float angle = (totalDaggers <= 1)
                 ? -MathHelper.PiOver2

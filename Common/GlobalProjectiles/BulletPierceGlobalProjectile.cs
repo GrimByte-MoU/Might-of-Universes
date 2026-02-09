@@ -8,10 +8,8 @@ namespace MightofUniverses.Common
 {
     public class BulletPierceGlobalProjectile : GlobalProjectile
     {
-        // We don't store per-entity state; just tweak on spawn.
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
-            // Only bullets fired by players
             if (projectile.owner < 0 || projectile.owner >= Main.maxPlayers)
                 return;
 

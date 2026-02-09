@@ -26,7 +26,6 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override bool CanUseItem(Player player)
         {
-            // Only allow a new cast if none of our fish are out
             int projType = ModContent.ProjectileType<SerrasalmidPiranha>();
             return player.ownedProjectileCounts[projType] == 0;
         }
@@ -38,23 +37,19 @@ namespace MightofUniverses.Content.Items.Weapons
                 return false;
 
             int projType = ModContent.ProjectileType<SerrasalmidPiranha>();
-
-            // Derive a sensible direction even if velocity is tiny due to channel timing
             Vector2 dir = velocity.LengthSquared() > 0.01f
                 ? Vector2.Normalize(velocity)
                 : Vector2.Normalize(Main.MouseWorld - player.MountedCenter);
 
             float speed = Item.shootSpeed > 0 ? Item.shootSpeed : 12f;
 
-            // Spawn 5 piranhas in a slight fan
             for (int i = 0; i < 5; i++)
             {
-                float t = i / 4f; // 0..1
+                float t = i / 4f;
                 Vector2 v = dir.RotatedBy(MathHelper.Lerp(-0.2f, 0.2f, t)) * speed;
                 Projectile.NewProjectile(source, position, v, projType, damage, knockback, player.whoAmI);
             }
 
-            // We handled spawning
             return false;
         }
 
@@ -65,7 +60,7 @@ namespace MightofUniverses.Content.Items.Weapons
                 .AddIngredient(ModContent.ItemType<AncientBone>(), 10)
                 .AddIngredient(ModContent.ItemType<PrehistoricAmber>(), 8)
                 .AddIngredient(ModContent.ItemType<TarChunk>(), 6)
-                .AddTile(TileID.LunarCraftingStation) // Ancient Manipulator
+                .AddTile(TileID.LunarCraftingStation)
                 .Register();
         }
     }

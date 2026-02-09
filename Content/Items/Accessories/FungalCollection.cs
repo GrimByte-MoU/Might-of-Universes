@@ -23,8 +23,6 @@ namespace MightofUniverses.Content.Items.Accessories
             player.statLifeMax2 += 25;
             player.statDefense += 3;
            player.GetModPlayer<PacifistPlayer>().pacifistDamageMultiplier += 0.35f;
-
-            // Enable mushroom spore effect
             player.GetModPlayer<FungalCollectionPlayer>().fungalCollection = true;
         }
 

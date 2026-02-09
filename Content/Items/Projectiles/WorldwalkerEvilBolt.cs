@@ -15,7 +15,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Melee;
             Projectile.penetrate = 12;
-            Projectile.timeLeft = 300; // 5 seconds
+            Projectile.timeLeft = 300;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = true;
             Projectile.extraUpdates = 1;

@@ -25,9 +25,6 @@ namespace MightofUniverses.Content.Items.Projectiles
             
         Projectile.rotation = Projectile.velocity.ToRotation();
 
-// Optional: Add this if you want the sprite to be oriented differently
-// Projectile.rotation += MathHelper.PiOver2; // Rotates sprite 90 degrees
-
             
             if (Main.rand.NextBool(3))
             {

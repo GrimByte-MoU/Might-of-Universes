@@ -23,28 +23,24 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             Projectile.rotation += 0.2f * Projectile.direction;
             Projectile.velocity.Y += 0.1f;
-
-            // Bounce logic
             if (Projectile.velocity.Y > 16f) Projectile.velocity.Y = 16f;
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)
 {
     Projectile.ai[0]++;
-    if (Projectile.ai[0] >= 6)  // 6 bounces (up from 3)
+    if (Projectile.ai[0] >= 6)
         Projectile.Kill();
     else
     {
-        // Better bounce retention
         if (Projectile.velocity.X != oldVelocity.X) 
-            Projectile.velocity. X = -oldVelocity.X * 0.90f;  // 90% retention
+            Projectile.velocity. X = -oldVelocity.X * 0.90f;
         if (Projectile.velocity.Y != oldVelocity.Y) 
             Projectile.velocity.Y = -oldVelocity. Y * 0.90f;
     }
     return false;
 }
 
-// Add lifesteal
 public override void OnHitNPC(NPC target, NPC. HitInfo hit, int damageDone)
 {
     target.AddBuff(ModContent.BuffType<TerrasRend>(), 180);

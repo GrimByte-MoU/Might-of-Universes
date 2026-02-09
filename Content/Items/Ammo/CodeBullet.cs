@@ -24,8 +24,8 @@ namespace MightofUniverses.Content.Items.Ammo
             Item.knockBack = 2f;
             Item.value = Item.sellPrice(0, 0, 1, 0);
             Item.rare = ItemRarityID.Pink;
-            Item.shoot = ModContent.ProjectileType<Projectiles.CodeBulletProjectile>();
-            Item.shootSpeed = 16f; // Moderate speed
+            Item.shoot = ModContent.ProjectileType<CodeBulletProjectile>();
+            Item.shootSpeed = 16f;
             Item.ammo = AmmoID.Bullet;
         }
 

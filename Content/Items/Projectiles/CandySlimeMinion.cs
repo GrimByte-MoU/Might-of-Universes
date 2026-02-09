@@ -20,7 +20,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             Projectile.friendly = true;
             Projectile.minion = true;
-            Projectile.minionSlots = 0.66f; // 3 slimes = 2 slots
+            Projectile.minionSlots = 0.66f;
             Projectile.penetrate = -1;
             Projectile.timeLeft = 18000;
             Projectile.tileCollide = false;
@@ -37,7 +37,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                 return;
             }
 
-            // Teleport to player if too far away
             if (Vector2.Distance(player.Center, Projectile.Center) > 800f)
             {
                 Projectile.Center = player.Center;
@@ -46,12 +45,10 @@ namespace MightofUniverses.Content.Items.Projectiles
 
             Lighting.AddLight(Projectile.Center, Color.Pink.ToVector3() * 0.5f);
 
-            // Basic minion AI
             Vector2 targetCenter = Projectile.Center;
             bool foundTarget = false;
             float distanceFromTarget = 700f;
-            
-            // Look for enemies
+
             for (int i = 0; i < Main.maxNPCs; i++)
             {
                 NPC npc = Main.npc[i];
@@ -70,17 +67,14 @@ namespace MightofUniverses.Content.Items.Projectiles
                 }
             }
 
-            // Movement behavior
             if (foundTarget)
             {
-                // Chase target
                 Vector2 direction = targetCenter - Projectile.Center;
                 direction.Normalize();
                 Projectile.velocity = (Projectile.velocity * 20f + direction * 8f) / 21f;
             }
             else
             {
-                // Follow player
                 Vector2 idlePosition = player.Center;
                 idlePosition.Y -= 48f;
                 

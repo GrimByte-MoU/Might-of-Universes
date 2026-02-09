@@ -56,13 +56,10 @@ namespace MightofUniverses.Content.Items.Projectiles
             }
             if (owner.HasBuff(ModContent.BuffType<AncientSkullMinionBuff>()))
                 Projectile.timeLeft = 2;
-
-            // Acquire or maintain target
             int currentTarget = (int)Projectile.ai[0] - 1;
             NPC target = (currentTarget >= 0 && currentTarget < Main.maxNPCs) ? Main.npc[currentTarget] : null;
             if (target == null || !target.active || target.friendly || target.dontTakeDamage || Vector2.DistanceSquared(owner.Center, target.Center) > AcquireRangePx * AcquireRangePx)
             {
-                // find nearest
                 float bestDist = AcquireRangePx;
                 int bestIdx = -1;
                 for (int i = 0; i < Main.maxNPCs; i++)
@@ -80,7 +77,7 @@ namespace MightofUniverses.Content.Items.Projectiles
                 if (bestIdx != -1)
                 {
                     Projectile.ai[0] = bestIdx + 1;
-                    Projectile.localAI[0] = 0f; // reset lock timer
+                    Projectile.localAI[0] = 0f;
                     Projectile.netUpdate = true;
                     target = Main.npc[bestIdx];
                 }
@@ -92,7 +89,6 @@ namespace MightofUniverses.Content.Items.Projectiles
             }
             else
             {
-                // If there is a closer enemy within range, switch
                 float currentDist = Vector2.Distance(owner.Center, target.Center);
                 for (int i = 0; i < Main.maxNPCs; i++)
                 {
@@ -103,7 +99,7 @@ namespace MightofUniverses.Content.Items.Projectiles
                     if (d < currentDist && d <= AcquireRangePx)
                     {
                         Projectile.ai[0] = n.whoAmI + 1;
-                        Projectile.localAI[0] = 0f; // reset lock timer
+                        Projectile.localAI[0] = 0f;
                         Projectile.netUpdate = true;
                         target = n;
                         break;
@@ -111,40 +107,29 @@ namespace MightofUniverses.Content.Items.Projectiles
                 }
             }
 
-            // Determine formation index so multiple minions spread horizontally
             (int index, int count) = GetFormationIndex(owner);
-            float spread = 60f; // horizontal spacing between minions
+            float spread = 60f;
             float sideOffset = (index - (count - 1) * 0.5f) * spread;
-
-            // Subtle bob so it isn’t rigid
             float bob = (float)Math.Sin((Main.GameUpdateCount * 0.12f) + Projectile.whoAmI * 0.7f) * 8f;
 
             Vector2 desiredPos;
             if (target == null)
             {
-                // Idle near player, offset to side for formations
                 desiredPos = owner.Center + new Vector2(sideOffset, IdleOffsetY + bob);
                 Projectile.rotation = 0f;
-                Projectile.localAI[1] = 0f; // beam accumulator
-                Projectile.localAI[0] = 0f; // lock timer
+                Projectile.localAI[1] = 0f;
+                Projectile.localAI[0] = 0f;
             }
             else
             {
-                // Hold above and to the side of the target
                 desiredPos = target.Center + new Vector2(sideOffset, AboveTargetOffsetY + bob);
                 Vector2 toTarget = target.Center - Projectile.Center;
                 Projectile.rotation = toTarget.ToRotation();
-
-                // Increase lock time
                 Projectile.localAI[0] += 1f;
-
-                // Beam damage ticking
                 DoBeamDamage(owner, target);
-                // Dust visuals along the beam line
                 BeamVisuals(target);
             }
 
-            // Movement
             Vector2 to = desiredPos - Projectile.Center;
             Projectile.velocity = Vector2.Lerp(Projectile.velocity, to, MoveLerp);
         }
@@ -160,11 +145,9 @@ namespace MightofUniverses.Content.Items.Projectiles
                     continue;
                 if (i == (int)p.whoAmI)
                 {
-                    // not how we compare; compute order by whoAmI ascending
                 }
             }
 
-            // Order by whoAmI to produce a consistent index
             for (int i = 0; i < Main.maxProjectiles; i++)
             {
                 Projectile p = Main.projectile[i];
@@ -175,13 +158,12 @@ namespace MightofUniverses.Content.Items.Projectiles
                     index++;
                 count++;
             }
-            if (count == 0) count = 1; // avoid divide by zero
+            if (count == 0) count = 1;
             return (index, count);
         }
 
         private void DoBeamDamage(Player owner, NPC target)
         {
-            // Determine stage based on lock time
             int lockTicks = (int)Projectile.localAI[0];
             float mult;
             float hitsPerSecond;
@@ -217,7 +199,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                 if (Main.netMode == NetmodeID.MultiplayerClient)
                     return;
 
-                // Compute summon damage with owner's modifiers
                 var mod = owner.GetTotalDamage(DamageClass.Summon);
                 int dmg = (int)mod.ApplyTo(Projectile.originalDamage * mult);
 
@@ -236,21 +217,19 @@ namespace MightofUniverses.Content.Items.Projectiles
                 }
                 catch
                 {
-                    // NPC may have died between scheduling and tick
                 }
             }
         }
 
         private void BeamVisuals(NPC target)
         {
-            // Draw a line of dark smoke-like dust between skull and target
             Vector2 start = Projectile.Center;
             Vector2 end = target.Center;
             Vector2 delta = end - start;
             float len = delta.Length();
             if (len <= 2f) return;
 
-            Vector2 step = delta / 12f; // number of samples
+            Vector2 step = delta / 12f;
             Vector2 p = start;
             byte alphaBase = 140;
 
@@ -274,7 +253,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void OnKill(int timeLeft)
         {
-            // light poof
             for (int i = 0; i < 12; i++)
             {
                 int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Smoke, Scale: Main.rand.NextFloat(1f, 1.4f));

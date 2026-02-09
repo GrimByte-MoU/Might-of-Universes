@@ -9,8 +9,6 @@ namespace MightofUniverses.Content.Items.Ammo
     {
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Reinforced Stake");
-            // Tooltip.SetDefault("A metal-reinforced wooden stake\nExtra effective against vampires");
         }
 
         public override void SetDefaults()
@@ -33,7 +31,7 @@ namespace MightofUniverses.Content.Items.Ammo
         {
             CreateRecipe(10)
                 .AddIngredient(ItemID.Stake, 10)
-                .AddRecipeGroup("IronBar", 1) // Iron or Lead bar
+                .AddRecipeGroup("IronBar", 1)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

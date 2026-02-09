@@ -6,9 +6,6 @@ using MightofUniverses.Common;
 
 namespace MightofUniverses.Common.Players
 {
-    /// <summary>
-    /// Handles Shield of Cthulhu dash damage conversion to Pacifist
-    /// </summary>
     public class VanillaPacifistPlayer : ModPlayer
     {
         public override void PostUpdateEquips()

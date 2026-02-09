@@ -11,7 +11,7 @@ namespace MightofUniverses.Common.GlobalNPCs
         {
             if (NPC.downedPlantBoss) return;
 
-            if (npc.type == NPCID.BloodNautilus) // Dreadnautilus
+            if (npc.type == NPCID.BloodNautilus)
             {
                 Item.NewItem(npc.GetSource_Loot(), npc.getRect(), ModContent.ItemType<SanguineEssence>(), 20);
             }

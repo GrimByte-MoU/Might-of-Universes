@@ -43,12 +43,11 @@ namespace MightofUniverses.Common.Players
                 if (attackTimer >= 6)
                 {
                     attackTimer = 0;
-                    FireBone(Player, true); // Use max damage burst
+                    FireBone(Player, true);
                 }
                 return;
             }
 
-            // Find the closest target
             NPC target = null;
             float minDistance = float.MaxValue;
 
@@ -70,10 +69,10 @@ namespace MightofUniverses.Common.Players
 
             int interval = minDistance switch
             {
-                <= 160f => 15,  // <10 tiles
-                <= 320f => 20,  // 11–20 tiles
-                <= 480f => 30,  // 21–30 tiles
-                _ => 40         // >30 tiles
+                <= 160f => 15,
+                <= 320f => 20,
+                <= 480f => 30,
+                _ => 40
             };
 
             if (attackTimer >= interval)
@@ -107,7 +106,6 @@ namespace MightofUniverses.Common.Players
 
             Vector2 direction = (target - position).SafeNormalize(Vector2.UnitX) * 8f;
 
-            // Choose projectile type and damage
             int projType = ModContent.ProjectileType<CrossboneProjectile>();
             int damage = 15;
 
@@ -122,7 +120,6 @@ namespace MightofUniverses.Common.Players
                 damage = 35;
             }
 
-            // Boost damage slightly during rapid fire burst
             if (rapidFire)
             {
                 damage += 10;

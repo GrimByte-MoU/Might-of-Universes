@@ -15,19 +15,18 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             Projectile.width        = 8;
             Projectile.height       = 8;
-            Projectile.aiStyle      = 0;  // custom motion
+            Projectile.aiStyle      = 0;
             Projectile.friendly     = true;
             Projectile.hostile      = false;
             Projectile.penetrate    = 3;
             Projectile.DamageType   = DamageClass.Ranged;
-            Projectile.timeLeft     = 60; // midrange lifetime
+            Projectile.timeLeft = 60;
             Projectile.ignoreWater  = true;
             Projectile.tileCollide  = true;
         }
 
         public override void AI()
         {
-            // ai[0] = starting phase; ai[1] = unused
             float phase   = Projectile.ai[0];
             float speed   = Projectile.velocity.Length();
             float progress= (60 - Projectile.timeLeft) / 60f * MathHelper.TwoPi * 2;
@@ -41,7 +40,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            // Apply sunfire & daybroken
             target.AddBuff(ModContent.BuffType<Sunfire>(), 180);
             target.AddBuff(BuffID.Daybreak, 180);
         }

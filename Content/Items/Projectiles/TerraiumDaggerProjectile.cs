@@ -40,7 +40,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            // Daggers should stick or break on tiles; small bounce then die
             Projectile.penetrate = 0;
             Projectile.Kill();
             return false;

@@ -1,7 +1,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using MightofUniverses.Common.Players; // Adjust if ReaperPlayer lives elsewhere
+using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Accessories
 {
@@ -55,7 +55,7 @@ namespace MightofUniverses.Content.Items.Accessories
             }
 
             tickTimer++;
-            if (tickTimer >= 6) // 6 ticks ≈ 0.1 second
+            if (tickTimer >= 6)
             {
                 tickTimer = 0;
 

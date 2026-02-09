@@ -11,8 +11,6 @@ namespace MightofUniverses.Common
 {
     public static class ReaperSoulEffects
     {
-        // Returns true if souls were consumed and empowerment applied.
-        // configure uses the canonical Players.ReaperEmpowermentValues type.
         public static bool TryReleaseSoulsWithEmpowerment(
             Player player,
             float cost,
@@ -23,10 +21,8 @@ namespace MightofUniverses.Common
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
 
-            // Minimal effective cost (no external dependency) to avoid errors.
             int effectiveCost = (int)Math.Floor(Math.Max(1f, cost));
 
-            // Assumes your ReaperPlayer.TryReleaseSouls returns bool and accepts onSuccess + optional message.
             var releaseResult = reaper.TryReleaseSouls(
                 effectiveCost,
                 onSuccess: p =>

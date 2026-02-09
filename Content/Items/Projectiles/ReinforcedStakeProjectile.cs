@@ -9,12 +9,11 @@ namespace MightofUniverses.Content.Items.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Reinforced Stake");
         }
 
         public override void SafeSetDefaults()
         {
-            Projectile.aiStyle = 1; // Standard arrow/stake aiStyle
+            Projectile.aiStyle = 1;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.penetrate = 9;
@@ -34,13 +33,11 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            // Extra damage against vampire-type enemies (similar to vanilla stake)
             if (target.type == NPCID.Vampire || target.type == NPCID.VampireBat)
             {
                 hit.Damage = (int)(hit.Damage * 2f);
             }
             
-            // Create dust effect on hit
             for (int i = 0; i < 10; i++)
             {
                 Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, 

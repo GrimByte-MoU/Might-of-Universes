@@ -23,8 +23,6 @@ namespace MightofUniverses.Common.UI
 
         private float displayedSoulPercent = 0f;
         private bool playedMaxSound = false;
-
-        // Death mark visuals
         private const int DeathMaxSlots = 5;
         private Texture2D deathEmptyTex;
         private Texture2D deathFilledTex;
@@ -65,7 +63,7 @@ namespace MightofUniverses.Common.UI
                 deathFilledTex = null;
             }
 
-            texturesLoaded = (deathEmptyTex != null && deathFilledTex != null);
+            texturesLoaded = deathEmptyTex != null && deathFilledTex != null;
             
             if (!texturesLoaded)
             {
@@ -87,7 +85,6 @@ namespace MightofUniverses.Common.UI
 
             if (!reaper.hasReaperArmor) return;
 
-            // Load textures on first draw
             if (!attemptedLoad)
             {
                 LoadDeathMarkTextures();
@@ -96,7 +93,6 @@ namespace MightofUniverses.Common.UI
             Texture2D barTexture = ModContent.Request<Texture2D>(SOUL_BAR_PATH).Value;
             Texture2D fillTexture = ModContent.Request<Texture2D>(SOUL_FILL_PATH).Value;
 
-            // --- Soul bar drawing ---
             Vector2 position = new Vector2(500, 80);
 
             float targetFillPercent = 0f;
@@ -124,7 +120,6 @@ namespace MightofUniverses.Common.UI
                 }
             }
 
-            // soul text
             string soulText = $"Soul Energy: {(int)reaper.soulEnergy}/{(int)reaper.maxSoulEnergy}";
             Vector2 textSize = FontAssets.MouseText.Value.MeasureString(soulText);
             Vector2 textPosition = position + new Vector2(barTexture.Width / 2f - textSize.X / 2f, -24);
@@ -148,13 +143,11 @@ namespace MightofUniverses.Common.UI
             // ----------------------------
             int marks = Math.Max(0, Math.Min(DeathMaxSlots, reaper.deathMarks));
 
-            // Debug text to show current mark count
             string debugText = $"Death Marks: {marks}/{DeathMaxSlots}";
             Vector2 debugTextSize = FontAssets.MouseText.Value.MeasureString(debugText);
             Vector2 debugTextPos = position + new Vector2(barTexture.Width + deathPaddingFromBar, -24);
             Utils.DrawBorderString(spriteBatch, debugText, debugTextPos, Color.Cyan);
 
-            // detect increases/decreases and trigger animations
             if (prevDeathMarks == -1)
             {
                 prevDeathMarks = marks;
@@ -171,7 +164,6 @@ namespace MightofUniverses.Common.UI
             }
             prevDeathMarks = marks;
 
-            // update animations
             for (int i = 0; i < DeathMaxSlots; i++)
             {
                 deathSlotScale[i] = MathHelper.Lerp(deathSlotScale[i], 1f, 0.18f);
@@ -180,17 +172,14 @@ namespace MightofUniverses.Common.UI
                 deathGlowAlpha[i] = MathHelper.Lerp(deathGlowAlpha[i], filled ? 0.35f : 0f, 0.12f);
             }
 
-            // compute marks origin right of the soul bar
             Vector2 marksOrigin = position + new Vector2(barTexture.Width + deathPaddingFromBar, (barTexture.Height - deathIconSize) / 2f);
 
-            // draw each slot
             for (int i = 0; i < DeathMaxSlots; i++)
             {
                 Vector2 slotPos = marksOrigin + new Vector2((deathIconSize + deathSpacing) * i, 0f);
                 Rectangle dest = new Rectangle((int)slotPos.X, (int)slotPos.Y, deathIconSize, deathIconSize);
                 bool filled = i < marks;
 
-                // glow behind filled slot
                 if (filled && deathGlowAlpha[i] > 0.01f && deathFilledTex != null)
                 {
                     float glowScale = 1.35f + (deathSlotScale[i] - 1f) * 0.35f;
@@ -201,7 +190,6 @@ namespace MightofUniverses.Common.UI
                     spriteBatch.Draw(deathFilledTex, new Rectangle((int)glowPos.X, (int)glowPos.Y, gw, gh), glowColor);
                 }
 
-                // Draw the actual icon
                 Texture2D tex = filled ? deathFilledTex : deathEmptyTex;
                 if (tex != null)
                 {
@@ -221,11 +209,9 @@ namespace MightofUniverses.Common.UI
                 }
                 else
                 {
-                    // Fallback squares - ALWAYS visible for debugging
                     Color fallback = filled ? Color.Purple * 0.9f : Color.DarkGray * 0.65f;
                     spriteBatch.Draw(TextureAssets.MagicPixel.Value, dest, fallback);
-                    
-                    // Draw border so you can SEE them
+
                     spriteBatch.Draw(TextureAssets.MagicPixel.Value, new Rectangle(dest.X, dest.Y, dest.Width, 2), Color.White * 0.5f);
                     spriteBatch.Draw(TextureAssets.MagicPixel.Value, new Rectangle(dest.X, dest.Bottom - 2, dest.Width, 2), Color.White * 0.5f);
                     spriteBatch.Draw(TextureAssets.MagicPixel.Value, new Rectangle(dest.X, dest.Y, 2, dest.Height), Color.White * 0.5f);

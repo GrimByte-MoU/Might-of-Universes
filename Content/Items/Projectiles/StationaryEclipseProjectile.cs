@@ -25,7 +25,6 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             Lighting.AddLight(Projectile.Center, 0.8f, 0.3f, 0f);
             
-            // Visual effects
             for (int i = 0; i < 2; i++)
             {
                 Vector2 dustPos = Projectile.Center + new Vector2(
@@ -36,7 +35,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                 Dust.NewDust(dustPos, 4, 4, DustID.OrangeTorch, 0f, 0f, 100, default, 1.5f);
             }
 
-            // Damage logic
             damageTimer++;
             if (damageTimer >= DAMAGE_INTERVAL)
             {
@@ -44,7 +42,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                 DamageNearbyEnemies();
             }
 
-            // Fade out near end of lifetime
             if (Projectile.timeLeft < 30)
             {
                 Projectile.alpha += 5;

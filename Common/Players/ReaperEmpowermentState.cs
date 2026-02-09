@@ -2,28 +2,24 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
 using MightofUniverses.Content.Items.Buffs;
-// If your ReaperDamageClass is in a different namespace, add the correct using
 using MightofUniverses.Common; 
 
 namespace MightofUniverses.Common.Players
 {
-    // Use a class so lambdas like `vals => { vals.LifestealPercent += 5; }` actually mutate it.
     public class ReaperEmpowermentValues
     {
-        public float ReaperDamage;          // +% to Reaper damage (e.g., 0.12f = +12%)
-        public float AttackSpeed;           // +% Reaper attack speed
-        public float CritChance;            // +% Reaper crit chance
-        public float Endurance;             // +% DR (0.10f = +10% DR)
-        public int   Defense;               // flat defense
-        public int   LifeRegen;             // life regen (vanilla units; +2 ~= +1 HP/sec)
-        public float DamageTakenMultiplier; // +% damage taken while active (e.g., 0.15f = +15% more dmg)
-        public int   BonusMaxSouls;         // temporary +max soul energy while the buff is active
-        public int   SoulDrainPerSecond;    // drains this many souls per second while active
-        public int   LifestealPercent;      // 5 = 5% of damage dealt returned as healing
-        public int   ArmorPenetration;      // flat armor penetration for Reaper damage
+        public float ReaperDamage;
+        public float AttackSpeed;
+        public float CritChance;
+        public float Endurance;
+        public int   Defense;
+        public int   LifeRegen;
+        public float DamageTakenMultiplier;
+        public int   BonusMaxSouls;
+        public int   SoulDrainPerSecond;
+        public int   LifestealPercent;
+        public int   ArmorPenetration;
     }
-
-    // Holds and applies current empowerment values while the buff is active
     public class ReaperEmpowermentState : ModPlayer
     {
         public ReaperEmpowermentValues Values;
@@ -32,7 +28,6 @@ namespace MightofUniverses.Common.Players
 
         public override void ResetEffects()
         {
-            // When the buff is not present, clear values. When present, keep last configured values for this tick.
             if (!Empowered)
             {
                 Values = null;
@@ -44,7 +39,6 @@ namespace MightofUniverses.Common.Players
             if (!Empowered || Values == null)
                 return;
 
-            // Dynamic soul drain
             if (Values.SoulDrainPerSecond > 0 && Player.whoAmI == Main.myPlayer && Main.GameUpdateCount % 60 == 0)
             {
                 var reaper = Player.GetModPlayer<ReaperPlayer>();
@@ -52,10 +46,9 @@ namespace MightofUniverses.Common.Players
                 if (reaper.soulEnergy >= drain)
                     reaper.soulEnergy -= drain;
                 else
-                    Player.ClearBuff(ModContent.BuffType<SoulEmpowerment>()); // end early if out of souls
+                    Player.ClearBuff(ModContent.BuffType<SoulEmpowerment>());
             }
 
-            // Temporary +max souls while empowered
             if (Values.BonusMaxSouls != 0)
             {
                 var reaper = Player.GetModPlayer<ReaperPlayer>();
@@ -65,7 +58,6 @@ namespace MightofUniverses.Common.Players
             }
         }
 
-        // Apply stat bonuses after equipment is processed
         public override void PostUpdateEquips()
         {
             if (!Empowered || Values == null)
@@ -103,7 +95,6 @@ namespace MightofUniverses.Common.Players
             }
         }
 
-        // Lifesteal on hit based on damage dealt
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
             TryLifesteal(damageDone);
@@ -124,14 +115,11 @@ namespace MightofUniverses.Common.Players
                 Player.Heal(heal);
         }
 
-        // Helper to start empowerment for durationTicks and set the values
         public static void Apply(Player player, int durationTicks, System.Action<ReaperEmpowermentValues> configure)
         {
             var state = player.GetModPlayer<ReaperEmpowermentState>();
             var vals = new ReaperEmpowermentValues();
             configure?.Invoke(vals);
-
-            // NEW: apply gear-driven empowerment duration modifiers
             var acc = player.GetModPlayer<ReaperAccessoryPlayer>();
             if (acc.EmpowerDurationMultiplier > 1f)
                 durationTicks = (int)(durationTicks * acc.EmpowerDurationMultiplier);

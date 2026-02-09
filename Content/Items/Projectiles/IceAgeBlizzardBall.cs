@@ -26,7 +26,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         private float orbitAngle;
         private float orbitRadius = 80f;
         private int orbitTimer = 0;
-        private const int orbitDuration = 120; // 2 seconds
+        private const int orbitDuration = 120;
 
         public override void SetStaticDefaults()
         {
@@ -85,9 +85,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
             float ballIndex = Projectile.ai[1];
             float rotationSpeed = 0.08f;
-            
-            // Calculate current angle (each ball starts at different position)
-            orbitAngle = (MathHelper.TwoPi / 8f) * ballIndex + (orbitTimer * rotationSpeed);
+            orbitAngle = MathHelper.TwoPi / 8f * ballIndex + (orbitTimer * rotationSpeed);
 
             Vector2 offset = new Vector2(
                 (float)Math.Cos(orbitAngle) * orbitRadius,
@@ -97,13 +95,10 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.Center = player.MountedCenter + offset;
             Projectile.velocity = Vector2.Zero;
 
-            // Fire when orbit time is done AND ball is roughly in front of player (facing mouse)
             if (orbitTimer >= orbitDuration)
             {
                 Vector2 toMouse = (Main.MouseWorld - player.Center).SafeNormalize(Vector2.UnitX);
                 float mouseAngle = toMouse.ToRotation();
-                
-                // Normalize angles to compare
                 float normalizedOrbitAngle = orbitAngle % MathHelper.TwoPi;
                 float normalizedMouseAngle = mouseAngle % MathHelper.TwoPi;
                 if (normalizedOrbitAngle < 0) normalizedOrbitAngle += MathHelper.TwoPi;
@@ -112,7 +107,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                 float angleDiff = Math.Abs(normalizedOrbitAngle - normalizedMouseAngle);
                 if (angleDiff > MathHelper.Pi) angleDiff = MathHelper.TwoPi - angleDiff;
 
-                // Fire when ball is within 45 degrees of mouse direction
                 if (angleDiff < MathHelper.PiOver4)
                 {
                     CurrentState = BallState.Firing;

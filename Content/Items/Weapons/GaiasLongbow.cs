@@ -33,7 +33,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override Vector2? HoldoutOffset() => new Vector2(-2, 0);
 
-        public override bool Shoot(Player player, Terraria.DataStructures.EntitySource_ItemUse_WithAmmo source,
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source,
             Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             int projType = ModContent.ProjectileType<GaiasArrow>();
@@ -48,7 +48,7 @@ namespace MightofUniverses.Content.Items.Weapons
                 Projectile.NewProjectile(source, position, perturbed, projType, damage, knockback, player.whoAmI);
             }
 
-            return false; // we manually fired projectiles
+            return false;
         }
 
     }

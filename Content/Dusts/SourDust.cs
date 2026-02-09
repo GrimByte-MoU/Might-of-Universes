@@ -19,7 +19,6 @@ namespace MightofUniverses.Content.Dusts
             dust.rotation += dust.velocity.X * 0.15f;
             dust.scale *= 0.98f;
 
-            // Faint red glow
             Lighting.AddLight(dust.position, 0.5f, 0.1f, 0.1f);
 
             if (dust.scale < 0.5f)

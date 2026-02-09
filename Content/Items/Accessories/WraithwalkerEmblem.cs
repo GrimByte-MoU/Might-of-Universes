@@ -55,22 +55,16 @@ namespace MightofUniverses.Content. Items.Accessories
 
             var reaperPlayer = Player.GetModPlayer<ReaperPlayer>();
             int soulEnergy = (int)reaperPlayer.soulEnergy;
-
-            // Per 10 souls:  +0.5% ranged damage, +0.5% attack speed, +1 armor pen
-            // Capped at 30 stacks (300 souls max)
             int stacks = Math.Min(soulEnergy / 10, 30);
-
             Player.GetDamage(DamageClass.Ranged) += stacks * 0.005f;
             Player.GetAttackSpeed(DamageClass.Ranged) += stacks * 0.005f;
             Player.GetArmorPenetration(DamageClass. Ranged) += stacks;
 
-            // Every 2 seconds:  Consume 1 ammo for souls
             ammoConsumeTimer++;
             if (ammoConsumeTimer >= 120)
             {
                 ammoConsumeTimer = 0;
 
-                // Find ammo in inventory
                 for (int i = 54; i < 58; i++)
                 {
                     Item ammo = Player.inventory[i];
@@ -83,7 +77,6 @@ namespace MightofUniverses.Content. Items.Accessories
 
                         reaperPlayer.AddSoulEnergy(soulGain, Player.Center);
 
-                        // Visual effect
                         for (int j = 0; j < 5; j++)
                         {
                             Dust. NewDust(Player.position, Player.width, Player.height, 

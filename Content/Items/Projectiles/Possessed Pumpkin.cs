@@ -22,7 +22,6 @@ namespace MightofUniverses.Content.Items.Projectiles
         public override void AI()
         {
            Projectile.rotation = Projectile.velocity.ToRotation();
-            // Similar homing behavior to FearPumpkin
             float maxDetectRadius = 999f;
             float projSpeed = 15f;
 
@@ -51,7 +50,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
             Projectile.rotation += 0.4f;
 
-            // Enhanced flame effects
             if (Main.rand.NextBool(2))
             {
                 Dust.NewDust(Projectile.position, Projectile.width, Projectile.height,
@@ -63,7 +61,6 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void Kill(int timeLeft)
         {
-            // Larger explosion effect
             for (int i = 0; i < 50; i++)
             {
                 Vector2 speed = Main.rand.NextVector2CircularEdge(1f, 1f);
@@ -73,7 +70,6 @@ namespace MightofUniverses.Content.Items.Projectiles
                     DustID.BlueTorch, speed.X * 7, speed.Y * 7);
             }
 
-            // Create larger explosion
             Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Vector2.Zero,
                 ProjectileID.JackOLantern, Projectile.damage * 3, Projectile.knockBack * 1.5f, Projectile.owner);
         }

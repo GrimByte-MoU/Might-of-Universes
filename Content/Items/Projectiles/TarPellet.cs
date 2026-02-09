@@ -13,7 +13,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.penetrate = 3;
-            Projectile.timeLeft = 28;          // short life
+            Projectile.timeLeft = 28;
             Projectile.tileCollide = true;
             Projectile.ignoreWater = false;
             Projectile.DamageType = DamageClass.Magic;
@@ -24,11 +24,9 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            // Rotate with motion
             Projectile.rotation = Projectile.velocity.ToRotation();
             Projectile.velocity *= 0.99f;
 
-            // Tar dust
             if (Main.rand.NextBool(4))
             {
                 int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Smoke, 0f, 0f, 0, default, 1f);

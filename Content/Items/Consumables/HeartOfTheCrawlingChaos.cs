@@ -53,7 +53,7 @@ namespace MightofUniverses.Content.Items.Consumables
                 Player.statLifeMax2 += 25;
                 Player.lifeRegen += 5;
 
-                if (Main.rand.NextBool(60)) // Occasional eerie visual
+                if (Main.rand.NextBool(60))
                 {
                     Dust.NewDust(Player.position, Player.width, Player.height, DustID.Shadowflame, Main.rand.NextFloat(-1, 1), Main.rand.NextFloat(-1, 1), 150, default, 1.2f);
                 }

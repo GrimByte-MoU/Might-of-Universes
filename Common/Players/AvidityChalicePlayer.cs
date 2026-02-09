@@ -9,8 +9,6 @@ namespace MightofUniverses.Common.Players
         public bool hasAvidityChalice;
         private bool chaliceActive = false;
         private int chaliceCooldown = 0;
-
-        // Drop control
         private int spawnTimer = 0;
         private int totalDrops = 0;
         private const int dropRate = 1;
@@ -23,7 +21,6 @@ namespace MightofUniverses.Common.Players
 
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            // Only activate if equipped and off cooldown
             if (hasAvidityChalice && chaliceCooldown <= 0 && ModKeybindManager.Ability3.JustPressed)
             {
                 chaliceCooldown = 60 * 30; // 30 seconds
@@ -38,7 +35,6 @@ namespace MightofUniverses.Common.Players
             if (chaliceCooldown > 0)
                 chaliceCooldown--;
 
-            // If the accessory is not equipped this tick, force-deactivate and clear any pending spawns
             if (!hasAvidityChalice)
             {
                 chaliceActive = false;
@@ -47,20 +43,15 @@ namespace MightofUniverses.Common.Players
                 return;
             }
 
-            // Only spawn while the ability is active
             if (!chaliceActive)
                 return;
 
-            // Prevent duplicate spawns in MP: only run on server (or singleplayer)
             if (Main.netMode == NetmodeID.MultiplayerClient)
                 return;
 
-            // Optional: also ensure only the owning player drives the spawns
-            // if (Player.whoAmI != Main.myPlayer) return;
-
             if (totalDrops >= maxDrops)
             {
-                chaliceActive = false; // finished this activation
+                chaliceActive = false;
                 return;
             }
 

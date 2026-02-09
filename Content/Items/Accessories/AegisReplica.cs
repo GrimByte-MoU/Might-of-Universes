@@ -67,7 +67,6 @@ namespace MightofUniverses. Content.Items.Accessories
                 Player.noKnockback = true;
             }
 
-            // CHANGED: Only regenerate when shield is completely broken
             if (shieldHealth <= 0)
             {
                 shieldRegenTimer++;
@@ -137,8 +136,7 @@ namespace MightofUniverses. Content.Items.Accessories
                                 DustID.GoldCoin, velocity.X, velocity. Y, 100, Color.Orange, 1.3f);
                             Main.dust[dust].noGravity = true;
                         }
-                        
-                        // CHANGED: Reset timer when shield breaks (starts 30s countdown)
+
                         shieldRegenTimer = 0;
                     }
                 };

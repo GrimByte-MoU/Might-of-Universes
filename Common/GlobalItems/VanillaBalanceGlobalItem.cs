@@ -293,7 +293,7 @@ namespace MightofUniverses.Common.GlobalItems
                     item.damage = 22;
                     break;
                 case ItemID.Zenith:
-                    item.damage = 140;
+                    item.damage = 100;
                     break;
             }
         }

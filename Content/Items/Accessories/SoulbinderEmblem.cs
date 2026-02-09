@@ -60,12 +60,10 @@ namespace MightofUniverses.Content.Items.Accessories
                 manaToSoulCooldown--;
         }
 
-        // FIXED METHOD SIGNATURE
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
             if (! hasSoulbinderEmblem || damageToManaCooldown > 0) return;
 
-            // Convert 50% of incoming damage to mana damage
             modifiers.ModifyHurtInfo += (ref Player.HurtInfo info) =>
             {
                 int manaDamage = Math.Min(info. Damage / 2, Player.statMana);
@@ -75,7 +73,7 @@ namespace MightofUniverses.Content.Items.Accessories
                     Player.statMana -= manaDamage;
                     info. Damage -= manaDamage;
 
-                    damageToManaCooldown = 180;  // 3 second cooldown
+                    damageToManaCooldown = 180;
 
                     // Visual effect
                     for (int i = 0; i < 10; i++)
@@ -92,20 +90,17 @@ namespace MightofUniverses.Content.Items.Accessories
                 }
             };
         }
-
-        // NEW REPLACEMENT EFFECT:  Mana converts to soul energy when casting
         public override void OnConsumeMana(Item item, int manaConsumed)
         {
             if (! hasSoulbinderEmblem || manaToSoulCooldown > 0) return;
 
-            // Every 20 mana spent → gain 10 soul energy
             if (manaConsumed >= 20)
             {
                 var reaperPlayer = Player.GetModPlayer<ReaperPlayer>();
                 int soulGain = manaConsumed / 2;
                 reaperPlayer. AddSoulEnergy(soulGain, Player.Center);
 
-                manaToSoulCooldown = 60;  // 1 second cooldown
+                manaToSoulCooldown = 60;
 
                 // Visual effect
                 for (int i = 0; i < 5; i++)

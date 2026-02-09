@@ -9,7 +9,7 @@ namespace MightofUniverses.Content.Items.Buffs
     {
         public override void SetStaticDefaults()
         {
-            Main.debuff[Type] = false; // It's a buff, not a debuff
+            Main.debuff[Type] = false;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = false;
             Main.buffNoTimeDisplay[Type] = false;
@@ -17,13 +17,8 @@ namespace MightofUniverses.Content.Items.Buffs
 
         public override void Update(Player player, ref int buffIndex)
         {
-            // Increase damage by 50%
             player.GetDamage(DamageClass.Generic) += 0.5f;
-            
-            // Increase damage taken by 100%
-            player.endurance -= 0.5f; // Reduces damage reduction by 50%, effectively increasing damage taken by 100%
-            
-            // Visual effect - fairy-like dust
+            player.endurance -= 0.5f;
             if (Main.rand.NextBool(3))
             {
                 Color dustColor = new Color(

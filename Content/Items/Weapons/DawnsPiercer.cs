@@ -36,7 +36,6 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            // 1) Two parallel stakes
             Vector2 perp = Vector2.Normalize(velocity).RotatedBy(MathHelper.PiOver2) * 10f;
             for (int i = -1; i <= 1; i += 2)
             {
@@ -53,7 +52,6 @@ namespace MightofUniverses.Content.Items.Weapons
                 proj.GetGlobalProjectile<DawnsPiercerGlobalProjectile>().ApplyDebuffs = true;
             }
 
-            // 2) Four helix solar bolts
             float boltDamage = damage * 70 / 100f;
             float boltSpeed  = 16f;
             Vector2[] offsets = new[]
@@ -80,7 +78,7 @@ namespace MightofUniverses.Content.Items.Weapons
                 }
             }
 
-            return false; // we handled all projectiles
+            return false;
         }
 
         public override void AddRecipes()

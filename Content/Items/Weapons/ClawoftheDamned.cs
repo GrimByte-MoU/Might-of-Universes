@@ -6,7 +6,6 @@ using MightofUniverses.Content.Items.Materials;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    // Early Hardmode tome upgrade to Demon Scythe
     public class ClawoftheDamned : ModItem
     {
         public override void SetDefaults()

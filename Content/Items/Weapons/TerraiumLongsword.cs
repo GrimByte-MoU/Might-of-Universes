@@ -30,10 +30,8 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override void MeleeEffects(Player player, Rectangle hitbox)
         {
-            // Soft blue glow as it swings
             Lighting.AddLight(hitbox.Center.ToVector2(), 0.2f, 0.4f, 0.9f);
 
-            // Cloud + water particles
             if (Main.rand.NextBool(3))
             {
                 Dust.NewDust(hitbox.TopLeft(), hitbox.Width, hitbox.Height, DustID.Cloud, 0f, 0f, 150, default, 1.2f);

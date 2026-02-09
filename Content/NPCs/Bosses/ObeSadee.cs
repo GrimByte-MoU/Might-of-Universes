@@ -12,7 +12,7 @@ using Terraria.Localization;
 using Terraria.ModLoader.Utilities;
 using MightofUniverses.Content.Items.Projectiles;
 using MightofUniverses.Common.Systems;
-using MightofUniverses.Content.Items.Consumables.BossBags;
+using MightofUniverses.Content.Items.Consumables;
 
 namespace MightofUniverses.Content.NPCs.Bosses
 {

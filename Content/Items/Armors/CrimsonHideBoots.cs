@@ -19,7 +19,7 @@ namespace MightofUniverses.Content.Items.Armors
 
         public override void UpdateEquip(Player player)
         {
-            player.GetDamage(DamageClass.Generic) *= 0.80f; // -20% all damage
+            player.GetDamage(DamageClass.Generic) *= 0.80f;
             player.GetModPlayer<PacifistPlayer>().pacifistDamageMultiplier += 0.20f;
             player.moveSpeed += 0.15f;
         }

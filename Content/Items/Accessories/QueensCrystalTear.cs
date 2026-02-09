@@ -53,7 +53,6 @@ namespace MightofUniverses.Content.Items.Accessories
             {
                 dodgeNextHit = true;
                 tearCooldown = 180;
-                CombatText.NewText(Player.Hitbox, Color.Aqua, "Next hit dodged!");
             }
         }
 
