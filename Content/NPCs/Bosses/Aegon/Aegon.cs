@@ -8,11 +8,11 @@ using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
-using Terraria.GameContent. Bestiary;
+using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
-using Terraria. ID;
+using Terraria.ID;
 using Terraria.ModLoader;
-using MightofUniverses.Content.Items.Projectiles. EnemyProjectiles;
+using MightofUniverses.Content.Items.Projectiles.EnemyProjectiles;
 
 namespace MightofUniverses.Content.NPCs.Bosses.Aegon
 {
@@ -25,8 +25,9 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             Phase1_Immune = 0,
             Phase2_FirstAttacks = 1,
             Phase3_WithShield = 2,
-            Phase4_ChunkCircle = 3,
-            Phase5_Patience = 4
+            Phase4_SigilCombat = 3,
+            Phase5_FreeMovement = 4,
+            Phase6_Patience = 5
         }
 
         private Phase CurrentPhase
@@ -44,24 +45,20 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
         private Vector2 arenaCenter;
         private float arenaRadius;
 
-        private const float ARENA_RADIUS_NORMAL = 65.5f;
-        private const float ARENA_RADIUS_EXPERT = 57.5f;
+        private const float ARENA_RADIUS_NORMAL = 75.5f;
+        private const float ARENA_RADIUS_EXPERT = 62.5f;
         private const float ARENA_RADIUS_MASTER = 50.5f;
 
         // ==================== REFERENCES ====================
         private int worldAegisIndex = -1;
-        private List<int> mirageIndices = new List<int> { -1, -1, -1 };
-
-        // ==================== PHASE 4 DATA ====================
-        private List<int> orbitingChunks = new List<int>();
-        private int chunksFired = 0;
-        private float orbitAngle = 0f;
+        private List<int> sigilIndices = new List<int> { -1, -1, -1, -1, -1 };
+        private int currentSigilAttackIndex = 0;
 
         // ==================== PHASE 2/3 DATA ====================
         private int currentAttack = -1;
         private int phase3PositionIndex = 0;
 
-        // ==================== PHASE 5 DATA ====================
+        // ==================== PHASE 6 DATA ====================
         private float patienceTimer = 0f;
         private bool patienceActive = false;
 
@@ -84,7 +81,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
         {
             NPC.width = 120;
             NPC.height = 120;
-            NPC.defense = 120;
+            NPC.defense = 100;
             NPC.lifeMax = 235000;
             NPC.HitSound = SoundID.NPCHit4;
             NPC.DeathSound = SoundID.NPCDeath6;
@@ -99,17 +96,16 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             NPC.netAlways = true;
             NPC.scale = 1.5f;
 
-
             if (Main.expertMode)
             {
                 NPC.lifeMax = 350000;
-                NPC.defense = 150;
+                NPC.defense = 125;
             }
 
             if (Main.masterMode)
             {
                 NPC.lifeMax = 470000;
-                NPC.defense = 180;
+                NPC.defense = 150;
             }
 
             Music = MusicID.Boss2;
@@ -118,11 +114,11 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
             bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[] {
-                BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes. Surface,
+                BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
                 new FlavorTextBestiaryInfoElement(
-                    "Aegon, the eternal guardian born from the world's core.  " +
-                    "His legendary World Aegis has shielded countless civilizations from annihilation.  " +
-                    "Until now, nothing has been able to even chip the Aegis."
+                    "Aegon, the eternal guardian born from the world's core. " +
+                    "His legendary World Aegis has shielded countless civilizations from annihilation. " +
+                    "Until now, nothing has been able to even chip the aegis."
                 )
             });
         }
@@ -147,8 +143,14 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             CurrentPhase = Phase.Phase1_Immune;
             NPC.dontTakeDamage = true;
 
+            // Create arena
+            AegonArena.Current = new AegonArena(arenaCenter);
+            AegonArena.Current.Create();
+
             SpawnWorldAegis();
+            SpawnSigils();
         }
+
         public override void AI()
         {
             if (NPC.target < 0 || NPC.target == 255 || Main.player[NPC.target].dead || !Main.player[NPC.target].active)
@@ -169,7 +171,12 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                     Main.npc[worldAegisIndex].active = false;
                 }
 
-                DespawnMirages();
+                DespawnSigils();
+                
+                if (AegonArena.Current != null)
+                {
+                    AegonArena.Current.Remove();
+                }
 
                 return;
             }
@@ -192,12 +199,16 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                     Phase3_CombinedAttacks();
                     break;
 
-                case Phase.Phase4_ChunkCircle:
-                    Phase4_MirageAndChunks();
+                case Phase.Phase4_SigilCombat:
+                    Phase4_SigilAttacks();
                     break;
 
-                case Phase.Phase5_Patience:
-                    Phase5_PatienceMechanic();
+                case Phase.Phase5_FreeMovement:
+                    Phase5_FreeMovementAttacks();
+                    break;
+
+                case Phase.Phase6_Patience:
+                    Phase6_PatienceMechanic();
                     break;
             }
 
@@ -208,9 +219,9 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
         private void Phase1_CircleArena()
         {
             float circleSpeed = 0.02f;
-            orbitAngle += circleSpeed;
+            float orbitAngle = AttackTimer * circleSpeed;
 
-            float orbitRadius = (arenaRadius + 15) * 20f;
+            float orbitRadius = (arenaRadius + 15) * 16f;
             NPC.Center = arenaCenter + new Vector2(
                 (float)Math.Cos(orbitAngle) * orbitRadius,
                 (float)Math.Sin(orbitAngle) * orbitRadius
@@ -229,12 +240,12 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
 
                 float aegisHPPercent = worldAegis.life / (float)worldAegis.lifeMax;
 
-                if (aegisHPPercent <= 0.7f && AttackTimer % 120 == 0)
+                if (aegisHPPercent <= 0.9f && AttackTimer % 120 == 0)
                 {
                     FireHallowedSpearSingle();
                 }
 
-                if (aegisHPPercent <= 0.6f && AttackTimer % 120 == 0)
+                if (aegisHPPercent <= 0.7f && AttackTimer % 120 == 0)
                 {
                     FireHallowedSpearDouble();
                 }
@@ -278,7 +289,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             }
         }
 
-        // ==================== TRANSITION:  PHASE 1 → PHASE 2 ====================
+        // ==================== TRANSITION: PHASE 1 → PHASE 2 ====================
         private void TransitionToPhase2()
         {
             CurrentPhase = Phase.Phase2_FirstAttacks;
@@ -303,6 +314,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                 Main.dust[dust].noGravity = true;
             }
         }
+
         // ==================== PHASE 2: FIRST ATTACKS ====================
         private void Phase2_AttackPatterns()
         {
@@ -313,7 +325,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
 
             if (currentAttack == -1)
             {
-                currentAttack = Main.rand.Next(3);
+                currentAttack = Main.rand.Next(4);
                 AttackTimer = 0;
                 SubTimer = 0;
             }
@@ -329,9 +341,12 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                 case 2:
                     Phase2_AttackC();
                     break;
+                case 3:
+                    Phase2_AttackD();
+                    break;
             }
 
-            if (NPC.life <= NPC.lifeMax * 0.6f)
+            if (NPC.life <= NPC.lifeMax * 0.5f)
             {
                 TransitionToPhase3();
             }
@@ -341,7 +356,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
         {
             Player target = Main.player[NPC.target];
 
-            if (SubTimer == 0 || SubTimer == 30 || SubTimer == 60)
+            if (SubTimer == 0 || SubTimer == 30 || SubTimer == 60 || SubTimer == 90 || SubTimer == 120)
             {
                 for (int i = 0; i < 3; i++)
                 {
@@ -368,7 +383,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             Vector2 direction = (target.Center - NPC.Center).SafeNormalize(Vector2.Zero);
             NPC.velocity = direction * 3f;
 
-            if (SubTimer >= 90)
+            if (SubTimer >= 150)
             {
                 currentAttack = -1;
                 SubTimer = 0;
@@ -383,7 +398,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             {
                 for (int i = 0; i < 12; i++)
                 {
-                    float angle = (i / 12f) * MathHelper.TwoPi;
+                    float angle = i / 12f * MathHelper.TwoPi;
 
                     Vector2 velocity = new Vector2(
                         (float)Math.Cos(angle),
@@ -399,9 +414,9 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                 }
             }
 
-            if (SubTimer > 30 && SubTimer <= 150)
+            if (SubTimer >= 60 && SubTimer <= 180)
             {
-                if (SubTimer % 45 == 0)
+                if (SubTimer % 30 == 0)
                 {
                     Vector2 velocity = (target.Center - NPC.Center).SafeNormalize(Vector2.UnitX) * 8f;
 
@@ -417,7 +432,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             SubTimer++;
             NPC.velocity *= 0.95f;
 
-            if (SubTimer >= 180)
+            if (SubTimer >= 210)
             {
                 currentAttack = -1;
                 SubTimer = 0;
@@ -428,7 +443,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
         {
             Player target = Main.player[NPC.target];
 
-            if (SubTimer == 0 || SubTimer == 40 || SubTimer == 80)
+            if (SubTimer == 0 || SubTimer == 60 || SubTimer == 120)
             {
                 for (int i = 0; i < 3; i++)
                 {
@@ -448,6 +463,22 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                             120, 0f);
                     }
                 }
+
+                for (int i = 0; i < 16; i++)
+                {
+                    float angle = i / 16f * MathHelper.TwoPi;
+                    Vector2 velocity = new Vector2(
+                        (float)Math.Cos(angle),
+                        (float)Math.Sin(angle)
+                    ) * 5f;
+
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
+                            ModContent.ProjectileType<CrimruptionBolt>(),
+                            120, 0f);
+                    }
+                }
             }
 
             SubTimer++;
@@ -455,14 +486,69 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             Vector2 direction = (target.Center - NPC.Center).SafeNormalize(Vector2.Zero);
             NPC.velocity = direction * 6f;
 
-            if (SubTimer >= 120)
+            if (SubTimer >= 150)
             {
                 currentAttack = -1;
                 SubTimer = 0;
             }
         }
 
-        // ==================== TRANSITION: PHASE 2 → PHASE 3 ====================
+        private void Phase2_AttackD()
+        {
+            Player target = Main.player[NPC.target];
+
+            if (SubTimer < 300)
+            {
+                if (SubTimer % 12 == 0)
+                {
+                    float angle = SubTimer * 0.2f;
+                    for (int i = 0; i < 4; i++)
+                    {
+                        float spiralAngle = angle + (i * MathHelper.PiOver2);
+                        Vector2 velocity = new Vector2(
+                            (float)Math.Cos(spiralAngle),
+                            (float)Math.Sin(spiralAngle)
+                        ) * 5f;
+
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                        {
+                            Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
+                                ModContent.ProjectileType<CrimruptionBolt>(),
+                                120, 0f);
+                        }
+                    }
+                }
+
+                if (SubTimer % 60 == 0)
+                {
+                    for (int i = 0; i < 16; i++)
+                    {
+                        float angle = i / 16f * MathHelper.TwoPi;
+                        Vector2 velocity = new Vector2(
+                            (float)Math.Cos(angle),
+                            (float)Math.Sin(angle)
+                        ) * 5f;
+
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                        {
+                            Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
+                                ModContent.ProjectileType<ForestLeaf>(),
+                                100, 0f);
+                        }
+                    }
+                }
+            }
+
+            SubTimer++;
+            NPC.velocity *= 0.98f;
+
+            if (SubTimer >= 300)
+            {
+                currentAttack = -1;
+                SubTimer = 0;
+            }
+        }
+                // ==================== TRANSITION: PHASE 2 → PHASE 3 ====================
         private void TransitionToPhase3()
         {
             CurrentPhase = Phase.Phase3_WithShield;
@@ -486,19 +572,12 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                 Main.dust[dust].noGravity = true;
             }
         }
+
         // ==================== PHASE 3: WITH SHIELD ====================
         private void Phase3_CombinedAttacks()
         {
             NPC.damage = 0;
             NPC.rotation = 0f;
-
-            float aegonHPPercent = NPC.life / (float)NPC.lifeMax;
-
-            if (aegonHPPercent <= 0.30f)
-            {
-                TransitionToPhase4();
-                return;
-            }
 
             if (worldAegisIndex == -1 || !Main.npc[worldAegisIndex].active)
             {
@@ -517,7 +596,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             {
                 if (AttackTimer >= 120)
                 {
-                    currentAttack = Main.rand.Next(3);
+                    currentAttack = Main.rand.Next(4);
                     AttackTimer = 0;
                     SubTimer = 0;
                     MoveToPhase3Position();
@@ -535,6 +614,9 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                         break;
                     case 2:
                         Phase3_AttackC();
+                        break;
+                    case 3:
+                        Phase3_AttackD();
                         break;
                 }
             }
@@ -613,6 +695,26 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                     var aegis = Main.npc[worldAegisIndex].ModNPC as WorldAegis;
                     aegis?.FireWorldAegisFireball();
                 }
+
+                if (worldAegisIndex != -1 && Main.npc[worldAegisIndex].active)
+                {
+                    NPC worldAegis = Main.npc[worldAegisIndex];
+                    for (int i = 0; i < 8; i++)
+                    {
+                        float angle = i / 8f * MathHelper.TwoPi;
+                        Vector2 velocity = new Vector2(
+                            (float)Math.Cos(angle),
+                            (float)Math.Sin(angle)
+                        ) * 5f;
+
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                        {
+                            Projectile.NewProjectile(NPC.GetSource_FromAI(), worldAegis.Center, velocity,
+                                ModContent.ProjectileType<AegisChunk>(),
+                                130, 0f);
+                        }
+                    }
+                }
             }
 
             SubTimer++;
@@ -640,7 +742,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                 }
             }
 
-            if (SubTimer % 45 == 0 && SubTimer < 120)
+            if (SubTimer % 30 == 0 && SubTimer < 180)
             {
                 float angle = SubTimer * 0.3f;
 
@@ -663,9 +765,9 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
 
             if (SubTimer == 150)
             {
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 16; i++)
                 {
-                    float angle = (i / 10f) * MathHelper.TwoPi;
+                    float angle = i / 16f * MathHelper.TwoPi;
 
                     Vector2 velocity = new Vector2(
                         (float)Math.Cos(angle),
@@ -675,8 +777,28 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                     if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
-                            ModContent.ProjectileType<JungleNeedle>(),
-                            95, 0f);
+                            ModContent.ProjectileType<AegisFragment>(),
+                            125, 0f);
+                    }
+                }
+
+                if (worldAegisIndex != -1 && Main.npc[worldAegisIndex].active)
+                {
+                    NPC worldAegis = Main.npc[worldAegisIndex];
+                    for (int i = 0; i < 32; i++)
+                    {
+                        float angle = i / 32f * MathHelper.TwoPi;
+                        Vector2 velocity = new Vector2(
+                            (float)Math.Cos(angle),
+                            (float)Math.Sin(angle)
+                        ) * 5f;
+
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                        {
+                            Projectile.NewProjectile(NPC.GetSource_FromAI(), worldAegis.Center, velocity,
+                                ModContent.ProjectileType<AegisShard>(),
+                                120, 0f);
+                        }
                     }
                 }
             }
@@ -760,15 +882,66 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             }
         }
 
-        // ==================== TRANSITION:  PHASE 3 → PHASE 4 ====================
+        private void Phase3_AttackD()
+        {
+            Player target = Main.player[NPC.target];
+
+            if (SubTimer == 0)
+            {
+                for (int i = 0; i < 12; i++)
+                {
+                    float angle = i / 12f * MathHelper.TwoPi;
+                    Vector2 velocity = new Vector2(
+                        (float)Math.Cos(angle),
+                        (float)Math.Sin(angle)
+                    ) * 5f;
+
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
+                            ModContent.ProjectileType<HallowedSpear>(),
+                            120, 0f);
+                    }
+                }
+
+                if (worldAegisIndex != -1 && Main.npc[worldAegisIndex].active)
+                {
+                    NPC worldAegis = Main.npc[worldAegisIndex];
+                    for (int i = 0; i < 32; i++)
+                    {
+                        float angle = i / 32f * MathHelper.TwoPi;
+                        Vector2 velocity = new Vector2(
+                            (float)Math.Cos(angle),
+                            (float)Math.Sin(angle)
+                        ) * 5f;
+
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                        {
+                            Projectile.NewProjectile(NPC.GetSource_FromAI(), worldAegis.Center, velocity,
+                                ModContent.ProjectileType<AegisShard>(),
+                                120, 0f);
+                        }
+                    }
+                }
+            }
+
+            SubTimer++;
+
+            if (SubTimer >= 90)
+            {
+                currentAttack = -1;
+                SubTimer = 0;
+            }
+        }
+
+        // ==================== TRANSITION: PHASE 3 → PHASE 4 ====================
         private void TransitionToPhase4()
         {
-            CurrentPhase = Phase.Phase4_ChunkCircle;
+            CurrentPhase = Phase.Phase4_SigilCombat;
             NPC.rotation = 0f;
             AttackTimer = 0;
             currentAttack = -1;
             SubTimer = 0;
-            chunksFired = 0;
 
             if (worldAegisIndex != -1 && Main.npc[worldAegisIndex].active)
             {
@@ -784,67 +957,50 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                 int dust = Dust.NewDust(NPC.Center, NPC.width, NPC.height, DustID.Stone, velocity.X, velocity.Y, 100, Color.Red, 2.5f);
                 Main.dust[dust].noGravity = true;
             }
+
+            if (Main.netMode != NetmodeID.Server)
+            {
+                Main.NewText("Aegon summons the Sigils of the World!", Color.Cyan);
+            }
         }
 
-        // ==================== PHASE 4: MIRAGE & ORBITING CHUNKS ====================
-
-        private bool didFirstPhase4AttackE = false; // Guarantee mirage
-
-        private void Phase4_MirageAndChunks()
+        // ==================== PHASE 4: SIGIL COMBAT ====================
+        private void Phase4_SigilAttacks()
         {
-            NPC.noTileCollide = true; // Travel through walls in this phase!
             NPC.damage = 0;
             NPC.rotation = 0f;
 
             float hpPercent = NPC.life / (float)NPC.lifeMax;
 
-            if (hpPercent <= 0.1f)
+            if (hpPercent <= 0.25f)
             {
-                NPC.noTileCollide = false; // Restore collision on phase end
                 TransitionToPhase5();
                 return;
             }
 
-            // ===== KEEP AEGON 40 BLOCKS TO THE RIGHT OF PLAYER =====
             Player target = Main.player[NPC.target];
-            Vector2 desiredPosition = target.Center + new Vector2(40 * 16f, 0); // 40 blocks right
+            Vector2 desiredPosition = target.Center + new Vector2(40 * 16f, 0);
             Vector2 direction = desiredPosition - NPC.Center;
             float distance = direction.Length();
 
             if (distance > 10f)
             {
                 direction.Normalize();
-                NPC.velocity = direction * Math.Min(distance * 0.1f, 8f); // Smooth follow
+                NPC.velocity = direction * Math.Min(distance * 0.1f, 8f);
             }
             else
             {
                 NPC.velocity *= 0.9f;
             }
 
-            UpdateOrbitingChunks();
-
-            if (AttackTimer % 60 == 0 && chunksFired < 24)
+            if (AttackTimer % 300 == 0)
             {
-                FireOrbitingChunk(target.Center);
+                TriggerNextSigilAttack();
             }
 
-            // Attack selection: Always start with Attack E
             if (currentAttack == -1)
             {
-                if (!didFirstPhase4AttackE)
-                {
-                    currentAttack = 4; // Attack E (charge/mirage)
-                    didFirstPhase4AttackE = true;
-                }
-                else if (chunksFired >= 24)
-                {
-                    currentAttack = 4; // Force Attack E for safety if chunks fired
-                }
-                else
-                {
-                    currentAttack = Main.rand.Next(4); // Random 0-3 (A, B, C, D)
-                }
-                AttackTimer = 0;
+                currentAttack = Main.rand.Next(5);
                 SubTimer = 0;
             }
 
@@ -858,98 +1014,13 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             }
         }
 
-        private void SpawnOrbitingChunks()
-        {
-            orbitingChunks.Clear();
-            orbitAngle = 0f;
-
-            for (int i = 0; i < 24; i++)
-            {
-                float angle = (i / 24f) * MathHelper.TwoPi;
-                Vector2 offset = new Vector2(
-                    (float)Math.Cos(angle),
-                    (float)Math.Sin(angle)
-                ) * 150f;
-
-                if (Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    int projIndex = Projectile.NewProjectile(
-                        NPC.GetSource_FromAI(),
-                        NPC.Center + offset,
-                        Vector2.Zero,
-                        ModContent.ProjectileType<AegisChunk>(),
-                        130,
-                        0f
-                    );
-
-                    if (projIndex >= 0 && projIndex < Main.maxProjectiles)
-                    {
-                        orbitingChunks.Add(projIndex);
-                    }
-                }
-            }
-
-            chunksFired = 0;
-        }
-
-        private void UpdateOrbitingChunks()
-        {
-            orbitAngle += 0.05f;
-
-            for (int i = orbitingChunks.Count - 1; i >= 0; i--)
-            {
-                int projIndex = orbitingChunks[i];
-                if (projIndex >= 0 && projIndex < Main.maxProjectiles && Main.projectile[projIndex].active)
-                {
-                    Projectile chunk = Main.projectile[projIndex];
-                    if (chunk.velocity == Vector2.Zero)
-                    {
-                        float angle = orbitAngle + (i / (float)orbitingChunks.Count) * MathHelper.TwoPi;
-                        Vector2 offset = new Vector2(
-                            (float)Math.Cos(angle),
-                            (float)Math.Sin(angle)
-                        ) * 150f;
-
-                        chunk.Center = NPC.Center + offset;
-                        chunk.rotation = angle;
-                    }
-                }
-                else
-                {
-                    orbitingChunks.RemoveAt(i);
-                }
-            }
-        }
-
-        private void FireOrbitingChunk(Vector2 targetPos)
-        {
-            if (orbitingChunks.Count == 0) return;
-
-            int projIndex = orbitingChunks[0];
-            orbitingChunks.RemoveAt(0);
-
-            if (projIndex >= 0 && projIndex < Main.maxProjectiles && Main.projectile[projIndex].active)
-            {
-                Projectile chunk = Main.projectile[projIndex];
-                Vector2 velocity = (targetPos - chunk.Center).SafeNormalize(Vector2.UnitX) * 12f;
-                chunk.velocity = velocity;
-                chunk.ai[0] = 1f;
-            }
-
-            chunksFired++;
-        }
-
-        // ==================== PHASE 4 ATTACKS ====================
-
         private void Phase4_AttackA()
         {
-            Player target = Main.player[NPC.target];
-
-            if (SubTimer % 60 == 0 && SubTimer < 300)
+            if (SubTimer % 75 == 0 && SubTimer < 300)
             {
                 for (int i = 0; i < 5; i++)
                 {
-                    float angle = (i / 5f) * MathHelper.TwoPi;
+                    float angle = i / 5f * MathHelper.TwoPi;
                     Vector2 velocity = new Vector2(
                         (float)Math.Cos(angle),
                         (float)Math.Sin(angle)
@@ -960,11 +1031,12 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                         int proj = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                             ModContent.ProjectileType<AegisFragment>(),
                             125, 0f);
-                        Main.projectile[proj].ai[0] = 1f;
+                        if (proj >= 0 && proj < Main.maxProjectiles)
+                        {
+                            Main.projectile[proj].ai[0] = 1f;
+                        }
                     }
                 }
-
-                FireMirageAttackA(target.Center);
             }
 
             SubTimer++;
@@ -1000,8 +1072,6 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                             120, 0f);
                     }
                 }
-
-                FireMirageAttackB(target.Center);
             }
 
             SubTimer++;
@@ -1016,8 +1086,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
         {
             Player target = Main.player[NPC.target];
 
-            // Shards rain
-            if (SubTimer % 20 == 0 && SubTimer < 120)
+            if (SubTimer % 12 == 0 && SubTimer < 300)
             {
                 Vector2 spawnPos = target.Center + new Vector2(Main.rand.NextFloat(-400f, 400f), -600f);
 
@@ -1029,8 +1098,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                 }
             }
 
-            // Fragments every 0.5 seconds
-            if (SubTimer % 60 == 0 && SubTimer < 120)
+            if (SubTimer % 120 == 0 && SubTimer < 300)
             {
                 Vector2 velocity = (target.Center - NPC.Center).SafeNormalize(Vector2.UnitX) * 7f;
                 if (Main.netMode != NetmodeID.MultiplayerClient)
@@ -1039,11 +1107,10 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                         ModContent.ProjectileType<AegisFragment>(),
                         125, 0f);
                 }
-                FireMirageAttackC_Fragment(target.Center);
             }
 
             SubTimer++;
-            if (SubTimer >= 120)
+            if (SubTimer >= 300)
             {
                 currentAttack = -1;
                 SubTimer = 0;
@@ -1052,53 +1119,45 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
 
         private void Phase4_AttackD()
         {
-            Player target = Main.player[NPC.target];
-            float duration = 300f;
-            float progress = SubTimer / duration;
-
-            float bottomY = arenaCenter.Y + (arenaRadius - 10) * 16f;
-            float topY = arenaCenter.Y - (arenaRadius - 10) * 16f;
-            float currentY = MathHelper.Lerp(bottomY, topY, progress);
-
-            float targetX = target.Center.X + (40 * 16f);
-            NPC.Center = new Vector2(targetX, currentY);
-            NPC.velocity = Vector2.Zero;
-
-            if (SubTimer % 60 == 0)
+            if (SubTimer == 0)
             {
-                Vector2 velocity = new Vector2(-8f, 0);
-
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                for (int i = 0; i < 24; i++)
                 {
-                    int proj = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
-                        ModContent.ProjectileType<AegisShard>(),
-                        120, 0f);
-                    Main.projectile[proj].ai[0] = 1f;
-                }
+                    float angleSpread = MathHelper.Lerp(-0.3f, 0.3f, i / 23f);
+                    Vector2 velocity = new Vector2(-8f, 0).RotatedBy(angleSpread);
 
-                FireMirageAttackD(progress, true);
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        int proj = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
+                            ModContent.ProjectileType<AegisShard>(),
+                            120, 0f);
+                        if (proj >= 0 && proj < Main.maxProjectiles)
+                        {
+                            Main.projectile[proj].ai[0] = 1f;
+                        }
+                    }
+                }
+            }
+
+            if (SubTimer == 180)
+            {
+                for (int i = 0; i < Main.maxProjectiles; i++)
+                {
+                    Projectile proj = Main.projectile[i];
+                    if (proj.active && proj.type == ModContent.ProjectileType<AegisShard>() && proj.ai[0] == 1f)
+                    {
+                        Vector2 velocity = (NPC.Center - proj.Center).SafeNormalize(Vector2.UnitX) * 10f;
+                        proj.velocity = velocity;
+                        proj.ai[0] = 2f;
+                    }
+                }
             }
 
             SubTimer++;
-            if (SubTimer >= duration)
+            if (SubTimer >= 240)
             {
-                RecallAegisShards();
                 currentAttack = -1;
                 SubTimer = 0;
-            }
-        }
-
-        private void RecallAegisShards()
-        {
-            for (int i = 0; i < Main.maxProjectiles; i++)
-            {
-                Projectile proj = Main.projectile[i];
-                if (proj.active && proj.type == ModContent.ProjectileType<AegisShard>() && proj.ai[0] == 1f)
-                {
-                    Vector2 velocity = (NPC.Center - proj.Center).SafeNormalize(Vector2.UnitX) * 10f;
-                    proj.velocity = velocity;
-                    proj.ai[0] = 2f;
-                }
             }
         }
 
@@ -1106,151 +1165,307 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
         {
             Player target = Main.player[NPC.target];
 
-            if (SubTimer == 0)
+            if (SubTimer % 20 == 0 && SubTimer < 180)
             {
-                NPC.damage = GetContactDamage(150);
-                for (int i = 0; i < 30; i++)
+                Vector2 spawnPos = target.Center + new Vector2(Main.rand.NextFloat(-400f, 400f), -600f);
+
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    int dust = Dust.NewDust(NPC.Center, NPC.width, NPC.height, DustID.GreenTorch, 0f, 0f, 100, Color.Lime, 2f);
-                    Main.dust[dust].noGravity = true;
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, new Vector2(0, 8f),
+                        ModContent.ProjectileType<SkySpark>(),
+                        100, 0f);
                 }
             }
 
-            // Charge left
-            if (SubTimer < 60)
+            if (SubTimer >= 60 && SubTimer < 180)
             {
-                NPC.velocity = new Vector2(-20f, 0);
-            }
-            // Stop and create mirage
-            else if (SubTimer == 60)
-            {
-                NPC.velocity = Vector2.Zero;
-                NPC.damage = 0;
-
-                if (GetActiveMirageCount() == 0)
+                if ((SubTimer - 60) % 10 == 0)
                 {
-                    Vector2 miragePos = target.Center + new Vector2(-40 * 16f, 0);
-                    CreateMirage(miragePos);
-                }
-            }
-            else if (SubTimer < 120)
-            {
-                NPC.damage = GetContactDamage(150);
-                NPC.velocity = new Vector2(20f, 0);
-            }
-            // Stop and reset
-            else if (SubTimer == 120)
-            {
-                NPC.velocity = Vector2.Zero;
-                NPC.damage = 0;
+                    int index = (int)((SubTimer - 60) / 10);
+                    float angle = index / 12f * MathHelper.TwoPi;
 
-                SpawnOrbitingChunks();
-                currentAttack = -1;
-                SubTimer = 0;
+                    Vector2 velocity = new Vector2(
+                        (float)Math.Cos(angle),
+                        (float)Math.Sin(angle)
+                    ) * 5f;
+
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
+                            ModContent.ProjectileType<HallowedSpear>(),
+                            120, 0f);
+                    }
+                }
             }
 
             SubTimer++;
-        }
-
-        // ==================== MIRAGE ATTACK HELPERS ====================
-
-        private void FireMirageAttackA(Vector2 playerPos)
-        {
-            for (int i = 0; i < mirageIndices.Count; i++)
+            if (SubTimer >= 240)
             {
-                int index = mirageIndices[i];
-                if (index != -1 && Main.npc[index].active)
-                {
-                    var mirage = Main.npc[index].ModNPC as AegonMirage;
-                    mirage?.MirrorAttackA_AegisFragmentCircle(playerPos, true);
-                }
+                currentAttack = -1;
+                SubTimer = 0;
             }
         }
-
-        private void FireMirageAttackB(Vector2 playerPos)
-        {
-            for (int i = 0; i < mirageIndices.Count; i++)
-            {
-                int index = mirageIndices[i];
-                if (index != -1 && Main.npc[index].active)
-                {
-                    var mirage = Main.npc[index].ModNPC as AegonMirage;
-                    mirage?.MirrorAttackB_AegisShardSpread(playerPos, true);
-                }
-            }
-        }
-
-        private void FireMirageAttackC_Fragment(Vector2 playerPos)
-        {
-            for (int i = 0; i < mirageIndices.Count; i++)
-            {
-                int index = mirageIndices[i];
-                if (index != -1 && Main.npc[index].active)
-                {
-                    var mirage = Main.npc[index].ModNPC as AegonMirage;
-                    mirage?.FireAegisFragment(playerPos, true);
-                }
-            }
-        }
-
-        private void FireMirageAttackD(float progress, bool shootingUp)
-        {
-            for (int i = 0; i < mirageIndices.Count; i++)
-            {
-                int index = mirageIndices[i];
-                if (index != -1 && Main.npc[index].active)
-                {
-                    var mirage = Main.npc[index].ModNPC as AegonMirage;
-                    mirage?.MirrorAttackD_RapidShards(progress, shootingUp, true);
-                }
-            }
-        }
-
-        private int GetActiveMirageCount()
-        {
-            int count = 0;
-            for (int i = 0; i < mirageIndices.Count; i++)
-            {
-                if (mirageIndices[i] != -1 && Main.npc[mirageIndices[i]].active)
-                {
-                    count++;
-                }
-            }
-            return count;
-        }
-
-        private void CreateMirage(Vector2 position)
-        {
-            for (int i = 0; i < mirageIndices.Count; i++)
-            {
-                if (mirageIndices[i] == -1 || !Main.npc[mirageIndices[i]].active)
-                {
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
-                    {
-                        int npcIndex = NPC.NewNPC(
-                            NPC.GetSource_FromAI(),
-                            (int)position.X,
-                            (int)position.Y,
-                            ModContent.NPCType<AegonMirage>()
-                        );
-
-                        mirageIndices[i] = npcIndex;
-
-                        if (Main.netMode == NetmodeID.Server)
-                        {
-                            NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, npcIndex);
-                        }
-                    }
-                    break;
-                }
-            }
-        }
-        // ==================== TRANSITION:   PHASE 4 → PHASE 5 ====================
-
+                // ==================== TRANSITION: PHASE 4 → PHASE 5 ====================
         private void TransitionToPhase5()
         {
-            CurrentPhase = Phase.Phase5_Patience;
-            NPC.life = (int)(NPC.lifeMax * 0.1f);
+            CurrentPhase = Phase.Phase5_FreeMovement;
+            NPC.rotation = 0f;
+            AttackTimer = 0;
+            currentAttack = -1;
+            SubTimer = 0;
+
+            if (AegonArena.Current != null)
+            {
+                AegonArena.Current.Remove();
+                if (Main.netMode != NetmodeID.Server)
+                {
+                    Main.NewText("The arena shatters! You are free to move!", Color.Gold);
+                }
+            }
+
+            for (int i = 0; i < 100; i++)
+            {
+                Vector2 velocity = Main.rand.NextVector2Circular(10f, 10f);
+                int dust = Dust.NewDust(arenaCenter, 100, 100, DustID.Stone, velocity.X, velocity.Y, 100, Color.Orange, 3f);
+                Main.dust[dust].noGravity = true;
+            }
+        }
+
+        // ==================== PHASE 5: FREE MOVEMENT ====================
+        private void Phase5_FreeMovementAttacks()
+        {
+            NPC.damage = 0;
+            NPC.rotation = 0f;
+
+            float hpPercent = NPC.life / (float)NPC.lifeMax;
+
+            if (hpPercent <= 0.01f)
+            {
+                TransitionToPhase6();
+                return;
+            }
+
+            Player target = Main.player[NPC.target];
+            Vector2 desiredPosition = target.Center + new Vector2(Main.rand.NextFloat(-40f, 40f) * 16f, -40 * 16f);
+            Vector2 direction = desiredPosition - NPC.Center;
+            float distance = direction.Length();
+
+            if (distance > 10f)
+            {
+                direction.Normalize();
+                NPC.velocity = direction * Math.Min(distance * 0.08f, 10f);
+            }
+            else
+            {
+                NPC.velocity *= 0.95f;
+            }
+
+            if (AttackTimer % 180 == 0)
+            {
+                TriggerNextSigilAttack();
+            }
+
+            if (currentAttack == -1)
+            {
+                currentAttack = Main.rand.Next(4);
+                SubTimer = 0;
+            }
+
+            switch (currentAttack)
+            {
+                case 0: Phase5_AttackA(); break;
+                case 1: Phase5_AttackB(); break;
+                case 2: Phase5_AttackC(); break;
+                case 3: Phase5_AttackD(); break;
+            }
+        }
+
+        private void Phase5_AttackA()
+        {
+            Player target = Main.player[NPC.target];
+
+            if (SubTimer == 0)
+            {
+                for (int i = 0; i < 12; i++)
+                {
+                    float angle = i / 12f * MathHelper.TwoPi;
+                    Vector2 velocity = new Vector2(
+                        (float)Math.Cos(angle),
+                        (float)Math.Sin(angle)
+                    ) * 5f;
+
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
+                            ModContent.ProjectileType<HallowedSpear>(),
+                            120, 0f);
+                    }
+                }
+            }
+
+            if (SubTimer % 30 == 0 && SubTimer < 180)
+            {
+                Vector2 velocity = (target.Center - NPC.Center).SafeNormalize(Vector2.UnitX) * 8f;
+                if (Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
+                        ModContent.ProjectileType<AegisShard>(),
+                        120, 0f);
+                }
+            }
+
+            SubTimer++;
+            if (SubTimer >= 180)
+            {
+                currentAttack = -1;
+                SubTimer = 0;
+            }
+        }
+
+        private void Phase5_AttackB()
+        {
+            NPC.velocity *= 0.5f;
+
+            if (SubTimer % 12 == 0 && SubTimer < 600)
+            {
+                float angle = SubTimer * 0.15f;
+
+                for (int i = 0; i < 2; i++)
+                {
+                    float spiralAngle = angle + (i * MathHelper.Pi);
+                    Vector2 velocity = new Vector2(
+                        (float)Math.Cos(spiralAngle),
+                        (float)Math.Sin(spiralAngle)
+                    ) * 5f;
+
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
+                            ModContent.ProjectileType<SnowSpike>(),
+                            110, 0f);
+                    }
+                }
+            }
+
+            if (SubTimer % 180 == 0 && SubTimer < 600)
+            {
+                for (int i = 0; i < 32; i++)
+                {
+                    float angle = i / 32f * MathHelper.TwoPi;
+                    Vector2 velocity = new Vector2(
+                        (float)Math.Cos(angle),
+                        (float)Math.Sin(angle)
+                    ) * 8f;
+
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
+                            ModContent.ProjectileType<AegisShard>(),
+                            120, 0f);
+                    }
+                }
+            }
+
+            SubTimer++;
+            if (SubTimer >= 600)
+            {
+                currentAttack = -1;
+                SubTimer = 0;
+            }
+        }
+
+        private void Phase5_AttackC()
+        {
+            Player target = Main.player[NPC.target];
+
+            if (SubTimer % 15 == 0 && SubTimer < 180)
+            {
+                float baseAngle = (target.Center - NPC.Center).ToRotation();
+                float spread = Main.rand.NextFloat(-0.13f, 0.13f);
+
+                Vector2 velocity = new Vector2(
+                    (float)Math.Cos(baseAngle + spread),
+                    (float)Math.Sin(baseAngle + spread)
+                ) * 10f;
+
+                if (Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
+                        ModContent.ProjectileType<AegisChunk>(),
+                        130, 0f);
+                }
+            }
+
+            if (SubTimer == 120 || SubTimer == 150)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    float baseAngle = (target.Center - NPC.Center).ToRotation();
+                    float spread = MathHelper.Lerp(-0.2f, 0.2f, i / 2f);
+                    float angle = baseAngle + spread;
+
+                    Vector2 velocity = new Vector2(
+                        (float)Math.Cos(angle),
+                        (float)Math.Sin(angle)
+                    ) * 7f;
+
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
+                            ModContent.ProjectileType<UnderworldFireball>(),
+                            110, 0f);
+                    }
+                }
+            }
+
+            SubTimer++;
+            if (SubTimer >= 180)
+            {
+                currentAttack = -1;
+                SubTimer = 0;
+            }
+        }
+
+        private void Phase5_AttackD()
+        {
+            Player target = Main.player[NPC.target];
+
+            if (SubTimer % 20 == 0 && SubTimer < 300)
+            {
+                Vector2 velocity = (target.Center - NPC.Center).SafeNormalize(Vector2.UnitX) * 6f;
+                if (Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
+                        ModContent.ProjectileType<OceanSphere>(),
+                        120, 0f);
+                }
+            }
+
+            if (SubTimer % 9 == 0 && SubTimer < 300)
+            {
+                Vector2 spawnPos = target.Center + new Vector2(Main.rand.NextFloat(-500f, 500f), -700f);
+
+                if (Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, new Vector2(0, 10f),
+                        ModContent.ProjectileType<SkySpark>(),
+                        100, 0f);
+                }
+            }
+
+            SubTimer++;
+            if (SubTimer >= 300)
+            {
+                currentAttack = -1;
+                SubTimer = 0;
+            }
+        }
+
+        // ==================== TRANSITION: PHASE 5 → PHASE 6 ====================
+        private void TransitionToPhase6()
+        {
+            CurrentPhase = Phase.Phase6_Patience;
+            NPC.life = (int)(NPC.lifeMax * 0.01f);
             NPC.dontTakeDamage = true;
             NPC.rotation = 0f;
             NPC.velocity = Vector2.Zero;
@@ -1258,66 +1473,70 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             patienceTimer = 0;
             patienceActive = true;
 
-            // ===== AEGON GOES TO BOTTOM-LEFT CORNER =====
-            Vector2 aegonCorner = arenaCenter + new Vector2(-(arenaRadius - 5) * 16f, (arenaRadius - 5) * 16f);
-            NPC.Center = aegonCorner;
+            Player target = Main.player[NPC.target];
 
-            // ===== WORLD AEGIS TO CENTER =====
             if (worldAegisIndex != -1 && Main.npc[worldAegisIndex].active)
             {
                 NPC worldAegis = Main.npc[worldAegisIndex];
-                worldAegis.Center = arenaCenter;
+                worldAegis.Center = target.Center + new Vector2(50 * 16f, 0);
                 worldAegis.velocity = Vector2.Zero;
                 worldAegis.active = true;
 
                 var aegis = worldAegis.ModNPC as WorldAegis;
-                aegis?.ReturnForPhase5(arenaCenter);
+                aegis?.ReturnForPhase5(target.Center);
             }
 
-            // ===== REMOVE ALL OLD MIRAGES =====
-            for (int i = 0; i < Main.maxNPCs; i++)
+            foreach (int sigilIndex in sigilIndices)
             {
-                if (Main.npc[i].active && Main.npc[i].type == ModContent.NPCType<AegonMirage>())
-                    Main.npc[i].active = false;
+                if (sigilIndex >= 0 && sigilIndex < Main.maxNPCs && Main.npc[sigilIndex].active)
+                {
+                }
             }
 
-            // ===== SPAWN 3 PATIENCE MIRAGES IN CORNERS =====
-            Vector2[] patienceCorners = new Vector2[]
+            for (int i = 0; i < 100; i++)
             {
-        arenaCenter + new Vector2(-(arenaRadius - 5) * 16f, -(arenaRadius - 5) * 16f), // Top-left
-        arenaCenter + new Vector2((arenaRadius - 5) * 16f, -(arenaRadius - 5) * 16f),  // Top-right
-        arenaCenter + new Vector2((arenaRadius - 5) * 16f, (arenaRadius - 5) * 16f)    // Bottom-right
-            };
-            foreach (Vector2 corner in patienceCorners)
-            {
-                NPC.NewNPC(NPC.GetSource_FromAI(), (int)corner.X, (int)corner.Y, ModContent.NPCType<AegonPatienceMirage>());
-            }
-
-            // ==== DUST, FLAVOR TEXT ====
-            for (int i = 0; i < 80; i++)
-            {
-                Vector2 velocity = Main.rand.NextVector2Circular(10f, 10f);
-                int dust = Dust.NewDust(arenaCenter, 100, 100, DustID.Stone, velocity.X, velocity.Y, 100, Color.DarkRed, 3f);
+                Vector2 velocity = Main.rand.NextVector2Circular(12f, 12f);
+                int dust = Dust.NewDust(target.Center, 100, 100, DustID.Stone, velocity.X, velocity.Y, 100, Color.DarkRed, 3f);
                 Main.dust[dust].noGravity = true;
             }
+
             if (Main.netMode != NetmodeID.Server)
             {
-                Main.NewText("You have strength but do you have patience?", Color.Red);
+                Main.NewText("You have strength, but do you have patience?", Color.Red);
+                Main.NewText("30 seconds remaining...", Color.Yellow);
             }
         }
 
-        // =============== PATIENCE PHASE MAIN LOGIC ===============
-        private void Phase5_PatienceMechanic()
+        // ==================== PHASE 6: PATIENCE ====================
+        private void Phase6_PatienceMechanic()
         {
             NPC.damage = 0;
             NPC.rotation = 0f;
             NPC.dontTakeDamage = true;
 
-            Vector2 aegonCorner = arenaCenter + new Vector2(-(arenaRadius - 5) * 16f, (arenaRadius - 5) * 16f);
-            NPC.Center = aegonCorner;
-            NPC.velocity = Vector2.Zero;
-
             Player target = Main.player[NPC.target];
+
+            float orbitRadius = 50f * 16f;
+            float orbitSpeed = 0.02f;
+            float angle = patienceTimer * orbitSpeed;
+
+            NPC.Center = target.Center + new Vector2(
+                (float)Math.Cos(angle) * orbitRadius,
+                (float)Math.Sin(angle) * orbitRadius
+            );
+
+            NPC.rotation = 0f;
+
+            if (worldAegisIndex != -1 && Main.npc[worldAegisIndex].active)
+            {
+                NPC worldAegis = Main.npc[worldAegisIndex];
+                worldAegis.Center = target.Center + new Vector2(
+                    (float)Math.Cos(-angle) * orbitRadius,
+                    (float)Math.Sin(-angle) * orbitRadius
+                );
+                worldAegis.rotation = 0f;
+            }
+
             DisablePlayerHealing(target);
 
             patienceTimer++;
@@ -1325,70 +1544,158 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             if (patienceTimer % 60 == 0)
             {
                 int secondsLeft = (1800 - (int)patienceTimer) / 60;
-                if (Main.netMode != NetmodeID.Server)
+                if (secondsLeft == 20 || secondsLeft == 10 || secondsLeft == 0)
                 {
-                    Main.NewText($"Patience: {secondsLeft} seconds remaining", Color.Yellow);
+                    if (Main.netMode != NetmodeID.Server)
+                    {
+                        if (secondsLeft > 0)
+                            Main.NewText($"{secondsLeft} seconds remaining", Color.Yellow);
+                        else
+                            Main.NewText("Patience complete!", Color.Gold);
+                    }
                 }
             }
-            if (patienceTimer >= 0)
+
+            if (patienceTimer >= 0 && patienceTimer % 20 == 0)
             {
-                if (patienceTimer % 180 == 0)
+                Vector2 velocityAegon = (target.Center - NPC.Center).SafeNormalize(Vector2.UnitX) * 6f;
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    for (int i = 0; i < 3; i++)
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocityAegon,
+                        ModContent.ProjectileType<AegisShard>(),
+                        120, 0f);
+                }
+
+                if (worldAegisIndex != -1 && Main.npc[worldAegisIndex].active)
+                {
+                    NPC worldAegis = Main.npc[worldAegisIndex];
+                    Vector2 velocityAegis = (target.Center - worldAegis.Center).SafeNormalize(Vector2.UnitX) * 6f;
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        float xPos = arenaCenter.X + Main.rand.NextFloat(-arenaRadius * 20f, arenaRadius * 20f);
-                        float yPos = arenaCenter.Y - (arenaRadius + 20) * 20f;
-                        Vector2 spawnPos = new Vector2(xPos, yPos);
-                        Vector2 velocity = new Vector2(0, 4f);
-                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), worldAegis.Center, velocityAegis,
+                            ModContent.ProjectileType<AegisShard>(),
+                            120, 0f);
+                    }
+                }
+            }
+
+            if (patienceTimer >= 300)
+            {
+                if ((patienceTimer - 300) % 120 == 0)
+                {
+                    foreach (int sigilIndex in sigilIndices)
+                    {
+                        if (sigilIndex >= 0 && sigilIndex < Main.maxNPCs && Main.npc[sigilIndex].active)
                         {
-                            Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, velocity, ModContent.ProjectileType<SkySpark>(), 100, 0f);
+                            var sigil = Main.npc[sigilIndex].ModNPC as AegonSigilBase;
+                            sigil?.StartTelegraph();
                         }
                     }
                 }
             }
-            if (patienceTimer >= 0)
+
+            if (patienceTimer >= 600 && patienceTimer % 20 == 0)
             {
-                if (patienceTimer % 60 == 0)
+                for (int i = 0; i < 3; i++)
                 {
-                    FireJungleNeedleSpread();
-                    FirePatienceMirageJungleNeedles();
+                    float xPos = target.Center.X + Main.rand.NextFloat(-600f, 600f);
+                    float yPos = target.Center.Y - 800f;
+                    Vector2 spawnPos = new Vector2(xPos, yPos);
+                    Vector2 velocity = new Vector2(0, 8f);
+
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, velocity,
+                            ModContent.ProjectileType<SkySpark>(),
+                            100, 0f);
+                    }
                 }
             }
-            if (patienceTimer >= 360)
+
+            if (patienceTimer >= 900 && patienceTimer % 10 == 0)
             {
-                if (patienceTimer % 60 == 0)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    FireCrimruptionBolts();
-                    FirePatienceMirageCrimruptionBolts();
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero,
+                        ModContent.ProjectileType<AegisChunk>(),
+                        130, 0f);
+                }
+
+                if (worldAegisIndex != -1 && Main.npc[worldAegisIndex].active)
+                {
+                    NPC worldAegis = Main.npc[worldAegisIndex];
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), worldAegis.Center, Vector2.Zero,
+                            ModContent.ProjectileType<AegisChunk>(),
+                            130, 0f);
+                    }
                 }
             }
-            if (patienceTimer >= 720)
+
+            if (patienceTimer >= 1200 && (patienceTimer - 1200) % 120 == 0)
             {
-                if (patienceTimer % 60 == 0)
+                for (int i = 0; i < 3; i++)
                 {
-                    FireOceanSphere();
-                    FirePatienceMirageOceanSpheres();
+                    float baseAngle = (target.Center - NPC.Center).ToRotation();
+                    float spread = MathHelper.Lerp(-0.3f, 0.3f, i / 2f);
+                    float angle2 = baseAngle + spread;
+
+                    Vector2 velocity = new Vector2(
+                        (float)Math.Cos(angle2),
+                        (float)Math.Sin(angle2)
+                    ) * 5f;
+
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
+                            ModContent.ProjectileType<HallowedSpear>(),
+                            120, 0f);
+                    }
+                }
+
+                if (worldAegisIndex != -1 && Main.npc[worldAegisIndex].active)
+                {
+                    NPC worldAegis = Main.npc[worldAegisIndex];
+                    for (int i = 0; i < 3; i++)
+                    {
+                        float baseAngle = (target.Center - worldAegis.Center).ToRotation();
+                        float spread = MathHelper.Lerp(-0.3f, 0.3f, i / 2f);
+                        float angle2 = baseAngle + spread;
+
+                        Vector2 velocity = new Vector2(
+                            (float)Math.Cos(angle2),
+                            (float)Math.Sin(angle2)
+                        ) * 5f;
+
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                        {
+                            Projectile.NewProjectile(NPC.GetSource_FromAI(), worldAegis.Center, velocity,
+                                ModContent.ProjectileType<HallowedSpear>(),
+                                120, 0f);
+                        }
+                    }
                 }
             }
-            if (patienceTimer >= 1080)
-            {
-                if (patienceTimer % 120 == 0)
-                {
-                    FireHallowedSpearsAtPlayer();
-                    FirePatienceMirageHallowedSpears();
-                }
-            }
+
             if (patienceTimer >= 1800)
             {
                 patienceActive = false;
                 EnablePlayerHealing(target);
 
+                NPC.velocity = Vector2.Zero;
+
                 if (worldAegisIndex != -1 && Main.npc[worldAegisIndex].active)
                 {
-                    var aegis = Main.npc[worldAegisIndex].ModNPC as WorldAegis;
+                    NPC worldAegis = Main.npc[worldAegisIndex];
+                    worldAegis.velocity = Vector2.Zero;
+                    worldAegis.Center = target.Center;
+
+                    var aegis = worldAegis.ModNPC as WorldAegis;
                     aegis?.MakeVulnerable();
                 }
+
+                DespawnSigils();
 
                 if (Main.netMode != NetmodeID.Server)
                 {
@@ -1397,162 +1704,40 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
 
                 patienceTimer = 1800;
             }
-        }
 
-        // ==== MAIN BOSS ATTACK HELPERS ====
-
-        private void FireJungleNeedleSpread()
-        {
-            int spreadCount = 4;
-            float baseAngle = (arenaCenter - NPC.Center).ToRotation();
-
-            for (int i = 0; i < spreadCount; i++)
+            if (patienceTimer >= 1800)
             {
-                float offsetAngle = MathHelper.Lerp(-MathHelper.PiOver4, MathHelper.PiOver4, i / (float)(spreadCount - 1));
-                float angle = baseAngle + offsetAngle;
-                Vector2 velocity = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * 3f;
-                if (Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity, ModContent.ProjectileType<JungleNeedle>(), 95, 0f);
-                }
+                PostPatienceAttacks();
             }
         }
 
-        private void FireCrimruptionBolts()
-        {
-            int spreadCount = 3;
-            float baseAngle = (arenaCenter - NPC.Center).ToRotation();
-
-            for (int i = 0; i < spreadCount; i++)
-            {
-                float offsetAngle = MathHelper.Lerp(-0.2f, 0.2f, i / (float)(spreadCount - 1));
-                float angle = baseAngle + offsetAngle;
-                Vector2 velocity = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * 5f;
-                if (Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity, ModContent.ProjectileType<CrimruptionBolt>(), 120, 0f);
-                }
-            }
-        }
-
-        private void FireOceanSphere()
-        {
-            float angle = (arenaCenter - NPC.Center).ToRotation();
-            Vector2 velocity = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * 6f;
-            if (Main.netMode != NetmodeID.MultiplayerClient)
-            {
-                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity, ModContent.ProjectileType<OceanSphere>(), 120, 0f);
-            }
-        }
-
-        private void FireHallowedSpearsAtPlayer()
+        private void PostPatienceAttacks()
         {
             Player target = Main.player[NPC.target];
-            int spreadCount = 3;
-            float baseAngle = (target.Center - NPC.Center).ToRotation();
 
-            for (int i = 0; i < spreadCount; i++)
+            Vector2 direction = (target.Center - NPC.Center).SafeNormalize(Vector2.Zero);
+            NPC.velocity = direction * 6f;
+
+            if (AttackTimer % 180 == 0)
             {
-                float offsetAngle = MathHelper.Lerp(-0.35f, 0.35f, i / (float)(spreadCount - 1));
-                float angle = baseAngle + offsetAngle;
-                Vector2 velocity = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * 4f;
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                for (int i = 0; i < 6; i++)
                 {
-                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity, ModContent.ProjectileType<HallowedSpear>(), 120, 0f);
+                    float angle = i / 6f * MathHelper.TwoPi;
+                    Vector2 velocity = new Vector2(
+                        (float)Math.Cos(angle),
+                        (float)Math.Sin(angle)
+                    ) * 5f;
+
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
+                            ModContent.ProjectileType<HallowedSpear>(),
+                            120, 0f);
+                    }
                 }
             }
         }
-
-        // ==== PATIENCE MIRAGE ATTACK HELPERS ====
-        private void FirePatienceMirageJungleNeedles()
-        {
-            foreach (NPC npc in Main.npc)
-            {
-                if (npc.active && npc.type == ModContent.NPCType<AegonPatienceMirage>())
-                {
-                    (npc.ModNPC as AegonPatienceMirage)?.FireJungleNeedleSpread(arenaCenter);
-                }
-            }
-        }
-        private void FirePatienceMirageCrimruptionBolts()
-        {
-            foreach (NPC npc in Main.npc)
-            {
-                if (npc.active && npc.type == ModContent.NPCType<AegonPatienceMirage>())
-                {
-                    (npc.ModNPC as AegonPatienceMirage)?.FireCrimruptionBolts(arenaCenter);
-                }
-            }
-        }
-        private void FirePatienceMirageOceanSpheres()
-        {
-            foreach (NPC npc in Main.npc)
-            {
-                if (npc.active && npc.type == ModContent.NPCType<AegonPatienceMirage>())
-                {
-                    (npc.ModNPC as AegonPatienceMirage)?.FireOceanSphere(arenaCenter);
-                }
-            }
-        }
-        private void FirePatienceMirageHallowedSpears()
-        {
-            Player target = Main.player[NPC.target];
-            foreach (NPC npc in Main.npc)
-            {
-                if (npc.active && npc.type == ModContent.NPCType<AegonPatienceMirage>())
-                {
-                    (npc.ModNPC as AegonPatienceMirage)?.FireHallowedSpears(target.Center);
-                }
-            }
-        }
-
-        private void DisablePlayerHealing(Player player)
-        {
-            player.lifeRegen = -999;
-            player.lifeRegenTime = 0;
-            player.potionDelay = int.MaxValue;
-        }
-
-        private void EnablePlayerHealing(Player player)
-        {
-            player.potionDelay = 0;
-        }
-
-        public void EndFight()
-        {
-            NPC.velocity = Vector2.Zero;
-            NPC.dontTakeDamage = true;
-
-            // Visuals
-            for (int i = 0; i < 150; i++)
-            {
-                Vector2 velocity = Main.rand.NextVector2Circular(15f, 15f);
-                int dust = Dust.NewDust(arenaCenter, 100, 100, DustID.Stone, velocity.X, velocity.Y, 100, Color.White, 3f);
-                Main.dust[dust].noGravity = true;
-            }
-
-            // Despawn all AegonMirage (phase 4 mirages)
-            foreach (NPC npc in Main.npc)
-            {
-                if (npc.active && npc.type == ModContent.NPCType<AegonMirage>())
-                    npc.active = false;
-            }
-
-
-            foreach (NPC npc in Main.npc)
-            {
-                if (npc.active && npc.type == ModContent.NPCType<AegonPatienceMirage>())
-                    npc.active = false;
-            }
-            NPC.active = false;
-
-            if (Main.netMode != NetmodeID.Server)
-            {
-                Main.NewText("Not bad, kid.", 50, 125, 255);
-            }
-        }
-
-        // ==================== HELPER METHODS ====================
+                // ==================== HELPER METHODS ====================
 
         private void SpawnWorldAegis()
         {
@@ -1574,26 +1759,99 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             }
         }
 
-        private int GetContactDamage(int baseDamage)
+        private void SpawnSigils()
         {
-            if (Main.masterMode)
-                return baseDamage * 3;
-            if (Main.expertMode)
-                return baseDamage * 2;
-            return baseDamage;
-        }
-
-        private void DespawnMirages()
-        {
-            for (int i = 0; i < mirageIndices.Count; i++)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                int index = mirageIndices[i];
-                if (index != -1 && index < Main.maxNPCs && Main.npc[index].active)
+                sigilIndices[0] = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<AegonHallowedSigil>());
+                sigilIndices[1] = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<AegonHellSigil>());
+                sigilIndices[2] = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<AegonEvilSigil>());
+                sigilIndices[3] = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<AegonDesertSigil>());
+                sigilIndices[4] = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<AegonJungleSigil>());
+
+                if (Main.netMode == NetmodeID.Server)
                 {
-                    Main.npc[index].active = false;
+                    foreach (int index in sigilIndices)
+                    {
+                        NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, index);
+                    }
                 }
             }
-            mirageIndices.Clear();
+        }
+
+        private void TriggerNextSigilAttack()
+        {
+            int index = sigilIndices[currentSigilAttackIndex];
+            if (index >= 0 && index < Main.maxNPCs && Main.npc[index].active)
+            {
+                var sigil = Main.npc[index].ModNPC as AegonSigilBase;
+                if (sigil != null && sigil.IsReadyToAttack())
+                {
+                    sigil.StartTelegraph();
+                }
+            }
+
+            currentSigilAttackIndex = (currentSigilAttackIndex + 1) % 5;
+        }
+
+        private void DespawnSigils()
+        {
+            foreach (int sigilIndex in sigilIndices)
+            {
+                if (sigilIndex >= 0 && sigilIndex < Main.maxNPCs && Main.npc[sigilIndex].active)
+                {
+                    Main.npc[sigilIndex].active = false;
+                }
+            }
+        }
+
+        private void DisablePlayerHealing(Player player)
+        {
+            player.lifeRegen = -999;
+            player.lifeRegenTime = 0;
+            player.potionDelay = int.MaxValue;
+        }
+
+        private void EnablePlayerHealing(Player player)
+        {
+            player.potionDelay = 0;
+        }
+
+        public int GetCurrentPhase()
+        {
+            return (int)CurrentPhase;
+        }
+
+        public bool IsPatienceActive()
+        {
+            return CurrentPhase == Phase.Phase6_Patience && patienceActive;
+        }
+
+        public void EndFight()
+        {
+            NPC.velocity = Vector2.Zero;
+            NPC.dontTakeDamage = true;
+
+            for (int i = 0; i < 150; i++)
+            {
+                Vector2 velocity = Main.rand.NextVector2Circular(15f, 15f);
+                int dust = Dust.NewDust(arenaCenter, 100, 100, DustID.Stone, velocity.X, velocity.Y, 100, Color.White, 3f);
+                Main.dust[dust].noGravity = true;
+            }
+
+            DespawnSigils();
+
+            if (AegonArena.Current != null)
+            {
+                AegonArena.Current.Remove();
+            }
+
+            NPC.active = false;
+
+            if (Main.netMode != NetmodeID.Server)
+            {
+                Main.NewText("Not bad, kid.", 50, 125, 255);
+            }
         }
 
         // ==================== DAMAGE REDUCTION (PHASE 3) ====================
@@ -1638,6 +1896,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                 Main.NewText("Not bad, kid", 255, 0, 0);
             }
         }
+
         public override bool CheckActive() => false;
     }
 }

@@ -52,7 +52,6 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             Point centerTile = Center. ToTileCoordinates();
             int radiusTiles = (int)Radius;
 
-            // Store original tiles and create arena
             for (int x = -radiusTiles; x <= radiusTiles; x++)
             {
                 for (int y = -radiusTiles; y <= radiusTiles; y++)
@@ -60,19 +59,16 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                     int worldX = centerTile.X + x;
                     int worldY = centerTile.Y + y;
 
-                    // Check if within world bounds
                     if (worldX < 0 || worldX >= Main.maxTilesX || worldY < 0 || worldY >= Main.maxTilesY)
                         continue;
 
                     float distance = new Vector2(x, y).Length();
 
-                    // Create circular arena border (1 tile thick)
                     if (distance >= Radius - 1 && distance <= Radius)
                     {
                         Point tilePos = new Point(worldX, worldY);
                         Tile tile = Main.tile[worldX, worldY];
 
-                        // Store original tile data
                         originalTiles[tilePos] = new TileData
                         {
                             type = tile.TileType,
@@ -80,11 +76,9 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                             active = tile.HasTile
                         };
 
-                        // Place arena wall
                         tile.TileType = TileID.WoodenSpikes;
                         tile.HasTile = true;
                         
-                        // Sync in multiplayer
                         if (Main. netMode != NetmodeID. SinglePlayer)
                         {
                             NetMessage.SendTileSquare(-1, worldX, worldY, 1);
@@ -96,21 +90,13 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             IsActive = true;
             Main. NewText($"[ARENA DEBUG] Arena created!  {originalTiles.Count} tiles stored", Color.Green);
 
-            // Visual effect - dust ring
             CreateDustRing();
         }
 
-        /// <summary>
-        /// Removes the arena and restores original tiles - FORCEFUL VERSION
-        /// </summary>
         public void Remove()
         {
             Main.NewText($"[ARENA DEBUG] Remove() called.  IsActive={IsActive}, Tiles stored={originalTiles.Count}", Color.Orange);
 
-            // REMOVED THE EARLY RETURN - ALWAYS TRY TO CLEAN UP
-            // if (! IsActive) return;  <-- THIS WAS THE PROBLEM! 
-
-            // Restore all original tiles
             int restoredCount = 0;
             foreach (var kvp in originalTiles)
             {
@@ -125,7 +111,6 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                 tile.WallType = data.wall;
                 tile.HasTile = data.active;
 
-                // Sync in multiplayer
                 if (Main.netMode != NetmodeID.SinglePlayer)
                 {
                     NetMessage.SendTileSquare(-1, pos.X, pos.Y, 1);
@@ -139,36 +124,26 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             originalTiles.Clear();
             IsActive = false;
 
-            // Visual effect - dust explosion
             CreateDustExplosion();
             
             Main.NewText("[ARENA DEBUG] Arena removed successfully!", Color.Green);
         }
 
-        /// <summary>
-        /// Checks if a position is inside the arena
-        /// </summary>
         public bool IsInsideArena(Vector2 position)
         {
             return Vector2.Distance(position, Center) <= (Radius * 16f); // Convert tiles to pixels
         }
 
-        /// <summary>
-        /// Checks if a position is outside the arena
-        /// </summary>
         public bool IsOutsideArena(Vector2 position)
         {
             return ! IsInsideArena(position);
         }
 
-        /// <summary>
-        /// Gets the nearest point inside the arena from a given position
-        /// </summary>
         public Vector2 ClampToArena(Vector2 position)
         {
             Vector2 direction = position - Center;
             float distance = direction.Length();
-            float maxDistance = (Radius - 2) * 16f; // Stay 2 tiles away from edge
+            float maxDistance = (Radius - 2) * 16f;
 
             if (distance > maxDistance)
             {
@@ -179,16 +154,12 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             return position;
         }
 
-        /// <summary>
-        /// Prevents tile destruction within arena
-        /// </summary>
         public bool CanBreakTile(int x, int y)
         {
             if (!IsActive) return true;
 
             Point tilePos = new Point(x, y);
             
-            // Can't break arena tiles
             if (originalTiles.ContainsKey(tilePos))
             {
                 Tile tile = Main.tile[x, y];
@@ -199,15 +170,12 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             return true;
         }
 
-        /// <summary>
-        /// Creates dust ring when arena spawns
-        /// </summary>
         private void CreateDustRing()
         {
             int segments = 200;
             for (int i = 0; i < segments; i++)
             {
-                float angle = (i / (float)segments) * MathHelper.TwoPi;
+                float angle = i / (float)segments * MathHelper.TwoPi;
                 Vector2 position = Center + new Vector2(
                     (float)Math.Cos(angle) * Radius * 16f,
                     (float)Math.Sin(angle) * Radius * 16f
@@ -219,9 +187,6 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             }
         }
 
-        /// <summary>
-        /// Creates dust explosion when arena is removed
-        /// </summary>
         private void CreateDustExplosion()
         {
             int segments = 100;
