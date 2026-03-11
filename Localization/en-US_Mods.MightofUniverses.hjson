@@ -833,6 +833,25 @@ Projectiles: {
 	KasurikamaSpinProjectile.DisplayName: Kasurikama Spin Projectile
 	PyroclastArrow.DisplayName: Pyroclast Arrow
 	PyroclastMagma.DisplayName: Pyroclast Magma
+	AegonDesertSigilBolt.DisplayName: Aegon Desert Sigil Bolt
+	AegonEvilSigilBolt.DisplayName: Aegon Evil Sigil Bolt
+	AegonHallowedSigilBolt.DisplayName: Aegon Hallowed Sigil Bolt
+	AegonHellSigilBolt.DisplayName: Aegon Hell Sigil Bolt
+	AegonJungleSigilBolt.DisplayName: Aegon Jungle Sigil Bolt
+	PompeiiFireball.DisplayName: Pompeii Fireball
+	PompeiiMeteor.DisplayName: Pompeii Meteor
+	PyreclawComboProjectile.DisplayName: Pyreclaw Combo Projectile
+	PyreclawFireball.DisplayName: Pyreclaw Fireball
+	PyreclawHeavySlash.DisplayName: Pyreclaw Heavy Slash
+	CyberFloraArrowProjectile.DisplayName: Cyber Flora Arrow Projectile
+	CyberFloraFlower.DisplayName: Cyber Flora Flower
+	DeltaStormArrowProjectile.DisplayName: Delta Storm Arrow Projectile
+	MoltenCoreArrowProjectile.DisplayName: Molten Core Arrow Projectile
+	NegativeColdArrowProjectile.DisplayName: Negative Cold Arrow Projectile
+	BriarfangProjectile.DisplayName: Briarfang Projectile
+	CyberFlower.DisplayName: Cyber Flower
+	CyberLeaf.DisplayName: Cyber Leaf
+	SharpLeaf.DisplayName: Sharp Leaf
 }
 
 Keybinds: {
@@ -1877,8 +1896,9 @@ Items: {
 		DisplayName: Frozen Enforcer
 		Tooltip:
 			'''
-			A relatively slow firing gun, but it packs a frosty punch
-			Inflicts Frostburn for 3 seconds
+			A powerful six shooter! 
+			Reloads every 6 shots
+			All bullets fired from it additionally inflict Frostburn for 3 seconds
 			'''
 	}
 
@@ -4596,7 +4616,7 @@ Items: {
 
 	SoundFractureBow: {
 		DisplayName: Sound Fracture Bow
-		Tooltip: Fires highly piercing, bouncing bolts that travel incredibly quickly
+		Tooltip: Fires highly piercing, bouncing bolts that travels so quickly it is imperceptible
 	}
 
 	MegaBusterX1: {
@@ -5070,7 +5090,7 @@ Items: {
 			'''
 			Fires a fragment of ice that gathers 6 souls, inflicts Sheer Cold for 2 seconds and shatters on impact into piercing shards
 			The shards gather 1 soul each and inflict Sheer Cold for 1 second
-			Ice Age itself inflicts Sheer Cold for 3 seconds
+			Ice Age itself inflicts Sheer Cold for 3 seconds and gathers 6 souls
 			Consume {0} souls to conjure Blizzard Balls that orbit the player for a short time
 			After 2 seconds, the balls will fire in rapid succession at the cursor
 			'''
@@ -5129,6 +5149,67 @@ Items: {
 			All minions and whips inflict Sheer Cold for 3 seconds and ignore 20 defense
 			'''
 	}
+
+	Pompeii: {
+		DisplayName: Pompeii
+		Tooltip:
+			'''
+			Fires a fireball that pierces once, gathers 9 souls and inflicts Core Heat for 2 seconds
+			The scythe itself also gathers 9 souls on hit and inflicts Core Heat for 2 seconds
+			Consume {0} souls to call down a meteor of molten ash from the sky to ram into enemies
+			The meteor does 300% damage, inflicts Core Heat for 4 seconds
+			The meteor fades away after 5 seconds
+			'''
+	}
+
+	Pyreclaw: {
+		DisplayName: Pyreclaw
+		Tooltip:
+			'''
+			Launches homing fireballs that inflict Core Heat for 2 seconds per swing
+			When hit for for than 10% of the player's max health, Pyreclaw will retaliate with a radial burst of 8 fireballs
+			'''
+	}
+
+	CyberFloraArrow: {
+		DisplayName: Cyber Flora Arrow
+		Tooltip: Inflicts Nature's Toxin for 3 seconds and fires out lifestealing and homing flowers with it
+	}
+
+	DeltaStormArrow: {
+		DisplayName: Delta Storm Arrow
+		Tooltip: Inflicts Delta Shock for 3 seconds and quickly accelerates. Will always crit at max speed
+	}
+
+	MoltenCoreArrow: {
+		DisplayName: Molten Core Arrow
+		Tooltip: Inflicts Core Heat for 3 seconds and explodes
+	}
+
+	NegativeColdArrow: {
+		DisplayName: Negative Cold Arrow
+		Tooltip: Inflicts Sheer Cold for 3 seconds and has a chance to paralyze enemies with Sheer Cold.
+	}
+
+	Briarfang: {
+		DisplayName: Briarfang
+		Tooltip:
+			'''
+			Attaches a parasitic flower to enemies it hits and inflicts Nature's Toxin
+			The flower steals life and mana for the player
+			When striking enemies that has the flower attached, leaves will fly out from the player to hit that enemy
+			The leaves inflict Nature's Toxin and Bleeding
+			'''
+	}
+
+	SylvanSniper: {
+		DisplayName: Sylvan Sniper
+		Tooltip:
+			'''
+			Replaces all bullets fired with a powerful leaf
+			The leaf inherits damage from the bullet consumed
+			'''
+	}
 }
 
 Prefixes: {
@@ -5150,4 +5231,9 @@ NPCs: {
 	AegonMirage.DisplayName: Aegon Mirage
 	WorldAegis.DisplayName: The World Aegis
 	AegonPatienceMirage.DisplayName: Aegon Mirage
+	AegonDesertSigil.DisplayName: Aegon Desert Sigil
+	AegonEvilSigil.DisplayName: Aegon Evil Sigil
+	AegonHallowedSigil.DisplayName: Aegon Hallowed Sigil
+	AegonHellSigil.DisplayName: Aegon Hell Sigil
+	AegonJungleSigil.DisplayName: Aegon Jungle Sigil
 }

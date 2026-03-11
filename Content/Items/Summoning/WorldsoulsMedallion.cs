@@ -1,5 +1,3 @@
-// Content/Items/Consumables/WorldsoulsMedallion.cs
-
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -7,6 +5,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.DataStructures;
 using MightofUniverses.Content.Rarities;
+using MightofUniverses.Common.Players; // ✅ ADD THIS
 
 namespace MightofUniverses.Content.Items.Summoning
 {
@@ -25,10 +24,10 @@ namespace MightofUniverses.Content.Items.Summoning
             Item.rare = ModContent.RarityType<TerraiumRarity>();
             Item.useAnimation = 45;
             Item.useTime = 45;
-            Item.useStyle = ItemUseStyleID. HoldUp; 
-            Item.UseSound = SoundID. Roar;
+            Item.useStyle = ItemUseStyleID.HoldUp;
+            Item.UseSound = SoundID.Roar;
             Item.consumable = false;
-            Item. value = Item.sellPrice(gold: 5);
+            Item.value = Item.sellPrice(gold: 5);
         }
 
         public override bool CanUseItem(Player player)
@@ -40,7 +39,7 @@ namespace MightofUniverses.Content.Items.Summoning
             return true;
         }
 
-        public override bool?  UseItem(Player player)
+        public override bool? UseItem(Player player)
         {
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
@@ -48,16 +47,16 @@ namespace MightofUniverses.Content.Items.Summoning
                     new EntitySource_ItemUse(player, Item),
                     (int)player.Center.X,
                     (int)player.Center.Y,
-                    ModContent.NPCType<NPCs. Bosses.Aegon. Aegon>()
+                    ModContent.NPCType<NPCs.Bosses.Aegon.Aegon>()
                 );
 
                 if (npcIndex != Main.maxNPCs)
                 {
                     NPC Aegon = Main.npc[npcIndex];
 
-                    if (Main. netMode == NetmodeID. Server)
+                    if (Main.netMode == NetmodeID.Server)
                     {
-                        NetMessage.SendData(MessageID. SyncNPC, -1, -1, null, npcIndex);
+                        NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, npcIndex);
                     }
                 }
                 CreateSummonEffect(player.Center);
@@ -65,6 +64,7 @@ namespace MightofUniverses.Content.Items.Summoning
 
             return true;
         }
+
         private void CreateSummonEffect(Vector2 position)
         {
             float arenaRadius;
@@ -84,8 +84,8 @@ namespace MightofUniverses.Content.Items.Summoning
                     (float)System.Math.Sin(angle) * arenaRadius * 16f
                 );
 
-                int dust = Dust.NewDust(dustPos, 0, 0, DustID. Stone, 0f, 0f, 100, Color.Brown, 2.5f);
-                Main. dust[dust].noGravity = true;
+                int dust = Dust.NewDust(dustPos, 0, 0, DustID.Stone, 0f, 0f, 100, Color.Brown, 2.5f);
+                Main.dust[dust].noGravity = true;
                 Main.dust[dust].velocity = Vector2.Zero;
             }
 
@@ -96,9 +96,10 @@ namespace MightofUniverses.Content.Items.Summoning
                 Main.dust[dust].noGravity = true;
             }
 
+            // ✅ FIXED: Use AddShake instead of ScreenShake
             if (Main.LocalPlayer.Distance(position) < 2000f)
             {
-                Main.LocalPlayer.GetModPlayer<ScreenShakePlayer>()?. ScreenShake(15, 30);
+                Main.LocalPlayer.GetModPlayer<ScreenShakePlayer>()?.AddShake(15f);
             }
         }
 
@@ -133,12 +134,13 @@ namespace MightofUniverses.Content.Items.Summoning
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.HallowedBar, 10)
-                .AddIngredient(ItemID.SoulofLight, 10)
-                .AddIngredient(ItemID.SoulofNight, 10)
-                .AddIngredient(ItemID.SoulofFlight, 5)
-                .AddIngredient(ItemID.CrystalShard, 15)
-                .AddTile(TileID.MythrilAnvil)
+                .AddIngredient(ItemID.LunarBar, 10)
+                .AddIngredient(ItemID.FragmentNebula, 10)
+                .AddIngredient(ItemID.FragmentSolar, 10)
+                .AddIngredient(ItemID.FragmentVortex, 10)
+                .AddIngredient(ItemID.FragmentStardust, 10)
+                .AddIngredient(ItemID.LihzahrdBrick, 250)
+                .AddTile(TileID.LunarCraftingStation)
                 .Register();
         }
     }

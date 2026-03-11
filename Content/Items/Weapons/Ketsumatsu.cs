@@ -69,7 +69,7 @@ namespace MightofUniverses.Content.Items.Weapons
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ModContent.ItemType<TerraiumBar>(), 5)
+                .AddIngredient(ModContent.ItemType<TerraiumBar>(), 10)
                 .AddIngredient(ItemID.LifeCrystal, 5)
                 .AddIngredient(ModContent.ItemType<OrichalcumScythe>(), 1)
                 .AddTile(TileID.LunarCraftingStation)

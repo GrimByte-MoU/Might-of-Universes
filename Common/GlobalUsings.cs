@@ -7,3 +7,6 @@ global using MightofUniverses.Common;
 global using MightofUniverses.Common.Players;
 global using MightofUniverses.Common.Abstractions;
 global using MightofUniverses.Common.Util;
+global using MightofUniverses.Content.Rarities;
+global using MightofUniverses.Content.Items.Materials;
+global using MightofUniverses.Content.Items.Projectiles;

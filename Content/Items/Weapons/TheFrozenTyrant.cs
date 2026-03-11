@@ -14,7 +14,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override void SetDefaults()
         {
-            Item.damage = 175;
+            Item.damage = 130;
             Item.DamageType = DamageClass.Magic;
             Item.width = 54;
             Item.height = 54;
@@ -52,8 +52,8 @@ namespace MightofUniverses.Content.Items.Weapons
 
             if (currentMode == 0)
             {
-                Item.useTime = 10;
-                Item.useAnimation = 10;
+                Item.useTime = 15;
+                Item.useAnimation = 15;
                 Item.mana = 12;
                 Item.shoot = ModContent.ProjectileType<FrozenTyrantSphere>();
                 Item.shootSpeed = 18f;
@@ -63,8 +63,8 @@ namespace MightofUniverses.Content.Items.Weapons
             }
             else
             {
-                Item.useTime = 3;
-                Item.useAnimation = 3;
+                Item.useTime = 6;
+                Item.useAnimation = 6;
                 Item.mana = 3;
                 Item.shoot = ModContent.ProjectileType<FrozenTyrantShard>();
                 Item.shootSpeed = 16f;

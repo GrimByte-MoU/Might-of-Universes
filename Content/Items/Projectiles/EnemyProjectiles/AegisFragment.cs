@@ -36,12 +36,12 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
             if (Main. rand.NextBool(2))
             {
                 int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile. height,
-                    DustID.GoldCoin, 0f, 0f, 100, Color.Orange, 1.2f);
+                    DustID.TerraBlade, 0f, 0f, 100, Color.Lime, 1.2f);
                 Main.dust[dust].noGravity = true;
                 Main.dust[dust].velocity *= 0.3f;
             }
 
-            Lighting.AddLight(Projectile.Center, 1.0f, 0.7f, 0.3f);
+            Lighting.AddLight(Projectile.Center, 0.3f, 1.0f, 0.3f);
         }
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
 {

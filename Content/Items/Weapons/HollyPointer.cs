@@ -33,7 +33,7 @@ namespace MightofUniverses.Content.Items. Weapons
             Item.noMelee = true;
 
             Item.DamageType = DamageClass.Summon;
-            Item.damage = 50;
+            Item.damage = 40;
             Item.knockBack = 3f;
             Item.mana = 10;
             Item.shoot = ModContent.ProjectileType<HollyFighter>();

@@ -10,7 +10,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 {
     public class HollyFighter : MoUProjectile
     {
-        private const float SHOOT_RATE = 15f;
+        private const float SHOOT_RATE = 30f;
         private float attackTimer = 0f;
 
         public override void SetStaticDefaults()
@@ -172,7 +172,7 @@ namespace MightofUniverses.Content.Items.Projectiles
                 
                 float strafingOffset = (float)Math.Sin(Main.GameUpdateCount * 0.03f + Projectile.whoAmI * 0.8f) * 120f;
                 targetPosition.X += strafingOffset;
-                targetPosition.Y -= 100f + (Projectile.whoAmI % 3) * 40f;
+                targetPosition.Y -= 100f + Projectile.whoAmI % 3 * 40f;
                 
                 Vector2 direction = targetPosition - Projectile.Center;
                 float distanceToTarget = direction.Length();

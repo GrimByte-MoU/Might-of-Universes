@@ -17,8 +17,6 @@ namespace MightofUniverses.Common.Players
         public bool summonerSetBonus;
         public bool reaperSetBonus;
 
-        private int rangerAttackTimer = 0;
-        private int lastUsedItemType = 0;
         private int glaiveSpawnTimer = 0;
         private int worldsoulSpawnTimer = 0;
         private bool lastConsumedSouls = false;
@@ -46,16 +44,6 @@ namespace MightofUniverses.Common.Players
                 UpdateKnightSetBonus();
             }
 
-            if (rangerSetBonus)
-            {
-                UpdateRangerSetBonus();
-            }
-
-            if (wizardSetBonus)
-            {
-                UpdateWizardSetBonus();
-            }
-
             if (summonerSetBonus)
             {
                 UpdateSummonerSetBonus();
@@ -67,21 +55,21 @@ namespace MightofUniverses.Common.Players
             }
         }
 
-       private void ApplyTerraiumVisuals()
-{
-    Player.armorEffectDrawShadow = true;
-    Player. armorEffectDrawOutlines = true;
-    Player.armorEffectDrawShadowLokis = true;
-    Lighting.AddLight(Player.Center, 0.5f, 0.9f, 0.3f);
-}
+        private void ApplyTerraiumVisuals()
+        {
+            Player.armorEffectDrawShadow = true;
+            Player.armorEffectDrawOutlines = true;
+            Player.armorEffectDrawShadowLokis = true;
+            Lighting.AddLight(Player.Center, 0.5f, 0.9f, 0.3f);
+        }
 
         private void UpdateKnightSetBonus()
         {
             int defenseBonus = Player.statDefense;
             int stacks = defenseBonus / 5;
 
-            Player.GetDamage(DamageClass. Melee) += stacks * 0.01f;
-            Player.GetAttackSpeed(DamageClass. Melee) += stacks * 0.01f;
+            Player.GetDamage(DamageClass.Melee) += stacks * 0.01f;
+            Player.GetAttackSpeed(DamageClass.Melee) += stacks * 0.01f;
             Player.endurance += stacks * 0.005f;
 
             glaiveSpawnTimer++;
@@ -98,11 +86,11 @@ namespace MightofUniverses.Common.Players
                 return;
 
             int existingGlaives = 0;
-            for (int i = 0; i < Main. maxProjectiles; i++)
+            for (int i = 0; i < Main.maxProjectiles; i++)
             {
-                if (Main.projectile[i]. active && 
+                if (Main.projectile[i].active && 
                     Main.projectile[i].owner == Player.whoAmI && 
-                    Main.projectile[i].type == ModContent. ProjectileType<TerraiumKnightGlaive>())
+                    Main.projectile[i].type == ModContent.ProjectileType<TerraiumKnightGlaive>())
                 {
                     existingGlaives++;
                 }
@@ -123,57 +111,6 @@ namespace MightofUniverses.Common.Players
                 existingGlaives++;
             }
         }
-
-        private void UpdateRangerSetBonus()
-{
-    if (Player.HeldItem. DamageType == DamageClass.Ranged && 
-        Player.HeldItem. useTime > 0 && 
-        ! Player.noItems && 
-        ! Player.CCed)
-    {
-        if (Player.HeldItem.type == lastUsedItemType)
-        {
-            if (Player.itemAnimation > 0 || Player.controlUseItem)
-            {
-                rangerAttackTimer++;
-            }
-        }
-        else
-        {
-            rangerAttackTimer = 0;
-            lastUsedItemType = Player. HeldItem.type;
-        }
-        int maxTimer = 300;
-        rangerAttackTimer = Math.Min(rangerAttackTimer, maxTimer);
-        float bonusAttackSpeed = rangerAttackTimer / (float)maxTimer * 0.50f;
-        Player.GetAttackSpeed(DamageClass.Ranged) += bonusAttackSpeed;
-        if (rangerAttackTimer > 150 && Main.rand.NextBool(8))
-        {
-            Dust speedDust = Dust.NewDustDirect(
-                Player.position,
-                Player.width,
-                Player.height,
-                DustID.TerraBlade,
-                Player.velocity. X * 0.5f,
-                Player. velocity.Y * 0.5f,
-                100,
-                Color. Lerp(Color.Orange, Color.Red, (rangerAttackTimer - 150) / 150f),
-                1.5f + (rangerAttackTimer / 300f)
-            );
-            speedDust.noGravity = true;
-        }
-    }
-    else
-    {
-        if (rangerAttackTimer > 0)
-        {
-            rangerAttackTimer -= 3;
-            if (rangerAttackTimer < 0)
-                rangerAttackTimer = 0;
-        }
-        lastUsedItemType = 0;
-    }
-}
 
         private void UpdateWizardSetBonus()
         {
@@ -227,7 +164,7 @@ namespace MightofUniverses.Common.Players
         {
             var reaperPlayer = Player.GetModPlayer<ReaperPlayer>();
 
-            if (reaperPlayer. justConsumedSouls && ! lastConsumedSouls)
+            if (reaperPlayer.justConsumedSouls && !lastConsumedSouls)
             {
                 FireTerraMissiles();
                 reaperPlayer.AddDeathMarks(1);
@@ -257,22 +194,53 @@ namespace MightofUniverses.Common.Players
                 );
             }
 
-            Terraria.Audio.SoundEngine.PlaySound(SoundID. Item92, Player.Center);
+            Terraria.Audio.SoundEngine.PlaySound(SoundID.Item92, Player.Center);
         }
 
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            ApplyTerraRend(item. DamageType, target);
+            ApplyTerraRend(item.DamageType, target);
+            ApplyRangerLifesteal(item.DamageType, damageDone);
         }
 
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC. HitInfo hit, int damageDone)
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
             ApplyTerraRend(proj.DamageType, target);
+            ApplyRangerLifesteal(proj.DamageType, damageDone);
+        }
+
+        private void ApplyRangerLifesteal(DamageClass damageClass, int damageDone)
+        {
+            if (rangerSetBonus && damageClass == DamageClass.Ranged)
+            {
+                int healAmount = (int)(damageDone * 0.005f);
+                
+                if (healAmount > 0)
+                {
+                    Player.Heal(healAmount);
+
+                    if (Main.rand.NextBool(3))
+                    {
+                        Dust lifestealDust = Dust.NewDustDirect(
+                            Player.Center,
+                            Player.width,
+                            Player.height,
+                            DustID.LifeDrain,
+                            0f,
+                            -2f,
+                            100,
+                            Color.LimeGreen,
+                            1.5f
+                        );
+                        lifestealDust.noGravity = true;
+                    }
+                }
+            }
         }
 
         private void ApplyTerraRend(DamageClass damageClass, NPC target)
         {
-            if (knightSetBonus && damageClass == DamageClass. Melee)
+            if (knightSetBonus && damageClass == DamageClass.Melee)
             {
                 target.AddBuff(ModContent.BuffType<TerrasRend>(), 180);
             }
@@ -284,12 +252,12 @@ namespace MightofUniverses.Common.Players
 
             if (wizardSetBonus && damageClass == DamageClass.Magic)
             {
-                target. AddBuff(ModContent.BuffType<TerrasRend>(), 180);
+                target.AddBuff(ModContent.BuffType<TerrasRend>(), 180);
             }
 
             if (summonerSetBonus && (damageClass == DamageClass.Summon || damageClass == DamageClass.SummonMeleeSpeed))
             {
-                target. AddBuff(ModContent.BuffType<TerrasRend>(), 180);
+                target.AddBuff(ModContent.BuffType<TerrasRend>(), 180);
             }
 
             if (reaperSetBonus && damageClass == ModContent.GetInstance<ReaperDamageClass>())

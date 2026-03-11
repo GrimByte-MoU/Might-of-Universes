@@ -36,7 +36,7 @@ namespace MightofUniverses.Content.Items.Weapons
             CreateRecipe()
                 .AddIngredient(ItemID.WandofSparking)
                 .AddIngredient(ItemID.LifeCrystal, 5)
-                .AddIngredient(ModContent.ItemType<TerraiumBar>(), 5)
+                .AddIngredient(ModContent.ItemType<TerraiumBar>(), 10)
                 .AddTile(TileID.LunarCraftingStation)
                 .Register();
         }

@@ -36,7 +36,7 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
             if (Main. rand.NextBool(2))
             {
                 int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height,
-                    DustID. GoldCoin, 0f, 0f, 100, Color.DarkGoldenrod, 1.4f);
+                    DustID. TerraBlade, 0f, 0f, 100, Color.Lime, 1.4f);
                 Main.dust[dust].noGravity = true;
                 Main.dust[dust].velocity *= 0.4f;
             }
@@ -44,11 +44,11 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
             if (Main.rand.NextBool(5))
             {
                 int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile. height,
-                    DustID.AmberBolt, 0f, 0f, 150, default, 1.0f);
+                    DustID.Dirt, 0f, 0f, 150, default, 1.0f);
                 Main.dust[dust].noGravity = true;
             }
 
-            Lighting.AddLight(Projectile.Center, 1.2f, 0.8f, 0.3f);
+            Lighting.AddLight(Projectile.Center, 0.5f, 1.2f, 0.3f);
         }
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
 {

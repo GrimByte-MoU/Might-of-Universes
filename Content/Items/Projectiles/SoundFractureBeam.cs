@@ -10,11 +10,12 @@ namespace MightofUniverses.Content.Items.Projectiles
         public override void SafeSetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.PulseBolt);
-            
+
             Projectile.penetrate = 11;
             Projectile.extraUpdates = 2;
-            Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 10;
+            Projectile.timeLeft = 300;
+            Projectile.scale = 2f;
+            Projectile.extraUpdates = 10;
         }
 
         private int bounceCount = 0;

@@ -1,4 +1,6 @@
 using Microsoft.Xna.Framework;
+using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using MightofUniverses.Content.Items.Projectiles.EnemyProjectiles;
 
@@ -10,5 +12,6 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
         protected override int SigilOrder => 2;
         protected override string SigilTexturePath => "MightofUniverses/Content/NPCs/Bosses/Aegon/AegonEvilSigil";
         protected override int ProjectileType => ModContent.ProjectileType<AegonEvilSigilBolt>();
+        protected override int TelegraphDustType => Main.rand.NextBool() ? DustID.Ichor : DustID.Shadowflame;
     }
 }

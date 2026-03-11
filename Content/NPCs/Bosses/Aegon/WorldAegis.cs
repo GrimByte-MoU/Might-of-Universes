@@ -18,7 +18,7 @@ using MightofUniverses.Content.NPCs.Bosses.Aegon;
 
 namespace MightofUniverses.Content.NPCs.Bosses.Aegon
 {
-    public class WorldAegis : ModNPC
+    public class WorldAegis : MoUNPC
     {
         private enum State
         {
@@ -61,7 +61,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             }
         }
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
             NPC.width = 160;
             NPC.height = 160;
@@ -99,7 +99,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             hasCleanedUp = false;
         }
 
-        public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        public override bool SafePreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             if (CurrentState == State.Phase2_FlewAway || CurrentState == State.Phase4_ScatterFragments)
             {
@@ -263,13 +263,15 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                 }
             }
 
-            if (NPC.life / (float)NPC.lifeMax <= 0.9f && AttackTimer % 30 == 0)
+        if (NPC.life / (float)NPC.lifeMax <= 0.9f && AttackTimer % 30 == 0)
             {
                 Vector2 direction = target.Center - NPC.Center;
-                if (direction != Vector2.Zero)
+
+                if (direction.Length() > 0)
                 {
                     direction.Normalize();
                     Vector2 velocity = direction * 6f;
+
                     if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
@@ -376,15 +378,22 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
         }
 
         // ==================== HELPER METHODS FOR PHASE 3 ====================
-        public void FireWorldAegisFireball()
+    public void FireWorldAegisFireball()
         {
             Player target = Main.player[NPC.target];
-            Vector2 velocity = (target.Center - NPC.Center).SafeNormalize(Vector2.UnitX) * 7f;
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            Vector2 direction = target.Center - NPC.Center;
+
+            if (direction.Length() > 0)
             {
-                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
-                    ModContent.ProjectileType<WorldAegisFireball>(),
-                    95, 0f);
+                direction.Normalize();
+                Vector2 velocity = direction * 7f;
+
+                if (Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
+                        ModContent.ProjectileType<WorldAegisFireball>(),
+                        95, 0f);
+                }
             }
         }
 
@@ -520,21 +529,51 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                 Main.dust[dust].noGravity = true;
             }
         }
+// ==================== PHASE 6: FLOAT IN PLACE (POST-PATIENCE) ====================
+private void Phase6FloatInPlace()
+{
+    if (aegonIndex == -1 || !Main.npc[aegonIndex].active)
+    {
+        float fallbackBobSpeed = 0.03f;
+        float fallbackBobHeight = 10f;
+        float fallbackBobOffset = (float)Math.Sin(AttackTimer * fallbackBobSpeed) * fallbackBobHeight;
 
-        // ==================== PHASE 6: FLOAT IN PLACE (POST-PATIENCE) ====================
-        private void Phase6FloatInPlace()
+        if (floatingPositionSet)
         {
-            float bobSpeed = 0.03f;
-            float bobHeight = 10f;
-            float bobOffset = (float)Math.Sin(AttackTimer * bobSpeed) * bobHeight;
-
-            if (floatingPositionSet)
-            {
-                NPC.Center = new Vector2(floatingPosition.X, floatingPosition.Y + bobOffset);
-                NPC.velocity = Vector2.Zero;
-                NPC.rotation = 0f;
-            }
+            NPC.Center = new Vector2(floatingPosition.X, floatingPosition.Y + fallbackBobOffset);
+            NPC.velocity = Vector2.Zero;
+            NPC.rotation = 0f;
         }
+        return;
+    }
+
+    NPC aegon = Main.npc[aegonIndex];
+    Player target = Main.player[aegon.target];
+    Vector2 directionToPlayer = (target.Center - aegon.Center).SafeNormalize(Vector2.UnitX);
+    float distanceInFront = 80f;
+
+    float hoverBobSpeed = 0.03f;
+    float hoverBobHeight = 10f;
+    float hoverBobOffset = (float)Math.Sin(AttackTimer * hoverBobSpeed) * hoverBobHeight;
+
+    Vector2 targetPosition = aegon.Center + (directionToPlayer * distanceInFront);
+    targetPosition.Y += hoverBobOffset;
+
+    Vector2 difference = targetPosition - NPC.Center;
+    float distance = difference.Length();
+
+    if (distance > 5f)
+    {
+        difference.Normalize();
+        NPC.velocity = difference * Math.Min(distance * 0.15f, 8f);
+    }
+    else
+    {
+        NPC.velocity *= 0.9f;
+    }
+
+    NPC.rotation = 0f;
+}
 
         // ==================== HELPER METHODS ====================
         private void FindAegon()

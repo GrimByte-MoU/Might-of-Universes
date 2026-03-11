@@ -18,7 +18,7 @@ namespace MightofUniverses. Content.Items.Projectiles
             Projectile.penetrate = 1;
             Projectile.timeLeft = 600;
             Projectile.light = 0.6f;
-            Projectile.extraUpdates = 2;
+            Projectile.extraUpdates = 5;
         }
 
         public override void AI()

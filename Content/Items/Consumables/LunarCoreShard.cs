@@ -23,18 +23,23 @@ namespace MightofUniverses.Content.Items.Consumables
             Item.UseSound = SoundID.Item4;
         }
 
+        public override bool CanUseItem(Player player)
+        {
+            return !player.GetModPlayer<LunarShardPlayer>().consumedLunarCoreShard;
+        }
+
         public override bool? UseItem(Player player)
         {
-            if (!player.GetModPlayer<LunarShardPlayer>().consumedLunarCoreShard)
+            player.GetModPlayer<LunarShardPlayer>().consumedLunarCoreShard = true;
+
+            if (Main.netMode == NetmodeID.MultiplayerClient)
             {
-                player.GetModPlayer<LunarShardPlayer>().consumedLunarCoreShard = true;
-                if (Main.netMode == NetmodeID.MultiplayerClient)
-                {
-                    NetMessage.SendData(MessageID.SyncPlayer, number: player.whoAmI);
-                }
-                return true;
+                NetMessage.SendData(MessageID.SyncPlayer, number: player.whoAmI);
             }
-            return false;
+
+            Main.NewText("Your accessory capacity has expanded!", 50, 255, 130);
+
+            return true;
         }
 
         public override void ModifyTooltips(List<TooltipLine> tooltips)

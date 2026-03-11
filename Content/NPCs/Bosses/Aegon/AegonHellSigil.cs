@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Terraria.ID;
 using Terraria.ModLoader;
 using MightofUniverses.Content.Items.Projectiles.EnemyProjectiles;
 
@@ -10,5 +11,6 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
         protected override int SigilOrder => 1;
         protected override string SigilTexturePath => "MightofUniverses/Content/NPCs/Bosses/Aegon/AegonHellSigil";
         protected override int ProjectileType => ModContent.ProjectileType<AegonHellSigilBolt>();
+        protected override int TelegraphDustType => DustID.Torch;
     }
 }

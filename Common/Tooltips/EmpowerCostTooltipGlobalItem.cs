@@ -57,6 +57,7 @@ namespace MightofUniverses.Common.Tooltips
                 ["IceAge"] = 225f,
                 ["Kasurikama"] = 60f,
                 ["CycloneKama"] = 200f,
+                ["Pompeii"] = 260f,
             };
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)

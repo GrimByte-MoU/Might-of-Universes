@@ -14,7 +14,7 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             Item.width = 32;
             Item.height = 32;
-            Item.damage = 130;
+            Item.damage = 115;
             Item.DamageType = DamageClass.Ranged;
             Item.useTime = 20;
             Item.useAnimation = 20;
@@ -38,7 +38,7 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             int projType = ModContent.ProjectileType<GaiasArrow>();
 
-            const int shots = 4;
+            const int shots = 3;
             const float spreadDegrees = 2f;
             for (int i = 0; i < shots; i++)
             {

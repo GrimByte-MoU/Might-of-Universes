@@ -13,12 +13,12 @@ namespace MightofUniverses. Content.Items.Weapons
     {
         public override void SetDefaults()
         {
-            Item.damage = 185;
+            Item.damage = 150;
             Item.DamageType = DamageClass.Melee;
             Item.width = 64;
             Item.height = 64;
-            Item.useTime = 10;
-            Item. useAnimation = 10;
+            Item.useTime = 15;
+            Item. useAnimation = 15;
             Item.useStyle = ItemUseStyleID. Swing;
             Item.knockBack = 6;
             Item.value = Item.sellPrice(gold: 5);
@@ -68,8 +68,8 @@ namespace MightofUniverses. Content.Items.Weapons
         }
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(ModContent. BuffType<SheerCold>(), 180);
-            player. AddBuff(ModContent.BuffType<GlacialArmor>(), 180);
+            target.AddBuff(ModContent.BuffType<SheerCold>(), 180);
+            player.AddBuff(ModContent.BuffType<GlacialArmor>(), 180);
             player.AddBuff(BuffID.Rage, 180);
             player.AddBuff(BuffID.Wrath, 180);
             for (int i = 0; i < 20; i++)

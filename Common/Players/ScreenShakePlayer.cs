@@ -1,26 +1,26 @@
-using Terraria;
 using Terraria.ModLoader;
+using Microsoft.Xna.Framework;
 
 namespace MightofUniverses.Common.Players
 {
     public class ScreenShakePlayer : ModPlayer
     {
-        private int shakeTimer = 0;
-        private float shakeIntensity = 0f;
+        public float shakeIntensity = 0f;
 
-        public void ScreenShake(float intensity, int duration)
+        public void AddShake(float intensity)
         {
-            shakeIntensity = intensity;
-            shakeTimer = duration;
+            shakeIntensity += intensity;
         }
 
         public override void ModifyScreenPosition()
         {
-            if (shakeTimer > 0)
+            if (shakeIntensity > 0f)
             {
                 Main.screenPosition += Main.rand.NextVector2Circular(shakeIntensity, shakeIntensity);
-                shakeTimer--;
-                shakeIntensity *= 0.95f;
+                shakeIntensity *= 0.9f;
+
+                if (shakeIntensity < 0.1f)
+                    shakeIntensity = 0f;
             }
         }
     }
