@@ -20,7 +20,7 @@ namespace MightofUniverses.Content.Items.Accessories
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.maxMinions += 2;
+            player.maxMinions += 1;
             player.GetModPlayer<PermafrostNecklacePlayer>().hasPermafrostNecklace = true;
         }
 

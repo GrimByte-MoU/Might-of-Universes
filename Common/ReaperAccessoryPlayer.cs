@@ -10,65 +10,47 @@ namespace MightofUniverses.Common.Players
 {
     public class ReaperAccessoryPlayer : ModPlayer
     {
-        // =========================
-        // Soul Cost Modification
-        // =========================
         public float SoulCostMultiplier;
-        public int   SoulCostFlatReduction;
+        public int SoulCostFlatReduction;
         public const float MinEffectiveCostMultiplier = 0.10f;
         public float EmpowerCostMultiplier;
 
         public float EmpowerDurationMultiplier;
-        public int   EmpowerExtraDurationTicks;
+        public int EmpowerExtraDurationTicks;
 
-        // =========================
-        // Refund Mechanics
-        // =========================
         public float RefundChance;
         public float RefundFraction;
-        public int   GuaranteedSoulRefund;
-        public bool  RefundAtLeastOne;
+        public int GuaranteedSoulRefund;
+        public bool RefundAtLeastOne;
 
-        // =========================
-        // Spend Tracking
-        // =========================
         public int LastSoulSpendAmount;
         public int LargestSoulSpendWindow;
         public int LargestSoulSpendTimer;
         public int LargestWindowDuration = 60 * 10;
         public bool UseLargestSpendWindowForFerryman;
 
-        // =========================
-        // Ferryman’s Token (cheat-death)
-        // =========================
         public bool HasFerrymansToken;
-        public int  FerrymanCooldownTicks;
+        public int FerrymanCooldownTicks;
         public const int FerrymanBaseCooldown = 60 * 60;
         public float FerrymanCooldownMultiplier;
-        public int   FerrymanCooldownFlatReduction;
+        public int FerrymanCooldownFlatReduction;
         public float FerrymanHealScale;
-        public int   FerrymanMaxHeal;
-        public int   FerrymanMinHealFloor = 1;
-        public bool  FerrymanSetLifeToBrink = true;
+        public int FerrymanMaxHeal;
+        public int FerrymanMinHealFloor = 1;
+        public bool FerrymanSetLifeToBrink = true;
 
-        public bool  ClearOnlyDebuffs = true;
+        public bool ClearOnlyDebuffs = true;
 
-        // =========================
-        // Crit / Misc Flags
-        // =========================
         public bool HasUndertakersBrooch;
-        public int  ReaperCritCounter;
-        public int  CritsPerReward = 5;
-        public int  CritRewardSouls = 5;
+        public int ReaperCritCounter;
+        public int CritsPerReward = 5;
+        public int CritRewardSouls = 5;
 
         public bool HasGravediggersRing;
         public bool HasCharmOfDepths;
         public bool HasMonkeysPaw;
         public bool HasSoulSiphoningArtifact;
 
-        // =========================
-        // Accessory flags (soul utility line)
-        // =========================
         public bool accTatteredCharm;
         public bool accProtectionCharm;
         public bool accSpiritString;
@@ -78,11 +60,13 @@ namespace MightofUniverses.Common.Players
         public bool accShackledArtifact;
         public bool accSoulEnslavementArtifact;
         public bool accSpectercageArtifact;
+        public bool accPrismaticSoulPrison;
+        public bool accElementalSoulDetainer;
         public bool accSkeletonKnickknack;
         public bool accSpiritTalisman;
         public bool accVisceraNovelty;
 
-        public int   flatMaxSoulsBonus;
+        public int flatMaxSoulsBonus;
         public float maxSoulsFromHPPercent;
         private float reportedPassiveSoulGenPS;
         private float accessoryPassiveSoulGenPS;
@@ -95,11 +79,11 @@ namespace MightofUniverses.Common.Players
         private int visceraPulseTimer;
         private int consumePulseICD;
 
-public bool accLoomOfFate = false;
-public bool loomOfFateActive = false;
-public bool loomOfFateOnCooldown = false;
-public int loomOfFateDuration = 0;
-public int loomOfFateCooldown = 0;
+        public bool accLoomOfFate = false;
+        public bool loomOfFateActive = false;
+        public bool loomOfFateOnCooldown = false;
+        public int loomOfFateDuration = 0;
+        public int loomOfFateCooldown = 0;
 
         public override void ResetEffects()
         {
@@ -138,16 +122,20 @@ public int loomOfFateCooldown = 0;
             accShackledArtifact = false;
             accSoulEnslavementArtifact = false;
             accSpectercageArtifact = false;
+            accPrismaticSoulPrison = false;
+            accElementalSoulDetainer = false;
             accSkeletonKnickknack = false;
             accSpiritTalisman = false;
             accVisceraNovelty = false;
             accLoomOfFate = false;
+
             flatMaxSoulsBonus = 0;
             maxSoulsFromHPPercent = 0f;
             passiveSoulToHpScalar = 0f;
             reportedPassiveSoulGenPS = 0f;
             accessoryPassiveSoulGenPS = 0f;
         }
+
         public override void PostUpdateEquips()
         {
             var reaper = Player.GetModPlayer<ReaperPlayer>();
@@ -224,13 +212,57 @@ public int loomOfFateCooldown = 0;
             }
         }
 
+        public void TriggerOnKillEffects(NPC target)
+{
+    if (accPrismaticSoulPrison)
+    {
+        SpawnChainedSoul();
+    }
+    else if (accElementalSoulDetainer)
+    {
+        SpawnBoundSpirit();
+    }
+}
+
+        private void SpawnChainedSoul()
+        {
+            if (Main.myPlayer != Player.whoAmI)
+                return;
+
+            Projectile.NewProjectile(
+                Player.GetSource_FromThis(),
+                Player.Center + new Vector2(Main.rand.Next(-50, 50), Main.rand.Next(-50, 50)),
+                Vector2.Zero,
+                ModContent.ProjectileType<ChainedSoulProj>(),
+                0,
+                0f,
+                Player.whoAmI
+            );
+        }
+
+        private void SpawnBoundSpirit()
+        {
+            if (Main.myPlayer != Player.whoAmI)
+                return;
+
+            Projectile.NewProjectile(
+                Player.GetSource_FromThis(),
+                Player.Center + new Vector2(Main.rand.Next(-50, 50), Main.rand.Next(-50, 50)),
+                Vector2.Zero,
+                ModContent.ProjectileType<BoundSpiritProj>(),
+                0,
+                0f,
+                Player.whoAmI
+            );
+        }
+
         public void RecordSoulSpend(int finalSpent)
         {
             LastSoulSpendAmount = finalSpent;
             if (finalSpent > LargestSoulSpendWindow)
             {
                 LargestSoulSpendWindow = finalSpent;
-                LargestSoulSpendTimer  = LargestWindowDuration;
+                LargestSoulSpendTimer = LargestWindowDuration;
             }
         }
 
@@ -254,9 +286,6 @@ public int loomOfFateCooldown = 0;
             return Math.Max(60, baseTicks);
         }
 
-        // =========================
-        // NEW CORE: Consume all souls
-        // =========================
         private int ComputeHealFromConsumed(int soulsConsumed)
         {
             double raw = soulsConsumed * FerrymanHealScale;
@@ -358,10 +387,6 @@ public int loomOfFateCooldown = 0;
                 : "Ferryman ready";
         }
 
-        // =========================
-        // Accessory integration helpers
-        // =========================
-
         public static void OnSoulsConsumed(Player player, int amount)
         {
             var p = player.GetModPlayer<ReaperAccessoryPlayer>();
@@ -434,7 +459,7 @@ public int loomOfFateCooldown = 0;
         {
             accessoryPassiveSoulGenPS += soulsPerSecond;
         }
-        
+
         private void DoPulseAOE(Player player, int radiusTiles, int damage, bool applyIchor, bool applySpineless, bool applyEnemyBleeding, int durationSeconds)
         {
             float radius = radiusTiles * 16f;

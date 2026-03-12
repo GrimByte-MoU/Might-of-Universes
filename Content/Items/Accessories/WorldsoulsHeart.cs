@@ -2,16 +2,20 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using MightofUniverses.Content.Items.Buffs;
+using MightofUniverses.Content.Items.Materials;
+using MightofUniverses.Content.Rarities;
+using MightofUniverses.Common;
 
 namespace MightofUniverses.Content.Items.Accessories
 {
-    public class TurtlesHeart : ModItem
-    {      public override void SetDefaults()
+    public class WorldsoulsHeart : ModItem
+    {
+        public override void SetDefaults()
         {
             Item.width = 24;
             Item.height = 24;
-            Item.value = Item.sellPrice(gold: 1);
-            Item.rare = ItemRarityID.Lime;
+            Item.value = Item.sellPrice(platinum: 1);
+            Item.rare = ModContent.RarityType<TerraiumRarity>();
             Item.accessory = true;
         }
 
@@ -21,17 +25,16 @@ namespace MightofUniverses.Content.Items.Accessories
             
             if (modPlayer.justConsumedSouls)
             {
-                player.AddBuff(ModContent.BuffType<TurtlesVitality>(), 300); 
+                player.AddBuff(ModContent.BuffType<WorldsoulsImmortality>(), 300);
             }
         }
 
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.LifeFruit, 3)
-                .AddIngredient(ItemID.TurtleShell, 3)
-                .AddIngredient(ModContent.ItemType<JungleHeart>(), 1)
-                .AddTile(TileID.WorkBenches)
+                .AddIngredient(ModContent.ItemType<TurtlesHeart>(), 1)
+                .AddIngredient(ModContent.ItemType<TerraiumBar>(), 5)
+                .AddTile(TileID.LunarCraftingStation)
                 .Register();
         }
     }

@@ -95,7 +95,7 @@ Buffs: {
 
 	JungleVitality: {
 		DisplayName: Jungle Vitality
-		Description: The jungle increases your vitality.
+		Description: +100 max life
 	}
 
 	TurtlesVitality: {
@@ -103,7 +103,7 @@ Buffs: {
 		Description:
 			'''
 			"You see my heart won't die though I really tried"
-			The turtle's vitality is within you.
+			+150 max life and +10 defense
 			'''
 	}
 
@@ -458,6 +458,11 @@ Buffs: {
 	NaturesToxin: {
 		DisplayName: Natures Toxin
 		Description: A deadly toxin found in nature sickens you!
+	}
+
+	WorldsoulsImmortality: {
+		DisplayName: Worldsoul's Immortality
+		Description: +250 max life and +15 defense
 	}
 }
 
@@ -852,6 +857,8 @@ Projectiles: {
 	CyberFlower.DisplayName: Cyber Flower
 	CyberLeaf.DisplayName: Cyber Leaf
 	SharpLeaf.DisplayName: Sharp Leaf
+	BoundSpiritProj.DisplayName: Bound Spirit Proj
+	ChainedSoulProj.DisplayName: Chained Soul Proj
 }
 
 Keybinds: {
@@ -1074,7 +1081,7 @@ Items: {
 		Tooltip:
 			'''
 			Who knew space tasted this good!
-			Increases your max minions by 3 and summon damage by 15%
+			Increases your max minions by 2 and summon damage by 15%
 			Summon damage also occasionally lifesteals
 			Reduces all other class damage by 50%
 			'''
@@ -2506,7 +2513,7 @@ Items: {
 
 	JungleHeart: {
 		DisplayName: Jungle Heart
-		Tooltip: Whenever you consume souls, you get Jungles Vitality for 5 seconds, giving you +100 max health
+		Tooltip: Whenever you consume souls, you get Jungles Vitality for 5 seconds
 	}
 
 	LivingStorm: {
@@ -2576,8 +2583,8 @@ Items: {
 	}
 
 	TurtlesHeart: {
-		DisplayName: Turtle's Heart
-		Tooltip: Whenever you consume souls you get Turtles Vitality for 5 seconds, giving you +150 max health and +10 defense
+		DisplayName: Turtles Heart
+		Tooltip: Whenever you consume souls you get Turtles Vitality for 5 seconds
 	}
 
 	VampiricTotem: {
@@ -5145,7 +5152,7 @@ Items: {
 		DisplayName: Subzero Necklace
 		Tooltip:
 			'''
-			+2 max minions
+			+1 max minions
 			All minions and whips inflict Sheer Cold for 3 seconds and ignore 20 defense
 			'''
 	}
@@ -5209,6 +5216,35 @@ Items: {
 			Replaces all bullets fired with a powerful leaf
 			The leaf inherits damage from the bullet consumed
 			'''
+	}
+
+	ElementalSoulDetainer: {
+		DisplayName: Elemental Soul Detainer
+		Tooltip:
+			'''
+			"It thrums with "
+			+18% Reaper damage
+			Gain max souls equal to 20% of your max life 
+			When killing an enemy, 1 specter orb will spawn and fly towards the player
+			Each soul orb heals the player for 15 health, gives the player 9 souls and grants the Caged Soul buff for 5 seconds
+			'''
+	}
+
+	PrismaticSoulPrison: {
+		DisplayName: Prismatic Soul Prison
+		Tooltip:
+			'''
+			"What a pretty prison"
+			+15% Reaper damage
+			Gain max souls equal to 15% of your max life 
+			When killing an enemy, 1 specter orb will spawn and fly towards the player
+			Each soul orb heals the player for 12 health, gives the player 7 souls and grants the Caged Soul buff for 4 seconds
+			'''
+	}
+
+	WorldsoulsHeart: {
+		DisplayName: Worldsouls Heart
+		Tooltip: Whenever you consume souls you get Worldsouls Immortality for 5 seconds
 	}
 }
 

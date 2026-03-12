@@ -14,7 +14,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.penetrate = 2;
             Projectile.timeLeft = 600;
             Projectile.light = 0.5f;
-            Projectile.extraUpdates = 2;
+            Projectile.extraUpdates = 10;
             AIType = ProjectileID.Bullet;
         }
 

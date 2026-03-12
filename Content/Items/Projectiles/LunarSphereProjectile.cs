@@ -14,13 +14,15 @@ namespace MightofUniverses.Content.Items.Projectiles
     private const float ORBIT_RADIUS = 125f;
     private const float ROTATION_SPEED = 0.2f;
 
-    public override void SafeSetDefaults()
-    {
-        Projectile.friendly = true;
-        Projectile.penetrate = -1;
-        Projectile.tileCollide = false;
-        Projectile.DamageType = ModContent.GetInstance<PacifistDamageClass>();
-        Projectile.damage = 80;
+        public override void SafeSetDefaults()
+        {
+            Projectile.friendly = true;
+            Projectile.penetrate = -1;
+            Projectile.tileCollide = false;
+            Projectile.DamageType = ModContent.GetInstance<PacifistDamageClass>();
+            Projectile.damage = 80;
+            Projectile.extraUpdates = 5;
+            Projectile.scale = 0.75f;
     }
 public override bool? CanHitNPC(NPC target) => true;
     public override void AI()
