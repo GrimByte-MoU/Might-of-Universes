@@ -13,7 +13,7 @@ using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class SweetHarvester : ModItem, IHasSoulCost
+    public class SweetHarvester : ModItem, IHasSoulCost, IScytheWeapon
     {
         public float BaseSoulCost => 85f;
 

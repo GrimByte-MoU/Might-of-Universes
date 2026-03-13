@@ -14,9 +14,9 @@ using MightofUniverses.Content.Rarities;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class IceAge : ModItem, IHasSoulCost
+    public class IceAge : ModItem, IHasSoulCost, IScytheWeapon
     {
-        public float BaseSoulCost => 225f;
+        public float BaseSoulCost => 275f;
 
         public override void SetDefaults()
         {

@@ -13,7 +13,7 @@ using MightofUniverses.Content.Rarities;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class CycloneKama : ModItem, IHasSoulCost
+    public class CycloneKama : ModItem, IHasSoulCost, IScytheWeapon
     {
         public float BaseSoulCost => 200f;
 

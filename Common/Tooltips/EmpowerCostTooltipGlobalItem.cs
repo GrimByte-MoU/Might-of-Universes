@@ -54,10 +54,10 @@ namespace MightofUniverses.Common.Tooltips
                 ["CelestialReaper"] = 125f,
                 ["NewMoon"] = 150f,
                 ["ReapersEcho"] = 200f,
-                ["IceAge"] = 225f,
+                ["IceAge"] = 275f,
                 ["Kasurikama"] = 60f,
                 ["CycloneKama"] = 200f,
-                ["Pompeii"] = 260f,
+                ["Pompeii"] = 300f,
             };
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)

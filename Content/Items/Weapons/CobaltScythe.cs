@@ -2,7 +2,7 @@ using MightofUniverses.Content.Items.Projectiles;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class CobaltScythe : ModItem, IHasSoulCost
+    public class CobaltScythe : ModItem, IHasSoulCost, IScytheWeapon
     {
         public float BaseSoulCost => 50f;
 

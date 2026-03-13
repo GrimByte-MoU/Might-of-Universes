@@ -11,7 +11,7 @@ using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class WardensHook : ModItem, IHasSoulCost
+    public class WardensHook : ModItem, IHasSoulCost, IScytheWeapon
     {
         public float BaseSoulCost => 30f;
 

@@ -5246,6 +5246,28 @@ Items: {
 		DisplayName: Worldsouls Heart
 		Tooltip: Whenever you consume souls you get Worldsouls Immortality for 5 seconds
 	}
+
+	CosmopolitanInsignia: {
+		DisplayName: Cosmopolitan Insignia
+		Tooltip:
+			'''
+			+10 defense, increased life regen, +50 max health and mana
+			+15% to all damage, +10% damage reduction, +35% movement speed
+			+35% flight time, +1 minion slot and +50% pacifist damage
+			'''
+	}
+
+	Worldtreaders: {
+		DisplayName: Worldtreaders
+		Tooltip:
+			'''
+			Allows flight and slow fall, superfast running and extra obility on ice
+			+20% movement speed
+			Provides the ability to walk on water, honey and lava
+			Grants immunity to fire blocks and 15 seconds of immunity to lava
+			Reduces damage from touching lava
+			'''
+	}
 }
 
 Prefixes: {
@@ -5258,6 +5280,14 @@ Prefixes: {
 	RobustPrefix.DisplayName: Robust
 	VitalPrefix.DisplayName: Vital
 	HardyPrefix.DisplayName: Hardy
+	CursedPrefix.DisplayName: Cursed
+	DeathRulingPrefix.DisplayName: Death Ruling
+	GrimPrefix.DisplayName: Grim
+	LongshadowedPrefix.DisplayName: Longshadowed
+	RavenousPrefix.DisplayName: Ravenous
+	ReapingPrefix.DisplayName: Reaping
+	SatiatedPrefix.DisplayName: Satiated
+	SpectralPrefix.DisplayName: Spectral
 }
 
 NPCs: {

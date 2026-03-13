@@ -12,7 +12,7 @@ using Terraria.DataStructures;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class Kasurikama : ModItem, IHasSoulCost
+    public class Kasurikama : ModItem, IHasSoulCost, IScytheWeapon
     {
         public float BaseSoulCost => 60f;
 

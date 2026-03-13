@@ -10,9 +10,9 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class Pompeii : ModItem, IHasSoulCost
+    public class Pompeii : ModItem, IHasSoulCost, IScytheWeapon
     {
-        public float BaseSoulCost => 260f;
+        public float BaseSoulCost => 300f;
 
         public override void SetDefaults()
         {

@@ -11,6 +11,7 @@ namespace MightofUniverses.Common.Util
         public static int ComputeEffectiveSoulCostInt(Player player, float baseCost)
         {
             var acc = player.GetModPlayer<ReaperAccessoryPlayer>();
+            
             float cost = baseCost;
 
             float multi = Math.Max(ReaperAccessoryPlayer.MinEffectiveCostMultiplier, acc.SoulCostMultiplier);

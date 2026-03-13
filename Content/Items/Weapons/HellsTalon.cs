@@ -11,7 +11,7 @@ using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class HellsTalon : ModItem, IHasSoulCost
+    public class HellsTalon : ModItem, IHasSoulCost, IScytheWeapon
     {
         public float BaseSoulCost => 45f;
 

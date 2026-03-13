@@ -8,7 +8,7 @@ using MightofUniverses.Content.Items.Projectiles;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class PalladiumScythe : ModItem, IHasSoulCost
+    public class PalladiumScythe : ModItem, IHasSoulCost, IScytheWeapon
     {
         public float BaseSoulCost => 75f;
 

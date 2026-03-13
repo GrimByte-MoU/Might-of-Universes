@@ -10,7 +10,7 @@ namespace MightofUniverses.Content.Items.Weapons
     public class Pathmaker : ModItem
     {
         private const int MAX_USE_TIME = 30;
-        private const int MIN_USE_TIME = 15;
+        private const int MIN_USE_TIME = 12;
         private const int RAMP_INTERVAL = 60;
         private const int RAMP_AMOUNT = 3;
 

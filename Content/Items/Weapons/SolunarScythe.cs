@@ -12,7 +12,7 @@ using MightofUniverses.Content.Items.Materials;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class SolunarScythe : ModItem, IHasSoulCost
+    public class SolunarScythe : ModItem, IHasSoulCost, IScytheWeapon
     {
         public float BaseSoulCost => 55f;
 

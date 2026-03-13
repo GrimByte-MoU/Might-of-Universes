@@ -14,7 +14,7 @@ using MightofUniverses.Content.Rarities;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class BiomeCleanser : ModItem, IHasSoulCost
+    public class BiomeCleanser : ModItem, IHasSoulCost, IScytheWeapon
     {
         public float BaseSoulCost => 200f;
 

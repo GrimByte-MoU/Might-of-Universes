@@ -14,9 +14,9 @@ using MightofUniverses.Common.Util;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class Ketsumatsu : ModItem, IHasSoulCost
+    public class Ketsumatsu : ModItem, IHasSoulCost, IScytheWeapon
     {
-        public float BaseSoulCost => 200f;
+        public float BaseSoulCost => 230f;
 
         public override void SetDefaults()
         {

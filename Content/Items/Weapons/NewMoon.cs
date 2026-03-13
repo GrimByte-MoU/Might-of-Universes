@@ -13,7 +13,7 @@ using MightofUniverses.Content.Items.Buffs;
 
 namespace MightofUniverses.Content.Items.Weapons
 {
-    public class NewMoon : ModItem, IHasSoulCost
+    public class NewMoon : ModItem, IHasSoulCost, IScytheWeapon
     {
         public float BaseSoulCost => 150f;
 
