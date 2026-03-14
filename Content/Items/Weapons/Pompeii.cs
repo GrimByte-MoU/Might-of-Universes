@@ -33,41 +33,39 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.maxStack = 1;
         }
 
-        public override void HoldItem(Player player)
+       public override void HoldItem(Player player)
+{
+    var reaper = player.GetModPlayer<ReaperPlayer>();
+
+    if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
+    {        
+        if (reaper.ConsumeSoulEnergy(BaseSoulCost))
         {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
-
-            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
+            Vector2 meteorSpawn = player.Center + new Vector2(0, -800f);
+            
+            NPC target = FindNearestEnemy(player);
+            if (target != null)
             {
-                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
+                Vector2 meteorVelocity = (target.Center - meteorSpawn).SafeNormalize(Vector2.UnitY) * 20f;
                 
-                if (reaper.ConsumeSoulEnergy(effectiveCost))
-                {
-                    Vector2 meteorSpawn = player.Center + new Vector2(0, -800f);
-                    
-                    NPC target = FindNearestEnemy(player);
-                    if (target != null)
-                    {
-                        Vector2 meteorVelocity = (target.Center - meteorSpawn).SafeNormalize(Vector2.UnitY) * 20f;
-                        
-                        IEntitySource src = player.GetSource_ItemUse(Item);
-                        int damage = player.GetWeaponDamage(Item);
-                        float kb = player.GetWeaponKnockback(Item);
+                IEntitySource src = player.GetSource_ItemUse(Item);
+                int damage = player.GetWeaponDamage(Item);
+                float kb = player.GetWeaponKnockback(Item);
 
-                        Projectile.NewProjectile(
-                            src,
-                            meteorSpawn,
-                            meteorVelocity,
-                            ModContent.ProjectileType<PompeiiMeteor>(),
-                            (int)(damage * 3f),
-                            kb * 2f,
-                            player.whoAmI
-                        );
-                        SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact, player.Center);
-                    }
-                }
+                Projectile.NewProjectile(
+                    src,
+                    meteorSpawn,
+                    meteorVelocity,
+                    ModContent.ProjectileType<PompeiiMeteor>(),
+                    (int)(damage * 3f),
+                    kb * 2f,
+                    player.whoAmI
+                );
+                SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact, player.Center);
             }
         }
+    }
+}
 
         private NPC FindNearestEnemy(Player player)
         {
@@ -94,7 +92,7 @@ namespace MightofUniverses.Content.Items.Weapons
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(9f, target.Center);
+            reaper.AddSoulEnergy(6f, target.Center);
             target.AddBuff(ModContent.BuffType<CoreHeat>(), 120);
         }
 

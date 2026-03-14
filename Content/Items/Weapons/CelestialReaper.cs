@@ -14,7 +14,7 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class CelestialReaper : ModItem, IHasSoulCost, IScytheWeapon
     {
-        public float BaseSoulCost => 125f;
+        public float BaseSoulCost => 150f;
 
         public override void SetDefaults()
         {
@@ -42,8 +42,7 @@ namespace MightofUniverses.Content.Items.Weapons
             var reaper = player.GetModPlayer<ReaperPlayer>();
             if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
             {
-                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
-                if (reaper.ConsumeSoulEnergy(effectiveCost))
+if (reaper.ConsumeSoulEnergy(BaseSoulCost))
                 {
                     Vector2 from = player.MountedCenter;
                     IEntitySource src = player.GetSource_ItemUse(Item);

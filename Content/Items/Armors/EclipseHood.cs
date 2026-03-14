@@ -39,7 +39,7 @@ namespace MightofUniverses.Content.Items.Armors
             var acc = player.GetModPlayer<ReaperAccessoryPlayer>();
             if (acc.SoulCostMultiplier == 0f)
                 acc.SoulCostMultiplier = 1f;
-            acc.SoulCostMultiplier *= 0.9f;
+            acc.SoulCostMultiplier = 0.9f;
         }
 
         public override bool IsArmorSet(Item head, Item body, Item legs)

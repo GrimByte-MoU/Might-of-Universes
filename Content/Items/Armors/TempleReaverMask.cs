@@ -27,7 +27,7 @@ namespace MightofUniverses.Content.Items.Armors
             player.statLifeMax2 += 15;
             player.endurance += 0.04f;
             
-            player.GetModPlayer<ReaperAccessoryPlayer>().SoulCostMultiplier *= 0.90f;
+            player.GetModPlayer<ReaperAccessoryPlayer>().SoulCostMultiplier = 0.90f;
         }
 
         public override bool IsArmorSet(Item head, Item body, Item legs)

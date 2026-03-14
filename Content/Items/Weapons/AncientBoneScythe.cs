@@ -53,8 +53,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
             if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
             {
-                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
-                if (reaper.ConsumeSoulEnergy(effectiveCost))
+if (reaper.ConsumeSoulEnergy(BaseSoulCost))
                 {
                     SoundEngine.PlaySound(SoundID.Item62 with { Pitch = -0.15f }, player.Center);
                     DoGrayPulse(player);

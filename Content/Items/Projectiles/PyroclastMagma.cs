@@ -24,7 +24,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.alpha = 0;
-            Projectile.usesLocalNPCImmunity = true;
+            Projectile.usesLocalNPCImmunity = false;
         }
 
         public override void AI()

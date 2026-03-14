@@ -16,7 +16,7 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class Ketsumatsu : ModItem, IHasSoulCost, IScytheWeapon
     {
-        public float BaseSoulCost => 230f;
+        public float BaseSoulCost => 275f;
 
         public override void SetDefaults()
         {
@@ -38,33 +38,33 @@ namespace MightofUniverses.Content.Items.Weapons
         }
 
         public override void HoldItem(Player player)
+{
+    var reaper = player.GetModPlayer<ReaperPlayer>();
+    if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed && reaper.ConsumeSoulEnergy(BaseSoulCost))
+    {
+        IEntitySource src = player.GetSource_ItemUse(Item);
+        int damage = player.GetWeaponDamage(Item);
+        float kb = player.GetWeaponKnockback(Item);
+
+        Vector2 cursorPos = Main.MouseWorld;
+        Projectile.NewProjectile(
+            src,
+            cursorPos,
+            Vector2.Zero,
+            ModContent.ProjectileType<KetsumatsuBloom>(),
+            (int)(damage * 4f),
+            kb,
+            player.whoAmI
+        );
+
+        for (int i = 0; i < 50; i++)
         {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
-            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed && reaper.ConsumeSoulEnergy(SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost)))
-            {
-                IEntitySource src = player.GetSource_ItemUse(Item);
-                int damage = player.GetWeaponDamage(Item);
-                float kb = player.GetWeaponKnockback(Item);
-
-                Vector2 cursorPos = Main.MouseWorld;
-                Projectile.NewProjectile(
-                    src,
-                    cursorPos,
-                    Vector2.Zero,
-                    ModContent.ProjectileType<KetsumatsuBloom>(),
-                    (int)(damage * 4f),
-                    kb,
-                    player.whoAmI
-                );
-
-                for (int i = 0; i < 50; i++)
-                {
-                    float t = i / 50f;
-                    Vector2 dustPos = Vector2.Lerp(player.Center, cursorPos, t);
-                    Dust.NewDustPerfect(dustPos, DustID.PinkCrystalShard, Vector2.Zero, 150, Color.LightPink, 1.2f).noGravity = true;
-                }
-            }
+            float t = i / 50f;
+            Vector2 dustPos = Vector2.Lerp(player.Center, cursorPos, t);
+            Dust.NewDustPerfect(dustPos, DustID.PinkCrystalShard, Vector2.Zero, 150, Color.LightPink, 1.2f).noGravity = true;
         }
+    }
+}
 
         public override void AddRecipes()
         {
@@ -99,7 +99,7 @@ namespace MightofUniverses.Content.Items.Weapons
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(10f, target.Center);
+            reaper.AddSoulEnergy(6f, target.Center);
         }
     }
 }

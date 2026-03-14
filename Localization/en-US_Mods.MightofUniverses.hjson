@@ -859,6 +859,7 @@ Projectiles: {
 	SharpLeaf.DisplayName: Sharp Leaf
 	BoundSpiritProj.DisplayName: Bound Spirit Proj
 	ChainedSoulProj.DisplayName: Chained Soul Proj
+	TerraiumSpike.DisplayName: Terraium Spike
 }
 
 Keybinds: {
@@ -3427,8 +3428,8 @@ Items: {
 			'''
 			"The sakura's last bloom falls, a crimson offering in the soil,
 			where shadows gather what light once held."
-			Gathers 10 souls per hit and fires out one or two petals at random
-			Each petal gathers 5 souls on hit
+			Gathers 5 souls per hit and fires out one or two petals at random
+			Each petal gathers 4 souls on hit
 			Consume {0} souls to spawn a Sakura Bloom on your cursor which damage an enemy for 400% damage
 			When making contact with an enemy, the bloom will explode into a radial burst of 24 Sakura Petals
 			The Sakura Petals deal 66% damage of the bloom and don't pierce
@@ -3451,9 +3452,9 @@ Items: {
 		DisplayName: Terraium Longsword
 		Tooltip:
 			'''
-			"It's like a shard of the world and it's sky!"
-			Whenever the player strikes an enemy with the blade, two bolts of lightning will strike the enemy
-			Each bolt of lightning will do 75% damage
+			Whenever the player strikes an enemy with the blade, three Terraium Spikes will strike the enemy
+			Each spike will do 60% damage
+			The sword inflicts Terra's Rend for 3 seconds and then spikes inflict it for 1 second
 			'''
 	}
 
@@ -4876,11 +4877,11 @@ Items: {
 		Tooltip:
 			'''
 			Hold to spin the scythe defensively around yourself, leaving a trail of glowing green streaks.
-			      While spinning, the scythe deals 150% damage, grants 10 souls per strike, and inflicts Terra's Rend for 4 seconds.
+			      While spinning, the scythe deals 150% damage, grants 5 souls per strike, and inflicts Terra's Rend for 4 seconds.
 			      Fires Worldsoul Crystals toward the cursor four times per second while spinning
-				  The crystal pierces 3 enemies, grants 7 souls, and inflicts Terra's Rend for 3 seconds.
+				  The crystal pierces 3 enemies, grants 5 souls, and inflicts Terra's Rend for 3 seconds.
 			      Consume {0} souls to unleash a radial burst of 16 Biome Cleanser spears that spin in place before homing into nearby enemies
-				  The spears deal 350% damage each and inflict Terra's Rend and Bleeding for 5 seconds.
+				  The spears deal 250% damage each and inflict Terra's Rend and Bleeding for 5 seconds.
 			'''
 	}
 
@@ -4949,8 +4950,8 @@ Items: {
 		Tooltip:
 			'''
 			Replaces all rockets with Acient Spheres
-			Ancient Spheres inflict Terra's Rend for 3 seconds and will explode in a 15 tile radius upon expiring
-			The explosion will deal 200% damage and inflict Terra's Rend for 4 seconds
+			Ancient Spheres inflict Terra's Rend for 3 seconds and will explode in a huge radius
+			The explosion will deal 50% damage and inflict Terra's Rend for 1 second
 			'''
 	}
 
@@ -5095,9 +5096,9 @@ Items: {
 		DisplayName: Ice Age
 		Tooltip:
 			'''
-			Fires a fragment of ice that gathers 6 souls, inflicts Sheer Cold for 2 seconds and shatters on impact into piercing shards
+			Fires a fragment of ice that gathers 5 souls, inflicts Sheer Cold for 2 seconds and shatters on impact into piercing shards
 			The shards gather 1 soul each and inflict Sheer Cold for 1 second
-			Ice Age itself inflicts Sheer Cold for 3 seconds and gathers 6 souls
+			Ice Age itself inflicts Sheer Cold for 3 seconds and gathers 5 souls
 			Consume {0} souls to conjure Blizzard Balls that orbit the player for a short time
 			After 2 seconds, the balls will fire in rapid succession at the cursor
 			'''
@@ -5142,9 +5143,10 @@ Items: {
 		DisplayName: Wind Quiver
 		Tooltip:
 			'''
-			Arrows inflict Delta Shock depending on how long the arrow has traveled (capped at 3 seconds)
-			Shows where arrows will hit
-			+5% arrow damage per second of flight (capped at +50% damage)
+			+20% ranged damage and greatly increased arrow speed
+			25% chance to not consume arrows
+			Ranged attacks inflict Delta Shock for 3 seconds
+			Enemies are less likely to target you
 			'''
 	}
 
@@ -5161,11 +5163,11 @@ Items: {
 		DisplayName: Pompeii
 		Tooltip:
 			'''
-			Fires a fireball that pierces once, gathers 9 souls and inflicts Core Heat for 2 seconds
-			The scythe itself also gathers 9 souls on hit and inflicts Core Heat for 2 seconds
+			Fires a fireball that pierces once, gathers 6 souls and inflicts Core Heat for 2 seconds
+			The scythe itself also gathers 5 souls on hit and inflicts Core Heat for 2 seconds
 			Consume {0} souls to call down a meteor of molten ash from the sky to ram into enemies
 			The meteor does 300% damage, inflicts Core Heat for 4 seconds
-			The meteor fades away after 5 seconds
+			The meteor fades away after 3 seconds
 			'''
 	}
 
@@ -5267,6 +5269,50 @@ Items: {
 			Grants immunity to fire blocks and 15 seconds of immunity to lava
 			Reduces damage from touching lava
 			'''
+	}
+
+	CloakOfEverwinter: {
+		DisplayName: Cloak of Everwinter
+		Tooltip:
+			'''
+			Magic attacks inflict Sheer Cold for 3 seconds
+			-12% mana usage
+			Automatically consume mana potions when out of mana
+			Enemies are less likely to target you
+			Increases pickup range for mana stars
+			Causes stars to fall when taking damage, stars restore mana when picked up
+			'''
+	}
+
+	DeepJungleNecklace: {
+		DisplayName: Deep Jungle Necklace
+		Tooltip:
+			'''
+			Summon attacks inflict Nature's Toxin for 3 seconds
+			Minions pierce 20 defense
+			+1 max minion
+			+20% summon damage
+			'''
+	}
+
+	ScabbardOfTheCore: {
+		DisplayName: Scabbard of the Core
+		Tooltip:
+			'''
+			Melee attacks inflict Core Heat for 3 seconds
+			+25% melee crit chance
+			+20% melee speed
+			'''
+	}
+
+	TerraiumPickaxe: {
+		DisplayName: Terraium Pickaxe
+		Tooltip: ""
+	}
+
+	TerraiumHamaxe: {
+		DisplayName: Terraium Hamaxe
+		Tooltip: ""
 	}
 }
 

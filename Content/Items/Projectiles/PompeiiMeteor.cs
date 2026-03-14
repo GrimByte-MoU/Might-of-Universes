@@ -15,7 +15,7 @@ namespace MightofUniverses.Content.Items.Projectiles
     {
         private List<int> hitNPCs = new List<int>();
         private int currentTarget = -1;
-        private const int LIFETIME = 300;
+        private const int LIFETIME = 180;
         private const float SEARCH_RADIUS = 600f;
         private int searchCooldown = 0;
 

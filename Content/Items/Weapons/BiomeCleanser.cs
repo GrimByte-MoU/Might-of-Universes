@@ -16,7 +16,7 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class BiomeCleanser : ModItem, IHasSoulCost, IScytheWeapon
     {
-        public float BaseSoulCost => 200f;
+        public float BaseSoulCost => 255f;
 
         public override void SetDefaults()
         {
@@ -50,28 +50,27 @@ namespace MightofUniverses.Content.Items.Weapons
             return false;
         }
 
-        public override void HoldItem(Player player)
+      public override void HoldItem(Player player)
+{
+    if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
+    {
+        if (player.GetModPlayer<ReaperPlayer>().ConsumeSoulEnergy(BaseSoulCost))
         {
-            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
+            IEntitySource src = player.GetSource_ItemUse(Item);
+            int spearType = ModContent.ProjectileType<BiomeCleanserSpearProjectile>();
+            int spearDamage = (int)(Item.damage * 2.5f);
+            float angleStep = MathHelper.TwoPi / 16f;
+            float radius = 20f;
+            for (int i = 0; i < 16; i++)
             {
-                int scost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
-                if (player.GetModPlayer<ReaperPlayer>().ConsumeSoulEnergy(scost))
-                {
-                    IEntitySource src = player.GetSource_ItemUse(Item);
-                    int spearType = ModContent.ProjectileType<BiomeCleanserSpearProjectile>();
-                    int spearDamage = (int)(Item.damage * 3.5f);
-                    float angleStep = MathHelper.TwoPi / 16f;
-                    float radius = 20f;
-                    for (int i = 0; i < 16; i++)
-                    {
-                        float angle = i * angleStep;
-                        Vector2 offset = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * radius;
-                        Vector2 spawn = player.Center + offset;
-                        Vector2 vel = offset.SafeNormalize(Vector2.UnitY) * 6f;
-                        Projectile.NewProjectile(src, spawn, vel, spearType, spearDamage, 6f, player.whoAmI);
-                    }
-                }
+                float angle = i * angleStep;
+                Vector2 offset = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * radius;
+                Vector2 spawn = player.Center + offset;
+                Vector2 vel = offset.SafeNormalize(Vector2.UnitY) * 6f;
+                Projectile.NewProjectile(src, spawn, vel, spearType, spearDamage, 6f, player.whoAmI);
             }
         }
+    }
+}
     }
 }

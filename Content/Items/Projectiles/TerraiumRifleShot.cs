@@ -8,22 +8,24 @@ using System. Linq;
 
 namespace MightofUniverses.Content.Items. Projectiles
 {
-    public class TerraiumRifleShot : ModProjectile
+    public class TerraiumRifleShot : MoUProjectile
     {
         private int lastHitNPC = -1;
         private int bounceCount = 0;
         private const int maxBounces = 10;
 
-        public override void SetDefaults()
+        public override void SafeSetDefaults()
         {
-            Projectile. width = 8;
+            Projectile.width = 8;
             Projectile.height = 8;
             Projectile.friendly = true;
-            Projectile. DamageType = DamageClass.Ranged;
-            Projectile. penetrate = -1;
+            Projectile.DamageType = DamageClass.Ranged;
+            Projectile.penetrate = -1;
             Projectile.timeLeft = 600;
-            Projectile. tileCollide = true;
+            Projectile.tileCollide = true;
             Projectile.ignoreWater = false;
+            Projectile.extraUpdates = 20;
+            Projectile.scale = 0.75f;
         }
 
         public override void AI()

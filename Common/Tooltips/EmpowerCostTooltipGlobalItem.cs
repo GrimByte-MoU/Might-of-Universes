@@ -50,14 +50,15 @@ namespace MightofUniverses.Common.Tooltips
                 ["TrickstersDue"] = 300f,
                 ["MartianTally"] = 70f,
                 ["AncientBoneScythe"] = 100f,
-                ["Ketsumatsu"] = 125f,
-                ["CelestialReaper"] = 125f,
-                ["NewMoon"] = 150f,
+                ["Ketsumatsu"] = 275f,
+                ["CelestialReaper"] = 150f,
+                ["NewMoon"] = 180f,
                 ["ReapersEcho"] = 200f,
                 ["IceAge"] = 275f,
                 ["Kasurikama"] = 60f,
                 ["CycloneKama"] = 200f,
                 ["Pompeii"] = 300f,
+                ["BiomeCleanser"] = 255f,
             };
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)

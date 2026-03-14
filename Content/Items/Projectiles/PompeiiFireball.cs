@@ -57,7 +57,7 @@ namespace MightofUniverses.Content.Items.Projectiles
            target.AddBuff(ModContent.BuffType<CoreHeat>(), 120);
 
             Player player = Main.player[Projectile.owner];
-            player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(9f, target.Center);
+            player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(6f, target.Center);
 
             for (int i = 0; i < 10; i++)
             {

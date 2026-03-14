@@ -8,7 +8,6 @@ using MightofUniverses.Content.Items.Buffs;
 using MightofUniverses.Common;
 using MightofUniverses.Common.Players;
 using MightofUniverses.Common.Abstractions;
-using MightofUniverses.Common.Util;
 using Terraria.DataStructures;
 using MightofUniverses.Content.Rarities;
 
@@ -44,8 +43,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
             if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
             {
-                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
-                if (reaper.ConsumeSoulEnergy(effectiveCost))
+                if (reaper.ConsumeSoulEnergy(BaseSoulCost))
                 {
                     IEntitySource src = player.GetSource_ItemUse(Item);
                     int damage = player.GetWeaponDamage(Item);
@@ -83,12 +81,7 @@ namespace MightofUniverses.Content.Items.Weapons
             target.AddBuff(ModContent.BuffType<SheerCold>(), 180);
             
             var reaper = player.GetModPlayer<ReaperPlayer>();
-            reaper.AddSoulEnergy(8f, target.Center);
-
-            if (!target.active)
-            {
-                reaper.AddSoulEnergy(8f, target.Center);
-            }
+            reaper.AddSoulEnergy(5f, target.Center);
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

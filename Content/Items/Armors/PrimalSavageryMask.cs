@@ -27,7 +27,7 @@ namespace MightofUniverses.Content.Items.Armors
 
             player.GetModPlayer<PrimalSavageryPlayer>().MaskEquipped = true;
 
-            player.GetModPlayer<ReaperAccessoryPlayer>().SoulCostMultiplier *= 0.90f;
+            player.GetModPlayer<ReaperAccessoryPlayer>().SoulCostMultiplier = 0.90f;
         }
 
         public override bool IsArmorSet(Item head, Item body, Item legs)

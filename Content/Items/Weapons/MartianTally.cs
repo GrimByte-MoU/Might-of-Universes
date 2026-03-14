@@ -37,21 +37,20 @@ namespace MightofUniverses.Content.Items.Weapons
         }
 
         public override void HoldItem(Player player)
-        {
-            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
+{
+    if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
+    {
+        ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
+            player,
+            cost: BaseSoulCost,
+            durationTicks: 180,
+            configure: vals =>
             {
-                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
-                ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
-                    player,
-                    cost: effectiveCost,
-                    durationTicks: 180,
-                    configure: vals =>
-                    {
-                        vals.ArmorPenetration += 9999;
-                    }
-                );
+                vals.ArmorPenetration += 9999;
             }
-        }
+        );
+    }
+}
 
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {

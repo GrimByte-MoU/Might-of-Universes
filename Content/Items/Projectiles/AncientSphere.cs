@@ -2,13 +2,14 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using MightofUniverses.Content.Items. Buffs;
+using MightofUniverses.Content.Items.Buffs;
 using System;
 
 namespace MightofUniverses.Content.Items.Projectiles
 {
     public class AncientSphere : MoUProjectile
     {
+        private bool hasExploded = false;
 
         public override void SafeSetDefaults()
         {
@@ -16,7 +17,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.height = 16;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;
-            Projectile. penetrate = 4;
+            Projectile.penetrate = 2;
             Projectile.timeLeft = 300;
             Projectile.tileCollide = true;
             Projectile.ignoreWater = false;
@@ -36,8 +37,8 @@ namespace MightofUniverses.Content.Items.Projectiles
 
             if (Main.rand.NextBool())
             {
-                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID. TerraBlade, 0, 0, 100, Color. LimeGreen, 2.0f);
-                dust. noGravity = true;
+                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.TerraBlade, 0, 0, 100, Color.LimeGreen, 2.0f);
+                dust.noGravity = true;
                 dust.velocity *= 0.5f;
             }
 
@@ -63,38 +64,37 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.penetrate--;
             if (Projectile.penetrate <= 0)
             {
-                Explode();
                 Projectile.Kill();
             }
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            Explode();
             return true;
         }
 
         public override void OnKill(int timeLeft)
         {
-            if (timeLeft <= 0)
+            if (!hasExploded)
             {
+                hasExploded = true;
                 Explode();
             }
         }
 
         private void Explode()
         {
-            float explosionRadius = 240f;
-            int explosionDamage = (int)(Projectile.damage * 2.0f);
+            float explosionRadius = 300f;
+            int explosionDamage = (int)(Projectile.damage * 0.5f);
 
             for (int ring = 0; ring < 6; ring++)
             {
-                float currentRadius = (explosionRadius / 6) * (ring + 1);
+                float currentRadius = explosionRadius / 6 * (ring + 1);
                 int segments = 25 + (ring * 10);
 
                 for (int i = 0; i < segments; i++)
                 {
-                    float angle = (i / (float)segments) * MathHelper.TwoPi;
+                    float angle = i / (float)segments * MathHelper.TwoPi;
                     Vector2 position = Projectile.Center + new Vector2(
                         (float)Math.Cos(angle) * currentRadius,
                         (float)Math.Sin(angle) * currentRadius
@@ -102,7 +102,7 @@ namespace MightofUniverses.Content.Items.Projectiles
 
                     int dustIndex = Dust.NewDust(position, 0, 0, DustID.TerraBlade, 0, 0, 100, Color.LimeGreen, 2.5f);
                     Main.dust[dustIndex].noGravity = true;
-                    Main. dust[dustIndex].velocity = new Vector2(
+                    Main.dust[dustIndex].velocity = new Vector2(
                         (float)Math.Cos(angle) * 3f,
                         (float)Math.Sin(angle) * 3f
                     );
@@ -116,24 +116,24 @@ namespace MightofUniverses.Content.Items.Projectiles
                     Main.rand.NextFloat(-10f, 10f),
                     Main.rand.NextFloat(-10f, 10f)
                 );
-                int dustIndex = Dust.NewDust(Projectile.Center, 30, 30, DustID. TerraBlade, velocity.X, velocity.Y, 0, Color.Green, 3.0f);
-                Main. dust[dustIndex].noGravity = true;
+                int dustIndex = Dust.NewDust(Projectile.Center, 30, 30, DustID.TerraBlade, velocity.X, velocity.Y, 0, Color.Green, 3.0f);
+                Main.dust[dustIndex].noGravity = true;
             }
 
-            Lighting.AddLight(Projectile. Center, 1.5f, 2.0f, 1.5f);
-            Terraria.Audio.SoundEngine.PlaySound(SoundID. Item14, Projectile.Center);
+            Lighting.AddLight(Projectile.Center, 1.5f, 2.0f, 1.5f);
+            Terraria.Audio.SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
 
             for (int i = 0; i < Main.maxNPCs; i++)
             {
                 NPC npc = Main.npc[i];
 
-                if (! npc.active)
+                if (!npc.active)
                     continue;
 
                 if (npc.friendly)
                     continue;
 
-                if (npc. dontTakeDamage)
+                if (npc.dontTakeDamage)
                     continue;
 
                 float distance = Vector2.Distance(Projectile.Center, npc.Center);
@@ -145,7 +145,7 @@ namespace MightofUniverses.Content.Items.Projectiles
                     npc.SimpleStrikeNPC(explosionDamage, 0, false, 0, null, false, 0, true);
                     npc.defense = savedDefense;
 
-                    npc.AddBuff(ModContent.BuffType<TerrasRend>(), 120);
+                    npc.AddBuff(ModContent.BuffType<TerrasRend>(), 60);
 
                     for (int d = 0; d < 10; d++)
                     {
@@ -158,7 +158,7 @@ namespace MightofUniverses.Content.Items.Projectiles
                     for (int d = 0; d < 12; d++)
                     {
                         Vector2 dustPos = Projectile.Center + (direction * distance * (d / 12f));
-                        Dust. NewDust(dustPos, 4, 4, DustID. TerraBlade, 0, 0, 100, Color. Green, 1.5f);
+                        Dust.NewDust(dustPos, 4, 4, DustID.TerraBlade, 0, 0, 100, Color.Green, 1.5f);
                     }
                 }
             }

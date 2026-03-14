@@ -3,6 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using MightofUniverses.Content.Items.Materials;
+using MightofUniverses.Content.Items.Buffs;
 using MightofUniverses.Content.Rarities;
 using MightofUniverses.Content.Items.Projectiles;
 
@@ -12,7 +13,7 @@ namespace MightofUniverses.Content.Items.Weapons
     {
         public override void SetDefaults()
         {
-            Item.damage = 190;
+            Item.damage = 155;
             Item.DamageType = DamageClass.Melee;
             Item.width = 64;
             Item.height = 64;
@@ -24,7 +25,6 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.rare = ModContent.RarityType<TerraiumRarity>();
             Item.UseSound = SoundID.Item1;
             Item.autoReuse = true;
-            Item.scale = 1.5f;
             Item.maxStack = 1;
         }
 
@@ -41,21 +41,25 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(ModContent.BuffType<TerrasRend>(), 180);
+
             if (player.whoAmI == Main.myPlayer)
             {
-                for (int i = 0; i < 2; i++)
+                for (int i = 0; i < 3; i++)
                 {
-                    
-                    int proj = Projectile.NewProjectile(
+                    Vector2 spawnPos = target.Center + new Vector2(Main.rand.Next(-60, 60), -500f);
+                    Vector2 velocity = (target.Center - spawnPos).SafeNormalize(Vector2.UnitY) * 20f;
+
+                    Projectile.NewProjectile(
                         player.GetSource_OnHit(target),
-                        target.Center + new Vector2(Main.rand.Next(-40, 40), -600f),
-                        Vector2.Zero,
-                        ModContent.ProjectileType<TerraiumLightning>(),
-                        (int)(damageDone * 0.75f),
-                        0f,
+                        spawnPos,
+                        velocity,
+                        ModContent.ProjectileType<TerraiumSpike>(),
+                        (int)(damageDone * 0.6f),
+                        3f,
                         player.whoAmI,
                         target.whoAmI,
-                        i * 10
+                        i * 8
                     );
                 }
             }

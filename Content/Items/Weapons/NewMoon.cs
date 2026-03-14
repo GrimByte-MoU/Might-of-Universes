@@ -15,7 +15,7 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class NewMoon : ModItem, IHasSoulCost, IScytheWeapon
     {
-        public float BaseSoulCost => 150f;
+        public float BaseSoulCost => 180f;
 
         public override void SetDefaults()
         {
@@ -37,24 +37,24 @@ namespace MightofUniverses.Content.Items.Weapons
         }
 
         public override void HoldItem(Player player)
-        {
-            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
+{
+    if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
+    {
+        if (ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
+            player,
+            cost: BaseSoulCost,
+            durationTicks: 300,
+            configure: vals =>
             {
-                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
-                bool released = ReaperSoulEffects.TryReleaseSoulsWithEmpowerment(
-                    player,
-                    cost: effectiveCost,
-                    durationTicks: 300,
-                    configure: vals =>
-                    {
-                        vals.Defense += 15;
-                        vals.Endurance += 0.10f;
-                    }
-                );
-                if (released)
-                    player.Heal(100);
+                vals.Defense += 15;
+                vals.Endurance += 0.10f;
             }
+        ))
+        {
+            player.Heal(100);
         }
+    }
+}
 
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {

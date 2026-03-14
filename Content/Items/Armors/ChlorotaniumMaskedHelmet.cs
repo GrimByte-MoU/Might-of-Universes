@@ -28,7 +28,7 @@ namespace MightofUniverses.Content.Items.Armors
 
 
             var acc = player.GetModPlayer<ReaperAccessoryPlayer>();
-            acc.SoulCostMultiplier *= 0.90f;
+            acc.SoulCostMultiplier = 0.90f;
 
             if (player.HeldItem?.type == ModContent.ItemType<ChlorotaniumScythe>())
             {

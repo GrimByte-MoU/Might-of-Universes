@@ -38,40 +38,39 @@ namespace MightofUniverses.Content.Items.Weapons
         }
 
         public override void HoldItem(Player player)
+{
+    var reaper = player.GetModPlayer<ReaperPlayer>();
+
+    if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
+    {
+        if (reaper.ConsumeSoulEnergy(BaseSoulCost))
         {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
+            Vector2 from = player.MountedCenter;
+            Vector2 dir = Main.MouseWorld - from;
+            if (dir.LengthSquared() < 0.0001f) dir = new Vector2(player.direction, 0f);
+            dir.Normalize();
+            Vector2 baseVel = dir * (Item.shootSpeed > 0 ? Item.shootSpeed : 10f);
 
-            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
+            IEntitySource src = player.GetSource_ItemUse(Item);
+            int damage = player.GetWeaponDamage(Item);
+            float kb = player.GetWeaponKnockback(Item);
+
+            for (int i = -1; i <= 1; i++)
             {
-                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
-                if (reaper.ConsumeSoulEnergy(effectiveCost))
-                {
-                    Vector2 from = player.MountedCenter;
-                    Vector2 dir = Main.MouseWorld - from;
-                    if (dir.LengthSquared() < 0.0001f) dir = new Vector2(player.direction, 0f);
-                    dir.Normalize();
-                    Vector2 baseVel = dir * (Item.shootSpeed > 0 ? Item.shootSpeed : 10f);
-
-                    IEntitySource src = player.GetSource_ItemUse(Item);
-                    int damage = player.GetWeaponDamage(Item);
-                    float kb = player.GetWeaponKnockback(Item);
-
-                    for (int i = -1; i <= 1; i++)
-                    {
-                        Vector2 newVelocity = baseVel.RotatedBy(MathHelper.ToRadians(4 * i));
-                        Projectile.NewProjectile(
-                            src,
-                            from,
-                            newVelocity,
-                            ModContent.ProjectileType<GlitchBlast>(),
-                            damage,
-                            kb,
-                            player.whoAmI
-                        );
-                    }
-                }
+                Vector2 newVelocity = baseVel.RotatedBy(MathHelper.ToRadians(4 * i));
+                Projectile.NewProjectile(
+                    src,
+                    from,
+                    newVelocity,
+                    ModContent.ProjectileType<GlitchBlast>(),
+                    damage,
+                    kb,
+                    player.whoAmI
+                );
             }
         }
+    }
+}
 
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {

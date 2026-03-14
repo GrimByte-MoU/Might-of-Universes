@@ -25,7 +25,7 @@ namespace MightofUniverses.Content.Items.Armors
             var acc = player.GetModPlayer<ReaperAccessoryPlayer>();
             if (acc.SoulCostMultiplier == 0f)
                 acc.SoulCostMultiplier = 1f;
-            acc.SoulCostMultiplier *= 0.95f;
+            acc.SoulCostMultiplier = 0.95f;
         }
 
         public override void AddRecipes()

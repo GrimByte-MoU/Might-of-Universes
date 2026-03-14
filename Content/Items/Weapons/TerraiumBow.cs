@@ -12,9 +12,9 @@ namespace MightofUniverses.Content.Items.Weapons
     {
         public override void SetDefaults()
         {
-            Item.damage = 130;
+            Item.damage = 110;
             Item.DamageType = DamageClass.Ranged;
-            Item. width = 32;
+            Item.width = 32;
             Item.height = 64;
             Item.useTime = 15;
             Item.useAnimation = 15;
@@ -25,9 +25,15 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.UseSound = SoundID.Item5;
             Item.autoReuse = true;
             Item.shoot = ProjectileID.WoodenArrowFriendly;
-            Item. shootSpeed = 20f;
+            Item.shootSpeed = 20f;
             Item.noMelee = true;
             Item.useAmmo = AmmoID.Arrow;
+            Item.scale = 0.8f;
+        }
+
+        public override Vector2? HoldoutOffset()
+        {
+            return new Vector2(-10f, 0f);
         }
 
         public override void AddRecipes()

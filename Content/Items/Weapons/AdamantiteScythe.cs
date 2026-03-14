@@ -39,8 +39,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
             if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
             {
-                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
-                if (reaper.ConsumeSoulEnergy(effectiveCost))
+                if (reaper.ConsumeSoulEnergy(BaseSoulCost))
                 {
                     Vector2 from = player.MountedCenter;
                     Vector2 dir = Main.MouseWorld - from;

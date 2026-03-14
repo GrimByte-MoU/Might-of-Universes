@@ -10,3 +10,4 @@ global using MightofUniverses.Common.Util;
 global using MightofUniverses.Content.Rarities;
 global using MightofUniverses.Content.Items.Materials;
 global using MightofUniverses.Content.Items.Projectiles;
+global using MightofUniverses.Content.Items.Buffs;

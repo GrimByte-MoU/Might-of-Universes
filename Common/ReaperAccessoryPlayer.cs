@@ -87,6 +87,7 @@ namespace MightofUniverses.Common.Players
 
         public override void ResetEffects()
         {
+            
             SoulCostMultiplier = 1f;
             SoulCostFlatReduction = 0;
             RefundChance = 0f;

@@ -39,7 +39,7 @@ namespace MightofUniverses.Content.Items.Armors
             player.setBonus = "Magic attacks inflict Terra's Rend\n" +
                              "Immunity to Mana Sickness\n" +
                              "Magic weapons ignore enemy defense depending on use time\n" +
-                             "For every 10 max mana the player gets +1% magic damage";
+                             "For every 10 max mana the player gets +0.5% magic damage";
             
             player.buffImmune[BuffID.ManaSickness] = true;
             

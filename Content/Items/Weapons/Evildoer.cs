@@ -39,15 +39,15 @@ namespace MightofUniverses.Content.Items.Weapons
         }
 
         public override void HoldItem(Player player)
-        {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
+{
+    var reaper = player.GetModPlayer<ReaperPlayer>();
 
-            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed && reaper.ConsumeSoulEnergy(SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost)))
-            {
-                debuffsActive = true;
-                debuffTimer = 300;
-            }
-        }
+    if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed && reaper.ConsumeSoulEnergy(BaseSoulCost))
+    {
+        debuffsActive = true;
+        debuffTimer = 300;
+    }
+}
 
         public override void UpdateInventory(Player player)
         {

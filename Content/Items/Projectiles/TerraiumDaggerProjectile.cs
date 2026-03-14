@@ -17,32 +17,25 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.DamageType = DamageClass.Melee;
             Projectile.tileCollide = true;
             Projectile.ignoreWater = false;
-            Projectile.penetrate = 3;
+            Projectile.penetrate = 1;
             Projectile.timeLeft = 600;
-            Projectile.extraUpdates = 1;
+            Projectile.extraUpdates = 5;
         }
 
         public override void AI()
         {
             
             Projectile.rotation = Projectile.velocity.ToRotation();
-            Lighting.AddLight(Projectile.Center, 0.18f, 0.35f, 0.85f);
+            Lighting.AddLight(Projectile.Center, 0.1f, 0.5f, 0.1f);
 
             if (Main.rand.NextBool(4))
             {
-                var d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.SilverCoin);
+                var d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.TerraBlade);
                 d.velocity *= 0.1f;
                 d.scale = 0.8f;
                 d.noGravity = true;
                 d.color = new Color(160, 210, 255);
             }
-        }
-
-        public override bool OnTileCollide(Vector2 oldVelocity)
-        {
-            Projectile.penetrate = 0;
-            Projectile.Kill();
-            return false;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

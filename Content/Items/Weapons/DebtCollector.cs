@@ -51,8 +51,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
             if (ReaperPlayer.SoulReleaseKey.JustPressed)
             {
-                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
-                if (reaper.ConsumeSoulEnergy(effectiveCost))
+if (reaper.ConsumeSoulEnergy(BaseSoulCost))
                 {
                     for (int i = 0; i < 7; i++)
                     {

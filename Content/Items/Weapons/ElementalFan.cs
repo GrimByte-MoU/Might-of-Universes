@@ -16,12 +16,12 @@ namespace MightofUniverses.Content.Items. Weapons
 
         public override void SetDefaults()
         {
-            Item.damage = 85;
+            Item.damage = 80;
             Item.DamageType = DamageClass.Magic;
             Item.width = 48;
             Item.height = 48;
-            Item.useTime = 4;
-            Item.useAnimation = 4;
+            Item.useTime = 6;
+            Item.useAnimation = 6;
             Item.useStyle = ItemUseStyleID. Shoot;
             Item.knockBack = 3;
             Item.value = Item.sellPrice(gold: 50);
@@ -31,14 +31,14 @@ namespace MightofUniverses.Content.Items. Weapons
             Item.shoot = ModContent.ProjectileType<ElementalFanNeedle>();
             Item.shootSpeed = 16f;
             Item.noMelee = true;
-            Item.mana = 4;
+            Item.mana = 8;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             shotCounter++;
 
-            if (shotCounter >= 8)
+            if (shotCounter >= 10)
             {
                 shotCounter = 0;
                 

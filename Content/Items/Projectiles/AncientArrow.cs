@@ -15,13 +15,14 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.height = 10;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;
-            Projectile. penetrate = 10;
+            Projectile.penetrate = 10;
             Projectile.timeLeft = 600;
             Projectile.tileCollide = true;
             Projectile.ignoreWater = false;
             Projectile.arrow = true;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 10;
+            Projectile.extraUpdates = 10;
         }
 
         public override void AI()

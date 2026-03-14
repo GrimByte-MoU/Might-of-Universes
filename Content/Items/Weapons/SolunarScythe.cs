@@ -36,27 +36,26 @@ namespace MightofUniverses.Content.Items.Weapons
         }
 
         public override void HoldItem(Player player)
-        {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
+{
+    var reaper = player.GetModPlayer<ReaperPlayer>();
 
-            if (ReaperPlayer.SoulReleaseKey != null &&
-                ReaperPlayer.SoulReleaseKey.JustPressed)
-            {
-                int cost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
-                if (!reaper.ConsumeSoulEnergy(cost))
-                    return;
+    if (ReaperPlayer.SoulReleaseKey != null &&
+        ReaperPlayer.SoulReleaseKey.JustPressed)
+    {
+        if (!reaper.ConsumeSoulEnergy(BaseSoulCost))
+            return;
 
-                IEntitySource src = player.GetSource_ItemUse(Item);
-                int damage = player.GetWeaponDamage(Item);
-                float kb = player.GetWeaponKnockback(Item);
-                
-                Projectile.NewProjectile(src, player.Center, Vector2.Zero,
-                    ModContent.ProjectileType<SolunarMedallion>(), damage * 2, kb, player.whoAmI, 0f);
+        IEntitySource src = player.GetSource_ItemUse(Item);
+        int damage = player.GetWeaponDamage(Item);
+        float kb = player.GetWeaponKnockback(Item);
+        
+        Projectile.NewProjectile(src, player.Center, Vector2.Zero,
+            ModContent.ProjectileType<SolunarMedallion>(), damage * 2, kb, player.whoAmI, 0f);
 
-                Projectile.NewProjectile(src, player.Center, Vector2.Zero,
-                    ModContent.ProjectileType<SolunarMedallion>(), damage * 2, kb, player.whoAmI, MathHelper.Pi);
-            }
-        }
+        Projectile.NewProjectile(src, player.Center, Vector2.Zero,
+            ModContent.ProjectileType<SolunarMedallion>(), damage * 2, kb, player.whoAmI, MathHelper.Pi);
+    }
+}
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source,
             Vector2 position, Vector2 velocity, int type, int damage, float knockback)

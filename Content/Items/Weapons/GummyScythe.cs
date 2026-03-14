@@ -41,8 +41,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
             if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
             {
-                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
-                if (reaper.ConsumeSoulEnergy(effectiveCost))
+                if (reaper.ConsumeSoulEnergy(BaseSoulCost))
                 {
                     player.Heal(50);
                     player.AddBuff(ModContent.BuffType<Hyper>(), 180);

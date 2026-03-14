@@ -72,7 +72,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             if (player.active && !player.dead)
             {
                 ReaperPlayer reaperPlayer = player.GetModPlayer<ReaperPlayer>();
-                reaperPlayer.AddSoulEnergy(6f, target.Center);
+                reaperPlayer.AddSoulEnergy(5f, target.Center);
             }
 
             ShatterIntoFragments(target.Center);

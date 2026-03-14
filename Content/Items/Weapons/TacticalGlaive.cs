@@ -20,6 +20,7 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.useAnimation = 25;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.noMelee = true;
+            Item.noUseGraphic = true;
             Item.knockBack = 3f;
             Item.value = Item.buyPrice(gold: 18);
             Item.rare = ItemRarityID.LightRed;

@@ -36,41 +36,40 @@ namespace MightofUniverses.Content.Items.Weapons
         }
 
         public override void HoldItem(Player player)
+{
+    var reaper = player.GetModPlayer<ReaperPlayer>();
+
+    if (ReaperPlayer.SoulReleaseKey != null &&
+        ReaperPlayer.SoulReleaseKey.JustPressed)
+    {
+        if (!reaper.ConsumeSoulEnergy(BaseSoulCost))
+            return;
+
+        IEntitySource src = player.GetSource_ItemUse(Item);
+        int damage = player.GetWeaponDamage(Item);
+        float kb = player.GetWeaponKnockback(Item);
+        float[] phases = {
+            0f,
+            MathHelper.PiOver2,
+            MathHelper.Pi,
+            MathHelper.Pi + MathHelper.PiOver2
+        };
+
+        foreach (float phase in phases)
         {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
-
-            if (ReaperPlayer.SoulReleaseKey != null &&
-                ReaperPlayer.SoulReleaseKey.JustPressed)
-            {
-                int cost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
-                if (!reaper.ConsumeSoulEnergy(cost))
-                    return;
-
-                IEntitySource src = player.GetSource_ItemUse(Item);
-                int damage = player.GetWeaponDamage(Item);
-                float kb = player.GetWeaponKnockback(Item);
-                float[] phases = {
-                    0f,
-                    MathHelper.PiOver2,
-                    MathHelper.Pi,
-                    MathHelper.Pi + MathHelper.PiOver2
-                };
-
-                foreach (float phase in phases)
-                {
-                    Projectile.NewProjectile(
-                        src,
-                        player.Center,
-                        Vector2.Zero,
-                        ModContent.ProjectileType<ScytheEclipse>(),
-                        damage * 2,
-                        kb,
-                        player.whoAmI,
-                        ai0: phase
-                    );
-                }
-            }
+            Projectile.NewProjectile(
+                src,
+                player.Center,
+                Vector2.Zero,
+                ModContent.ProjectileType<ScytheEclipse>(),
+                damage * 2,
+                kb,
+                player.whoAmI,
+                ai0: phase
+            );
         }
+    }
+}
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source,
             Vector2 position, Vector2 velocity, int type, int damage, float knockback)

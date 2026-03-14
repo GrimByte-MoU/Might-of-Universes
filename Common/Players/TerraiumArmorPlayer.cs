@@ -115,7 +115,7 @@ namespace MightofUniverses.Common.Players
         private void UpdateWizardSetBonus()
         {
             int manaStacks = Player.statManaMax2 / 10;
-            float bonusDamage = manaStacks * 0.01f;
+            float bonusDamage = manaStacks * 0.005f;
             Player.GetDamage(DamageClass.Magic) += bonusDamage;
         }
 
@@ -274,7 +274,7 @@ namespace MightofUniverses.Common.Players
                 if (heldItem != null && heldItem.useTime > 0)
                 {
                     int useTime = heldItem.useTime;
-                    int armorPen = 100 - (useTime * 2);
+                    int armorPen = 100 - (useTime * 3);
                     
                     armorPen = Math.Max(0, armorPen);
                     

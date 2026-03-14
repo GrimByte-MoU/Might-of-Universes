@@ -20,7 +20,7 @@ namespace MightofUniverses. Content.Items.Projectiles
             Projectile.tileCollide = true;
             Projectile. ignoreWater = false;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 10;
+            Projectile.localNPCHitCooldown = 5;
         }
 
         public override void AI()
@@ -39,7 +39,7 @@ namespace MightofUniverses. Content.Items.Projectiles
 
         public override Color? GetAlpha(Color lightColor)
         {
-            return Color.Gold;
+            return Color.LimeGreen;
         }
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)

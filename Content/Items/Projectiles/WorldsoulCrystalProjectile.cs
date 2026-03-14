@@ -35,7 +35,7 @@ namespace MightofUniverses.Content.Items.Projectiles
         {
             Player player = Main.player[Projectile.owner];
             target.AddBuff(ModContent.BuffType<TerrasRend>(), 180);
-            player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(7f, target.Center);
+            player.GetModPlayer<ReaperPlayer>().AddSoulEnergy(5f, target.Center);
         }
     }
 }

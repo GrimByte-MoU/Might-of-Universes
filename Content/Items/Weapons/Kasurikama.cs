@@ -40,32 +40,31 @@ namespace MightofUniverses.Content.Items.Weapons
         }
 
         public override void HoldItem(Player player)
+{
+    var reaper = player.GetModPlayer<ReaperPlayer>();
+
+    if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
+    {
+        if (reaper.ConsumeSoulEnergy(BaseSoulCost))
         {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
+            IEntitySource src = player.GetSource_ItemUse(Item);
+            int damage = (int)(player.GetWeaponDamage(Item) * 5.0f);
+            float kb = player.GetWeaponKnockback(Item);
 
-            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed)
-            {
-                int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost);
-                if (reaper.ConsumeSoulEnergy(effectiveCost))
-                {
-                    IEntitySource src = player.GetSource_ItemUse(Item);
-                    int damage = (int)(player.GetWeaponDamage(Item) * 5.0f);
-                    float kb = player.GetWeaponKnockback(Item);
+            Projectile.NewProjectile(
+                src,
+                player.Center,
+                Vector2.Zero,
+                ModContent.ProjectileType<KasurikamaGiantSickle>(),
+                damage,
+                kb,
+                player.whoAmI
+            );
 
-                    Projectile.NewProjectile(
-                        src,
-                        player.Center,
-                        Vector2.Zero,
-                        ModContent.ProjectileType<KasurikamaGiantSickle>(),
-                        damage,
-                        kb,
-                        player.whoAmI
-                    );
-
-                    SoundEngine.PlaySound(SoundID.Item71, player.Center);
-                }
-            }
+            SoundEngine.PlaySound(SoundID.Item71, player.Center);
         }
+    }
+}
 
         public override bool CanUseItem(Player player)
         {

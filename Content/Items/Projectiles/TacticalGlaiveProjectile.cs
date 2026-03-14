@@ -19,9 +19,9 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.scale = 0.75f;
         }
 
-        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            modifiers.FinalDamage *= 1.15f;
+            target.AddBuff(ModContent.BuffType<EnemyBleeding>(), 120);
         }
 
         public override void AI()

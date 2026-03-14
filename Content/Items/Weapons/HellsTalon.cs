@@ -35,32 +35,32 @@ namespace MightofUniverses.Content.Items.Weapons
         }
 
         public override void HoldItem(Player player)
-        {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
+{
+    var reaper = player.GetModPlayer<ReaperPlayer>();
 
-            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed && reaper.ConsumeSoulEnergy(SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost)))
-            {
-                Vector2 from = player.MountedCenter;
-                Vector2 dir = Main.MouseWorld - from;
-                if (dir.LengthSquared() < 0.0001f) dir = new Vector2(player.direction, 0f);
-                dir.Normalize();
-                Vector2 velocity = dir * (Item.shootSpeed > 0 ? Item.shootSpeed : 16f);
+    if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed && reaper.ConsumeSoulEnergy(BaseSoulCost))
+    {
+        Vector2 from = player.MountedCenter;
+        Vector2 dir = Main.MouseWorld - from;
+        if (dir.LengthSquared() < 0.0001f) dir = new Vector2(player.direction, 0f);
+        dir.Normalize();
+        Vector2 velocity = dir * (Item.shootSpeed > 0 ? Item.shootSpeed : 16f);
 
-                IEntitySource src = player.GetSource_ItemUse(Item);
-                int damage = player.GetWeaponDamage(Item);
-                float kb = player.GetWeaponKnockback(Item);
+        IEntitySource src = player.GetSource_ItemUse(Item);
+        int damage = player.GetWeaponDamage(Item);
+        float kb = player.GetWeaponKnockback(Item);
 
-                Projectile.NewProjectile(
-                    src,
-                    from,
-                    velocity,
-                    ModContent.ProjectileType<HellsoulProjectile>(),
-                    (int)(damage * 1.5f),
-                    kb * 2f,
-                    player.whoAmI
-                );
-            }
-        }
+        Projectile.NewProjectile(
+            src,
+            from,
+            velocity,
+            ModContent.ProjectileType<HellsoulProjectile>(),
+            (int)(damage * 1.5f),
+            kb * 2f,
+            player.whoAmI
+        );
+    }
+}
 
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {

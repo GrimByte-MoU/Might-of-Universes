@@ -41,7 +41,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
     if (ReaperPlayer.SoulReleaseKey != null &&
         ReaperPlayer.SoulReleaseKey.JustPressed &&
-        reaper.ConsumeSoulEnergy(SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost)))
+        reaper.ConsumeSoulEnergy(BaseSoulCost))
     {
         IEntitySource src = player.GetSource_ItemUse(Item);
         int damage = player.GetWeaponDamage(Item);

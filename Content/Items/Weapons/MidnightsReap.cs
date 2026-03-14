@@ -35,38 +35,38 @@ namespace MightofUniverses.Content.Items.Weapons
         }
 
         public override void HoldItem(Player player)
+{
+    var reaper = player.GetModPlayer<ReaperPlayer>();
+
+    if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed && reaper.ConsumeSoulEnergy(BaseSoulCost))
+    {
+        Vector2 from = player.MountedCenter;
+        Vector2 dir = Main.MouseWorld - from;
+        if (dir.LengthSquared() < 0.0001f) dir = new Vector2(player.direction, 0f);
+        dir.Normalize();
+        Vector2 baseVel = dir * (Item.shootSpeed > 0 ? Item.shootSpeed : 16f);
+
+        IEntitySource src = player.GetSource_ItemUse(Item);
+        int damage = player.GetWeaponDamage(Item);
+        float kb = player.GetWeaponKnockback(Item);
+
+        for (int i = 0; i < 5; i++)
         {
-            var reaper = player.GetModPlayer<ReaperPlayer>();
-
-            if (ReaperPlayer.SoulReleaseKey != null && ReaperPlayer.SoulReleaseKey.JustPressed && reaper.ConsumeSoulEnergy(SoulCostHelper.ComputeEffectiveSoulCostInt(player, BaseSoulCost)))
-            {
-                Vector2 from = player.MountedCenter;
-                Vector2 dir = Main.MouseWorld - from;
-                if (dir.LengthSquared() < 0.0001f) dir = new Vector2(player.direction, 0f);
-                dir.Normalize();
-                Vector2 baseVel = dir * (Item.shootSpeed > 0 ? Item.shootSpeed : 16f);
-
-                IEntitySource src = player.GetSource_ItemUse(Item);
-                int damage = player.GetWeaponDamage(Item);
-                float kb = player.GetWeaponKnockback(Item);
-
-                for (int i = 0; i < 5; i++)
-                {
-                    Vector2 newVelocity = baseVel.RotatedBy(MathHelper.ToRadians(Main.rand.NextFloat(-7.5f, 7.5f)));
-                    Projectile.NewProjectile(
-                        src,
-                        from,
-                        newVelocity * 1.5f,
-                        ModContent.ProjectileType<MidnightSoulProjectile>(),
-                        (int)(damage * 1.5f),
-                        kb,
-                        player.whoAmI,
-                        0f,
-                        i * 5
-                    );
-                }
-            }
+            Vector2 newVelocity = baseVel.RotatedBy(MathHelper.ToRadians(Main.rand.NextFloat(-7.5f, 7.5f)));
+            Projectile.NewProjectile(
+                src,
+                from,
+                newVelocity * 1.5f,
+                ModContent.ProjectileType<MidnightSoulProjectile>(),
+                (int)(damage * 1.5f),
+                kb,
+                player.whoAmI,
+                0f,
+                i * 5
+            );
         }
+    }
+}
 
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {

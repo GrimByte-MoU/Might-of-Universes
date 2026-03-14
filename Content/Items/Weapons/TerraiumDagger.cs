@@ -14,15 +14,15 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override void SetDefaults()
         {
-            Item.damage = 160;
+            Item.damage = 125;
             Item.DamageType = DamageClass.Melee;
             Item.width = 34;
             Item.height = 34;
-            Item.useTime = 9;
-            Item.useAnimation = 9;
+            Item.useTime = 15;
+            Item.useAnimation = 15;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.noMelee = true;
-            Item.noUseGraphic = false;
+            Item.noUseGraphic = true;
             Item.knockBack = 2.5f;
             Item.value = Item.buyPrice(gold: 50);
             Item.rare = ModContent.RarityType<TerraiumRarity>();
@@ -36,8 +36,8 @@ namespace MightofUniverses.Content.Items.Weapons
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source,
             Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            int count = 5;
-            float totalSpreadDegrees = 10f;
+            int count = 3;
+            float totalSpreadDegrees = 6f;
             float startAngle = -MathHelper.ToRadians(totalSpreadDegrees) / 2f;
             float step = MathHelper.ToRadians(totalSpreadDegrees) / (count - 1);
 
