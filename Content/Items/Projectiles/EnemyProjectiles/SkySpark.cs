@@ -53,10 +53,6 @@ namespace MightofUniverses.Content.Items. Projectiles.EnemyProjectiles
             float pulse = (float)Math.Sin(Projectile.ai[0] * 0.2f) * 0.3f + 0.7f;
             Lighting.AddLight(Projectile.Center, 0.8f * pulse, 0.8f * pulse, 0.3f * pulse);
         }
-        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
-{
-    modifiers.FinalDamage.Base = 100;
-}
 
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)

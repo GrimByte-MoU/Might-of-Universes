@@ -66,10 +66,6 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
                 dust.velocity *= 0.3f;
             }
         }
-        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
-{
-    modifiers.FinalDamage.Base = 110;
-}
 
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)

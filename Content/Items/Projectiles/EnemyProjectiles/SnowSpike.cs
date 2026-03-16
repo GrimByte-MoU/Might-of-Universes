@@ -30,7 +30,6 @@ namespace MightofUniverses.Content.Items. Projectiles.EnemyProjectiles
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
 
-            // Ice trail
             if (Main.rand.NextBool(2))
             {
                 int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile. height,
@@ -48,10 +47,6 @@ namespace MightofUniverses.Content.Items. Projectiles.EnemyProjectiles
 
             Lighting.AddLight(Projectile.Center, 0.4f, 0.6f, 0.8f);
         }
-        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
-{
-    modifiers.FinalDamage.Base = 110;
-}
 
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)

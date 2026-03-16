@@ -63,51 +63,80 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
         private bool patienceActive = false;
 
         public override void SetStaticDefaults()
-        {
-            Main.npcFrameCount[Type] = 1;
-            NPCID.Sets.MPAllowedEnemies[Type] = true;
-            NPCID.Sets.BossBestiaryPriority.Add(Type);
+{
+    Main.npcFrameCount[Type] = 1;
+    NPCID.Sets.MPAllowedEnemies[Type] = true;
+    NPCID.Sets.BossBestiaryPriority.Add(Type);
 
-            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers()
-            {
-                CustomTexturePath = "MightofUniverses/Content/NPCs/Bosses/Aegon/Aegon",
-                PortraitScale = 0.6f,
-                PortraitPositionYOverride = 0f,
-            };
-            NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
-        }
+    NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers()
+    {
+        CustomTexturePath = "MightofUniverses/Content/NPCs/Bosses/Aegon/Aegon",
+        PortraitScale = 0.6f,
+        PortraitPositionYOverride = 0f,
+    };
+    NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
 
-        public override void SafeSetDefaults()
-        {
-            NPC.defense = 100;
-            NPC.lifeMax = 235000;
-            NPC.HitSound = SoundID.NPCHit4;
-            NPC.DeathSound = SoundID.NPCDeath6;
-            NPC.knockBackResist = 0f;
-            NPC.noGravity = true;
-            NPC.noTileCollide = true;
-            NPC.value = Item.buyPrice(gold: 50);
-            NPC.SpawnWithHigherTime(30);
-            NPC.boss = true;
-            NPC.npcSlots = 15f;
-            NPC.aiStyle = -1;
-            NPC.netAlways = true;
-            NPC.scale = 1.5f;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Venom] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire3] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.CursedInferno] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Frostburn] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Frostburn2] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.ShadowFlame] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Daybreak] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Electrified] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Bleeding] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Slow] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Stinky] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Chilled] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Frozen] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<TerrasRend>()] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<CoreHeat>()] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<SheerCold>()] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<DeltaShock>()] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<NaturesToxin>()] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<ElementsHarmony>()] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<Corrupted>()] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<DeadlyCorrupt>()] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<Demonfire>()] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<EnemyBleeding>()] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<MortalWound>()] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<OceanPressure>()] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<RebukingLight>()] = true;
+}
+public override void SafeSetDefaults()
+{
+    NPC.defense = 100;
+    NPC.lifeMax = 235000;
+    NPC.HitSound = SoundID.NPCHit4;
+    NPC.DeathSound = SoundID.NPCDeath6;
+    NPC.knockBackResist = 0f;
+    NPC.noGravity = true;
+    NPC.noTileCollide = true;
+    NPC.value = Item.buyPrice(gold: 50);
+    NPC.SpawnWithHigherTime(30);
+    NPC.boss = true;
+    NPC.npcSlots = 15f;
+    NPC.aiStyle = -1;
+    NPC.netAlways = true;
+    NPC.scale = 1.5f;
 
-            if (Main.expertMode)
-            {
-                NPC.lifeMax = 350000;
-                NPC.defense = 125;
-            }
+    if (Main.expertMode)
+    {
+        NPC.lifeMax = 350000;
+        NPC.defense = 125;
+    }
 
-            if (Main.masterMode)
-            {
-                NPC.lifeMax = 470000;
-                NPC.defense = 150;
-            }
+    if (Main.masterMode)
+    {
+        NPC.lifeMax = 470000;
+        NPC.defense = 150;
+    }
 
-            Music = MusicID.Boss2;
-        }
+    Music = MusicID.Boss4;
+}
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
@@ -258,7 +287,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
             {
                 Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, direction * 5f,
                     ModContent.ProjectileType<HallowedSpear>(),
-                    120, 0f);
+                    40, 0f);
             }
         }
 
@@ -281,7 +310,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                 {
                     Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                         ModContent.ProjectileType<HallowedSpear>(),
-                        120, 0f);
+                        40, 0f);
                 }
             }
         }
@@ -370,7 +399,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                     {
                         Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                             ModContent.ProjectileType<HallowedSpear>(),
-                            120, 0f);
+                            40, 0f);
                     }
                 }
             }
@@ -406,7 +435,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                     {
                         Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                             ModContent.ProjectileType<HallowedSpear>(),
-                            120, 0f);
+                            40, 0f);
                     }
                 }
             }
@@ -421,7 +450,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                     {
                         Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                             ModContent.ProjectileType<ForestLeaf>(),
-                            100, 0f);
+                            30, 0f);
                     }
                 }
             }
@@ -457,7 +486,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                     {
                         Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                             ModContent.ProjectileType<OceanSphere>(),
-                            120, 0f);
+                            40, 0f);
                     }
                 }
 
@@ -473,7 +502,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                     {
                         Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                             ModContent.ProjectileType<CrimruptionBolt>(),
-                            120, 0f);
+                            30, 0f);
                     }
                 }
             }
@@ -511,7 +540,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                         {
                             Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                                 ModContent.ProjectileType<CrimruptionBolt>(),
-                                120, 0f);
+                                30, 0f);
                         }
                     }
                 }
@@ -530,7 +559,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                         {
                             Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                                 ModContent.ProjectileType<ForestLeaf>(),
-                                100, 0f);
+                                30, 0f);
                         }
                     }
                 }
@@ -683,7 +712,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                     {
                         Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                             ModContent.ProjectileType<UnderworldFireball>(),
-                            110, 0f);
+                            30, 0f);
                     }
                 }
 
@@ -708,7 +737,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                         {
                             Projectile.NewProjectile(NPC.GetSource_FromAI(), worldAegis.Center, velocity,
                                 ModContent.ProjectileType<AegisChunk>(),
-                                130, 0f);
+                                40, 0f);
                         }
                     }
                 }
@@ -755,7 +784,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                     {
                         Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                             ModContent.ProjectileType<CrimruptionBolt>(),
-                            120, 0f);
+                            30, 0f);
                     }
                 }
             }
@@ -775,7 +804,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                     {
                         Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                             ModContent.ProjectileType<AegisFragment>(),
-                            125, 0f);
+                            30, 0f);
                     }
                 }
 
@@ -794,7 +823,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                         {
                             Projectile.NewProjectile(NPC.GetSource_FromAI(), worldAegis.Center, velocity,
                                 ModContent.ProjectileType<AegisShard>(),
-                                120, 0f);
+                                30, 0f);
                         }
                     }
                 }
@@ -838,7 +867,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                 {
                     Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, new Vector2(0, 8f),
                         ModContent.ProjectileType<SkySpark>(),
-                        100, 0f);
+                        25, 0f);
                 }
             }
 
@@ -859,7 +888,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                     {
                         Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                             ModContent.ProjectileType<SnowSpike>(),
-                            110, 0f);
+                            25, 0f);
                     }
                 }
             }
@@ -897,7 +926,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                     {
                         Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                             ModContent.ProjectileType<HallowedSpear>(),
-                            120, 0f);
+                            40, 0f);
                     }
                 }
 
@@ -916,7 +945,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                         {
                             Projectile.NewProjectile(NPC.GetSource_FromAI(), worldAegis.Center, velocity,
                                 ModContent.ProjectileType<AegisShard>(),
-                                120, 0f);
+                                30, 0f);
                         }
                     }
                 }
@@ -1066,7 +1095,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                     {
                         Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                             ModContent.ProjectileType<AegisShard>(),
-                            120, 0f);
+                            30, 0f);
                     }
                 }
             }
@@ -1091,7 +1120,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                 {
                     Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, new Vector2(0, 10f),
                         ModContent.ProjectileType<AegisShard>(),
-                        120, 0f);
+                        30, 0f);
                 }
             }
 
@@ -1102,7 +1131,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                 {
                     Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                         ModContent.ProjectileType<AegisFragment>(),
-                        125, 0f);
+                        35, 0f);
                 }
             }
 
@@ -1127,7 +1156,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                     {
                         int proj = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                             ModContent.ProjectileType<AegisShard>(),
-                            120, 0f);
+                            40, 0f);
                         if (proj >= 0 && proj < Main.maxProjectiles)
                         {
                             Main.projectile[proj].ai[0] = 1f;
@@ -1170,7 +1199,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                 {
                     Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, new Vector2(0, 8f),
                         ModContent.ProjectileType<SkySpark>(),
-                        100, 0f);
+                        25, 0f);
                 }
             }
 
@@ -1190,7 +1219,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                     {
                         Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                             ModContent.ProjectileType<HallowedSpear>(),
-                            120, 0f);
+                            40, 0f);
                     }
                 }
             }
@@ -1310,7 +1339,7 @@ private void Phase5_AttackA()
             {
                 Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                     ModContent.ProjectileType<HallowedSpear>(),
-                    120, 0f);
+                    40, 0f);
             }
         }
     }
@@ -1322,7 +1351,7 @@ private void Phase5_AttackA()
         {
             Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                 ModContent.ProjectileType<AegisShard>(),
-                120, 0f);
+                30, 0f);
         }
     }
 
@@ -1352,7 +1381,7 @@ private void Phase5_AttackB()
             {
                 Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                     ModContent.ProjectileType<SnowSpike>(),
-                    110, 0f);
+                    25, 0f);
             }
         }
     }
@@ -1371,7 +1400,7 @@ private void Phase5_AttackB()
             {
                 Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                     ModContent.ProjectileType<AegisShard>(),
-                    120, 0f);
+                    30, 0f);
             }
         }
     }
@@ -1402,7 +1431,7 @@ private void Phase5_AttackC()
         {
             Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                 ModContent.ProjectileType<AegisChunk>(),
-                130, 0f);
+                40, 0f);
         }
     }
 
@@ -1423,7 +1452,7 @@ private void Phase5_AttackC()
             {
                 Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                     ModContent.ProjectileType<UnderworldFireball>(),
-                    110, 0f);
+                    35, 0f);
             }
         }
     }
@@ -1447,7 +1476,7 @@ private void Phase5_AttackD()
         {
             Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                 ModContent.ProjectileType<OceanSphere>(),
-                120, 0f);
+                40, 0f);
         }
     }
 
@@ -1459,7 +1488,7 @@ private void Phase5_AttackD()
         {
             Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, new Vector2(0, 10f),
                 ModContent.ProjectileType<SkySpark>(),
-                100, 0f);
+                25, 0f);
         }
     }
 
@@ -1555,7 +1584,7 @@ private void Phase6_PatienceMechanic()
         {
             Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocityAegon,
                 ModContent.ProjectileType<AegisShard>(),
-                120, 0f);
+                30, 0f);
         }
 
         if (worldAegisIndex != -1 && Main.npc[worldAegisIndex].active)
@@ -1566,7 +1595,7 @@ private void Phase6_PatienceMechanic()
             {
                 Projectile.NewProjectile(NPC.GetSource_FromAI(), worldAegis.Center, velocityAegis,
                     ModContent.ProjectileType<AegisShard>(),
-                    120, 0f);
+                    30, 0f);
             }
         }
     }
@@ -1599,7 +1628,7 @@ private void Phase6_PatienceMechanic()
             {
                 Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, velocity,
                     ModContent.ProjectileType<SkySpark>(),
-                    100, 0f);
+                    45, 0f);
             }
         }
     }
@@ -1610,7 +1639,7 @@ private void Phase6_PatienceMechanic()
         {
             Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero,
                 ModContent.ProjectileType<AegisChunk>(),
-                130, 0f);
+                40, 0f);
         }
 
         if (worldAegisIndex != -1 && Main.npc[worldAegisIndex].active)
@@ -1620,7 +1649,7 @@ private void Phase6_PatienceMechanic()
             {
                 Projectile.NewProjectile(NPC.GetSource_FromAI(), worldAegis.Center, Vector2.Zero,
                     ModContent.ProjectileType<AegisChunk>(),
-                    130, 0f);
+                    40, 0f);
             }
         }
     }
@@ -1642,7 +1671,7 @@ private void Phase6_PatienceMechanic()
             {
                 Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                     ModContent.ProjectileType<HallowedSpear>(),
-                    120, 0f);
+                    40, 0f);
             }
         }
 
@@ -1664,7 +1693,7 @@ private void Phase6_PatienceMechanic()
                 {
                     Projectile.NewProjectile(NPC.GetSource_FromAI(), worldAegis.Center, velocity,
                         ModContent.ProjectileType<HallowedSpear>(),
-                        120, 0f);
+                        40, 0f);
                 }
             }
         }
@@ -1724,7 +1753,7 @@ private void Phase6_PatienceMechanic()
                     {
                         Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                             ModContent.ProjectileType<HallowedSpear>(),
-                            120, 0f);
+                            40, 0f);
                     }
                 }
             }

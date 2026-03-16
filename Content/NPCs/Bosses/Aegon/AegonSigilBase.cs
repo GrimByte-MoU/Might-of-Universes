@@ -100,7 +100,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                                     40, 40,
                                     TelegraphDustType,
                                     dustVel.X, dustVel.Y,
-                                    100,
+                                    30,
                                     SigilColor,
                                     1.5f
                                 );
@@ -132,7 +132,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                                     NPC.Center,
                                     vel,
                                     ProjectileType,
-                                    100,
+                                    30,
                                     0f
                                 );
                             }
@@ -148,7 +148,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                                     NPC.Center,
                                     dir * 6f,
                                     ProjectileType,
-                                    100,
+                                    30,
                                     0f
                                 );
                             }

@@ -3,14 +3,12 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria.Audio;
+using MightofUniverses.Common;
 
 namespace MightofUniverses.Content.Items.Accessories
 {
     public class Firewall : ModItem
     {
-        public const int DASH_DURATION = 15;
-        public const int DASH_COOLDOWN = 400;
-        public const float DASH_VELOCITY = 10f;
         public const int DASH_DAMAGE = 50;
 
         public override void SetDefaults()
@@ -42,161 +40,80 @@ namespace MightofUniverses.Content.Items.Accessories
 
     public class FirewallPlayer : ModPlayer
     {
+        public const int DashRight = 2;
+        public const int DashLeft = 3;
+        public const int DashCooldown = 50;
+        public const int DashDuration = 35;
+        public const float DashVelocity = 10f;
+
         public bool hasFirewall;
-        public bool dashing;
-        public int dashTimer;
-        public int dashCooldown;
-        public int dashDirection;
-        private bool rightKeyDown;
-        private bool leftKeyDown;
-        private int rightKeyPressTime;
-        private int leftKeyPressTime;
-        private int rightKeyReleaseTime;
-        private int leftKeyReleaseTime;
-        private int rightTapCount;
-        private int leftTapCount;
-        private const int TAP_WINDOW = 15;
+        public int DashDir = -1;
+        public int DashDelay = 0;
+        public int DashTimer = 0;
 
         public override void ResetEffects()
         {
             hasFirewall = false;
-        }
 
-        public bool CanUseDash()
-        {
-            return hasFirewall && Player.dashType == 0 && !Player.mount.Active && dashCooldown <= 0 && !dashing;
-        }
-
-        public void StartDash(int direction)
-        {
-            dashing = true;
-            dashTimer = Firewall.DASH_DURATION;
-            dashDirection = direction;
-            dashCooldown = Firewall.DASH_COOLDOWN;
-            SoundEngine.PlaySound(SoundID.Item74, Player.Center);
-        }
-
-        public override void PreUpdate()
-        {
-            if (dashCooldown > 0)
+            if (Player.controlRight && Player.releaseRight && Player.doubleTapCardinalTimer[DashRight] < 15)
             {
-                dashCooldown--;
+                DashDir = DashRight;
             }
-
-            if (dashTimer > 0)
+            else if (Player.controlLeft && Player.releaseLeft && Player.doubleTapCardinalTimer[DashLeft] < 15)
             {
-                dashTimer--;
-                if (dashTimer <= 0)
-                {
-                    dashing = false;
-                }
-            }
-
-            HandleDoubleTapDetection();
-        }
-        
-        private void HandleDoubleTapDetection()
-        {
-            bool rightKeyPressed = Player.controlRight && !Player.controlLeft;
-            if (rightKeyPressed && !rightKeyDown)
-            {
-                rightKeyDown = true;
-                rightKeyPressTime = 0;
-
-                if (rightKeyReleaseTime < TAP_WINDOW)
-                {
-                    rightTapCount++;
-                    if (rightTapCount >= 2 && CanUseDash())
-                    {
-                        StartDash(1);
-                        rightTapCount = 0;
-                    }
-                }
-                else
-                {
-                    rightTapCount = 1;
-                }
-            }
-            else if (!rightKeyPressed && rightKeyDown)
-            {
-                rightKeyDown = false;
-                rightKeyReleaseTime = 0;
-            }
-
-            bool leftKeyPressed = Player.controlLeft && !Player.controlRight;
-            if (leftKeyPressed && !leftKeyDown)
-            {
-                leftKeyDown = true;
-                leftKeyPressTime = 0;
-
-                if (leftKeyReleaseTime < TAP_WINDOW)
-                {
-                    leftTapCount++;
-                    if (leftTapCount >= 2 && CanUseDash())
-                    {
-                        StartDash(-1);
-                        leftTapCount = 0;
-                    }
-                }
-                else
-                {
-                    leftTapCount = 1;
-                }
-            }
-            else if (!leftKeyPressed && leftKeyDown)
-            {
-                leftKeyDown = false;
-                leftKeyReleaseTime = 0;
-            }
-
-            if (rightKeyDown)
-            {
-                rightKeyPressTime++;
+                DashDir = DashLeft;
             }
             else
             {
-                rightKeyReleaseTime++;
-            }
-            
-            if (leftKeyDown)
-            {
-                leftKeyPressTime++;
-            }
-            else
-            {
-                leftKeyReleaseTime++;
-            }
-
-            if (rightKeyReleaseTime > TAP_WINDOW * 2)
-            {
-                rightTapCount = 0;
-            }
-            
-            if (leftKeyReleaseTime > TAP_WINDOW * 2)
-            {
-                leftTapCount = 0;
+                DashDir = -1;
             }
         }
 
         public override void PreUpdateMovement()
         {
-            if (dashing)
+            if (CanUseDash() && DashDir != -1 && DashDelay == 0)
             {
+                Vector2 newVelocity = Player.velocity;
+
+                switch (DashDir)
+                {
+                    case DashLeft when Player.velocity.X > -DashVelocity:
+                    case DashRight when Player.velocity.X < DashVelocity:
+                        float dashDirection = DashDir == DashRight ? 1 : -1;
+                        newVelocity.X = dashDirection * DashVelocity;
+                        break;
+                    default:
+                        return;
+                }
+
+                DashDelay = DashCooldown;
+                DashTimer = DashDuration;
+                Player.velocity = newVelocity;
+
+                SoundEngine.PlaySound(SoundID.Item74, Player.Center);
+            }
+
+            if (DashDelay > 0)
+                DashDelay--;
+
+            if (DashTimer > 0)
+            {
+                Player.eocDash = DashTimer;
+                Player.armorEffectDrawShadowEOCShield = true;
                 Player.immune = true;
                 Player.immuneTime = 6;
-                Player.velocity.X = Firewall.DASH_VELOCITY * dashDirection;
 
                 for (int i = 0; i < 3; i++)
                 {
                     Dust dust = Dust.NewDustDirect(
-                        Player.position, 
-                        Player.width, 
+                        Player.position,
+                        Player.width,
                         Player.height,
-                        DustID.GreenTorch, 
-                        0f, 
-                        0f, 
-                        100, 
-                        default, 
+                        DustID.GreenTorch,
+                        0f,
+                        0f,
+                        100,
+                        default,
                         1.5f
                     );
                     dust.noGravity = true;
@@ -209,26 +126,30 @@ namespace MightofUniverses.Content.Items.Accessories
                     NPC npc = Main.npc[i];
                     if (npc.active && !npc.friendly && hitbox.Intersects(npc.Hitbox))
                     {
+                        int baseDamage = Firewall.DASH_DAMAGE;
+                        float damageMultiplier = Player.GetDamage<PacifistDamageClass>().Additive + Player.GetDamage<PacifistDamageClass>().Multiplicative - 1f;
+                        int finalDamage = (int)(baseDamage * damageMultiplier);
+
                         npc.StrikeNPC(new NPC.HitInfo
                         {
-                            Damage = Firewall.DASH_DAMAGE,
+                            Damage = finalDamage,
                             Knockback = 8f,
-                            HitDirection = dashDirection
+                            HitDirection = DashDir == DashRight ? 1 : -1
                         });
-                        
+
                         SoundEngine.PlaySound(SoundID.Item14, npc.Center);
-                        
+
                         for (int d = 0; d < 20; d++)
                         {
                             Dust dust = Dust.NewDustDirect(
-                                npc.position, 
-                                npc.width, 
+                                npc.position,
+                                npc.width,
                                 npc.height,
-                                DustID.GreenTorch, 
-                                0f, 
-                                0f, 
-                                100, 
-                                default, 
+                                DustID.GreenTorch,
+                                0f,
+                                0f,
+                                100,
+                                default,
                                 2f
                             );
                             dust.noGravity = true;
@@ -236,7 +157,17 @@ namespace MightofUniverses.Content.Items.Accessories
                         }
                     }
                 }
+
+                DashTimer--;
             }
+        }
+
+        private bool CanUseDash()
+        {
+            return hasFirewall
+                && Player.dashType == 0
+                && !Player.setSolar
+                && !Player.mount.Active;
         }
     }
 }

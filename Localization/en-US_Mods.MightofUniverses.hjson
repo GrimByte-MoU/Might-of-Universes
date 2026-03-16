@@ -860,6 +860,8 @@ Projectiles: {
 	BoundSpiritProj.DisplayName: Bound Spirit Proj
 	ChainedSoulProj.DisplayName: Chained Soul Proj
 	TerraiumSpike.DisplayName: Terraium Spike
+	EMPTrap.DisplayName: E M P Trap
+	CyberRing.DisplayName: Cyber Ring
 }
 
 Keybinds: {
@@ -1992,7 +1994,7 @@ Items: {
 		DisplayName: Satellite Defense Grid
 		Tooltip:
 			'''
-			System onl1ne... Defense gr1d 100% operat10onal...
+			System onl1ne... Defense gr1d 100% operat10nal...
 			+10 defense and immunity to most debuffs
 			Enables the player to perform a more powerful dash
 			The player emanates a triple layered aura that damages enemies
@@ -5313,6 +5315,51 @@ Items: {
 	TerraiumHamaxe: {
 		DisplayName: Terraium Hamaxe
 		Tooltip: ""
+	}
+
+	CyberOneChestplate: {
+		DisplayName: Cyber 1.0 Chestplate
+		Tooltip:
+			'''
+			-25% damage for all classes
+			+60% nonweapon damage
+			+125 max life
+			Knockback immunity
+			'''
+	}
+
+	CyberOneLegArmor: {
+		DisplayName: Cyber 1.0 Leg Armor
+		Tooltip:
+			'''
+			-20% damage for all classes
+			+50% nonweapon damage
+			+30% movement speed
+			'''
+	}
+
+	CyberOneVisor: {
+		DisplayName: Cyber 1.0 Visor
+		Tooltip:
+			'''
+			-20% damage for all classes
+			+40% nonweapon damage
+			Highlights treasure, enemies and traps
+			'''
+	}
+
+	CyberOneWings: {
+		DisplayName: Cyber One Wings
+		Tooltip: ""
+	}
+
+	BaseCyberModule: {
+		DisplayName: Base Cyber Module
+		Tooltip: 
+		'''
+		Once per second, fires a Cyber Ring that accelerates and homes in on nearby enemies dealing damage and inflicting Electrified for 5 seconds
+		Enhanced if your wearing Cyber Armor
+		'''
 	}
 }
 

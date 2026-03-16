@@ -47,10 +47,6 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
                 Projectile.alpha += 8;
             }
         }
-        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
-{
-    modifiers.FinalDamage.Base = 100;
-}
 
 
         public override void Kill(int timeLeft)

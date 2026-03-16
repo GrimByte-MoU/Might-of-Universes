@@ -51,15 +51,49 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
         private static Asset<Texture2D> textureRuined;
 
         public override void SetStaticDefaults()
-        {
-            NPCID.Sets.MPAllowedEnemies[Type] = true;
-            if (Main.netMode != NetmodeID.Server)
-            {
-                textureNormal = ModContent.Request<Texture2D>("MightofUniverses/Content/NPCs/Bosses/Aegon/WorldAegis");
-                textureDamaged = ModContent.Request<Texture2D>("MightofUniverses/Content/NPCs/Bosses/Aegon/WorldAegis_Damaged");
-                textureRuined = ModContent.Request<Texture2D>("MightofUniverses/Content/NPCs/Bosses/Aegon/WorldAegis_Ruined");
-            }
-        }
+{
+    NPCID.Sets.MPAllowedEnemies[Type] = true;
+    
+    if (Main.netMode != NetmodeID.Server)
+    {
+        textureNormal = ModContent.Request<Texture2D>("MightofUniverses/Content/NPCs/Bosses/Aegon/WorldAegis");
+        textureDamaged = ModContent.Request<Texture2D>("MightofUniverses/Content/NPCs/Bosses/Aegon/WorldAegis_Damaged");
+        textureRuined = ModContent.Request<Texture2D>("MightofUniverses/Content/NPCs/Bosses/Aegon/WorldAegis_Ruined");
+    }
+
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Venom] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire3] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.CursedInferno] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Frostburn] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Frostburn2] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.ShadowFlame] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Daybreak] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Ichor] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.BetsysCurse] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Electrified] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Bleeding] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Slow] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Stinky] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Chilled] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Frozen] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<TerrasRend>()] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<CoreHeat>()] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<SheerCold>()] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<DeltaShock>()] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<NaturesToxin>()] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<ElementsHarmony>()] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<Corrupted>()] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<DeadlyCorrupt>()] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<Demonfire>()] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<HellsMark>()] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<EnemyBleeding>()] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<MortalWound>()] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<OceanPressure>()] = true;
+    NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<RebukingLight>()] = true;
+}
 
         public override void SafeSetDefaults()
         {
@@ -236,51 +270,58 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
         }
 
         // ==================== PHASE 1: FULL SHIELD ====================
-        private void Phase1Attacks()
+private void Phase1Attacks()
+{
+    if (NPC.target < 0 || NPC.target >= Main.maxPlayers)
+        NPC.TargetClosest();
+        
+    Player target = Main.player[NPC.target];
+    
+    if (target == null || !target.active || target.dead)
+        return;
+
+    if (AttackTimer % 60 == 0)
+    {
+        int projectileCount = NPC.life / (float)NPC.lifeMax > 0.8f ? 8 : 12;
+        for (int i = 0; i < projectileCount; i++)
         {
-            Player target = Main.player[NPC.target];
-
-            if (AttackTimer % 60 == 0)
+            float angle = i / (float)projectileCount * MathHelper.TwoPi;
+            Vector2 spawnOffset = new Vector2(
+                (float)Math.Cos(angle),
+                (float)Math.Sin(angle)
+            ) * 64f;
+            Vector2 velocity = new Vector2(
+                (float)Math.Cos(angle),
+                (float)Math.Sin(angle)
+            ) * 4f;
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                int projectileCount = NPC.life / (float)NPC.lifeMax > 0.8f ? 8 : 12;
-                for (int i = 0; i < projectileCount; i++)
-                {
-                    float angle = i / (float)projectileCount * MathHelper.TwoPi;
-                    Vector2 spawnOffset = new Vector2(
-                        (float)Math.Cos(angle),
-                        (float)Math.Sin(angle)
-                    ) * 64f;
-                    Vector2 velocity = new Vector2(
-                        (float)Math.Cos(angle),
-                        (float)Math.Sin(angle)
-                    ) * 4f;
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
-                    {
-                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center + spawnOffset, velocity,
-                            ModContent.ProjectileType<WorldAegisBolt>(),
-                            95, 0f);
-                    }
-                }
-            }
-
-        if (NPC.life / (float)NPC.lifeMax <= 0.9f && AttackTimer % 30 == 0)
-            {
-                Vector2 direction = target.Center - NPC.Center;
-
-                if (direction.Length() > 0)
-                {
-                    direction.Normalize();
-                    Vector2 velocity = direction * 6f;
-
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
-                    {
-                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
-                            ModContent.ProjectileType<WorldAegisLeaf>(),
-                            100, 0f);
-                    }
-                }
+                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center + spawnOffset, velocity,
+                    ModContent.ProjectileType<WorldAegisBolt>(),
+                    40, 0f);
             }
         }
+    }
+
+    if (NPC.life / (float)NPC.lifeMax <= 0.9f && AttackTimer % 30 == 0)
+    {
+        Vector2 toPlayer = target.Center - NPC.Center;
+        float distance = toPlayer.Length();
+        
+        if (distance > 10f)
+        {
+            toPlayer.Normalize();
+            Vector2 velocity = toPlayer * 6f;
+
+            if (Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
+                    ModContent.ProjectileType<WorldAegisLeaf>(),
+                    35, 0f);
+            }
+        }
+    }
+}
 
         // ==================== TRANSITION: PHASE 1 → PHASE 2 ====================
         public void TransitionToPhase2AndFlyAway()
@@ -357,7 +398,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                     {
                         Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                             ModContent.ProjectileType<AegisShard>(),
-                            95, 0f);
+                            40, 0f);
                     }
                 }
             }
@@ -392,7 +433,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                 {
                     Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                         ModContent.ProjectileType<WorldAegisFireball>(),
-                        95, 0f);
+                        45, 0f);
                 }
             }
         }
@@ -419,7 +460,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                     {
                         Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                             ModContent.ProjectileType<WorldAegisWater>(),
-                            95, 0f);
+                            45, 0f);
                     }
                 }
             }
@@ -444,7 +485,7 @@ namespace MightofUniverses.Content.NPCs.Bosses.Aegon
                 {
                     Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
                         ModContent.ProjectileType<AegisFragment>(),
-                        125, 0f);
+                        30, 0f);
                 }
             }
 

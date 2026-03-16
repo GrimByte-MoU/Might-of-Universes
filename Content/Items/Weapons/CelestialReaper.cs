@@ -14,7 +14,7 @@ namespace MightofUniverses.Content.Items.Weapons
 {
     public class CelestialReaper : ModItem, IHasSoulCost, IScytheWeapon
     {
-        public float BaseSoulCost => 150f;
+        public float BaseSoulCost => 200f;
 
         public override void SetDefaults()
         {

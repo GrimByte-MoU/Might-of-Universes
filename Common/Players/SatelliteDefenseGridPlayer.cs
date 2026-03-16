@@ -6,90 +6,98 @@ using System.Collections.Generic;
 using Terraria.ID;
 using System;
 using Terraria.Audio;
+using MightofUniverses.Common;
 
 namespace MightofUniverses.Common.Players
 {
     public class SatelliteDefenseGridPlayer : ModPlayer
     {
+        public const int DashRight = 2;
+        public const int DashLeft = 3;
+        public const int DashCooldown = 50;
+        public const int DashDuration = 45;
+        public const float DashVelocity = 20f;
+        public const int DashDamage = 100;
+
         public bool hasSatelliteGrid;
-        public bool dashing;
-        public int dashTimer;
-        public int dashDirection;
-        public int dashCooldown;
+        public int DashDir = -1;
+        public int DashDelay = 0;
+        public int DashTimer = 0;
         public bool regenActive;
         public int regenTimer;
         public int healCooldown;
         public int emergencyHealCooldown;
+
         private const float GREEN_RADIUS = 30f * 16f;
         private const int GREEN_BASE_DAMAGE = 50;
         private const int GREEN_DAMAGE_PER_ENEMY = 5;
         private const float GREEN_DAMAGE_INTERVAL = 30f;
         private int greenDamageTimer;
+
         private const float YELLOW_RADIUS = 20f * 16f;
         private const int YELLOW_BASE_DAMAGE = 75;
         private const int YELLOW_DAMAGE_PER_ENEMY = 10;
         private const float YELLOW_DAMAGE_INTERVAL = 20f;
         private int yellowDamageTimer;
+
         private const float RED_RADIUS = 10f * 16f;
         private const int RED_BASE_DAMAGE = 100;
         private const int RED_DAMAGE_PER_ENEMY = 15;
         private const float RED_DAMAGE_INTERVAL = 10f;
         private int redDamageTimer;
-        private bool rightKeyDown;
-        private bool leftKeyDown;
-        private int rightKeyPressTime;
-        private int leftKeyPressTime;
-        private int rightKeyReleaseTime;
-        private int leftKeyReleaseTime;
-        private int rightTapCount;
-        private int leftTapCount;
-        private const int TAP_WINDOW = 15;
-        private const int DASH_DURATION = 20;
-        private const int DASH_COOLDOWN = 200;
-        private const float DASH_VELOCITY = 15f;
-        private const int DASH_DAMAGE = 100;
 
         public override void ResetEffects()
         {
             hasSatelliteGrid = false;
-            
+
             if (healCooldown > 0) healCooldown--;
             if (emergencyHealCooldown > 0) emergencyHealCooldown--;
-        }
 
-        private void StartDash(int direction)
-        {
-            dashing = true;
-            dashTimer = DASH_DURATION;
-            dashDirection = direction;
-            dashCooldown = DASH_COOLDOWN;
-            SoundEngine.PlaySound(SoundID.Item74, Player.Center);
-        }
-
-        public override void PreUpdate()
-        {
-            if (dashCooldown > 0)
+            if (Player.controlRight && Player.releaseRight && Player.doubleTapCardinalTimer[DashRight] < 15)
             {
-                dashCooldown--;
+                DashDir = DashRight;
             }
-
-            if (dashTimer > 0)
+            else if (Player.controlLeft && Player.releaseLeft && Player.doubleTapCardinalTimer[DashLeft] < 15)
             {
-                dashTimer--;
-                if (dashTimer <= 0)
+                DashDir = DashLeft;
+            }
+            else
+            {
+                DashDir = -1;
+            }
+        }
+
+        public override void PreUpdateMovement()
+        {
+            if (CanUseDash() && DashDir != -1 && DashDelay == 0)
+            {
+                Vector2 newVelocity = Player.velocity;
+
+                switch (DashDir)
                 {
-                    dashing = false;
+                    case DashLeft when Player.velocity.X > -DashVelocity:
+                    case DashRight when Player.velocity.X < DashVelocity:
+                        float dashDirection = DashDir == DashRight ? 1 : -1;
+                        newVelocity.X = dashDirection * DashVelocity;
+                        break;
+                    default:
+                        return;
                 }
+
+                DashDelay = DashCooldown;
+                DashTimer = DashDuration;
+                Player.velocity = newVelocity;
+
+                SoundEngine.PlaySound(SoundID.Item74, Player.Center);
             }
 
-            if (hasSatelliteGrid)
+            if (DashDelay > 0)
+                DashDelay--;
+
+            if (DashTimer > 0)
             {
-                HandleDoubleTapDetection();
-            }
-            
-            if (dashing)
-            {
-                Player.velocity.X = DASH_VELOCITY * dashDirection;
+                Player.eocDash = DashTimer;
+                Player.armorEffectDrawShadowEOCShield = true;
                 Player.immune = true;
                 Player.immuneTime = 6;
 
@@ -108,7 +116,7 @@ namespace MightofUniverses.Common.Players
                     );
                     dust.noGravity = true;
                     dust.velocity *= 0.7f;
-                    
+
                     Dust dust2 = Dust.NewDustDirect(
                         Player.position,
                         Player.width,
@@ -130,17 +138,22 @@ namespace MightofUniverses.Common.Players
                     NPC npc = Main.npc[i];
                     if (npc.active && !npc.friendly && hitbox.Intersects(npc.Hitbox))
                     {
+                        int baseDamage = DashDamage;
+                        float damageMultiplier = Player.GetDamage<PacifistDamageClass>().Additive + Player.GetDamage<PacifistDamageClass>().Multiplicative - 1f;
+                        int finalDamage = (int)(baseDamage * damageMultiplier);
+
                         npc.StrikeNPC(new NPC.HitInfo
                         {
-                            Damage = DASH_DAMAGE,
+                            Damage = finalDamage,
                             Knockback = 8f,
-                            HitDirection = dashDirection
+                            HitDirection = DashDir == DashRight ? 1 : -1
                         });
 
                         SoundEngine.PlaySound(SoundID.Item14, npc.Center);
-                        for (int d = 0; d < 10; d++)
+
+                        for (int d = 0; d < 20; d++)
                         {
-                            Dust.NewDust(
+                            Dust dust = Dust.NewDustDirect(
                                 npc.position,
                                 npc.width,
                                 npc.height,
@@ -149,107 +162,58 @@ namespace MightofUniverses.Common.Players
                                 0f,
                                 100,
                                 default,
-                                1.5f
+                                2f
                             );
+                            dust.noGravity = true;
+                            dust.velocity *= 2f;
                         }
                     }
                 }
+
+                DashTimer--;
             }
         }
-        
-        private void HandleDoubleTapDetection()
+
+        private bool CanUseDash()
         {
-            bool rightKeyPressed = Player.controlRight && !Player.controlLeft;
-            if (rightKeyPressed && !rightKeyDown)
-            {
-                rightKeyDown = true;
-                rightKeyPressTime = 0;
-
-                if (rightKeyReleaseTime < TAP_WINDOW)
-                {
-                    rightTapCount++;
-                    if (rightTapCount >= 2 && dashCooldown <= 0 && !dashing)
-                    {
-                        StartDash(1);
-                        rightTapCount = 0;
-                    }
-                }
-                else
-                {
-                    rightTapCount = 1;
-                }
-            }
-            else if (!rightKeyPressed && rightKeyDown)
-            {
-                rightKeyDown = false;
-                rightKeyReleaseTime = 0;
-            }
-
-            bool leftKeyPressed = Player.controlLeft && !Player.controlRight;
-            if (leftKeyPressed && !leftKeyDown)
-            {
-                leftKeyDown = true;
-                leftKeyPressTime = 0;
-
-                if (leftKeyReleaseTime < TAP_WINDOW)
-                {
-                    leftTapCount++;
-                    if (leftTapCount >= 2 && dashCooldown <= 0 && !dashing)
-                    {
-                        StartDash(-1);
-                        leftTapCount = 0;
-                    }
-                }
-                else
-                {
-                    leftTapCount = 1;
-                }
-            }
-            else if (!leftKeyPressed && leftKeyDown)
-            {
-                leftKeyDown = false;
-                leftKeyReleaseTime = 0;
-            }
-
-            if (rightKeyDown)
-            {
-                rightKeyPressTime++;
-            }
-            else
-            {
-                rightKeyReleaseTime++;
-            }
-            
-            if (leftKeyDown)
-            {
-                leftKeyPressTime++;
-            }
-            else
-            {
-                leftKeyReleaseTime++;
-            }
-
-            if (rightKeyReleaseTime > TAP_WINDOW * 2)
-            {
-                rightTapCount = 0;
-            }
-            
-            if (leftKeyReleaseTime > TAP_WINDOW * 2)
-            {
-                leftTapCount = 0;
-            }
+            return hasSatelliteGrid
+                && Player.dashType == 0
+                && !Player.setSolar
+                && !Player.mount.Active;
         }
 
         public override void PostUpdate()
         {
             if (!hasSatelliteGrid) return;
-            
-            HandleRing(GREEN_RADIUS, GREEN_BASE_DAMAGE, GREEN_DAMAGE_PER_ENEMY, ref greenDamageTimer, Color.Green, DustID.GreenTorch, GREEN_DAMAGE_INTERVAL);
-            HandleRing(YELLOW_RADIUS, YELLOW_BASE_DAMAGE, YELLOW_DAMAGE_PER_ENEMY, ref yellowDamageTimer, Color.Yellow, DustID.YellowTorch, YELLOW_DAMAGE_INTERVAL);
-            HandleRing(RED_RADIUS, RED_BASE_DAMAGE, RED_DAMAGE_PER_ENEMY, ref redDamageTimer, Color.Red, DustID.RedTorch, RED_DAMAGE_INTERVAL);
+
+            DrawRing(GREEN_RADIUS, Color.Green, DustID.GreenTorch);
+            DrawRing(YELLOW_RADIUS, Color.Yellow, DustID.YellowTorch);
+            DrawRing(RED_RADIUS, Color.Red, DustID.RedTorch);
+
+            greenDamageTimer++;
+            yellowDamageTimer++;
+            redDamageTimer++;
+
+            if (greenDamageTimer >= GREEN_DAMAGE_INTERVAL)
+            {
+                greenDamageTimer = 0;
+                DamageEnemiesInRing(YELLOW_RADIUS, GREEN_RADIUS, GREEN_BASE_DAMAGE, GREEN_DAMAGE_PER_ENEMY, DustID.GreenTorch);
+            }
+
+            if (yellowDamageTimer >= YELLOW_DAMAGE_INTERVAL)
+            {
+                yellowDamageTimer = 0;
+                DamageEnemiesInRing(RED_RADIUS, YELLOW_RADIUS, YELLOW_BASE_DAMAGE, YELLOW_DAMAGE_PER_ENEMY, DustID.YellowTorch);
+            }
+
+            if (redDamageTimer >= RED_DAMAGE_INTERVAL)
+            {
+                redDamageTimer = 0;
+                DamageEnemiesInRing(0f, RED_RADIUS, RED_BASE_DAMAGE, RED_DAMAGE_PER_ENEMY, DustID.RedTorch);
+            }
         }
 
-        private void HandleRing(float radius, int baseDamage, int damagePerEnemy, ref int timer, Color color, int dustType, float damageInterval)
+        private void DrawRing(float radius, Color color, int dustType)
         {
             const int NUM_POINTS = 120;
             for (int i = 0; i < NUM_POINTS; i++)
@@ -271,51 +235,56 @@ namespace MightofUniverses.Common.Players
                 dust.noGravity = true;
                 dust.noLight = false;
             }
+        }
 
-            timer++;
-            if (timer >= damageInterval)
+        private void DamageEnemiesInRing(float innerRadius, float outerRadius, int baseDamage, int damagePerEnemy, int dustType)
+        {
+            List<NPC> affectedNPCs = new List<NPC>();
+            
+            for (int i = 0; i < Main.maxNPCs; i++)
             {
-                timer = 0;
-                List<NPC> affectedNPCs = new List<NPC>();
-                for (int i = 0; i < Main.maxNPCs; i++)
+                NPC npc = Main.npc[i];
+                if (npc.active && !npc.friendly)
                 {
-                    NPC npc = Main.npc[i];
-                    if (npc.active && !npc.friendly && Vector2.Distance(npc.Center, Player.Center) <= radius)
+                    float distance = Vector2.Distance(npc.Center, Player.Center);
+                    if (distance > innerRadius && distance <= outerRadius)
                     {
                         affectedNPCs.Add(npc);
                     }
                 }
+            }
 
-                if (affectedNPCs.Count > 0)
+            if (affectedNPCs.Count > 0)
+            {
+                int baseDamageCalculated = baseDamage + (affectedNPCs.Count * damagePerEnemy);
+                float damageMultiplier = Player.GetDamage<PacifistDamageClass>().Additive + Player.GetDamage<PacifistDamageClass>().Multiplicative - 1f;
+                int damagePerNPC = (int)(baseDamageCalculated * damageMultiplier);
+
+                foreach (NPC npc in affectedNPCs)
                 {
-                    int damagePerNPC = baseDamage + (affectedNPCs.Count * damagePerEnemy);
-                    foreach (NPC npc in affectedNPCs)
+                    npc.StrikeNPC(new NPC.HitInfo
                     {
-                        npc.StrikeNPC(new NPC.HitInfo
-                        {
-                            Damage = damagePerNPC,
-                            Knockback = 0f,
-                            HitDirection = 0
-                        });
-                        for (int d = 0; d < 3; d++)
-                        {
-                            Dust.NewDust(
-                                npc.position,
-                                npc.width,
-                                npc.height,
-                                dustType,
-                                0f,
-                                0f,
-                                100,
-                                default,
-                                1f
-                            );
-                        }
+                        Damage = damagePerNPC,
+                        Knockback = 0f,
+                        HitDirection = 0
+                    });
+                    
+                    for (int d = 0; d < 3; d++)
+                    {
+                        Dust.NewDust(
+                            npc.position,
+                            npc.width,
+                            npc.height,
+                            dustType,
+                            0f,
+                            0f,
+                            100,
+                            default,
+                            1f
+                        );
                     }
                 }
             }
         }
     }
 }
-
-

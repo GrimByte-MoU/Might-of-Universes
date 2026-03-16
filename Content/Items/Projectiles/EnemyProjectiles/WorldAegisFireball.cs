@@ -49,10 +49,6 @@ namespace MightofUniverses.Content.Items.Projectiles.EnemyProjectiles
 
             Lighting.AddLight(Projectile.Center, 1.0f, 0.5f, 0.1f);
         }
-        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
-{
-    modifiers.FinalDamage.Base = 95;
-}
 
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)

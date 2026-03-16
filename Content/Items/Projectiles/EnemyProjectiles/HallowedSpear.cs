@@ -51,11 +51,6 @@ namespace MightofUniverses.Content.Items.Projectiles. EnemyProjectiles
             Projectile.tileCollide = true;
         }
 
-        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
-{
-    modifiers.FinalDamage.Base = 120;
-}
-
         public override void AI()
         {
             StateTimer++;
