@@ -130,18 +130,18 @@ namespace MightofUniverses.Content.Items.Projectiles. EnemyProjectiles
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             int rebukeDuration = 60;
-            int subjugatedDuration = 30;
+            int subjugatedDuration = 20;
 
             if (Main.expertMode)
             {
                 rebukeDuration = 120;
-                subjugatedDuration = 60;
+                subjugatedDuration = 30;
             }
 
             if (Main.masterMode)
             {
                 rebukeDuration = 180;
-                subjugatedDuration = 90;
+                subjugatedDuration = 60;
             }
 
             target.AddBuff(ModContent. BuffType<RebukingLight>(), rebukeDuration);

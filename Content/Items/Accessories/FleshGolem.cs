@@ -18,7 +18,7 @@ namespace MightofUniverses.Content.Items.Accessories
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.endurance += 0.08f;
+            player.endurance += 0.06f;
             player.lifeRegen += 3;
             player.statLifeMax2 += 25;
             player.GetModPlayer<FleshGolemPlayer>().hasFleshGolem = true;

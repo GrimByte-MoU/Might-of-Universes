@@ -862,6 +862,9 @@ Projectiles: {
 	TerraiumSpike.DisplayName: Terraium Spike
 	EMPTrap.DisplayName: E M P Trap
 	CyberRing.DisplayName: Cyber Ring
+	CoreSphereProjectile.DisplayName: Core Sphere Projectile
+	CyberSaw.DisplayName: Cyber Saw
+	MoltenCoreSphereProjectile.DisplayName: Molten Core Sphere Projectile
 }
 
 Keybinds: {
@@ -1681,10 +1684,10 @@ Items: {
 		Tooltip:
 			'''
 			A golem made of flesh and bone
-			+8% damage reduction
+			+6% damage reduction
 			+1.5hp/sec life regen
 			+25 max health
-			You have a 15% chance to dodge attacks and gain the Altered Perception Buff for 8 seconds
+			You have a 10% chance to dodge attacks and gain the Altered Perception Buff for 8 seconds
 			After dodging, you give all enemies in a 35 tile range Ichor and Spineless for 3 seconds
 			While having Altered Perception, you can't dodge another attack and your crits deal 50% more damage
 			'''
@@ -1695,7 +1698,7 @@ Items: {
 		Tooltip:
 			'''
 			This little guy is hot to the touch
-			+9% damage and damage reduction
+			+6% damage and damage reduction
 			Whenever an enemy hurts you, they take double the damage you took
 			They are also given Cursed Inferno and Demonfire for 3 seconds
 			'''
@@ -1706,16 +1709,17 @@ Items: {
 		Tooltip:
 			'''
 			An incredibly powerful twin Familiar
-			+12% damage and dagame reduction
+			+10% damage 
+			+9% dagame reduction
 			+2.5hp/sec life regen
 			+40 max health
 			Whenever an enemy damages you, they take triple the damage you took and 2 Lunar blasts will also fall from the sky and damage nearby enemies
-			You have a 20% chance to dodge attacks, gaining Lunar Vision for 8 seconds when you do
-			This chance increases by 5% for each second that you haven't dodged an attack
+			You have a 5% chance to dodge attacks, gaining Lunar Vision for 8 seconds when you do
+			This chance increases by 5% for every 2 seconds you haven't dodged an attack
 			Whenever you successfully dodge, all enemies within 75 tiles are given Ichor, Demonfire and Lunar Reap for 3 seconds
 			Five Lunar blasts will also rain down from above and hit enemies
 			You cannot dodge another attack while having Lunar Vision or Altered Perception
-			Your critical strikes deal double damage while having Lunar Vision
+			Your critical strikes deal 50% more damage while having Lunar Vision
 			'''
 	}
 
@@ -1724,10 +1728,10 @@ Items: {
 		Tooltip:
 			'''
 			Some need the brain as well as the spine
-			+7% damage reduction
+			+5% damage reduction
 			+1hp/sec life regen
 			+20 max health
-			You have a 15% chance to dodge attacks and gain the Cerebral Mindtrick Buff for 6 seconds
+			You have a 5% chance to dodge attacks and gain the Cerebral Mindtrick Buff for 6 seconds
 			After dodging, you give all enemies in a 25 tile radius Ichor and Spineless for 3 second
 			While having Cerebral Mindtrick, you can't dodge another Attack
 			'''
@@ -1747,7 +1751,7 @@ Items: {
 		Tooltip:
 			'''
 			A powerful familiar with great capabilities
-			+10% damage and damage reduction
+			+7% damage and damage reduction
 			Whenever an enemy hurts you, they take two and a half times the damage you took
 			They are also given Demonfire and Prismatic Rend for 3 seconds
 			Every 30 seconds, whenever you reach 50% or less health, 5 Prismatic Spitballs will retaliate and damage nearby enemies
@@ -1762,7 +1766,7 @@ Items: {
 			+9% damage reduction
 			+2hp/sec life regen
 			+30 max health
-			You have a 15% chance to dodge attacks and gain the Altered Perception Buff for 8 seconds
+			You have a 10% chance to dodge attacks and gain the Altered Perception Buff for 8 seconds
 			After dodging, you give all enemies in a 50 tile range Ichor, Spineless and Prismatic Rend for 3 seconds
 			While having Altered Perception, you can't dodge another attack and your crits deal 75% more damage
 			'''
@@ -1773,7 +1777,7 @@ Items: {
 		Tooltip:
 			'''
 			A tamed corrupted worm
-			+8% damage and damage reduction
+			+5% damage and damage reduction
 			Whenever an enemy damages you, they take damage equal to 150% of the damage you took
 			They will also be given Corrupted and Cursed Inferno for 3 seconds
 			'''
@@ -1783,7 +1787,7 @@ Items: {
 		DisplayName: Worm Fang
 		Tooltip:
 			'''
-			+8% damage
+			+6% damage
 			Whenever an enemy damages you, they take damage equal to the damage you took
 			They will also be given Corrupted for 3 seconds
 			'''
@@ -4841,7 +4845,7 @@ Items: {
 		Tooltip:
 			'''
 			+15 defense
-			      Creates a shield that absorbs 1,500 damage
+			      Creates a shield that absorbs 600 damage
 			      The shield regenerates 30 seconds after breaking
 			      Grants immunity to knockback while the shield is active
 			      Grants immunity to several deadly debuffs
@@ -5349,17 +5353,37 @@ Items: {
 	}
 
 	CyberOneWings: {
-		DisplayName: Cyber One Wings
+		DisplayName: Cyber 1.0 Wings
 		Tooltip: ""
 	}
 
 	BaseCyberModule: {
 		DisplayName: Base Cyber Module
-		Tooltip: 
-		'''
-		Once per second, fires a Cyber Ring that accelerates and homes in on nearby enemies dealing damage and inflicting Electrified for 5 seconds
-		Enhanced if your wearing Cyber Armor
-		'''
+		Tooltip:
+			'''
+			Once per second, fires a Cyber Ring that accelerates and homes in on nearby enemies dealing damage and inflicting Electrified for 5 seconds
+			If your wearing Cyber Armor, the module is enhanced
+			'''
+	}
+
+	CoreSphere: {
+		DisplayName: Core Sphere
+		Tooltip:
+			'''
+			Two rings of spheres orbit you
+			The first ring orbits closer and deals more damage while the secind ring orbits further but deals less damage
+			The inner ring inflicts Core Heat for 3 seconds
+			The outer ring inflicts Core Heat for 2 seconds
+			'''
+	}
+
+	SmartCyberModule: {
+		DisplayName: Smart Cyber Module
+		Tooltip:
+			'''
+			Once per second, fires a Cyber Saw that accelerates and homes in on nearby enemies dealing damage and inflicting Terra's Rend for 3 seconds
+			If your wearing Cyber Armor, the module is enhanced
+			'''
 	}
 }
 

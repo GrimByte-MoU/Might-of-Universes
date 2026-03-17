@@ -22,8 +22,8 @@ public class LunarHellrider : ModItem
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        player.GetDamage(DamageClass.Generic) += 0.12f;
-        player.endurance += 0.12f;
+        player.GetDamage(DamageClass.Generic) += 0.10f;
+        player.endurance += 0.07f;
           player.lifeRegen += 5;
             player.statLifeMax2 += 40;
         player.GetModPlayer<LunarHellriderPlayer>().hasLunarHellrider = true;

@@ -28,7 +28,7 @@ namespace MightofUniverses.Common.Players
             int wingSlot = ModContent.GetInstance<CyberOneWings>().Item.wingSlot;
             Player.wings = wingSlot;
             Player.wingsLogic = wingSlot;
-            Player.wingTimeMax = 900;
+            Player.wingTimeMax = 600;
         }
 
         public override void PostUpdate()

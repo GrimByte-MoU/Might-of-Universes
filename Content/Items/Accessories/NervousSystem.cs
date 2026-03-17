@@ -19,7 +19,7 @@ namespace MightofUniverses.Content.Items.Accessories
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.endurance += 0.07f;
+            player.endurance += 0.05f;
               player.lifeRegen += 2;
             player.statLifeMax2 += 20;
             player.GetModPlayer<NervousSystemPlayer>().hasNervousSystem = true;

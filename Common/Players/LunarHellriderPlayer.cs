@@ -15,7 +15,7 @@ namespace MightofUniverses.Common.Players
 public class LunarHellriderPlayer : ModPlayer
 {
     public bool hasLunarHellrider;
-    private float dodgeChance = 0.20f;
+    private float dodgeChance = 0.05f;
     private int timeSinceLastDodge = 0;
 
     public override void ResetEffects()
@@ -29,7 +29,7 @@ public class LunarHellriderPlayer : ModPlayer
             !Player.HasBuff(ModContent.BuffType<AlteredPerception>()))
         {
             timeSinceLastDodge++;
-            dodgeChance = Math.Min(1f, 0.20f + (timeSinceLastDodge / 60f) * 0.05f);
+            dodgeChance = Math.Min(1f, 0.20f + timeSinceLastDodge / 120f * 0.05f);
         }
     }
 
@@ -46,7 +46,7 @@ public class LunarHellriderPlayer : ModPlayer
             modifiers.FinalDamage *= 0;
             Player.AddBuff(ModContent.BuffType<LunarVision>(), 480);
             timeSinceLastDodge = 0;
-            dodgeChance = 0.20f;
+            dodgeChance = 0.05f;
             SpawnLunarBlasts(5);
             for (int i = 0; i < Main.maxNPCs; i++)
             {
@@ -98,7 +98,7 @@ public class LunarHellriderPlayer : ModPlayer
         if (Player.HasBuff(ModContent.BuffType<LunarVision>()))
         {
             if (hasLunarHellrider)
-                modifiers.CritDamage += 1f;
+                modifiers.CritDamage += 0.5f;
         }
     }
 }

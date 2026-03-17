@@ -24,7 +24,7 @@ public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         if (Player.HasBuff(ModContent.BuffType<CerebralMindtrick>()))
             return;
 
-        if (Main.rand.NextFloat() < 0.15f)
+        if (Main.rand.NextFloat() < 0.05f)
         {
             Player.AddBuff(ModContent.BuffType<CerebralMindtrick>(), 360);
             

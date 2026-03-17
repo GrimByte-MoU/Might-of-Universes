@@ -40,7 +40,7 @@ namespace MightofUniverses.Content.Items.Armors
                 ? ModKeybindManager.ArmorAbility.GetAssignedKeys()[0] 
                 : "[Unbound]";
 
-            player.setBonus = $"Allows flight, slow fall and hovering\n" +
+            player.setBonus = $"Grants flight and slow fall\n" +
                              $"+100% nonweapon damage\n" +
                              $"Press '{key}' to teleport to cursor and leave an EMP Trap\n" +
                              $"EMP Trap deals heavy damage and Paralyzes non-boss enemies for 3 seconds\n" +

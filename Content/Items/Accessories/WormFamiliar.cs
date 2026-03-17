@@ -20,8 +20,8 @@ namespace MightofUniverses.Content.Items.Accessories
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetDamage(DamageClass.Generic) += 0.08f;
-            player.endurance += 0.08f;
+            player.GetDamage(DamageClass.Generic) += 0.05f;
+            player.endurance += 0.05f;
             player.GetModPlayer<WormFangPlayer>().hasWormFamiliar = true;
         }
 

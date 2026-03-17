@@ -18,7 +18,7 @@ public class PrismaticGolem : ModItem
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        player.endurance += 0.1f;
+        player.endurance += 0.09f;
           player.lifeRegen += 4;
             player.statLifeMax2 += 30;
         player.GetModPlayer<FleshGolemPlayer>().hasPrismaticGolem = true;

@@ -36,7 +36,7 @@ namespace MightofUniverses. Content.Items.Accessories
         public bool hideVisual;
         
         public float shieldHealth;
-        public float maxShieldHealth = 1500f;
+        public float maxShieldHealth = 600f;
         public int shieldRegenTimer;
         public const int SHIELD_REGEN_TIME = 1800;
 

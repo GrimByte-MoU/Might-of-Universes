@@ -15,8 +15,8 @@ namespace MightofUniverses.Common.Players
         public const int DashRight = 2;
         public const int DashLeft = 3;
         public const int DashCooldown = 50;
-        public const int DashDuration = 45;
-        public const float DashVelocity = 20f;
+        public const int DashDuration = 30;
+        public const float DashVelocity = 17f;
         public const int DashDamage = 100;
 
         public bool hasSatelliteGrid;

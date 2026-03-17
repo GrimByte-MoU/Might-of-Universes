@@ -26,7 +26,7 @@ namespace MightofUniverses.Common.Players
             if (Player.HasBuff(ModContent.BuffType<AlteredPerception>()))
                 return;
 
-            if (Main.rand.NextFloat() < 0.15f)
+            if (Main.rand.NextFloat() < 0.10f)
             {
                 Player.AddBuff(ModContent.BuffType<AlteredPerception>(), hasPrismaticGolem ? 480 : 480);
 
@@ -53,9 +53,9 @@ namespace MightofUniverses.Common.Players
         if (Player.HasBuff(ModContent.BuffType<AlteredPerception>()))
         {
             if (hasPrismaticGolem)
-                modifiers.CritDamage += 0.75f;
-            else if (hasFleshGolem)
                 modifiers.CritDamage += 0.50f;
+            else if (hasFleshGolem)
+                modifiers.CritDamage += 0.25f;
         }
     }
 }

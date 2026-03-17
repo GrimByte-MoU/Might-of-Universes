@@ -9,7 +9,7 @@ namespace MightofUniverses.Content.Items.Accessories
     {
         public override void SetStaticDefaults()
         {
-            ArmorIDs.Wing.Sets.Stats[Item.wingSlot] = new WingStats(900, 12f, 5f, true, 15f, 7f);
+            ArmorIDs.Wing.Sets.Stats[Item.wingSlot] = new WingStats(600, 10f, 3f, true, 10f, 5f);
         }
 
         public override void SetDefaults()
@@ -26,9 +26,9 @@ namespace MightofUniverses.Content.Items.Accessories
             ref float maxCanAscendMultiplier, ref float maxAscentMultiplier, ref float constantAscend)
         {
             ascentWhenFalling = 0.95f;
-            ascentWhenRising = 0.25f;
-            maxCanAscendMultiplier = 1.5f;
-            maxAscentMultiplier = 4f;
+            ascentWhenRising = 0.2f;
+            maxCanAscendMultiplier = 1f;
+            maxAscentMultiplier = 2f;
             constantAscend = 0.15f;
         }
     }
