@@ -40,7 +40,7 @@ namespace MightofUniverses.Common.Players
         public override void PostUpdateEquips()
         {
             if (wearing)
-                Player.setBonus = "+150 max souls\n20‑tile golden aura: enemies inside take +25% Reaper damage & gain Rebuking Light.\nHolding Orcus: +50% damage, +20% speed, ignore 25 defense.";
+                Player.setBonus = "+150 max souls\n20‑tile golden aura: enemies inside take +25% reaper damage & gain Rebuking Light.\nHolding Orcus: +50% damage, +20% speed, ignore 25 defense.";
         }
 
         public override void PostUpdate()

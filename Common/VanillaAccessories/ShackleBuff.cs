@@ -12,7 +12,7 @@ namespace MightofUniverses.Common.VanillaAccessories
         {
             if (item.type == ItemID.Shackle)
             {
-                tooltips.Add(new TooltipLine(Mod, "ShackleBuff1", "+2% damage reduction"));
+                tooltips.Add(new TooltipLine(Mod, "ShackleBuff1", "Reduces damage taken by 2%"));
             }
         }
 

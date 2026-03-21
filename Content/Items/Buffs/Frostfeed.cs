@@ -10,8 +10,8 @@ namespace MightofUniverses.Content.Items.Buffs
         {
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
-            Main.buffNoSave[Type] = false;
-            Main.buffNoTimeDisplay[Type] = false;
+            Main.buffNoSave[Type] = true;
+            Main.buffNoTimeDisplay[Type] = true;
         }
 
         public override void Update(NPC npc, ref int buffIndex)

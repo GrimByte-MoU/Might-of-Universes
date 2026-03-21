@@ -37,7 +37,7 @@ namespace MightofUniverses.Content.Items.Armors
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "+15% damage against bosses\n 3 gears orbits the player that when hit by a ranged projectile will increase it's damage, armor penetration and velocity\n Grants 4 seconds of flight and fall damage immunity";
+            player.setBonus = "+15% damage against bosses\n 3 gears orbits you that when hit by a ranged projectile will increase it's damage, armor penetration and velocity\n Grants 4 seconds of flight and fall damage immunity";
             player.GetModPlayer<ClockworkPlayer>().hasClockworkSet = true;
         }
 

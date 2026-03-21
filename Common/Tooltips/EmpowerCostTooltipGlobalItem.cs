@@ -53,7 +53,7 @@ namespace MightofUniverses.Common.Tooltips
                 ["Ketsumatsu"] = 275f,
                 ["CelestialReaper"] = 200f,
                 ["NewMoon"] = 260f,
-                ["ReapersEcho"] = 200f,
+                ["ReapersEcho"] = 450f,
                 ["IceAge"] = 275f,
                 ["Kasurikama"] = 60f,
                 ["CycloneKama"] = 200f,

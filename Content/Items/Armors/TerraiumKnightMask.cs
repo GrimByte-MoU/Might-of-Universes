@@ -38,7 +38,7 @@ namespace MightofUniverses.Content.Items.Armors
         {
             player.setBonus = "Melee attacks inflict Terra's Rend\n" +
                              "Three Terraium Glaives orbit around you\n" +
-                             "For every 5 defense:  +1% melee damage, +1% melee speed, +0.5% damage reduction";
+                             "For every 5 defense:  +1% melee damage, +1% melee speed and reduces daage taken by 0.5%";
             
             var modPlayer = player.GetModPlayer<TerraiumArmorPlayer>();
             modPlayer. knightSetBonus = true;

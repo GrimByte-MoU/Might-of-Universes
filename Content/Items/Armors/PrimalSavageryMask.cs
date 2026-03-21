@@ -39,7 +39,7 @@ namespace MightofUniverses.Content.Items.Armors
         public override void UpdateArmorSet(Player player)
         {
             player.setBonus =
-                "+350 max souls, +15% Reaper damage, +10% Reaper crit\n" +
+                "+350 max souls, +15% reaper damage, +10% Reaper crit\n" +
                 "Reaper attacks inflict Tarred and Oiled for 3 seconds \n" +
                 "Consuming souls grants the Savage buff for 5 seconds";
 

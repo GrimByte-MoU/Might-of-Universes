@@ -13,7 +13,7 @@ namespace MightofUniverses.Content.Items.Buffs
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;
-            Main.buffNoTimeDisplay[Type] = false;
+            Main.buffNoTimeDisplay[Type] = true;
             BuffID.Sets.LongerExpertDebuff[Type] = true;
         }
 
@@ -31,11 +31,11 @@ namespace MightofUniverses.Content.Items.Buffs
 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.velocity.X *= 0.8f;
+            player.velocity.X -= 0.2f;
             
             if (!player.justJumped && !player.sliding)
             {
-                player.velocity.Y *= 0.8f;
+                player.velocity.Y -= 0.2f;
             }
             
             if (Main.rand.NextBool(3))

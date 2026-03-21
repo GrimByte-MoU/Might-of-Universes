@@ -30,11 +30,7 @@ namespace MightofUniverses.Common.Systems
 
             int t = item.type;
 
-            if (t == WingIds.FledglingWings)
-            {
-                player.moveSpeed += 0.05f;
-            }
-            else if (t == WingIds.AngelWings)
+             if (t == WingIds.AngelWings)
             {
                 AddLife(20);
                 player.lifeRegen += 2;
@@ -54,12 +50,6 @@ namespace MightofUniverses.Common.Systems
                 player.maxMinions += 2;
                 player.maxTurrets += 2;
                 player.GetDamage(DamageClass.Summon) -= 0.10f;
-            }
-            else if (t == WingIds.EmpressWings)
-            {
-                player.moveSpeed += 0.20f;
-                TryImmune(player, "MightofUniverses", "PrismaticRend");
-                TryImmune(player, "MightofUniverses", "PrismaticRendDebuff");
             }
             else if (t == WingIds.Jetpack)
             {
@@ -121,11 +111,6 @@ namespace MightofUniverses.Common.Systems
             {
                 if (Main.eclipse)
                     p.MothronEclipseBoost = true;
-            }
-            else if (t == WingIds.SpectreWings)
-            {
-                player.manaRegenBonus += 2;
-                player.GetCritChance(DamageClass.Magic) += 5;
             }
             else if (t == WingIds.BeetleWings)
             {
@@ -207,9 +192,7 @@ namespace MightofUniverses.Common.Systems
 
         private string GetBonusText(int itemType)
         {
-            if (itemType == WingIds.FledglingWings)
-                return "+5% movement speed";
-            else if (itemType == WingIds.AngelWings)
+             if (itemType == WingIds.AngelWings)
                 return "+20 max life\n+2 life regeneration";
             else if (itemType == WingIds.DemonWings)
                 return "+20 max life\n+5% damage";
@@ -217,8 +200,6 @@ namespace MightofUniverses.Common.Systems
                 return "+1 max minion\n+4 defense";
             else if (itemType == WingIds.BetsyWings)
                 return "+2 max minions\n+2 max sentries\n-10% summon damage";
-            else if (itemType == WingIds.EmpressWings)
-                return "+20% movement speed\nImmunity to Prismatic Rend";
             else if (itemType == WingIds.Jetpack)
                 return "+5 defense\n+60% jump speed";
             else if (itemType == WingIds.FairyWings)
@@ -245,8 +226,6 @@ namespace MightofUniverses.Common.Systems
                 return "+10% reaper damage";
             else if (itemType == WingIds.MothronWings)
                 return "Infinite flight time during Solar Eclipse";
-            else if (itemType == WingIds.SpectreWings)
-                return "+2 mana regeneration\n+5% magic critical strike chance";
             else if (itemType == WingIds.BeetleWings)
                 return "+8 defense\n+5 life regeneration";
             else if (itemType == WingIds.SpookyWings)
@@ -260,13 +239,13 @@ namespace MightofUniverses.Common.Systems
             else if (itemType == WingIds.StardustWings)
                 return "+2 max minions";
             else if (itemType == WingIds.CelestialStarboard)
-                return "+80% pacifist damage";
+                return "+80% nonweapon damage";
             else if (itemType == WingIds.NebulaMantle)
                 return "+15% magic damage";
             else if (itemType == WingIds.VortexBooster)
                 return "+15% ranged damage";
             else if (itemType == WingIds.FestiveWings)
-                return "+50% pacifist damage";
+                return "+50% nonweapon damage";
 
             return string.Empty;
         }
@@ -327,44 +306,36 @@ namespace MightofUniverses.Common.Systems
     }
 
     internal static class WingIds
-{
-    public static readonly int FledglingWings     = Find("FledglingWings");
-    public static readonly int AngelWings         = Find("AngelWings");
-    public static readonly int DemonWings         = Find("DemonWings");
-    public static readonly int LeafWings          = Find("LeafWings");
-    public static readonly int BetsyWings         = Find("BetsyWings");
-    public static readonly int EmpressWings       = Find("FairyQueenWings");
-    public static readonly int FairyWings         = Find("FairyWings");
-    public static readonly int FinWings           = Find("FinWings");
-    public static readonly int HarpyWings         = Find("HarpyWings");
-    public static readonly int FrozenWings        = Find("FrozenWings");
-    public static readonly int FlameWings         = Find("FlameWings");
-    public static readonly int GhostWings         = Find("GhostWings");
-    public static readonly int BeeWings           = Find("BeeWings");
-    public static readonly int ButterflyWings     = Find("ButterflyWings");
-    public static readonly int BatWings           = Find("BatWings");
-    public static readonly int BoneWings          = Find("BoneWings");
-    public static readonly int MothronWings       = Find("MothronWings");
-    public static readonly int SpectreWings       = Find("SpectreWings");
-    public static readonly int BeetleWings        = Find("BeetleWings");
-    public static readonly int SpookyWings        = Find("SpookyWings");
-    public static readonly int TatteredFairyWings = Find("TatteredFairyWings");
-    public static readonly int SteampunkWings     = Find("SteampunkWings");
-    public static readonly int FishronWings       = Find("FishronWings");
-    public static readonly int SolarWings         = Find("WingsSolar");
-    public static readonly int StardustWings      = Find("WingsStardust");
-    public static readonly int FestiveWings       = Find("FestiveWings");
-
-    public static readonly int CelestialStarboard = Find("WingsNebula");
-    public static readonly int NebulaMantle       = Find("NebulaMantle");
-    public static readonly int VortexBooster      = Find("WingsVortex");
-
-    public static readonly int Jetpack            = Find("Jetpack");
-    public static readonly int Hoverboard         = Find("Hoverboard");
-
-    private static int Find(string name)
     {
-        return ItemID.Search.TryGetId(name, out int id) ? id : -1;
+        public static readonly int AngelWings         = ItemID.AngelWings;
+        public static readonly int DemonWings         = ItemID.DemonWings;
+        public static readonly int LeafWings          = ItemID.LeafWings;
+        public static readonly int BetsyWings         = ItemID.BetsyWings;
+        public static readonly int FairyWings         = ItemID.FairyWings;
+        public static readonly int FinWings           = ItemID.FinWings;
+        public static readonly int HarpyWings         = ItemID.HarpyWings;
+        public static readonly int FrozenWings        = ItemID.FrozenWings;
+        public static readonly int FlameWings         = ItemID.FlameWings;
+        public static readonly int GhostWings         = ItemID.GhostWings;
+        public static readonly int BeeWings           = ItemID.BeeWings;
+        public static readonly int ButterflyWings     = ItemID.ButterflyWings;
+        public static readonly int BatWings           = ItemID.BatWings;
+        public static readonly int BoneWings          = ItemID.BoneWings;
+        public static readonly int MothronWings       = ItemID.MothronWings;
+        public static readonly int BeetleWings        = ItemID.BeetleWings;
+        public static readonly int SpookyWings        = ItemID.SpookyWings;
+        public static readonly int TatteredFairyWings = ItemID.TatteredFairyWings;
+        public static readonly int SteampunkWings     = ItemID.SteampunkWings;
+        public static readonly int FishronWings       = ItemID.FishronWings;
+        public static readonly int SolarWings         = ItemID.WingsSolar;
+        public static readonly int StardustWings      = ItemID.WingsStardust;
+        public static readonly int FestiveWings       = ItemID.FestiveWings;
+
+        public static readonly int CelestialStarboard = ItemID.LongRainbowTrailWings;
+        public static readonly int NebulaMantle       = ItemID.WingsNebula;
+        public static readonly int VortexBooster      = ItemID.WingsVortex;
+
+        public static readonly int Jetpack            = ItemID.Jetpack;
+        public static readonly int Hoverboard         = ItemID.Hoverboard;
     }
-}
 }

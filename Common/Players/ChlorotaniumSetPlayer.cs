@@ -42,7 +42,7 @@ namespace MightofUniverses.Common.Players
             {
                 Player.setBonus =
                     $"+{MaxSoulBonus} max souls\n" +
-                    "+10% Reaper damage and +10% damage reduction\n" +
+                    "10% increased reaper damage and reduces damage taken by 10%\n" +
                     "The Chlorotanium Scythe gains an additional +10% damage and crit chance as well as +15% swing speed and size.";
             }
         }

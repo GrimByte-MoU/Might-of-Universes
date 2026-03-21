@@ -16,8 +16,8 @@ namespace MightofUniverses.Content.Items.Accessories
                 ? string.Join(", ", ModKeybindManager.Ability2.GetAssignedKeys())
                 : "Unbound";
             string line =
-                $"Press [{key}] to activate: gain +30 defense and +25% damage reduction for 5s, but lose 90% movement speed\n" +
-                "This effect ends early if you are hit.\n" +
+                $"Press [{key}] to activate: gain 30 defense and reduces damage taken by 25% for 5s, but move 90% slower\n" +
+                "This effect ends early if you are hit\n" +
                 "If it completes, heal 50 HP and remove all debuffs\n" +
                 "45 second cooldown";
             tooltips.Insert(1, new TooltipLine(Mod, "SigilOfWinterEffect", line));

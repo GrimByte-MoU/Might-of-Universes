@@ -39,7 +39,7 @@ namespace MightofUniverses.Content.Items.Armors
         public override void UpdateArmorSet(Player player)
         {
             player.setBonus =
-                "+350 max souls, +10% damage reduction\n" +
+                "+350 max souls, reduces damage taken by 10%\n" +
                 "Soul Empowerment from soul consumption lasts twice as long \n" +
                 "Being hit while Empowered ends the buff and halts soul gain for 5 seconds ";
 

@@ -47,6 +47,41 @@ namespace MightofUniverses.Content.Items.Weapons
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Projectile.NewProjectile(source, position, velocity, ModContent.ProjectileType<AncientSphere>(), damage, knockback, player.whoAmI);
+
+            Vector2 backBlastDirection = -velocity;
+            backBlastDirection.Normalize();
+            
+            for (int i = 0; i < 30; i++)
+            {
+                Vector2 dustVelocity = backBlastDirection.RotatedByRandom(MathHelper.ToRadians(25)) * Main.rand.NextFloat(3f, 8f);
+                
+                Dust dust = Dust.NewDustPerfect(
+                    position,
+                    DustID.TerraBlade,
+                    dustVelocity,
+                    100,
+                    default,
+                    Main.rand.NextFloat(1.5f, 2.5f)
+                );
+                dust.noGravity = true;
+                dust.fadeIn = 1.2f;
+            }
+
+            for (int i = 0; i < 15; i++)
+            {
+                Vector2 smokeVelocity = backBlastDirection.RotatedByRandom(MathHelper.ToRadians(30)) * Main.rand.NextFloat(2f, 5f);
+                
+                Dust smoke = Dust.NewDustPerfect(
+                    position,
+                    DustID.Smoke,
+                    smokeVelocity,
+                    100,
+                    Color.LimeGreen,
+                    Main.rand.NextFloat(1.2f, 2f)
+                );
+                smoke.noGravity = true;
+            }
+
             return false;
         }
 

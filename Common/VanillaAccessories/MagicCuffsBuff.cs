@@ -12,8 +12,8 @@ namespace MightofUniverses.Common.VanillaAccessories
         {
             if (item.type == ItemID.MagicCuffs)
             {
-                tooltips.Add(new TooltipLine(Mod, "MagicCuffsBuff1", "+5% magic damage bonus"));
-                tooltips.Add(new TooltipLine(Mod, "MagicCuffsBuff2", "+1% damage reduction"));
+                tooltips.Add(new TooltipLine(Mod, "MagicCuffsBuff1", "5% increase to magic damage"));
+                tooltips.Add(new TooltipLine(Mod, "MagicCuffsBuff2", "Reduces damage taken by 1%"));
 
             }
         }

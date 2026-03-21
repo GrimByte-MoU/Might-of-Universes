@@ -12,8 +12,8 @@ namespace MightofUniverses.Common.VanillaAccessories
         {
             if (item.type == ItemID.CelestialCuffs)
             {
-                tooltips.Add(new TooltipLine(Mod, "MagicCuffsBuff1", "+5% magic damage bonus"));
-                tooltips.Add(new TooltipLine(Mod, "MagicCuffsBuff2", "+2% damage reduction"));
+                tooltips.Add(new TooltipLine(Mod, "MagicCuffsBuff1", "5% increased magic damage"));
+                tooltips.Add(new TooltipLine(Mod, "MagicCuffsBuff2", "Reduces damage taken by 2%"));
 
             }
         }

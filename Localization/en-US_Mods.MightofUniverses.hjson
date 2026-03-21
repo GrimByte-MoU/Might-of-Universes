@@ -45,7 +45,7 @@ Buffs: {
 
 	SolunarEmpowerment: {
 		DisplayName: Solunar Empowerment
-		Description: +20% Reaper damage and +5% Reaper critical strike chance
+		Description: +20% reaper damage and +5% Reaper critical strike chance
 	}
 
 	LunarReap: {
@@ -194,7 +194,7 @@ Buffs: {
 		Description:
 			'''
 			Your filled with the spirit of Halloween!
-			+7% damage, +5% damage reduction and +5 defense
+			+7% damage, +5 defense and reduces damage taken by 5%
 			'''
 	}
 
@@ -307,7 +307,7 @@ Buffs: {
 
 	PrimalSavageryBuff: {
 		DisplayName: Primal Savagery Buff
-		Description: +30% Reaper damage and pierce 50 defense
+		Description: +30% reaper damage and pierce 50 defense
 	}
 
 	CactusReaperPierce: {
@@ -325,7 +325,7 @@ Buffs: {
 		Description:
 			'''
 			"Draw your strength from beyond"
-			+10% Reaper damage
+			+10% reaper damage
 			'''
 	}
 
@@ -339,7 +339,7 @@ Buffs: {
 		Description:
 			'''
 			"The light fills you with peace and thoughts of home"
-			+4% damage reduction
+			Reduces damage taken by 4%
 			+1% health regen per second
 			Debuff duration is reduced by 20%
 			'''
@@ -384,7 +384,7 @@ Buffs: {
 
 	YangBuff: {
 		DisplayName: Yang Buff
-		Description: +10% damage reduction and +10 defense
+		Description: +10 defense and reduces damage taken by
 	}
 
 	YinBuff: {
@@ -397,7 +397,8 @@ Buffs: {
 		Description:
 			'''
 			"Scream for the holidays!"
-			+12% damage reduction, +25% bonus health healed when healing
+			+25% bonus health healed when healing
+			Reduces damage taken by 12%
 			All positive life regen is increased by 20%
 			'''
 	}
@@ -436,7 +437,8 @@ Buffs: {
 		Description:
 			'''
 			An armor of cold protects you
-			+10 defense, +5% damage reduction
+			+10 defense
+			Reduces damage taken by 5%
 			'''
 	}
 
@@ -865,6 +867,10 @@ Projectiles: {
 	CoreSphereProjectile.DisplayName: Core Sphere Projectile
 	CyberSaw.DisplayName: Cyber Saw
 	MoltenCoreSphereProjectile.DisplayName: Molten Core Sphere Projectile
+	EchoAxehead.DisplayName: Echo Axehead
+	EchoBlade.DisplayName: Echo Blade
+	EchoShard.DisplayName: Echo Shard
+	EchoSoulsaw.DisplayName: Echo Soulsaw
 }
 
 Keybinds: {
@@ -884,8 +890,8 @@ Keybinds: {
 
 DamageClasses: {
 	ReaperDamageClass: {
-		$parentVal: Reaper Damage Class
-		DisplayName: Reaper Damage Class
+		$parentVal: reaper damage Class
+		DisplayName: reaper damage Class
 	}
 
 	PacifistDamageClass.DisplayName: Pacifist Damage Class
@@ -912,11 +918,11 @@ Items: {
 		DisplayName: Goblin Plating
 		Tooltip:
 			'''
+			+3 defense
 			Increases maximum life by 10%
-			Increases damage reduction by 5%
+			Reduces damage taken by 5%
 			Increases life regeneration by 2 health per second
 			Grants dreamcatcher and thorns effects
-			Provides 3 defense
 			'''
 	}
 
@@ -925,7 +931,7 @@ Items: {
 		Tooltip:
 			'''
 			Grants treasure detection, creature detection, danger sense, night vision, and sonar effects
-			Emits a faint light around the player
+			Emits a faint light around you
 			'''
 	}
 
@@ -946,7 +952,7 @@ Items: {
 			'''
 			Grants treasure detection
 			Increases pickaxe speed by 25%
-			Emits a faint light around the player
+			Emits a faint light around you
 			'''
 	}
 
@@ -991,7 +997,7 @@ Items: {
 		Tooltip:
 			'''
 			Makes all slime NPCs non-aggressive
-			Increases damage reduction by 3%
+			Reduces damage taken by 3%
 			'''
 	}
 
@@ -1000,8 +1006,8 @@ Items: {
 		Tooltip:
 			'''
 			Grants the effects of Lucky Coin and Gold Ring
-			Increases generic damage by up to 50% based on the number of Platinum Coins in the player's inventory
-			If the player has 5 or more Platinum Coins, increases critical strike chance by 5%, increases defense by 7, and reduces damage taken by 5%
+			Increases generic damage by up to 50% based on the number of Platinum Coins in you's inventory
+			If you has 5 or more Platinum Coins, increases critical strike chance by 5%, increases defense by 7, and reduces damage taken by 5%
 			'''
 	}
 
@@ -1499,7 +1505,7 @@ Items: {
 	SolunarHelmet: {
 		SetBonus:
 			'''
-			+10% Reaper damage
+			+10% reaper damage
 			+100 max souls
 			Two Solunar Medallions orbit you, damaging enemies and gathering souls
 			Whenever you consume souls, you heal 20 health and get Solunar Empowerment for 5 seconds
@@ -1537,7 +1543,7 @@ Items: {
 		Tooltip:
 			'''
 			A Brass Sphere Containment Unit
-			3 brass spheres orbit the player dealing damage to enemies
+			3 brass spheres orbit you dealing damage to enemies
 			The spheres also inflict Shred
 			'''
 	}
@@ -1566,10 +1572,14 @@ Items: {
 		Tooltip:
 			'''
 			A charm used by those versed in their land
-			+6 defense, +1.5hp/sec life regen, +30 max health and mana
-			+8% all damage, +8% damage reduction, +20% movement speed, +1 minion slot
-			+25% jump speed, improved jump height and +1 minion slot
-			Increases armor set bonus and accessory damage by 30%
+			Increases life regeneration
+			+30 max health and mana
+			8% increase to all damage
+			20% increased movement speed
+			+1 max minions
+			Increased jump speed and improved jump height
+			Reduces damage taken by 8%
+			Increases nonweapon damage by 30%
 			'''
 	}
 
@@ -1646,9 +1656,13 @@ Items: {
 		Tooltip:
 			'''
 			For those who have grown fond of their world
-			+8 defense, +2hp/sec life regen, +35 max health and mana
-			+10% to all damage, +8% damage reduction, +25% movement speed
-			+30% jump speed, improved jump height and +1 minion slot
+			Increased life regeneration 
+			+35 max health and mana
+			10% increase to all damage 
+			Reduces damage taken by 8%
+			25% increased movement speed
+			Increased jump speed, improved jump height 
+			+1 max minion
 			'''
 	}
 
@@ -1661,9 +1675,9 @@ Items: {
 		DisplayName: Backbone
 		Tooltip:
 			'''
-			A complete spine, someone needs that
-			+5% damage reduction
-			+0.5hp/sec life regen
+			A complete spine, someone surely needs that
+			Reduces damage taken by 5%
+			Slightly increased life regeneration
 			+10 max health
 			Your attacks inflict Spineless for 3 seconds
 			'''
@@ -1684,8 +1698,8 @@ Items: {
 		Tooltip:
 			'''
 			A golem made of flesh and bone
-			+6% damage reduction
-			+1.5hp/sec life regen
+			Reduces damage taken by 6%
+			Increased life regeneration
 			+25 max health
 			You have a 10% chance to dodge attacks and gain the Altered Perception Buff for 8 seconds
 			After dodging, you give all enemies in a 35 tile range Ichor and Spineless for 3 seconds
@@ -1698,7 +1712,8 @@ Items: {
 		Tooltip:
 			'''
 			This little guy is hot to the touch
-			+6% damage and damage reduction
+			6% increase to all damage 
+			Reduces damage taken by 6%
 			Whenever an enemy hurts you, they take double the damage you took
 			They are also given Cursed Inferno and Demonfire for 3 seconds
 			'''
@@ -1727,13 +1742,13 @@ Items: {
 		DisplayName: Nervous System
 		Tooltip:
 			'''
-			Some need the brain as well as the spine
-			+5% damage reduction
-			+1hp/sec life regen
+			Some need the brain as well as the spine, maybe more than the spine
+			Reduces damage taken by 5%
+			Increased life regeneration
 			+20 max health
 			You have a 5% chance to dodge attacks and gain the Cerebral Mindtrick Buff for 6 seconds
 			After dodging, you give all enemies in a 25 tile radius Ichor and Spineless for 3 second
-			While having Cerebral Mindtrick, you can't dodge another Attack
+			While having Cerebral Mindtrick, you can't dodge another attack
 			'''
 	}
 
@@ -1751,10 +1766,12 @@ Items: {
 		Tooltip:
 			'''
 			A powerful familiar with great capabilities
-			+7% damage and damage reduction
+			7% increase to all damage 
+			Reduces damage taken by 7%
 			Whenever an enemy hurts you, they take two and a half times the damage you took
 			They are also given Demonfire and Prismatic Rend for 3 seconds
-			Every 30 seconds, whenever you reach 50% or less health, 5 Prismatic Spitballs will retaliate and damage nearby enemies
+			Whenever you reach 50% or less health, 5 Prismatic Spitballs will retaliate and damage nearby enemies
+			The Prismatic Spitballs have a 30 second cooldown
 			'''
 	}
 
@@ -1763,8 +1780,8 @@ Items: {
 		Tooltip:
 			'''
 			A golem made of prismatic materials
-			+9% damage reduction
-			+2hp/sec life regen
+			Reduces damage taken by 9%
+			Increased life regeneration
 			+30 max health
 			You have a 10% chance to dodge attacks and gain the Altered Perception Buff for 8 seconds
 			After dodging, you give all enemies in a 50 tile range Ichor, Spineless and Prismatic Rend for 3 seconds
@@ -1777,7 +1794,8 @@ Items: {
 		Tooltip:
 			'''
 			A tamed corrupted worm
-			+5% damage and damage reduction
+			5% increase to all damage 
+			Reduces damage taken by 5%
 			Whenever an enemy damages you, they take damage equal to 150% of the damage you took
 			They will also be given Corrupted and Cursed Inferno for 3 seconds
 			'''
@@ -1839,9 +1857,10 @@ Items: {
 		Tooltip:
 			'''
 			A candied heart that emanates power
-			+8 defense, +30 max health
-			While above 50% health, +10% damage and critical strike chance
-			While below 50% health, +3hp/sec life regen and 10% damage reduction
+			+8 defense
+			+30 max health
+			While above 50% health, 10% increase to all damage and critical strike chance
+			While below 50% health, increased life regeneration and reduces all daage taken by 10%
 			'''
 	}
 
@@ -1853,15 +1872,15 @@ Items: {
 	EclipseHood: {
 		SetBonus:
 			'''
-			+15% Reaper damage
+			+15% reaper damage
 			+300 max souls
 			Four miniature Eclipses orbit you, damaging enemies and gathering souls
-			Whenever you consume souls, you temporarily gain +30% attack speed and +20% Reaper damage
+			Whenever you consume souls, you temporarily gain +30% attack speed and +20% reaper damage
 			'''
 		DisplayName: Eclipse Hood
 		Tooltip:
 			'''
-			+8% Reaper damage and attack speed
+			+8% reaper damage and attack speed
 			+6% Reaper critical strike chance
 			Soul consumption abilities cost 10% less to activate
 			'''
@@ -1871,7 +1890,7 @@ Items: {
 		DisplayName: Eclipse Chestplate
 		Tooltip:
 			'''
-			+8% Reaper damage and attack speed
+			+8% reaper damage and attack speed
 			+6% Reaper critical strike chance
 			+20% movement speed
 			'''
@@ -1882,7 +1901,7 @@ Items: {
 		Tooltip:
 			'''
 			+20% movement speed
-			+8% Reaper damage and attack speed
+			+8% reaper damage and attack speed
 			+6% Reaper critical strike chance
 			'''
 	}
@@ -2000,8 +2019,8 @@ Items: {
 			'''
 			System onl1ne... Defense gr1d 100% operat10nal...
 			+10 defense and immunity to most debuffs
-			Enables the player to perform a more powerful dash
-			The player emanates a triple layered aura that damages enemies
+			Enables you to perform a more powerful dash
+			you emanates a triple layered aura that damages enemies
 			The aura deals more damage to enemies that are closer to you
 			The more enemies in the aura, the more damage it deals to all of them
 			Every 30 seconds, whenever you reach 50% or less health, you rapidly regenerate health for 6 seconds
@@ -2218,7 +2237,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 1 soul on hit
-			Consume {0} souls to heal the player 40 health as well as grant +5 defense and +10% reaper dsamage for 4 seconds
+			Consume {0} souls to heal you 40 health as well as grant +5 defense and +10% reaper dsamage for 4 seconds
 			'''
 	}
 
@@ -2227,7 +2246,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 1 soul on hit
-			Consume {0} souls to heal the player 50 health as well as grant the Hyper buff for 3 seconds
+			Consume {0} souls to heal you 50 health as well as grant the Hyper buff for 3 seconds
 			'''
 	}
 
@@ -2246,7 +2265,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 1 soul on hit
-			Consume {0} souls to give the player increased life regen for 3 seconds
+			Consume {0} souls to give you increased life regen for 3 seconds
 			'''
 	}
 
@@ -2255,7 +2274,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 1 soul on hit
-			Consume {0} souls to give the player increased life regen for 3 seconds
+			Consume {0} souls to give you increased life regen for 3 seconds
 			'''
 	}
 
@@ -2283,7 +2302,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 1 soul on hit
-			Consume {0} souls to heal the player 40 health as well as grant +5 defense and +10% reaper dsamage for 4 seconds
+			Consume {0} souls to heal you 40 health as well as grant +5 defense and +10% reaper dsamage for 4 seconds
 			'''
 	}
 
@@ -2346,7 +2365,7 @@ Items: {
 			'''
 			A scythe used by Thanatos
 			Gathers 4 souls on hit and fires a Hallowed Scythe which gathers 3 souls on hit
-			Consume {0} souls to give yourself +7 defense, +15% attack speed and +5% damage reduction for 3 seconds
+			Consume {0} souls to give yourself +7 defense, +15% attack speed and reduces all damage taken by 5% for 3 seconds
 			'''
 	}
 
@@ -2364,7 +2383,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 4 souls on hit and fires out a titanium star which gathers 3 souls on hit
-			Consume {0} souls to instantly heal yourself 150 health, then get +15 defense and +15% damage reduction for 4 seconds
+			Consume {0} souls to instantly heal yourself 150 health, then get +15 defense and reduces damage taken by 15% for 4 seconds
 			'''
 	}
 
@@ -2428,7 +2447,7 @@ Items: {
 		DisplayName: Mythril Scythe
 		Tooltip:
 			'''
-			Gathers 4 souls on hit and fires out a mythril blade that gathers 2 souls on hit
+			Steals 4 souls on hit and fires out a mythril blade that steals 2 souls on hit
 			Consume {0} souls to send out a mineral wave that sends enemies it hits flying back
 			'''
 	}
@@ -2437,8 +2456,8 @@ Items: {
 		DisplayName: Chlorotanium Scythe
 		Tooltip:
 			'''
-			Gathers 5 souls on hit and fires out a chlorotanium star that also gathers 5 souls on hit
-			Consume {0} souls to heal for 150 health, then gain rapid life regen, +20 defense and +15% damage reduction for 5 seconds.
+			Steals 5 souls on hit and fires out a chlorotanium star that also steals 5 souls on hit
+			Consume {0} souls to heal for 150 health, then gain rapid life regen, +20 defense and reduces damage taken by 15% for 5 seconds.
 			'''
 	}
 
@@ -2466,7 +2485,7 @@ Items: {
 		Tooltip:
 			'''
 			Gathers 5 souls on hit and fires out two eclipse rays that each gather 2 souls on hit
-			Consume {0} souls to create four miniature eclipses that circle out and away from the player
+			Consume {0} souls to create four miniature eclipses that circle out and away from you
 			'''
 	}
 
@@ -2474,8 +2493,8 @@ Items: {
 		DisplayName: Scythe of Christmas Future
 		Tooltip:
 			'''
-			Gthers 5 souls on hit and fires out a holly leaf that  gathers 4 souls and heals the player for 5 health on hit
-			15% chance to instead fire out a more powerful holly leaf that gathers 6 souls and heals the player for 15 health on hit
+			Gthers 5 souls on hit and fires out a holly leaf that  gathers 4 souls and heals you for 5 health on hit
+			15% chance to instead fire out a more powerful holly leaf that gathers 6 souls and heals you for 15 health on hit
 			Consume {0} souls to gain significant life regen for 5 seconds
 			'''
 	}
@@ -2496,7 +2515,7 @@ Items: {
 			'''
 			Gathers 7 souls on hit and fires out three temple shards that each gather 4 souls on hit
 			15% chance for each shard to be replaced by a bouncing fireball that pierces and bounces but gathers no souls
-			Consume {0} souls to heal for 150 flat health, then gain rapid regeneration, +25 defense and +20% damage reduction for 5 seconds
+			Consume {0} souls to heal for 150 flat health, then gain rapid regeneration, +25 defense and reduces damage taken by 20% for 5 seconds
 			'''
 	}
 
@@ -2527,7 +2546,7 @@ Items: {
 		DisplayName: Living Storm
 		Tooltip:
 			'''
-			Creates a damaging aura around the player that electrifies enemies
+			Creates a damaging aura around you that electrifies enemies
 			Each enemy hit gathers you 1 soul
 			'''
 	}
@@ -2556,7 +2575,7 @@ Items: {
 		Tooltip:
 			'''
 			They are many and they are angry
-			A large area around the player damages and electrifies enemies twice per second
+			A large area around you damages and electrifies enemies twice per second
 			Each enemy hit gathers you 3 souls
 			'''
 	}
@@ -2581,7 +2600,7 @@ Items: {
 
 	ReaperEmblem: {
 		DisplayName: Reaper Emblem
-		Tooltip: +15% Reaper damage
+		Tooltip: +15% reaper damage
 	}
 
 	TrappedDemonFire: {
@@ -2608,7 +2627,7 @@ Items: {
 			 		Taking damage grants soul energy equal to half the damage taken
 			 		This effect has a 3 second cooldown
 			 		While holding a melee weapon, lose 10 soul energy per second
-			 		but gain 10% damage reduction and 3 life regeneration per second
+			 		but reduce damage taken by 10% and gain increased life regeneration
 			'''
 	}
 
@@ -2616,8 +2635,8 @@ Items: {
 		DisplayName: Goblin Core
 		Tooltip:
 			'''
-			Increases the player's movement speed by 15%
-			Grants the player the effects of flipper, depth meter and water walking potions
+			Increases you's movement speed by 15%
+			Grants you the effects of flipper, depth meter and water walking potions
 			Shows player depth and tells the time
 			Players take no fall damage and emit light
 			'''
@@ -2706,9 +2725,9 @@ Items: {
 		Tooltip:
 			'''
 			The banner of a madman
-			+15% Reaper damage
+			+15% reaper damage
 			+10% Reaper critical strike chance
-			Whenever you consume souls, the player heals for 15% of their max health
+			Whenever you consume souls, you heals for 15% of their max health
 			'''
 	}
 
@@ -2935,7 +2954,7 @@ Items: {
 
 	TrueLifePotion: {
 		DisplayName: True Life Potion
-		Tooltip: Heals for 400 health or half of the player's max health, whichever is higher
+		Tooltip: Heals for 400 health or half of you's max health, whichever is higher
 	}
 
 	CandyBowl: {
@@ -3030,7 +3049,7 @@ Items: {
 		DisplayName: Infected Tablet
 		Tooltip:
 			'''
-			While being held, enemies within 30 tiles of the player will be attacked by Tablet Worms which inflict Code Destabilized for 3 seconds
+			While being held, enemies within 30 tiles of you will be attacked by Tablet Worms which inflict Code Destabilized for 3 seconds
 			Tablet Worms have a 25% chance to be replaced by Infected Tablet Worms which inflict Code Destabilized for 5 seconds instead
 			'''
 	}
@@ -3060,7 +3079,7 @@ Items: {
 		Tooltip:
 			'''
 			Condensed fear in a pristine canister
-			The player gives off a bright aura that causes enemies that come within 13 tiles of the player to become Terrified for 3 seconds
+			you gives off a bright aura that causes enemies that come within 13 tiles of you to become Terrified for 3 seconds
 			The aura will generate 2 souls per second per enemy in the aura as well
 			'''
 	}
@@ -3070,8 +3089,8 @@ Items: {
 		Tooltip:
 			'''
 			A coin to take the Northern Express!
-			Twice per second, a little orb will appear near the player
-			If the player touches the orb, they will rapidly regenerate health and soul energy for 0.5 seconds
+			Twice per second, a little orb will appear near you
+			If you touches the orb, they will rapidly regenerate health and soul energy for 0.5 seconds
 			If an enemy touches the orb they will rapidly lose health for 0.5 seconds
 			'''
 	}
@@ -3081,10 +3100,10 @@ Items: {
 		Tooltip:
 			'''
 			A crystal holding a piece of the eclipsed sun within it
-			For each 1 soul energy the player has, their Reaper damage is increased by 0.075%
-			During the day, the player gains increased life regeneration
-			At night, the player generates 4 soul energy per second
-			During an eclipse, the player gets both benefits simultaneously
+			For each 1 soul energy you has, their reaper damage is increased by 0.075%
+			During the day, you gains increased life regeneration
+			At night, you generates 4 soul energy per second
+			During an eclipse, you gets both benefits simultaneously
 			'''
 	}
 
@@ -3093,7 +3112,7 @@ Items: {
 		Tooltip:
 			'''
 			Christmas music (not MC) can be faintly heard from it
-			Whenever an enemy deals contact damage to the player, that damage is reduced by 50% and that enemy suffers some damage
+			Whenever an enemy deals contact damage to you, that damage is reduced by 50% and that enemy suffers some damage
 			While in the snow biome, the contact damage is reduced by 60% instead and suffers even greator retaliatory damage
 			This has a 0.33 second cooldown, which is reduced to 0.25 seconds in the snow biome
 			'''
@@ -3104,7 +3123,7 @@ Items: {
 		Tooltip:
 			'''
 			A spooky, scary firefly that ominously glows
-			Whenever the player is damaged, five spookyflies will spawn around the player and retaliate
+			Whenever you is damaged, five spookyflies will spawn around you and retaliate
 			Spookyflies inflict Terrified for 3 seconds
 			The spookyflies have a 0.5 second cooldown
 			'''
@@ -3115,7 +3134,7 @@ Items: {
 		Tooltip:
 			'''
 			A bowl of black dust that glows orange
-			Twice per second, an orb is spawned near the player, touching the orb heals the player 5 health and gives the Eclipse Blessing for 3 seconds
+			Twice per second, an orb is spawned near you, touching the orb heals you 5 health and gives the Eclipse Blessing for 3 seconds
 			During an eclipse, the orbs spawn four times per second instead
 			'''
 	}
@@ -3125,7 +3144,7 @@ Items: {
 		Tooltip:
 			'''
 			A fruit bread said to show you your future
-			Grants the player the Halloween Might buff for 30 seconds.
+			Grants you the Halloween Might buff for 30 seconds.
 			'''
 	}
 
@@ -3134,7 +3153,7 @@ Items: {
 		Tooltip:
 			'''
 			It tastes of Christmas Spirit and family gatherings
-			Grants the player the Festive Comfort buff for 30 seconds
+			Grants you the Festive Comfort buff for 30 seconds
 			'''
 	}
 
@@ -3143,7 +3162,7 @@ Items: {
 		Tooltip:
 			'''
 			It sizzles and pops in your mouth!
-			Grants the player the Eclipse Blessing for 30 seconds
+			Grants you the Eclipse Blessing for 30 seconds
 			'''
 	}
 
@@ -3151,7 +3170,7 @@ Items: {
 		DisplayName: Avidity Chalice
 		Tooltip:
 			'''
-			Upon activation, chalice droplets will fly out from the player towards enemies within 15 tiles
+			Upon activation, chalice droplets will fly out from you towards enemies within 15 tiles
 			Chalice droplets deal 25 damage, inflict Ichor for 2 seconds and steals 2 soul energy
 			Chalice droplets have a 15% chance to be replaced with larger green droplets
 			The green chalice droplets deal 40 damage, steals 5 soul energy, inflict Ichor for 5 seconds and Midas for 2 seconds
@@ -3163,10 +3182,10 @@ Items: {
 		DisplayName: Frigid Heart
 		Tooltip:
 			'''
-			Frigid Heart Shards will periodically spawn and orbit around the player
+			Frigid Heart Shards will periodically spawn and orbit around you
 			Whenever an enemy makes contact with the shards, all shards explode dealing 100 damage to that enemy for each shard
-			Whenever the player lands a critical strike, a shard will fly at the enemy for equal damage
-			If the player has less than 50% health, two shards will fly at the enemy instead
+			Whenever you lands a critical strike, a shard will fly at the enemy for equal damage
+			If you has less than 50% health, two shards will fly at the enemy instead
 			'''
 	}
 
@@ -3225,12 +3244,12 @@ Items: {
 		DisplayName: Clockwork Pirate Hat
 		Tooltip:
 			'''
-			+12% ranged damage
-			+5% ranged critical strike chance
-			+10% ranged speed
-			+10% chance to not consume ammo
-			+1% damage reduction
-			Ranged attacks ignore 5 defense
+			12% increased ranged damage
+			5% increased ranged critical strike chance
+			10% increased ranged speed
+			10% chance to not consume ammo
+			Reduces damage taken by 1%
+			Ranged attacks penetrate 5 defense
 			'''
 	}
 
@@ -3238,12 +3257,12 @@ Items: {
 		DisplayName: Clockwork Pirate Pants
 		Tooltip:
 			'''
-			+13% ranged damage
-			+5% ranged critical strike chance
-			+15% movement speed
-			+15% chance to not consume ammo
-			+2% damage reduction
-			Ranged attacks ignore 5 defense
+			13% increased ranged damage
+			5% increased ranged critical strike chance
+			15% increased movement speed
+			15% chance to not consume ammo
+			Reduces damage taken by 2%
+			Ranged attacks penetrate 5 defense
 			'''
 	}
 
@@ -3251,13 +3270,13 @@ Items: {
 		DisplayName: Clockwork Pirate Vest
 		Tooltip:
 			'''
-			+15% ranged damage
-			+10% ranged critical strike chance
-			+10% movement speed
-			+20% chance to not consume ammo
-			+3% damage reduction
+			15% increased ranged damage
+			10% increased ranged critical strike chance
+			10% increased movement speed
+			20% chance to not consume ammo
+			Reduces damage taken by 3%
 			+40 max health
-			Ranged attacks ignore 10 defense
+			Ranged attacks penetrate 10 defense
 			'''
 	}
 
@@ -3286,7 +3305,7 @@ Items: {
 
 	MushroomSample: {
 		DisplayName: Mushroom Sample
-		Tooltip: Spore clouds will randomly appear around the player and damage enemies
+		Tooltip: Spore clouds will randomly appear around you and damage enemies
 	}
 
 	NeedlePointer: {
@@ -3340,7 +3359,7 @@ Items: {
 		Tooltip:
 			'''
 			Different species living in harmony
-			Spore clouds will randomly appear around the player and damage enemies
+			Spore clouds will randomly appear around you and damage enemies
 			+3 defense, +25 max health, +35% nonweapon damage
 			'''
 	}
@@ -3350,7 +3369,7 @@ Items: {
 		Tooltip:
 			'''
 			Don't interrupt it!
-			Spore traps will randomly spawn around the player that will home in and explode on enemies
+			Spore traps will randomly spawn around you that will home in and explode on enemies
 			+5 defense, +30 max health, +45% nonweapon damage
 			'''
 	}
@@ -3458,7 +3477,7 @@ Items: {
 		DisplayName: Terraium Longsword
 		Tooltip:
 			'''
-			Whenever the player strikes an enemy with the blade, three Terraium Spikes will strike the enemy
+			Whenever you strikes an enemy with the blade, three Terraium Spikes will strike the enemy
 			Each spike will do 60% damage
 			The sword inflicts Terra's Rend for 3 seconds and then spikes inflict it for 1 second
 			'''
@@ -3490,7 +3509,7 @@ Items: {
 			'''
 			Increases life regen by 3hp/sec and increases max health by 25%
 			Take 20% damage from enemies
-			Everytime the player is hit, they gain 40% of the damage dealt as soul energy, this has a 20 second cooldown
+			Everytime you is hit, they gain 40% of the damage dealt as soul energy, this has a 20 second cooldown
 			'''
 	}
 
@@ -3498,7 +3517,7 @@ Items: {
 		DisplayName: Hallowed Mirror
 		Tooltip:
 			'''
-			Whenever the player teleports m32 or more blocks away, they gain 1 second of invincibility, 
+			Whenever you teleports m32 or more blocks away, they gain 1 second of invincibility, 
 			+50% movement speed for 5 seconds and restores all flight time
 			This has a 20 second cooldown.
 			'''
@@ -3509,8 +3528,8 @@ Items: {
 		Tooltip:
 			'''
 			"Everything comes at a price"
-			Whenever the player would receive damage equal to or greater than 20% of their max health, that damage is prevented
-			When damage is prevented this way, for every 5 damage prevented, the player will receive 1 second of the Ominous Price debuff
+			Whenever you would receive damage equal to or greater than 20% of their max health, that damage is prevented
+			When damage is prevented this way, for every 5 damage prevented, you will receive 1 second of the Ominous Price debuff
 			This ability has a 10 second cooldown
 			'''
 	}
@@ -3519,24 +3538,24 @@ Items: {
 		DisplayName: Queens Crystal Tear
 		Tooltip:
 			'''
-			+12% Reaper Damage, +7% Reaper Crit Chance
-			Whenever the player consumes souls, they will dodge the next attack they would take.
+			+12% reaper damage, +7% Reaper Crit Chance
+			Whenever you consumes souls, they will dodge the next attack they would take.
 			'''
 	}
 
 	BloodyBroth: {
 		DisplayName: Bloody Broth
-		Tooltip: Grants the player the Broth Vitality buff for 30 seconds
+		Tooltip: Grants you the Broth Vitality buff for 30 seconds
 	}
 
 	HallowedPastry: {
 		DisplayName: Hallowed Pastry
-		Tooltip: Grants the player the Cake Blessing buff for 30 seconds
+		Tooltip: Grants you the Cake Blessing buff for 30 seconds
 	}
 
 	PiratesPorridge: {
 		DisplayName: Pirates Porridge
-		Tooltip: Grants the player the Pirate Power buff for 30 seconds
+		Tooltip: Grants you the Pirate Power buff for 30 seconds
 	}
 
 	ObsidianDaggerBox: {
@@ -3737,7 +3756,7 @@ Items: {
 		Tooltip:
 			'''
 			Upon taking fatal damage, prevent all the damage then consume all of your current souls
-			The player will heal healt equal to 50% of the souls consumed
+			you will heal healt equal to 50% of the souls consumed
 			This has a 60 second cooldown.
 			'''
 	}
@@ -3746,7 +3765,7 @@ Items: {
 		DisplayName: Gravediggers Ring
 		Tooltip:
 			'''
-			+10% Reaper damage, +75 max souls
+			+10% reaper damage, +75 max souls
 			When consuming souls, 10% cance to refund 50% of the souls consumed, rounded down
 			'''
 	}
@@ -3765,10 +3784,10 @@ Items: {
 		DisplayName: Soul Siphoning Artifact
 		Tooltip:
 			'''
-			+5% Reaper damage
+			+5% reaper damage
 			Gain max souls equal to 5% of your max life 
-			When killing an enemy, 1-2 soul orbs will spawn and fly towards the player
-			Each soul orb heals the player for 1-2 health and gives the player 1 soul
+			When killing an enemy, 1-2 soul orbs will spawn and fly towards you
+			Each soul orb heals you for 1-2 health and gives you 1 soul
 			'''
 	}
 
@@ -3777,7 +3796,7 @@ Items: {
 		Tooltip:
 			'''
 			+50 max souls, +6% Reaper crit chance
-			Every 5th Reaper crit gives the player 5 souls
+			Every 5th Reaper crit gives you 5 souls
 			'''
 	}
 
@@ -3786,7 +3805,7 @@ Items: {
 		Tooltip:
 			'''
 			"Did you really think infusing the monkey's paw with literal devil's blood would be a good idea?"
-			+15% max health, +75 max souls and +15% Reaper damage
+			+15% max health, +75 max souls and +15% reaper damage
 			+30% damage taken from enemies and soul consumption abilities cost 10% more to activate
 			'''
 	}
@@ -3824,14 +3843,14 @@ Items: {
 		DisplayName: Lantern Of Fading Moths
 		Tooltip:
 			'''
-			+30 max souls and +3% Reaper damage
-			At night, the player gives off a faint light and the Reaper damage bonus is increased to 6%
+			+30 max souls and +3% reaper damage
+			At night, you gives off a faint light and the reaper damage bonus is increased to 6%
 			'''
 	}
 
 	ProtectionCharm: {
 		DisplayName: Protection Charm
-		Tooltip: When consuming souls, the player gains the Protection Cantrip buff for 5 seconds
+		Tooltip: When consuming souls, you gains the Protection Cantrip buff for 5 seconds
 	}
 
 	ShackledSpiritArtifact: {
@@ -3839,10 +3858,10 @@ Items: {
 		Tooltip:
 			'''
 			"A poor shackled soul rests within this old cranium"
-			+7% Reaper damage
+			+7% reaper damage
 			Gain max souls equal to 7.5% of your max life 
-			When killing an enemy, 1-3 soul orbs will spawn and fly towards the player
-			Each soul orb heals the player for 3-5 health and gives the player 2 souls
+			When killing an enemy, 1-3 soul orbs will spawn and fly towards you
+			Each soul orb heals you for 3-5 health and gives you 2 souls
 			'''
 	}
 
@@ -3860,10 +3879,10 @@ Items: {
 		Tooltip:
 			'''
 			"A benevolent soul is bound to this accursed artifact"
-			+10% Reaper damage
+			+10% reaper damage
 			Gain max souls equal to 10% of your max life 
-			When killing an enemy, 2-3 soul orbs will spawn and fly towards the player
-			Each soul orb heals the player for 4-5 health and gives the player 2 souls
+			When killing an enemy, 2-3 soul orbs will spawn and fly towards you
+			Each soul orb heals you for 4-5 health and gives you 2 souls
 			'''
 	}
 
@@ -3872,10 +3891,10 @@ Items: {
 		Tooltip:
 			'''
 			"This artifact is made with the sole purpose of keeping souls trapped"
-			+12% Reaper damage
+			+12% reaper damage
 			Gain max souls equal to 12.5% of your max life 
-			When killing an enemy, 1 specter orb will spawn and fly towards the player
-			Each soul orb heals the player for 10 health, gives the player 5 souls and grants the Caged Soul buff for 3 seconds
+			When killing an enemy, 1 specter orb will spawn and fly towards you
+			Each soul orb heals you for 10 health, gives you 5 souls and grants the Caged Soul buff for 3 seconds
 			'''
 	}
 
@@ -3886,12 +3905,12 @@ Items: {
 
 	SpiritTalisman: {
 		DisplayName: Spirit Talisman
-		Tooltip: When consuming souls, the player gains the Spirit's Tag buff for 5 seconds
+		Tooltip: When consuming souls, you gains the Spirit's Tag buff for 5 seconds
 	}
 
 	TatteredCharm: {
 		DisplayName: Tattered Charm
-		Tooltip: When consuming souls, the player will heal for 5 health.
+		Tooltip: When consuming souls, you will heal for 5 health.
 	}
 
 	ThreadsOfTheSoul: {
@@ -3899,7 +3918,7 @@ Items: {
 		Tooltip:
 			'''
 			All positive, passive soul generation grants positive life regen at a rate of 50%
-			Upon reaching 20% or less health, the player will generate 20 souls per second for 5 seconds
+			Upon reaching 20% or less health, you will generate 20 souls per second for 5 seconds
 			The soul generation has a 20 second cooldown
 			'''
 	}
@@ -3930,7 +3949,7 @@ Items: {
 		DisplayName: Mortician's Chestplate
 		Tooltip:
 			'''
-			+3% Reaper damage
+			+3% reaper damage
 			+1% Reaper critical strike chance
 			+1 health regen/sec
 			'''
@@ -3941,7 +3960,7 @@ Items: {
 		Tooltip:
 			'''
 			+5% Movement speed
-			+2% Reaper damage
+			+2% reaper damage
 			'''
 	}
 
@@ -3954,7 +3973,7 @@ Items: {
 		DisplayName: Gravetender's Chestplate
 		Tooltip:
 			'''
-			+4% Reaper damage
+			+4% reaper damage
 			+4% Reaper critical strike chance
 			+4 Armor Penetration against poisoned enemies
 			'''
@@ -3964,7 +3983,7 @@ Items: {
 		DisplayName: Gravetender's Hat
 		Tooltip:
 			'''
-			+3% Reaper damage
+			+3% reaper damage
 			+3% Reaper critical strike chance
 			+3 Armor Penetration against poisoned enemies
 			'''
@@ -3974,7 +3993,7 @@ Items: {
 		DisplayName: Gravetender's Shoes
 		Tooltip:
 			'''
-			+3% Reaper damage
+			+3% reaper damage
 			+3% Reaper critical strike chance
 			+3 Armor Penetration against poisoned enemies
 			+5% Movement speed
@@ -3985,7 +4004,7 @@ Items: {
 		DisplayName: Bone Collector's Hat
 		Tooltip:
 			'''
-			+4% Reaper damage
+			+4% reaper damage
 			+2% Reaper critical strike chance
 			+5 max life
 			'''
@@ -3995,7 +4014,7 @@ Items: {
 		DisplayName: Bone Collector's Pants
 		Tooltip:
 			'''
-			+5% Reaper damage
+			+5% reaper damage
 			+10 max life
 			+3% Reaper critical strike chance
 			+10% movement speed
@@ -4006,7 +4025,7 @@ Items: {
 		DisplayName: Bone Collector's Shirt
 		Tooltip:
 			'''
-			+6% Reaper damage
+			+6% reaper damage
 			+10 max life
 			+4% Reaper critical strike chance
 			'''
@@ -4016,7 +4035,7 @@ Items: {
 		DisplayName: Lich's Chestplate
 		Tooltip:
 			'''
-			+6% Reaper damage
+			+6% reaper damage
 			+6% Reaper critical strike chance
 			Soul consumption abilities cost 5% less to activate
 			'''
@@ -4026,7 +4045,7 @@ Items: {
 		DisplayName: Lich's Greaves
 		Tooltip:
 			'''
-			+5% Reaper damage
+			+5% reaper damage
 			+5% Reaper critical strike chance
 			+10% movement speed
 			'''
@@ -4036,7 +4055,7 @@ Items: {
 		DisplayName: Lich's Mask
 		Tooltip:
 			'''
-			+4% Reaper damage
+			+4% reaper damage
 			+4% Reaper critical strike chance
 			+1 soul generated per second
 			'''
@@ -4046,7 +4065,7 @@ Items: {
 		DisplayName: Murky Ice Boots
 		Tooltip:
 			'''
-			+5% Reaper damage
+			+5% reaper damage
 			+3% Reaper critical strike chance
 			+10% movement speed
 			'''
@@ -4056,7 +4075,7 @@ Items: {
 		DisplayName: Murky Ice Chestplate
 		Tooltip:
 			'''
-			+6% Reaper damage
+			+6% reaper damage
 			+5% Reaper critical strike chance
 			'''
 	}
@@ -4065,7 +4084,7 @@ Items: {
 		DisplayName: Murky Ice Helmet
 		Tooltip:
 			'''
-			+4% Reaper damage
+			+4% reaper damage
 			+2% Reaper critical strike chance
 			'''
 	}
@@ -4074,7 +4093,7 @@ Items: {
 		DisplayName: Chestplate Of Orcus
 		Tooltip:
 			'''
-			+8% Reaper damage
+			+8% reaper damage
 			+5% Reaper critical strike chance
 			+10 armor penetration against enemies afflicted with Rebuking Light
 			'''
@@ -4084,7 +4103,7 @@ Items: {
 		DisplayName: Greaves Of Orcus
 		Tooltip:
 			'''
-			+6% Reaper damage
+			+6% reaper damage
 			+5% Reaper critical strike chance
 			+12% movement speed
 			'''
@@ -4094,7 +4113,7 @@ Items: {
 		DisplayName: Mask Of Orcus
 		Tooltip:
 			'''
-			+6% Reaper damage
+			+6% reaper damage
 			+5% Reaper critical strike chance
 			+2 souls generated per second
 			'''
@@ -4104,10 +4123,10 @@ Items: {
 		DisplayName: Yin Yang Cloak
 		Tooltip:
 			'''
-			+4% Reaper damage
-			+4% Reaper critical strike chance
-			+2% damage reduction
-			+10 max life
+			4% increased reaper damage
+			4% increased reaper critical strike chance
+			Reduces all damage taken by 2%
+			Increases max life by 10
 			'''
 	}
 
@@ -4115,10 +4134,10 @@ Items: {
 		DisplayName: Yin Yang Hat
 		Tooltip:
 			'''
-			+3% Reaper damage
-			+3% Reaper critical strike chance
-			+1% damage reduction
-			+10 max life
+			3% increased reaper damage
+			3% increased reaper critical strike chance
+			Reduces damage taken by 1%
+			Increases max life by 10
 			'''
 	}
 
@@ -4126,10 +4145,10 @@ Items: {
 		DisplayName: Yin Yang Shoes
 		Tooltip:
 			'''
-			+3% Reaper damage
-			+3% Reaper critical strike chance
-			+1% damage reduction
-			+10 max life
+			3% increased reaper damage
+			3% increased reaper critical strike chance
+			Reduces damage taken by 1%
+			Increases max life by 10
 			'''
 	}
 
@@ -4137,9 +4156,10 @@ Items: {
 		DisplayName: Chlorotanium Chestplate
 		Tooltip:
 			'''
-			+5% Reaper damage and critical strike chance
-			+30 armor penetration for enemies with Cursed Inferno
-			+10 max life
+			5% increased reaper damage
+			5% increased reaper critical strike chance
+			Penetrates 30 defense for enemies with Cursed Inferno
+			Increases max life by 10
 			'''
 	}
 
@@ -4147,9 +4167,10 @@ Items: {
 		DisplayName: Chlorotanium Greaves
 		Tooltip:
 			'''
-			+5% Reaper damage and critical strike chance
-			+13% movement speed
-			+10 max life
+			5% increased reaper damage
+			5% increased reaper critical strike chance
+			13% increased movement speed
+			Increases max life by 10
 			'''
 	}
 
@@ -4157,7 +4178,8 @@ Items: {
 		DisplayName: Chlorotanium Masked Helmet
 		Tooltip:
 			'''
-			+5% Reaper damage and critical strike chance
+			5% increased reaper damage
+			5% increased reaper critical strike chance
 			Soul consumption abilities cost 10% less to activate
 			'''
 	}
@@ -4166,9 +4188,10 @@ Items: {
 		DisplayName: Mecha Cactus Breastplate
 		Tooltip:
 			'''
-			+5% Reaper damage and critical strike chance
-			+15 max life
-			+2% damage reduction
+			5% increased reaper damage
+			5% increased reaper critical strike chance
+			Reduces damage taken by 2%
+			Increases max life by 15
 			'''
 	}
 
@@ -4176,9 +4199,10 @@ Items: {
 		DisplayName: Mecha Cactus Helmet
 		Tooltip:
 			'''
-			+4% Reaper damage and critical strike chance
-			+10 max life
-			+1% damage reduction
+			4% increased reaper damage
+			4% increased reaper critical strike chance
+			Reduces damage taken by 1%
+			Increases max life by 10
 			'''
 	}
 
@@ -4186,9 +4210,10 @@ Items: {
 		DisplayName: Mecha Cactus Leggings
 		Tooltip:
 			'''
-			+3% Reaper damage and critical strike chance
-			+10% movement speed
-			+10 max life
+			3% increased reaper damage
+			3% increased reaper critical strike chance
+			10% increased movement speed
+			Increases max life by 10
 			'''
 	}
 
@@ -4196,7 +4221,7 @@ Items: {
 		DisplayName: Ectoplasmic Contraption
 		Tooltip:
 			'''
-			+200 max souls
+			Increases max souls by 200
 			Soul consumption abilities cost 10% less to activate
 			'''
 	}
@@ -4205,26 +4230,26 @@ Items: {
 		DisplayName: Overloaded Soul Pack
 		Tooltip:
 			'''
-			+150 max souls
+			Increases max souls by 150
 			Soul consumption abilities cost 5% less to activate
 			'''
 	}
 
 	SoulBattery: {
 		DisplayName: Soul Battery
-		Tooltip: +50 max souls
+		Tooltip: Increases max souls by 50
 	}
 
 	SoulCapacitor: {
 		DisplayName: Soul Capacitor
-		Tooltip: +100 max souls
+		Tooltip: Increases max souls by 100
 	}
 
 	FoundryRevenantBoilerplate: {
 		DisplayName: Foundry Revenant Boilerplate
 		Tooltip:
 			'''
-			+5% Reaper damage and critical strike chance
+			+5% reaper damage and critical strike chance
 			See all traps and enemies
 			'''
 	}
@@ -4233,7 +4258,7 @@ Items: {
 		DisplayName: Foundry Revenant Treads
 		Tooltip:
 			'''
-			+5% Reaper damage and critical strike chance
+			+5% reaper damage and critical strike chance
 			Soul consumption abilities cost 10% less to activate
 			+25 max life
 			'''
@@ -4243,7 +4268,7 @@ Items: {
 		DisplayName: Foundry Revenant Visage
 		Tooltip:
 			'''
-			+5% Reaper damage and critical strike chance
+			+5% reaper damage and critical strike chance
 			+15% movement speed
 			'''
 	}
@@ -4252,7 +4277,7 @@ Items: {
 		DisplayName: Holiday Butcher Chestplate
 		Tooltip:
 			'''
-			+6% Reaper damage and critical strike chance
+			+6% reaper damage and critical strike chance
 			+50 max life
 			+4% damage reduction
 			'''
@@ -4262,7 +4287,7 @@ Items: {
 		DisplayName: Holiday Butcher Greaves
 		Tooltip:
 			'''
-			+6% Reaper damage and critical strike chance
+			+6% reaper damage and critical strike chance
 			+15% movement speed
 			+3% damage reduction
 			'''
@@ -4272,7 +4297,7 @@ Items: {
 		DisplayName: Holiday Butcher Hat
 		Tooltip:
 			'''
-			+6% Reaper damage and critical strike chance
+			+6% reaper damage and critical strike chance
 			Soul consumption abilities cost 5% less to activate
 			+3% damage reduction
 			'''
@@ -4282,7 +4307,7 @@ Items: {
 		DisplayName: Primal Savagery Boots
 		Tooltip:
 			'''
-			+8% Reaper damage 
+			+8% reaper damage 
 			+7% critical strike chance
 			+15 armor penetration against Tarred or Oiled enemies
 			+20% movement speed
@@ -4293,7 +4318,7 @@ Items: {
 		DisplayName: Primal Savagery Chestplate
 		Tooltip:
 			'''
-			+8% Reaper damage 
+			+8% reaper damage 
 			+7% critical strike chance
 			+15 armor penetration against Tarred or Oiled enemies
 			+4 souls generated per second
@@ -4304,7 +4329,7 @@ Items: {
 		DisplayName: Primal Savagery Mask
 		Tooltip:
 			'''
-			+8% Reaper damage 
+			+8% reaper damage 
 			+7% critical strike chance
 			+15 armor penetration against Tarred or Oiled enemies
 			Soul consumption abilities cost 10% less to activate
@@ -4315,7 +4340,7 @@ Items: {
 		DisplayName: Temple Reaver Boots
 		Tooltip:
 			'''
-			+6% Reaper damage and critical strike chance
+			+6% reaper damage and critical strike chance
 			+15 max life
 			+4% damage reduction
 			+16% movement speed
@@ -4326,7 +4351,7 @@ Items: {
 		DisplayName: Temple Reaver Mask
 		Tooltip:
 			'''
-			+6% Reaper damage and critical strike chance
+			+6% reaper damage and critical strike chance
 			+15 max life
 			+4% damage reduction
 			Soul consumption abilities cost 10% less to activate
@@ -4337,7 +4362,7 @@ Items: {
 		DisplayName: Temple Reaver Plate
 		Tooltip:
 			'''
-			+7% Reaper damage and critical strike chance
+			+7% reaper damage and critical strike chance
 			+20 max life
 			+4% damage reduction
 			+3 souls generated per second
@@ -4662,7 +4687,7 @@ Items: {
 		DisplayName: Lunar Shroud Cowl
 		Tooltip:
 			'''
-			+20% Reaper damage
+			+20% reaper damage
 			+8% Reaper critical strike chance
 			+2% damage reduction
 			+10% Reaper attack speed
@@ -4774,7 +4799,7 @@ Items: {
 			Fires a Moon Sickle that starts off stationary and quickly accelerates
 			Both the scythe and sickle gather 7 souls on strike
 			The scythe inflicts Lunar Reap for 3 seconds and the sickle inflicts it for 2 seconds
-			Consume {0} souls to instantly heal the player 100 health, then give the player +15 defense and +10% damage reduction for 5 seconds
+			Consume {0} souls to instantly heal you 100 health, then give you +15 defense and +10% damage reduction for 5 seconds
 			'''
 	}
 
@@ -4785,7 +4810,7 @@ Items: {
 
 	DeathRecords: {
 		DisplayName: Death Records
-		Tooltip: +7% Reaper damage per Death Mark
+		Tooltip: +7% reaper damage per Death Mark
 	}
 
 	GauntletsOfHaste: {
@@ -4797,8 +4822,8 @@ Items: {
 		DisplayName: Mortality Bell
 		Tooltip:
 			'''
-			Whenever the player would die, instead all Death Marks are consumed
-			For each Death Mark consumed, the player will heal for 10% of their max health
+			Whenever you would die, instead all Death Marks are consumed
+			For each Death Mark consumed, you will heal for 10% of their max health
 			This has a 60 second cooldown
 			'''
 	}
@@ -4810,7 +4835,7 @@ Items: {
 
 	CultistTapestry: {
 		DisplayName: Cultist Tapestry
-		Tooltip: Whenever a Death Mark decays due to being out of combat, the player will heal 50 health and have 20% of their max soul capacity filled
+		Tooltip: Whenever a Death Mark decays due to being out of combat, you will heal 50 health and have 20% of their max soul capacity filled
 	}
 
 	LoomOfFate: {
@@ -4818,7 +4843,7 @@ Items: {
 		Tooltip:
 			'''
 				All positive, passive soul generation grants positive life regen at a rate of 65%
-				Upon reaching 20% or less health, the player will generate 30 souls per second for 5 seconds
+				Upon reaching 20% or less health, you will generate 30 souls per second for 5 seconds
 				The soul generation has a 15 second cooldown
 			'''
 	}
@@ -4832,11 +4857,13 @@ Items: {
 		DisplayName: Reaper's Echo
 		Tooltip:
 			'''
-			"A scythe with a story of going from nothing to slaying the remnant of an ancient god etched into the handle"
-			Fires mirages of the player at the cursor six times per second which pierces infinitely
-			Mirages gather 8 souls on strike
-			Consume {0} souls to conjure a ring of 8 mirages which all pause before flying at the cursor
-			These mirages each do 300% damage
+			"A scythe with a story of going from nothing to slaying the remnant of an ancient being etched into the handle"
+			Consume {0} souls to cause 10 blades to orbit you as well as fire a saw, as well as several boosts in stats for 5 seconds.
+			After three seconds, the blades will fly out and home in on nearby enemies
+			The blades deal 200% damage and dont pierce
+			The saw deals 500% damage and pierces 10 enemies
+			The boosts include:
+			+15 defense, +15% reaper damage, +15% reaper crit chance, +15% chance to lifesteal and 20 armor penetration
 			'''
 	}
 
@@ -4858,7 +4885,7 @@ Items: {
 			'''
 			'Heavy is the head that wears the crown'
 			+25% damage to all classes
-			+150% pacifist damage
+			+150% nonweapon damage
 			+15% crit chance
 			'''
 	}
@@ -4896,7 +4923,7 @@ Items: {
 		Tooltip:
 			'''
 			Inflicts Sheer Cold for 3 seconds on strike
-			Hitting enemies gives the player Glacial Armor, Rage and Wrath for 3 seconds
+			Hitting enemies gives you Glacial Armor, Rage and Wrath for 3 seconds
 			'''
 	}
 
@@ -5048,7 +5075,7 @@ Items: {
 		DisplayName: Terraium Reaper Hood
 		Tooltip:
 			'''
-			+38% Reaper damage
+			+38% reaper damage
 			+35% Reaper critical strike chance
 			+8 souls generated per second
 			Soul consumption abilities cost 20% less to activate
@@ -5105,7 +5132,7 @@ Items: {
 			Fires a fragment of ice that gathers 5 souls, inflicts Sheer Cold for 2 seconds and shatters on impact into piercing shards
 			The shards gather 1 soul each and inflict Sheer Cold for 1 second
 			Ice Age itself inflicts Sheer Cold for 3 seconds and gathers 5 souls
-			Consume {0} souls to conjure Blizzard Balls that orbit the player for a short time
+			Consume {0} souls to conjure Blizzard Balls that orbit you for a short time
 			After 2 seconds, the balls will fire in rapid succession at the cursor
 			'''
 	}
@@ -5114,10 +5141,10 @@ Items: {
 		DisplayName: Cyclone Sickle
 		Tooltip:
 			'''
-			Hold to spin the Cyclone Sickle clockwise around the player
+			Hold to spin the Cyclone Sickle clockwise around you
 			The Cyclone Sickle gathers 8 souls per strike, inflicts Delta Shock for 3 seconds and zaps up to 2 nearby enemies
 			The zaps deal 75% damage and inflict Delta Shock for 2 seconds
-			Consume {0} souls to spin a Cyclone Blade around the player
+			Consume {0} souls to spin a Cyclone Blade around you
 			The Cyclone Blade deals 1,000% damage and inflicts Delta Shock for 10 seconds
 			'''
 	}
@@ -5126,9 +5153,9 @@ Items: {
 		DisplayName: Kasurikama
 		Tooltip:
 			'''
-			Hold to spin the Kasurikama clockwise around the player
+			Hold to spin the Kasurikama clockwise around you
 			The Kasurikama gathers 4 souls per strike and inflicts Bleeding for 2 seconds
-			Consume {0} souls to spin a Giant Sickle around the player
+			Consume {0} souls to spin a Giant Sickle around you
 			The Giant Sickle deals 500% damage and inflicts Bleeding for 5 seconds
 			'''
 	}
@@ -5182,7 +5209,7 @@ Items: {
 		Tooltip:
 			'''
 			Launches homing fireballs that inflict Core Heat for 2 seconds per swing
-			When hit for for than 10% of the player's max health, Pyreclaw will retaliate with a radial burst of 8 fireballs
+			When hit for for than 10% of you's max health, Pyreclaw will retaliate with a radial burst of 8 fireballs
 			'''
 	}
 
@@ -5211,8 +5238,8 @@ Items: {
 		Tooltip:
 			'''
 			Attaches a parasitic flower to enemies it hits and inflicts Nature's Toxin
-			The flower steals life and mana for the player
-			When striking enemies that has the flower attached, leaves will fly out from the player to hit that enemy
+			The flower steals life and mana for you
+			When striking enemies that has the flower attached, leaves will fly out from you to hit that enemy
 			The leaves inflict Nature's Toxin and Bleeding
 			'''
 	}
@@ -5231,10 +5258,10 @@ Items: {
 		Tooltip:
 			'''
 			"It thrums with "
-			+18% Reaper damage
+			+18% reaper damage
 			Gain max souls equal to 20% of your max life 
-			When killing an enemy, 1 specter orb will spawn and fly towards the player
-			Each soul orb heals the player for 15 health, gives the player 9 souls and grants the Caged Soul buff for 5 seconds
+			When killing an enemy, 1 specter orb will spawn and fly towards you
+			Each soul orb heals you for 15 health, gives you 9 souls and grants the Caged Soul buff for 5 seconds
 			'''
 	}
 
@@ -5243,10 +5270,10 @@ Items: {
 		Tooltip:
 			'''
 			"What a pretty prison"
-			+15% Reaper damage
+			+15% reaper damage
 			Gain max souls equal to 15% of your max life 
-			When killing an enemy, 1 specter orb will spawn and fly towards the player
-			Each soul orb heals the player for 12 health, gives the player 7 souls and grants the Caged Soul buff for 4 seconds
+			When killing an enemy, 1 specter orb will spawn and fly towards you
+			Each soul orb heals you for 12 health, gives you 7 souls and grants the Caged Soul buff for 4 seconds
 			'''
 	}
 
@@ -5261,7 +5288,7 @@ Items: {
 			'''
 			+10 defense, increased life regen, +50 max health and mana
 			+15% to all damage, +10% damage reduction, +35% movement speed
-			+35% flight time, +1 minion slot and +50% pacifist damage
+			+35% flight time, +1 minion slot and +50% nonweapon damage
 			'''
 	}
 
@@ -5383,6 +5410,26 @@ Items: {
 			'''
 			Once per second, fires a Cyber Saw that accelerates and homes in on nearby enemies dealing damage and inflicting Terra's Rend for 3 seconds
 			If your wearing Cyber Armor, the module is enhanced
+			'''
+	}
+
+	AnkhFirewallProgram: {
+		DisplayName: Ankh Firewall Program
+		Tooltip:
+			'''
+			Reduces damage taken by 10%
+			Grants immunity to many debuffs and knockback
+			Grants a player a damaging dash that inflicts Code Destabilized for 5 seconds
+			'''
+	}
+
+	EternityBand: {
+		DisplayName: Eternity Band
+		Tooltip:
+			'''
+			Provides life regeneration 
+			Reduces the cooldown of healing potions by 50%
+			Reduces the duration of debuffs by 50%
 			'''
 	}
 }
