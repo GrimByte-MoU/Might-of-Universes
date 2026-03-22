@@ -17,7 +17,7 @@ namespace MightofUniverses.Common.Players
         public const int DashCooldown = 50;
         public const int DashDuration = 30;
         public const float DashVelocity = 17f;
-        public const int DashDamage = 100;
+        public const int DashDamage = 150;
 
         public bool hasSatelliteGrid;
         public int DashDir = -1;
@@ -31,19 +31,19 @@ namespace MightofUniverses.Common.Players
         private const float GREEN_RADIUS = 30f * 16f;
         private const int GREEN_BASE_DAMAGE = 50;
         private const int GREEN_DAMAGE_PER_ENEMY = 5;
-        private const float GREEN_DAMAGE_INTERVAL = 30f;
+        private const float GREEN_DAMAGE_INTERVAL = 40f;
         private int greenDamageTimer;
 
         private const float YELLOW_RADIUS = 20f * 16f;
         private const int YELLOW_BASE_DAMAGE = 75;
         private const int YELLOW_DAMAGE_PER_ENEMY = 10;
-        private const float YELLOW_DAMAGE_INTERVAL = 20f;
+        private const float YELLOW_DAMAGE_INTERVAL = 30f;
         private int yellowDamageTimer;
 
         private const float RED_RADIUS = 10f * 16f;
         private const int RED_BASE_DAMAGE = 100;
         private const int RED_DAMAGE_PER_ENEMY = 15;
-        private const float RED_DAMAGE_INTERVAL = 10f;
+        private const float RED_DAMAGE_INTERVAL = 20f;
         private int redDamageTimer;
 
         public override void ResetEffects()

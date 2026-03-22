@@ -21,7 +21,7 @@ namespace MightofUniverses.Common.Players
                 return;
 
             orbTimer++;
-            if (orbTimer >= 30)
+            if (orbTimer >= 120)
             {
                 orbTimer = 0;
                 Vector2 spawn = Player.Center + Main.rand.NextVector2Circular(320f, 320f);

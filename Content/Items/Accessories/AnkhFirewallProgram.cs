@@ -25,7 +25,7 @@ namespace MightofUniverses.Content.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.GetModPlayer<AnkhFirewallPlayer>().hasAnkhFirewall = true;
-            player.statDefense += 12;
+            player.statDefense += 15;
             player.endurance += 0.10f;
             player.noKnockback = true;
 
@@ -138,7 +138,7 @@ namespace MightofUniverses.Content.Items.Accessories
                         Player.position,
                         Player.width,
                         Player.height,
-                        DustID.Electric,
+                        DustID.GreenTorch,
                         0f,
                         0f,
                         100,

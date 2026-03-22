@@ -26,7 +26,7 @@ namespace MightofUniverses.Content.Items.Materials
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ModContent.ItemType<AegisRemains>(), 4)
+                .AddIngredient(ModContent.ItemType<AegisRemains>(), 6)
                 .AddTile(TileID.LunarCraftingStation)
                 .Register();
         }

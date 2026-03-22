@@ -9,6 +9,8 @@ namespace MightofUniverses.Content.Items.Projectiles
     {
         public override void SafeSetDefaults()
         {
+            Projectile.width = 30;
+            Projectile.height = 30;
             Projectile.friendly = true;
             Projectile.penetrate = -1;
             Projectile.DamageType = DamageClass.Melee;
@@ -17,6 +19,8 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.tileCollide = true;
             Projectile.extraUpdates = 1;
             Projectile.scale = 0.75f;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 10;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -26,7 +30,10 @@ namespace MightofUniverses.Content.Items.Projectiles
 
         public override void AI()
         {
-            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Electric, 0f, 0f, 150, default, 0.75f);
+            if (Main.rand.NextBool(2))
+            {
+                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Electric, 0f, 0f, 150, default, 0.75f);
+            }
         }
     }
 }

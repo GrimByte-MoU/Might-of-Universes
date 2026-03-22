@@ -10,7 +10,7 @@ namespace MightofUniverses.Content.Items.Accessories
 {
     public class SatelliteDefenseGrid : ModItem
     {
-        private const int HEAL_COOLDOWN = 1800;
+        private const int HEAL_COOLDOWN = 3600;
         private const int EMERGENCY_HEAL_COOLDOWN = 3600;
 
         public override void SetDefaults()
@@ -27,7 +27,7 @@ namespace MightofUniverses.Content.Items.Accessories
         {
             var modPlayer = player.GetModPlayer<SatelliteDefenseGridPlayer>();
             modPlayer.hasSatelliteGrid = true;
-            player.statDefense += 10;
+            player.statDefense += 5;
             SetAnkhShieldImmunities(player);
             HandleRegenSystem(player, modPlayer);
             HandleEmergencyHealing(player, modPlayer);
@@ -54,7 +54,7 @@ namespace MightofUniverses.Content.Items.Accessories
         {
             if (modPlayer.regenActive)
             {
-                player.lifeRegen += 25;
+                player.lifeRegen += 20;
                 modPlayer.regenTimer--;
                 if (modPlayer.regenTimer <= 0)
                 {
@@ -68,7 +68,7 @@ namespace MightofUniverses.Content.Items.Accessories
         {
             if ((float)player.statLife / player.statLifeMax2 <= 0.2f && modPlayer.emergencyHealCooldown <= 0)
             {
-                player.Heal(200);
+                player.Heal(50);
                 ClearDebuffs(player);
                 modPlayer.emergencyHealCooldown = EMERGENCY_HEAL_COOLDOWN;
             }

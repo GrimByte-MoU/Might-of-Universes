@@ -26,6 +26,10 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.autoReuse = true;
             Item.maxStack = 1;
         }
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            target.AddBuff(ModContent.BuffType<TerrasRend>(), 180);
+        }
 
         public override void AddRecipes()
         {

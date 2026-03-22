@@ -68,20 +68,23 @@ namespace MightofUniverses.Content.Items.Weapons
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             int projectilesPerBurst = 5;
-            float radius = 100f;
+            Vector2 direction = (Main.MouseWorld - player.Center).SafeNormalize(Vector2.UnitY);
+            Vector2 finalVelocity = direction * Item.shootSpeed;
 
             for (int i = 0; i < projectilesPerBurst; i++)
             {
-                float angle = MathHelper.TwoPi * i / projectilesPerBurst;
-                Vector2 offset = Vector2.UnitX.RotatedBy(angle) * radius;
-                Vector2 spawnPos = player.Center + offset;
-
-                Vector2 direction = (Main.MouseWorld - spawnPos).SafeNormalize(Vector2.UnitY);
-                Vector2 finalVelocity = direction * Item.shootSpeed;
-
                 int randomProj = ModContent.ProjectileType<PrismaticFractureProjectile1>() + Main.rand.Next(10);
-
-                Projectile.NewProjectile(source, spawnPos, finalVelocity, randomProj, damage, knockback, player.whoAmI);
+                
+                Projectile.NewProjectile(
+                    source, 
+                    player.Center, 
+                    finalVelocity, 
+                    randomProj, 
+                    damage, 
+                    knockback, 
+                    player.whoAmI, 
+                    ai0: i * 3
+                );
             }
 
             return false;
@@ -97,5 +100,3 @@ namespace MightofUniverses.Content.Items.Weapons
         }
     }
 }
-
-

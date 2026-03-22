@@ -1,13 +1,3 @@
-MightofUniverses.WorldsBalanceGauntlet_Tooltip:
-	'''
-	Improves melee damage, attack speed, and knockback
-	Increases melee damage by 30%
-	Increases melee attack speed by 30%
-	Increases melee knockback by 30%
-	Enables auto-swing
-	Melee attacks inflict Element's Harmony
-	'''
-
 Buffs: {
 	GoblinsCurse: {
 		DisplayName: Goblin's Curse
@@ -1057,14 +1047,15 @@ Items: {
 	}
 
 	WorldsBalanceGauntlet: {
-		DisplayName: World's Balance Gauntlet
+		DisplayName: Elemental Gauntlet
 		Tooltip:
 			'''
-			Increases melee damage by 20%
-			Increases melee attack speed by 20%
-			Increases melee knockback by 20%
+			Improves melee damage, attack speed, and knockback
+			Increases melee damage by 30%
+			Increases melee attack speed by 30%
+			Increases melee knockback by 30%
 			Enables auto-swing
-			Melee attacks inflict Element's Harmony for 3 seconds
+			Melee attacks inflict Element's Harmony
 			'''
 	}
 
@@ -2018,13 +2009,13 @@ Items: {
 		Tooltip:
 			'''
 			System onl1ne... Defense gr1d 100% operat10nal...
-			+10 defense and immunity to most debuffs
+			+5 defense and immunity to several debuffs
 			Enables you to perform a more powerful dash
 			you emanates a triple layered aura that damages enemies
 			The aura deals more damage to enemies that are closer to you
 			The more enemies in the aura, the more damage it deals to all of them
-			Every 30 seconds, whenever you reach 50% or less health, you rapidly regenerate health for 6 seconds
-			Every 60 seconds, whenever you reach 20% or less health, all harmful debuffs will be scrubbed and you will instantly heal 200 health
+			Every 60 seconds, whenever you reach 50% or less health, you rapidly regenerate health for 6 seconds
+			Every 60 seconds, whenever you reach 20% or less health, all harmful debuffs will be scrubbed and you will instantly heal 50 health
 			'''
 	}
 
@@ -3089,9 +3080,9 @@ Items: {
 		Tooltip:
 			'''
 			A coin to take the Northern Express!
-			Twice per second, a little orb will appear near you
-			If you touches the orb, they will rapidly regenerate health and soul energy for 0.5 seconds
-			If an enemy touches the orb they will rapidly lose health for 0.5 seconds
+			Once every other second, a little orb will appear near you
+			If you touches the orb, they will rapidly regenerate health for 0.5 seconds and gain soul energy
+			If an enemy touches the orb they will take damage
 			'''
 	}
 
@@ -3237,7 +3228,7 @@ Items: {
 
 	TacticalGlaive: {
 		DisplayName: Tactical Glaive
-		Tooltip: Throw a fast moving blade that pierces all in its path
+		Tooltip: Throw a fast moving blade that inflicts Bleeding
 	}
 
 	ClockworkPirateHat: {
@@ -3477,15 +3468,19 @@ Items: {
 		DisplayName: Terraium Longsword
 		Tooltip:
 			'''
-			Whenever you strikes an enemy with the blade, three Terraium Spikes will strike the enemy
+			Whenever you strike an enemy with the blade, three Terraium Spikes will strike the enemy
 			Each spike will do 60% damage
-			The sword inflicts Terra's Rend for 3 seconds and then spikes inflict it for 1 second
+			The sword and spikes inflicts Terra's Rend
 			'''
 	}
 
 	TerraiumShortsword: {
 		DisplayName: Terraium Shortsword
-		Tooltip: '''"The shank of the world!"'''
+		Tooltip:
+			'''
+			"The shank of the world!"
+			Inflicts Terra's Rend
+			'''
 	}
 
 	TerraiumDagger: {
@@ -5257,7 +5252,7 @@ Items: {
 		DisplayName: Elemental Soul Detainer
 		Tooltip:
 			'''
-			"It thrums with "
+			"It thrums with ancient elemental magics"
 			+18% reaper damage
 			Gain max souls equal to 20% of your max life 
 			When killing an enemy, 1 specter orb will spawn and fly towards you
@@ -5417,6 +5412,7 @@ Items: {
 		DisplayName: Ankh Firewall Program
 		Tooltip:
 			'''
+			+15 defense
 			Reduces damage taken by 10%
 			Grants immunity to many debuffs and knockback
 			Grants a player a damaging dash that inflicts Code Destabilized for 5 seconds
@@ -5427,9 +5423,77 @@ Items: {
 		DisplayName: Eternity Band
 		Tooltip:
 			'''
-			Provides life regeneration 
+			+5 defense
+			Increases life regeneration 
+			Increases max health by 50
 			Reduces the cooldown of healing potions by 50%
 			Reduces the duration of debuffs by 50%
+			'''
+	}
+
+	BerserkerBloom: {
+		DisplayName: Berserker Bloom
+		Tooltip:
+			'''
+			-15 defense
+			Increases max life by 200
+			Increases damage taken by 15% and increases enemy aggro
+			25% increased reaper damage while at or below 50% health
+			25% increased reaper critical strike chance while at or below 25% health
+			'''
+	}
+
+	BlizzardPulser: {
+		DisplayName: Blizzard Pulser
+		Tooltip:
+			'''
+			Every other second, sends out a wave of chilly energy that travels out and damages enemies
+			The wave inflicts Sheer Cold for 3 seconds
+			Also Paralyzes nonboss enemies for 2 seconds
+			'''
+	}
+
+	SkyAthame: {
+		DisplayName: Sky Athame
+		Tooltip:
+			'''
+			Increases magic critical strike chance by 20%
+			Increases magic damage by 15%
+			35% increased movement speed while firing a magic weapon
+			'''
+	}
+
+	ElementalAmmoBox: {
+		DisplayName: Elemental Ammo Box
+		Tooltip:
+			'''
+			Ranged attacks inflict Elements Harmony
+			20% increased ranged damage
+			15% increased ranged attack speed
+			10% increased ranged critical strike chance
+			'''
+	}
+
+	ElementalBeetle: {
+		DisplayName: Elemental Beetle
+		Tooltip:
+			'''
+			Summon attacks inflict Elements Harmony
+			25% increased summon damage
+			Greatly increased minion knockback
+			+2 max minions
+			'''
+	}
+
+	ElementalMagestone: {
+		DisplayName: Elemental Magestone
+		Tooltip:
+			'''
+			Magic attacks inflict Elements Harmony
+			20% increased magic damage
+			15% increased magic knockback
+			10% magic critical strike chance
+			-15% mana costs
 			'''
 	}
 }

@@ -15,7 +15,7 @@ namespace MightofUniverses.Content.Items.Armors
             Item.width = 18;
             Item.height = 18;
             Item.value = Item.sellPrice(gold: 5);
-            Item.rare = ItemRarityID.Lime;
+            Item.rare = ItemRarityID.Green;
             Item.defense = 9;
         }
 
