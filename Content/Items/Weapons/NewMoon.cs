@@ -16,6 +16,8 @@ namespace MightofUniverses.Content.Items.Weapons
     public class NewMoon : ModItem, IHasSoulCost, IScytheWeapon
     {
         public float BaseSoulCost => 260f;
+        public int EmpowermentDurationTicks => 300;
+
 
         public override void SetDefaults()
         {

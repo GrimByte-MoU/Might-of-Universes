@@ -17,6 +17,17 @@ namespace MightofUniverses.Common.Players
 
         public float EmpowerDurationMultiplier;
         public int EmpowerExtraDurationTicks;
+        public int BonusEmpowerLifestealPercent;
+        public float BonusEmpowerReaperDamage;
+        public float BonusEmpowerAttackSpeed;
+        public float BonusEmpowerCritChance;
+        public int BonusEmpowerArmorPen;
+        public int BonusEmpowerDefense;
+        public float BonusEmpowerEndurance;
+        public int BonusEmpowerLifeRegen;
+        public float BonusEmpowerDamageTakenMultiplier;
+        public int BonusEmpowerMaxSouls;
+        public int BonusEmpowerSoulDrainPerSecond;
 
         public float RefundChance;
         public float RefundFraction;
@@ -87,7 +98,6 @@ namespace MightofUniverses.Common.Players
 
         public override void ResetEffects()
         {
-            
             SoulCostMultiplier = 1f;
             SoulCostFlatReduction = 0;
             RefundChance = 0f;
@@ -98,6 +108,17 @@ namespace MightofUniverses.Common.Players
             EmpowerCostMultiplier = 1f;
             EmpowerDurationMultiplier = 1f;
             EmpowerExtraDurationTicks = 0;
+            BonusEmpowerLifestealPercent = 0;
+            BonusEmpowerReaperDamage = 0f;
+            BonusEmpowerAttackSpeed = 0f;
+            BonusEmpowerCritChance = 0f;
+            BonusEmpowerArmorPen = 0;
+            BonusEmpowerDefense = 0;
+            BonusEmpowerEndurance = 0f;
+            BonusEmpowerLifeRegen = 0;
+            BonusEmpowerDamageTakenMultiplier = 0f;
+            BonusEmpowerMaxSouls = 0;
+            BonusEmpowerSoulDrainPerSecond = 0;
 
             HasFerrymansToken = false;
             FerrymanCooldownMultiplier = 1f;
@@ -214,16 +235,16 @@ namespace MightofUniverses.Common.Players
         }
 
         public void TriggerOnKillEffects(NPC target)
-{
-    if (accPrismaticSoulPrison)
-    {
-        SpawnChainedSoul();
-    }
-    else if (accElementalSoulDetainer)
-    {
-        SpawnBoundSpirit();
-    }
-}
+        {
+            if (accPrismaticSoulPrison)
+            {
+                SpawnChainedSoul();
+            }
+            else if (accElementalSoulDetainer)
+            {
+                SpawnBoundSpirit();
+            }
+        }
 
         private void SpawnChainedSoul()
         {

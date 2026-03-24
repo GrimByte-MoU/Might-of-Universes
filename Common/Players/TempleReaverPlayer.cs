@@ -27,7 +27,6 @@ namespace MightofUniverses.Common.Players
         {
             if (ChestSoulGenActive)
             {
-                // +3 souls/sec from plate
                 var reaper = Player.GetModPlayer<ReaperPlayer>();
                 reaper.AddSoulEnergy(3f / 60f);
             }

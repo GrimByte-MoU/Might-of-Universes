@@ -38,7 +38,8 @@ namespace MightofUniverses.Common.Players
                 Player.setBonus =
                     "Attackers take damage\n" +
                     "+20 max souls\n" +
-                    "When struck, gain 5 souls (0.5s cooldown)";
+                    "When struck, gain 5 souls\n" +
+                    "0.5 second cooldown";
             }
         }
 

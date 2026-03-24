@@ -15,6 +15,7 @@ namespace MightofUniverses.Content.Items.Weapons
     public class Bloodletter : ModItem, IHasSoulCost, IScytheWeapon
     {
         public float BaseSoulCost => 50f;
+        public int EmpowermentDurationTicks => 300;
 
         public override void SetDefaults()
         {

@@ -36,8 +36,8 @@ namespace MightofUniverses.Content.Items.Armors
         public override void UpdateArmorSet(Player player)
         {
             player.setBonus =
-                "+250 max souls, +10% reaper damage\n" +
-                "Consuming souls grants Foundry stacks (up to 50) that persist until death or unequipping.\n" +
+                "+250 max souls, 10% increased reaper damage\n" +
+                "Consuming souls grants 1 stack of the Foundry buff (stacks up to 50 times) that persist until death or unequipping.\n" +
                 "Stacks: Increases armor penetration by 1 per stack;\n 5+: 1% increased reaper damage per strike ;\n 10+: 1% increased movement speed per stack;\n" +
                 "25+: You get a 0.1% chance to dodge attacks per stack\n" +
                 "50: Reduces damage taken by 0.2% per stack";

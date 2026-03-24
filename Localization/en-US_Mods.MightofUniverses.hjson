@@ -861,6 +861,7 @@ Projectiles: {
 	EchoBlade.DisplayName: Echo Blade
 	EchoShard.DisplayName: Echo Shard
 	EchoSoulsaw.DisplayName: Echo Soulsaw
+	AokigaharaLeaf.DisplayName: Aokigahara Leaf
 }
 
 Keybinds: {
@@ -1498,7 +1499,7 @@ Items: {
 			'''
 			+10% reaper damage
 			+100 max souls
-			Two Solunar Medallions orbit you, damaging enemies and gathering souls
+			Two Solunar Medallions orbit you, damaging enemies and stealing souls
 			Whenever you consume souls, you heal 20 health and get Solunar Empowerment for 5 seconds
 			'''
 		DisplayName: Solunar Helmet
@@ -1817,8 +1818,8 @@ Items: {
 			'''
 			A pouch of soul cluster candy
 			Reaper strikes heals you for 3 health while wearing any reaper armor
-			Reaper strikes gather an additional soul while wearing any reaper armor
-			Reaper strikes gather an additional 2 souls and heal an additional 5 health while wearing any reaper armor and having the Hyper buff
+			Reaper strikes steal an additional soul while wearing any reaper armor
+			Reaper strikes steal an additional 2 souls and heal an additional 5 health while wearing any reaper armor and having the Hyper buff
 			'''
 	}
 
@@ -1839,7 +1840,7 @@ Items: {
 			'''
 			A pouch of soul candy!
 			Reaper strikes heals you for 2 health while wearing any reaper armor
-			Reaper strikes gather an additional soul and heal an additional 1 health while wearing any reaper armor and having the Hyper buff
+			Reaper strikes steal an additional soul and heal an additional 1 health while wearing any reaper armor and having the Hyper buff
 			'''
 	}
 
@@ -1865,7 +1866,7 @@ Items: {
 			'''
 			+15% reaper damage
 			+300 max souls
-			Four miniature Eclipses orbit you, damaging enemies and gathering souls
+			Four miniature Eclipses orbit you, damaging enemies and stealing souls
 			Whenever you consume souls, you temporarily gain +30% attack speed and +20% reaper damage
 			'''
 		DisplayName: Eclipse Hood
@@ -1930,9 +1931,9 @@ Items: {
 		DisplayName: Industrial Severence
 		Tooltip:
 			'''
-			5 souls gathered per strike
+			The scythe steals 5 souls per strike
 			Fires out a burst of a random amount of gears that travel random distances
-			Each gear gathers 1 soul per hit
+			Each gear steal 1 soul per hit
 			Consume {0} souls to fire a piercing tesla spear that electrifies enemies for 5 seconds
 			'''
 	}
@@ -2202,23 +2203,23 @@ Items: {
 		DisplayName: Bloodletter
 		Tooltip:
 			'''
-			Gathers 1 soul on hit and fires a bloody projectile
-			The projectile also gathers 1 soul when hitting
-			Consume {0} souls to give your weapons lifesteal for 5 seconds
+			steals 1 soul on hit and fires a bloody projectile
+			The projectile also steals 1 soul when hitting
+			Consume {0} souls to be empowered by souls for {1:F1} seconds
 			'''
 	}
 
 	CopperScythe: {
 		DisplayName: Copper Scythe
-		Tooltip: Consume {0} souls to gain increased life regen for 3 seconds
+		Tooltip: Consume {0} souls to be empowered by souls for {1:F1} seconds
 	}
 
 	Evildoer: {
 		DisplayName: Evil Doer
 		Tooltip:
 			'''
-			Gathers 1 soul on hit and fires a corrupted projectile
-			The projectile also gathers 1 soul when hitting
+			steals 1 soul on hit and fires a corrupted projectile
+			The projectile also steals 1 soul when hitting
 			Consume {0} souls to give your weapons the ability to inflict Corrupted and Cursed Inferno for 5 seconds
 			'''
 	}
@@ -2227,8 +2228,8 @@ Items: {
 		DisplayName: Gold Scythe
 		Tooltip:
 			'''
-			Gathers 1 soul on hit
-			Consume {0} souls to heal you 40 health as well as grant +5 defense and +10% reaper dsamage for 4 seconds
+			steals 1 soul on hit
+			Consume {0} souls to heal you 40 health as well as be empowered by souls for {1:F1} seconds
 			'''
 	}
 
@@ -2236,7 +2237,7 @@ Items: {
 		DisplayName: Gummy Scythe
 		Tooltip:
 			'''
-			Gathers 1 soul on hit
+			steals 1 soul on hit
 			Consume {0} souls to heal you 50 health as well as grant the Hyper buff for 3 seconds
 			'''
 	}
@@ -2245,8 +2246,8 @@ Items: {
 		DisplayName: Hell's Talon
 		Tooltip:
 			'''
-			Gathers 2 souls, ignites on hit and launches a fiery  projectile
-			The projectile also gathers 1 soul when hitting
+			steals 2 souls, ignites on hit and launches a fiery  projectile
+			The projectile also steals 1 soul when hitting
 			Consume {0} souls to launch a Hellsoul
 			'''
 	}
@@ -2255,8 +2256,8 @@ Items: {
 		DisplayName: Iron Scythe
 		Tooltip:
 			'''
-			Gathers 1 soul on hit
-			Consume {0} souls to give you increased life regen for 3 seconds
+			steals 1 soul on hit
+			Consume {0} souls to be empowered by souls for {1:F1} seconds
 			'''
 	}
 
@@ -2264,8 +2265,8 @@ Items: {
 		DisplayName: Lead Scythe
 		Tooltip:
 			'''
-			Gathers 1 soul on hit
-			Consume {0} souls to give you increased life regen for 3 seconds
+			steals 1 soul on hit
+			Consume {0} souls to be empowered by souls for {1:F1} seconds
 			'''
 	}
 
@@ -2273,7 +2274,7 @@ Items: {
 		DisplayName: Meteorite Harvester
 		Tooltip:
 			'''
-			Gathers 2 souls on hit and fires a meteoric shard which gathers 2 soul on hit
+			steals 2 souls on hit and fires a meteoric shard which steals 2 soul on hit
 			Consume {0} souls to fire a shotgun of three meteors
 			The meteors inflict Hellfire for 10 seconds
 			'''
@@ -2283,7 +2284,7 @@ Items: {
 		DisplayName: Midnight's Reap
 		Tooltip:
 			'''
-			Gathers 3 souls on hit and fires a midnight wave that gathers 2 soul on hit
+			steals 3 souls on hit and fires a midnight wave that steals 2 soul on hit
 			Consume {0} souls to fire out several nightbound souls
 			'''
 	}
@@ -2292,8 +2293,8 @@ Items: {
 		DisplayName: Platinum Scythe
 		Tooltip:
 			'''
-			Gathers 1 soul on hit
-			Consume {0} souls to heal you 40 health as well as grant +5 defense and +10% reaper dsamage for 4 seconds
+			steals 1 soul on hit
+			Consume {0} souls to heal you 40 health as well as be empowered by souls for {1:F1} seconds
 			'''
 	}
 
@@ -2301,8 +2302,8 @@ Items: {
 		DisplayName: Solunar Scythe
 		Tooltip:
 			'''
-			Gathers 2 souls on hit
-			Fires 2 solunar bolts that move in a helix, the bolts gather 1 soul each
+			steals 2 souls on hit
+			Fires 2 solunar bolts that move in a helix, the bolts steal 1 soul each
 			Consume {0} souls to cause two Solunar medallions to spin away from you
 			'''
 	}
@@ -2311,22 +2312,22 @@ Items: {
 		DisplayName: Sweet Harvester
 		Tooltip:
 			'''
-			Gathers 2 souls on hit
-			Fires a gumball projectile that also gathers 1 soul on hit
-			Consume {0} souls to heal for 100 health as well as gain greatly increased life regen and the Hyper buff for 5 seconds
+			steals 2 souls on hit
+			Fires a gumball projectile that also steals 1 soul on hit
+			Consume {0} souls to heal for 100 health as well as be empowered by souls for {1:F1} seconds
 			'''
 	}
 
 	TinScythe: {
 		DisplayName: Tin Scythe
-		Tooltip: Consume {0} souls to gain increased life regen for 3 seconds
+		Tooltip: Consume {0} souls to be empowered by souls for {1:F1} seconds
 	}
 
 	WardensHook: {
 		DisplayName: Warden's Hook
 		Tooltip:
 			'''
-			Gathers 2 souls on hit and fires a water bolt which also steals 1 soul on hit
+			steals 2 souls on hit and fires a water bolt which also steals 1 soul on hit
 			15% chance to instead fire damaging crossbones
 			Consume {0} souls to fire a piercing water spear
 			'''
@@ -2336,8 +2337,8 @@ Items: {
 		DisplayName: Palladium Scythe
 		Tooltip:
 			'''
-			Gathers 3 souls on hit and fires a Palladium dart which gathers 2 souls on hit
-			Consume {0} souls to give yourself +7 defense and greatly increased life regen for 5 seconds
+			steals 3 souls on hit and fires a Palladium dart which steals 2 souls on hit
+			Consume {0} souls to be empowered by souls for {1:F1} seconds
 			'''
 	}
 
@@ -2345,8 +2346,8 @@ Items: {
 		DisplayName: Chlorophyte Scythe
 		Tooltip:
 			'''
-			Gathers 4 souls on hit and fires a Chlorophyte leaf which gathers 3 souls on hit
-			Consume {0} souls to immediately heal for 150 health, then rapidly regenerate health for 5 seconds
+			steals 4 souls on hit and fires a Chlorophyte leaf which steals 3 souls on hit
+			Consume {0} souls to immediately heal for 150 health as well as be empowered by souls for {1:F1} seconds
 			'''
 	}
 
@@ -2355,8 +2356,8 @@ Items: {
 		Tooltip:
 			'''
 			A scythe used by Thanatos
-			Gathers 4 souls on hit and fires a Hallowed Scythe which gathers 3 souls on hit
-			Consume {0} souls to give yourself +7 defense, +15% attack speed and reduces all damage taken by 5% for 3 seconds
+			steals 4 souls on hit and fires a Hallowed Scythe which steals 3 souls on hit
+			Consume {0} souls to be empowered by souls for {1:F1} seconds
 			'''
 	}
 
@@ -2364,8 +2365,8 @@ Items: {
 		DisplayName: Orichalcum Scythe
 		Tooltip:
 			'''
-			Gathers 4 souls on hit and fires out an orichalcum petal that gathers 2 souls on hit
-			Consume {0} souls to give yourself +15% reaper damage and attack speed for 4 seconds
+			steals 4 souls on hit and fires out an orichalcum petal that steals 2 souls on hit
+			Consume {0} souls to be empowered by souls for {1:F1} seconds
 			'''
 	}
 
@@ -2373,8 +2374,8 @@ Items: {
 		DisplayName: Titanium Scythe
 		Tooltip:
 			'''
-			Gathers 4 souls on hit and fires out a titanium star which gathers 3 souls on hit
-			Consume {0} souls to instantly heal yourself 150 health, then get +15 defense and reduces damage taken by 15% for 4 seconds
+			The scythe steals 4 souls on hit and fires out a titanium star which steals 3 souls on hit
+			Consume {0} souls to instantly heal yourself 150 health as well as be empowered by souls for {1:F1} seconds
 			'''
 	}
 
@@ -2382,7 +2383,7 @@ Items: {
 		DisplayName: Adamantite Scythe
 		Tooltip:
 			'''
-			Gathers 4 souls on hit and fires out an adamantite dart that gathers 3 souls on hit
+			steals 4 souls on hit and fires out an adamantite dart that steals 3 souls on hit
 			Consume {0} souls to fire a homing adamantite sphere that pierces all defense and deals 500% damage
 			'''
 	}
@@ -2391,8 +2392,8 @@ Items: {
 		DisplayName: Blood Tithe
 		Tooltip:
 			'''
-			Gathers 5 souls on strike and fire out an accelerating blood wave that also gathers 5 souls on hit
-			Consume {0} souls to get decreased life regen, +30% attack speed and +25% reaper damage for 5 seconds
+			steals 5 souls on strike and fire out an accelerating blood wave that also steals 5 souls on hit
+			Consume {0} souls to be empowered by souls for {1:F1} seconds
 			'''
 	}
 
@@ -2400,8 +2401,8 @@ Items: {
 		DisplayName: Cobalt Scythe
 		Tooltip:
 			'''
-			Gathers 3 souls on hit and fires a Cobalt dart which gathers 2 souls on hit
-			Consume {0} souls to fire out 4 powerful cobalt blades
+			steals 3 souls on hit and fires a Cobalt dart which steals 2 souls on hit
+			Consume {0} souls to be empowered by souls for {1:F1} seconds
 			'''
 	}
 
@@ -2410,7 +2411,7 @@ Items: {
 		Tooltip:
 			'''
 			SYSTEM ERROR... SYSTEM FAILURE...
-			Gathers 5 souls on strike and fires out a code wave which gathers 3 souls on hit
+			steals 5 souls on strike and fires out a code wave which steals 3 souls on hit
 			Consume {0} souls to fire out two homing code spheres
 			'''
 	}
@@ -2419,8 +2420,8 @@ Items: {
 		DisplayName: Demon's Finger
 		Tooltip:
 			'''
-			Gathers 4 souls and inflicts Hellfire for 3 seconds on strike
-			Fires a firebolt that gathers 3 souls and inflicts Hellfire for 3 seconds on hit
+			steals 4 souls and inflicts Hellfire for 3 seconds on strike
+			Fires a firebolt that steals 3 souls and inflicts Hellfire for 3 seconds on hit
 			Consume {0} souls to fire out a barrage of demon souls that inflict Demonfire for 3 seconds and Hellfire for 5 seconds
 			'''
 	}
@@ -2429,7 +2430,7 @@ Items: {
 		DisplayName: Glitch Scythe
 		Tooltip:
 			'''
-			Gathers 3 souls on hit and fires a glitch bolt that gathers 2 souls on strike
+			steals 3 souls on hit and fires a glitch bolt that steals 2 souls on strike
 			Consume {0} souls to fire three glitch blasts in a tight arc
 			'''
 	}
@@ -2448,7 +2449,7 @@ Items: {
 		Tooltip:
 			'''
 			Steals 5 souls on hit and fires out a chlorotanium star that also steals 5 souls on hit
-			Consume {0} souls to heal for 150 health, then gain rapid life regen, +20 defense and reduces damage taken by 15% for 5 seconds.
+			Consume {0} souls to heal for 150 health as well as be empowered by souls for {1:F1} seconds
 			'''
 	}
 
@@ -2456,7 +2457,7 @@ Items: {
 		DisplayName: Debt Collector
 		Tooltip:
 			'''
-			Gathers 5 souls on hit and fires out a lifestealing soul coin that also gathers 5 souls on hit
+			steals 5 souls on hit and fires out a lifestealing soul coin that also steals 5 souls on hit
 			Consume {0} souls to fire out a barrage of greedy souls
 			'''
 	}
@@ -2465,7 +2466,7 @@ Items: {
 		DisplayName: Great Blizzard 88
 		Tooltip:
 			'''
-			Gathers 5 souls on hit and randomly fires out one or two snoflakes that each gather 5 souls on hit
+			steals 5 souls on hit and randomly fires out one or two snoflakes that each steal 5 souls on hit
 			Consume {0} souls to cause a blizzard to rain down from the sky
 			The snowflakes inflict Frostburn for 3 seconds while the blizzard inflicts Frostburn for 1 second
 			'''
@@ -2475,7 +2476,7 @@ Items: {
 		DisplayName: Life's Twilight
 		Tooltip:
 			'''
-			Gathers 5 souls on hit and fires out two eclipse rays that each gather 2 souls on hit
+			steals 5 souls on hit and fires out two eclipse rays that each steal 2 souls on hit
 			Consume {0} souls to create four miniature eclipses that circle out and away from you
 			'''
 	}
@@ -2484,29 +2485,29 @@ Items: {
 		DisplayName: Scythe of Christmas Future
 		Tooltip:
 			'''
-			Gthers 5 souls on hit and fires out a holly leaf that  gathers 4 souls and heals you for 5 health on hit
-			15% chance to instead fire out a more powerful holly leaf that gathers 6 souls and heals you for 15 health on hit
-			Consume {0} souls to gain significant life regen for 5 seconds
+			Gthers 5 souls on hit and fires out a holly leaf that  steals 4 souls and heals you for 5 health on hit
+			15% chance to instead fire out a more powerful holly leaf that steals 6 souls and heals you for 15 health on hit
+			Consume {0} souls to be empowered by souls for {1:F1} seconds
 			'''
 	}
 
 	SilverScythe: {
 		DisplayName: Silver Scythe
-		Tooltip: Consume {0} souls to gain increased life regen and +10% reaper damage for 3 seconds
+		Tooltip: Consume {0} souls to be empowered by souls for {1:F1} seconds
 	}
 
 	TungstenScythe: {
 		DisplayName: Tungsten Scythe
-		Tooltip: Consume {0} souls to gain increased life regen and +10% reaper damage for 3 seconds
+		Tooltip: Consume {0} souls to be empowered by souls for {1:F1} seconds
 	}
 
 	TempleReaper: {
 		DisplayName: Temple Reaper
 		Tooltip:
 			'''
-			Gathers 7 souls on hit and fires out three temple shards that each gather 4 souls on hit
-			15% chance for each shard to be replaced by a bouncing fireball that pierces and bounces but gathers no souls
-			Consume {0} souls to heal for 150 flat health, then gain rapid regeneration, +25 defense and reduces damage taken by 20% for 5 seconds
+			steals 7 souls on hit and fires out three temple shards that each steal 4 souls on hit
+			15% chance for each shard to be replaced by a bouncing fireball that pierces and bounces but steals no souls
+			Consume {0} souls to heal for 150 flat health as well as be empowered by souls for {1:F1} seconds
 			'''
 	}
 
@@ -2514,8 +2515,8 @@ Items: {
 		DisplayName: Trickster's Due
 		Tooltip:
 			'''
-			Gathers 7 souls on hit and fires out a pixie bolt that also gathers 7 souls on hit
-			Consume {0} souls to give yourself massive life regen for 5 seconds
+			steals 7 souls on hit and fires out a pixie bolt that also steals 7 souls on hit
+			Consume {0} souls to be empowered by souls for {1:F1} seconds
 			'''
 	}
 
@@ -2523,8 +2524,8 @@ Items: {
 		DisplayName: Martian Tally
 		Tooltip:
 			'''
-			Gathers 7 souls on hit and fires out 1 or 2 wavy martian tally bolts that gather 5 souls each
-			Consume {0} souls to gain double attack speed and ignore all defense for 3 seconds
+			The scythe steals teals 7 souls on hit and fires out 1 or 2 wavy martian tally bolts that steal 5 souls each
+			Consume {0} souls to be empowered by souls for {1:F1} seconds
 			'''
 	}
 
@@ -2538,7 +2539,7 @@ Items: {
 		Tooltip:
 			'''
 			Creates a damaging aura around you that electrifies enemies
-			Each enemy hit gathers you 1 soul
+			Lightning strikes steal 1 soul
 			'''
 	}
 
@@ -2547,7 +2548,7 @@ Items: {
 		Tooltip:
 			'''
 			Delicious...
-			Generaates you 1 soul per second
+			Generates you 1 soul per second
 			'''
 	}
 
@@ -2558,7 +2559,7 @@ Items: {
 
 	MoodyStorm: {
 		DisplayName: Moody Storm
-		Tooltip: An upgraded area damages enemies faster and gathers you 2 souls per hit enemy
+		Tooltip: An upgraded area damages enemies faster and steals you 2 souls per hit enemy
 	}
 
 	SoulStorm: {
@@ -2567,7 +2568,7 @@ Items: {
 			'''
 			They are many and they are angry
 			A large area around you damages and electrifies enemies twice per second
-			Each enemy hit gathers you 3 souls
+			Each enemy hit steals you 3 souls
 			'''
 	}
 
@@ -2591,7 +2592,7 @@ Items: {
 
 	ReaperEmblem: {
 		DisplayName: Reaper Emblem
-		Tooltip: +15% reaper damage
+		Tooltip: 15% increased reaper damage
 	}
 
 	TrappedDemonFire: {
@@ -2613,8 +2614,8 @@ Items: {
 		DisplayName: Deathknight Emblem
 		Tooltip:
 			'''
-			 		+12% Reaper and melee damage
-			 		+10% Reaper and melee critical strike chance
+			 		12% increased reaper and melee damage
+			 		10% increased reaper and melee critical strike chance
 			 		Taking damage grants soul energy equal to half the damage taken
 			 		This effect has a 3 second cooldown
 			 		While holding a melee weapon, lose 10 soul energy per second
@@ -2626,7 +2627,7 @@ Items: {
 		DisplayName: Goblin Core
 		Tooltip:
 			'''
-			Increases you's movement speed by 15%
+			Increases your movement speed by 15%
 			Grants you the effects of flipper, depth meter and water walking potions
 			Shows player depth and tells the time
 			Players take no fall damage and emit light
@@ -2637,12 +2638,12 @@ Items: {
 		DisplayName: Necromaster Emblem
 		Tooltip:
 			'''
-			 		+12% Reaper and summon damage
-			 		+10% Reaper critical strike chance
-			 		Minions gather 1 soul energy whenever they strike an enemy
-			 		+2 life regeneration per second for each active minion
-			 		If controlling no minions, gain +2 defense and +2 armor penetration per unused minion slot
-			 		Unused minion slots also grant +1 soul energy per enemy killed
+			12% increased reaper and summon damage
+			10% increased reaper critical strike chance
+			Minions steal 1 soul energy whenever they strike an enemy
+			+2 life regeneration per second for each active minion
+			If controlling no minions, gain +2 defense and +2 armor penetration per unused minion slot
+			Unused minion slots also grant +1 soul energy per enemy killed
 			'''
 	}
 
@@ -2650,11 +2651,11 @@ Items: {
 		DisplayName: Soulbinder Emblem
 		Tooltip:
 			'''
-			+12% Reaper and magic damage
-			 		+10% Reaper and magic critical strike chance
-			 		50% of damage taken is absorbed by mana instead of health
-			 		This effect has a 3 second cooldown
-			 		Mana spent on spells converts to soul energy at a 2:1 ratio
+			12% increased reaper and magic damage
+			10% increased reaper and magic critical strike chance
+			50% of damage taken is absorbed by mana instead of health
+			This effect has a 3 second cooldown
+			Mana spent on spells converts to soul energy at a 2:1 ratio
 			'''
 	}
 
@@ -2662,11 +2663,11 @@ Items: {
 		DisplayName: Wraithwalker Emblem
 		Tooltip:
 			'''
-			 		+12% Reaper and ranged damage
-			 		+10% Reaper and ranged critical strike chance
-			 		Every 2 seconds, consume 1 ammo to gain soul energy equal to half its damage
-			 		For every 10 soul energy, gain +0.5% ranged damage, +0.5% ranged attack speed, and +1 armor penetration
-			 		Bonus caps at 300 soul energy
+			12% increased reaper and ranged damage
+			10% increased reaper and ranged critical strike chance
+			Every 2 seconds, consume 1 ammo to gain soul energy equal to half its damage
+			For every 10 soul energy, gain +0.5% ranged damage, +0.5% ranged attack speed, and +1 armor penetration
+			Bonus caps at 300 soul energy
 			'''
 	}
 
@@ -2675,10 +2676,7 @@ Items: {
 		Tooltip:
 			'''
 			A belt only a mad alchemist would endorse
-			Reaper attacks inflict multiple debuffs:
-			      Prismatic Rend for 3 seconds
-			      Demonfire for 5 seconds
-			      Corrupted for 10 seconds
+			Reaper attacks inflict multiple debuffs
 			'''
 	}
 
@@ -2687,7 +2685,7 @@ Items: {
 		Tooltip:
 			'''
 			Radiates a chilling aura that slows all nonboss enemies by 50%
-			Enemies that die within the aura are lost to the eternal cold granting you a 10 soul energy bonus
+			Enemies that die within the aura are lost to the eternal cold generating you 10 souls
 			'''
 	}
 
@@ -2698,7 +2696,7 @@ Items: {
 
 	PrismaticVial: {
 		DisplayName: Prismatic Vial
-		Tooltip: Reaper attacks inflict Prismatic Rend for 3 seconds
+		Tooltip: Reaper attacks inflict Prismatic Rend
 	}
 
 	LunaticCloth: {
@@ -2708,7 +2706,7 @@ Items: {
 
 	LiquidTerra: {
 		DisplayName: Liquid Terra
-		Tooltip: Reaper attacks inflict Element's Harmony for 3 seconds
+		Tooltip: Reaper attacks inflict Element's Harmony
 	}
 
 	LunaticBanner: {
@@ -2716,27 +2714,20 @@ Items: {
 		Tooltip:
 			'''
 			The banner of a madman
-			+15% reaper damage
-			+10% Reaper critical strike chance
+			15% increased reaper damage
+			10% increased reaper critical strike chance
 			Whenever you consume souls, you heals for 15% of their max health
 			'''
 	}
 
 	VialofLordsVenom: {
 		DisplayName: Vialof Lords Venom
-		Tooltip: Reaper attacks inflict Lord's Venom for 3 seconds
+		Tooltip: Reaper attacks inflict Lord's Venom
 	}
 
 	WarcrimeSash: {
 		DisplayName: Warcrime Sash
-		Tooltip:
-			'''
-			Reaper attacks inflicts several vicious debuffs
-			Lord's Venom for 3 seconds
-			Sunfire for 4 seconds
-			Element's Harmony and Deadly Corruption for 5 seconds
-			Prismatic Rend for 6 seconds
-			'''
+		Tooltip: Reaper attacks inflicts several vicious debuffs
 	}
 
 	ReinforcedStake: {
@@ -2757,8 +2748,10 @@ Items: {
 		DisplayName: Psychic Tadpole
 		Tooltip:
 			'''
-			Allows flight and slow fall.
-			+20 max life, +20% movement speed and +7% damage
+			Allows flight and slow fall
+			Increases max life 20 
+			Increases movement speed 
+			7% increased damage
 			'''
 	}
 
@@ -2766,8 +2759,11 @@ Items: {
 		DisplayName: Stellar Tadpole
 		Tooltip:
 			'''
-			Allows flight and slow fall.
-			+40 max life, +35% movement speed, +12% damage and +7 defense
+			+7 defense
+			Allows flight and slow fall
+			Increases max life by 40
+			Increases movement speed
+			12% increased damage
 			'''
 	}
 
@@ -2775,8 +2771,8 @@ Items: {
 		DisplayName: Envenomed Stake
 		Tooltip:
 			'''
-			A stake coated in venom.
-			Inflicts Acid Venom for 5 seconds
+			A stake coated in venom
+			Inflicts Acid Venom
 			'''
 	}
 
@@ -2784,8 +2780,8 @@ Items: {
 		DisplayName: Hellstake
 		Tooltip:
 			'''
-			A stake containing the fires of Hell.
-			Explodes and inflicts Demonfire and Hellfire for 3 seconds
+			A stake containing the fires of the underworld
+			Explodes and inflicts Demonfire and Hellfire
 			'''
 	}
 
@@ -2793,7 +2789,7 @@ Items: {
 		DisplayName: Nature Stake
 		Tooltip:
 			'''
-			A stake empowered by nature.
+			A stake empowered by nature
 			Bounces off the ground and walls up to 3 times
 			'''
 	}
@@ -2802,8 +2798,8 @@ Items: {
 		DisplayName: Sollutum Stake
 		Tooltip:
 			'''
-			A stake infused with the force of a sun.
-			Explodes and inflicts Sunfire and Daybroken for 3 seconds.
+			A stake infused with the force of a sun
+			Explodes and inflicts Sunfire and Daybroken
 			'''
 	}
 
@@ -2812,28 +2808,30 @@ Items: {
 		Tooltip:
 			'''
 			A stake launcher used by a legendary hunter of the undead.
-			Fires two stakes and two helixes of sun bolts that inflict Daybroken and Sunfire for 3 seconds
+			Fires two stakes and two helixes of sun bolts that inflict Daybroken and Sunfire
 			'''
 	}
 
 	BroodheartOfTheThousandYoung: {
-		DisplayName: Broodheart Of The Thousand Young
+		DisplayName: Broodheart of The Thousand Young
 		Tooltip:
 			'''
 			It beats a maddening pulse.
+			Permanently grants the following buffs:
 			Increases max life by 25
 			Increases max mana by 200
-			+15% damage
-			+2 max minion slots
+			15% increased damage
+			+2 max minions
 			'''
 	}
 
 	CoreOfBlindIdiocy: {
-		DisplayName: Core Of Blind Idiocy
+		DisplayName: Core of Blind Idiocy
 		Tooltip:
 			'''
 			The core of an unspeakable entity.
-			+275 max health
+			Permanently grants the following buff:
+			Increases max life by 275
 			'''
 	}
 
@@ -2842,8 +2840,9 @@ Items: {
 		Tooltip:
 			'''
 			A pulsing heart made entirely of otherworldly chaos.
-			+25 max life
-			+50 max mana
+			Permanently grants the following buffs:
+			Permanently increases max life by 25
+			Permanently increases max mana by 50 max mana
 			-10% mana cost
 			Increased mana and life regen
 			'''
@@ -2854,6 +2853,7 @@ Items: {
 		Tooltip:
 			'''
 			A key that opens to beyond space and time.
+			Permanently grants the following buffs:
 			+1 accessory slot
 			Grants a 2% chance to dodge any and all damage, damage dodged from this dodge heal
 			'''
@@ -2873,8 +2873,11 @@ Items: {
 		Tooltip:
 			'''
 			A pearl imbued with unnatural darkness.
-			+25 max life
-			Allows free movement through liquids, water breathing and normalized gravity while in space
+			Permanently grants the following buffs:
+			Increases max life by 25
+			Allows free movement through liquids
+			Enabkles water breathing
+			Normalized gravity in space
 			'''
 	}
 
@@ -2883,9 +2886,11 @@ Items: {
 		Tooltip:
 			'''
 			A tattered and worn yellow cloak.
+			Permanently grants the following buffs:
 			+1 accessory slot
-			Allows for much faster acceleration, deceleration and fall speed
-			+20% move speed, +1 second flight time
+			Faster acceleration, deceleration and fall speed
+			Greatly increased movement speed
+			+1 extra second flight time
 			'''
 	}
 
@@ -2893,7 +2898,7 @@ Items: {
 		DisplayName: Luna Flower
 		Tooltip:
 			'''
-				Reduces weapon damage by 70%
+			Reduces weapon damage by 70%
 				Increases armor set bonus and accessory damage by 115%
 				Grants stacking bonuses to defense and life regeneration when not using a weapon
 				Stacks up to 6 times, with each stack granting +5 defense and +6 health regeneration per second
@@ -3070,7 +3075,7 @@ Items: {
 		Tooltip:
 			'''
 			Condensed fear in a pristine canister
-			you gives off a bright aura that causes enemies that come within 13 tiles of you to become Terrified for 3 seconds
+			you gives off a bright aura that causes enemies that come within 20 tiles of you to become Terrified for 3 seconds
 			The aura will generate 2 souls per second per enemy in the aura as well
 			'''
 	}
@@ -3143,7 +3148,7 @@ Items: {
 		DisplayName: Mug Of Festivities
 		Tooltip:
 			'''
-			It tastes of Christmas Spirit and family gatherings
+			It tastes of Christmas Spirit and family stealings
 			Grants you the Festive Comfort buff for 30 seconds
 			'''
 	}
@@ -3443,9 +3448,9 @@ Items: {
 		Tooltip:
 			'''
 			"The sakura's last bloom falls, a crimson offering in the soil,
-			where shadows gather what light once held."
-			Gathers 5 souls per hit and fires out one or two petals at random
-			Each petal gathers 4 souls on hit
+			where shadows steal what light once held."
+			steals 5 souls per hit and fires out one or two petals at random
+			Each petal steals 4 souls on hit
 			Consume {0} souls to spawn a Sakura Bloom on your cursor which damage an enemy for 400% damage
 			When making contact with an enemy, the bloom will explode into a radial burst of 24 Sakura Petals
 			The Sakura Petals deal 66% damage of the bloom and don't pierce
@@ -3732,7 +3737,7 @@ Items: {
 		Tooltip:
 			'''
 			"The finality of the ancient's lives are inscribed in this scythe"
-			Gathers 8 souls per strike
+			steals 8 souls per strike
 			Consume {0} souls to gain the Primal Savagery buff for 5 seconds
 			'''
 	}
@@ -4779,10 +4784,10 @@ Items: {
 		Tooltip:
 			'''
 			Hold to spin the scythe and charge, starting slow and spinning faster over the course of 4 seconds. 
-			At half of its max speed, six times per second it starts to fire homing Celestial Orbs that gather 1 soul and inflict several debuffs for 1 second. 
+			At half of its max speed, six times per second it starts to fire homing Celestial Orbs that steal 1 soul and inflict several debuffs for 1 second. 
 			Celestial Orbs are fired twice as frequently when spinning at max speed. 
 			When thrown at max speed, the scythe will quickly fire radial bursts of celestial orbs.
-			The scythe gathers 10 souls when striking an enemy when being spun and 2 souls when thrown and inflicts several debuffs for 3 seconds.
+			The scythe steals 10 souls when striking an enemy when being spun and 2 souls when thrown and inflicts several debuffs for 3 seconds.
 			Consume {0} souls to unleash a devastating scythe that relentlessly hunts all enemies on screen for 5 seconds.
 			'''
 	}
@@ -4792,25 +4797,25 @@ Items: {
 		Tooltip:
 			'''
 			Fires a Moon Sickle that starts off stationary and quickly accelerates
-			Both the scythe and sickle gather 7 souls on strike
+			Both the scythe and sickle steal 7 souls on strike
 			The scythe inflicts Lunar Reap for 3 seconds and the sickle inflicts it for 2 seconds
-			Consume {0} souls to instantly heal you 100 health, then give you +15 defense and +10% damage reduction for 5 seconds
+			Consume {0} souls to be empowered by souls for {1:F1} seconds
 			'''
 	}
 
 	CharmOfMorbidFocus: {
 		DisplayName: Charm Of Morbid Focus
-		Tooltip: +3% Reaper crit chance per Death Mark
+		Tooltip: 3% increased reaper critical strike chance per Death Mark
 	}
 
 	DeathRecords: {
 		DisplayName: Death Records
-		Tooltip: +7% reaper damage per Death Mark
+		Tooltip: 7% increased reaper damage per Death Mark
 	}
 
 	GauntletsOfHaste: {
 		DisplayName: Gauntlets Of Haste
-		Tooltip: +4% Reaper attack speed per Death Mark
+		Tooltip: 4% increased reaper attack speed per Death Mark
 	}
 
 	MortalityBell: {
@@ -4838,7 +4843,7 @@ Items: {
 		Tooltip:
 			'''
 				All positive, passive soul generation grants positive life regen at a rate of 65%
-				Upon reaching 20% or less health, you will generate 30 souls per second for 5 seconds
+				Upon reaching 20% or less health, you generate 30 souls per second for 5 seconds
 				The soul generation has a 15 second cooldown
 			'''
 	}
@@ -4853,12 +4858,10 @@ Items: {
 		Tooltip:
 			'''
 			"A scythe with a story of going from nothing to slaying the remnant of an ancient being etched into the handle"
-			Consume {0} souls to cause 10 blades to orbit you as well as fire a saw, as well as several boosts in stats for 5 seconds.
+			Consume {0} souls to cause 10 blades to orbit you as well as fire a saw, as well as be empowered by souls for {1:F1} seconds.
 			After three seconds, the blades will fly out and home in on nearby enemies
 			The blades deal 200% damage and dont pierce
 			The saw deals 500% damage and pierces 10 enemies
-			The boosts include:
-			+15 defense, +15% reaper damage, +15% reaper crit chance, +15% chance to lifesteal and 20 armor penetration
 			'''
 	}
 
@@ -4867,10 +4870,10 @@ Items: {
 		Tooltip:
 			'''
 			+15 defense
-			      Creates a shield that absorbs 600 damage
-			      The shield regenerates 30 seconds after breaking
-			      Grants immunity to knockback while the shield is active
-			      Grants immunity to several deadly debuffs
+			Creates a shield that absorbs 600 damage
+			The shield regenerates 30 seconds after breaking
+			Grants immunity to knockback while the shield is active
+			Grants immunity to several deadly debuffs
 			'''
 	}
 
@@ -4879,9 +4882,9 @@ Items: {
 		Tooltip:
 			'''
 			'Heavy is the head that wears the crown'
-			+25% damage to all classes
-			+150% nonweapon damage
-			+15% crit chance
+			25% increased damage
+			150% increase to nonweapon damage
+			15% increase to crit chance
 			'''
 	}
 
@@ -4905,11 +4908,11 @@ Items: {
 		Tooltip:
 			'''
 			Hold to spin the scythe defensively around yourself, leaving a trail of glowing green streaks.
-			      While spinning, the scythe deals 150% damage, grants 5 souls per strike, and inflicts Terra's Rend for 4 seconds.
-			      Fires Worldsoul Crystals toward the cursor four times per second while spinning
-				  The crystal pierces 3 enemies, grants 5 souls, and inflicts Terra's Rend for 3 seconds.
-			      Consume {0} souls to unleash a radial burst of 16 Biome Cleanser spears that spin in place before homing into nearby enemies
-				  The spears deal 250% damage each and inflict Terra's Rend and Bleeding for 5 seconds.
+			While spinning, the scythe deals 150% damage, grants 5 souls per strike, and inflicts Terra's Rend for 4 seconds.
+			Fires Worldsoul Crystals toward the cursor four times per second while spinning
+			The crystal pierces 3 enemies, grants 5 souls, and inflicts Terra's Rend for 3 seconds.
+			Consume {0} souls to unleash a radial burst of 16 Biome Cleanser spears that spin in place before homing into nearby enemies
+			The spears deal 250% damage each and inflict Terra's Rend and Bleeding for 5 seconds.
 			'''
 	}
 
@@ -4917,7 +4920,7 @@ Items: {
 		DisplayName: Permafrost Greatsword
 		Tooltip:
 			'''
-			Inflicts Sheer Cold for 3 seconds on strike
+			Inflicts Sheer Cold
 			Hitting enemies gives you Glacial Armor, Rage and Wrath for 3 seconds
 			'''
 	}
@@ -4926,10 +4929,10 @@ Items: {
 		DisplayName: Hallowed Core
 		Tooltip:
 			'''
-			All weapons inflict Rebuking Light for 2 seconds
+			All weapons inflict Rebuking Light
 			+5 defense
-			+50 max life
-			+7% damage
+			Increases max life by 50 
+			7% increased damage
 			'''
 	}
 
@@ -5124,9 +5127,9 @@ Items: {
 		DisplayName: Ice Age
 		Tooltip:
 			'''
-			Fires a fragment of ice that gathers 5 souls, inflicts Sheer Cold for 2 seconds and shatters on impact into piercing shards
-			The shards gather 1 soul each and inflict Sheer Cold for 1 second
-			Ice Age itself inflicts Sheer Cold for 3 seconds and gathers 5 souls
+			Fires a fragment of ice that steals 5 souls, inflicts Sheer Cold for 2 seconds and shatters on impact into piercing shards
+			The shards steal 1 soul each and inflict Sheer Cold for 1 second
+			Ice Age itself inflicts Sheer Cold for 3 seconds and steals 5 souls
 			Consume {0} souls to conjure Blizzard Balls that orbit you for a short time
 			After 2 seconds, the balls will fire in rapid succession at the cursor
 			'''
@@ -5137,7 +5140,7 @@ Items: {
 		Tooltip:
 			'''
 			Hold to spin the Cyclone Sickle clockwise around you
-			The Cyclone Sickle gathers 8 souls per strike, inflicts Delta Shock for 3 seconds and zaps up to 2 nearby enemies
+			The Cyclone Sickle steals 8 souls per strike, inflicts Delta Shock for 3 seconds and zaps up to 2 nearby enemies
 			The zaps deal 75% damage and inflict Delta Shock for 2 seconds
 			Consume {0} souls to spin a Cyclone Blade around you
 			The Cyclone Blade deals 1,000% damage and inflicts Delta Shock for 10 seconds
@@ -5149,7 +5152,7 @@ Items: {
 		Tooltip:
 			'''
 			Hold to spin the Kasurikama clockwise around you
-			The Kasurikama gathers 4 souls per strike and inflicts Bleeding for 2 seconds
+			The Kasurikama steals 4 souls per strike and inflicts Bleeding for 2 seconds
 			Consume {0} souls to spin a Giant Sickle around you
 			The Giant Sickle deals 500% damage and inflicts Bleeding for 5 seconds
 			'''
@@ -5191,8 +5194,8 @@ Items: {
 		DisplayName: Pompeii
 		Tooltip:
 			'''
-			Fires a fireball that pierces once, gathers 6 souls and inflicts Core Heat for 2 seconds
-			The scythe itself also gathers 5 souls on hit and inflicts Core Heat for 2 seconds
+			Fires a fireball that pierces once, steals 6 souls and inflicts Core Heat for 2 seconds
+			The scythe itself also steals 5 souls on hit and inflicts Core Heat for 2 seconds
 			Consume {0} souls to call down a meteor of molten ash from the sky to ram into enemies
 			The meteor does 300% damage, inflicts Core Heat for 4 seconds
 			The meteor fades away after 3 seconds
@@ -5494,6 +5497,106 @@ Items: {
 			15% increased magic knockback
 			10% magic critical strike chance
 			-15% mana costs
+			'''
+	}
+
+	Aokigahara: {
+		DisplayName: Aokigahara
+		Tooltip:
+			'''
+			Fires a pair of ghostly leaves that home in on enemies
+			The scythe steals 5 souls and the leaves each steal 3 souls
+			The scythe and leaves both inflict Nature's Toxin
+			The leaves deal 50% damage each
+			Consume {0} souls to be empowered by souls for {1:F1} seconds
+			'''
+	}
+
+	Annabelle: {
+		DisplayName: Annabelle
+		Tooltip:
+			'''
+			Soul empowerment lasts 5 seconds longer
+			While empowered by souls, reaper attacks have an additional 10% chance to lifesteal
+			'''
+	}
+
+	OldDoll: {
+		DisplayName: Old Doll
+		Tooltip: Soul empowerment lasts 1 second longer
+	}
+
+	Robert: {
+		DisplayName: Robert
+		Tooltip:
+			'''
+			Soul empowerment lasts 4 seconds longer
+			While empowered by souls, reaper attacks have an additional 5% chance to lifesteal
+			'''
+	}
+
+	StitchedDoll: {
+		DisplayName: Stitched Doll
+		Tooltip: Soul empowerment lasts 2 seconds longer
+	}
+
+	VictorianDoll: {
+		DisplayName: Victorian Doll
+		Tooltip: Soul empowerment lasts 3 seconds longer
+	}
+
+	CrypticMessage: {
+		DisplayName: Cryptic Message
+		Tooltip:
+			'''
+			While empowered by souls, you additionally get: 
+			10% increased reaper damage
+			5% increased reaper attack speed
+			5% increased reaper critical strike chance
+			'''
+	}
+
+	DybbukBox: {
+		DisplayName: Dybbuk Box
+		Tooltip:
+			'''
+			While empowered by souls, you additionally get:
+			15% increased reaper damage
+			10% increased reaper attack speed
+			12% increased reaper critical strike chance
+			'''
+	}
+
+	OminousNote: {
+		DisplayName: Ominous Note
+		Tooltip:
+			'''
+			While empowered by souls, you additionally get:
+			5% increased reaper damage
+			5% increased reaper attack speed
+			'''
+	}
+
+	OuijaBoard: {
+		DisplayName: Ouija Board
+		Tooltip:
+			'''
+			While empowered by souls, you additionally get: 
+			12% increased reaper damage
+			10% increased reaper attack speed
+			10% increased reaper critical strike chance
+			'''
+	}
+
+	PandorasBox: {
+		DisplayName: Pandoras Box
+		Tooltip:
+			'''
+			While empowered by souls, you additionally get:
+			20% increased reaper damage
+			10% increased reaper attack speed
+			12% increased reaper critical strike chance
+			20 armor penetration
 			'''
 	}
 }

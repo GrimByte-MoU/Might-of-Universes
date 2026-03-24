@@ -16,6 +16,8 @@ namespace MightofUniverses.Content.Items.Weapons
     public class SweetHarvester : ModItem, IHasSoulCost, IScytheWeapon
     {
         public float BaseSoulCost => 85f;
+        public int EmpowermentDurationTicks => 300;
+
 
         public override void SetDefaults()
         {
@@ -44,7 +46,7 @@ namespace MightofUniverses.Content.Items.Weapons
             player,
             BaseSoulCost,
             300,
-            vals => { vals.LifeRegen += 10; }
+            vals => { vals.LifeRegen += 20; }
         ))
         {
             player.Heal(100);

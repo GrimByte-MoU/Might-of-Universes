@@ -13,6 +13,8 @@ namespace MightofUniverses.Content.Items.Weapons
     public class IronScythe : ModItem, IHasSoulCost, IScytheWeapon
     {
         public float BaseSoulCost => 30f;
+        public int EmpowermentDurationTicks => 180;
+
 
         public override void SetDefaults()
         {

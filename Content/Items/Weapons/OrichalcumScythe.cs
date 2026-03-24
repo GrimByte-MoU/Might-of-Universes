@@ -14,6 +14,8 @@ namespace MightofUniverses.Content.Items.Weapons
     public class OrichalcumScythe : ModItem, IHasSoulCost, IScytheWeapon
     {
         public float BaseSoulCost => 55f;
+        public int EmpowermentDurationTicks => 240;
+
 
         public override void SetDefaults()
         {

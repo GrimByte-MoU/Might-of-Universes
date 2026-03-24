@@ -16,6 +16,8 @@ namespace MightofUniverses.Content.Items.Weapons
     {
         public float BaseSoulCost => 450f;
         private int swingCounter = 0;
+        public int EmpowermentDurationTicks => 300;
+
 
         public override void SetDefaults()
         {

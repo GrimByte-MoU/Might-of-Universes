@@ -68,11 +68,6 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             var reaper = player.GetModPlayer<ReaperPlayer>();
             reaper.AddSoulEnergy(4f, target.Center);
-
-            if (!target.active)
-            {
-                reaper.AddSoulEnergy(4f, target.Center);
-            }
             target.AddBuff(BuffID.Electrified, 180);
         }
         

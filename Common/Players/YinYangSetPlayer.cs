@@ -32,7 +32,9 @@ namespace MightofUniverses.Common.Players
         public override void PostUpdateEquips()
         {
             if (wearing)
-                Player.setBonus = "+125 max souls\nConsuming souls grants Yang (3s). Also grants Yin (3s) if below 50% life.";
+                Player.setBonus = "+125 max souls\n" +
+                "Consuming souls grants the Yang buff for 3 seconds.\n" +
+                "Also grants the Yin buff for 3 seconds if below 50% life.";
         }
 
         public override void PostUpdate()

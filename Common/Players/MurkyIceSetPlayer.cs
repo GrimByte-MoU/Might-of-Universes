@@ -33,7 +33,8 @@ namespace MightofUniverses.Common.Players
         {
             if (wearingMurkyIceSet)
             {
-                Player.setBonus = "+60 max souls\nWhen you consume souls, gain Chilling Presence (5s). Reaper attacks +15% damage vs Frostburn, Corrupted or Spineless enemies.";
+                Player.setBonus = "+60 max souls\nWhen you consume souls, gain Chilling Presence for 5 seconds.\n" +
+                "Reaper attacks +15% damage vs Frostburn, Corrupted or Spineless enemies.";
             }
         }
 

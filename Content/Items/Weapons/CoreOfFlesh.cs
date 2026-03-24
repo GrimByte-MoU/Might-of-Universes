@@ -209,9 +209,9 @@ namespace MightofUniverses.Content.Items.Weapons
         {
             tooltips.Add(new TooltipLine(Mod, "Mode", $"[c/FFD700:Current Mode:  {GetModeName()}]"));
             tooltips.Add(new TooltipLine(Mod, "ModeSwitch", "[c/808080:Right-click to cycle modes]"));
-            tooltips.Add(new TooltipLine(Mod, "FleshGlob", "[c/FF6B6B:Flesh Glob:] 2 globs, +2 souls per hit, 75% damage"));
+            tooltips.Add(new TooltipLine(Mod, "FleshGlob", "[c/FF6B6B:Flesh Glob:] 2 globs, steals 2 souls per hit, 75% damage"));
             tooltips.Add(new TooltipLine(Mod, "Laser", "[c/FFFF00:Laser Beam:] 3-shot burst, 80% damage"));
-            tooltips.Add(new TooltipLine(Mod, "Sickle", "[c/9B59B6:Sickle of Demons:] 250% damage, -30 souls/sickle, ignores 50 defense"));
+            tooltips.Add(new TooltipLine(Mod, "Sickle", "[c/9B59B6:Sickle of Demons:] 250% damage, -30 souls per sickle, ignores 50 defense"));
         }
 
         private string GetModeName()

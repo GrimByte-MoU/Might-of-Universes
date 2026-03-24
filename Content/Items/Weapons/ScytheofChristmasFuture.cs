@@ -15,6 +15,8 @@ namespace MightofUniverses.Content.Items.Weapons
     public class ScytheofChristmasFuture : ModItem, IHasSoulCost, IScytheWeapon
     {
         public float BaseSoulCost => 175f;
+        public int EmpowermentDurationTicks => 300;
+
 
         public override void SetDefaults()
         {

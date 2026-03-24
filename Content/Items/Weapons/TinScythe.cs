@@ -13,6 +13,8 @@ namespace MightofUniverses.Content.Items.Weapons
     public class TinScythe : ModItem, IHasSoulCost, IScytheWeapon
     {
         public float BaseSoulCost => 25f;
+        public int EmpowermentDurationTicks => 180;
+
 
         public override void SetDefaults()
         {
@@ -40,7 +42,7 @@ namespace MightofUniverses.Content.Items.Weapons
                     player,
                     cost: effectiveCost,
                     durationTicks: 180,
-                    configure: vals => { vals.LifeRegen += 3; }
+                    configure: vals => { vals.LifeRegen += 6; }
                 );
             }
         }

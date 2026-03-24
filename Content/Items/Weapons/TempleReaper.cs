@@ -15,6 +15,8 @@ namespace MightofUniverses.Content.Items.Weapons
     public class TempleReaper : ModItem, IHasSoulCost, IScytheWeapon
     {
         public float BaseSoulCost => 200f;
+        public int EmpowermentDurationTicks => 300;
+
 
         public override void SetDefaults()
         {

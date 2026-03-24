@@ -14,6 +14,8 @@ namespace MightofUniverses.Content.Items.Weapons
     public class ChlorophyteScythe : ModItem, IHasSoulCost, IScytheWeapon
     {
         public float BaseSoulCost => 100f;
+        public int EmpowermentDurationTicks => 300;
+
 
         public override void SetDefaults()
         {
@@ -44,7 +46,7 @@ namespace MightofUniverses.Content.Items.Weapons
             durationTicks: 300,
             configure: vals =>
             {
-                vals.LifeRegen += 15;
+                vals.LifeRegen += 30;
             }
         );
     }

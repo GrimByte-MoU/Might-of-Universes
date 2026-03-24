@@ -5,7 +5,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.DataStructures;
 using MightofUniverses.Content.Rarities;
-using MightofUniverses.Common.Players; // ✅ ADD THIS
+using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Content.Items.Summoning
 {

@@ -40,8 +40,8 @@ namespace MightofUniverses.Content.Items.Armors
         {
             player.setBonus =
                 "+350 max souls, reduces damage taken by 10%\n" +
-                "Soul Empowerment from soul consumption lasts twice as long \n" +
-                "Being hit while Empowered ends the buff and halts soul gain for 5 seconds ";
+                "Soul empowerment lasts twice as long\n" +
+                "Being hit while empowered ends the buff and halts soul gain for 5 seconds ";
 
             player.GetModPlayer<TempleReaverPlayer>().FullSetEquipped = true;
             player.GetModPlayer<ReaperPlayer>().hasReaperArmor = true;

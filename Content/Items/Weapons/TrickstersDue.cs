@@ -15,6 +15,8 @@ namespace MightofUniverses.Content.Items.Weapons
     public class TrickstersDue : ModItem, IHasSoulCost, IScytheWeapon
     {
         public float BaseSoulCost => 300f;
+        public int EmpowermentDurationTicks => 300;
+
 
         public override void SetDefaults()
         {

@@ -33,7 +33,7 @@ namespace MightofUniverses.Common.Players
         public override void PostUpdateEquips()
         {
             if (wearing)
-                Player.setBonus = "+40 max souls\nConsuming souls grants Mortician's Grace (5s).";
+                Player.setBonus = "+40 max souls\nConsuming souls grants Mortician's Grace for 5 seconds.";
         }
 
         public override void PostUpdate()

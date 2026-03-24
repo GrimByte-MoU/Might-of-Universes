@@ -15,6 +15,8 @@ namespace MightofUniverses.Content.Items.Weapons
     public class ChlorotaniumScythe : ModItem, IHasSoulCost, IScytheWeapon
     {
         public float BaseSoulCost => 200f;
+        public int EmpowermentDurationTicks => 300;
+
 
         public override void SetDefaults()
         {
@@ -47,7 +49,7 @@ namespace MightofUniverses.Content.Items.Weapons
             {
                 vals.Defense += 20;
                 vals.Endurance += 0.15f;
-                vals.LifeRegen += 15;
+                vals.LifeRegen += 30;
             }
         );
         if (released)

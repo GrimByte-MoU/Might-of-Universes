@@ -39,8 +39,10 @@ namespace MightofUniverses.Content.Items.Armors
         public override void UpdateArmorSet(Player player)
         {
             player.setBonus =
-                "+350 max souls, +15% reaper damage, +10% Reaper crit\n" +
-                "Reaper attacks inflict Tarred and Oiled for 3 seconds \n" +
+                "+350 max souls\n" +
+                "15% increased reaper damage\n" +
+                "10% increased reaper critical strike chance\n" +
+                "Reaper attacks inflict Tarred and Oiled for 3 seconds\n" +
                 "Consuming souls grants the Savage buff for 5 seconds";
 
             player.GetModPlayer<PrimalSavageryPlayer>().FullSetEquipped = true;

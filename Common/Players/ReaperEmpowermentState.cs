@@ -20,6 +20,7 @@ namespace MightofUniverses.Common.Players
         public int   LifestealPercent;
         public int   ArmorPenetration;
     }
+    
     public class ReaperEmpowermentState : ModPlayer
     {
         public ReaperEmpowermentValues Values;
@@ -120,11 +121,46 @@ namespace MightofUniverses.Common.Players
             var state = player.GetModPlayer<ReaperEmpowermentState>();
             var vals = new ReaperEmpowermentValues();
             configure?.Invoke(vals);
+            
             var acc = player.GetModPlayer<ReaperAccessoryPlayer>();
+            
             if (acc.EmpowerDurationMultiplier > 1f)
                 durationTicks = (int)(durationTicks * acc.EmpowerDurationMultiplier);
             if (acc.EmpowerExtraDurationTicks > 0)
                 durationTicks += acc.EmpowerExtraDurationTicks;
+
+            if (acc.BonusEmpowerLifestealPercent > 0)
+                vals.LifestealPercent += acc.BonusEmpowerLifestealPercent;
+            
+            if (acc.BonusEmpowerReaperDamage > 0f)
+                vals.ReaperDamage += acc.BonusEmpowerReaperDamage;
+            
+            if (acc.BonusEmpowerAttackSpeed > 0f)
+                vals.AttackSpeed += acc.BonusEmpowerAttackSpeed;
+            
+            if (acc.BonusEmpowerCritChance > 0f)
+                vals.CritChance += acc.BonusEmpowerCritChance;
+            
+            if (acc.BonusEmpowerArmorPen > 0)
+                vals.ArmorPenetration += acc.BonusEmpowerArmorPen;
+            
+            if (acc.BonusEmpowerDefense > 0)
+                vals.Defense += acc.BonusEmpowerDefense;
+            
+            if (acc.BonusEmpowerEndurance > 0f)
+                vals.Endurance += acc.BonusEmpowerEndurance;
+            
+            if (acc.BonusEmpowerLifeRegen > 0)
+                vals.LifeRegen += acc.BonusEmpowerLifeRegen;
+            
+            if (acc.BonusEmpowerDamageTakenMultiplier != 0f)
+                vals.DamageTakenMultiplier += acc.BonusEmpowerDamageTakenMultiplier;
+            
+            if (acc.BonusEmpowerMaxSouls > 0)
+                vals.BonusMaxSouls += acc.BonusEmpowerMaxSouls;
+            
+            if (acc.BonusEmpowerSoulDrainPerSecond > 0)
+                vals.SoulDrainPerSecond += acc.BonusEmpowerSoulDrainPerSecond;
 
             state.Values = vals;
             player.AddBuff(ModContent.BuffType<SoulEmpowerment>(), durationTicks);

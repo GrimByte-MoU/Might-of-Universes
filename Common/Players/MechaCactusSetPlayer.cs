@@ -50,7 +50,7 @@ namespace MightofUniverses.Common.Players
             {
                 Player.setBonus =
                     $"+{(int)MaxSoulBonus} max souls\n" +
-                    "Taking >10% of max life in one hit retaliates for 250% of damage, applies Mortal Wound for 5 seconds, and grants souls equal to damage taken.\n" +
+                    "Taking >10% of max life in one hit retaliates, applies Mortal Wound for 5 seconds, and generates souls equal to damage taken.\n" +
                     "Enemies with Mortal Wound deal 20% less damage to you and the soul gain has a 3 second cooldown.";
             }
         }

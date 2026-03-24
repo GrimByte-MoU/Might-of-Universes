@@ -5,6 +5,7 @@ using Terraria;
 using Terraria.ModLoader;
 using MightofUniverses.Common.Util;
 using MightofUniverses.Common.Abstractions;
+using MightofUniverses.Common.Players;
 
 namespace MightofUniverses.Common.Tooltips
 {
@@ -59,6 +60,24 @@ namespace MightofUniverses.Common.Tooltips
                 ["CycloneKama"] = 200f,
                 ["Pompeii"] = 300f,
                 ["BiomeCleanser"] = 255f,
+                ["Aokigahara"] = 275f,
+            };
+
+        private static readonly Dictionary<string, int> EmpowermentDurations =
+            new(StringComparer.OrdinalIgnoreCase)
+            {
+                ["CopperScythe"] = 180,
+                ["TinScythe"] = 180,
+                ["IronScythe"] = 180,
+                ["LeadScythe"] = 180,
+                ["SilverScythe"] = 180,
+                ["TungstenScythe"] = 180,
+                ["GoldScythe"] = 240,
+                ["PlatinumScythe"] = 240,
+                ["Orcus"] = 180,
+                ["NewMoon"] = 300,
+                ["Aokigahara"] = 240,
+                ["ReapersEcho"] = 300,
             };
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
@@ -66,11 +85,14 @@ namespace MightofUniverses.Common.Tooltips
             var modItem = item.ModItem;
             if (modItem == null || modItem.Mod?.Name != "MightofUniverses")
                 return;
+
             bool hasPlaceholder = false;
             for (int i = 0; i < tooltips.Count; i++)
             {
                 var t = tooltips[i].Text;
-                if (!string.IsNullOrEmpty(t) && t.IndexOf("{0}", StringComparison.Ordinal) >= 0)
+                if (!string.IsNullOrEmpty(t) && 
+                    (t.IndexOf("{0}", StringComparison.Ordinal) >= 0 || 
+                     t.IndexOf("{1}", StringComparison.Ordinal) >= 0))
                 {
                     hasPlaceholder = true;
                     break;
@@ -78,6 +100,7 @@ namespace MightofUniverses.Common.Tooltips
             }
             if (!hasPlaceholder)
                 return;
+
             float baseCost;
             if (modItem is IHasSoulCost hasCost)
             {
@@ -94,17 +117,48 @@ namespace MightofUniverses.Common.Tooltips
 
             int effectiveCost = SoulCostHelper.ComputeEffectiveSoulCostInt(player, baseCost);
 
+            int baseDuration = 0;
+            if (modItem is IHasSoulCost hasCost2)
+            {
+                baseDuration = hasCost2.EmpowermentDurationTicks;
+            }
+            else
+            {
+                EmpowermentDurations.TryGetValue(modItem.Name, out baseDuration);
+            }
+
+            float effectiveDuration = 0f;
+            if (baseDuration > 0)
+            {
+                var acc = player.GetModPlayer<ReaperAccessoryPlayer>();
+                int finalDuration = baseDuration;
+                
+                if (acc.EmpowerDurationMultiplier > 1f)
+                    finalDuration = (int)(finalDuration * acc.EmpowerDurationMultiplier);
+                
+                if (acc.EmpowerExtraDurationTicks > 0)
+                    finalDuration += acc.EmpowerExtraDurationTicks;
+
+                effectiveDuration = finalDuration / 60f;
+            }
+
             for (int i = 0; i < tooltips.Count; i++)
             {
                 var line = tooltips[i];
                 if (string.IsNullOrEmpty(line.Text))
                     continue;
 
-                if (line.Text.IndexOf("{0}", StringComparison.Ordinal) >= 0)
+                if (line.Text.IndexOf("{0}", StringComparison.Ordinal) >= 0 ||
+                    line.Text.IndexOf("{1}", StringComparison.Ordinal) >= 0)
                 {
                     try
                     {
-                        line.Text = string.Format(CultureInfo.InvariantCulture, line.Text, effectiveCost);
+                        line.Text = string.Format(
+                            CultureInfo.InvariantCulture, 
+                            line.Text, 
+                            effectiveCost,      
+                            effectiveDuration   
+                        );
                     }
                     catch
                     {

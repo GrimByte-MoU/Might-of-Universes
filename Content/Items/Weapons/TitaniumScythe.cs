@@ -14,6 +14,8 @@ namespace MightofUniverses.Content.Items.Weapons
     public class TitaniumScythe : ModItem, IHasSoulCost, IScytheWeapon
     {
         public float BaseSoulCost => 130f;
+        public int EmpowermentDurationTicks => 240;
+
 
         public override void SetDefaults()
         {
