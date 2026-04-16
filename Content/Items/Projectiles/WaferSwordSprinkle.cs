@@ -17,7 +17,7 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.ignoreWater = true;
             Projectile.tileCollide = true;
             Projectile.aiStyle = -1;
-            Projectile.scale = 1f;
+            Projectile.scale = 0.75f;
         }
         public override void Kill(int timeLeft)
         {

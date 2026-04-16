@@ -77,7 +77,7 @@ namespace MightofUniverses.Common.Tooltips
                 ["Orcus"] = 180,
                 ["NewMoon"] = 300,
                 ["Aokigahara"] = 240,
-                ["ReapersEcho"] = 300,
+                ["ReapersEcho"] = 180,
             };
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)

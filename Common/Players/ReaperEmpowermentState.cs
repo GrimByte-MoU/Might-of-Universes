@@ -129,6 +129,17 @@ namespace MightofUniverses.Common.Players
             if (acc.EmpowerExtraDurationTicks > 0)
                 durationTicks += acc.EmpowerExtraDurationTicks;
 
+            var book = player.GetModPlayer<BookEmpowermentPlayer>();
+            if (book.hasBook && state.Empowered)
+            {
+                int buffIndex = player.FindBuffIndex(ModContent.BuffType<SoulEmpowerment>());
+                if (buffIndex >= 0)
+                {
+                    int currentTime = player.buffTime[buffIndex];
+                    durationTicks = currentTime + durationTicks + book.bonusRefreshTicks;
+                }
+            }
+
             if (acc.BonusEmpowerLifestealPercent > 0)
                 vals.LifestealPercent += acc.BonusEmpowerLifestealPercent;
             

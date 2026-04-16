@@ -17,8 +17,8 @@ namespace MightofUniverses.Content.Items.Weapons
             Item.rare = ItemRarityID.Green;
             Item.value = Item.sellPrice(gold: 3);
             Item.useStyle = ItemUseStyleID.Swing;
-            Item.useTime = 12;
-            Item.useAnimation = 12;
+            Item.useTime = 20;
+            Item.useAnimation = 20;
             Item.autoReuse = true;
             Item.DamageType = DamageClass.Melee;
             Item.damage = 25;
@@ -36,8 +36,8 @@ namespace MightofUniverses.Content.Items.Weapons
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            float startingAngle = -30f;
-            for (int i = 0; i < 7; i++)
+            float startingAngle = -15f;
+            for (int i = 0; i < 3; i++)
             {
                 Vector2 shortVelocity = velocity * 0.3f;
                 Vector2 rotatedVelocity = shortVelocity.RotatedBy(MathHelper.ToRadians(startingAngle + (i * 15f)));

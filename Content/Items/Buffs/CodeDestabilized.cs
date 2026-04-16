@@ -27,6 +27,7 @@ namespace MightofUniverses.Content.Items.Buffs
 
             Lighting.AddLight(npc.Center, 0f, 1f, 0.1f);
         }
+        
 
         public override void Update(Player player, ref int buffIndex)
         {

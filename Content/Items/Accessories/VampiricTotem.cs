@@ -6,10 +6,6 @@ namespace MightOfUniverses.Content.Items.Accessories
 {
     public class VampiricTotem : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-        }
-
         public override void SetDefaults()
         {
             Item.width = 24;
@@ -38,6 +34,7 @@ namespace MightOfUniverses.Content.Items.Accessories
     {
         public bool hasVampiricTotem = false;
         private const float LIFESTEAL_PERCENT = 0.05f;
+        private static readonly DamageClass ReaperClass = ModContent.GetInstance<ReaperDamageClass>();
 
         public override void ResetEffects()
         {
@@ -46,49 +43,31 @@ namespace MightOfUniverses.Content.Items.Accessories
 
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (hasVampiricTotem && item.DamageType == ModContent.GetInstance<ReaperDamageClass>())
-            {
+            if (hasVampiricTotem && item.CountsAsClass(ReaperClass))
                 ApplyLifesteal(damageDone);
-            }
         }
 
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (hasVampiricTotem && proj.DamageType == ModContent.GetInstance<ReaperDamageClass>())
-            {
+            if (hasVampiricTotem && proj.CountsAsClass(ReaperClass))
                 ApplyLifesteal(damageDone);
-            }
         }
 
         private void ApplyLifesteal(int damageDone)
         {
             int healAmount = (int)(damageDone * LIFESTEAL_PERCENT);
-            
+
             if (damageDone > 0 && healAmount < 1)
                 healAmount = 1;
-            
-            if (healAmount > 0)
+
+            Player.statLife = System.Math.Min(Player.statLife + healAmount, Player.statLifeMax2);
+            Player.HealEffect(healAmount);
+
+            for (int i = 0; i < 5; i++)
             {
-                Player.HealEffect(healAmount);
-                Player.statLife += healAmount;
-                
-                if (Player.statLife > Player.statLifeMax2)
-                    Player.statLife = Player.statLifeMax2;
-                
-                for (int i = 0; i < 5; i++)
-                {
-                    Dust.NewDust(
-                        Player.position,
-                        Player.width,
-                        Player.height,
-                        DustID.Blood,
-                        Main.rand.NextFloat(-2f, 2f),
-                        Main.rand.NextFloat(-2f, 2f),
-                        0,
-                        default,
-                        Main.rand.NextFloat(0.7f, 1.2f)
-                    );
-                }
+                Dust.NewDust(Player.position, Player.width, Player.height, DustID.Blood,
+                    Main.rand.NextFloat(-2f, 2f), Main.rand.NextFloat(-2f, 2f),
+                    0, default, Main.rand.NextFloat(0.7f, 1.2f));
             }
         }
     }

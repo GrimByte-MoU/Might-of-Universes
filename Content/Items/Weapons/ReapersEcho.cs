@@ -16,17 +16,17 @@ namespace MightofUniverses.Content.Items.Weapons
     {
         public float BaseSoulCost => 450f;
         private int swingCounter = 0;
-        public int EmpowermentDurationTicks => 300;
+        public int EmpowermentDurationTicks => 180;
 
 
         public override void SetDefaults()
         {
             Item.width = 80;
             Item.height = 80;
-            Item.damage = 200;
+            Item.damage = 125;
             Item.DamageType = ModContent.GetInstance<ReaperDamageClass>();
-            Item.useTime = 15;
-            Item.useAnimation = 15;
+            Item.useTime = 12;
+            Item.useAnimation = 12;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 7f;
             Item.value = Item.sellPrice(platinum: 1);
@@ -81,7 +81,7 @@ namespace MightofUniverses.Content.Items.Weapons
                         player.whoAmI
                     );
 
-                    ReaperEmpowermentState.Apply(player, 300, vals =>
+                    ReaperEmpowermentState.Apply(player, 180, vals =>
                     {
                         vals.Defense = 15;
                         vals.ReaperDamage = 0.15f;
@@ -147,7 +147,7 @@ namespace MightofUniverses.Content.Items.Weapons
 
             Projectile.NewProjectile(source, position, velocity, ModContent.ProjectileType<EchoAxehead>(), damage, knockback, player.whoAmI);
 
-            if (swingCounter >= 4)
+            if (swingCounter >= 5)
             {
                 swingCounter = 0;
 

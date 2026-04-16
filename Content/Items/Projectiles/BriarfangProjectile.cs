@@ -15,7 +15,6 @@ namespace MightofUniverses.Content.Items.Projectiles
             Projectile.height = 18;
             Projectile.aiStyle = 19;
             Projectile.penetrate = -1;
-            Projectile.scale = 2.0f;
             Projectile.alpha = 0;
             Projectile.hide = true;
             Projectile.ownerHitCheck = true;

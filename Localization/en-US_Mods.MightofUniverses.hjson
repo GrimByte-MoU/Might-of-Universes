@@ -456,6 +456,41 @@ Buffs: {
 		DisplayName: Worldsoul's Immortality
 		Description: +250 max life and +15 defense
 	}
+
+	BattleCryBuff: {
+		DisplayName: Battle Cry
+		Description: +20% damage and +35% movement speed
+	}
+
+	FireMageBuff: {
+		DisplayName: Fire Mage Buff
+		Description: The Fire Mage protects you!
+	}
+
+	FrostWarriorBuff: {
+		DisplayName: Frost Warrior Buff
+		Description: The Frost Warrior protects you!
+	}
+
+	FullPartyBuff: {
+		DisplayName: Full Party Buff
+		Description: You have a full adventuring party!
+	}
+
+	NatureHealerBuff: {
+		DisplayName: Nature Healer Buff
+		Description: The Nature Healer protects you!
+	}
+
+	RalliedBuff: {
+		DisplayName: Rallied Buff
+		Description: +10% damage reduction and +15 defense
+	}
+
+	WindRangerBuff: {
+		DisplayName: Wind Ranger Buff
+		Description: The Wind Ranger protects you!
+	}
 }
 
 Projectiles: {
@@ -862,6 +897,23 @@ Projectiles: {
 	EchoShard.DisplayName: Echo Shard
 	EchoSoulsaw.DisplayName: Echo Soulsaw
 	AokigaharaLeaf.DisplayName: Aokigahara Leaf
+	DragonFlameDust.DisplayName: Dragon Flame Dust
+	Dragonspark.DisplayName: Dragonspark
+	IceSaw.DisplayName: Ice Saw
+	LightningBolt.DisplayName: Lightning Bolt
+	LightningReticle.DisplayName: Lightning Reticle
+	OrbitingIceSaw.DisplayName: Orbiting Ice Saw
+	RazorLeaf.DisplayName: Razor Leaf
+	LollicopterPop.DisplayName: Lollicopter Pop
+	FireMageMeteor.DisplayName: Fire Mage Meteor
+	FireMageMinion.DisplayName: Fire Mage Minion
+	FrostWarriorMinion.DisplayName: Frost Warrior Minion
+	HealOrbProjectile.DisplayName: Heal Orb Projectile
+	NatureHealerMinion.DisplayName: Nature Healer Minion
+	WindRangerMinion.DisplayName: Wind Ranger Minion
+	FireMageFirebolt.DisplayName: Fire Mage Firebolt
+	NatureOrbProjectile.DisplayName: Nature Orb Projectile
+	WindRangerArrow.DisplayName: Wind Ranger Arrow
 }
 
 Keybinds: {
@@ -1378,11 +1430,11 @@ Items: {
 	}
 
 	ChocolateScale: {
-		DisplayName: Chocolate Scale
+		DisplayName: Dragon Scale
 		Tooltip:
 			'''
-			A scale made entirely of very tough chocolate
-			It is as hard as a dragonscale
+			A dragon's scale!
+			This one just happens to come from a dragon made of chocolate
 			'''
 	}
 
@@ -4858,6 +4910,8 @@ Items: {
 		Tooltip:
 			'''
 			"A scythe with a story of going from nothing to slaying the remnant of an ancient being etched into the handle"
+			Fires an axehead that pierces and steals 5 souls each
+			Occasionally also fires a spread of homing darts that don't pierce and steal 1 soul each
 			Consume {0} souls to cause 10 blades to orbit you as well as fire a saw, as well as be empowered by souls for {1:F1} seconds.
 			After three seconds, the blades will fly out and home in on nearby enemies
 			The blades deal 200% damage and dont pierce
@@ -5599,6 +5653,238 @@ Items: {
 			20 armor penetration
 			'''
 	}
+
+	AnguishedMan: {
+		DisplayName: Anguished Man
+		Tooltip:
+			'''
+			While empowered by souls, you additionally get:
+			12 defense
+			Reduces damage taken by 10%
+			Increased life regeneration
+			'''
+	}
+
+	HauntedPainting: {
+		DisplayName: Haunted Painting
+		Tooltip:
+			'''
+			While empowered by souls, you additionally get:
+			10 defense
+			Reduces damage taken by 8%
+			Increased life regeneration
+			'''
+	}
+
+	QuestionableInk: {
+		DisplayName: Questionable Ink
+		Tooltip:
+			'''
+			While empowered by souls, you additionally get:
+			4 defense
+			Reduces damage taken by 5%
+			'''
+	}
+
+	StrangeSketch: {
+		DisplayName: Strange Sketch
+		Tooltip:
+			'''
+			While empowered by souls, you additionally get:
+			6 defense
+			Reduces damage taken by 6%
+			'''
+	}
+
+	TheCryingBoy: {
+		DisplayName: The Crying Boy
+		Tooltip:
+			'''
+			While empowered by souls, you additionally get:
+			15 defense
+			Reduces damage taken by 12%
+			Increased life regeneration
+			'''
+	}
+
+	AntiqueHandMirror: {
+		DisplayName: Antique Hand Mirror
+		Tooltip:
+			'''
+			When damaged while empowered by souls, attackers also take damage
+			Increases length of invinciblity after taking damage while empowered by souls
+			'''
+	}
+
+	FoggyGlass: {
+		DisplayName: Foggy Glass
+		Tooltip: When damaged while empowered by souls, attackers also take damage
+	}
+
+	MarysMirror: {
+		DisplayName: Bloody Mirror
+		Tooltip:
+			'''
+			When damaged while empowered by souls, attackers also take damage
+			Increases length of invinciblity after taking damage while empowered by souls
+			'''
+	}
+
+	MyrtlesPlantationMirror: {
+		DisplayName: Myrtles Plantation Mirror
+		Tooltip:
+			'''
+			When damaged while empowered by souls, attackers also take damage
+			Increases length of invinciblity and movement speed after taking damage while empowered by souls
+			'''
+	}
+
+	UnusualLookingGlass: {
+		DisplayName: Unusual Looking Glass
+		Tooltip: When damaged while empowered by souls, attackers also take damage
+	}
+
+	BookOfSoyga: {
+		DisplayName: Book Of Soyga
+		Tooltip:
+			'''
+			When refreshing soul empowerment while being empowered, you get a bonus 2 seconds of soul empowerment
+			When soul empowerment wears off, 5% chance to refund 50% of the souls consumed
+			'''
+	}
+
+	CursedDiary: {
+		DisplayName: Cursed Diary
+		Tooltip: When refreshing soul empowerment while being empowered, you get a bonus 1 second of soul empowerment
+	}
+
+	Grimoire: {
+		DisplayName: Grimoire
+		Tooltip: When refreshing soul empowerment while being empowered, you get a bonus 1.5 seconds of soul empowerment
+	}
+
+	OldBook: {
+		DisplayName: Old Book
+		Tooltip: When refreshing soul empowerment while being empowered, you get a bonus 0.5 seconds of soul empowerment
+	}
+
+	VoynichManuscript: {
+		DisplayName: Voynich Manuscript
+		Tooltip: When refreshing soul empowerment while being empowered, you get a bonus 2 seconds of soul empowerment
+	}
+
+	DragonsBreath: {
+		DisplayName: Dragon's Breath
+		Tooltip:
+			'''
+			Inflicts Core Heat
+			Fires a stream of dragonfire that ignores 50 defense
+			Occasionally fires piercing dragonsparks as well
+			'''
+	}
+
+	RazorLeaves: {
+		DisplayName: Razor Leaves
+		Tooltip:
+			'''
+			Inflicts Nature's Toxin and Bleeding
+			Fires razor leaves in a cone
+			'''
+	}
+
+	StormCall: {
+		DisplayName: Storm Call
+		Tooltip:
+			'''
+			Click to create a reticle at the cursor
+			If an enemy is clicked, the reticle will lock onto the enemy
+			After a short delay, two powerful bolts of lightning will strike at the reticle's location
+			'''
+	}
+
+	WintersWrath: {
+		DisplayName: Winter's Wrath
+		Tooltip:
+			'''
+			Inflicts Sheer Cold
+			Hold to begin charging and causing icy saws to orbit
+			Release to send all ice saws out to converge
+			The saws deal more damage for each saw
+			'''
+	}
+
+	RotorSword: {
+		DisplayName: Rotor Sword
+		Tooltip: Inflicts Sugar Crash and gets the player Hyper
+	}
+
+	WaferBow: {
+		DisplayName: Wafer Bow
+		Tooltip:
+			'''
+			Fires two arrows at once
+			Inflicts Sugar Crash
+			'''
+	}
+
+	ChampionStaff: {
+		DisplayName: Champion Staff
+		Tooltip:
+			'''
+			Inflicts Sheer Cold
+			Summons a Frost Warrior that alternates between various attacks depending on what's needed 
+			The frost warrior takes up 3 minion slots, only one can exist and enrages when the player is below 50% health
+			When enemies are close, it attacks. When enemies are far, the warrior battle cries periodocally, rallying you
+			Partially benefits from melee damage boosts at a rate of 50%
+			While having a Full Party, you are always rallied and the battle cry gives the battle cry buff
+			While having a Full Party, the warrior also deals double damage 
+			You have a Full Party when you have a frost warrior, nature healer, wind ranger and fire mage summoned all at once
+			'''
+	}
+
+	HealersWand: {
+		DisplayName: Healer's Wand
+		Tooltip:
+			'''
+			Inflicts Nature's Toxin
+			Summons a Nature Healer that alternates between various attacks depending on what's needed 
+			The nature healer takes up 3 minion slots, only one can exist and strengthens healing potions
+			When your above 50% health, the healer attacks. When your below 50% health, the healer will fire healing orbs at you
+			While having a Full Party, minions will lifesteal
+			While having a Full Party, the healer also deals double damage 
+			You have a Full Party when you have a frost warrior, nature healer, wind ranger and fire mage summoned all at once
+			'''
+	}
+
+	PyromancersWand: {
+		DisplayName: Pyromancer's Wand
+		Tooltip:
+			'''
+			Inflicts Core Heat
+			Summons a Fire Mage that alternates between various attacks depending on what's needed 
+			The fire mage takes up 3 minion slots, only one can exist and the mage can critical strike
+			When there are less enemies, it attacks with fireballs. When there are more enemies, the mage calls down meteors
+			Partially benefits from magic damage boosts
+			While having a Full Party, all minions inflict crits
+			While having a Full Party, the mage also deals double damage 
+			You have a Full Party when you have a frost warrior, nature healer, wind ranger and fire mage summoned all at once
+			'''
+	}
+
+	StaffOfTheHunter: {
+		DisplayName: Staff Of The Hunter
+		Tooltip:
+			'''
+			Inflicts Delta Shock
+			Summons a Wind Ranger that alternates between various attacks depending on what's needed 
+			The wind ranger takes up 3 minion slots, only one can exist and deals increased damage to further targets
+			When there are a large number of enemies, the ranger attacks twice as fast
+			Partially benefits from ranged damage boosts
+			While having a Full Party, all minions penetrate 35 defense
+			While having a Full Party, the ranger also deals double damage 
+			You have a Full Party when you have a wind ranger, nature healer, wind ranger and fire mage summoned all at once
+			'''
+	}
 }
 
 Prefixes: {
@@ -5633,4 +5919,11 @@ NPCs: {
 	AegonHallowedSigil.DisplayName: Aegon Hallowed Sigil
 	AegonHellSigil.DisplayName: Aegon Hell Sigil
 	AegonJungleSigil.DisplayName: Aegon Jungle Sigil
+	CandySlime.DisplayName: Candy Slime
+	CavityBat.DisplayName: Cavity Bat
+	Lollicopter.DisplayName: Lollicopter
+	GummyWormBody.DisplayName: Gummy Worm Body
+	GummyWormHead.DisplayName: Gummy Worm Head
+	GummyWormTail.DisplayName: Gummy Worm Tail
+	Jawbreaker.DisplayName: Jawbreaker
 }
