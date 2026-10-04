@@ -5244,6 +5244,16 @@ Items: {
 			'''
 	}
 
+	TearOfTheFrozenMoon: {
+		DisplayName: Tear of the Frozen Moon
+		Tooltip:
+			'''
+			Dealing damage to enemies with Sheer Cold inflicts Frozen for 3 seconds, with a 10 second cooldown
+			Attacks against Frozen enemies ignore 100 defense
+			Critical strikes against Frozen enemies shatter them into 8 shards dealing 100 pacifist damage each, removing Frozen
+			'''
+	}
+
 	Pompeii: {
 		DisplayName: Pompeii
 		Tooltip:
